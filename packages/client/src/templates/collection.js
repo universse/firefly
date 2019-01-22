@@ -3,12 +3,13 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import Layout from '../layouts/Layout'
+import { baseWrapper } from '../styles'
 
-const link = css`
-  color: rgba(0, 0, 0, 0.65);
+const link = theme => css`
+  color: ${theme.colors.gray700};
 `
 
-// add helmet
+// TODO: add helmet
 export default function ({
   data: {
     collections: { name, level, urls, tags, suggestions }
@@ -17,21 +18,23 @@ export default function ({
   return (
     <Layout>
       <main>
-        <h1>{name}</h1>
-        <ul>
-          {urls.map(({ id, url, type }) => (
-            <li key={id}>
-              <a
-                css={link}
-                href={url}
-                rel='noopener noreferrer'
-                target='_blank'
-              >
-                {url}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div css={baseWrapper}>
+          <h1>{name}</h1>
+          <ul>
+            {urls.map(({ id, url, type }) => (
+              <li key={id}>
+                <a
+                  css={link}
+                  href={url}
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >
+                  {url}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </main>
     </Layout>
   )

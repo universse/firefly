@@ -31,8 +31,8 @@ export default function Hero () {
       >
         <div>
           <h1
-            css={css`
-              color: #000;
+            css={theme => css`
+              color: ${theme.colors.gray900};
               font-size: 2.25rem;
               font-weight: 700;
               line-height: 3rem;
@@ -41,8 +41,8 @@ export default function Hero () {
             Follow your curiosity.
           </h1>
           <h2
-            css={css`
-              color: #000;
+            css={theme => css`
+              color: ${theme.colors.gray900};
               font-size: 1.125rem;
               line-height: 2rem;
             `}

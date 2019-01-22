@@ -39,8 +39,8 @@ export default function SignUpForm ({ inputRef }) {
         `}
       >
         <span
-          css={css`
-            color: #000;
+          css={theme => css`
+            color: ${theme.colors.gray900};
             font-size: 0.9375rem;
             font-weight: 700;
             line-height: 1.25rem;

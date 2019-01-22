@@ -15,8 +15,8 @@ export function Collections ({ data }) {
 
   return (
     <main
-      css={css`
-        background-color: #f7f9fb;
+      css={theme => css`
+        background-color: ${theme.colors.gray100};
         padding: 3rem 0;
       `}
     >

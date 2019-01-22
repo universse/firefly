@@ -6,19 +6,19 @@ import matchSorter from 'match-sorter'
 
 import { createCollectionPath } from '../../gatsby/utils'
 
-const input = css`
-  background-color: #f7f7f7;
+const input = theme => css`
+  background-color: ${theme.colors.gray300};
   border-radius: 1.25rem;
-  color: rgba(0, 0, 0, 0.65);
+  color: ${theme.colors.gray900};
   font-size: 0.9375rem;
   height: 2.5rem;
   padding-left: 1rem;
   width: 100%;
 `
 
-const result = css`
+const result = theme => css`
   align-items: center;
-  color: rgba(0, 0, 0, 0.65);
+  color: ${theme.colors.gray900};
   display: flex;
   font-size: 0.9375rem;
   font-weight: 600;
@@ -26,8 +26,8 @@ const result = css`
   padding: 0 0 0 1rem;
 `
 
-const resultBox = css`
-  background-color: #f7f7f7;
+const resultBox = theme => css`
+  background-color: ${theme.colors.gray300};
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
   overflow: auto;
@@ -109,7 +109,7 @@ function SearchBar ({ data }) {
               `}
               {...getLabelProps()}
             >
-              Search
+              What do you want to learn today?
             </label>
             <input
               css={input}

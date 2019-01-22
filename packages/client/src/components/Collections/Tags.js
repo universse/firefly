@@ -14,7 +14,7 @@ export default function Tags ({ tags }) {
         <li
           key={tag}
           css={css`
-            margin-right: 0.5rem;
+            margin-right: 0.25rem;
           `}
         >
           <Tag to='/'>{tag}</Tag>

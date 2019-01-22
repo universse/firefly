@@ -14,7 +14,7 @@ export default function CollectionCard ({
   handleHeartClick
 }) {
   return (
-    <CardWrapper topic={'design'}>
+    <CardWrapper topic={'psychology'}>
       <div>
         <div
           css={css`
@@ -24,7 +24,7 @@ export default function CollectionCard ({
             justify-content: space-between;
           `}
         >
-          <Topic to='/' topic={'design'} />
+          <Topic to='/' topic={'psychology'} />
           <Difficulty>Fundamental</Difficulty>
         </div>
         <div

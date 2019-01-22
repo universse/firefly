@@ -14,8 +14,8 @@ export function CardTitle ({ id, name }) {
       to={createCollectionPath({ id, name })}
     >
       <h3
-        css={css`
-          color: rgba(0, 0, 0, 0.7);
+        css={theme => css`
+          color: ${theme.colors.gray700};
           font-weight: 700;
         `}
       >
@@ -47,11 +47,6 @@ export function CardWrapper ({ topic, ...props }) {
           box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
             0 8px 10px 1px rgba(0, 0, 0, 0.14),
             0 3px 14px 2px rgba(0, 0, 0, 0.12);
-
-          button {
-            opacity: 1;
-            transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-          }
         }
       `}
       {...props}
@@ -62,9 +57,11 @@ export function CardWrapper ({ topic, ...props }) {
 export function Difficulty (props) {
   return (
     <span
-      css={css`
-        color: rgba(0, 0, 0, 0.7);
+      css={theme => css`
+        color: ${theme.colors.gray700};
         font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: capitalize;
       `}
       {...props}
     />
@@ -76,13 +73,8 @@ export function IconButton (props) {
     <button
       css={theme =>
         css`
-          color: ${theme.colors.brand500};
+          color: ${theme.colors.gray500};
           height: 1.5rem;
-          opacity: 0;
-
-          &:focus {
-            opacity: 1;
-          }
         `
       }
       type='button'
@@ -95,9 +87,9 @@ export function Tag (props) {
   return (
     <Link
       css={theme => css`
-        background-color: ${theme.colors.brand100};
+        background-color: ${theme.colors.gray300};
         border-radius: 0.75rem;
-        color: ${theme.colors.brand900};
+        color: ${theme.colors.gray900};
         display: block;
         font-size: 0.875rem;
         font-weight: 600;

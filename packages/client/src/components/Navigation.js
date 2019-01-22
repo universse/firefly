@@ -62,7 +62,7 @@ function NavLink (props) {
   return (
     <Link
       css={theme => css`
-        color: rgba(0, 0, 0, 0.65);
+        color: ${theme.colors.gray900};
         font-size: 0.9375rem;
         font-weight: 600;
 

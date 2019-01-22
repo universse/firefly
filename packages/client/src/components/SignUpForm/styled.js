@@ -39,3 +39,37 @@ export function CloseButton (props) {
     </div>
   )
 }
+
+export function ErrorMessage (props) {
+  return (
+    <span
+      css={theme => css`
+        color: ${theme.colors.danger};
+        font-size: 0.8125rem;
+        font-weight: 600;
+      `}
+      {...props}
+    />
+  )
+}
+
+export function Input ({ inputRef, isValid, ...props }) {
+  return (
+    <input
+      autoComplete='off'
+      css={theme => css`
+        border: 1px solid
+          ${isValid ? theme.colors.gray500 : theme.colors.danger};
+        border-radius: 1.25rem;
+        color: ${theme.colors.gray700};
+        font-size: 0.9375rem;
+        height: 2.5rem;
+        padding-left: 1rem;
+        width: 18rem;
+      `}
+      ref={inputRef}
+      type='text'
+      {...props}
+    />
+  )
+}

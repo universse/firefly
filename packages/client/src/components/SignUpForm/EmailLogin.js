@@ -3,10 +3,8 @@ import { css } from '@emotion/core'
 
 import FirebaseContext from '../../contexts/FirebaseContext'
 import LocalStorage from '../../constants/LocalStorage'
-import { AuthButton } from './styled'
-
-const isValidEmail = email =>
-  /^[^@]+@[^@]+$/.test(email) && !/[.]$/.test(email) && !/yopmail/i.test(email)
+import { AuthButton, ErrorMessage, Input } from './styled'
+import { isValidEmail } from './utils'
 
 export default function EmailLogin ({ inputRef, setSignUpState }) {
   const [email, setEmail] = useState('')
@@ -45,45 +43,24 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
     }
   }
 
-  const border =
-    isValidEmail(email) || email === ''
-      ? '1px solid rgba(0, 0, 0, 0.5)'
-      : '1px solid red'
+  const isValid = isValidEmail(email) || email === ''
 
   // spinner icon to button
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <Input
         aria-label='Your Email Address'
-        autoComplete='off'
-        css={css`
-          border: ${border};
-          border-radius: 1.25rem;
-          color: rgba(0, 0, 0, 0.65);
-          font-size: 0.9375rem;
-          height: 2.5rem;
-          padding-left: 1rem;
-          width: 18rem;
-        `}
+        isValid={isValid}
         name='email'
         onChange={handleChange}
         onFocus={handleFocus}
         placeholder='username@domain.com'
-        ref={inputRef}
-        type='text'
+        inputRef={inputRef}
         value={email}
       />
       {isErrorShown && (
         <div>
-          <span
-            css={css`
-              color: red;
-              font-size: 0.8125rem;
-              font-weight: 600;
-            `}
-          >
-            Please enter a valid email address
-          </span>
+          <ErrorMessage>Please enter a valid email address</ErrorMessage>
         </div>
       )}
       <div
