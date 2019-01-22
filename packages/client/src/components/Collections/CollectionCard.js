@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import Tags from './tags'
+import Tags from './Tags'
 import { CardTitle, CardWrapper, Topic, Difficulty, IconButton } from './styled'
 import { Heart, Save } from '../../icons'
 
