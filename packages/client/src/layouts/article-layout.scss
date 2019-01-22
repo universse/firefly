@@ -1,0 +1,68 @@
+body {
+  max-width: 672px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 44px;
+  line-height: 64px;
+  margin: 32px 0 16px;
+}
+
+h2 {
+  font-size: 28px;
+  line-height: 40px;
+  margin: 8px 0;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 32px;
+  margin: 20px 0 8px;
+}
+
+p,
+blockquote {
+  font-family: Georgia, Times, "Times New Roman", serif;
+  font-size: 21px;
+  line-height: 36px;
+  margin: 0 0 16px;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+figure {
+  margin: 8px auto;
+}
+
+figure img {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+figure figcaption {
+  margin: 8px auto;
+  text-align: center;
+  font-size: 15px;
+  line-height: 16px;
+}
+
+blockquote {
+  margin: 24px 0;
+  border-left: 4px solid #dadada;
+  padding-left: 20px;
+  color: #666664;
+}

@@ -1,0 +1,61 @@
+service: lambdas
+
+plugins:
+  - serverless-webpack
+  # - serverless-dynamodb-local
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  # To load environment variables externally
+  # rename env.example to env.yml and uncomment
+  # the following line. Also, make sure to not
+  # commit your env.yml.
+  #
+  # environment: ${file(env.yml):${self:provider.stage}}
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    packager: yarn
+
+  serverless-offline:
+    port: 4000
+  # dynamodb:
+  #   start:
+  #     port: 8000
+  #     inMemory: true
+  #     migrate: true
+  #     seed: true
+  #   seed:
+  #     test:
+  #       sources:
+  #         - table: Users
+  #           sources: [seed-data/Users.json]
+  #         - table: Tweets
+  #           sources: [seed-data/Tweets.json]
+
+package:
+  individually: true
+
+functions:
+  hello:
+    handler: handlers.hello
+    events:
+      - http:
+          path: hello
+          method: get
+  graphql:
+    handler: handlers.graphql
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
