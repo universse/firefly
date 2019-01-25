@@ -35,7 +35,7 @@ const Layout = ({ children }) => (
         <Modal>
           <div
             css={css`
-              margin-top: 3.5rem;
+              margin-top: 4rem;
             `}
           >
             <Header siteTitle={data.site.siteMetadata.title} />

@@ -29,7 +29,7 @@ module.exports = async ({ graphql, actions }) => {
 
   db.data.allCollections.edges.forEach(({ node: { id, name } }) => {
     createPage({
-      path: createCollectionPath({ id, name }),
+      path: createCollectionPath({ id, name }).slice(1),
       component: resolve('./src/templates/collection.js'),
       context: {
         id

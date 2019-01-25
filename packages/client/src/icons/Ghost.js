@@ -29,5 +29,5 @@ export function Ghost ({ color }) {
 }
 
 Ghost.defaultProps = {
-  color: '#ed5565'
+  color: '#ed5567'
 }

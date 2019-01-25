@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
 import ArticleLayout from '../layouts/ArticleLayout'
 import { outline3API } from '../services/outline'

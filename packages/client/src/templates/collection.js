@@ -3,39 +3,27 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import Layout from '../layouts/Layout'
+import CollectionView from '../components/CollectionView'
 import { baseWrapper } from '../styles'
 
-const link = theme => css`
-  color: ${theme.colors.gray700};
-`
-
 // TODO: add helmet
-// udacity dribbble
 
-export default function ({
-  data: {
-    collections: { name, level, urls, tags, suggestions }
-  }
-}) {
+export default function ({ data: { collections } }) {
   return (
     <Layout>
-      <main>
-        <div css={baseWrapper}>
-          <h1>{name}</h1>
-          <ul>
-            {urls.map(({ id, url, type }) => (
-              <li key={id}>
-                <a
-                  css={link}
-                  href={url}
-                  rel='noopener noreferrer'
-                  target='_blank'
-                >
-                  {url}
-                </a>
-              </li>
-            ))}
-          </ul>
+      <main
+        css={theme => css`
+          background-color: ${theme.colors.gray100};
+          padding: 3rem 0;
+        `}
+      >
+        <div
+          css={css`
+            ${baseWrapper};
+            max-width: 56rem;
+          `}
+        >
+          <CollectionView collection={collections} />
         </div>
       </main>
     </Layout>
@@ -45,7 +33,9 @@ export default function ({
 export const query = graphql`
   query($id: String!) {
     collections(id: { eq: $id }) {
+      id
       name
+      # topic
       level
       urls {
         id

@@ -37,13 +37,13 @@ const resultBox = theme => css`
   width: 100%;
 `
 
-function Item ({ isActive, ...rest }) {
+function Item ({ isActive, ...props }) {
   return (
     <li
-      {...rest}
       css={css`
         background-color: ${isActive ? '#fff' : 'transparent'};
       `}
+      {...props}
     />
   )
 }
@@ -59,7 +59,7 @@ function stateReducer (state, changes) {
   }
 }
 
-// TODO
+// TODO constants
 const NO_OF_RESULTS = 7
 // add search icon
 function SearchBar ({ data }) {
@@ -76,13 +76,19 @@ function SearchBar ({ data }) {
 
   const numOfResults = Math.min(results.length, NO_OF_RESULTS)
 
+  const handleChange = ({ id, name }) => {
+    name
+      ? navigate(createCollectionPath({ id, name }))
+      : navigate('/search/', {
+          state: { results, searchInput }
+        })
+  }
+
   return (
     <Downshift
       inputValue={searchInput}
       itemToString={item => (item ? item.name : '')}
-      onChange={selection =>
-        navigate(`${selection.id}`, { state: { results, searchInput } })
-      }
+      onChange={handleChange}
       stateReducer={stateReducer}
     >
       {({
@@ -153,7 +159,7 @@ function SearchBar ({ data }) {
                     >
                       <Link
                         css={result}
-                        to='/search'
+                        to='/search/'
                         state={{ results, searchInput }}
                       >
                         See all results

@@ -15,6 +15,7 @@ export default function Tags ({ tags }) {
           key={tag}
           css={css`
             margin-right: 0.25rem;
+            z-index: 1;
           `}
         >
           <Tag to='/'>{tag}</Tag>

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:900");
 *,
 ::before,
 ::after {
@@ -183,41 +184,6 @@ table {
   border-spacing: 0;
 }
 
-h1 {
-  font-size: 44px;
-  line-height: 64px;
-}
-
-h2 {
-  font-size: 28px;
-  line-height: 40px;
-}
-
-h3 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-h4 {
-  font-size: 44px;
-  line-height: 64px;
-}
-
-h5 {
-  font-size: 28px;
-  line-height: 40px;
-}
-
-h6 {
-  font-size: 24px;
-  line-height: 32px;
-}
-
-p {
-  font-size: 24px;
-  line-height: 32px;
-}
-
 a {
   text-decoration: none;
 }
@@ -260,9 +226,19 @@ embed,
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 2;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.28s;
 }
 
 .ReactModal__Body--open {
   touch-action: none;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }

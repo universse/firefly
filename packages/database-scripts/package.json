@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
-    "firebase-admin": "^6.5.0",
+    "firebase-admin": "^6.5.1",
     "tabletop": "^1.5.2"
   },
   "devDependencies": {},

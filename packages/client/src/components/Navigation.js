@@ -21,7 +21,7 @@ function GhostButton (props) {
         height: 2rem;
         padding: 0 1rem;
 
-        &:hover {
+        :hover {
           background-color: ${theme.colors.brand500};
           color: #fff;
         }
@@ -42,11 +42,12 @@ function PrimaryButton (props) {
         color: #fff;
         display: flex;
         font-size: 0.9375rem;
+        border-bottom: 1px solid transparent;
         font-weight: 700;
         height: 2rem;
         padding: 0 1rem;
 
-        &:hover {
+        :hover {
           background-color: ${theme.colors.brand500};
         }
       `}
@@ -61,16 +62,21 @@ function NavLink (props) {
 
   return (
     <Link
+      activeStyle={{ borderBottom: `2px solid ${theme.colors.brand500}` }}
       css={theme => css`
+        align-items: center;
+        border-bottom: 2px solid transparent;
         color: ${theme.colors.gray900};
+        display: flex;
         font-size: 0.9375rem;
         font-weight: 600;
+        height: 2rem;
 
         :hover {
+          border-bottom: 2px solid ${theme.colors.brand500};
           color: ${theme.colors.brand500};
         }
       `}
-      activeStyle={{ color: theme.colors.brand500 }}
       {...props}
     />
   )
@@ -89,22 +95,22 @@ export default function Navigation () {
           align-items: center;
         `}
       >
-        {/* <li
+        <li
           css={css`
             margin-left: 2rem;
           `}
         >
-          <NavLink to='/search'>Explore</NavLink>
-        </li> */}
+          <NavLink to='/me/'>My Library</NavLink>
+        </li>
         {user ? (
           <>
-            <li
+            {/* <li
               css={css`
                 margin-left: 2rem;
               `}
             >
-              <NavLink to='/search'>My Library</NavLink>
-            </li>
+              <NavLink to='/search/'>My Library</NavLink>
+            </li> */}
             <li
               css={css`
                 margin-left: 2rem;

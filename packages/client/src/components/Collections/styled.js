@@ -4,19 +4,23 @@ import { css } from '@emotion/core'
 
 import { createCollectionPath } from '../../../gatsby/utils'
 
-export function CardTitle ({ id, name }) {
+export function CollectionTitle ({ id, name }) {
   return (
     <Link
       css={css`
         display: block;
-        height: 8rem;
+        height: 100%;
+        padding: 3.75rem 0 0 2rem;
       `}
       to={createCollectionPath({ id, name })}
     >
       <h3
         css={theme => css`
           color: ${theme.colors.gray700};
-          font-weight: 700;
+          font-family: 'Playfair Display', serif;
+          font-size: 1.5rem;
+          font-weight: 900;
+          line-height: 2rem;
         `}
       >
         {name}
@@ -25,29 +29,16 @@ export function CardTitle ({ id, name }) {
   )
 }
 
-export function CardWrapper ({ topic, ...props }) {
+export function CollectionWrapper (props) {
   return (
     <div
       css={theme => css`
-        background-color: #fff;
-        border-radius: 0.5rem;
-        border-top: 0.5rem solid ${theme.colors.topics[topic]};
-        box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
-          0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+        border-bottom: 1px solid ${theme.colors.gray400};
         display: flex;
         flex-direction: column;
-        height: 16rem;
+        height: 12rem;
         justify-content: space-between;
-        padding: 1.5rem 2rem;
-        position: relative;
-        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        will-change: box-shadow;
-
-        &:hover {
-          box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-            0 8px 10px 1px rgba(0, 0, 0, 0.14),
-            0 3px 14px 2px rgba(0, 0, 0, 0.12);
-        }
+        padding: 2rem 2rem;
       `}
       {...props}
     />
@@ -75,6 +66,7 @@ export function IconButton (props) {
         css`
           color: ${theme.colors.gray500};
           height: 1.5rem;
+          z-index: 1;
         `
       }
       type='button'
@@ -95,24 +87,27 @@ export function Tag (props) {
         font-weight: 600;
         line-height: 1.5rem;
         padding: 0 0.75rem;
+
+        :hover {
+          background-color: ${theme.colors.gray400};
+        }
       `}
       {...props}
     />
   )
 }
 
-export function Topic ({ topic, ...props }) {
+export function Topic (props) {
   return (
     <Link
       css={theme => css`
-        color: ${theme.colors.topics[topic]};
+        color: ${theme.colors.brand500};
         font-size: 0.875rem;
         text-transform: uppercase;
         font-weight: 700;
+        z-index: 1;
       `}
       {...props}
-    >
-      {topic}
-    </Link>
+    />
   )
 }

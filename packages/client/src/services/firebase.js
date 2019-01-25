@@ -4,6 +4,7 @@ import 'firebase/firestore'
 
 const config = JSON.parse(process.env.GATSBY_FIREBASE_CONFIG)
 
+// TODO add GATSBY_HOME_PAGE to netlify
 class Firebase {
   constructor (firebase) {
     firebase.initializeApp(config)
@@ -11,7 +12,7 @@ class Firebase {
     this.googleProvider = new firebase.auth.GoogleAuthProvider()
     this.facebookProvider = new firebase.auth.FacebookAuthProvider()
     this.actionCodeSettings = {
-      url: 'http://localhost:3000/welcome',
+      url: `${process.env.GATSBY_HOME_PAGE}/welcome/`,
       handleCodeInApp: true
     }
   }

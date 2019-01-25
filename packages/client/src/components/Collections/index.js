@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { AuthenticationContext } from '../Authentication'
 import { ModalContext } from '../Modal'
-import { baseWrapper } from '../../styles'
-import CollectionCard from './CollectionCard'
+import Collection from './Collection'
 
 export function Collections ({ data }) {
   const user = useContext(AuthenticationContext)
@@ -14,29 +13,29 @@ export function Collections ({ data }) {
   const handleHeartClick = () => !user && handleModalOpen()
 
   return (
-    <main
-      css={theme => css`
-        background-color: ${theme.colors.gray100};
-        padding: 3rem 0;
+    <ul
+      css={css`
+        background-color: #fff;
+        border-radius: 8px;
+        width: 70%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+        li:last-child div {
+          border: none;
+        }
       `}
     >
-      <div css={baseWrapper}>
-        <ul
+      {data.allCollections.edges.map(({ node }) => (
+        <li
+          key={node.id}
           css={css`
-            display: grid;
-            grid-gap: 2rem;
-            grid-template-columns: repeat(auto-fill, minmax(328px, 1fr));
-            width: 100%;
+            position: relative;
           `}
         >
-          {data.allCollections.edges.map(({ node }) => (
-            <li key={node.id}>
-              <CollectionCard {...node} handleHeartClick={handleHeartClick} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </main>
+          <Collection {...node} handleHeartClick={handleHeartClick} />
+        </li>
+      ))}
+    </ul>
   )
 }
 

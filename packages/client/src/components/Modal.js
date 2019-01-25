@@ -33,6 +33,7 @@ export default function Modal ({ children }) {
       {children}
       <ReactModal
         className='Modal'
+        closeTimeoutMS={280}
         contentLabel='Sign Up'
         isOpen={isOpen}
         onAfterOpen={afterModalOpen}
