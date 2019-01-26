@@ -1,17 +1,12 @@
 import React from 'react'
 
-export function Url ({ color }) {
+export function Url ({ color, small }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      height='24'
-      width='24'
+      className='feather'
       viewBox='0 0 24 24'
-      fill='none'
       stroke={color}
-      strokeWidth='2'
-      strokeLinecap='round'
-      strokeLinejoin='round'
       aria-label='url'
       role='img'
     >

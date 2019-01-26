@@ -4,13 +4,27 @@ import { css } from '@emotion/core'
 
 import { createCollectionPath } from '../../../gatsby/utils'
 
+export function Category (props) {
+  return (
+    <Link
+      css={theme => css`
+        color: ${theme.colors.brand500};
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        font-weight: 700;
+      `}
+      {...props}
+    />
+  )
+}
+
 export function CollectionTitle ({ id, name }) {
   return (
     <Link
       css={css`
         display: block;
         height: 100%;
-        padding: 3.75rem 0 0 2rem;
+        padding: 3.75rem 2rem 0 2rem;
       `}
       to={createCollectionPath({ id, name })}
     >
@@ -65,7 +79,8 @@ export function IconButton (props) {
       css={theme =>
         css`
           color: ${theme.colors.gray500};
-          height: 1.5rem;
+          height: 3rem;
+          width: 2rem;
           z-index: 1;
         `
       }
@@ -91,21 +106,6 @@ export function Tag (props) {
         :hover {
           background-color: ${theme.colors.gray400};
         }
-      `}
-      {...props}
-    />
-  )
-}
-
-export function Topic (props) {
-  return (
-    <Link
-      css={theme => css`
-        color: ${theme.colors.brand500};
-        font-size: 0.875rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        z-index: 1;
       `}
       {...props}
     />

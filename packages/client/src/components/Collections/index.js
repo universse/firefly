@@ -1,16 +1,27 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { AuthenticationContext } from '../Authentication'
 import { ModalContext } from '../Modal'
 import Collection from './Collection'
+import { saveCollection } from 'services/localforage'
 
 export function Collections ({ data }) {
+  const allCollectionsById = useMemo(
+    () =>
+      data.allCollections.edges.reduce((all, current) => {
+        all[current.node.id] = current.node
+        return all
+      }, {}),
+    [data]
+  )
+
   const user = useContext(AuthenticationContext)
-  // TODO: open modal when user click love
   const { handleModalOpen } = useContext(ModalContext)
-  const handleHeartClick = () => !user && handleModalOpen()
+  const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
+  const handleSaveClick = e =>
+    saveCollection(allCollectionsById[e.target.value])
 
   return (
     <ul
@@ -32,7 +43,11 @@ export function Collections ({ data }) {
             position: relative;
           `}
         >
-          <Collection {...node} handleHeartClick={handleHeartClick} />
+          <Collection
+            {...node}
+            handleHeartClick={handleHeartClick}
+            handleSaveClick={handleSaveClick}
+          />
         </li>
       ))}
     </ul>
@@ -48,7 +63,7 @@ export default props => (
             node {
               id
               name
-              # topic
+              # category
               level
               tags
             }

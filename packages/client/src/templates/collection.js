@@ -35,7 +35,7 @@ export const query = graphql`
     collections(id: { eq: $id }) {
       id
       name
-      # topic
+      # category
       level
       urls {
         id

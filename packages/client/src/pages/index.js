@@ -8,7 +8,7 @@ import Collections from '../components/Collections'
 import CategoryFilter from '../components/CategoryFilter'
 import { baseWrapper } from '../styles'
 
-export default function IndexPage () {
+export default function IndexPage (props) {
   const user = useContext(AuthenticationContext)
 
   // TODO: loading screen

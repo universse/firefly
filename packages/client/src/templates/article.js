@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
 
 import ArticleLayout from '../layouts/ArticleLayout'
 import { outline3API } from '../services/outline'
@@ -34,10 +33,10 @@ export default function ({
   )
 }
 
-export const query = graphql`
-  query($id: String!) {
-    urls(id: { eq: $id }) {
-      url
-    }
-  }
-`
+// export const query = graphql`
+//   query($id: String!) {
+//     urls(id: { eq: $id }) {
+//       url
+//     }
+//   }
+// `

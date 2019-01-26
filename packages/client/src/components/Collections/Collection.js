@@ -3,9 +3,9 @@ import { css } from '@emotion/core'
 
 import Tags from './Tags'
 import {
+  Category,
   CollectionTitle,
   CollectionWrapper,
-  Topic,
   Difficulty,
   IconButton
 } from './styled'
@@ -15,10 +15,11 @@ import { DifficultyLevels } from '../../constants'
 export default function Collection ({
   id,
   name,
-  topic,
+  category,
   level,
   tags,
-  handleHeartClick
+  handleHeartClick,
+  handleSaveClick
 }) {
   return (
     <>
@@ -40,7 +41,7 @@ export default function Collection ({
             justify-content: space-between;
           `}
         >
-          <Topic to='/'>Psychology</Topic>
+          <Category to='/'>Psychology</Category>
           <Difficulty>Fundamental</Difficulty>
         </div>
         <div
@@ -48,6 +49,7 @@ export default function Collection ({
             align-items: center;
             display: flex;
             justify-content: space-between;
+            margin-right: -0.25rem;
           `}
         >
           <Tags tags={tags} />
@@ -55,16 +57,17 @@ export default function Collection ({
             css={css`
               display: flex;
               justify-content: space-between;
-              width: 3.5rem;
+              width: 4.5rem;
             `}
           >
             <IconButton
               aria-label='Save to My Library'
-              onClick={handleHeartClick}
+              onClick={handleSaveClick}
+              value={id}
             >
               <Save />
             </IconButton>
-            <IconButton aria-label='Love' onClick={handleHeartClick}>
+            <IconButton aria-label='Love' onClick={handleHeartClick} value={id}>
               <Heart />
             </IconButton>
           </div>

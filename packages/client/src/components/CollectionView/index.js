@@ -2,36 +2,17 @@ import React from 'react'
 import { css } from '@emotion/core'
 
 import Tags from './Tags'
-import Links from './Links'
-import { Difficulty, IconButton, CollectionTitle, Topic } from './styled'
+import LearningList from './LearningList'
+import {
+  Category,
+  CollectionTitle,
+  Difficulty,
+  IconButton,
+  ProgressBar
+} from './styled'
 import { Heart, Save, Share } from '../../icons'
 
 // TODO: add helmet
-
-export function ProgressBar ({ percentage }) {
-  return (
-    <div
-      css={theme =>
-        css`
-          background-color: ${theme.colors.gray300};
-          border-radius: 0.375rem;
-          width: 12rem;
-        `
-      }
-    >
-      <div
-        css={theme =>
-          css`
-            background-color: ${theme.colors.brand500};
-            border-radius: 0.375rem;
-            height: 0.75rem;
-            width: ${percentage}%;
-          `
-        }
-      />
-    </div>
-  )
-}
 
 export default function CollectionView ({
   collection: { urls, suggestions, name, tags }
@@ -54,7 +35,7 @@ export default function CollectionView ({
             justify-content: space-between;
           `}
         >
-          <Topic topic='design'>design</Topic>
+          <Category to='/'>design</Category>
           <Difficulty>Fundamental</Difficulty>
         </div>
         <div
@@ -86,7 +67,7 @@ export default function CollectionView ({
             display: flex;
             height: 4rem;
             justify-content: space-between;
-            padding: 0 3.25rem 0 4rem;
+            padding: 0 3.75rem 0 4rem;
           `}
         >
           <div
@@ -118,7 +99,7 @@ export default function CollectionView ({
             css={css`
               display: flex;
               justify-content: space-between;
-              width: 10rem;
+              width: 7rem;
             `}
           >
             <IconButton
@@ -141,7 +122,7 @@ export default function CollectionView ({
             </IconButton>
           </div>
         </div>
-        <Links urls={urls} />
+        <LearningList urls={urls} />
       </div>
     </>
   )

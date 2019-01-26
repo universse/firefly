@@ -1,6 +1,17 @@
 const { resolve } = require('path')
 const { createCollectionPath } = require('./utils')
 
+// const categories = [
+//   { category: 'artificial intelligence', to: '/artificial-intelligence/' },
+//   { category: 'cloud', to: '/cloud/' },
+//   { category: 'design', to: '/design/' },
+//   { category: 'marketing', to: '/marketing/' },
+//   { category: 'programming', to: '/programming/' },
+//   { category: 'psychology', to: '/psychology/' },
+//   { category: 'startup', to: '/startup/' },
+//   { category: 'web development', to: '/web-development/' }
+// ]
+
 module.exports = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -27,7 +38,15 @@ module.exports = async ({ graphql, actions }) => {
   //   })
   // })
 
-  db.data.allCollections.edges.forEach(({ node: { id, name } }) => {
+  // categories.forEach(({ category, to }) =>
+  //   createPage({
+  //     path: to,
+  //     component: resolve('./src/templates/category.js'),
+  //     context: { category }
+  //   })
+  // )
+
+  db.data.allCollections.edges.forEach(({ node: { id, name } }) =>
     createPage({
       path: createCollectionPath({ id, name }).slice(1),
       component: resolve('./src/templates/collection.js'),
@@ -35,5 +54,5 @@ module.exports = async ({ graphql, actions }) => {
         id
       }
     })
-  })
+  )
 }
