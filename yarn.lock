@@ -2887,7 +2887,22 @@ autoprefixer@^9.0.0:
     postcss "^7.0.13"
     postcss-value-parser "^3.3.1"
 
-aws-sdk@^2.394.0, aws-sdk@^2.7.0:
+aws-sdk@^2.395.0:
+  version "2.395.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.395.0.tgz#637e5fa06d69bfb923b17bde24a8bd2a74dedab3"
+  integrity sha512-ldTTjctniZT4E2lq2z3D8Y2u+vpkp+laoEnDkXgjKXTKbiJ0QEtfWsUdx/IQ7awCt8stoxyqZK47DJOxIbRNoA==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.7.0:
   version "2.394.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.394.0.tgz#ef18e5f110e0c8d1dd2808b2a89e58f13d94c6c4"
   integrity sha512-Vn9BsY7gkmVcJAvhKfRi9ukxNiHiJfThwkrXCNCm3aPc4NH5wcc0ZjXvYuAqx7OzAyYn3xrEFMMVV0aqFuxxmw==
