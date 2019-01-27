@@ -49,7 +49,7 @@ export default function Collection ({
             align-items: center;
             display: flex;
             justify-content: space-between;
-            margin-right: -0.25rem;
+            margin-right: -0.5rem;
           `}
         >
           <Tags tags={tags} />
@@ -57,7 +57,7 @@ export default function Collection ({
             css={css`
               display: flex;
               justify-content: space-between;
-              width: 4.5rem;
+              width: 5.5rem;
             `}
           >
             <IconButton

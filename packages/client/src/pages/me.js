@@ -1,4 +1,4 @@
-// sign up bottom pop up
+// sign up bottom pop up to sync across devices
 // page
 import React, { useState, useEffect } from 'react'
 

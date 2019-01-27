@@ -100,7 +100,7 @@ export default function Navigation () {
             margin-left: 2rem;
           `}
         >
-          <NavLink to='/me/'>My Library</NavLink>
+          <NavLink to='/me'>My Library</NavLink>
         </li>
         {user ? (
           <>
@@ -109,7 +109,7 @@ export default function Navigation () {
                 margin-left: 2rem;
               `}
             >
-              <NavLink to='/search/'>My Library</NavLink>
+              <NavLink to='/search'>My Library</NavLink>
             </li> */}
             <li
               css={css`

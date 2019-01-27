@@ -80,7 +80,7 @@ export function IconButton (props) {
         css`
           color: ${theme.colors.gray500};
           height: 3rem;
-          width: 2rem;
+          width: 2.5rem;
           z-index: 1;
         `
       }

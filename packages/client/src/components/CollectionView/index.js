@@ -67,7 +67,7 @@ export default function CollectionView ({
             display: flex;
             height: 4rem;
             justify-content: space-between;
-            padding: 0 3.75rem 0 4rem;
+            padding: 0 3.5rem 0 4rem;
           `}
         >
           <div
@@ -99,7 +99,7 @@ export default function CollectionView ({
             css={css`
               display: flex;
               justify-content: space-between;
-              width: 7rem;
+              width: 8.5rem;
             `}
           >
             <IconButton

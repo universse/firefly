@@ -34,6 +34,7 @@ module.exports = {
       resolve: 'gatsby-plugin-create-client-paths',
       options: { prefixes: ['/new-collection/*'] }
     },
+    'gatsby-plugin-remove-trailing-slashes',
     {
       resolve: 'gatsby-source-filesystem',
       options: {

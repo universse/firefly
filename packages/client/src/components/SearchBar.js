@@ -159,7 +159,7 @@ function SearchBar ({ data }) {
                     >
                       <Link
                         css={result}
-                        to='/search/'
+                        to='/search'
                         state={{ results, searchInput }}
                       >
                         See all results
