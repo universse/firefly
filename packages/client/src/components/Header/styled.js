@@ -8,12 +8,9 @@ export function HeaderTag ({ boxShadow, translateY, ...props }) {
     <header
       css={css`
         background-color: #fff;
-        box-shadow: ${boxShadow};
         height: 4rem;
         position: fixed;
         top: 0;
-        transform: translateY(${translateY});
-        transition: box-shadow 0.35s, transform 0.35s;
         width: 100%;
         z-index: 500;
       `}

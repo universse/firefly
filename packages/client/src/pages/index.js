@@ -27,7 +27,6 @@ export default function IndexPage (props) {
         <div
           css={css`
             ${baseWrapper};
-            display: flex;
           `}
         >
           <CategoryFilter />

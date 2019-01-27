@@ -2,8 +2,16 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
-export function Category ({ category, to }) {
+export function Category ({ active, category, to }) {
   const theme = useContext(ThemeContext)
+
+  const activeStyle =
+    active &&
+    css`
+      border-left: 4px solid ${theme.colors.brand500};
+      color: ${theme.colors.brand500};
+      font-weight: 700;
+    `
 
   return (
     <Link
@@ -21,6 +29,7 @@ export function Category ({ category, to }) {
         margin: 0.25rem 0;
         padding-left: 1rem;
         text-transform: capitalize;
+        ${activeStyle};
 
         :hover {
           color: ${theme.colors.brand500};

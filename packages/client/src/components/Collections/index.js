@@ -17,19 +17,22 @@ export function Collections ({ data }) {
     [data]
   )
 
+  console.log(allCollectionsById)
+
   const user = useContext(AuthenticationContext)
   const { handleModalOpen } = useContext(ModalContext)
   const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
   const handleSaveClick = e =>
-    saveCollection(allCollectionsById[e.target.value])
+    saveCollection(allCollectionsById[e.currentTarget.value])
 
   return (
     <ul
       css={css`
         background-color: #fff;
         border-radius: 8px;
-        width: 70%;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        display: inline-block;
+        width: 70%;
 
         li:last-child div {
           border: none;

@@ -12,7 +12,7 @@ class Firebase {
     this.googleProvider = new firebase.auth.GoogleAuthProvider()
     this.facebookProvider = new firebase.auth.FacebookAuthProvider()
     this.actionCodeSettings = {
-      url: `${process.env.GATSBY_HOME_PAGE}/welcome/`,
+      url: `${process.env.GATSBY_HOME_PAGE}/welcome`,
       handleCodeInApp: true
     }
   }
