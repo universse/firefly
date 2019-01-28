@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import FirebaseContext from '../../contexts/FirebaseContext'
-import { LocalStorage } from '../../constants'
+import FirebaseContext from 'contexts/FirebaseContext'
+import LocalStorage from 'constants/LocalStorage'
 import { AuthButton, ErrorMessage, Input } from './styled'
 import { isValidEmail } from './utils'
 

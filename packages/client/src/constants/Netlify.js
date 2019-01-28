@@ -1,1 +1,1 @@
-export const Netlify = '/.netlify/functions/'
+export default '/.netlify/functions/'

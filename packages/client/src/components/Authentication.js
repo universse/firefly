@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-import FirebaseContext from '../contexts/FirebaseContext'
+import FirebaseContext from 'contexts/FirebaseContext'
 
 export const AuthenticationContext = createContext()
 

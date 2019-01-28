@@ -3,7 +3,8 @@ import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
 
 import FirebaseContext from '../contexts/FirebaseContext'
-import { AuthErrors, LocalStorage } from '../constants'
+import LocalStorage from 'constants/LocalStorage'
+import AuthErrors from 'constants/AuthErrors'
 
 export default function WelcomePage () {
   const [message, setMessage] = useState('')

@@ -7,7 +7,7 @@ export function HeaderTag ({ boxShadow, translateY, ...props }) {
   return (
     <header
       css={css`
-        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.95);
         height: 4rem;
         position: fixed;
         top: 0;

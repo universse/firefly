@@ -4,7 +4,7 @@ import { ThemeContext, css } from '@emotion/core'
 
 import { AuthenticationContext } from './Authentication'
 import { ModalContext } from './Modal'
-import FirebaseContext from '../contexts/FirebaseContext'
+import FirebaseContext from 'contexts/FirebaseContext'
 
 // darker shade hover
 function GhostButton (props) {

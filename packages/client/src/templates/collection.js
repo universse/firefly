@@ -2,8 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import Layout from '../layouts/Layout'
-import CollectionView from '../components/CollectionView'
+import Layout from 'layouts/Layout'
+import CollectionView from 'components/CollectionView'
 import { baseWrapper } from '../styles'
 
 // TODO: add helmet
@@ -20,7 +20,7 @@ export default function ({ data: { collections } }) {
         <div
           css={css`
             ${baseWrapper};
-            max-width: 56rem;
+            max-width: 50rem;
           `}
         >
           <CollectionView collection={collections} />

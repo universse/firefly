@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
 import { Category } from './styled'
-import { Categories } from '../../constants'
+import Categories from 'constants/Categories'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 export default function CategoryFilter () {

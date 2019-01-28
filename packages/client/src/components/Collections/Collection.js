@@ -10,8 +10,10 @@ import {
   IconButton
 } from './styled'
 import { Heart, Save } from '../../icons'
-import { DifficultyLevels } from '../../constants'
+import DifficultyLevels from 'constants/DifficultyLevels'
+import { createCategoryPath } from '../../../gatsby/utils'
 
+// TODO: category
 export default function Collection ({
   id,
   name,
@@ -42,7 +44,7 @@ export default function Collection ({
           `}
         >
           <Category to='/'>Psychology</Category>
-          <Difficulty>Fundamental</Difficulty>
+          <Difficulty>{DifficultyLevels[level]}</Difficulty>
         </div>
         <div
           css={css`

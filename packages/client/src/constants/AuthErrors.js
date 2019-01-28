@@ -1,4 +1,4 @@
-export const AuthErrors = {
+export default {
   EXPIRED_ACTION_CODE: 'auth/expired-action-code',
   INVALID_ACTION_CODE: 'auth/invalid-action-code',
   INVALID_USER_CODE: 'auth/user-disabled',

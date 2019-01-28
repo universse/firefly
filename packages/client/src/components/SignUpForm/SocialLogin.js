@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { ModalContext } from '../Modal'
-import FirebaseContext from '../../contexts/FirebaseContext'
+import FirebaseContext from 'contexts/FirebaseContext'
 import { AuthButton } from './styled'
 
 export default function SocialLogin ({

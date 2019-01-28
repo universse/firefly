@@ -1,6 +1,6 @@
 import { Article, Book, Code, Course, Podcast, Url, Video } from '../icons'
 
-export const LinkIcons = {
+export default {
   ARTICLE: Article,
   BOOK: Book,
   CODE: Code,

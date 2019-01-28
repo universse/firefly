@@ -1,6 +1,1 @@
-export const DifficultyLevels = [
-  'primer',
-  'fundamental',
-  'intermediate',
-  'advanced'
-]
+export default ['primer', 'fundamental', 'intermediate', 'advanced']

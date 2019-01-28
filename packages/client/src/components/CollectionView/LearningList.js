@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { LearningItem } from './styled'
+import LearningItem from './LearningItem'
 
 export default function LearningList ({ urls }) {
   return (

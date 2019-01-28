@@ -17,8 +17,6 @@ export function Collections ({ data }) {
     [data]
   )
 
-  console.log(allCollectionsById)
-
   const user = useContext(AuthenticationContext)
   const { handleModalOpen } = useContext(ModalContext)
   const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())

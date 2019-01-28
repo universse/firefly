@@ -1,4 +1,4 @@
-export const Categories = [
+export default [
   'artificial intelligence',
   'cloud',
   'design',
