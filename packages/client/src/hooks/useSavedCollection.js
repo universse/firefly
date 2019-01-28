@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import { getSavedCollections, saveCollection } from 'services/localforage'
 
-export default function useSavedCollection (collection) {
+export default function useSavedCollection (collection, onUnsave = () => {}) {
   const [isLoading, setIsLoading] = useState(true)
   const [isSaved, setIsSaved] = useState()
 
@@ -17,7 +17,11 @@ export default function useSavedCollection (collection) {
 
   const handleSaveClick = e => {
     saveCollection(collection)
-      .then(() => setIsSaved(!isSaved))
+      .then(() => {
+        isSaved && onUnsave()
+        setIsSaved(!isSaved)
+      })
+
       .catch(() => {})
   }
 

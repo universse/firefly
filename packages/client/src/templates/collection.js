@@ -7,8 +7,7 @@ import { baseWrapper } from '../styles'
 
 // TODO: add helmet
 
-export default function ({ location, data: { collections } }) {
-  console.log(location)
+export default function ({ data: { collections } }) {
   return (
     <main
       css={theme => css`

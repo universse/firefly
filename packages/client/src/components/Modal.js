@@ -1,4 +1,5 @@
 import React, { createContext, useState, useMemo, useRef } from 'react'
+import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
 import SignUpForm from './SignUpForm'
@@ -45,4 +46,8 @@ export default function Modal ({ children }) {
       </ReactModal>
     </ModalContext.Provider>
   )
+}
+
+Modal.propTypes = {
+  children: PropTypes.node.isRequired
 }

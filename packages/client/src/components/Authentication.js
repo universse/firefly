@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 
 import FirebaseContext from 'contexts/FirebaseContext'
 
@@ -21,4 +22,8 @@ export default function Authentication ({ children }) {
       {children}
     </AuthenticationContext.Provider>
   )
+}
+
+Authentication.propTypes = {
+  children: PropTypes.node.isRequired
 }

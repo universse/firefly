@@ -2,14 +2,14 @@ import React, { useContext } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { AuthenticationContext } from '../Authentication'
-import { ModalContext } from '../Modal'
+// import { AuthenticationContext } from '../Authentication'
+// import { ModalContext } from '../Modal'
 import Collection from './Collection'
-
+// flag
 export function Collections ({ data }) {
-  const user = useContext(AuthenticationContext)
-  const { handleModalOpen } = useContext(ModalContext)
-  const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
+  // const user = useContext(AuthenticationContext)
+  // const { handleModalOpen } = useContext(ModalContext)
+  // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
 
   return (
     <ul
@@ -32,7 +32,10 @@ export function Collections ({ data }) {
             position: relative;
           `}
         >
-          <Collection collection={node} handleHeartClick={handleHeartClick} />
+          <Collection
+            collection={node}
+            // handleHeartClick={handleHeartClick}
+          />
         </li>
       ))}
     </ul>

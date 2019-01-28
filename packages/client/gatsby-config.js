@@ -141,7 +141,12 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
-    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-offline'
+      // options: {
+      //   maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
+      // }
+    },
     // 'gatsby-plugin-sitemap',
     'gatsby-plugin-no-sourcemaps',
     'gatsby-plugin-netlify-cache',

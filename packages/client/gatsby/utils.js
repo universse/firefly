@@ -1,8 +1,8 @@
-const slug = require('slug')
+var getSlug = require('speakingurl')
 
 // get unique categories
 module.exports = {
   createCollectionPath: ({ id, name }) =>
-    `/collections/${slug(`${name} ${id}`, { lower: true })}`,
-  createCategoryPath: category => `/category/${slug(category)}`
+    `/collections/${getSlug(`${name} ${id}`)}`,
+  createCategoryPath: category => `/category/${getSlug(category)}`
 }

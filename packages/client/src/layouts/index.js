@@ -5,8 +5,9 @@ import { ThemeProvider } from 'emotion-theming'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-import Authentication from 'components/Authentication'
-import Modal from 'components/Modal'
+// flag
+// import Authentication from 'components/Authentication'
+// import Modal from 'components/Modal'
 import Header from 'components/Header'
 import Theme from 'constants/Theme'
 
@@ -37,18 +38,18 @@ export default function Layout ({ children }) {
             <html lang='en' />
           </Helmet>
           <ThemeProvider theme={Theme}>
-            <Authentication>
-              <Modal>
-                <div
-                  css={css`
-                    margin-top: 4rem;
-                  `}
-                >
-                  <Header siteTitle={data.site.siteMetadata.title} />
-                  {children}
-                </div>
-              </Modal>
-            </Authentication>
+            {/* <Authentication> */}
+            {/* <Modal> */}
+            <div
+              css={css`
+                margin-top: 4rem;
+              `}
+            >
+              <Header siteTitle={data.site.siteMetadata.title} />
+              {children}
+            </div>
+            {/* </Modal> */}
+            {/* </Authentication> */}
           </ThemeProvider>
         </>
       )}

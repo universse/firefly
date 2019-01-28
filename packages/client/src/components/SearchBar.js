@@ -49,10 +49,10 @@ function Item ({ isActive, ...props }) {
 }
 
 function stateReducer (state, changes) {
+  console.log(changes)
   switch (changes.type) {
     case Downshift.stateChangeTypes.blurInput:
     case Downshift.stateChangeTypes.mouseUp:
-    case Downshift.stateChangeTypes.clickItem:
       return { isOpen: false }
     default:
       return changes
@@ -79,9 +79,11 @@ function SearchBar ({ data }) {
   const handleChange = ({ id, name }) => {
     name
       ? navigate(createCollectionPath({ id, name }))
-      : navigate('/search/', {
+      : navigate('/search', {
           state: { results, searchInput }
         })
+
+    setSearchInput('')
   }
 
   return (

@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
-import { ModalContext } from './Modal'
-import FirebaseContext from 'contexts/FirebaseContext'
+// import { ModalContext } from './Modal'
+// import FirebaseContext from 'contexts/FirebaseContext'
 import hasSignedIn from 'utils/hasSignedIn'
 
 // darker shade hover
@@ -83,38 +83,37 @@ function NavLink (props) {
 }
 
 export default function Navigation () {
-  const { handleModalOpen } = useContext(ModalContext)
-  const firebase = useContext(FirebaseContext)
+  // const { handleModalOpen } = useContext(ModalContext)
+  // const firebase = useContext(FirebaseContext)
 
-  const authNav = hasSignedIn ? (
-    <li
-      css={css`
-        margin-left: 2rem;
-      `}
-    >
-      <GhostButton onClick={firebase.signOut}>Log Out</GhostButton>
-    </li>
-  ) : (
-    <>
-      {/* FLAG */}
-      {/* <li
-        css={css`
-          margin-left: 2rem;
-        `}
-      >
-        <GhostButton onClick={handleModalOpen}>Log In</GhostButton>
-      </li> */}
-      {/* <li
-              css={css`
-                margin-left: 1rem;
-              `}
-            >
-              <PrimaryButton onClick={handleModalOpen}>
-                Get Started
-              </PrimaryButton>
-            </li> */}
-    </>
-  )
+  /* FLAG */
+
+  // const authNav = hasSignedIn ? (
+  //   <li
+  //     css={css`
+  //       margin-left: 2rem;
+  //     `}
+  //   >
+  //     <GhostButton onClick={firebase.signOut}>Log Out</GhostButton>
+  //   </li>
+  // ) : (
+  //   <>
+  //     <li
+  //       css={css`
+  //         margin-left: 2rem;
+  //       `}
+  //     >
+  //       <GhostButton onClick={handleModalOpen}>Log In</GhostButton>
+  //     </li>
+  //     <li
+  //       css={css`
+  //         margin-left: 1rem;
+  //       `}
+  //     >
+  //       <PrimaryButton onClick={handleModalOpen}>Get Started</PrimaryButton>
+  //     </li>
+  //   </>
+  // )
 
   return (
     <nav>
@@ -131,7 +130,7 @@ export default function Navigation () {
         >
           <NavLink to='/me'>My Library</NavLink>
         </li>
-        {authNav}
+        {/* {authNav} */}
       </ul>
     </nav>
   )
