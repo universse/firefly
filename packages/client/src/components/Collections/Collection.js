@@ -11,18 +11,22 @@ import {
 } from './styled'
 import { Heart, Save } from '../../icons'
 import DifficultyLevels from 'constants/DifficultyLevels'
+import useSavedCollection from 'hooks/useSavedCollection'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 // TODO: category
 export default function Collection ({
-  id,
-  name,
-  category,
-  level,
-  tags,
-  handleHeartClick,
-  handleSaveClick
+  collection: { id, name, category, level, tags },
+  handleHeartClick
 }) {
+  const [, isSaved, handleSaveClick] = useSavedCollection({
+    id,
+    name,
+    category,
+    level,
+    tags
+  })
+
   return (
     <>
       <div
@@ -59,7 +63,7 @@ export default function Collection ({
             css={css`
               display: flex;
               justify-content: space-between;
-              width: 5.5rem;
+              width: 2.5rem;
             `}
           >
             <IconButton
@@ -67,11 +71,12 @@ export default function Collection ({
               onClick={handleSaveClick}
               value={id}
             >
-              <Save />
+              <Save filled={isSaved} />
             </IconButton>
+            {/* FLAG
             <IconButton aria-label='Love' onClick={handleHeartClick} value={id}>
-              <Heart />
-            </IconButton>
+              <Heart color='#f00' />
+            </IconButton> */}
           </div>
         </div>
       </CollectionWrapper>

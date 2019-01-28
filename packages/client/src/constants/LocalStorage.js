@@ -1,5 +1,5 @@
 export default {
   EMAIL_SIGN_IN: 'pristineEmailLinkSignIn',
-  IS_VISITED: 'pristineIsVisited',
+  HAS_SIGNED_IN: 'pristineHasSignedUp',
   SAVED_COLLECTIONS: 'pristineSavedCollections'
 }

@@ -1,10 +1,12 @@
 import React from 'react'
 
-export function Save ({ color }) {
+export function Save ({ color, filled }) {
+  const className = filled ? 'feather feather-filled' : 'feather'
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      className='feather'
+      className={className}
       viewBox='0 0 24 24'
       stroke={color}
       aria-label='save'
@@ -17,5 +19,6 @@ export function Save ({ color }) {
 }
 
 Save.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  filled: false
 }

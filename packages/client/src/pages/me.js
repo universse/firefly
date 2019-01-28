@@ -2,7 +2,6 @@
 // page
 import React, { useState, useEffect } from 'react'
 
-import Layout from 'layouts/Layout'
 import { getSavedCollections } from 'services/localforage'
 
 export default function MePage (props) {
@@ -12,9 +11,5 @@ export default function MePage (props) {
     getSavedCollections().then(value => setSavedCollections(value))
   }, [])
 
-  return (
-    <Layout>
-      <div>{JSON.stringify(savedCollections)}</div>
-    </Layout>
-  )
+  return <span>{JSON.stringify(savedCollections)}</span>
 }

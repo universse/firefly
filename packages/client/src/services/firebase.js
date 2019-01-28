@@ -2,7 +2,14 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
+import LocalStorage from 'constants/LocalStorage'
+
 const config = JSON.parse(process.env.GATSBY_FIREBASE_CONFIG)
+
+const setHasSignedIn = () => {
+  window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+  window.location.reload()
+}
 
 // TODO add GATSBY_HOME_PAGE to netlify
 class Firebase {
@@ -23,19 +30,27 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password)
 
   signInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password)
+    this.auth.signInWithEmailAndPassword(email, password).then(setHasSignedIn)
 
   sendSignInLinkToEmail = email =>
     this.auth.sendSignInLinkToEmail(email, this.actionCodeSettings)
 
   signInWithEmailLink = email =>
-    this.auth.signInWithEmailLink(email, window.location.href)
+    this.auth
+      .signInWithEmailLink(email, window.location.href)
+      .then(setHasSignedIn)
 
-  signInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider)
+  signInWithGoogle = () =>
+    this.auth.signInWithPopup(this.googleProvider).then(setHasSignedIn)
 
-  signInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider)
+  signInWithFacebook = () =>
+    this.auth.signInWithPopup(this.facebookProvider).then(setHasSignedIn)
 
-  signOut = () => this.auth.signOut()
+  signOut = () =>
+    this.auth.signOut().then(() => {
+      window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
+      window.location.reload()
+    })
 
   sendPasswordResetEmail = email => this.auth.sendPasswordResetEmail(email)
 

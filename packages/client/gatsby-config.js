@@ -26,8 +26,7 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
-    'gatsby-plugin-firebase-authentication',
-    'gatsby-plugin-emotion-theming',
+    'gatsby-plugin-layout',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',
     {

@@ -2,31 +2,30 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import Layout from 'layouts/Layout'
 import CollectionView from 'components/CollectionView'
 import { baseWrapper } from '../styles'
 
 // TODO: add helmet
 
-export default function ({ data: { collections } }) {
+export default function ({ location, data: { collections } }) {
+  console.log(location)
   return (
-    <Layout>
-      <main
-        css={theme => css`
-          background-color: ${theme.colors.gray100};
-          padding: 3rem 0;
+    <main
+      css={theme => css`
+        background-color: ${theme.colors.gray100};
+        min-height: 100vh;
+        padding: 3rem 0;
+      `}
+    >
+      <div
+        css={css`
+          ${baseWrapper};
+          max-width: 50rem;
         `}
       >
-        <div
-          css={css`
-            ${baseWrapper};
-            max-width: 50rem;
-          `}
-        >
-          <CollectionView collection={collections} />
-        </div>
-      </main>
-    </Layout>
+        <CollectionView collection={collections} />
+      </div>
+    </main>
   )
 }
 

@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
-import { AuthenticationContext } from './Authentication'
 import { ModalContext } from './Modal'
 import FirebaseContext from 'contexts/FirebaseContext'
+import hasSignedIn from 'utils/hasSignedIn'
 
 // darker shade hover
 function GhostButton (props) {
@@ -83,9 +83,38 @@ function NavLink (props) {
 }
 
 export default function Navigation () {
-  const user = useContext(AuthenticationContext)
   const { handleModalOpen } = useContext(ModalContext)
   const firebase = useContext(FirebaseContext)
+
+  const authNav = hasSignedIn ? (
+    <li
+      css={css`
+        margin-left: 2rem;
+      `}
+    >
+      <GhostButton onClick={firebase.signOut}>Log Out</GhostButton>
+    </li>
+  ) : (
+    <>
+      {/* FLAG */}
+      {/* <li
+        css={css`
+          margin-left: 2rem;
+        `}
+      >
+        <GhostButton onClick={handleModalOpen}>Log In</GhostButton>
+      </li> */}
+      {/* <li
+              css={css`
+                margin-left: 1rem;
+              `}
+            >
+              <PrimaryButton onClick={handleModalOpen}>
+                Get Started
+              </PrimaryButton>
+            </li> */}
+    </>
+  )
 
   return (
     <nav>
@@ -102,43 +131,7 @@ export default function Navigation () {
         >
           <NavLink to='/me'>My Library</NavLink>
         </li>
-        {user ? (
-          <>
-            {/* <li
-              css={css`
-                margin-left: 2rem;
-              `}
-            >
-              <NavLink to='/search'>My Library</NavLink>
-            </li> */}
-            <li
-              css={css`
-                margin-left: 2rem;
-              `}
-            >
-              <GhostButton onClick={firebase.signOut}>Log Out</GhostButton>
-            </li>
-          </>
-        ) : (
-          <>
-            <li
-              css={css`
-                margin-left: 2rem;
-              `}
-            >
-              <GhostButton onClick={handleModalOpen}>Log In</GhostButton>
-            </li>
-            {/* <li
-              css={css`
-                margin-left: 1rem;
-              `}
-            >
-              <PrimaryButton onClick={handleModalOpen}>
-                Get Started
-              </PrimaryButton>
-            </li> */}
-          </>
-        )}
+        {authNav}
       </ul>
     </nav>
   )

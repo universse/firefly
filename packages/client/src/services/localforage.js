@@ -16,11 +16,11 @@ export const saveCollection = async collection => {
       ? delete savedCollections[id]
       : (savedCollections[id] = collection)
 
-    localforage
+    return localforage
       .setItem(LocalStorage.SAVED_COLLECTIONS, savedCollections)
       .then(console.log)
   } else {
-    localforage
+    return localforage
       .setItem(LocalStorage.SAVED_COLLECTIONS, { [id]: collection })
       .then(console.log)
   }

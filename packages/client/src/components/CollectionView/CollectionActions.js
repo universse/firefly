@@ -4,7 +4,11 @@ import { css } from '@emotion/core'
 import { IconButton, ProgressBar } from './styled'
 import { Heart, Save, Share } from '../../icons'
 
-export default function CollectionActions ({ urls }) {
+export default function CollectionActions ({
+  isSaved,
+  handleSaveClick,
+  numOfItems
+}) {
   return (
     <div
       css={theme => css`
@@ -36,7 +40,7 @@ export default function CollectionActions ({ urls }) {
               line-height: 1.25rem;
             `}
           >
-            0 of {urls.length} items completed
+            0 of {numOfItems} items completed
           </span>
         </div>
       </div>
@@ -45,27 +49,22 @@ export default function CollectionActions ({ urls }) {
           display: flex;
           justify-content: space-between;
           margin-right: -0.5rem;
-          width: 8.5rem;
+          width: 5.5rem;
         `}
       >
-        <IconButton
-          aria-label='Share'
-          // onClick={handleHeartClick}
-        >
+        <IconButton aria-label='Share' onClick={() => console.log()}>
           <Share />
         </IconButton>
-        <IconButton
-          aria-label='Save to My Library'
-          // onClick={handleHeartClick}
-        >
-          <Save />
+        <IconButton aria-label='Save to My Library' onClick={handleSaveClick}>
+          <Save filled={isSaved} />
         </IconButton>
-        <IconButton
+        {/* FLAG
+            <IconButton
           aria-label='Love'
           // onClick={handleHeartClick}
         >
           <Heart />
-        </IconButton>
+        </IconButton> */}
       </div>
     </div>
   )
