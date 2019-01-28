@@ -13,7 +13,10 @@ import LocalStorage from 'constants/LocalStorage'
 export default function IndexPage (props) {
   const user = useContext(AuthenticationContext)
 
-  if (!window.localStorage.getItem(LocalStorage.IS_VISITED)) {
+  if (
+    typeof window === 'object' &&
+    !window.localStorage.getItem(LocalStorage.IS_VISITED)
+  ) {
     window.localStorage.setItem(LocalStorage.IS_VISITED, true)
 
     return (
