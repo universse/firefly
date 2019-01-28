@@ -8,8 +8,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Authentication from 'components/Authentication'
 import Modal from 'components/Modal'
 import Header from 'components/Header'
-
-import Theme from 'constants/theme'
+import Theme from 'constants/Theme'
 
 export default function Layout ({ children }) {
   return (
