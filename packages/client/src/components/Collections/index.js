@@ -5,10 +5,13 @@ import { css } from '@emotion/core'
 // import { AuthenticationContext } from '../Authentication'
 // import { ModalContext } from '../Modal'
 import Collection from './Collection'
+import { SavedCollectionsContext } from 'components/SavedCollections'
+
 // flag
 export function Collections ({ data }) {
   // const user = useContext(AuthenticationContext)
   // const { handleModalOpen } = useContext(ModalContext)
+  const [savedCollections, dispatch] = useContext(SavedCollectionsContext)
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
 
   return (
@@ -34,7 +37,14 @@ export function Collections ({ data }) {
         >
           <Collection
             collection={node}
-            // handleHeartClick={handleHeartClick}
+            // handleHeartClick={onHeartClick}
+            handleSaveClick={() =>
+              dispatch({
+                type: 'saveClick',
+                payload: node
+              })
+            }
+            isSaved={!!savedCollections[node.id]}
           />
         </li>
       ))}

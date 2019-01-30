@@ -5,6 +5,7 @@ import { IconButton, ProgressBar } from './styled'
 import { Heart, Save, Share } from '../../icons'
 
 export default function CollectionActions ({
+  id,
   isSaved,
   handleSaveClick,
   numOfItems
@@ -55,7 +56,11 @@ export default function CollectionActions ({
         <IconButton aria-label='Share' onClick={() => console.log()}>
           <Share />
         </IconButton>
-        <IconButton aria-label='Save to My Library' onClick={handleSaveClick}>
+        <IconButton
+          aria-label='Save to My Library'
+          onClick={handleSaveClick}
+          value={id}
+        >
           <Save filled={isSaved} />
         </IconButton>
         {/* FLAG

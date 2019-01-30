@@ -1,21 +1,20 @@
 // sign up bottom pop up to sync across devices
 // page
-import React, { useState, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
+import { SavedCollectionsContext } from 'components/SavedCollections'
 import Collection from 'components/Collections/Collection'
-import { getSavedCollections } from 'services/localforage'
 import { baseWrapper } from '../styles'
 
 export default function MePage (props) {
-  const [savedCollections, setSavedCollections] = useState()
+  const [savedCollections, dispatch] = useContext(SavedCollectionsContext)
 
-  useEffect(() => {
-    getSavedCollections().then(value => setSavedCollections(value))
-  }, [])
-
-  const handleUnsave = () =>
-    getSavedCollections().then(value => setSavedCollections(value))
+  const onSaveClick = e =>
+    dispatch({
+      type: 'saveClick',
+      payload: { id: e.currentTarget.value }
+    })
 
   return (
     <main
@@ -61,7 +60,12 @@ export default function MePage (props) {
                 `}
                 key={collection.id}
               >
-                <Collection collection={collection} onUnsave={handleUnsave} />
+                <Collection
+                  collection={collection}
+                  // handleHeartClick={onHeartClick}
+                  handleSaveClick={onSaveClick}
+                  isSaved
+                />
               </li>
             ))}
         </ul>

@@ -11,26 +11,15 @@ import {
 } from './styled'
 import { Heart, Save } from '../../icons'
 import DifficultyLevels from 'constants/DifficultyLevels'
-import useSavedCollection from 'hooks/useSavedCollection'
 // import { createCategoryPath } from '../../../gatsby/utils'
 
 // TODO: category
 export default function Collection ({
   collection: { id, name, category, level, tags },
   handleHeartClick,
-  onUnsave
+  handleSaveClick,
+  isSaved
 }) {
-  const [, isSaved, handleSaveClick] = useSavedCollection(
-    {
-      id,
-      name,
-      category,
-      level,
-      tags
-    },
-    onUnsave
-  )
-
   return (
     <>
       <div

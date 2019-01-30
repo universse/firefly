@@ -14,7 +14,9 @@ export default function Authentication ({ children }) {
       setUser(currentUser)
     })
 
-    return () => stopAuthListener()
+    return () => {
+      stopAuthListener()
+    }
   }, [])
 
   return (
