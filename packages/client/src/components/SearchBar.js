@@ -49,7 +49,6 @@ function Item ({ isActive, ...props }) {
 }
 
 function stateReducer (state, changes) {
-  console.log(changes)
   switch (changes.type) {
     case Downshift.stateChangeTypes.blurInput:
     case Downshift.stateChangeTypes.mouseUp:

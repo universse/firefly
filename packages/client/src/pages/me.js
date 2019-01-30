@@ -1,14 +1,14 @@
 // sign up bottom pop up to sync across devices
 // page
-import React, { useContext } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
-import { SavedCollectionsContext } from 'components/SavedCollections'
 import Collection from 'components/Collections/Collection'
+import useSavedCollections from 'hooks/useSavedCollections'
 import { baseWrapper } from '../styles'
 
 export default function MePage (props) {
-  const [savedCollections, dispatch] = useContext(SavedCollectionsContext)
+  const [savedCollections, dispatch] = useSavedCollections()
 
   const onSaveClick = e =>
     dispatch({

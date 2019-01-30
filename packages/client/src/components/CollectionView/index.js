@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
-import { SavedCollectionsContext } from 'components/SavedCollections'
+import useSavedCollections from 'hooks/useSavedCollections'
 
 // TODO: add helmet
 // suggestion component
@@ -13,7 +13,7 @@ export default function CollectionView ({
   collection: { urls, ...collection }
 }) {
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
-  const [savedCollections, dispatch] = useContext(SavedCollectionsContext)
+  const [savedCollections, dispatch] = useSavedCollections()
 
   const onSaveClick = e =>
     dispatch({
@@ -21,7 +21,7 @@ export default function CollectionView ({
       payload: collection
     })
 
-  return (
+  return savedCollections ? (
     <>
       <div
         css={css`
@@ -57,5 +57,5 @@ export default function CollectionView ({
         <LearningList urls={urls} />
       </div>
     </>
-  )
+  ) : null
 }

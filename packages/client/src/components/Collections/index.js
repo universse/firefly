@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 // import { AuthenticationContext } from '../Authentication'
 // import { ModalContext } from '../Modal'
 import Collection from './Collection'
-import { SavedCollectionsContext } from 'components/SavedCollections'
+import useSavedCollections from 'hooks/useSavedCollections'
 
 // flag
 export function Collections ({ data }) {
   // const user = useContext(AuthenticationContext)
   // const { handleModalOpen } = useContext(ModalContext)
-  const [savedCollections, dispatch] = useContext(SavedCollectionsContext)
+  const [savedCollections, dispatch] = useSavedCollections()
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
 
   return (
@@ -28,26 +28,27 @@ export function Collections ({ data }) {
         }
       `}
     >
-      {data.allCollections.edges.map(({ node }) => (
-        <li
-          key={node.id}
-          css={css`
-            position: relative;
-          `}
-        >
-          <Collection
-            collection={node}
-            // handleHeartClick={onHeartClick}
-            handleSaveClick={() =>
-              dispatch({
-                type: 'saveClick',
-                payload: node
-              })
-            }
-            isSaved={!!savedCollections[node.id]}
-          />
-        </li>
-      ))}
+      {savedCollections &&
+        data.allCollections.edges.map(({ node }) => (
+          <li
+            key={node.id}
+            css={css`
+              position: relative;
+            `}
+          >
+            <Collection
+              collection={node}
+              // handleHeartClick={onHeartClick}
+              handleSaveClick={() =>
+                dispatch({
+                  type: 'saveClick',
+                  payload: node
+                })
+              }
+              isSaved={!!savedCollections[node.id]}
+            />
+          </li>
+        ))}
     </ul>
   )
 }
