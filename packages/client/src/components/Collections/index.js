@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -39,12 +39,14 @@ export function Collections ({ data }) {
             <Collection
               collection={node}
               // handleHeartClick={onHeartClick}
-              handleSaveClick={() =>
-                dispatch({
-                  type: 'saveClick',
-                  payload: node
-                })
-              }
+              handleSaveClick={useCallback(
+                () =>
+                  dispatch({
+                    type: 'saveClick',
+                    payload: node
+                  }),
+                []
+              )}
               isSaved={!!savedCollections[node.id]}
             />
           </li>

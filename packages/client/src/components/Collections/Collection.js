@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import Tags from './Tags'
@@ -14,7 +14,7 @@ import DifficultyLevels from 'constants/DifficultyLevels'
 // import { createCategoryPath } from '../../../gatsby/utils'
 
 // TODO: category
-export default function Collection ({
+export function Collection ({
   collection: { id, name, category, level, tags },
   handleHeartClick,
   handleSaveClick,
@@ -76,3 +76,5 @@ export default function Collection ({
     </>
   )
 }
+
+export default memo(Collection)
