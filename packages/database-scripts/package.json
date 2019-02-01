@@ -5,8 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
-    "firebase-admin": "^6.5.1",
-    "tabletop": "^1.5.2"
+    "firebase-admin": "^7.0.0",
+    "got": "^9.6.0",
+    "metascraper": "^4.10.1",
+    "metascraper-description": "^4.10.1",
+    "metascraper-title": "^4.10.1",
+    "xlsx": "^0.14.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -35,7 +35,7 @@
     "stylelint-processor-styled-components": "^1.5.2"
   },
   "scripts": {
-    "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf yarn.lock",
+    "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf yarn.lock && yarn",
     "commit": "shjs ./scripts/commit.js",
     "flow": "flow",
     "flow start": "flow start",
