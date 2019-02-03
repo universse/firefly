@@ -25,6 +25,7 @@ export function Category ({ active, category, to }) {
         border-left: 4px solid transparent;
         color: ${theme.colors.gray900};
         display: inline-flex;
+        font-size: 1rem;
         height: 2rem;
         margin: 0.25rem 0;
         padding-left: 1rem;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { Tag } from './styled'
+import { Tag } from 'components/common'
 
 export default function Tags ({ tags }) {
   return (

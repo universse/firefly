@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { css } from '@emotion/core'
+import localforage from 'localforage'
 
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
 import useSavedCollections from 'hooks/useSavedCollections'
+import LocalStorage from 'constants/LocalStorage'
 
 // TODO: add helmet
 // suggestion component
@@ -14,6 +16,37 @@ export default function CollectionView ({
 }) {
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
   const [savedCollections, dispatch] = useSavedCollections()
+  const [completedItems, setCompletedItems] = useState()
+  const isFirstMount = useRef(true)
+
+  const save = () => {
+    localforage.setItem(LocalStorage.COMPLETED_ITEMS, completedItems)
+  }
+
+  useEffect(() => {
+    if (isFirstMount.current) {
+      localforage.getItem(LocalStorage.COMPLETED_ITEMS).then(value => {
+        console.log(value)
+        value ? setCompletedItems(value) : setCompletedItems({})
+      })
+      isFirstMount.current = false
+      return
+    }
+
+    window.addEventListener('beforeunload', save)
+
+    return () => {
+      save()
+      window.removeEventListener('beforeunload', save)
+    }
+  }, [completedItems])
+
+  const numOfCompleted =
+    completedItems &&
+    urls.reduce(
+      (total, current) => (completedItems[current.id] ? total + 1 : total),
+      0
+    )
 
   const onSaveClick = e =>
     dispatch({
@@ -21,7 +54,19 @@ export default function CollectionView ({
       payload: collection
     })
 
-  return savedCollections ? (
+  const onCheckClick = e => {
+    const id = e.currentTarget.value
+
+    if (completedItems[id]) {
+      const newState = { ...completedItems }
+      delete newState[id]
+      setCompletedItems(newState)
+    } else {
+      setCompletedItems({ ...completedItems, [id]: true })
+    }
+  }
+
+  return savedCollections && completedItems ? (
     <>
       <div
         css={css`
@@ -31,8 +76,9 @@ export default function CollectionView ({
         `}
       >
         <CollectionDetails
-          name={collection.name}
+          category={collection.category}
           level={collection.level}
+          name={collection.name}
           tags={collection.tags}
         />
         <div
@@ -44,6 +90,7 @@ export default function CollectionView ({
             isSaved={!!savedCollections[collection.id]}
             handleSaveClick={onSaveClick}
             numOfItems={urls.length}
+            numOfCompleted={numOfCompleted}
           />
         </div>
       </div>
@@ -54,7 +101,11 @@ export default function CollectionView ({
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         `}
       >
-        <LearningList urls={urls} />
+        <LearningList
+          completedItems={completedItems}
+          onCheckClick={onCheckClick}
+          urls={urls}
+        />
       </div>
     </>
   ) : null

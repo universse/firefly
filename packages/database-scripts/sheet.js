@@ -6,13 +6,13 @@ const metascraper = require('metascraper')([
 const got = require('got')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
+const { toTitleCase } = require('common')
 
-const processed = require('./data.json')
-
-const workbook = XLSX.readFile(resolve(__dirname, './raw.xlsx'))
+const workbook = XLSX.readFile(resolve(__dirname, './data/raw.xlsx'))
 const worksheet = workbook.Sheets['Sheet1']
 
 const NUMBER_OF_URLS = 20
+const processed = { collections: [] }
 
 ;(async () => {
   await Promise.all(
@@ -32,7 +32,7 @@ const NUMBER_OF_URLS = 20
 
               urls[i] = {
                 url,
-                title,
+                title: toTitleCase(title),
                 description,
                 type
               }
@@ -44,15 +44,15 @@ const NUMBER_OF_URLS = 20
         name: row.name,
         category: row.category,
         level: row.level,
-        tags: row.tags,
-        suggestions: row.suggestions,
+        tags: row.tags.split(';'),
+        suggestions: [''],
         urls
       })
     })
   )
 
   writeFileSync(
-    resolve(__dirname, './test.json'),
+    resolve(__dirname, './data/processed.json'),
     JSON.stringify(processed, null, 2)
   )
 })()

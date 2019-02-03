@@ -4,49 +4,8 @@ import Downshift from 'downshift'
 import { css } from '@emotion/core'
 import matchSorter from 'match-sorter'
 
-import { createCollectionPath } from '../../gatsby/utils'
-
-const input = theme => css`
-  background-color: ${theme.colors.gray300};
-  border-radius: 1.25rem;
-  color: ${theme.colors.gray900};
-  font-size: 0.9375rem;
-  height: 2.5rem;
-  padding-left: 1rem;
-  width: 100%;
-`
-
-const result = theme => css`
-  align-items: center;
-  color: ${theme.colors.gray900};
-  display: flex;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  line-height: 2.5rem;
-  padding: 0 0 0 1rem;
-`
-
-const resultBox = theme => css`
-  background-color: ${theme.colors.gray300};
-  border-bottom-left-radius: 1.25rem;
-  border-bottom-right-radius: 1.25rem;
-  overflow: auto;
-  padding: 1.25rem 0 0 0;
-  position: absolute;
-  top: 1.25rem;
-  width: 100%;
-`
-
-function Item ({ isActive, ...props }) {
-  return (
-    <li
-      css={css`
-        background-color: ${isActive ? '#fff' : 'transparent'};
-      `}
-      {...props}
-    />
-  )
-}
+import { Input, Item, Result, ResultBox } from './styled'
+import { createCollectionPath } from '../../../gatsby/utils'
 
 function stateReducer (state, changes) {
   switch (changes.type) {
@@ -58,9 +17,9 @@ function stateReducer (state, changes) {
   }
 }
 
-// TODO constants
 const NO_OF_RESULTS = 7
-// add search icon
+
+// TODO add search icon
 function SearchBar ({ data }) {
   const [searchInput, setSearchInput] = useState('')
 
@@ -118,8 +77,7 @@ function SearchBar ({ data }) {
             >
               What do you want to learn today?
             </label>
-            <input
-              css={input}
+            <Input
               {...getInputProps({
                 onFocus: openMenu,
                 placeholder: 'What do you want to learn today?',
@@ -127,7 +85,7 @@ function SearchBar ({ data }) {
               })}
             />
           </form>
-          <div css={resultBox}>
+          <ResultBox>
             <ul {...getMenuProps()}>
               {isOpen && searchInput && (
                 <>
@@ -140,15 +98,14 @@ function SearchBar ({ data }) {
                         isActive: highlightedIndex === index
                       })}
                     >
-                      <Link
-                        css={result}
+                      <Result
                         to={createCollectionPath({
                           id: item.id,
                           name: item.name
                         })}
                       >
                         {item.name}
-                      </Link>
+                      </Result>
                     </Item>
                   ))}
                   {results.length !== 0 ? (
@@ -158,23 +115,19 @@ function SearchBar ({ data }) {
                         isActive: highlightedIndex === numOfResults
                       })}
                     >
-                      <Link
-                        css={result}
-                        to='/search'
-                        state={{ results, searchInput }}
-                      >
+                      <Result to='/search' state={{ results, searchInput }}>
                         See all results
-                      </Link>
+                      </Result>
                     </Item>
                   ) : (
                     <li>
-                      <span css={result}>No result found :(</span>
+                      <Result as='span'>No result found :(</Result>
                     </li>
                   )}
                 </>
               )}
             </ul>
-          </div>
+          </ResultBox>
         </div>
       )}
     </Downshift>

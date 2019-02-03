@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import { Check } from '../../icons'
 import LinkIcons from 'constants/LinkIcons'
-import { IconButton, LinkTitle } from './styled'
+import { LinkTitle } from './styled'
+import { IconButton } from 'components/common'
 import { getHostname } from './utils'
 
-export default function LearningItem ({ url, title, type }) {
+function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
   return (
@@ -18,7 +19,7 @@ export default function LearningItem ({ url, title, type }) {
           width: 100%;
         `}
       >
-        <LinkTitle href={url} title='This is a title for the learning item' />
+        <LinkTitle href={url} title={title} />
       </div>
       <div
         css={theme => css`
@@ -35,11 +36,11 @@ export default function LearningItem ({ url, title, type }) {
           css={theme => css`
             align-items: center;
             display: flex;
-            margin: -0.375rem 0 0 -0.25rem;
+            margin: -0.375rem 0 0 -0.375rem;
           `}
         >
-          <IconButton>
-            <Check />
+          <IconButton onClick={handleCheckClick} value={id}>
+            <Check checked={checked} />
           </IconButton>
         </div>
         {/* TODO: author */}
@@ -81,3 +82,5 @@ export default function LearningItem ({ url, title, type }) {
     </>
   )
 }
+
+export default memo(LearningItem)

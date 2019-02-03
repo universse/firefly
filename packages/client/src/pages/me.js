@@ -38,7 +38,7 @@ export default function MePage (props) {
           <h1
             css={theme => css`
               color: ${theme.colors.gray700};
-              font-size: 1.125rem;
+              font-size: 1.25rem;
               line-height: 2rem;
             `}
           >

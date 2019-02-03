@@ -1,5 +1,5 @@
 import React from 'react'
-// import { graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import Hero from 'components/Hero'
@@ -8,7 +8,7 @@ import CategoryFilter from 'components/CategoryFilter'
 import { baseWrapper } from '../styles'
 import hasSignedIn from 'utils/hasSignedIn'
 
-export default function IndexPage (props) {
+export default function IndexPage ({ data, location }) {
   if (!hasSignedIn) {
     return (
       <>
@@ -20,13 +20,9 @@ export default function IndexPage (props) {
           `}
           id='main'
         >
-          <div
-            css={css`
-              ${baseWrapper};
-            `}
-          >
+          <div css={baseWrapper}>
             <CategoryFilter />
-            <Collections />
+            <Collections collections={data.allCollections.edges} />
           </div>
         </main>
       </>
@@ -42,32 +38,26 @@ export default function IndexPage (props) {
       id='main'
     >
       {/* first time user ?  */}
-      <div
-        css={css`
-          ${baseWrapper};
-        `}
-      >
+      <div css={baseWrapper}>
         <CategoryFilter />
-        <Collections />
+        <Collections collections={data.allCollections.edges} />
       </div>
     </main>
   )
 }
 
-// export const query = graphql`
-//   query($id: String!) {
-//     collections(id: { eq: $id }) {
-//       id
-//       name
-//       # category
-//       level
-//       urls {
-//         id
-//         url
-//         type
-//       }
-//       tags
-//       suggestions
-//     }
-//   }
-// `
+export const query = graphql`
+  query($category: String) {
+    allCollections(filter: { category: { eq: $category } }) {
+      edges {
+        node {
+          id
+          category
+          level
+          name
+          tags
+        }
+      }
+    }
+  }
+`

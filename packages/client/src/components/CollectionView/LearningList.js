@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import LearningItem from './LearningItem'
 
-export default function LearningList ({ urls }) {
+export default function LearningList ({ completedItems, onCheckClick, urls }) {
   return (
     <ul
       css={css`
@@ -12,14 +12,18 @@ export default function LearningList ({ urls }) {
         }
       `}
     >
-      {urls.map(({ id, ...url }) => (
+      {urls.map(url => (
         <li
           css={css`
             position: relative;
           `}
-          key={id}
+          key={url.id}
         >
-          <LearningItem {...url} />
+          <LearningItem
+            {...url}
+            checked={!!completedItems[url.id]}
+            handleCheckClick={onCheckClick}
+          />
         </li>
       ))}
     </ul>

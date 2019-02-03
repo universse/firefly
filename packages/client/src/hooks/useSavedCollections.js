@@ -1,11 +1,16 @@
 import { useEffect, useContext } from 'react'
+import localforage from 'localforage'
 
 import { SavedCollectionsContext } from 'components/SavedCollections'
-import { saveCollections } from 'services/localforage'
+import LocalStorage from 'constants/LocalStorage'
 
 export default function useSavedCollections () {
   const savedCollectionsReducer = useContext(SavedCollectionsContext)
-  const save = e => saveCollections(savedCollectionsReducer[0])
+  const save = () =>
+    localforage.setItem(
+      LocalStorage.SAVED_COLLECTIONS,
+      savedCollectionsReducer[0]
+    )
 
   useEffect(() => {
     window.addEventListener('beforeunload', save)

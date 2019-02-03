@@ -2,18 +2,11 @@ import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import Tags from './Tags'
-import {
-  Category,
-  CollectionTitle,
-  CollectionWrapper,
-  Difficulty,
-  IconButton
-} from './styled'
 import { Heart, Save } from '../../icons'
-import DifficultyLevels from 'constants/DifficultyLevels'
-// import { createCategoryPath } from '../../../gatsby/utils'
+import { CollectionTitle, CollectionWrapper } from './styled'
+import { Category, Difficulty, IconButton } from 'components/common'
+import { createCategoryPath } from '../../../gatsby/utils'
 
-// TODO: category
 export function Collection ({
   collection: { id, name, category, level, tags },
   handleHeartClick,
@@ -40,8 +33,8 @@ export function Collection ({
             justify-content: space-between;
           `}
         >
-          <Category to='/'>Psychology</Category>
-          <Difficulty>{DifficultyLevels[level]}</Difficulty>
+          <Category to={createCategoryPath(category)}>{category}</Category>
+          <Difficulty>{level}</Difficulty>
         </div>
         <div
           css={css`

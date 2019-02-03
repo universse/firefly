@@ -1,0 +1,83 @@
+{
+  "collections": [
+    {
+      "name": "asda",
+      "category": "startup",
+      "level": "primer",
+      "tags": [
+        "asd",
+        "as"
+      ],
+      "suggestions": [
+        ""
+      ],
+      "urls": [
+        {
+          "url": "https://stackoverflow.com/questions/47189234/modify-routing-in-gatsby-site",
+          "title": "Modify Routing in Gatsby Site",
+          "description": "I want to set up pagination in a Gatsby blog. In my pages/index.js page I am storing the posts, the “chunked” posts (e.g. chunks of 4 posts per page), and the current page number: this.state = {",
+          "type": "course"
+        }
+      ]
+    },
+    {
+      "name": "acxc",
+      "category": "programming",
+      "level": "intermediate",
+      "tags": [
+        "safsa",
+        "safsaf"
+      ],
+      "suggestions": [
+        ""
+      ],
+      "urls": [
+        {
+          "url": "https://www.techrepublic.com/blog/microsoft-office/how-to-add-a-drop-down-list-to-an-excel-cell/",
+          "title": "How to Add a Drop-Down List to an Excel Cell",
+          "description": "Drop-down lists can greatly facilitate data entry. Here’s a look at how to use Excel’s data validation feature to create handy lists within your worksheets.",
+          "type": "video"
+        }
+      ]
+    },
+    {
+      "name": "asda",
+      "category": "artificial intelligence",
+      "level": "primer",
+      "tags": [
+        "a"
+      ],
+      "suggestions": [
+        ""
+      ],
+      "urls": [
+        {
+          "url": "https://medium.freecodecamp.org/before-you-can-master-design-you-must-first-master-the-fundamentals-1981a2af1fda?gi=d11c72969024",
+          "title": "Before You Can Master Design, You Must First Master the Fundamentals",
+          "description": "Last week, one of my readers sent in a question: How do I become a better visual designer?",
+          "type": "article"
+        }
+      ]
+    },
+    {
+      "name": "asdadsa",
+      "category": "design",
+      "level": "fundamental",
+      "tags": [
+        "a",
+        "s"
+      ],
+      "suggestions": [
+        ""
+      ],
+      "urls": [
+        {
+          "url": "https://medium.freecodecamp.org/before-you-can-master-design-you-must-first-master-the-fundamentals-1981a2af1fda?gi=c878f28b2a39",
+          "title": "Before You Can Master Design, You Must First Master the Fundamentals",
+          "description": "Last week, one of my readers sent in a question: How do I become a better visual designer?",
+          "type": "article"
+        }
+      ]
+    }
+  ]
+}

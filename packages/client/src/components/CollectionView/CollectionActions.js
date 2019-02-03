@@ -1,14 +1,18 @@
 import React from 'react'
 import { css } from '@emotion/core'
+import { Location } from '@reach/router'
 
-import { IconButton, ProgressBar } from './styled'
 import { Heart, Save, Share } from '../../icons'
+import { ProgressBar } from './styled'
+import { IconButton } from 'components/common'
+import { copyToClipboard } from './utils'
 
 export default function CollectionActions ({
   id,
   isSaved,
   handleSaveClick,
-  numOfItems
+  numOfItems,
+  numOfCompleted
 }) {
   return (
     <div
@@ -27,7 +31,7 @@ export default function CollectionActions ({
           justify-content: space-between;
         `}
       >
-        <ProgressBar percentage={50} />
+        <ProgressBar percentage={(numOfCompleted / numOfItems) * 100} />
         <div
           css={css`
             margin-left: 1rem;
@@ -41,7 +45,7 @@ export default function CollectionActions ({
               line-height: 1.25rem;
             `}
           >
-            0 of {numOfItems} items completed
+            {numOfCompleted} of {numOfItems} items completed
           </span>
         </div>
       </div>
@@ -53,9 +57,16 @@ export default function CollectionActions ({
           width: 5.5rem;
         `}
       >
-        <IconButton aria-label='Share' onClick={() => console.log()}>
-          <Share />
-        </IconButton>
+        <Location>
+          {({ location }) => (
+            <IconButton
+              aria-label='Share'
+              onClick={() => copyToClipboard(location.href)}
+            >
+              <Share />
+            </IconButton>
+          )}
+        </Location>
         <IconButton
           aria-label='Save to My Library'
           onClick={handleSaveClick}

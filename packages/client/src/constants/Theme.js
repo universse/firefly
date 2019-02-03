@@ -9,6 +9,8 @@ export default {
     gray400: '#cfcfcf',
     gray500: '#666',
     gray700: 'rgba(0, 0, 0, 0.7)',
-    gray900: 'rgba(0, 0, 0, 0.87)'
-  }
+    gray900: 'rgba(0, 0, 0, 0.87)',
+    success: '#13ae36'
+  },
+  typography: {}
 }

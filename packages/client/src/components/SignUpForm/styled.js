@@ -45,7 +45,7 @@ export function ErrorMessage (props) {
     <span
       css={theme => css`
         color: ${theme.colors.danger};
-        font-size: 0.8125rem;
+        font-size: 0.875rem;
         font-weight: 600;
       `}
       {...props}

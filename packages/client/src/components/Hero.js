@@ -3,15 +3,23 @@ import { css } from '@emotion/core'
 
 import { baseWrapper } from '../styles'
 
-const button = theme => css`
-  background-color: ${theme.colors.brand500};
-  border-radius: 1.5rem;
-  color: #fff;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  height: 3rem;
-  padding: 0 4rem;
-`
+export function CTA (props) {
+  return (
+    <button
+      css={theme => css`
+        background-color: ${theme.colors.brand500};
+        border-radius: 1.5rem;
+        color: #fff;
+        font-size: 0.9375rem;
+        font-weight: 700;
+        height: 3rem;
+        padding: 0 4rem;
+      `}
+      type='button'
+      {...props}
+    />
+  )
+}
 
 export default function Hero () {
   const handleClick = () =>
@@ -59,9 +67,7 @@ export default function Hero () {
             margin-top: 1.5rem;
           `}
         >
-          <button css={button} onClick={handleClick} type='button'>
-            EXPLORE
-          </button>
+          <CTA onClick={handleClick}>EXPLORE</CTA>
         </div>
       </div>
     </section>

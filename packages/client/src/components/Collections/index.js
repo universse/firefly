@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 // import { AuthenticationContext } from '../Authentication'
@@ -8,7 +7,7 @@ import Collection from './Collection'
 import useSavedCollections from 'hooks/useSavedCollections'
 
 // flag
-export function Collections ({ data }) {
+export default function Collections ({ collections }) {
   // const user = useContext(AuthenticationContext)
   // const { handleModalOpen } = useContext(ModalContext)
   const [savedCollections, dispatch] = useSavedCollections()
@@ -29,7 +28,7 @@ export function Collections ({ data }) {
       `}
     >
       {savedCollections &&
-        data.allCollections.edges.map(({ node }) => (
+        collections.map(({ node }) => (
           <li
             key={node.id}
             css={css`
@@ -54,24 +53,3 @@ export function Collections ({ data }) {
     </ul>
   )
 }
-
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allCollections {
-          edges {
-            node {
-              id
-              name
-              # category
-              level
-              tags
-            }
-          }
-        }
-      }
-    `}
-    render={data => <Collections data={data} {...props} />}
-  />
-)

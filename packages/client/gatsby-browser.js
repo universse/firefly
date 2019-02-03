@@ -1,4 +1,5 @@
 import './src/layouts/global.scss'
+import 'typeface-playfair-display'
 
 // export const onServiceWorkerUpdateFound = () => {
 //   const answer = window.confirm(

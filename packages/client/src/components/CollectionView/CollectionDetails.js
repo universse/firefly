@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
-import Tags from './Tags'
-import { Category, CollectionTitle, Difficulty } from './styled'
-import DifficultyLevels from 'constants/DifficultyLevels'
+import Tags from 'components/Collections/Tags'
+import { CollectionTitle } from './styled'
+import { Category, Difficulty } from 'components/common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-// TODO: category
-export default function CollectionDetails ({ category, name, level, tags }) {
+function CollectionDetails ({ category, level, name, tags }) {
   return (
     <div
       css={css`
@@ -25,8 +24,8 @@ export default function CollectionDetails ({ category, name, level, tags }) {
           justify-content: space-between;
         `}
       >
-        <Category to='/'>design</Category>
-        <Difficulty>{DifficultyLevels[level]}</Difficulty>
+        <Category to={createCategoryPath(category)}>{category}</Category>
+        <Difficulty>{level}</Difficulty>
       </div>
       <div
         css={css`
@@ -45,3 +44,5 @@ export default function CollectionDetails ({ category, name, level, tags }) {
     </div>
   )
 }
+
+export default memo(CollectionDetails)

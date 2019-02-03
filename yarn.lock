@@ -1228,16 +1228,16 @@
     read-package-tree "^5.1.6"
     semver "^5.5.0"
 
-"@lerna/changed@3.10.6":
-  version "3.10.6"
-  resolved "https://registry.yarnpkg.com/@lerna/changed/-/changed-3.10.6.tgz#48fed2e6c890b39a71f1dac29e42a6f853956d71"
-  integrity sha512-nZDVq/sKdhgoAg1BVnpqjqUUz5+zedG+AnU+6mjEN2f23YVtRCsW55N4I9eEdW2pxXUaCY85Hj/HPSA74BYaFg==
+"@lerna/changed@3.10.8":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@lerna/changed/-/changed-3.10.8.tgz#7ed17a00c4ca0f6437ce9f7d4925d5e779b8553c"
+  integrity sha512-K2BQPpSS93uNJqi8A5mwrFR9I6Pa/a0jgR/26jun0Wa39DTOjf5WP7EDvXQ8Pftx5kMdHb5hQDwvMCcBJw25mA==
   dependencies:
     "@lerna/collect-updates" "3.10.1"
     "@lerna/command" "3.10.6"
     "@lerna/listable" "3.10.6"
     "@lerna/output" "3.6.0"
-    "@lerna/version" "3.10.6"
+    "@lerna/version" "3.10.8"
 
 "@lerna/check-working-tree@3.10.0":
   version "3.10.0"
@@ -1307,10 +1307,10 @@
     libnpm "^2.0.1"
     lodash "^4.17.5"
 
-"@lerna/conventional-commits@3.10.0":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@lerna/conventional-commits/-/conventional-commits-3.10.0.tgz#284cc16bd3c387f841ff6bec42bcadaa2d13d8e4"
-  integrity sha512-8FvO0eR8g/tEgkb6eRVYaD39TsqMKsOXp17EV48jciciEqcrF/d1Ypu6ilK1GDp6R/1m2mbjt/b52a/qrO+xaw==
+"@lerna/conventional-commits@3.10.8":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@lerna/conventional-commits/-/conventional-commits-3.10.8.tgz#b9f6dd8a09bc679f6afbb8296456de59e268fe3e"
+  integrity sha512-kjODN5f++nsvNT6w9zPuzN+tfNlq7QaKzy6KOMUb+AvGfI4+AKw8z9Uhr8AGvyuFgyNVI69/vdFaXrWC4iTKtQ==
   dependencies:
     "@lerna/validation-error" "3.6.0"
     conventional-changelog-angular "^5.0.2"
@@ -1319,6 +1319,7 @@
     fs-extra "^7.0.0"
     get-stream "^4.0.0"
     libnpm "^2.0.1"
+    pify "^3.0.0"
     semver "^5.5.0"
 
 "@lerna/create-symlink@3.6.0":
@@ -1607,10 +1608,10 @@
     inquirer "^6.2.0"
     libnpm "^2.0.1"
 
-"@lerna/publish@3.10.7":
-  version "3.10.7"
-  resolved "https://registry.yarnpkg.com/@lerna/publish/-/publish-3.10.7.tgz#8c5a3268398152e1f7993ff7bb6722a0363797af"
-  integrity sha512-Qd8pml2l9s6GIvNX1pTnia+Ddjsm9LF3pRRoOQeugAdv2IJNf45c/83AAEyE9M2ShG5VjgxEITNW4Lg49zipjQ==
+"@lerna/publish@3.10.8":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@lerna/publish/-/publish-3.10.8.tgz#fcf73ab2468807f5a8f3339234c2f66f0f65b088"
+  integrity sha512-kS3zia6knsoN8nd+6ihuwRhicBM6HRmbDgoa4uii4+ZqLVz4dniHYfHCMcZzHYSN8Kj35MsT25Ax1iq5eCjxmQ==
   dependencies:
     "@lerna/batch-packages" "3.10.6"
     "@lerna/check-working-tree" "3.10.0"
@@ -1629,7 +1630,7 @@
     "@lerna/run-lifecycle" "3.10.5"
     "@lerna/run-parallel-batches" "3.0.0"
     "@lerna/validation-error" "3.6.0"
-    "@lerna/version" "3.10.6"
+    "@lerna/version" "3.10.8"
     figgy-pudding "^3.5.1"
     fs-extra "^7.0.0"
     libnpm "^2.0.1"
@@ -1732,17 +1733,17 @@
   dependencies:
     libnpm "^2.0.1"
 
-"@lerna/version@3.10.6":
-  version "3.10.6"
-  resolved "https://registry.yarnpkg.com/@lerna/version/-/version-3.10.6.tgz#c31c2bb1aabbdc851407534155567b5cdf48e0fb"
-  integrity sha512-77peW2ROlHHl1e/tHBUmhpb8tsO6CIdlx34XapZhUuIVykrkOuqVFFxqMecrGG8SJe0e3l1G+Fah7bJTQcG0kw==
+"@lerna/version@3.10.8":
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/@lerna/version/-/version-3.10.8.tgz#14a645724b0369f84a0bf4c1eb093e8e96a219f1"
+  integrity sha512-Iko2OkwwkjyK+tIklnH/72M/f54muSiRJurCsC3JqdM8aZaeDXeUrHmAyl7nQLfBlSsHfHyRax/ELkREmO5Tng==
   dependencies:
     "@lerna/batch-packages" "3.10.6"
     "@lerna/check-working-tree" "3.10.0"
     "@lerna/child-process" "3.3.0"
     "@lerna/collect-updates" "3.10.1"
     "@lerna/command" "3.10.6"
-    "@lerna/conventional-commits" "3.10.0"
+    "@lerna/conventional-commits" "3.10.8"
     "@lerna/output" "3.6.0"
     "@lerna/prompt" "3.6.0"
     "@lerna/run-lifecycle" "3.10.5"
@@ -6526,7 +6527,49 @@ eslint@^4.0.0:
     table "4.0.2"
     text-table "~0.2.0"
 
-eslint@^5.12.1, eslint@^5.6.0:
+eslint@^5.13.0:
+  version "5.13.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.13.0.tgz#ce71cc529c450eed9504530939aa97527861ede9"
+  integrity sha512-nqD5WQMisciZC5EHZowejLKQjWGuFS5c70fxqSKlnDME+oz9zmE8KTlX+lHSg+/5wsC/kf9Q9eMkC8qS3oM2fg==
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    ajv "^6.5.3"
+    chalk "^2.1.0"
+    cross-spawn "^6.0.5"
+    debug "^4.0.1"
+    doctrine "^2.1.0"
+    eslint-scope "^4.0.0"
+    eslint-utils "^1.3.1"
+    eslint-visitor-keys "^1.0.0"
+    espree "^5.0.0"
+    esquery "^1.0.1"
+    esutils "^2.0.2"
+    file-entry-cache "^2.0.0"
+    functional-red-black-tree "^1.0.1"
+    glob "^7.1.2"
+    globals "^11.7.0"
+    ignore "^4.0.6"
+    import-fresh "^3.0.0"
+    imurmurhash "^0.1.4"
+    inquirer "^6.1.0"
+    js-yaml "^3.12.0"
+    json-stable-stringify-without-jsonify "^1.0.1"
+    levn "^0.3.0"
+    lodash "^4.17.5"
+    minimatch "^3.0.4"
+    mkdirp "^0.5.1"
+    natural-compare "^1.4.0"
+    optionator "^0.8.2"
+    path-is-inside "^1.0.2"
+    progress "^2.0.0"
+    regexpp "^2.0.1"
+    semver "^5.5.1"
+    strip-ansi "^4.0.0"
+    strip-json-comments "^2.0.1"
+    table "^5.0.2"
+    text-table "^0.2.0"
+
+eslint@^5.6.0:
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.12.1.tgz#5ca9931fb9029d04e7be92b03ce3b58edfac7e3b"
   integrity sha512-54NV+JkTpTu0d8+UYSA8mMKAG4XAsaOrozA9rCW7tgneg1mevcL7wIotPC+fZ0SkWwdhNqoXoxnQCTBp7UvTsg==
@@ -7725,10 +7768,10 @@ gatsby-plugin-create-client-paths@^2.0.4:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-gatsby-plugin-emotion@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.0.2.tgz#5e16a55d3326a1764eda8ae29a2efea85e42aa9f"
-  integrity sha512-uQ/m2tLl7u1GTpgu7gqjTUx0uBXwO03B+HvHyIOqgV3/KS6JNE5Nii4Xz3MQGFtFi9NwFRByS1rpK/AMfAZzSQ==
+gatsby-plugin-emotion@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-emotion/-/gatsby-plugin-emotion-4.0.3.tgz#7b4ee2c96914cf49ff2d170b8f8e52036e8932f0"
+  integrity sha512-1pEFfr71G8+mDno9o3ACwSkeRxNIo+7Bo0djq16uHz3r9VdBTwsC+G3PKK7s+lT1C3g4gKyyXO7NYr9yxbcWHg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@emotion/babel-preset-css-prop" "10.0.5"
@@ -7933,10 +7976,10 @@ gatsby-transformer-sharp@^2.1.13:
     probe-image-size "^4.0.0"
     sharp "^0.21.3"
 
-gatsby@^2.0.110:
-  version "2.0.110"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.110.tgz#6a25def41a5273f10e91b902847e4478537cf2d2"
-  integrity sha512-nVP8UCLwj86TiYPNMuSV8vtknMfR4jAvjfXGTjxaU75h4DAfOtS9t+avImfi6zdRFPv0j+n3fL3aDnOfgauJ9A==
+gatsby@^2.0.111:
+  version "2.0.111"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.111.tgz#a0f9e794d878f3c77fe1996018ab44c4352c5105"
+  integrity sha512-fmg8t/1SocUD1XqXAnLnVA66AdaJl9MRixF+he3LvDHh+9KrNsDGRRAjKAe/Qr4ujtcmsVmBk5Yho32YxwruoQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -9405,6 +9448,11 @@ immediate@~3.0.5:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
   integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
+
+immer@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-2.0.0.tgz#d834c874d2d249f73511af39f3ef1ed3b7411132"
+  integrity sha512-qwwvbGbidU0P5SjO4s1wZ9hjNj8fQ908UVtKDSAYgxuDiY1MFylCvsQJSr/fUUo3aeHdxZapdpzPi3vpwTUXUQ==
 
 immutable-tuple@^0.4.9:
   version "0.4.10"
@@ -11104,14 +11152,14 @@ left-pad@^1.3.0:
   resolved "https://registry.yarnpkg.com/left-pad/-/left-pad-1.3.0.tgz#5b8a3a7765dfe001261dde915589e782f8c94d1e"
   integrity sha512-XI5MPzVNApjAyhQzphX8BkmKsKUxD4LdyK24iZeQGinBN9yTQT3bFlCBy/aVx2HrNcqQGsdot8ghrjyrvMCoEA==
 
-lerna@^3.10.7:
-  version "3.10.7"
-  resolved "https://registry.yarnpkg.com/lerna/-/lerna-3.10.7.tgz#9d308b1fee1697f89fe90e6bc37e51c03b531557"
-  integrity sha512-ha/dehl/L3Nw0pbdir5z6Hrv2oYBg5ym2fTcuk8HCLe7Zdb/ylIHdrgW8CU9eTVZkwr4et8RdVtxFA/+xa65/Q==
+lerna@^3.10.8:
+  version "3.10.8"
+  resolved "https://registry.yarnpkg.com/lerna/-/lerna-3.10.8.tgz#89e04b5e29f7d6acb3cec7ce59cec2d4343e5cf4"
+  integrity sha512-Ua5SkZnVk+gtplaw/IiXOckk9TEvNwNyTXJke5gkf0vxku809iRmI7RlI0mKFUjeweBs7AJDgBoD/A+vHst/UQ==
   dependencies:
     "@lerna/add" "3.10.6"
     "@lerna/bootstrap" "3.10.6"
-    "@lerna/changed" "3.10.6"
+    "@lerna/changed" "3.10.8"
     "@lerna/clean" "3.10.6"
     "@lerna/cli" "3.10.7"
     "@lerna/create" "3.10.6"
@@ -11121,9 +11169,9 @@ lerna@^3.10.7:
     "@lerna/init" "3.10.6"
     "@lerna/link" "3.10.6"
     "@lerna/list" "3.10.6"
-    "@lerna/publish" "3.10.7"
+    "@lerna/publish" "3.10.8"
     "@lerna/run" "3.10.6"
-    "@lerna/version" "3.10.6"
+    "@lerna/version" "3.10.8"
     import-local "^1.0.0"
     libnpm "^2.0.1"
 
@@ -11246,10 +11294,10 @@ lie@3.1.1:
   dependencies:
     immediate "~3.0.5"
 
-lint-staged@^8.1.1:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-8.1.1.tgz#4a9837c75ea23d1ea81f2c5b5f334153cc7f7932"
-  integrity sha512-6C9tmmCedjDYQMzHydT5mXRtmEgpGUQDoIl+Ser8cfI/n9grsRUsuG2jd1BWqGf62OV+BV+6n/Drt82uYTCgJg==
+lint-staged@^8.1.3:
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-8.1.3.tgz#bb069db5466c0fe16710216e633a84f2b362fa60"
+  integrity sha512-6TGkikL1B+6mIOuSNq2TV6oP21IhPMnV8q0cf9oYZ296ArTVNcbFh1l1pfVOHHbBIYLlziWNsQ2q45/ffmJ4AA==
   dependencies:
     "@iamstarkov/listr-update-renderer" "0.4.1"
     chalk "^2.3.1"
@@ -12405,10 +12453,10 @@ neo-async@^2.5.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
 
-netlify-lambda@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.3.1.tgz#563bfafb78dea8617124c7a7a5b941eca9c71d61"
-  integrity sha512-+PqOvQbPAU0lnGYdjSonep+m53Zjw/4NfOwQSVPTF8f/qdwUlYKkxgRvYKVaFcnnOv92bRNCufy6BoC1kWbz2w==
+netlify-lambda@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.3.3.tgz#8b20e31a2b9e38f82bacfac4067ae1633099c972"
+  integrity sha512-S8bKfCQz5xDFe15J+YUNIahLV4dKL8Yvfj/xLVSN+R2Vo918+0SMipRELjazOaabEQWJzXbaFI+HgSSXHDP7ow==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"
@@ -14625,7 +14673,7 @@ qs@6.5.2, qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-qs@^6.5.1:
+qs@^6.5.1, qs@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
@@ -17555,6 +17603,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typeface-playfair-display@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-playfair-display/-/typeface-playfair-display-0.0.54.tgz#32a210d27e8dcbfbd6eebd63108af26d115838a0"
+  integrity sha512-geSEULjSeJrysLvneiH/Czq2FNXeRCUJCv81UmFmi6xQ4okYUpAOP7y4OLsKC2+4ewHQTEMxPUf+zeIko2v5YQ==
 
 typescript-eslint-parser@^16.0.0:
   version "16.0.1"

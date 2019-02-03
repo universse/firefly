@@ -33,12 +33,13 @@ export const query = graphql`
     collections(id: { eq: $id }) {
       id
       name
-      # category
+      category
       level
       urls {
         id
-        url
+        title
         type
+        url
       }
       tags
       suggestions
