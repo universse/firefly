@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import CollectionView from 'components/CollectionView'
-import { baseWrapper } from '../styles'
+import { baseWrapper } from 'utils/styles'
 
 // TODO: add helmet
 

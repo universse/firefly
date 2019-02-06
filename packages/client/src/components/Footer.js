@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { baseWrapper } from '../styles'
+import { baseWrapper } from 'utils/styles'
 
 const wrapper = css`
   align-items: center;

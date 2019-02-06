@@ -25,10 +25,11 @@ export default function CollectionView ({
 
   useEffect(() => {
     if (isFirstMount.current) {
-      localforage.getItem(LocalStorage.COMPLETED_ITEMS).then(value => {
-        console.log(value)
-        value ? setCompletedItems(value) : setCompletedItems({})
-      })
+      localforage
+        .getItem(LocalStorage.COMPLETED_ITEMS)
+        .then(value =>
+          value ? setCompletedItems(value) : setCompletedItems({})
+        )
       isFirstMount.current = false
       return
     }
@@ -95,10 +96,10 @@ export default function CollectionView ({
         </div>
       </div>
       <div
-        css={css`
+        css={theme => css`
           background-color: #fff;
           border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          box-shadow: ${theme.shadows.subtle};
         `}
       >
         <LearningList

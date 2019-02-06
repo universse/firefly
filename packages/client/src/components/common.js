@@ -9,8 +9,12 @@ export function Category (props) {
         color: ${theme.colors.brand500};
         font-size: 0.875rem;
         text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 600;
         z-index: 1;
+
+        &:hover {
+          text-decoration: underline;
+        }
       `}
       {...props}
     />
@@ -74,7 +78,7 @@ export function Tag (props) {
         line-height: 1.5rem;
         padding: 0 0.75rem;
 
-        :hover {
+        &:hover {
           background-color: ${theme.colors.gray400};
         }
       `}

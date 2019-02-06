@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+// import { withPrefix } from 'gatsby'
 
 import LocalStorage from 'constants/LocalStorage'
 

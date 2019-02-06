@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { createCollectionPath } from '../../../gatsby/utils'
-
 export function Input (props) {
   return (
     <input
@@ -36,7 +34,6 @@ export function Result ({ as: Tag, ...props }) {
   return (
     <Tag
       css={theme => css`
-        align-items: center;
         color: ${theme.colors.gray900};
         display: flex;
         font-size: 0.9375rem;

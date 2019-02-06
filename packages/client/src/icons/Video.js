@@ -12,7 +12,7 @@ export function Video ({ color, small }) {
     >
       <title>video</title>
       <circle cx='12' cy='12' r='10' />
-      <polygon points='10 8 16 12 10 16 10 8' />
+      <path d='M10 8l6 4-6 4V8z' />
     </svg>
   )
 }

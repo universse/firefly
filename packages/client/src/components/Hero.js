@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { baseWrapper } from '../styles'
+import { baseWrapper } from 'utils/styles'
 
 export function CTA (props) {
   return (
@@ -14,6 +14,10 @@ export function CTA (props) {
         font-weight: 700;
         height: 3rem;
         padding: 0 4rem;
+
+        &:hover {
+          background-color: ${theme.colors.danger};
+        }
       `}
       type='button'
       {...props}

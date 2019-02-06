@@ -1,63 +1,65 @@
-import React from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
 
-import { Category } from './styled'
-import { Categories } from 'common'
-import { createCategoryPath } from '../../../gatsby/utils'
+import Filters from './Filters'
+import { ScrollButton, Title, Wrapper } from './styled'
 
 export default function CategoryFilter () {
+  const scrollByX = 200
+  const [isMaxScroll, setIsMaxScroll] = useState(false)
+  const [isMinScroll, setIsMinScroll] = useState(true)
+
+  const slider = useRef()
+
+  const onScroll = useCallback(() => {
+    setIsMaxScroll(
+      slider.current.scrollLeft >=
+        slider.current.scrollWidth - slider.current.clientWidth
+    )
+    setIsMinScroll(slider.current.scrollLeft === 0)
+  }, [])
+
+  const onScrollLeftClick = useCallback(e => {
+    slider.current.scrollBy({ left: -scrollByX, behavior: 'smooth' })
+  }, [])
+
+  const onScrollRightClick = useCallback(e => {
+    slider.current.scrollBy({ left: scrollByX, behavior: 'smooth' })
+  }, [])
+
   return (
-    <div
-      css={css`
-        display: inline-block;
-        padding-top: 2rem;
-        position: sticky;
-        top: 4rem;
-        vertical-align: top;
-        width: 30%;
-      `}
-    >
+    <Wrapper>
       <div
-        css={css`
+        css={theme => css`
           margin-bottom: 1rem;
+
+          ${theme.screens.nonDesktop} {
+            display: none;
+          }
         `}
       >
-        <span
-          css={theme =>
-            css`
-              color: ${theme.colors.gray500};
-              display: block;
-              font-size: 0.875rem;
-              font-weight: 700;
-              line-height: 1.25rem;
-              padding-left: calc(1rem + 4px);
-            `
-          }
-        >
-          CATEGORIES
-        </span>
+        <Title>CATEGORIES</Title>
       </div>
-      <nav>
-        <ul>
-          <li>
-            <Location>
-              {({ location }) => (
-                <Category
-                  active={location.pathname === '/'}
-                  category='all'
-                  to='/category/all'
-                />
-              )}
-            </Location>
-          </li>
-          {Categories.map(category => (
-            <li key={category}>
-              <Category category={category} to={createCategoryPath(category)} />
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+
+      <Filters slider={slider} handleScroll={onScroll} />
+      <div
+        css={theme => css`
+          ${theme.screens.desktop} {
+            display: none;
+          }
+        `}
+      >
+        <ScrollButton
+          display={!isMinScroll}
+          handleClick={onScrollLeftClick}
+          side='left'
+        />
+        <ScrollButton
+          display={!isMaxScroll}
+          handleClick={onScrollRightClick}
+          side='right'
+        />
+      </div>
+    </Wrapper>
   )
 }

@@ -21,7 +21,7 @@ function GhostButton (props) {
         height: 2rem;
         padding: 0 1rem;
 
-        :hover {
+        &:hover {
           background-color: ${theme.colors.brand500};
           color: #fff;
         }
@@ -47,7 +47,7 @@ function PrimaryButton (props) {
         height: 2rem;
         padding: 0 1rem;
 
-        :hover {
+        &:hover {
           background-color: ${theme.colors.brand500};
         }
       `}
@@ -72,7 +72,7 @@ function NavLink (props) {
         font-weight: 600;
         height: 2rem;
 
-        :hover {
+        &:hover {
           border-bottom: 2px solid ${theme.colors.brand500};
           color: ${theme.colors.brand500};
         }
@@ -116,11 +116,17 @@ export default function Navigation () {
   // )
 
   return (
-    <nav>
+    <nav
+      css={theme => css`
+        ${theme.screens.nonDesktop} {
+          display: none;
+        }
+      `}
+    >
       <ul
         css={css`
-          display: flex;
           align-items: center;
+          display: flex;
         `}
       >
         <li

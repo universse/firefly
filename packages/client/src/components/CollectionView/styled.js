@@ -7,9 +7,8 @@ export function CollectionTitle (props) {
     <h1
       css={theme => css`
         color: ${theme.colors.gray700};
-        font-family: 'Playfair Display', serif;
         font-size: 2.25rem;
-        font-weight: 900;
+        font-weight: 700;
         line-height: 2.75rem;
       `}
       {...props}

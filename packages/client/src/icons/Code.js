@@ -11,8 +11,7 @@ export function Code ({ color, small }) {
       role='img'
     >
       <title>code</title>
-      <polyline points='16 18 22 12 16 6' />
-      <polyline points='8 6 2 12 8 18' />
+      <path d='M16 18l6-6-6-6M8 6l-6 6 6 6' />
     </svg>
   )
 }

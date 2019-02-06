@@ -10,16 +10,15 @@ export function CollectionTitle ({ id, name }) {
       css={css`
         display: block;
         height: 100%;
-        padding: 3.75rem 2rem 0 2rem;
+        padding: 2.5rem 2rem 0 2rem;
       `}
       to={createCollectionPath({ id, name })}
     >
       <h3
         css={theme => css`
           color: ${theme.colors.gray700};
-          font-family: 'Playfair Display', serif;
           font-size: 1.5rem;
-          font-weight: 900;
+          font-weight: 700;
           line-height: 2rem;
         `}
       >
@@ -36,9 +35,9 @@ export function CollectionWrapper (props) {
         border-bottom: 1px solid ${theme.colors.gray400};
         display: flex;
         flex-direction: column;
-        height: 12rem;
+        height: 10.5rem;
         justify-content: space-between;
-        padding: 2rem;
+        padding: 1rem 2rem;
       `}
       {...props}
     />

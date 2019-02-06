@@ -12,8 +12,7 @@ export function Course ({ color, small }) {
     >
       <title>course</title>
       <rect x='2' y='3' width='20' height='14' rx='2' ry='2' />
-      <line x1='8' y1='21' x2='16' y2='21' />
-      <line x1='12' y1='17' x2='12' y2='21' />
+      <path d='M8 21h8M12 17v4' />
     </svg>
   )
 }

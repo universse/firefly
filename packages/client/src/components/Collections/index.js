@@ -15,15 +15,20 @@ export default function Collections ({ collections }) {
 
   return (
     <ul
-      css={css`
+      css={theme => css`
         background-color: #fff;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        display: inline-block;
-        width: 70%;
+        box-shadow: ${theme.shadows.subtle};
+        margin-top: 1rem;
 
         li:last-child div {
           border: none;
+        }
+
+        ${theme.screens.desktop} {
+          display: inline-block;
+          margin-top: 0;
+          width: 70%;
         }
       `}
     >

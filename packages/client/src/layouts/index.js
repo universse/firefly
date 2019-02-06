@@ -4,12 +4,14 @@ import { css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import { Location } from '@reach/router'
 
 // flag
 // import Authentication from 'components/Authentication'
 // import Modal from 'components/Modal'
-import SavedCollections from 'components/SavedCollections'
 import Header from 'components/Header'
+import MobileNavigation from 'components/MobileNavigation'
+import SavedCollections from 'components/SavedCollections'
 import Theme from 'constants/Theme'
 
 export default function Layout ({ children }) {
@@ -42,12 +44,21 @@ export default function Layout ({ children }) {
             {/* <Authentication> */}
             {/* <Modal> */}
             <div
-              css={css`
-                margin-top: 4rem;
+              css={theme => css`
+                ${theme.screens.desktop} {
+                  margin-top: 4rem;
+                }
               `}
             >
               <Header siteTitle={data.site.siteMetadata.title} />
               <SavedCollections>{children}</SavedCollections>
+              <Location>
+                {({ location }) =>
+                  !location.pathname.includes('collection') && (
+                    <MobileNavigation />
+                  )
+                }
+              </Location>
             </div>
             {/* </Modal> */}
             {/* </Authentication> */}

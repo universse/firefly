@@ -1,45 +1,145 @@
-import React, { useContext } from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
-import { ThemeContext, css } from '@emotion/core'
+import { css } from '@emotion/core'
+
+import { ChevronLeft, ChevronRight } from 'icons'
 
 export function Category ({ active, category, to }) {
-  const theme = useContext(ThemeContext)
-
-  const activeStyle =
-    active &&
-    css`
-      border-left: 4px solid ${theme.colors.brand500};
-      color: ${theme.colors.brand500};
-      font-weight: 700;
-    `
-
   return (
     <Link
-      activeStyle={{
-        borderLeft: `4px solid ${theme.colors.brand500}`,
-        color: `${theme.colors.brand500}`,
-        fontWeight: 700
-      }}
       css={theme => css`
         align-items: center;
-        border-left: 4px solid transparent;
+        border-bottom: 3px solid transparent;
         color: ${theme.colors.gray900};
         display: inline-flex;
         font-size: 1rem;
-        height: 2rem;
-        margin: 0.25rem 0;
-        padding-left: 1rem;
+        height: 3.5rem;
+        margin: 0.25rem 0.25rem;
+        padding: 0 0.75rem;
         text-transform: capitalize;
-        ${activeStyle};
+        ${active &&
+          css`
+            border-bottom: 3px solid ${theme.colors.brand500};
+            color: ${theme.colors.brand500};
+            font-weight: 700;
+          `};
 
-        :hover {
+        &:hover {
+          border-bottom: 3px solid ${theme.colors.brand500};
           color: ${theme.colors.brand500};
-          border-left: 4px solid ${theme.colors.brand500};
+        }
+
+        ${theme.screens.desktop} {
+          border-bottom: none;
+          border-left: 4px solid transparent;
+          height: 2rem;
+          margin: 0.25rem 0;
+          padding: 0 0 0 1rem;
+          ${active &&
+            css`
+              border-bottom: none;
+              border-left: 4px solid ${theme.colors.brand500};
+            `};
+
+          &:hover {
+            border-bottom: none;
+            border-left: 4px solid ${theme.colors.brand500};
+          }
         }
       `}
       to={to}
     >
       {category}
     </Link>
+  )
+}
+
+function Scroll ({ display, handleClick, side }) {
+  const align =
+    side === 'left'
+      ? css`
+          left: 0;
+        `
+      : css`
+          justify-content: flex-end;
+          right: 0;
+        `
+
+  return (
+    <div
+      css={theme => css`
+        align-items: center;
+        background-image: ${theme.gradients[side]};
+        display: ${display ? 'flex' : 'none'};
+        height: 4rem;
+        position: absolute;
+        top: 0;
+        width: 3rem;
+        ${align};
+      `}
+    >
+      <button
+        css={theme =>
+          css`
+            color: ${theme.colors.gray500};
+
+            &:focus,
+            &:hover {
+              color: #000;
+            }
+          `
+        }
+        onClick={handleClick}
+      >
+        {side === 'left' ? <ChevronLeft /> : <ChevronRight />}
+      </button>
+    </div>
+  )
+}
+
+export const ScrollButton = memo(Scroll)
+
+export function Title (props) {
+  return (
+    <span
+      css={theme =>
+        css`
+          color: ${theme.colors.gray500};
+          display: block;
+          font-size: 0.875rem;
+          font-weight: 700;
+          line-height: 1.25rem;
+          padding-left: calc(1rem + 4px);
+        `
+      }
+      {...props}
+    />
+  )
+}
+
+export function Wrapper (props) {
+  return (
+    <div
+      css={theme => css`
+        position: sticky;
+
+        ${theme.screens.nonDesktop} {
+          background-color: ${theme.colors.white};
+          box-shadow: ${theme.shadows.subtle};
+          margin: 0 -1rem;
+          top: 0;
+          z-index: 500;
+        }
+
+        ${theme.screens.desktop} {
+          display: inline-block;
+          padding-top: 2rem;
+          top: 4rem;
+          vertical-align: top;
+          width: 30%;
+        }
+      `}
+      {...props}
+    />
   )
 }

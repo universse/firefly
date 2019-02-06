@@ -1,21 +1,21 @@
 import React from 'react'
 
-export function Move ({ color }) {
+export function ChevronLeft ({ color }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       className='feather'
       viewBox='0 0 24 24'
       stroke={color}
-      aria-label='move'
+      aria-label='chevron left'
       role='img'
     >
-      <title>move</title>
-      <path d='M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20' />
+      <title>chevron left</title>
+      <path d='M15 18l-6-6 6-6' />
     </svg>
   )
 }
 
-Move.defaultProps = {
+ChevronLeft.defaultProps = {
   color: 'currentColor'
 }

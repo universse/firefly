@@ -13,7 +13,7 @@ function CollectionDetails ({ category, level, name, tags }) {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 2rem 4rem 3rem;
+        padding: 2rem 4rem 2rem;
       `}
     >
       <div

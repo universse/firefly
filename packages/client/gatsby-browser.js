@@ -31,7 +31,7 @@ export const shouldUpdateScroll = ({
   if (isCurrentCategoryFilter) {
     if (isPreviousCategoryFilter || prevRouterProps.location.pathname === '/') {
       window.scrollTo({
-        top: document.getElementById('main').offsetTop - 64,
+        top: document.getElementById('main').offsetTop,
         behavior: 'smooth'
       })
       return false

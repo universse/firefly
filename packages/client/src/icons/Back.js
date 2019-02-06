@@ -1,21 +1,21 @@
 import React from 'react'
 
-export function Move ({ color }) {
+export function Back ({ color }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       className='feather'
       viewBox='0 0 24 24'
       stroke={color}
-      aria-label='move'
+      aria-label='back'
       role='img'
     >
-      <title>move</title>
-      <path d='M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20' />
+      <title>back</title>
+      <path d='M19 12H5M12 19l-7-7 7-7' />
     </svg>
   )
 }
 
-Move.defaultProps = {
+Back.defaultProps = {
   color: 'currentColor'
 }

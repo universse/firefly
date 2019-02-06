@@ -1,18 +1,21 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { baseWrapper } from '../../styles'
+import { baseWrapper } from 'utils/styles'
 
-export function HeaderTag ({ boxShadow, translateY, ...props }) {
+export function HeaderTag (props) {
   return (
     <header
-      css={css`
-        background-color: rgba(255, 255, 255, 0.95);
+      css={theme => css`
+        background-color: ${theme.colors.white};
         height: 4rem;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 500;
+
+        ${theme.screens.desktop} {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 500;
+        }
       `}
       {...props}
     />

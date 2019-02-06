@@ -57,11 +57,23 @@ function SearchBar ({ data }) {
         getItemProps,
         getLabelProps,
         getMenuProps,
+        getRootProps,
         highlightedIndex,
         isOpen,
         openMenu
       }) => (
-        <div style={{ position: 'relative', width: '30rem' }}>
+        <div
+          css={theme => css`
+            display: none;
+
+            ${theme.screens.desktop} {
+              display: block;
+              position: relative;
+              width: 30rem;
+            }
+          `}
+          {...getRootProps()}
+        >
           <form
             css={css`
               position: relative;
