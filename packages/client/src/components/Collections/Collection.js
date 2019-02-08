@@ -17,7 +17,8 @@ export function Collection ({
     <>
       <div
         css={css`
-          height: 10.5rem;
+          height: 100%;
+          padding: 0.25rem;
           position: absolute;
           width: 100%;
         `}

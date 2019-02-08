@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
 // import { AuthenticationContext } from '../Authentication'
@@ -17,17 +17,15 @@ export default function Collections ({ collections }) {
     <ul
       css={theme => css`
         background-color: #fff;
-        border-radius: 8px;
-        box-shadow: ${theme.shadows.subtle};
-        margin-top: 1rem;
 
         li:last-child div {
           border: none;
         }
 
         ${theme.screens.desktop} {
+          border-radius: 8px;
+          box-shadow: ${theme.shadows.subtle};
           display: inline-block;
-          margin-top: 0;
           width: 70%;
         }
       `}
@@ -43,14 +41,12 @@ export default function Collections ({ collections }) {
             <Collection
               collection={node}
               // handleHeartClick={onHeartClick}
-              handleSaveClick={useCallback(
-                () =>
-                  dispatch({
-                    type: 'saveClick',
-                    payload: node
-                  }),
-                []
-              )}
+              handleSaveClick={() =>
+                dispatch({
+                  type: 'saveClick',
+                  payload: node
+                })
+              }
               isSaved={!!savedCollections[node.id]}
             />
           </li>

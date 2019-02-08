@@ -10,7 +10,7 @@ export function CollectionTitle ({ id, name }) {
       css={css`
         display: block;
         height: 100%;
-        padding: 2.5rem 2rem 0 2rem;
+        padding: 2.25rem 1.75rem 0 1.75rem;
       `}
       to={createCollectionPath({ id, name })}
     >

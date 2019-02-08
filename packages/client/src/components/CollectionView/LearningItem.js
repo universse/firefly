@@ -15,6 +15,7 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
       <div
         css={css`
           height: 100%;
+          padding: 0.25rem;
           position: absolute;
           width: 100%;
         `}

@@ -69,19 +69,19 @@ function Scroll ({ display, handleClick, side }) {
     <div
       css={theme => css`
         align-items: center;
-        background-image: ${theme.gradients[side]};
         display: ${display ? 'flex' : 'none'};
-        height: 4rem;
         position: absolute;
         top: 0;
-        width: 3rem;
         ${align};
       `}
     >
       <button
         css={theme =>
           css`
+            background-image: ${theme.gradients[side]};
             color: ${theme.colors.gray500};
+            height: 4rem;
+            width: 2.5rem;
 
             &:focus,
             &:hover {
@@ -126,14 +126,13 @@ export function Wrapper (props) {
         ${theme.screens.nonDesktop} {
           background-color: ${theme.colors.white};
           box-shadow: ${theme.shadows.subtle};
-          margin: 0 -1rem;
           top: 0;
           z-index: 500;
         }
 
         ${theme.screens.desktop} {
           display: inline-block;
-          padding-top: 2rem;
+          padding-top: 1rem;
           top: 4rem;
           vertical-align: top;
           width: 30%;

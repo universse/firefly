@@ -16,7 +16,7 @@ export function CTA (props) {
         padding: 0 4rem;
 
         &:hover {
-          background-color: ${theme.colors.danger};
+          background-color: ${theme.colors.brand900};
         }
       `}
       type='button'

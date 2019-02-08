@@ -23,7 +23,7 @@ export function LinkTitle ({ href, title }) {
         color: ${theme.colors.gray700};
         display: flex;
         height: 100%;
-        padding: 1.5rem 4rem 0 6.5rem;
+        padding: 1.25rem 3.75rem 0 6.25rem;
       `}
       href={href}
       rel='noopener noreferrer'

@@ -74,7 +74,6 @@ function NavLink (props) {
 
         &:hover {
           border-bottom: 2px solid ${theme.colors.brand500};
-          color: ${theme.colors.brand500};
         }
       `}
       {...props}

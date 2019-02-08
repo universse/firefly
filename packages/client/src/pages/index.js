@@ -16,7 +16,7 @@ export default function IndexPage ({ data, location }) {
         <main
           css={theme => css`
             background-color: ${theme.colors.gray100};
-            padding: 0 0 4.5rem;
+            padding: 0 0 3.5rem;
 
             ${theme.screens.desktop} {
               padding: 3rem 0;
@@ -24,7 +24,15 @@ export default function IndexPage ({ data, location }) {
           `}
           id='main'
         >
-          <div css={baseWrapper}>
+          <div
+            css={theme => css`
+              ${baseWrapper};
+
+              ${theme.screens.nonDesktop} {
+                padding: 0;
+              }
+            `}
+          >
             <CategoryFilter />
             <Collections collections={data.allCollections.edges} />
           </div>
@@ -37,7 +45,7 @@ export default function IndexPage ({ data, location }) {
     <main
       css={theme => css`
         background-color: ${theme.colors.gray100};
-        padding: 0 0 4.5rem;
+        padding: 0 0 3.5rem;
 
         ${theme.screens.desktop} {
           padding: 3rem 0;
@@ -46,7 +54,15 @@ export default function IndexPage ({ data, location }) {
       id='main'
     >
       {/* first time user ?  */}
-      <div css={baseWrapper}>
+      <div
+        css={theme => css`
+          ${baseWrapper};
+
+          ${theme.screens.nonDesktop} {
+            padding: 0;
+          }
+        `}
+      >
         <CategoryFilter />
         <Collections collections={data.allCollections.edges} />
       </div>

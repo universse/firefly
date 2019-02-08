@@ -1,8 +1,8 @@
 export default {
   colors: {
-    brand100: '',
-    brand500: '#ed5567',
-    brand900: '',
+    brand100: '#ed5567',
+    brand500: '#d70d37',
+    brand900: '#bf072d',
     danger: '#da4453',
     white: 'rgba(255, 255, 255, 0.95)',
     gray100: '#f2f5f8',
@@ -16,9 +16,9 @@ export default {
   },
   gradients: {
     left:
-      'linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 80%)',
+      'linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 30%)',
     right:
-      'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 80%)'
+      'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 30%)'
   },
   screens: {
     desktop: '@media screen and (min-width: 52.0625rem)',

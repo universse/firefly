@@ -34,8 +34,12 @@ export const shouldUpdateScroll = ({
         top: document.getElementById('main').offsetTop,
         behavior: 'smooth'
       })
-      return false
+    } else {
+      window.scrollTo({
+        top: document.getElementById('main').offsetTop
+      })
     }
+    return false
   }
 
   return true
