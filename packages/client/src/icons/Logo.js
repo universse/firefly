@@ -18,5 +18,5 @@ export function Logo ({ color }) {
 }
 
 Logo.defaultProps = {
-  color: '#d70d37'
+  color: '#e4234f'
 }

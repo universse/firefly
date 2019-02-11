@@ -6,3 +6,5 @@ export const baseWrapper = css`
   padding: 0 1rem;
   width: 100%;
 `
+
+export const baseFontSize = 16

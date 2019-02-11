@@ -17,7 +17,7 @@ function NavLink ({ active, label, Icon, ...props }) {
         display: flex;
         flex-direction: column;
         height: 3.5rem;
-        padding: 0.5rem 0 0.75rem;
+        padding: 0.5rem 0 0.5rem;
         ${active &&
           css`
             color: ${theme.colors.brand500};
@@ -25,11 +25,18 @@ function NavLink ({ active, label, Icon, ...props }) {
       `}
       {...props}
     >
-      <Icon />
+      <div
+        css={css`
+          margin-bottom: 0.25rem;
+        `}
+      >
+        <Icon />
+      </div>
       <span
         css={css`
           font-size: 0.75rem;
           font-weight: 600;
+          text-transform: uppercase;
         `}
       >
         {label}
@@ -38,7 +45,7 @@ function NavLink ({ active, label, Icon, ...props }) {
   )
 }
 
-export default function MobileNavigation () {
+function MobileNavigation ({ location: { pathname } }) {
   // const { handleModalOpen } = useContext(ModalContext)
   // const firebase = useContext(FirebaseContext)
 
@@ -75,6 +82,7 @@ export default function MobileNavigation () {
     <nav
       css={theme => css`
         background-color: ${theme.colors.white};
+        border-top: 1px solid ${theme.colors.gray300};
         bottom: 0;
         height: 3.5rem;
         position: fixed;
@@ -86,54 +94,60 @@ export default function MobileNavigation () {
         }
       `}
     >
-      <Location>
-        {({ location: { pathname } }) => (
-          <ul
-            css={css`
-              align-items: center;
-              display: flex;
-              height: 100%;
-            `}
-          >
-            <li
-              css={css`
-                flex: 1;
-              `}
-            >
-              <NavLink
-                active={pathname === '/' || pathname.includes('category')}
-                Icon={Home}
-                label='Home'
-                to='/'
-              />
-            </li>
-            <li
-              css={css`
-                flex: 1;
-              `}
-            >
-              <NavLink
-                active={pathname === '/search'}
-                Icon={Search}
-                label='Search'
-                to='/search'
-              />
-            </li>
-            <li
-              css={css`
-                flex: 1;
-              `}
-            >
-              <NavLink
-                active={pathname === '/me'}
-                Icon={Library}
-                label='My Library'
-                to='/me'
-              />
-            </li>
-          </ul>
-        )}
-      </Location>
+      <ul
+        css={css`
+          align-items: center;
+          display: flex;
+          height: 100%;
+        `}
+      >
+        <li
+          css={css`
+            flex: 1;
+          `}
+        >
+          <NavLink
+            active={pathname === '/' || pathname.includes('/category/')}
+            Icon={Home}
+            label='Home'
+            to='/'
+          />
+        </li>
+        <li
+          css={css`
+            flex: 1;
+          `}
+        >
+          <NavLink
+            active={pathname === '/search'}
+            Icon={Search}
+            label='Search'
+            to='/search'
+          />
+        </li>
+        <li
+          css={css`
+            flex: 1;
+          `}
+        >
+          <NavLink
+            active={pathname === '/me'}
+            Icon={Library}
+            label='My Library'
+            to='/me'
+          />
+        </li>
+      </ul>
     </nav>
   )
 }
+
+export default () => (
+  <Location>
+    {({ location }) =>
+      !location.pathname.includes('/collection/') && (
+        <MobileNavigation location={location} />
+      )
+    }
+  </Location>
+)

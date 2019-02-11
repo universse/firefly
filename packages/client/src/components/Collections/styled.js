@@ -4,6 +4,8 @@ import { css } from '@emotion/core'
 
 import { createCollectionPath } from '../../../gatsby/utils'
 
+export const collectionHeightInRem = 10.5
+
 export function CollectionTitle ({ id, name }) {
   return (
     <Link
@@ -35,7 +37,7 @@ export function CollectionWrapper (props) {
         border-bottom: 1px solid ${theme.colors.gray400};
         display: flex;
         flex-direction: column;
-        height: 10.5rem;
+        height: ${collectionHeightInRem}rem;
         justify-content: space-between;
         padding: 1rem 2rem;
       `}

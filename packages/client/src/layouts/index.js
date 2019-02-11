@@ -4,7 +4,6 @@ import { css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import { Location } from '@reach/router'
 
 // flag
 // import Authentication from 'components/Authentication'
@@ -52,13 +51,7 @@ export default function Layout ({ children }) {
             >
               <Header siteTitle={data.site.siteMetadata.title} />
               <SavedCollections>{children}</SavedCollections>
-              <Location>
-                {({ location }) =>
-                  !location.pathname.includes('collection') && (
-                    <MobileNavigation />
-                  )
-                }
-              </Location>
+              <MobileNavigation />
             </div>
             {/* </Modal> */}
             {/* </Authentication> */}

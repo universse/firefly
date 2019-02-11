@@ -7,10 +7,8 @@ import reducer from './reducer'
 
 export const SavedCollectionsContext = createContext()
 
-const initialState = {}
-
 export default function SavedCollections ({ children }) {
-  const savedCollectionsReducer = useReducer(reducer, initialState)
+  const savedCollectionsReducer = useReducer(reducer)
   const [, dispatch] = savedCollectionsReducer
 
   useEffect(() => {

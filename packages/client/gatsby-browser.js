@@ -21,11 +21,11 @@ export const shouldUpdateScroll = ({
   }
 
   const isCurrentCategoryFilter = routerProps.location.pathname.includes(
-    'category'
+    '/category/'
   )
 
   const isPreviousCategoryFilter = prevRouterProps.location.pathname.includes(
-    'category'
+    '/category/'
   )
 
   if (isCurrentCategoryFilter) {

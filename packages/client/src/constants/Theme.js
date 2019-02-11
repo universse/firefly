@@ -1,8 +1,8 @@
 export default {
   colors: {
     brand100: '#ed5567',
-    brand500: '#d70d37',
-    brand900: '#bf072d',
+    brand500: '#e4234f',
+    brand900: '#c70e3a',
     danger: '#da4453',
     white: 'rgba(255, 255, 255, 0.95)',
     gray100: '#f2f5f8',

@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
+import { Location } from '@reach/router'
 
 import { Tag } from 'components/common'
+import { URLUtilsContext } from 'pages'
 
-export default function Tags ({ tags }) {
+function Tags ({ location, tags }) {
+  const urlUtils = useContext(URLUtilsContext)
+
   return (
     <ul
       css={css`
@@ -18,9 +23,33 @@ export default function Tags ({ tags }) {
             z-index: 1;
           `}
         >
-          <Tag to='/'>{tag}</Tag>
+          <Tag
+            onClick={e => {
+              e.preventDefault()
+              if (location.pathname.includes('/collection/')) {
+                navigate(`/?tags=${tag}`)
+              } else {
+                urlUtils.updateQuery(tag)
+              }
+            }}
+            href={
+              location.pathname.includes('/collection/')
+                ? `/?tags=${tag}`
+                : urlUtils.constructUrl(tag).href
+            }
+          >
+            {tag}
+          </Tag>
         </li>
       ))}
     </ul>
+  )
+}
+
+export default function TagsWithLocation (props) {
+  return (
+    <Location>
+      {({ location }) => <Tags location={location} {...props} />}
+    </Location>
   )
 }

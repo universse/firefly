@@ -6,7 +6,7 @@ import { Category } from './styled'
 import { Categories } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function Filters ({ slider, handleScroll }) {
+function Filters ({ handleClick, handleScroll, slider }) {
   return (
     <nav>
       <div

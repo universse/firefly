@@ -1,10 +1,13 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { ChevronLeft, ChevronRight } from 'icons'
+import { URLUtilsContext } from 'pages'
 
-export function Category ({ active, category, to }) {
+export function Category ({ active, category, handleClick, to }) {
+  const { onFilterClick } = useContext(URLUtilsContext)
+
   return (
     <Link
       css={theme => css`
@@ -14,7 +17,7 @@ export function Category ({ active, category, to }) {
         display: inline-flex;
         font-size: 1rem;
         height: 3.5rem;
-        margin: 0.25rem 0.25rem;
+        margin: 0.25rem;
         padding: 0 0.75rem;
         text-transform: capitalize;
         ${active &&
@@ -47,6 +50,7 @@ export function Category ({ active, category, to }) {
           }
         }
       `}
+      onClick={onFilterClick}
       to={to}
     >
       {category}

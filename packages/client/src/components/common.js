@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
+import { URLUtilsContext } from 'pages'
+
 export function Category (props) {
+  const urlUtils = useContext(URLUtilsContext)
+
   return (
     <Link
       css={theme => css`
@@ -16,6 +20,7 @@ export function Category (props) {
           text-decoration: underline;
         }
       `}
+      onClick={() => urlUtils && urlUtils.onFilterClick()}
       {...props}
     />
   )
@@ -67,7 +72,7 @@ export function IconButton (props) {
 
 export function Tag (props) {
   return (
-    <Link
+    <a
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 0.75rem;

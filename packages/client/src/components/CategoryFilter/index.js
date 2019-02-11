@@ -41,7 +41,7 @@ export default function CategoryFilter () {
         <Title>CATEGORIES</Title>
       </div>
 
-      <Filters slider={slider} handleScroll={onScroll} />
+      <Filters handleScroll={onScroll} slider={slider} />
       <div
         css={theme => css`
           ${theme.screens.desktop} {
