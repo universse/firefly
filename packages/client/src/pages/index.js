@@ -6,6 +6,7 @@ import qs from 'qs'
 import Hero from 'components/Hero'
 import Collections from 'components/Collections'
 import CategoryFilter from 'components/CategoryFilter'
+import Layout from 'components/Layout'
 import useTags from 'hooks/useTags'
 import { baseWrapper } from 'utils/styles'
 import hasSignedIn from 'utils/hasSignedIn'
@@ -57,7 +58,7 @@ export default function IndexPage ({ data, location }) {
 
   if (!hasSignedIn) {
     return (
-      <>
+      <Layout>
         <Hero />
         <main
           css={theme => css`
@@ -89,7 +90,7 @@ export default function IndexPage ({ data, location }) {
             </URLUtilsContext.Provider>
           </div>
         </main>
-      </>
+      </Layout>
     )
   }
   return null

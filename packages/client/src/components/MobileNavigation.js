@@ -141,10 +141,6 @@ function MobileNavigation ({ location: { pathname } }) {
 
 export default () => (
   <Location>
-    {({ location }) =>
-      !location.pathname.includes('/collection/') && (
-        <MobileNavigation location={location} />
-      )
-    }
+    {({ location }) => <MobileNavigation location={location} />}
   </Location>
 )

@@ -9,7 +9,6 @@ import { StaticQuery, graphql } from 'gatsby'
 // import Authentication from 'components/Authentication'
 // import Modal from 'components/Modal'
 import Header from 'components/Header'
-import MobileNavigation from 'components/MobileNavigation'
 import SavedCollections from 'components/SavedCollections'
 import Theme from 'constants/Theme'
 
@@ -51,7 +50,6 @@ export default function Layout ({ children }) {
             >
               <Header siteTitle={data.site.siteMetadata.title} />
               <SavedCollections>{children}</SavedCollections>
-              <MobileNavigation />
             </div>
             {/* </Modal> */}
             {/* </Authentication> */}
