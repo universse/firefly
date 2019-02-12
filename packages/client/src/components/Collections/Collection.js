@@ -5,8 +5,9 @@ import Tags from './Tags'
 import { Heart, Save } from '../../icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { Category, Difficulty, IconButton } from 'components/common'
-import { createCategoryPath } from '../../../gatsby/utils'
 import { URLUtilsContext } from 'pages'
+import { DifficultyLevels } from 'common'
+import { createCategoryPath } from '../../../gatsby/utils'
 
 export function Collection ({
   collection: { id, name, category, level, tags },
@@ -14,7 +15,7 @@ export function Collection ({
   handleSaveClick,
   isSaved
 }) {
-  const { onFilterClick } = useContext(URLUtilsContext)
+  const { onFilterClick } = useContext(URLUtilsContext) || {}
 
   return (
     <>
@@ -40,7 +41,7 @@ export function Collection ({
           <Category onClick={onFilterClick} to={createCategoryPath(category)}>
             {category}
           </Category>
-          <Difficulty>{level}</Difficulty>
+          <Difficulty>{DifficultyLevels[level]}</Difficulty>
         </div>
         <div
           css={css`

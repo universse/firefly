@@ -41,7 +41,7 @@ function SearchBar ({ data }) {
           state: { results, searchInput }
         })
 
-    setSearchInput('')
+    setSearchInput(name)
   }
 
   return (

@@ -40,7 +40,7 @@ function Filters ({ handleScroll, slider }) {
                 `}
               >
                 <Category
-                  active={pathname === '/' || pathname === '/category/all'}
+                  isActive={pathname === '/' || pathname === '/category/all'}
                   category='all'
                   handleClick={onFilterClick}
                   to='/category/all'
@@ -54,7 +54,7 @@ function Filters ({ handleScroll, slider }) {
                   `}
                 >
                   <Category
-                    active={pathname === createCategoryPath(category)}
+                    isActive={pathname === createCategoryPath(category)}
                     category={category}
                     handleClick={onFilterClick}
                     to={createCategoryPath(category)}

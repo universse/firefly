@@ -4,7 +4,7 @@ export default function reducer (state, { type, payload }) {
   return produce(state, draft => {
     switch (type) {
       case 'load':
-        return payload
+        return payload || {}
 
       case 'saveClick':
         if (draft[payload.id]) {

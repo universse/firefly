@@ -1,6 +1,6 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const { Categories, DifficultyLevels, ItemTypes } = require('common')
+const { Categories, ItemTypes } = require('common')
 
 require('dotenv').config({
   path: resolve(__dirname, `.env.${process.env.NODE_ENV}`)
@@ -8,7 +8,7 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: 'Pristine'
+    title: 'Firefly'
     // siteUrl: 'https://'
   },
 
@@ -61,7 +61,7 @@ module.exports = {
             collection: 'collections',
             map: ({ c, l, n, s, t, us }) => ({
               category: Categories[c],
-              level: DifficultyLevels[l],
+              level: l,
               name: n,
               suggestions: s,
               tags: t,

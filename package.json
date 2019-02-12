@@ -1,5 +1,5 @@
 {
-  "name": "pristine",
+  "name": "firefly",
   "private": true,
   "workspaces": [
     "packages/*"

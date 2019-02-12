@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import Tags from 'components/Collections/Tags'
 import { CollectionTitle } from './styled'
 import { Category, Difficulty } from 'components/common'
+import { DifficultyLevels } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 function CollectionDetails ({ category, level, name, tags }) {
@@ -25,7 +26,7 @@ function CollectionDetails ({ category, level, name, tags }) {
         `}
       >
         <Category to={createCategoryPath(category)}>{category}</Category>
-        <Difficulty>{level}</Difficulty>
+        <Difficulty>{DifficultyLevels[level]}</Difficulty>
       </div>
       <div
         css={css`

@@ -4,45 +4,41 @@ import { css } from '@emotion/core'
 
 import { ChevronLeft, ChevronRight } from 'icons'
 
-export function Category ({ active, category, handleClick, to }) {
+export function Category ({ isActive, category, handleClick, to }) {
   return (
     <Link
       css={theme => css`
         align-items: center;
-        border-bottom: 3px solid transparent;
-        color: ${theme.colors.gray900};
+        color: ${isActive ? theme.colors.brand500 : theme.colors.gray900};
         display: inline-flex;
         font-size: 1rem;
-        height: 3.5rem;
-        margin: 0.25rem;
-        padding: 0 0.75rem;
+        font-weight: ${isActive ? 700 : 400};
         text-transform: capitalize;
-        ${active &&
-          css`
-            border-bottom: 3px solid ${theme.colors.brand500};
-            color: ${theme.colors.brand500};
-            font-weight: 700;
-          `};
 
         &:hover {
-          border-bottom: 3px solid ${theme.colors.brand500};
           color: ${theme.colors.brand500};
         }
 
+        ${theme.screens.nonDesktop} {
+          border-bottom: 3px solid
+            ${isActive ? theme.colors.brand500 : 'transparent'};
+          height: 3.5rem;
+          margin: 0.25rem;
+          padding: 0 0.75rem;
+
+          &:hover {
+            border-bottom: 3px solid ${theme.colors.brand500};
+          }
+        }
+
         ${theme.screens.desktop} {
-          border-bottom: none;
-          border-left: 4px solid transparent;
+          border-left: 4px solid
+            ${isActive ? theme.colors.brand500 : 'transparent'};
           height: 2rem;
           margin: 0.25rem 0;
           padding: 0 0 0 1rem;
-          ${active &&
-            css`
-              border-bottom: none;
-              border-left: 4px solid ${theme.colors.brand500};
-            `};
 
           &:hover {
-            border-bottom: none;
             border-left: 4px solid ${theme.colors.brand500};
           }
         }

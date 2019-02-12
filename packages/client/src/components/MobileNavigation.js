@@ -7,21 +7,18 @@ import { Location } from '@reach/router'
 // import FirebaseContext from 'contexts/FirebaseContext'
 import { Home, Search, Library } from 'icons'
 import hasSignedIn from 'utils/hasSignedIn'
+import isIndexPage from 'utils/isIndexPage'
 
-function NavLink ({ active, label, Icon, ...props }) {
+function NavLink ({ isActive, label, Icon, ...props }) {
   return (
     <Link
       css={theme => css`
         align-items: center;
-        color: ${theme.colors.gray500};
+        color: ${isActive ? theme.colors.brand500 : theme.colors.gray500};
         display: flex;
         flex-direction: column;
         height: 3.5rem;
         padding: 0.5rem 0 0.5rem;
-        ${active &&
-          css`
-            color: ${theme.colors.brand500};
-          `};
       `}
       {...props}
     >
@@ -107,7 +104,7 @@ function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <NavLink
-            active={pathname === '/' || pathname.includes('/category/')}
+            isActive={isIndexPage(pathname)}
             Icon={Home}
             label='Home'
             to='/'
@@ -119,7 +116,7 @@ function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <NavLink
-            active={pathname === '/search'}
+            isActive={pathname === '/search'}
             Icon={Search}
             label='Search'
             to='/search'
@@ -131,7 +128,7 @@ function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <NavLink
-            active={pathname === '/me'}
+            isActive={pathname === '/me'}
             Icon={Library}
             label='My Library'
             to='/me'

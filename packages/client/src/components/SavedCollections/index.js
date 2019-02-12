@@ -14,7 +14,7 @@ export default function SavedCollections ({ children }) {
   useEffect(() => {
     localforage
       .getItem(LocalStorage.SAVED_COLLECTIONS)
-      .then(value => value && dispatch({ type: 'load', payload: value }))
+      .then(value => dispatch({ type: 'load', payload: value }))
   }, [])
 
   return (

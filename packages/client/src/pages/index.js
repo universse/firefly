@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react'
+import React, { createContext, useState, useMemo, useEffect } from 'react'
 import { graphql, navigate } from 'gatsby'
 import { css } from '@emotion/core'
 import qs from 'qs'
@@ -15,6 +15,18 @@ export const URLUtilsContext = createContext()
 export default function IndexPage ({ data, location }) {
   const { pathname, search } = location
   const [tags, setTags] = useTags(search)
+  const [collections, setCollections] = useState([])
+
+  useEffect(() => {
+    setCollections(
+      data.allCollections.edges.filter(collection =>
+        tags.reduce(
+          (bool, tag) => bool && collection.node.tags.includes(tag),
+          true
+        )
+      )
+    )
+  }, [data, tags])
 
   const constructUrl = tag => {
     const updatedTags = tags.includes(tag)
@@ -41,17 +53,6 @@ export default function IndexPage ({ data, location }) {
     setTags(updatedTags)
   }
 
-  const collections = useMemo(
-    () =>
-      data.allCollections.edges.filter(collection =>
-        tags.reduce(
-          (bool, tag) => bool && collection.node.tags.includes(tag),
-          true
-        )
-      ),
-    [data, tags]
-  )
-
   const onFilterClick = () => setTags([])
 
   if (!hasSignedIn) {
@@ -64,7 +65,7 @@ export default function IndexPage ({ data, location }) {
             padding: 0 0 3.5rem;
 
             ${theme.screens.desktop} {
-              padding: 3rem 0;
+              padding: 3rem 0 2rem;
             }
           `}
           id='main'
@@ -84,22 +85,7 @@ export default function IndexPage ({ data, location }) {
               value={{ updateQuery, constructUrl, onFilterClick }}
             >
               <CategoryFilter />
-              <Collections
-                collections={[
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections,
-                  ...collections
-                ]}
-              />
+              <Collections collections={collections} />
             </URLUtilsContext.Provider>
           </div>
         </main>

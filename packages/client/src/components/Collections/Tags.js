@@ -5,8 +5,9 @@ import { Location } from '@reach/router'
 
 import { Tag } from 'components/common'
 import { URLUtilsContext } from 'pages'
+import isIndexPage from 'utils/isIndexPage'
 
-function Tags ({ location, tags }) {
+function Tags ({ location: { pathname }, tags }) {
   const urlUtils = useContext(URLUtilsContext)
 
   return (
@@ -26,16 +27,14 @@ function Tags ({ location, tags }) {
           <Tag
             onClick={e => {
               e.preventDefault()
-              if (location.pathname.includes('/collection/')) {
-                navigate(`/?tags=${tag}`)
-              } else {
-                urlUtils.updateQuery(tag)
-              }
+              isIndexPage(pathname)
+                ? urlUtils.updateQuery(tag)
+                : navigate(`/?tags=${tag}`)
             }}
             href={
-              location.pathname.includes('/collection/')
-                ? `/?tags=${tag}`
-                : urlUtils.constructUrl(tag).href
+              isIndexPage(pathname)
+                ? urlUtils.constructUrl(tag).href
+                : `/?tags=${tag}`
             }
           >
             {tag}

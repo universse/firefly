@@ -10,25 +10,21 @@ import useSavedCollections from 'hooks/useSavedCollections'
 import { collectionHeightInRem } from './styled'
 import { baseFontSize } from 'utils/styles'
 
-// function itemKey (index, data) {
-//   return data[index].node.id
-// }
+function itemKey (index, data) {
+  return data[index].node.id
+}
 
 // flag
 export default function Collections ({ collections }) {
   // const user = useContext(AuthenticationContext)
   // const { handleModalOpen } = useContext(ModalContext)
   const [savedCollections, dispatch] = useSavedCollections()
-  const listRef = useRef()
-
-  const numOfCollections = collections.length
-  const itemSize = collectionHeightInRem * baseFontSize
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
-  const handleScroll = ({ scrollTop }) => {
-    if (listRef.current) {
-      listRef.current.scrollTo(scrollTop)
-    }
-  }
+
+  const listRef = useRef()
+  const handleScroll = ({ scrollTop }) =>
+    listRef.current && listRef.current.scrollTo(scrollTop)
+
   return savedCollections ? (
     <>
       <WindowScroller onScroll={handleScroll}>{() => <div />}</WindowScroller>
@@ -49,27 +45,27 @@ export default function Collections ({ collections }) {
         `}
         height={window.innerHeight}
         innerElementType='ul'
-        itemCount={numOfCollections}
+        itemCount={collections.length}
         itemData={collections}
-        // itemKey={itemKey}
-        itemSize={itemSize}
+        itemKey={itemKey}
+        itemSize={collectionHeightInRem * baseFontSize}
         ref={listRef}
       >
         {({ data, index, style }) => {
-          const node = data[index].node
+          const collection = data[index].node
 
           return (
             <li style={style}>
               <Collection
-                collection={node}
+                collection={collection}
                 // handleHeartClick={onHeartClick}
                 handleSaveClick={() =>
                   dispatch({
                     type: 'saveClick',
-                    payload: node
+                    payload: collection
                   })
                 }
-                isSaved={!!savedCollections[node.id]}
+                isSaved={!!savedCollections[collection.id]}
               />
             </li>
           )
