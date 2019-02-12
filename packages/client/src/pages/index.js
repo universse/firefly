@@ -72,8 +72,10 @@ export default function IndexPage ({ data, location }) {
           <div
             css={theme => css`
               ${baseWrapper};
+              display: flex;
 
               ${theme.screens.nonDesktop} {
+                flex-direction: column;
                 padding: 0;
               }
             `}
@@ -82,7 +84,22 @@ export default function IndexPage ({ data, location }) {
               value={{ updateQuery, constructUrl, onFilterClick }}
             >
               <CategoryFilter />
-              <Collections collections={collections} />
+              <Collections
+                collections={[
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections,
+                  ...collections
+                ]}
+              />
             </URLUtilsContext.Provider>
           </div>
         </main>

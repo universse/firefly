@@ -1,12 +1,8 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { URLUtilsContext } from 'pages'
-
 export function Category (props) {
-  const urlUtils = useContext(URLUtilsContext)
-
   return (
     <Link
       css={theme => css`
@@ -20,7 +16,6 @@ export function Category (props) {
           text-decoration: underline;
         }
       `}
-      onClick={() => urlUtils && urlUtils.onFilterClick()}
       {...props}
     />
   )

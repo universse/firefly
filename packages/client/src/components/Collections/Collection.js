@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 
 import Tags from './Tags'
@@ -6,6 +6,7 @@ import { Heart, Save } from '../../icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { Category, Difficulty, IconButton } from 'components/common'
 import { createCategoryPath } from '../../../gatsby/utils'
+import { URLUtilsContext } from 'pages'
 
 export function Collection ({
   collection: { id, name, category, level, tags },
@@ -13,6 +14,8 @@ export function Collection ({
   handleSaveClick,
   isSaved
 }) {
+  const { onFilterClick } = useContext(URLUtilsContext)
+
   return (
     <>
       <div
@@ -34,7 +37,9 @@ export function Collection ({
             justify-content: space-between;
           `}
         >
-          <Category to={createCategoryPath(category)}>{category}</Category>
+          <Category onClick={onFilterClick} to={createCategoryPath(category)}>
+            {category}
+          </Category>
           <Difficulty>{level}</Difficulty>
         </div>
         <div

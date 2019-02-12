@@ -1,13 +1,10 @@
-import React, { memo, useContext } from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { ChevronLeft, ChevronRight } from 'icons'
-import { URLUtilsContext } from 'pages'
 
 export function Category ({ active, category, handleClick, to }) {
-  const { onFilterClick } = useContext(URLUtilsContext)
-
   return (
     <Link
       css={theme => css`
@@ -50,7 +47,7 @@ export function Category ({ active, category, handleClick, to }) {
           }
         }
       `}
-      onClick={onFilterClick}
+      onClick={handleClick}
       to={to}
     >
       {category}
@@ -135,10 +132,8 @@ export function Wrapper (props) {
         }
 
         ${theme.screens.desktop} {
-          display: inline-block;
           padding-top: 1rem;
           top: 4rem;
-          vertical-align: top;
           width: 30%;
         }
       `}

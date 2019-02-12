@@ -1,12 +1,15 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
 import { Category } from './styled'
 import { Categories } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
+import { URLUtilsContext } from 'pages'
 
-function Filters ({ handleClick, handleScroll, slider }) {
+function Filters ({ handleScroll, slider }) {
+  const { onFilterClick } = useContext(URLUtilsContext)
+
   return (
     <nav>
       <div
@@ -39,6 +42,7 @@ function Filters ({ handleClick, handleScroll, slider }) {
                 <Category
                   active={pathname === '/' || pathname === '/category/all'}
                   category='all'
+                  handleClick={onFilterClick}
                   to='/category/all'
                 />
               </li>
@@ -52,6 +56,7 @@ function Filters ({ handleClick, handleScroll, slider }) {
                   <Category
                     active={pathname === createCategoryPath(category)}
                     category={category}
+                    handleClick={onFilterClick}
                     to={createCategoryPath(category)}
                   />
                 </li>
