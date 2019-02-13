@@ -134,8 +134,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'Firefly',
+        short_name: 'Firefly',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#e4234f',

@@ -9,8 +9,9 @@ import { ThemeProvider } from 'emotion-theming'
 import Header from 'components/Header'
 import SavedCollections from 'components/SavedCollections'
 import Theme from 'constants/Theme'
+import MobileNavigation from 'components/MobileNavigation'
 
-export default function Layout ({ children }) {
+export default function Layout ({ children, location }) {
   return (
     <ThemeProvider theme={Theme}>
       {/* <Authentication> */}
@@ -22,8 +23,9 @@ export default function Layout ({ children }) {
           }
         `}
       >
-        <Header />
+        <Header location={location} />
         <SavedCollections>{children}</SavedCollections>
+        <MobileNavigation location={location} />
       </div>
       {/* </Modal> */}
       {/* </Authentication> */}

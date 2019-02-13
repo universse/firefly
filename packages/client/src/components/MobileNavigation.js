@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
 
 // import { ModalContext } from './Modal'
 // import FirebaseContext from 'contexts/FirebaseContext'
@@ -42,7 +41,7 @@ function NavLink ({ isActive, label, Icon, ...props }) {
   )
 }
 
-function MobileNavigation ({ location: { pathname } }) {
+export default function MobileNavigation ({ location: { pathname } }) {
   // const { handleModalOpen } = useContext(ModalContext)
   // const firebase = useContext(FirebaseContext)
 
@@ -138,9 +137,3 @@ function MobileNavigation ({ location: { pathname } }) {
     </nav>
   )
 }
-
-export default () => (
-  <Location>
-    {({ location }) => <MobileNavigation location={location} />}
-  </Location>
-)

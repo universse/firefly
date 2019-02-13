@@ -1,11 +1,12 @@
 import React from 'react'
 
-import Layout from 'components/Layout'
+import SEO from 'components/SEO'
 
 // TODO
 export default function SearchPage ({ location }) {
   return (
-    <Layout>
+    <>
+      <SEO />
       {location.state && location.state.results ? (
         // search bar with state.searchInput
         <ul>
@@ -16,6 +17,6 @@ export default function SearchPage ({ location }) {
       ) : (
         'lol' // empty search bar
       )}
-    </Layout>
+    </>
   )
 }

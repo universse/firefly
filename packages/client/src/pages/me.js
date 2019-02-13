@@ -4,7 +4,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 
 import Collection from 'components/Collections/Collection'
-import Layout from 'components/Layout'
+import SEO from 'components/SEO'
 import useSavedCollections from 'hooks/useSavedCollections'
 import { baseWrapper } from 'utils/styles'
 
@@ -18,7 +18,8 @@ export default function MePage (props) {
     })
 
   return (
-    <Layout>
+    <>
+      <SEO />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
@@ -73,6 +74,6 @@ export default function MePage (props) {
           </ul>
         </div>
       </main>
-    </Layout>
+    </>
   )
 }
