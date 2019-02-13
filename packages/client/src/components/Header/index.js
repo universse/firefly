@@ -8,7 +8,7 @@ import Navigation from '../Navigation'
 import { Logo } from '../../icons'
 import { HeaderTag, Wrapper } from './styled'
 
-export default function Header ({ siteTitle }) {
+export default function Header () {
   return (
     <HeaderTag>
       <Wrapper>

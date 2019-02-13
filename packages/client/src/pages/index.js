@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo, useEffect } from 'react'
+import React, { createContext } from 'react'
 import { graphql, navigate } from 'gatsby'
 import { css } from '@emotion/core'
 import qs from 'qs'
@@ -6,8 +6,10 @@ import qs from 'qs'
 import Hero from 'components/Hero'
 import Collections from 'components/Collections'
 import CategoryFilter from 'components/CategoryFilter'
+import SEO from 'components/SEO'
 import Layout from 'components/Layout'
-import useTags from 'hooks/useTags'
+import useParams from 'hooks/useParams'
+import useSortedCollections from 'hooks/useSortedCollections'
 import { baseWrapper } from 'utils/styles'
 import hasSignedIn from 'utils/hasSignedIn'
 
@@ -15,19 +17,9 @@ export const URLUtilsContext = createContext()
 
 export default function IndexPage ({ data, location }) {
   const { pathname, search } = location
-  const [tags, setTags] = useTags(search)
-  const [collections, setCollections] = useState([])
-
-  useEffect(() => {
-    setCollections(
-      data.allCollections.edges.filter(collection =>
-        tags.reduce(
-          (bool, tag) => bool && collection.node.tags.includes(tag),
-          true
-        )
-      )
-    )
-  }, [data, tags])
+  const [queryValues, dispatch] = useParams(search)
+  const collections = useSortedCollections(data, queryValues)
+  const { sort, tags } = queryValues
 
   const constructUrl = tag => {
     const updatedTags = tags.includes(tag)
@@ -51,14 +43,15 @@ export default function IndexPage ({ data, location }) {
   const updateQuery = tag => {
     const { href, updatedTags } = constructUrl(tag)
     navigate(href)
-    setTags(updatedTags)
+    dispatch({ payload: { sort, tags: updatedTags } })
   }
 
-  const onFilterClick = () => setTags([])
+  const onFilterClick = () => dispatch({ payload: { sort, tags: [] } })
 
   if (!hasSignedIn) {
     return (
       <Layout>
+        <SEO />
         <Hero />
         <main
           css={theme => css`
@@ -96,18 +89,38 @@ export default function IndexPage ({ data, location }) {
   return null
 }
 
+export const collections = graphql`
+  fragment collections on collectionsConnection {
+    edges {
+      node {
+        id
+        category
+        level
+        name
+        tags
+      }
+    }
+  }
+`
+
 export const query = graphql`
   query($category: String) {
-    allCollections(filter: { category: { eq: $category } }) {
-      edges {
-        node {
-          id
-          category
-          level
-          name
-          tags
-        }
-      }
+    allCollections: allCollections(filter: { category: { eq: $category } }) {
+      ...collections
+    }
+
+    allCollectionsASC: allCollections(
+      filter: { category: { eq: $category } }
+      sort: { fields: [level], order: ASC }
+    ) {
+      ...collections
+    }
+
+    allCollectionsDESC: allCollections(
+      filter: { category: { eq: $category } }
+      sort: { fields: [level], order: DESC }
+    ) {
+      ...collections
     }
   }
 `

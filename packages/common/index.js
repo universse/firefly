@@ -1,13 +1,13 @@
 module.exports = {
   Categories: [
     'artificial intelligence',
-    // 'cloud',
+    'cloud',
     'design',
-    // 'marketing',
+    'marketing',
     'programming',
-    // 'psychology',
-    'startup'
-    // 'web development'
+    'psychology',
+    'startup',
+    'web development'
   ],
   DifficultyLevels: ['primer', 'fundamental', 'intermediate', 'advanced'],
   ItemTypes: ['article', 'book', 'code', 'course', 'podcast', 'url', 'video'],

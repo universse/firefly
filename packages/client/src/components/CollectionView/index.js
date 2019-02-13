@@ -17,25 +17,19 @@ export default function CollectionView ({
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
   const [savedCollections, dispatch] = useSavedCollections()
   const [completedItems, setCompletedItems] = useState()
-  const isFirstMount = useRef(true)
 
   const save = () => {
     localforage.setItem(LocalStorage.COMPLETED_ITEMS, completedItems)
   }
 
   useEffect(() => {
-    if (isFirstMount.current) {
-      localforage
-        .getItem(LocalStorage.COMPLETED_ITEMS)
-        .then(value =>
-          value ? setCompletedItems(value) : setCompletedItems({})
-        )
-      isFirstMount.current = false
-      return
-    }
+    localforage
+      .getItem(LocalStorage.COMPLETED_ITEMS)
+      .then(value => (value ? setCompletedItems(value) : setCompletedItems({})))
+  }, [])
 
+  useEffect(() => {
     window.addEventListener('beforeunload', save)
-
     return () => {
       save()
       window.removeEventListener('beforeunload', save)

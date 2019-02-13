@@ -6405,12 +6405,12 @@ eslint-plugin-flowtype@^2.46.1:
   dependencies:
     lodash "^4.17.10"
 
-eslint-plugin-flowtype@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.2.1.tgz#45e032aee54e695dfc41a891e92b7afedfc62c77"
-  integrity sha512-1lymqM8Cawxu5xsS8TaCrLWJYUmUdoG4hCfa7yWOhCf0qZn/CvI8FxqkhdOP6bAosBn5zeYxKe3Q/4rfKN8a+A==
+eslint-plugin-flowtype@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.4.1.tgz#d359af7e4a22f41b8b441b8be72a207787f7b3f8"
+  integrity sha512-u+shn4XXuLEMAuJmrkfa4d2a7PE3yirkAkjXF5yyLbK02DIsOP9BgRQo3MTAAbcRfTz9sOL6hmRPLYGaK5lhcA==
   dependencies:
-    lodash "^4.17.10"
+    lodash "^4.17.11"
 
 eslint-plugin-graphql@^2.0.0:
   version "2.1.1"
@@ -12389,10 +12389,10 @@ neo-async@^2.5.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.0.tgz#b9d15e4d71c6762908654b5183ed38b753340835"
   integrity sha512-MFh0d/Wa7vkKO3Y3LlacqAEeHK0mckVqzDieUKTT+KGxi+zIpeVsFxymkIiRpbpDziHc290Xr9A1O4Om7otoRA==
 
-netlify-lambda@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.4.0.tgz#c49f50892bdf24746392c38ee98056fbb21e52bc"
-  integrity sha512-s5zqXU/8TyoyUsSEoJSrqiid3HxXSr2nNGy6uay8MpoKe5l0r+SrrqzBq5UHSQ6z8aUttmsby9mYHg1uykLNhA==
+netlify-lambda@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.4.1.tgz#8cd04865bcf17a4fd231ff886338c788ebebc7d5"
+  integrity sha512-Tb4bxN9SzMbs+KaB3bPhUimVPJV77pY7M97BwPklSLhohm8Ooym8JmUtakoP3khsZDW5/hxwwsO5PWHW4oo41Q==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"
@@ -15842,10 +15842,10 @@ serverless-dynamodb-local@^0.2.36:
     mkdirp "^0.5.0"
     tar "^2.0.0"
 
-serverless-offline@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-4.4.0.tgz#25b7fad3dbc311328e9727c0776acf7458baeb5c"
-  integrity sha512-m3nusKQtOYYgoXrtqkmxKymi2Dm66BzSV1vtBalQEUBokPr/IfaRjd1BQRk72NzMdLct22n37vHyHT8f2PLDOw==
+serverless-offline@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-4.4.2.tgz#3dd4baf76826ed3dfe60b8a0393b57cfeb201440"
+  integrity sha512-lDRETGRmwbmNMH1+MYnP+NIsVUFKjE1gov1q5m+csPsxeYg0DvCJrjemvMSfNDJTowodFIHU8ODMaWIhxHu0yQ==
   dependencies:
     boom "^7.3.0"
     cryptiles "^4.1.2"
