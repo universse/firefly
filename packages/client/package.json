@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.7",
-    "apollo-boost": "^0.1.27",
+    "apollo-boost": "^0.1.28",
     "axios": "^0.18.0",
     "common": "*",
     "downshift": "^3.2.2",
@@ -12,7 +12,7 @@
     "emotion-server": "^10.0.7",
     "emotion-theming": "^10.0.7",
     "firebase": "^5.8.2",
-    "gatsby": "^2.0.118",
+    "gatsby": "^2.1.0",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-amplitude-analytics": "^1.4.0",
     "gatsby-plugin-create-client-paths": "^2.0.4",
@@ -30,6 +30,7 @@
     "gatsby-plugin-sass": "^2.0.10",
     "gatsby-plugin-sharp": "^2.0.20",
     "gatsby-plugin-sitemap": "^2.0.5",
+    "gatsby-plugin-subfont": "^1.0.3",
     "gatsby-source-filesystem": "^2.0.20",
     "gatsby-source-firestore": "^1.0.3",
     "gatsby-source-graphql": "^2.0.10",
@@ -54,7 +55,7 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^0.19.1",
-    "netlify-lambda": "^1.4.1",
+    "netlify-lambda": "^1.4.2",
     "npm-run-all": "^4.1.5",
     "preval.macro": "^3.0.0"
   },

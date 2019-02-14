@@ -14,20 +14,24 @@ export default function Modal ({ children }) {
 
   const handleWheel = e => e.preventDefault()
 
-  const handleModalClose = () => {
-    window.removeEventListener('wheel', handleWheel)
-    setIsOpen(false)
-  }
-
-  const handleModalOpen = () => {
-    window.addEventListener('wheel', handleWheel)
-    setIsOpen(true)
-  }
+  const modalHandlers = useMemo(
+    () => ({
+      handleModalClose: () => {
+        window.removeEventListener('wheel', handleWheel)
+        setIsOpen(false)
+      },
+      handleModalOpen: () => {
+        window.addEventListener('wheel', handleWheel)
+        setIsOpen(true)
+      }
+    }),
+    []
+  )
 
   const afterModalOpen = () => inputEl.current.focus()
 
   return (
-    <ModalContext.Provider value={{ handleModalClose, handleModalOpen }}>
+    <ModalContext.Provider value={modalHandlers}>
       {children}
       <ReactModal
         className='Modal'
@@ -35,7 +39,7 @@ export default function Modal ({ children }) {
         contentLabel='Sign Up'
         isOpen={isOpen}
         onAfterOpen={afterModalOpen}
-        onRequestClose={handleModalClose}
+        onRequestClose={modalHandlers.handleModalClose}
         overlayClassName='Overlay'
         shouldCloseOnOverlayClick
       >

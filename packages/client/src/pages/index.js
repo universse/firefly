@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useMemo } from 'react'
 import { graphql, navigate } from 'gatsby'
 import { css } from '@emotion/core'
 import qs from 'qs'
@@ -14,38 +14,41 @@ import hasSignedIn from 'utils/hasSignedIn'
 
 export const URLUtilsContext = createContext()
 
-export default function IndexPage ({ data, location }) {
-  const { pathname, search } = location
+export default function IndexPage ({ data, location: { pathname, search } }) {
   const [queryValues, dispatch] = useParams(search)
   const collections = useSortedCollections(data, queryValues)
   const { sort, tags } = queryValues
 
-  const constructUrl = tag => {
-    const updatedTags = tags.includes(tag)
-      ? tags.filter(t => t !== tag)
-      : [...tags, tag]
+  const urlUtils = useMemo(() => {
+    const constructUrl = tag => {
+      const updatedTags = tags.includes(tag)
+        ? tags.filter(t => t !== tag)
+        : [...tags, tag]
 
-    if (updatedTags.length === 0) {
-      return { href: pathname, updatedTags }
-    } else {
-      const queryString = qs.stringify(
-        { tags: updatedTags.join(',') },
-        { encode: false }
-      )
-      return {
-        href: `${pathname}?${queryString}`,
-        updatedTags
+      if (updatedTags.length === 0) {
+        return { href: pathname, updatedTags }
+      } else {
+        const queryString = qs.stringify(
+          { tags: updatedTags.join(',') },
+          { encode: false }
+        )
+        return {
+          href: `${pathname}?${queryString}`,
+          updatedTags
+        }
       }
     }
-  }
 
-  const updateQuery = tag => {
-    const { href, updatedTags } = constructUrl(tag)
-    navigate(href)
-    dispatch({ payload: { sort, tags: updatedTags } })
-  }
-
-  const onFilterClick = () => dispatch({ payload: { sort, tags: [] } })
+    return {
+      constructUrl,
+      updateQuery: tag => {
+        const { href, updatedTags } = constructUrl(tag)
+        navigate(href)
+        dispatch({ payload: { sort, tags: updatedTags } })
+      },
+      onFilterClick: () => dispatch({ payload: { sort, tags: [] } })
+    }
+  }, [queryValues])
 
   if (!hasSignedIn) {
     return (
@@ -74,9 +77,7 @@ export default function IndexPage ({ data, location }) {
               }
             `}
           >
-            <URLUtilsContext.Provider
-              value={{ updateQuery, constructUrl, onFilterClick }}
-            >
+            <URLUtilsContext.Provider value={urlUtils}>
               <CategoryFilter />
               <Collections collections={collections} />
             </URLUtilsContext.Provider>

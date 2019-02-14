@@ -31,12 +31,12 @@ export const shouldUpdateScroll = ({
   if (isCurrentCategoryFilter) {
     if (isPreviousCategoryFilter || prevRouterProps.location.pathname === '/') {
       window.scrollTo({
-        top: document.getElementById('main').offsetTop,
+        top: document.getElementById('main').offsetTop - 64,
         behavior: 'smooth'
       })
     } else {
       window.scrollTo({
-        top: document.getElementById('main').offsetTop
+        top: document.getElementById('main').offsetTop - 64
       })
     }
     return false

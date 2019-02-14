@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 
 import { createCollectionPath } from '../../../gatsby/utils'
 
-export const collectionHeightInRem = 10.5
+export const collectionHeightInRem = 9
 
 export function CollectionTitle ({ id, name }) {
   return (
