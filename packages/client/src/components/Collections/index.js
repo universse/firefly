@@ -14,6 +14,21 @@ function itemKey (index, data) {
   return data[index].node.id
 }
 
+const listStyle = theme => css`
+  background-color: #fff;
+  height: 100% !important;
+
+  li:last-child div {
+    border: none;
+  }
+
+  ${theme.screens.desktop} {
+    border-radius: 8px;
+    box-shadow: ${theme.shadows.subtle};
+    width: 70%;
+  }
+`
+
 // flag
 export default function Collections ({ collections }) {
   // const user = useContext(AuthenticationContext)
@@ -29,20 +44,7 @@ export default function Collections ({ collections }) {
     <>
       <WindowScroller onScroll={handleScroll}>{() => <div />}</WindowScroller>
       <List
-        css={theme => css`
-          background-color: #fff;
-          height: 100% !important;
-
-          li:last-child div {
-            border: none;
-          }
-
-          ${theme.screens.desktop} {
-            border-radius: 8px;
-            box-shadow: ${theme.shadows.subtle};
-            width: 70%;
-          }
-        `}
+        css={listStyle}
         height={window.innerHeight}
         innerElementType='ul'
         itemCount={collections.length}

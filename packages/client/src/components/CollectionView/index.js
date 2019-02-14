@@ -64,9 +64,10 @@ export default function CollectionView ({
   return savedCollections && completedItems ? (
     <>
       <div
-        css={css`
+        css={theme => css`
           background-color: #fff;
           border-radius: 8px;
+          box-shadow: ${theme.shadows.subtle};
           margin-bottom: 2rem;
         `}
       >

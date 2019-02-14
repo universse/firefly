@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react'
-import { StaticQuery, graphql, Link, navigate } from 'gatsby'
+import React, { useState } from 'react'
+import { StaticQuery, graphql, navigate } from 'gatsby'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
 import matchSorter from 'match-sorter'
@@ -23,18 +23,13 @@ const NO_OF_RESULTS = 7
 function SearchBar ({ data }) {
   const [searchInput, setSearchInput] = useState('')
 
-  const allCollections = useMemo(
-    () => data.allCollections.edges.map(({ node }) => node),
-    [data]
-  )
-
-  const results = matchSorter(allCollections, searchInput, {
-    keys: ['name']
+  const results = matchSorter(data.allCollections.edges, searchInput, {
+    keys: ['node.name']
   })
 
   const numOfResults = Math.min(results.length, NO_OF_RESULTS)
 
-  const handleChange = ({ id, name }) => {
+  const handleChange = ({ node: { id, name } }) => {
     name
       ? navigate(createCollectionPath({ id, name }))
       : navigate('/search', {
@@ -47,7 +42,7 @@ function SearchBar ({ data }) {
   return (
     <Downshift
       inputValue={searchInput}
-      itemToString={item => (item ? item.name : '')}
+      itemToString={item => (item ? item.node.name : '')}
       onChange={handleChange}
       stateReducer={stateReducer}
     >
@@ -91,6 +86,7 @@ function SearchBar ({ data }) {
             </label>
             <Input
               {...getInputProps({
+                onClick: openMenu,
                 onFocus: openMenu,
                 placeholder: 'What do you want to learn today?',
                 onChange: e => setSearchInput(e.target.value)
@@ -103,7 +99,7 @@ function SearchBar ({ data }) {
                 <>
                   {results.slice(0, numOfResults).map((item, index) => (
                     <Item
-                      key={item.id}
+                      key={item.node.id}
                       {...getItemProps({
                         item,
                         index,
@@ -112,11 +108,11 @@ function SearchBar ({ data }) {
                     >
                       <Result
                         to={createCollectionPath({
-                          id: item.id,
-                          name: item.name
+                          id: item.node.id,
+                          name: item.node.name
                         })}
                       >
-                        {item.name}
+                        {item.node.name}
                       </Result>
                     </Item>
                   ))}

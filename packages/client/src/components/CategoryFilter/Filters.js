@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
@@ -7,7 +7,7 @@ import { Categories } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 import { URLUtilsContext } from 'pages'
 
-function Filters ({ handleScroll, slider }) {
+export default function Filters ({ handleScroll, slider }) {
   const { onFilterClick } = useContext(URLUtilsContext)
 
   return (
@@ -68,5 +68,3 @@ function Filters ({ handleScroll, slider }) {
     </nav>
   )
 }
-
-export default memo(Filters)
