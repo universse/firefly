@@ -1,5 +1,7 @@
 import { css } from '@emotion/core'
 
+export const baseFontSize = 16
+
 export const baseWrapper = css`
   margin: 0 auto;
   max-width: 64rem;
@@ -7,4 +9,4 @@ export const baseWrapper = css`
   width: 100%;
 `
 
-export const baseFontSize = 16
+export const headerHeightInRem = 4

@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { AllCollectionsContext } from 'components/AllCollections'
 import SEO from 'components/SEO'
 import useSearch from 'hooks/useSearch'
+import { baseWrapper } from 'utils/styles'
 
 // TODO
 export default function SearchPage ({ location }) {
@@ -23,10 +24,12 @@ export default function SearchPage ({ location }) {
           padding: 2rem 0;
         `}
       >
-        <ul>
-          {searchInput &&
-            results.map(({ node: { id, name } }) => <li key={id}>{name}</li>)}
-        </ul>
+        <div css={baseWrapper}>
+          <ul>
+            {searchInput &&
+              results.map(({ node: { id, name } }) => <li key={id}>{name}</li>)}
+          </ul>
+        </div>
       </main>
     </>
   )

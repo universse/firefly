@@ -12,7 +12,7 @@ import LocalStorage from 'constants/LocalStorage'
 // suggestion component
 
 export default function CollectionView ({
-  collection: { urls, ...collection }
+  collection: { id, category, level, name, tags, urls }
 }) {
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
   const [savedCollections, dispatch] = useSavedCollections()
@@ -72,10 +72,11 @@ export default function CollectionView ({
         `}
       >
         <CollectionDetails
-          category={collection.category}
-          level={collection.level}
-          name={collection.name}
-          tags={collection.tags}
+          id={id}
+          category={category}
+          level={level}
+          name={name}
+          tags={tags}
         />
         <div
           css={css`
@@ -83,7 +84,8 @@ export default function CollectionView ({
           `}
         >
           <CollectionActions
-            isSaved={!!savedCollections[collection.id]}
+            id={id}
+            isSaved={!!savedCollections[id]}
             handleSaveClick={onSaveClick}
             numOfItems={urls.length}
             numOfCompleted={numOfCompleted}
