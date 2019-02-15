@@ -6,30 +6,33 @@ import { ThemeProvider } from 'emotion-theming'
 // flag
 // import Authentication from 'components/Authentication'
 // import Modal from 'components/Modal'
+import AllCollections from 'components/AllCollections'
 import Header from 'components/Header'
+import MobileNavigation from 'components/MobileNavigation'
 import SavedCollections from 'components/SavedCollections'
 import Theme from 'constants/Theme'
-import MobileNavigation from 'components/MobileNavigation'
 
 export default function Layout ({ children, location }) {
   return (
-    <ThemeProvider theme={Theme}>
-      {/* <Authentication> */}
-      {/* <Modal> */}
-      <div
-        css={theme => css`
-          ${theme.screens.desktop} {
-            margin-top: 4rem;
-          }
-        `}
-      >
-        <Header location={location} />
-        <SavedCollections>{children}</SavedCollections>
-        <MobileNavigation location={location} />
-      </div>
-      {/* </Modal> */}
-      {/* </Authentication> */}
-    </ThemeProvider>
+    <AllCollections location={location}>
+      <ThemeProvider theme={Theme}>
+        {/* <Authentication> */}
+        {/* <Modal> */}
+        <div
+          css={theme => css`
+            ${theme.screens.desktop} {
+              margin-top: 4rem;
+            }
+          `}
+        >
+          <Header location={location} />
+          <SavedCollections>{children}</SavedCollections>
+          <MobileNavigation location={location} />
+        </div>
+        {/* </Modal> */}
+        {/* </Authentication> */}
+      </ThemeProvider>
+    </AllCollections>
   )
 }
 

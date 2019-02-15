@@ -1,4 +1,4 @@
-const firebase = require('firebase-admin')
+const admin = require('firebase-admin')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
 
@@ -10,11 +10,11 @@ const { Categories, DifficultyLevels, ItemTypes } = require('common')
 
 const firebaseKey = JSON.parse(process.env.FIREBASE_CREDENTIALS_DEV)
 
-firebase.initializeApp({
-  credential: firebase.credential.cert(firebaseKey)
+admin.initializeApp({
+  credential: admin.credential.cert(firebaseKey)
 })
 
-const db = firebase.firestore()
+const db = admin.firestore()
 db.settings({
   timestampsInSnapshots: true
 })

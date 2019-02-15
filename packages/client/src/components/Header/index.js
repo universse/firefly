@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
 
 import SearchBar from '../SearchBar'
 import Navigation from '../Navigation'
 import { Logo } from '../../icons'
 import { HeaderTag, Wrapper } from './styled'
 
-export default function Header () {
+export default function Header ({ location: { pathname } }) {
   return (
     <HeaderTag>
       <Wrapper>
@@ -33,9 +32,7 @@ export default function Header () {
               <Logo />
             </Link>
           </div>
-          <Location>
-            {({ location }) => location.pathname !== '/search' && <SearchBar />}
-          </Location>
+          {pathname !== '/search' && <SearchBar />}
         </div>
         <Navigation />
       </Wrapper>

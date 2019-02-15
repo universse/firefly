@@ -1,42 +1,32 @@
-import React, { useState } from 'react'
-import { StaticQuery, graphql, navigate } from 'gatsby'
+import React, { useState, useContext } from 'react'
+import { navigate } from 'gatsby'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
-import matchSorter from 'match-sorter'
 
+import { AllCollectionsContext } from 'components/AllCollections'
+import useSearch from 'hooks/useSearch'
+import stateReducer from './stateReducer'
 import { Input, Item, Result, ResultBox } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
-
-function stateReducer (state, changes) {
-  switch (changes.type) {
-    case Downshift.stateChangeTypes.blurInput:
-    case Downshift.stateChangeTypes.mouseUp:
-      return { isOpen: false }
-    default:
-      return changes
-  }
-}
 
 const NO_OF_RESULTS = 7
 
 // TODO add search icon
-function SearchBar ({ data }) {
+export default function SearchBar () {
+  const allCollections = useContext(AllCollectionsContext)
   const [searchInput, setSearchInput] = useState('')
-
-  const results = matchSorter(data.allCollections.edges, searchInput, {
-    keys: ['node.name']
-  })
-
+  const results = useSearch(allCollections, searchInput)
   const numOfResults = Math.min(results.length, NO_OF_RESULTS)
 
   const handleChange = ({ node: { id, name } }) => {
-    name
-      ? navigate(createCollectionPath({ id, name }))
-      : navigate('/search', {
-          state: { results, searchInput }
-        })
-
-    setSearchInput(name)
+    if (name) {
+      navigate(createCollectionPath({ id, name }))
+      setSearchInput(name)
+    } else {
+      navigate('/search', {
+        state: { searchInput }
+      })
+    }
   }
 
   return (
@@ -119,11 +109,12 @@ function SearchBar ({ data }) {
                   {results.length !== 0 ? (
                     <Item
                       {...getItemProps({
-                        item: { id: 'search' },
+                        item: { node: { id: 'search' } },
+                        index: numOfResults,
                         isActive: highlightedIndex === numOfResults
                       })}
                     >
-                      <Result to='/search' state={{ results, searchInput }}>
+                      <Result to='/search' state={{ searchInput }}>
                         See all results
                       </Result>
                     </Item>
@@ -141,23 +132,3 @@ function SearchBar ({ data }) {
     </Downshift>
   )
 }
-
-export default props => (
-  <StaticQuery
-    query={graphql`
-      query {
-        allCollections {
-          edges {
-            node {
-              id
-              name
-              level
-              tags
-            }
-          }
-        }
-      }
-    `}
-    render={data => <SearchBar data={data} {...props} />}
-  />
-)

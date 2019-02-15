@@ -38,5 +38,5 @@ export default function useURLUtils (queryValues, pathname, dispatch) {
       updateQuery,
       onFilterClick
     }
-  }, [queryValues])
+  }, [queryValues, pathname])
 }

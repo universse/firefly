@@ -1,7 +1,5 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import 'firebase/firestore'
-// import { withPrefix } from 'gatsby'
 
 import LocalStorage from 'constants/LocalStorage'
 
@@ -12,7 +10,6 @@ const setHasSignedIn = () => {
   window.location.reload()
 }
 
-// TODO add GATSBY_HOME_PAGE to netlify
 class Firebase {
   constructor (firebase) {
     firebase.initializeApp(config)

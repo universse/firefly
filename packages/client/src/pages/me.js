@@ -1,15 +1,25 @@
 // sign up bottom pop up to sync across devices
 // page
-import React from 'react'
+import React, { useContext, useMemo } from 'react'
 import { css } from '@emotion/core'
 
+import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
 import SEO from 'components/SEO'
 import useSavedCollections from 'hooks/useSavedCollections'
 import { baseWrapper } from 'utils/styles'
 
 export default function MePage (props) {
+  const allCollections = useContext(AllCollectionsContext)
   const [savedCollections, dispatch] = useSavedCollections()
+  const allCollectionsById = useMemo(
+    () =>
+      allCollections.reduce((all, { node }) => {
+        all[node.id] = node
+        return all
+      }, {}),
+    [allCollections]
+  )
 
   const onSaveClick = e =>
     dispatch({
@@ -23,8 +33,8 @@ export default function MePage (props) {
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          min-height: 100vh;
-          padding: 3rem 0;
+          min-height: calc(100vh - 4rem);
+          padding: 2rem 0;
         `}
       >
         <div
@@ -35,7 +45,7 @@ export default function MePage (props) {
         >
           <div
             css={css`
-              margin: 0 0 2rem 2rem;
+              margin: 0 0 1.5rem 2rem;
             `}
           >
             <h1
@@ -53,18 +63,22 @@ export default function MePage (props) {
               background-color: #fff;
               border-radius: 8px;
               box-shadow: ${theme.shadows.subtle};
+
+              li:last-child div {
+                border: none;
+              }
             `}
           >
             {savedCollections &&
-              Object.values(savedCollections).map(collection => (
+              Object.keys(savedCollections).map(id => (
                 <li
                   css={css`
                     position: relative;
                   `}
-                  key={collection.id}
+                  key={id}
                 >
                   <Collection
-                    collection={collection}
+                    collection={allCollectionsById[id]}
                     // handleHeartClick={onHeartClick}
                     handleSaveClick={onSaveClick}
                     isSaved

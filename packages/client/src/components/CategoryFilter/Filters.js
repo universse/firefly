@@ -7,7 +7,7 @@ import { Categories } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 import { URLUtilsContext } from 'pages'
 
-export default function Filters ({ handleScroll, slider }) {
+function Filters ({ handleScroll, location: { pathname }, slider }) {
   const { onFilterClick } = useContext(URLUtilsContext)
 
   return (
@@ -22,49 +22,53 @@ export default function Filters ({ handleScroll, slider }) {
           }
         `}
       >
-        <Location>
-          {({ location: { pathname } }) => (
-            <ul
-              css={theme => css`
-                ${theme.screens.nonDesktop} {
-                  display: flex;
-                  overflow-x: auto;
-                }
+        <ul
+          css={theme => css`
+            ${theme.screens.nonDesktop} {
+              display: flex;
+              overflow-x: auto;
+            }
+          `}
+          onScroll={handleScroll}
+          ref={slider}
+        >
+          <li
+            css={css`
+              flex: 1 0 auto;
+            `}
+          >
+            <Category
+              isActive={pathname === '/' || pathname === '/category/all'}
+              category='all'
+              handleClick={onFilterClick}
+              to='/category/all'
+            />
+          </li>
+          {Categories.map(category => (
+            <li
+              key={category}
+              css={css`
+                flex: 1 0 auto;
               `}
-              onScroll={handleScroll}
-              ref={slider}
             >
-              <li
-                css={css`
-                  flex: 1 0 auto;
-                `}
-              >
-                <Category
-                  isActive={pathname === '/' || pathname === '/category/all'}
-                  category='all'
-                  handleClick={onFilterClick}
-                  to='/category/all'
-                />
-              </li>
-              {Categories.map(category => (
-                <li
-                  key={category}
-                  css={css`
-                    flex: 1 0 auto;
-                  `}
-                >
-                  <Category
-                    isActive={pathname === createCategoryPath(category)}
-                    category={category}
-                    handleClick={onFilterClick}
-                    to={createCategoryPath(category)}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-        </Location>
+              <Category
+                isActive={pathname === createCategoryPath(category)}
+                category={category}
+                handleClick={onFilterClick}
+                to={createCategoryPath(category)}
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
+  )
+}
+
+export default function WithLocation (props) {
+  return (
+    <Location>
+      {({ location }) => <Filters location={location} {...props} />}
+    </Location>
   )
 }

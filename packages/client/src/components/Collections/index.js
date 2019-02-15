@@ -40,6 +40,12 @@ export default function Collections ({ collections }) {
   const handleScroll = ({ scrollTop }) =>
     listRef.current && listRef.current.scrollTo(scrollTop)
 
+  const onSaveClick = e =>
+    dispatch({
+      type: 'saveClick',
+      payload: { id: e.currentTarget.value }
+    })
+
   return savedCollections ? (
     <>
       <WindowScroller onScroll={handleScroll}>{() => <div />}</WindowScroller>
@@ -61,12 +67,7 @@ export default function Collections ({ collections }) {
               <Collection
                 collection={collection}
                 // handleHeartClick={onHeartClick}
-                handleSaveClick={() =>
-                  dispatch({
-                    type: 'saveClick',
-                    payload: collection
-                  })
-                }
+                handleSaveClick={onSaveClick}
                 isSaved={!!savedCollections[collection.id]}
               />
             </li>

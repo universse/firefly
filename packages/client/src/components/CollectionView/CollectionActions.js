@@ -7,10 +7,11 @@ import { ProgressBar } from './styled'
 import { IconButton } from 'components/common'
 import { copyToClipboard } from './utils'
 
-export default function CollectionActions ({
+function CollectionActions ({
   id,
   isSaved,
   handleSaveClick,
+  location: { href },
   numOfItems,
   numOfCompleted
 }) {
@@ -57,16 +58,9 @@ export default function CollectionActions ({
           width: 5.5rem;
         `}
       >
-        <Location>
-          {({ location }) => (
-            <IconButton
-              aria-label='Share'
-              onClick={() => copyToClipboard(location.href)}
-            >
-              <Share />
-            </IconButton>
-          )}
-        </Location>
+        <IconButton aria-label='Share' onClick={() => copyToClipboard(href)}>
+          <Share />
+        </IconButton>
         <IconButton
           aria-label='Save to My Library'
           onClick={handleSaveClick}
@@ -83,5 +77,13 @@ export default function CollectionActions ({
         </IconButton> */}
       </div>
     </div>
+  )
+}
+
+export default function WithLocation (props) {
+  return (
+    <Location>
+      {({ location }) => <CollectionActions location={location} {...props} />}
+    </Location>
   )
 }

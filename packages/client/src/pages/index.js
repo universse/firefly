@@ -6,6 +6,7 @@ import Hero from 'components/Hero'
 import Collections from 'components/Collections'
 import CategoryFilter from 'components/CategoryFilter'
 import SEO from 'components/SEO'
+import TagFilter from 'components/TagFilter'
 import useAggregatedTags from 'hooks/useAggregatedTags'
 import useParams from 'hooks/useParams'
 import useSortedCollections from 'hooks/useSortedCollections'
@@ -15,14 +16,36 @@ import hasSignedIn from 'utils/hasSignedIn'
 
 export const URLUtilsContext = createContext()
 
+function Wrapper (props) {
+  return (
+    <div
+      css={theme => css`
+        position: sticky;
+
+        ${theme.screens.nonDesktop} {
+          background-color: ${theme.colors.white};
+          box-shadow: ${theme.shadows.subtle};
+          top: 0;
+          z-index: 500;
+        }
+
+        ${theme.screens.desktop} {
+          align-self: flex-start;
+          padding-top: 1rem;
+          top: 4rem;
+          width: 30%;
+        }
+      `}
+      {...props}
+    />
+  )
+}
+
 export default function IndexPage ({ data, location: { pathname, search } }) {
   const [queryValues, dispatch] = useParams(search)
   const collections = useSortedCollections(data, queryValues)
-  // const aggregatedTags = useAggregatedTags(collections)
+  const aggregatedTags = useAggregatedTags(collections)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
-
-  // TODO: tags sidebar
-  // console.log(aggregatedTags)
 
   if (!hasSignedIn) {
     return (
@@ -52,7 +75,10 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
             `}
           >
             <URLUtilsContext.Provider value={urlUtils}>
-              <CategoryFilter />
+              <Wrapper>
+                <CategoryFilter />
+                <TagFilter aggregatedTags={aggregatedTags} />
+              </Wrapper>
               <Collections collections={collections} />
             </URLUtilsContext.Provider>
           </div>

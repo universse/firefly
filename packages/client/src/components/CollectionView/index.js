@@ -18,15 +18,15 @@ export default function CollectionView ({
   const [savedCollections, dispatch] = useSavedCollections()
   const [completedItems, setCompletedItems] = useState()
 
-  const save = () => {
-    localforage.setItem(LocalStorage.COMPLETED_ITEMS, completedItems)
-  }
-
   useEffect(() => {
     localforage
       .getItem(LocalStorage.COMPLETED_ITEMS)
       .then(value => (value ? setCompletedItems(value) : setCompletedItems({})))
   }, [])
+
+  const save = () => {
+    localforage.setItem(LocalStorage.COMPLETED_ITEMS, completedItems)
+  }
 
   useEffect(() => {
     window.addEventListener('beforeunload', save)
@@ -46,7 +46,7 @@ export default function CollectionView ({
   const onSaveClick = e =>
     dispatch({
       type: 'saveClick',
-      payload: collection
+      payload: { id: e.currentTarget.value }
     })
 
   const onCheckClick = e => {

@@ -45,7 +45,7 @@ function Tags ({ location: { pathname }, tags }) {
   )
 }
 
-export default function TagsWithLocation (props) {
+export default function WithLocation (props) {
   return (
     <Location>
       {({ location }) => <Tags location={location} {...props} />}

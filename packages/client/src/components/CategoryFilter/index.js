@@ -2,7 +2,7 @@ import React, { useState, useRef, useCallback } from 'react'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
-import { ScrollButton, Title, Wrapper } from './styled'
+import { ScrollButton, Title } from './styled'
 
 export default function CategoryFilter () {
   const scrollByX = 200
@@ -28,7 +28,7 @@ export default function CategoryFilter () {
   }, [])
 
   return (
-    <Wrapper>
+    <div>
       <div
         css={theme => css`
           margin-bottom: 1rem;
@@ -60,6 +60,6 @@ export default function CategoryFilter () {
           side='right'
         />
       </div>
-    </Wrapper>
+    </div>
   )
 }
