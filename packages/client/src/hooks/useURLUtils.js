@@ -32,11 +32,18 @@ export default function useURLUtils (queryValues, pathname, dispatch) {
     }
 
     const onFilterClick = () => dispatch({ payload: { sort: '', tags: [] } })
+    const onTagClick = tag => {
+      navigate(`/?tags=${tag}`)
+      dispatch({ payload: { sort: '', tags: [tag] } })
+    }
+    const onTagResetClick = tag => dispatch({ payload: { sort, tags: [] } })
 
     return {
       constructUrl,
       updateQuery,
-      onFilterClick
+      onFilterClick,
+      onTagClick,
+      onTagResetClick
     }
   }, [queryValues, pathname])
 }

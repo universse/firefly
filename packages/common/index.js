@@ -9,7 +9,7 @@ module.exports = {
     'startup',
     'web development'
   ],
-  DifficultyLevels: ['primer', 'fundamental', 'intermediate', 'advanced'],
+  DifficultyLevels: ['introductory', 'fundamental', 'intermediate', 'advanced'],
   ItemTypes: ['article', 'book', 'code', 'course', 'podcast', 'url', 'video'],
   toTitleCase (str) {
     const smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|so|the|to|v.?|vs.?|via)$/i

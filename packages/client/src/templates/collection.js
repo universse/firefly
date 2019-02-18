@@ -4,16 +4,16 @@ import { css } from '@emotion/core'
 
 import CollectionView from 'components/CollectionView'
 import SEO from 'components/SEO'
-import { baseWrapper } from 'utils/styles'
+import { baseWrapper, headerHeightInRem } from 'utils/styles'
 
 export default function ({ data: { collections } }) {
   return (
     <>
-      <SEO />
+      <SEO title={collections.name} />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          min-height: calc(100vh - 4rem);
+          min-height: calc(100vh - ${headerHeightInRem}rem);
           padding: 3rem 0;
         `}
       >

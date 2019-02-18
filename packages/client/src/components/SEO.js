@@ -12,7 +12,7 @@ export default function SEO ({
   title
 }) {
   const data = useStaticQuery(graphql`
-    query DefaultSEOQuery {
+    query {
       site {
         siteMetadata {
           title

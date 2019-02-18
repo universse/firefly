@@ -8,8 +8,9 @@ require('dotenv').config({
 
 module.exports = {
   siteMetadata: {
-    title: 'Firefly',
-    description: ''
+    title: 'Firefly - Follow your curiosity.',
+    description:
+      'Discover the best learning resources, curated by the community.'
     // siteUrl: 'https://'
   },
 

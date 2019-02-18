@@ -7,7 +7,7 @@ import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
 import SEO from 'components/SEO'
 import useSavedCollections from 'hooks/useSavedCollections'
-import { baseWrapper } from 'utils/styles'
+import { baseWrapper, headerHeightInRem } from 'utils/styles'
 
 export default function MePage (props) {
   const allCollections = useContext(AllCollectionsContext)
@@ -29,11 +29,11 @@ export default function MePage (props) {
 
   return (
     <>
-      <SEO />
+      <SEO title='My Library' />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          min-height: calc(100vh - 4rem);
+          min-height: calc(100vh - ${headerHeightInRem}rem);
           padding: 2rem 0;
         `}
       >

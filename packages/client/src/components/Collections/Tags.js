@@ -28,12 +28,12 @@ function Tags ({ location: { pathname }, tags }) {
             onClick={e => {
               e.preventDefault()
               isIndexPage(pathname)
-                ? urlUtils.updateQuery(tag)
+                ? urlUtils.onTagClick(tag)
                 : navigate(`/?tags=${tag}`)
             }}
             href={
               isIndexPage(pathname)
-                ? urlUtils.constructUrl(tag).href
+                ? `${pathname}?tags=${tag}`
                 : `/?tags=${tag}`
             }
           >

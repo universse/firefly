@@ -2,7 +2,8 @@ import React, { useState, useRef, useCallback } from 'react'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
-import { ScrollButton, Title } from './styled'
+import { ScrollButton } from './styled'
+import { Title } from 'components/common'
 
 export default function CategoryFilter () {
   const scrollByX = 200
@@ -28,10 +29,16 @@ export default function CategoryFilter () {
   }, [])
 
   return (
-    <div>
+    <div
+      css={theme => css`
+        ${theme.screens.desktop} {
+          margin-bottom: 2rem;
+        }
+      `}
+    >
       <div
         css={theme => css`
-          margin-bottom: 1rem;
+          margin-bottom: 0.75rem;
 
           ${theme.screens.nonDesktop} {
             display: none;

@@ -1,16 +1,17 @@
 import { useMemo } from 'react'
 
-// TODO: add sorting
 export default function useAggregatedTags (collections) {
-  return useMemo(
-    () =>
-      collections.reduce((aggregatedTags, collection) => {
-        collection.node.tags.forEach(tag => {
-          aggregatedTags[tag] = aggregatedTags[tag] ? ++aggregatedTags[tag] : 1
-        })
+  return useMemo(() => {
+    const tagCounts = collections.reduce((counts, collection) => {
+      collection.node.tags.forEach(tag => {
+        counts[tag] = counts[tag] ? ++counts[tag] : 1
+      })
 
-        return aggregatedTags
-      }, {}),
-    [collections]
-  )
+      return counts
+    }, {})
+
+    return Object.entries(tagCounts).sort(
+      ([, count1], [, count2]) => count1 < count2
+    )
+  }, [collections])
 }

@@ -1,40 +1,38 @@
-import React, { useState, useContext } from 'react'
-import { navigate } from 'gatsby'
+import React from 'react'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
 
-import { AllCollectionsContext } from 'components/AllCollections'
 import useSearch from 'hooks/useSearch'
-import stateReducer from './stateReducer'
-import { Input, Item, Result, ResultBox } from './styled'
+import { DefaultItem, DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 
-const NO_OF_RESULTS = 7
+// TODO add X icon
+export default function SearchBar ({
+  controlledProps,
+  initialSearchInput,
+  showAllResults,
+  Input,
+  Item,
+  Result,
+  ResultBox,
+  Root
+}) {
+  const { searchInput, handleChange, handleSearchInput, results } = useSearch(
+    initialSearchInput
+  )
 
-// TODO add search icon
-export default function SearchBar () {
-  const allCollections = useContext(AllCollectionsContext)
-  const [searchInput, setSearchInput] = useState('')
-  const results = useSearch(allCollections, searchInput)
-  const numOfResults = Math.min(results.length, NO_OF_RESULTS)
+  const totalNumOfResults = results.length
 
-  const handleChange = ({ node: { id, name } }) => {
-    if (name) {
-      navigate(createCollectionPath({ id, name }))
-      setSearchInput(name)
-    } else {
-      navigate('/search', {
-        state: { searchInput }
-      })
-    }
-  }
+  const numOfResults = showAllResults
+    ? totalNumOfResults
+    : Math.min(totalNumOfResults, 7)
 
   return (
     <Downshift
       inputValue={searchInput}
       itemToString={item => (item ? item.node.name : '')}
       onChange={handleChange}
-      stateReducer={stateReducer}
+      {...controlledProps}
     >
       {({
         clearSelection,
@@ -47,18 +45,7 @@ export default function SearchBar () {
         isOpen,
         openMenu
       }) => (
-        <div
-          css={theme => css`
-            display: none;
-
-            ${theme.screens.desktop} {
-              display: block;
-              position: relative;
-              width: 30rem;
-            }
-          `}
-          {...getRootProps()}
-        >
+        <Root {...getRootProps({ refKey: 'innerRef' })}>
           <form
             css={css`
               position: relative;
@@ -79,7 +66,7 @@ export default function SearchBar () {
                 onClick: openMenu,
                 onFocus: openMenu,
                 placeholder: 'What do you want to learn today?',
-                onChange: e => setSearchInput(e.target.value)
+                onChange: handleSearchInput
               })}
             />
           </form>
@@ -106,7 +93,7 @@ export default function SearchBar () {
                       </Result>
                     </Item>
                   ))}
-                  {results.length !== 0 ? (
+                  {totalNumOfResults > 0 && numOfResults < totalNumOfResults && (
                     <Item
                       {...getItemProps({
                         item: { node: { id: 'search' } },
@@ -118,7 +105,8 @@ export default function SearchBar () {
                         See all results
                       </Result>
                     </Item>
-                  ) : (
+                  )}
+                  {!totalNumOfResults && (
                     <li>
                       <Result as='span'>No result found :(</Result>
                     </li>
@@ -127,8 +115,17 @@ export default function SearchBar () {
               )}
             </ul>
           </ResultBox>
-        </div>
+        </Root>
       )}
     </Downshift>
   )
+}
+
+SearchBar.defaultProps = {
+  controlledProps: {},
+  initialSearchInput: '',
+  showAllResults: false,
+  Item: DefaultItem,
+  ResultBox: DefaultResultBox,
+  Root: DefaultRoot
 }

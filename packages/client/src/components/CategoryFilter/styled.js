@@ -34,7 +34,7 @@ export function Category ({ isActive, category, handleClick, to }) {
         ${theme.screens.desktop} {
           border-left: 4px solid
             ${isActive ? theme.colors.brand500 : 'transparent'};
-          height: 2rem;
+          height: 1.5rem;
           margin: 0.25rem 0;
           padding: 0 0 0 1rem;
 
@@ -95,21 +95,3 @@ function Scroll ({ display, handleClick, side }) {
 }
 
 export const ScrollButton = memo(Scroll)
-
-export function Title (props) {
-  return (
-    <span
-      css={theme =>
-        css`
-          color: ${theme.colors.gray500};
-          display: block;
-          font-size: 0.875rem;
-          font-weight: 700;
-          line-height: 1.25rem;
-          padding-left: calc(1rem + 4px);
-        `
-      }
-      {...props}
-    />
-  )
-}

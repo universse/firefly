@@ -11,6 +11,7 @@ import Header from 'components/Header'
 import MobileNavigation from 'components/MobileNavigation'
 import SavedCollections from 'components/SavedCollections'
 import Theme from 'constants/Theme'
+import { headerHeightInRem } from 'utils/styles'
 
 export default function Layout ({ children, location }) {
   return (
@@ -21,7 +22,7 @@ export default function Layout ({ children, location }) {
         <div
           css={theme => css`
             ${theme.screens.desktop} {
-              margin-top: 4rem;
+              margin-top: ${headerHeightInRem}rem;
             }
           `}
         >

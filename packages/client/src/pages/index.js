@@ -2,10 +2,12 @@ import React, { createContext } from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import Hero from 'components/Hero'
+import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
+import Hero from 'components/Hero'
 import SEO from 'components/SEO'
-import Sidebar from 'components/Sidebar'
+import TagFilter from 'components/TagFilter'
+import { Sidebar } from 'components/common'
 import useAggregatedTags from 'hooks/useAggregatedTags'
 import useParams from 'hooks/useParams'
 import useSortedCollections from 'hooks/useSortedCollections'
@@ -46,10 +48,20 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
                 flex-direction: column;
                 padding: 0;
               }
+
+              ${theme.screens.desktop} {
+                justify-content: space-between;
+              }
             `}
           >
             <URLUtilsContext.Provider value={urlUtils}>
-              <Sidebar aggregatedTags={aggregatedTags} />
+              <Sidebar>
+                <CategoryFilter />
+                <TagFilter
+                  aggregatedTags={aggregatedTags}
+                  tags={queryValues.tags}
+                />
+              </Sidebar>
               <Collections collections={collections} />
             </URLUtilsContext.Provider>
           </div>

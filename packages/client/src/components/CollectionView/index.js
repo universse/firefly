@@ -8,7 +8,7 @@ import LearningList from './LearningList'
 import useSavedCollections from 'hooks/useSavedCollections'
 import LocalStorage from 'constants/LocalStorage'
 
-// TODO: add helmet
+// TODO:
 // suggestion component
 
 export default function CollectionView ({
