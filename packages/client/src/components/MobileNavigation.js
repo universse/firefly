@@ -7,6 +7,7 @@ import { css } from '@emotion/core'
 import { Home, Search, Library } from 'icons'
 import hasSignedIn from 'utils/hasSignedIn'
 import isIndexPage from 'utils/isIndexPage'
+import { mobileNavigationHeightInRem } from 'utils/styles'
 
 function NavLink ({ isActive, label, Icon, ...props }) {
   return (
@@ -16,7 +17,7 @@ function NavLink ({ isActive, label, Icon, ...props }) {
         color: ${isActive ? theme.colors.brand500 : theme.colors.gray500};
         display: flex;
         flex-direction: column;
-        height: 3.5rem;
+        height: 100%;
         padding: 0.5rem 0 0.5rem;
       `}
       {...props}
@@ -80,7 +81,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         background-color: ${theme.colors.white};
         border-top: 1px solid ${theme.colors.gray300};
         bottom: 0;
-        height: 3.5rem;
+        height: ${mobileNavigationHeightInRem}rem;
         position: fixed;
         width: 100%;
         z-index: 500;

@@ -22,7 +22,9 @@ export default {
   },
   screens: {
     desktop: '@media screen and (min-width: 52.0625rem)',
-    nonDesktop: '@media screen and (max-width: 52rem)'
+    nonDesktop: '@media screen and (max-width: 52rem)',
+    mobile: '@media screen and (max-width: 36rem)',
+    nonMobile: '@media screen and (min-width: 36.0625rem)'
   },
   shadows: { subtle: '0 2px 4px rgba(0, 0, 0, 0.05)' },
   typography: {}

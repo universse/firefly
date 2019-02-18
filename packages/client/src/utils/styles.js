@@ -10,3 +10,7 @@ export const baseWrapper = css`
 `
 
 export const headerHeightInRem = 4
+
+export const mobileHeaderHeightInRem = 3
+
+export const mobileNavigationHeightInRem = 3.5

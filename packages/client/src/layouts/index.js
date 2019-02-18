@@ -11,7 +11,7 @@ import Header from 'components/Header'
 import MobileNavigation from 'components/MobileNavigation'
 import SavedCollections from 'components/SavedCollections'
 import Theme from 'constants/Theme'
-import { headerHeightInRem } from 'utils/styles'
+import { headerHeightInRem, mobileHeaderHeightInRem } from 'utils/styles'
 
 export default function Layout ({ children, location }) {
   return (
@@ -21,12 +21,14 @@ export default function Layout ({ children, location }) {
         {/* <Modal> */}
         <div
           css={theme => css`
+            padding-top: ${mobileHeaderHeightInRem}rem;
+
             ${theme.screens.desktop} {
-              margin-top: ${headerHeightInRem}rem;
+              padding-top: ${headerHeightInRem}rem;
             }
           `}
         >
-          <Header location={location} />
+          {location.pathname !== '/search' && <Header location={location} />}
           <SavedCollections>{children}</SavedCollections>
           <MobileNavigation location={location} />
         </div>

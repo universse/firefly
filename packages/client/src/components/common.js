@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { headerHeightInRem } from 'utils/styles'
+import { baseWrapper, headerHeightInRem } from 'utils/styles'
 
 export function Category (props) {
   return (
@@ -10,12 +10,17 @@ export function Category (props) {
       css={theme => css`
         color: ${theme.colors.brand500};
         font-size: 0.875rem;
-        text-transform: uppercase;
         font-weight: 600;
+        line-height: 1.25rem;
+        text-transform: capitalize;
         z-index: 1;
 
         &:hover {
           text-decoration: underline;
+        }
+
+        ${theme.screens.nonMobile} {
+          text-transform: uppercase;
         }
       `}
       {...props}
@@ -31,6 +36,21 @@ export function Difficulty (props) {
         font-size: 0.875rem;
         font-weight: 600;
         text-transform: capitalize;
+      `}
+      {...props}
+    />
+  )
+}
+
+export function HeaderWrapper (props) {
+  return (
+    <div
+      css={css`
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        ${baseWrapper}
       `}
       {...props}
     />
@@ -70,13 +90,14 @@ export function IconButton (props) {
 export function Input (props) {
   return (
     <input
+      autoFocus
       css={theme => css`
-        background-color: transparent;
-        border-bottom: 1px solid ${theme.colors.gray400};
+        background-color: ${theme.colors.gray300};
+        border-radius: 1.25rem;
         color: ${theme.colors.gray900};
         font-size: 1rem;
-        height: 2rem;
-        padding-left: 1rem;
+        height: 2.5rem;
+        padding-left: 3.25rem;
         width: 100%;
 
         ::placeholder {
@@ -84,11 +105,8 @@ export function Input (props) {
           opacity: 1;
         }
 
-        &:focus {
-          border-bottom: 1px solid ${theme.colors.gray500};
-        }
-
         ${theme.screens.desktop} {
+          border-radius: 1.5rem;
           font-size: 1.25rem;
           height: 3rem;
         }
@@ -104,9 +122,10 @@ export function Result ({ as: Tag, ...props }) {
       css={theme => css`
         color: ${theme.colors.gray900};
         display: flex;
-        font-size: 1rem;
+        font-size: 1.125rem;
+        font-weight: 600;
         line-height: 2.5rem;
-        padding: 0 0 0 1rem;
+        padding-left: 1rem;
 
         &:hover {
           color: ${theme.colors.brand500};
@@ -159,7 +178,7 @@ export function Tag (props) {
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 0.75rem;
-        color: ${theme.colors.gray900};
+        color: ${theme.colors.gray700};
         display: block;
         font-size: 0.875rem;
         font-weight: 600;
@@ -168,6 +187,10 @@ export function Tag (props) {
 
         &:hover {
           background-color: ${theme.colors.gray400};
+        }
+
+        ${theme.screens.desktop} {
+          color: ${theme.colors.gray900};
         }
       `}
       {...props}

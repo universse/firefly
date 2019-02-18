@@ -66,7 +66,8 @@ export default function SearchBar ({
                 onClick: openMenu,
                 onFocus: openMenu,
                 placeholder: 'What do you want to learn today?',
-                onChange: handleSearchInput
+                onChange: handleSearchInput,
+                type: 'text'
               })}
             />
           </form>
@@ -107,7 +108,16 @@ export default function SearchBar ({
                     </Item>
                   )}
                   {!totalNumOfResults && (
-                    <li>
+                    <li
+                      css={theme => css`
+                        span {
+                          &:hover {
+                            color: ${theme.colors.gray900};
+                            text-decoration: none;
+                          }
+                        }
+                      `}
+                    >
                       <Result as='span'>No result found :(</Result>
                     </li>
                   )}

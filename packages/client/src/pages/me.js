@@ -7,7 +7,12 @@ import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
 import SEO from 'components/SEO'
 import useSavedCollections from 'hooks/useSavedCollections'
-import { baseWrapper, headerHeightInRem } from 'utils/styles'
+import {
+  baseWrapper,
+  headerHeightInRem,
+  mobileHeaderHeightInRem,
+  mobileNavigationHeightInRem
+} from 'utils/styles'
 
 export default function MePage (props) {
   const allCollections = useContext(AllCollectionsContext)
@@ -21,6 +26,8 @@ export default function MePage (props) {
     [allCollections]
   )
 
+  console.log(mobileHeaderHeightInRem)
+
   const onSaveClick = e =>
     dispatch({
       type: 'saveClick',
@@ -33,19 +40,31 @@ export default function MePage (props) {
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          min-height: calc(100vh - ${headerHeightInRem}rem);
           padding: 2rem 0;
+          min-height: calc(100vh - ${headerHeightInRem}rem);
+
+          ${theme.screens.nonDesktop} {
+            min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
+            padding: 1rem 0;
+            position: relative;
+            top: -${mobileHeaderHeightInRem}rem;
+          }
         `}
       >
         <div
           css={css`
             ${baseWrapper};
             max-width: 48rem;
+            padding: 0;
           `}
         >
           <div
-            css={css`
-              margin: 0 0 1.5rem 2rem;
+            css={theme => css`
+              margin: 0 0 1rem 1rem;
+
+              ${theme.screens.nonMobile} {
+                margin: 0 0 1.5rem 2rem;
+              }
             `}
           >
             <h1
@@ -61,11 +80,14 @@ export default function MePage (props) {
           <ul
             css={theme => css`
               background-color: #fff;
-              border-radius: 8px;
-              box-shadow: ${theme.shadows.subtle};
 
               li:last-child div {
                 border: none;
+              }
+
+              ${theme.screens.desktop} {
+                border-radius: 8px;
+                box-shadow: ${theme.shadows.subtle};
               }
             `}
           >

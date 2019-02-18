@@ -5,6 +5,7 @@ import { css } from '@emotion/core'
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
+import MobileHeader from 'components/MobileHeader'
 import SEO from 'components/SEO'
 import TagFilter from 'components/TagFilter'
 import { Sidebar } from 'components/common'
@@ -12,7 +13,7 @@ import useAggregatedTags from 'hooks/useAggregatedTags'
 import useParams from 'hooks/useParams'
 import useSortedCollections from 'hooks/useSortedCollections'
 import useURLUtils from 'hooks/useURLUtils'
-import { baseWrapper } from 'utils/styles'
+import { baseWrapper, mobileNavigationHeightInRem } from 'utils/styles'
 import hasSignedIn from 'utils/hasSignedIn'
 
 export const URLUtilsContext = createContext()
@@ -20,18 +21,19 @@ export const URLUtilsContext = createContext()
 export default function IndexPage ({ data, location: { pathname, search } }) {
   const [queryValues, dispatch] = useParams(search)
   const collections = useSortedCollections(data, queryValues)
-  const aggregatedTags = useAggregatedTags(collections)
+  const aggregatedTags = useAggregatedTags(collections, queryValues)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
   if (!hasSignedIn) {
     return (
       <>
         <SEO />
+        <MobileHeader />
         <Hero />
         <main
           css={theme => css`
             background-color: ${theme.colors.gray100};
-            padding: 0 0 3.5rem;
+            padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
             ${theme.screens.desktop} {
               padding: 3rem 0 2rem;

@@ -10,12 +10,13 @@ export function HeaderTag (props) {
       css={theme => css`
         background-color: ${theme.colors.white};
         height: ${headerHeightInRem}rem;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 500;
 
-        ${theme.screens.desktop} {
-          position: fixed;
-          top: 0;
-          width: 100%;
-          z-index: 500;
+        ${theme.screens.nonDesktop} {
+          display: none;
         }
       `}
       {...props}
@@ -107,21 +108,6 @@ export function Root ({ innerRef, ...props }) {
         }
       `}
       ref={innerRef}
-      {...props}
-    />
-  )
-}
-
-export function Wrapper (props) {
-  return (
-    <div
-      css={css`
-        align-items: center;
-        display: flex;
-        height: 100%;
-        justify-content: space-between;
-        ${baseWrapper}
-      `}
       {...props}
     />
   )

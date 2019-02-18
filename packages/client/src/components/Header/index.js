@@ -4,21 +4,14 @@ import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
 import Navigation from 'components/Navigation'
+import { HeaderWrapper } from 'components/common'
 import { Logo } from 'icons'
-import {
-  HeaderTag,
-  Input,
-  Item,
-  Result,
-  ResultBox,
-  Root,
-  Wrapper
-} from './styled'
+import { HeaderTag, Input, Item, Result, ResultBox, Root } from './styled'
 
 export default function Header ({ location: { pathname } }) {
   return (
     <HeaderTag>
-      <Wrapper>
+      <HeaderWrapper>
         <div
           css={css`
             align-items: center;
@@ -40,18 +33,16 @@ export default function Header ({ location: { pathname } }) {
               <Logo />
             </Link>
           </div>
-          {pathname !== '/search' && (
-            <SearchBar
-              Input={Input}
-              Item={Item}
-              Result={Result}
-              ResultBox={ResultBox}
-              Root={Root}
-            />
-          )}
+          <SearchBar
+            Input={Input}
+            Item={Item}
+            Result={Result}
+            ResultBox={ResultBox}
+            Root={Root}
+          />
         </div>
         <Navigation />
-      </Wrapper>
+      </HeaderWrapper>
     </HeaderTag>
   )
 }

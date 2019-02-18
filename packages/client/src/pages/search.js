@@ -3,8 +3,14 @@ import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
-import { baseWrapper, headerHeightInRem } from 'utils/styles'
-import { Input, Result } from 'components/common'
+import {
+  baseWrapper,
+  headerHeightInRem,
+  mobileHeaderHeightInRem,
+  mobileNavigationHeightInRem
+} from 'utils/styles'
+import { IconButton, Input, Result } from 'components/common'
+import { Back, Search } from 'icons'
 
 export default function SearchPage ({ location }) {
   const initialSearchInput = location.state ? location.state.searchInput : ''
@@ -13,16 +19,63 @@ export default function SearchPage ({ location }) {
       <SEO title='Search' />
       <main
         css={theme => css`
-          background-color: ${theme.colors.gray100};
           min-height: calc(100vh - ${headerHeightInRem}rem);
-          padding: 2rem 0;
+          padding: 0 0 2rem;
 
           ${theme.screens.nonDesktop} {
-            padding: 1rem 0 4.5rem;
+            min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
+            padding: 1rem 0;
+            position: relative;
+            top: -${mobileHeaderHeightInRem}rem;
           }
         `}
       >
-        <div css={baseWrapper}>
+        <div
+          css={theme => css`
+            position: fixed;
+            top: 2rem;
+            left: 1rem;
+
+            ${theme.screens.nonDesktop} {
+              display: none;
+            }
+          `}
+        >
+          <IconButton
+            aria-label='Go Back to Previous Screen'
+            onClick={() => window.history.back()}
+          >
+            <Back />
+          </IconButton>
+        </div>
+        <div
+          css={theme => css`
+            ${baseWrapper};
+            color: ${theme.colors.gray500};
+            max-width: 44rem;
+            position: relative;
+
+            ${theme.screens.desktop} {
+              top: -2rem;
+            }
+          `}
+        >
+          <div
+            css={theme => css`
+              align-items: center;
+              display: flex;
+              height: 2.5rem;
+              left: 2rem;
+              position: absolute;
+              z-index: 2;
+
+              ${theme.screens.desktop} {
+                height: 3rem;
+              }
+            `}
+          >
+            <Search />
+          </div>
           <SearchBar
             controlledProps={{ isOpen: true }}
             initialSearchInput={initialSearchInput}
