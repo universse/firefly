@@ -23,7 +23,15 @@ export function LinkTitle ({ href, title }) {
         color: ${theme.colors.gray700};
         display: flex;
         height: 100%;
-        padding: 1.25rem 3.75rem 0 6.25rem;
+        padding: 0.5rem 0.75rem 0 3.25rem;
+
+        ${theme.screens.tablet} {
+          padding: 0.5rem 3.75rem 0 3.25rem;
+        }
+
+        ${theme.screens.desktop} {
+          padding: 1.25rem 3.75rem 0 6.25rem;
+        }
       `}
       href={href}
       rel='noopener noreferrer'
@@ -33,9 +41,15 @@ export function LinkTitle ({ href, title }) {
         css={theme =>
           css`
             color: ${theme.colors.gray700};
-            font-size: 1.25rem;
-            font-weight: 600;
-            line-height: 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5rem;
+
+            ${theme.screens.nonMobile} {
+              font-size: 1.25rem;
+              font-weight: 600;
+              line-height: 2rem;
+            }
           `
         }
       >

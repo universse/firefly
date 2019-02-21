@@ -13,12 +13,10 @@ export default function CategoryFilter ({ aggregatedTags, tags }) {
   return (
     <div
       css={theme => css`
+        margin-bottom: 2rem;
+
         ${theme.screens.nonDesktop} {
           display: none;
-        }
-
-        ${theme.screens.desktop} {
-          margin-bottom: 2rem;
         }
       `}
     >
@@ -34,11 +32,11 @@ export default function CategoryFilter ({ aggregatedTags, tags }) {
         <button
           css={theme => css`
             color: ${theme.colors.gray500};
-            font-size: 0.75rem;
+            font-size: 0.875rem;
           `}
           onClick={onTagResetClick}
         >
-          RESET
+          reset
         </button>
       </div>
       <ul>
@@ -46,7 +44,9 @@ export default function CategoryFilter ({ aggregatedTags, tags }) {
           <li
             key={tag}
             css={css`
+              align-items: center;
               display: flex;
+              height: 1.5rem;
               justify-content: space-between;
               margin: 0.375rem 0 0.375rem calc(1rem + 4px);
             `}

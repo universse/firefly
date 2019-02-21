@@ -52,7 +52,6 @@ export default function SearchPage ({ location }) {
           css={theme => css`
             ${baseWrapper};
             color: ${theme.colors.gray500};
-            max-width: 44rem;
             position: relative;
 
             ${theme.screens.desktop} {

@@ -13,11 +13,14 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
   return (
     <>
       <div
-        css={css`
+        css={theme => css`
           height: 100%;
-          padding: 0.25rem;
           position: absolute;
           width: 100%;
+
+          ${theme.screens.desktop} {
+            padding: 0.25rem;
+          }
         `}
       >
         <LinkTitle href={url} title={title} />
@@ -27,17 +30,35 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
           border-bottom: 1px solid ${theme.colors.gray400};
           display: flex;
           flex-direction: column;
-          height: 9rem;
+          height: 7rem;
           justify-content: space-between;
-          margin: 0 4rem;
-          padding: 1.5rem 0;
+          margin: 0 1rem;
+          padding: 0.75rem 0;
+
+          ${theme.screens.tablet} {
+            padding: 0.5rem 0;
+          }
+
+          ${theme.screens.desktop} {
+            height: 9rem;
+            margin: 0 4rem;
+            padding: 1.5rem 0;
+          }
         `}
       >
         <div
           css={theme => css`
             align-items: center;
             display: flex;
-            margin: -0.375rem 0 0 -0.375rem;
+            margin: -0.875rem 0 0 -0.5rem;
+
+            ${theme.screens.tablet} {
+              margin: -0.375rem 0 0 -0.5rem;
+            }
+
+            ${theme.screens.desktop} {
+              margin: -0.375rem 0 0 -0.375rem;
+            }
           `}
         >
           <IconButton onClick={handleCheckClick} value={id}>
@@ -46,10 +67,14 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
         </div>
         {/* TODO: author */}
         <div
-          css={css`
+          css={theme => css`
             display: flex;
             align-items: center;
-            margin-left: 2.5rem;
+            margin-left: 2.25rem;
+
+            ${theme.screens.desktop} {
+              margin-left: 2.5rem;
+            }
           `}
         >
           <div

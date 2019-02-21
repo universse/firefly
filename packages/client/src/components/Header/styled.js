@@ -2,7 +2,18 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import { baseWrapper, headerHeightInRem } from 'utils/styles'
+import {
+  baseWrapper,
+  headerHeightInRem,
+  mobileHeaderHeightInRem
+} from 'utils/styles'
+
+const headerStyle = css`
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 500;
+`
 
 export function HeaderTag (props) {
   return (
@@ -10,14 +21,26 @@ export function HeaderTag (props) {
       css={theme => css`
         background-color: ${theme.colors.white};
         height: ${headerHeightInRem}rem;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 500;
+        ${headerStyle};
 
         ${theme.screens.nonDesktop} {
           display: none;
         }
+      `}
+      {...props}
+    />
+  )
+}
+
+export function HeaderWrapper (props) {
+  return (
+    <div
+      css={css`
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        ${baseWrapper}
       `}
       {...props}
     />
@@ -51,6 +74,23 @@ export function Item ({ isActive, ...props }) {
     <li
       css={css`
         background-color: ${isActive ? '#fff' : 'transparent'};
+      `}
+      {...props}
+    />
+  )
+}
+
+export function MobileHeaderTag (props) {
+  return (
+    <header
+      css={theme => css`
+        background-color: ${theme.colors.white};
+        height: ${mobileHeaderHeightInRem}rem;
+        ${headerStyle};
+
+        ${theme.screens.desktop} {
+          display: none;
+        }
       `}
       {...props}
     />

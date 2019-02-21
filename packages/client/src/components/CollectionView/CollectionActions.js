@@ -4,8 +4,8 @@ import { Location } from '@reach/router'
 
 import { Heart, Save, Share } from '../../icons'
 import { ProgressBar } from './styled'
-import { IconButton } from 'components/common'
-import { copyToClipboard } from './utils'
+import { ActionBar, IconButton } from 'components/common'
+import copyToClipboard from 'utils/copyToClipboard'
 
 function CollectionActions ({
   id,
@@ -50,23 +50,17 @@ function CollectionActions ({
           </span>
         </div>
       </div>
-      <div
-        css={css`
-          display: flex;
-          justify-content: space-between;
-          margin-right: -0.5rem;
-          width: 5.5rem;
-        `}
-      >
-        <IconButton aria-label='Share' onClick={() => copyToClipboard(href)}>
-          <Share />
-        </IconButton>
+
+      <ActionBar>
         <IconButton
           aria-label='Save to My Library'
           onClick={handleSaveClick}
           value={id}
         >
           <Save filled={isSaved} />
+        </IconButton>
+        <IconButton aria-label='Share' onClick={() => copyToClipboard(href)}>
+          <Share />
         </IconButton>
         {/* FLAG
             <IconButton
@@ -75,7 +69,7 @@ function CollectionActions ({
         >
           <Heart />
         </IconButton> */}
-      </div>
+      </ActionBar>
     </div>
   )
 }

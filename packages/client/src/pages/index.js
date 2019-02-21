@@ -5,10 +5,11 @@ import { css } from '@emotion/core'
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
-import MobileHeader from 'components/MobileHeader'
+import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import TagFilter from 'components/TagFilter'
-import { Sidebar } from 'components/common'
+import { IconButton, Sidebar } from 'components/common'
+import { Filter } from 'icons'
 import useAggregatedTags from 'hooks/useAggregatedTags'
 import useParams from 'hooks/useParams'
 import useSortedCollections from 'hooks/useSortedCollections'
@@ -28,7 +29,14 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
     return (
       <>
         <SEO />
-        <MobileHeader />
+        <MobileHeader
+          actions={
+            <IconButton>
+              <Filter />
+            </IconButton>
+          }
+          title='Collections'
+        />
         <Hero />
         <main
           css={theme => css`

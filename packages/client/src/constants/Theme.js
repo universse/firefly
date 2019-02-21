@@ -4,7 +4,7 @@ export default {
     brand500: '#e4234f',
     brand900: '#c70e3a',
     danger: '#da4453',
-    white: 'rgba(255, 255, 255, 0.95)',
+    white: 'rgba(255, 255, 255, 0.9)',
     gray100: '#f2f5f8',
     gray300: '#f1f1f1',
     gray400: '#cfcfcf',
@@ -23,8 +23,9 @@ export default {
   screens: {
     desktop: '@media screen and (min-width: 52.0625rem)',
     nonDesktop: '@media screen and (max-width: 52rem)',
-    mobile: '@media screen and (max-width: 36rem)',
-    nonMobile: '@media screen and (min-width: 36.0625rem)'
+    mobile: '@media screen and (max-width: 37rem)',
+    nonMobile: '@media screen and (min-width: 37.0625rem)',
+    tablet: '@media screen and (min-width: 37.0625rem) and (max-width: 52rem)'
   },
   shadows: { subtle: '0 2px 4px rgba(0, 0, 0, 0.05)' },
   typography: {}

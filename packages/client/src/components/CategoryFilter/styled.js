@@ -20,14 +20,13 @@ export function Category ({ isActive, category, handleClick, to }) {
         }
 
         ${theme.screens.nonDesktop} {
-          border-bottom: 3px solid
+          border-bottom: 2px solid
             ${isActive ? theme.colors.brand500 : 'transparent'};
-          height: 3.5rem;
-          margin: 0.25rem;
-          padding: 0 0.75rem;
+          height: 3rem;
+          padding: 0 1rem;
 
           &:hover {
-            border-bottom: 3px solid ${theme.colors.brand500};
+            border-bottom: 2px solid ${theme.colors.brand500};
           }
         }
 
@@ -77,7 +76,7 @@ function Scroll ({ display, handleClick, side }) {
           css`
             background-image: ${theme.gradients[side]};
             color: ${theme.colors.gray500};
-            height: 4rem;
+            height: 3rem;
             width: 2.5rem;
 
             &:focus,

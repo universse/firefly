@@ -18,7 +18,7 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
 
           ${theme.screens.nonDesktop} {
             overflow: hidden;
-            height: 4rem;
+            height: 3rem;
           }
         `}
       >

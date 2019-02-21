@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import Tags from './Tags'
 import { Heart, Save } from '../../icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
-import { Category, Difficulty, IconButton } from 'components/common'
+import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'pages'
 import { DifficultyLevels } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
@@ -48,17 +48,10 @@ export default function Collection ({
             align-items: center;
             display: flex;
             justify-content: space-between;
-            margin-right: -0.5rem;
           `}
         >
           <Tags tags={tags} />
-          <div
-            css={css`
-              display: flex;
-              justify-content: space-between;
-              width: 2.5rem;
-            `}
-          >
+          <ActionBar>
             <IconButton
               aria-label='Save to My Library'
               onClick={handleSaveClick}
@@ -70,7 +63,7 @@ export default function Collection ({
             <IconButton aria-label='Love' onClick={handleHeartClick} value={id}>
               <Heart color='#f00' />
             </IconButton> */}
-          </div>
+          </ActionBar>
         </div>
       </CollectionWrapper>
     </>

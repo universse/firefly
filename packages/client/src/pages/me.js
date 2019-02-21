@@ -5,13 +5,13 @@ import { css } from '@emotion/core'
 
 import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
+import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
   headerHeightInRem,
-  mobileHeaderHeightInRem,
-  mobileNavigationHeightInRem
+  mobileBarsHeightInRem
 } from 'utils/styles'
 
 export default function MePage (props) {
@@ -26,8 +26,6 @@ export default function MePage (props) {
     [allCollections]
   )
 
-  console.log(mobileHeaderHeightInRem)
-
   const onSaveClick = e =>
     dispatch({
       type: 'saveClick',
@@ -37,6 +35,7 @@ export default function MePage (props) {
   return (
     <>
       <SEO title='My Library' />
+      <MobileHeader title='My Saved Collections' />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
@@ -44,10 +43,8 @@ export default function MePage (props) {
           min-height: calc(100vh - ${headerHeightInRem}rem);
 
           ${theme.screens.nonDesktop} {
-            min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
+            min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
             padding: 1rem 0;
-            position: relative;
-            top: -${mobileHeaderHeightInRem}rem;
           }
         `}
       >
@@ -60,10 +57,10 @@ export default function MePage (props) {
         >
           <div
             css={theme => css`
-              margin: 0 0 1rem 1rem;
+              margin: 0 0 1.5rem 2rem;
 
-              ${theme.screens.nonMobile} {
-                margin: 0 0 1.5rem 2rem;
+              ${theme.screens.nonDesktop} {
+                display: none;
               }
             `}
           >

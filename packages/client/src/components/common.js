@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { Children, Fragment } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { baseWrapper, headerHeightInRem } from 'utils/styles'
+import { headerHeightInRem, mobileHeaderHeightInRem } from 'utils/styles'
+
+export function ActionBar ({ children }) {
+  const childrenCount =
+    children.type === Fragment
+      ? Children.count(children.props.children)
+      : Children.count(children)
+
+  return (
+    <div
+      css={css`
+        display: flex;
+        justify-content: space-between;
+        margin-right: -0.5rem;
+        width: ${2.5 * childrenCount + 0.5 * (childrenCount - 1)}rem;
+      `}
+    >
+      {children}
+    </div>
+  )
+}
 
 export function Category (props) {
   return (
@@ -36,21 +56,6 @@ export function Difficulty (props) {
         font-size: 0.875rem;
         font-weight: 600;
         text-transform: capitalize;
-      `}
-      {...props}
-    />
-  )
-}
-
-export function HeaderWrapper (props) {
-  return (
-    <div
-      css={css`
-        align-items: center;
-        display: flex;
-        height: 100%;
-        justify-content: space-between;
-        ${baseWrapper}
       `}
       {...props}
     />
@@ -155,7 +160,7 @@ export function Sidebar (props) {
         ${theme.screens.nonDesktop} {
           background-color: ${theme.colors.white};
           box-shadow: ${theme.shadows.subtle};
-          top: 0;
+          top: ${mobileHeaderHeightInRem}rem;
           z-index: 500;
         }
 
@@ -163,7 +168,7 @@ export function Sidebar (props) {
           align-self: flex-start;
           padding-top: 1rem;
           top: ${headerHeightInRem}rem;
-          width: 25%;
+          width: 22.5%;
         }
       `}
       {...props}

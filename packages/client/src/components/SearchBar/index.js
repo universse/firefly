@@ -35,7 +35,6 @@ export default function SearchBar ({
       {...controlledProps}
     >
       {({
-        clearSelection,
         getInputProps,
         getItemProps,
         getLabelProps,

@@ -45,5 +45,5 @@ export default function useURLUtils (queryValues, pathname, dispatch) {
       onTagClick,
       onTagResetClick
     }
-  }, [queryValues, pathname])
+  }, [queryValues, pathname, dispatch])
 }

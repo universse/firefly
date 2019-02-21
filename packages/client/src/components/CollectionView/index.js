@@ -5,17 +5,17 @@ import localforage from 'localforage'
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
-import useSavedCollections from 'hooks/useSavedCollections'
 import LocalStorage from 'constants/LocalStorage'
 
 // TODO:
 // suggestion component
 
 export default function CollectionView ({
-  collection: { id, category, level, name, tags, urls }
+  collection: { id, category, level, name, tags, urls },
+  onSaveClick,
+  savedCollections
 }) {
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
-  const [savedCollections, dispatch] = useSavedCollections()
   const [completedItems, setCompletedItems] = useState()
 
   useEffect(() => {
@@ -43,12 +43,6 @@ export default function CollectionView ({
       0
     )
 
-  const onSaveClick = e =>
-    dispatch({
-      type: 'saveClick',
-      payload: { id: e.currentTarget.value }
-    })
-
   const onCheckClick = e => {
     const id = e.currentTarget.value
 
@@ -61,14 +55,18 @@ export default function CollectionView ({
     }
   }
 
-  return savedCollections && completedItems ? (
+  return completedItems ? (
     <>
       <div
         css={theme => css`
           background-color: #fff;
-          border-radius: 8px;
-          box-shadow: ${theme.shadows.subtle};
-          margin-bottom: 2rem;
+          margin-bottom: 1rem;
+
+          ${theme.screens.nonMobile} {
+            border-radius: 8px;
+            box-shadow: ${theme.shadows.subtle};
+            margin-bottom: 2rem;
+          }
         `}
       >
         <CollectionDetails
@@ -79,8 +77,12 @@ export default function CollectionView ({
           tags={tags}
         />
         <div
-          css={css`
-            padding: 0 4rem;
+          css={theme => css`
+            margin: 0 4rem;
+
+            ${theme.screens.mobile} {
+              display: none;
+            }
           `}
         >
           <CollectionActions
@@ -95,8 +97,11 @@ export default function CollectionView ({
       <div
         css={theme => css`
           background-color: #fff;
-          border-radius: 8px;
-          box-shadow: ${theme.shadows.subtle};
+
+          ${theme.screens.nonMobile} {
+            border-radius: 8px;
+            box-shadow: ${theme.shadows.subtle};
+          }
         `}
       >
         <LearningList
