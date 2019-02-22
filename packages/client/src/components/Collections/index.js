@@ -4,7 +4,7 @@ import { FixedSizeList as List } from 'react-window'
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
 // import { AuthenticationContext } from '../Authentication'
-// import { ModalContext } from '../Modal'
+// import { ModalContext } from 'components/ModalProvider'
 import Collection from './Collection'
 import useSavedCollections from 'hooks/useSavedCollections'
 import { collectionHeightInRem } from './styled'

@@ -5,7 +5,7 @@ import { Title } from 'components/common'
 import { Count, Tag } from './styled'
 import { URLUtilsContext } from 'pages'
 
-export default function CategoryFilter ({ aggregatedTags, tags }) {
+export default function TagFilter ({ aggregatedTags, tags }) {
   const { updateQuery, constructUrl, onTagResetClick } = useContext(
     URLUtilsContext
   )

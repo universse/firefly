@@ -1,18 +1,18 @@
 import React, { useState, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { ModalContext } from '../Modal'
+import { ModalContext } from 'components/ModalProvider'
 import EmailLogin from './EmailLogin'
 import SocialLogin from './SocialLogin'
 import { CloseButton } from './styled'
 
-export default function SignUpForm ({ inputRef }) {
+export default function SignUpForm () {
   const [signUpState, setSignUpState] = useState({
     loading: false,
     email: '',
     socialLogin: ''
   })
-  const { handleModalClose } = useContext(ModalContext)
+  const { focusable, handleModalClose } = useContext(ModalContext)
 
   // TODO style p
   return !signUpState.loading && signUpState.email ? (
@@ -32,7 +32,7 @@ export default function SignUpForm ({ inputRef }) {
     </>
   ) : (
     <>
-      <EmailLogin inputRef={inputRef} setSignUpState={setSignUpState} />
+      <EmailLogin inputRef={focusable} setSignUpState={setSignUpState} />
       <div
         css={css`
           margin-top: 0.75rem;

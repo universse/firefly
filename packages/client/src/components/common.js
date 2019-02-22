@@ -116,6 +116,7 @@ export function Input (props) {
           height: 3rem;
         }
       `}
+      type='text'
       {...props}
     />
   )

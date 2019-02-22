@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-// import { ModalContext } from './Modal'
+// import { ModalContext } from 'components/ModalProvider'
 // import FirebaseContext from 'contexts/FirebaseContext'
 import { Home, Search, Library } from 'icons'
 import hasSignedIn from 'utils/hasSignedIn'

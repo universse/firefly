@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useContext } from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -6,6 +6,8 @@ import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
 import { MobileHeader } from 'components/Header'
+import Modal from 'components/Modal'
+import { ModalContext } from 'components/ModalProvider'
 import SEO from 'components/SEO'
 import TagFilter from 'components/TagFilter'
 import { IconButton, Sidebar } from 'components/common'
@@ -16,6 +18,7 @@ import useSortedCollections from 'hooks/useSortedCollections'
 import useURLUtils from 'hooks/useURLUtils'
 import { baseWrapper, mobileNavigationHeightInRem } from 'utils/styles'
 import hasSignedIn from 'utils/hasSignedIn'
+import ModalTypes from 'constants/ModalTypes'
 
 export const URLUtilsContext = createContext()
 
@@ -24,6 +27,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
   const collections = useSortedCollections(data, queryValues)
   const aggregatedTags = useAggregatedTags(collections, queryValues)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
+  const { focusable, openModal } = useContext(ModalContext)
 
   if (!hasSignedIn) {
     return (
@@ -31,7 +35,10 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
         <SEO />
         <MobileHeader
           actions={
-            <IconButton>
+            <IconButton
+              aria-label='Filter Collections by Tags'
+              onClick={() => openModal(ModalTypes.MOBILE_TAG_FILTER)}
+            >
               <Filter />
             </IconButton>
           }
@@ -71,6 +78,14 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
                   aggregatedTags={aggregatedTags}
                   tags={queryValues.tags}
                 />
+                <Modal
+                  contentLabel='Filter Collections by Tags'
+                  type={ModalTypes.MOBILE_TAG_FILTER}
+                >
+                  <div>
+                    <span ref={focusable}>testing</span>
+                  </div>
+                </Modal>
               </Sidebar>
               <Collections collections={collections} />
             </URLUtilsContext.Provider>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { ModalContext } from '../Modal'
+import { ModalContext } from 'components/ModalProvider'
 import FirebaseContext from 'contexts/FirebaseContext'
 import { AuthButton } from './styled'
 

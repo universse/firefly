@@ -64,6 +64,7 @@ export function Input (props) {
           opacity: 1;
         }
       `}
+      type='text'
       {...props}
     />
   )

@@ -1,59 +1,31 @@
-import React, {
-  createContext,
-  useState,
-  useCallback,
-  useMemo,
-  useRef
-} from 'react'
-import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 import ReactModal from 'react-modal'
 
-import SignUpForm from './SignUpForm'
+import { ModalContext } from 'components/ModalProvider'
 
 ReactModal.setAppElement('#___gatsby')
 
-export const ModalContext = createContext()
+export default function Modal ({ children, contentLabel, type }) {
+  const { activeModalType, afterModalOpen, handleModalClose } = useContext(
+    ModalContext
+  )
 
-export default function Modal ({ children }) {
-  const [isOpen, setIsOpen] = useState(false)
-  const inputEl = useRef(null)
-
-  const modalHandlers = useMemo(() => {
-    const handleWheel = e => e.preventDefault()
-
-    return {
-      handleModalClose: () => {
-        window.removeEventListener('wheel', handleWheel)
-        setIsOpen(false)
-      },
-      handleModalOpen: () => {
-        window.addEventListener('wheel', handleWheel)
-        setIsOpen(true)
-      }
-    }
-  }, [])
-
-  const afterModalOpen = useCallback(() => inputEl.current.focus(), [])
+  const isOpen = activeModalType === type
 
   return (
-    <ModalContext.Provider value={modalHandlers}>
-      {children}
+    isOpen && (
       <ReactModal
         className='Modal'
         closeTimeoutMS={280}
-        contentLabel='Sign Up'
+        contentLabel={contentLabel}
         isOpen={isOpen}
         onAfterOpen={afterModalOpen}
-        onRequestClose={modalHandlers.handleModalClose}
+        onRequestClose={handleModalClose}
         overlayClassName='Overlay'
         shouldCloseOnOverlayClick
       >
-        <SignUpForm inputRef={inputEl} />
+        {children}
       </ReactModal>
-    </ModalContext.Provider>
+    )
   )
-}
-
-Modal.propTypes = {
-  children: PropTypes.node.isRequired
 }

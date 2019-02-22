@@ -65,8 +65,7 @@ export default function SearchBar ({
                 onClick: openMenu,
                 onFocus: openMenu,
                 placeholder: 'What do you want to learn today?',
-                onChange: handleSearchInput,
-                type: 'text'
+                onChange: handleSearchInput
               })}
             />
           </form>

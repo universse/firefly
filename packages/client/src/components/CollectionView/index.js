@@ -21,6 +21,7 @@ export default function CollectionView ({
   const [completedItems, onCheckClick] = useSavedItemsReducer(
     LocalStorage.COMPLETED_ITEMS
   )
+
   useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
 
   const numOfCompleted =

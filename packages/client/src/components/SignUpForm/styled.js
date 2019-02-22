@@ -58,14 +58,18 @@ export function Input ({ inputRef, isValid, ...props }) {
     <input
       autoComplete='off'
       css={theme => css`
-        border: 1px solid
-          ${isValid ? theme.colors.gray500 : theme.colors.danger};
+        background-color: ${theme.colors.gray300};
         border-radius: 1.25rem;
-        color: ${theme.colors.gray700};
+        color: ${theme.colors.gray900};
         font-size: 0.9375rem;
         height: 2.5rem;
         padding-left: 1rem;
         width: 18rem;
+
+        ::placeholder {
+          color: ${theme.colors.gray600};
+          opacity: 1;
+        }
       `}
       ref={inputRef}
       type='text'

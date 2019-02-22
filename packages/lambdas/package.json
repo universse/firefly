@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "apollo-server-lambda": "^2.4.4",
+    "apollo-server-lambda": "^2.4.6",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1"
   },

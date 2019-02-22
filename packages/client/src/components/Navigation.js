@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
-// import { ModalContext } from './Modal'
+import { ModalContext } from 'components/ModalProvider'
 // import FirebaseContext from 'contexts/FirebaseContext'
 import hasSignedIn from 'utils/hasSignedIn'
 
@@ -82,7 +82,7 @@ function NavLink (props) {
 }
 
 export default function Navigation () {
-  // const { handleModalOpen } = useContext(ModalContext)
+  const { openModal } = useContext(ModalContext)
   // const firebase = useContext(FirebaseContext)
 
   /* FLAG */
@@ -134,6 +134,15 @@ export default function Navigation () {
           `}
         >
           <NavLink to='/me'>My Library</NavLink>
+        </li>
+        <li
+          css={css`
+            margin-left: 2rem;
+          `}
+        >
+          <GhostButton onClick={() => openModal('signUpForm')}>
+            Log In
+          </GhostButton>
         </li>
         {/* {authNav} */}
       </ul>
