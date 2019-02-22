@@ -16,5 +16,5 @@ export default function useAggregatedTags (collections, queryValues) {
       ([tag1, count1], [tag2, count2]) =>
         tags.includes(tag1) < tags.includes(tag2) || count1 < count2
     )
-  }, [collections, queryValues])
+  }, [collections, tags])
 }

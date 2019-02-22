@@ -5,7 +5,7 @@ export default {
     brand900: '#c70e3a',
     danger: '#da4453',
     white: 'rgba(255, 255, 255, 0.9)',
-    gray100: '#f2f5f8',
+    gray100: '#f9fafb',
     gray300: '#f1f1f1',
     gray400: '#cfcfcf',
     gray500: '#666',

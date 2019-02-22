@@ -16,7 +16,7 @@ import {
 
 export default function MePage (props) {
   const allCollections = useContext(AllCollectionsContext)
-  const [savedCollections, dispatch] = useSavedCollections()
+  const [savedCollections, onSaveClick] = useSavedCollections()
   const allCollectionsById = useMemo(
     () =>
       allCollections.reduce((all, { node }) => {
@@ -25,12 +25,6 @@ export default function MePage (props) {
       }, {}),
     [allCollections]
   )
-
-  const onSaveClick = e =>
-    dispatch({
-      type: 'saveClick',
-      payload: { id: e.currentTarget.value }
-    })
 
   return (
     <>

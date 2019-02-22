@@ -12,6 +12,6 @@ export default function useSortedCollections (data, queryValues) {
             true
           )
       ),
-    [data, queryValues]
+    [data, sort, tags]
   )
 }

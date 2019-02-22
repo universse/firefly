@@ -1,5 +1,6 @@
 import React, { createContext } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import PropTypes from 'prop-types'
 
 export const AllCollectionsContext = createContext()
 
@@ -25,4 +26,8 @@ export default function AllCollections ({ children, location }) {
       {children}
     </AllCollectionsContext.Provider>
   )
+}
+
+AllCollections.propTypes = {
+  children: PropTypes.node.isRequired
 }

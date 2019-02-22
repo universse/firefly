@@ -44,7 +44,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
             padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
             ${theme.screens.desktop} {
-              padding: 3rem 0 2rem;
+              padding: 2rem 0;
             }
           `}
           id='main'

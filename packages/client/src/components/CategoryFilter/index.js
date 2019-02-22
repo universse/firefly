@@ -1,32 +1,20 @@
-import React, { useState, useRef, useCallback } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
 import { ScrollButton } from './styled'
 import { Title } from 'components/common'
+import useSlider from 'hooks/useSlider'
 
 export default function CategoryFilter () {
-  const scrollByX = 200
-  const [isMaxScroll, setIsMaxScroll] = useState(false)
-  const [isMinScroll, setIsMinScroll] = useState(true)
-
-  const slider = useRef()
-
-  const onScroll = useCallback(() => {
-    setIsMaxScroll(
-      slider.current.scrollLeft >=
-        slider.current.scrollWidth - slider.current.clientWidth
-    )
-    setIsMinScroll(slider.current.scrollLeft === 0)
-  }, [])
-
-  const onScrollLeftClick = useCallback(e => {
-    slider.current.scrollBy({ left: -scrollByX, behavior: 'smooth' })
-  }, [])
-
-  const onScrollRightClick = useCallback(e => {
-    slider.current.scrollBy({ left: scrollByX, behavior: 'smooth' })
-  }, [])
+  const {
+    isMaxScroll,
+    isMinScroll,
+    onScroll,
+    onScrollLeftClick,
+    onScrollRightClick,
+    slider
+  } = useSlider()
 
   return (
     <div

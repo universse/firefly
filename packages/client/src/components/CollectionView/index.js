@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
-import localforage from 'localforage'
 
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
+import useLocalForage from 'hooks/useLocalForage'
+import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
 import LocalStorage from 'constants/LocalStorage'
 
 // TODO:
@@ -16,25 +17,11 @@ export default function CollectionView ({
   savedCollections
 }) {
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
-  const [completedItems, setCompletedItems] = useState()
 
-  useEffect(() => {
-    localforage
-      .getItem(LocalStorage.COMPLETED_ITEMS)
-      .then(value => (value ? setCompletedItems(value) : setCompletedItems({})))
-  }, [])
-
-  const save = () => {
-    localforage.setItem(LocalStorage.COMPLETED_ITEMS, completedItems)
-  }
-
-  useEffect(() => {
-    window.addEventListener('beforeunload', save)
-    return () => {
-      save()
-      window.removeEventListener('beforeunload', save)
-    }
-  }, [completedItems])
+  const [completedItems, onCheckClick] = useSavedItemsReducer(
+    LocalStorage.COMPLETED_ITEMS
+  )
+  useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
 
   const numOfCompleted =
     completedItems &&
@@ -42,18 +29,6 @@ export default function CollectionView ({
       (total, current) => (completedItems[current.id] ? total + 1 : total),
       0
     )
-
-  const onCheckClick = e => {
-    const id = e.currentTarget.value
-
-    if (completedItems[id]) {
-      const newState = { ...completedItems }
-      delete newState[id]
-      setCompletedItems(newState)
-    } else {
-      setCompletedItems({ ...completedItems, [id]: true })
-    }
-  }
 
   return completedItems ? (
     <>

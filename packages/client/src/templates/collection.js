@@ -16,14 +16,8 @@ import {
 import copyToClipboard from 'utils/copyToClipboard'
 
 export default function ({ data: { collections }, location: { href } }) {
-  const [savedCollections, dispatch] = useSavedCollections()
+  const [savedCollections, onSaveClick] = useSavedCollections()
   const { id, name } = collections
-
-  const onSaveClick = e =>
-    dispatch({
-      type: 'saveClick',
-      payload: { id: e.currentTarget.value }
-    })
 
   return (
     <>

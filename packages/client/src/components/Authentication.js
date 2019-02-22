@@ -17,7 +17,7 @@ export default function Authentication ({ children }) {
     return () => {
       stopAuthListener()
     }
-  }, [])
+  }, [firebase])
 
   return (
     <AuthenticationContext.Provider value={user}>

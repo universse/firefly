@@ -1,4 +1,10 @@
-import React, { createContext, useState, useMemo, useRef } from 'react'
+import React, {
+  createContext,
+  useState,
+  useCallback,
+  useMemo,
+  useRef
+} from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
@@ -12,10 +18,10 @@ export default function Modal ({ children }) {
   const [isOpen, setIsOpen] = useState(false)
   const inputEl = useRef(null)
 
-  const handleWheel = e => e.preventDefault()
+  const modalHandlers = useMemo(() => {
+    const handleWheel = e => e.preventDefault()
 
-  const modalHandlers = useMemo(
-    () => ({
+    return {
       handleModalClose: () => {
         window.removeEventListener('wheel', handleWheel)
         setIsOpen(false)
@@ -24,11 +30,10 @@ export default function Modal ({ children }) {
         window.addEventListener('wheel', handleWheel)
         setIsOpen(true)
       }
-    }),
-    []
-  )
+    }
+  }, [])
 
-  const afterModalOpen = () => inputEl.current.focus()
+  const afterModalOpen = useCallback(() => inputEl.current.focus(), [])
 
   return (
     <ModalContext.Provider value={modalHandlers}>

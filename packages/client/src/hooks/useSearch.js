@@ -30,7 +30,7 @@ export default function useSearch (initialSearchInput) {
     }
   }
 
-  const handleSearchInput = useCallback(e => setSearchInput(e.target.value))
+  const handleSearchInput = useCallback(e => setSearchInput(e.target.value), [])
 
   return { searchInput, handleChange, handleSearchInput, results }
 }

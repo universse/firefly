@@ -33,18 +33,12 @@ const listStyle = theme => css`
 export default function Collections ({ collections }) {
   // const user = useContext(AuthenticationContext)
   // const { handleModalOpen } = useContext(ModalContext)
-  const [savedCollections, dispatch] = useSavedCollections()
+  const [savedCollections, onSaveClick] = useSavedCollections()
   // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
 
   const listRef = useRef()
   const handleScroll = ({ scrollTop }) =>
     listRef.current && listRef.current.scrollTo(scrollTop)
-
-  const onSaveClick = e =>
-    dispatch({
-      type: 'saveClick',
-      payload: { id: e.currentTarget.value }
-    })
 
   return savedCollections ? (
     <>

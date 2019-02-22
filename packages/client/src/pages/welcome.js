@@ -31,7 +31,7 @@ export default function WelcomePage () {
   //       )
   //       .finally(() => setTimeout(() => navigate('/'), 2000))
   //   }
-  // }, [])
+  // }, [firebase, firebase.auth])
   // TODO
   return (
     <p

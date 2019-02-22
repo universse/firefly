@@ -1,21 +1,15 @@
-import React, { createContext, useEffect, useReducer } from 'react'
+import React, { createContext } from 'react'
 import PropTypes from 'prop-types'
-import localforage from 'localforage'
 
+import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
 import LocalStorage from 'constants/LocalStorage'
-import reducer from './reducer'
 
 export const SavedCollectionsContext = createContext()
 
 export default function SavedCollections ({ children }) {
-  const savedCollectionsReducer = useReducer(reducer)
-  const [, dispatch] = savedCollectionsReducer
-
-  useEffect(() => {
-    localforage
-      .getItem(LocalStorage.SAVED_COLLECTIONS)
-      .then(value => dispatch({ type: 'load', payload: value }))
-  }, [])
+  const savedCollectionsReducer = useSavedItemsReducer(
+    LocalStorage.SAVED_COLLECTIONS
+  )
 
   return (
     <SavedCollectionsContext.Provider value={savedCollectionsReducer}>

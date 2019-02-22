@@ -27,7 +27,7 @@ export default function useParams (query) {
     return () => {
       unlisten()
     }
-  }, [])
+  }, [dispatch])
 
   return paramsReducer
 }
