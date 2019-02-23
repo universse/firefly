@@ -3550,10 +3550,10 @@ autoprefixer@^9.0.0, autoprefixer@^9.4.3:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
-aws-sdk@^2.408.0:
-  version "2.408.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.408.0.tgz#63b5fd9aad198b34aa45b12ee6100c0f612cb13d"
-  integrity sha512-xPbFDeq8biFVth+5N8NiwcPmRXJqldVsvtx3LKo0ecCLyUIziH12ZzHBo7em4M0uVPj3fpA76j7gocB5NX9xQQ==
+aws-sdk@^2.409.0:
+  version "2.409.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.409.0.tgz#d017060ba9e005487c68dc34a592af74d916f295"
+  integrity sha512-QV6j9zBQq/Kz8BqVOrJ03ABjMKtErXdUT1YdYEljoLQZimpzt0ZdQwJAsoZIsxxriOJgrqeZsQUklv9AFQaldQ==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -16677,10 +16677,10 @@ serverless-dynamodb-local@^0.2.36:
     mkdirp "^0.5.0"
     tar "^2.0.0"
 
-serverless-offline@^4.5.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-4.5.1.tgz#3149bf04eeb924cd110c7083b9ad294e71adeba7"
-  integrity sha512-ctS9qn2bz2qeV51sEXbWaIl5h1LyFPQ+608k8RaIzYsn2jlJfPFm4kvNQZDsjlyTT9zNb0kvvdhZ05nycrXINA==
+serverless-offline@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-4.6.0.tgz#b0315897888ba6b9c728202b06f1bfcba45213b2"
+  integrity sha512-mQcsXB9UHVfXxI1ejrrZkaAos3XodthH/WemYqBcgHv8pGlsMG5XVv2CNNE7jFuw0i08aeK+r8KCYbdkwDC6bg==
   dependencies:
     boom "^7.3.0"
     cryptiles "^4.1.2"

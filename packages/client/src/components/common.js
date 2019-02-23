@@ -2,7 +2,11 @@ import React, { Children, Fragment } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { headerHeightInRem, mobileHeaderHeightInRem } from 'utils/styles'
+import {
+  headerHeightInRem,
+  mobileHeaderHeightInRem,
+  mobileNavigationHeightInRem
+} from 'utils/styles'
 
 export function ActionBar ({ children }) {
   const childrenCount =
@@ -58,6 +62,23 @@ export function Difficulty (props) {
         text-transform: capitalize;
       `}
       {...props}
+    />
+  )
+}
+
+export function FAB ({ display, ...props }) {
+  return (
+    <button
+      css={theme => css`
+        background-color: ${theme.colors.brand500};
+        border-radius: 1.5rem;
+        bottom: ${mobileNavigationHeightInRem + 1}rem;
+        display: ${display ? 'block' : 'none'};
+        height: 3rem;
+        position: fixed;
+        right: 1rem;
+        width: 3rem;
+      `}
     />
   )
 }

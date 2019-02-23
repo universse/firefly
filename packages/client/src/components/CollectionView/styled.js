@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 export function CollectionTitle (props) {
   return (
+    // eslint-disable-next-line
     <h1
       css={theme => css`
         color: ${theme.colors.gray700};

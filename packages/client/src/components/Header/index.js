@@ -11,85 +11,94 @@ import {
   HeaderWrapper,
   Input,
   Item,
-  MobileHeaderTag,
   Result,
   ResultBox,
   Root
 } from './styled'
+import useMedia from 'hooks/useMedia'
+import { media } from 'constants/Theme'
 
 export default function Header ({ location: { pathname } }) {
+  const isDesktop = useMedia(media.desktop)
+
   return (
-    <HeaderTag>
-      <HeaderWrapper>
-        <div
-          css={css`
-            align-items: center;
-            display: flex;
-          `}
-        >
+    isDesktop && (
+      <HeaderTag>
+        <HeaderWrapper>
           <div
             css={css`
-              margin-right: 1.5rem;
+              align-items: center;
+              display: flex;
             `}
           >
-            <Link
+            <div
               css={css`
-                display: block;
-                height: 2.25rem;
+                margin-right: 1.5rem;
               `}
-              to='/'
             >
-              <Logo />
-            </Link>
+              <Link
+                css={css`
+                  display: block;
+                  height: 2.25rem;
+                `}
+                to='/'
+              >
+                <Logo />
+              </Link>
+            </div>
+            <SearchBar
+              Input={Input}
+              Item={Item}
+              Result={Result}
+              ResultBox={ResultBox}
+              Root={Root}
+            />
           </div>
-          <SearchBar
-            Input={Input}
-            Item={Item}
-            Result={Result}
-            ResultBox={ResultBox}
-            Root={Root}
-          />
-        </div>
-        <Navigation />
-      </HeaderWrapper>
-    </HeaderTag>
+          <Navigation />
+        </HeaderWrapper>
+      </HeaderTag>
+    )
   )
 }
 
 export function MobileHeader ({ actions, navIcon, title }) {
+  const isNonDesktop = useMedia(media.nonDesktop)
+
   return (
-    <MobileHeaderTag>
-      <HeaderWrapper>
-        <div
-          css={css`
-            align-items: center;
-            display: flex;
-          `}
-        >
-          {navIcon && (
-            <div
-              css={css`
-                margin: 0 1.5rem 0 -0.5rem;
-              `}
-            >
-              {navIcon}
+    isNonDesktop && (
+      <HeaderTag>
+        <HeaderWrapper>
+          <div
+            css={css`
+              align-items: center;
+              display: flex;
+            `}
+          >
+            {navIcon && (
+              <div
+                css={css`
+                  margin: 0 1.5rem 0 -0.5rem;
+                `}
+              >
+                {navIcon}
+              </div>
+            )}
+            <div>
+              <h2
+                css={theme => css`
+                  color: ${theme.colors.gray700};
+                  font-size: 1.25rem;
+                  font-weight: 600;
+                  line-height: 1.5rem;
+                `}
+              >
+                {title}
+              </h2>
             </div>
-          )}
-          <div>
-            <h2
-              css={theme => css`
-                color: ${theme.colors.gray700};
-                font-size: 1.25rem;
-                font-weight: 600;
-                line-height: 1.5rem;
-              `}
-            >
-              {title}
-            </h2>
           </div>
-        </div>
-        {actions && <ActionBar>{actions}</ActionBar>}
-      </HeaderWrapper>
-    </MobileHeaderTag>
+          {actions && <ActionBar>{actions}</ActionBar>}
+        </HeaderWrapper>
+      </HeaderTag>
+    )
   )
 }

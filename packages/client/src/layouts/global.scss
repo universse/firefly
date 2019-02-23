@@ -208,14 +208,20 @@ embed,
 }
 
 .Modal {
-  align-items: center;
   background-color: #fff;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
+}
+
+.SignUpModal {
+  align-items: center;
+  border-radius: 8px;
   justify-content: center;
   padding: 6rem;
   position: relative;
+}
+
+.TagFilterModal {
 }
 
 .Overlay {

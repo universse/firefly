@@ -5,9 +5,11 @@ import { css } from '@emotion/core'
 // import { ModalContext } from 'components/ModalProvider'
 // import FirebaseContext from 'contexts/FirebaseContext'
 import { Home, Search, Library } from 'icons'
+import useMedia from 'hooks/useMedia'
 import hasSignedIn from 'utils/hasSignedIn'
 import isIndexPage from 'utils/isIndexPage'
 import { mobileNavigationHeightInRem } from 'utils/styles'
+import { media } from 'constants/Theme'
 
 function NavLink ({ isActive, label, Icon, ...props }) {
   return (
@@ -43,6 +45,8 @@ function NavLink ({ isActive, label, Icon, ...props }) {
 }
 
 export default function MobileNavigation ({ location: { pathname } }) {
+  const isNonDesktop = useMedia(media.nonDesktop)
+
   // const { handleModalOpen } = useContext(ModalContext)
   // const firebase = useContext(FirebaseContext)
 
@@ -76,65 +80,63 @@ export default function MobileNavigation ({ location: { pathname } }) {
   // )
 
   return (
-    <nav
-      css={theme => css`
-        background-color: ${theme.colors.white};
-        border-top: 1px solid ${theme.colors.gray300};
-        bottom: 0;
-        height: ${mobileNavigationHeightInRem}rem;
-        position: fixed;
-        width: 100%;
-        z-index: 500;
-
-        ${theme.screens.desktop} {
-          display: none;
-        }
-      `}
-    >
-      <ul
-        css={css`
-          align-items: center;
-          display: flex;
-          height: 100%;
+    isNonDesktop && (
+      <nav
+        css={theme => css`
+          background-color: ${theme.colors.white};
+          border-top: 1px solid ${theme.colors.gray300};
+          bottom: 0;
+          height: ${mobileNavigationHeightInRem}rem;
+          position: fixed;
+          width: 100%;
+          z-index: 500;
         `}
       >
-        <li
+        <ul
           css={css`
-            flex: 1;
+            align-items: center;
+            display: flex;
+            height: 100%;
           `}
         >
-          <NavLink
-            isActive={isIndexPage(pathname)}
-            Icon={Home}
-            label='Home'
-            to='/'
-          />
-        </li>
-        <li
-          css={css`
-            flex: 1;
-          `}
-        >
-          <NavLink
-            isActive={pathname === '/search'}
-            Icon={Search}
-            label='Search'
-            to='/search'
-          />
-        </li>
-        <li
-          css={css`
-            flex: 1;
-          `}
-        >
-          <NavLink
-            isActive={pathname === '/me'}
-            Icon={Library}
-            label='My Library'
-            to='/me'
-          />
-        </li>
-      </ul>
-    </nav>
+          <li
+            css={css`
+              flex: 1;
+            `}
+          >
+            <NavLink
+              isActive={isIndexPage(pathname)}
+              Icon={Home}
+              label='Home'
+              to='/'
+            />
+          </li>
+          <li
+            css={css`
+              flex: 1;
+            `}
+          >
+            <NavLink
+              isActive={pathname === '/search'}
+              Icon={Search}
+              label='Search'
+              to='/search'
+            />
+          </li>
+          <li
+            css={css`
+              flex: 1;
+            `}
+          >
+            <NavLink
+              isActive={pathname === '/me'}
+              Icon={Library}
+              label='My Library'
+              to='/me'
+            />
+          </li>
+        </ul>
+      </nav>
+    )
   )
 }

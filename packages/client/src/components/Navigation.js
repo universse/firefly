@@ -115,13 +115,7 @@ export default function Navigation () {
   // )
 
   return (
-    <nav
-      css={theme => css`
-        ${theme.screens.nonDesktop} {
-          display: none;
-        }
-      `}
-    >
+    <nav>
       <ul
         css={css`
           align-items: center;

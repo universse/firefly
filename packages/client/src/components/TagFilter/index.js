@@ -1,23 +1,25 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
+import Modal from 'components/Modal'
 import { Title } from 'components/common'
 import { Count, Tag } from './styled'
 import { URLUtilsContext } from 'pages'
+import useMedia from 'hooks/useMedia'
+import ModalTypes from 'constants/ModalTypes'
+import { media } from 'constants/Theme'
 
 export default function TagFilter ({ aggregatedTags, tags }) {
   const { updateQuery, constructUrl, onTagResetClick } = useContext(
     URLUtilsContext
   )
 
-  return (
+  const isDesktop = useMedia(media.desktop)
+
+  return isDesktop ? (
     <div
       css={theme => css`
         margin-bottom: 2rem;
-
-        ${theme.screens.nonDesktop} {
-          display: none;
-        }
       `}
     >
       <div
@@ -66,5 +68,15 @@ export default function TagFilter ({ aggregatedTags, tags }) {
         ))}
       </ul>
     </div>
+  ) : (
+    <Modal
+      className='TagFilterModal'
+      contentLabel='Filter Collections by Tags'
+      type={ModalTypes.MOBILE_TAG_FILTER}
+    >
+      <div>
+        <span>testing</span>
+      </div>
+    </Modal>
   )
 }

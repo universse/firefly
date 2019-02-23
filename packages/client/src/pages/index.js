@@ -6,7 +6,6 @@ import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
 import { MobileHeader } from 'components/Header'
-import Modal from 'components/Modal'
 import { ModalContext } from 'components/ModalProvider'
 import SEO from 'components/SEO'
 import TagFilter from 'components/TagFilter'
@@ -27,7 +26,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
   const collections = useSortedCollections(data, queryValues)
   const aggregatedTags = useAggregatedTags(collections, queryValues)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
-  const { focusable, openModal } = useContext(ModalContext)
+  const { openModal } = useContext(ModalContext)
 
   if (!hasSignedIn) {
     return (
@@ -78,14 +77,6 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
                   aggregatedTags={aggregatedTags}
                   tags={queryValues.tags}
                 />
-                <Modal
-                  contentLabel='Filter Collections by Tags'
-                  type={ModalTypes.MOBILE_TAG_FILTER}
-                >
-                  <div>
-                    <span ref={focusable}>testing</span>
-                  </div>
-                </Modal>
               </Sidebar>
               <Collections collections={collections} />
             </URLUtilsContext.Provider>

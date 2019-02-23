@@ -1,3 +1,11 @@
+export const media = {
+  desktop: 'screen and (min-width: 52.0625rem)',
+  nonDesktop: 'screen and (max-width: 52rem)',
+  mobile: 'screen and (max-width: 37rem)',
+  nonMobile: 'screen and (min-width: 37.0625rem)',
+  tablet: 'screen and (min-width: 37.0625rem) and (max-width: 52rem)'
+}
+
 export default {
   colors: {
     brand100: '#ed5567',
@@ -21,11 +29,11 @@ export default {
       'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 30%)'
   },
   screens: {
-    desktop: '@media screen and (min-width: 52.0625rem)',
-    nonDesktop: '@media screen and (max-width: 52rem)',
-    mobile: '@media screen and (max-width: 37rem)',
-    nonMobile: '@media screen and (min-width: 37.0625rem)',
-    tablet: '@media screen and (min-width: 37.0625rem) and (max-width: 52rem)'
+    desktop: `@media ${media.desktop}`,
+    nonDesktop: `@media ${media.nonDesktop}`,
+    mobile: `@media ${media.mobile}`,
+    nonMobile: `@media ${media.nonMobile}`,
+    tablet: `@media ${media.tablet}`
   },
   shadows: { subtle: '0 2px 4px rgba(0, 0, 0, 0.05)' },
   typography: {}

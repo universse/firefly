@@ -1,8 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { mobileNavigationHeightInRem } from 'utils/styles'
-
 export function Count ({ isActive, ...props }) {
   return (
     <span
@@ -12,27 +10,6 @@ export function Count ({ isActive, ...props }) {
         font-weight: ${isActive ? 700 : 400};
       `}
       {...props}
-    />
-  )
-}
-
-export function FilterFAB ({ display, ...props }) {
-  return (
-    <button
-      css={theme => css`
-        background-color: ${theme.colors.brand500};
-        border-radius: 1.5rem;
-        bottom: ${mobileNavigationHeightInRem + 1}rem;
-        display: ${display ? 'block' : 'none'};
-        height: 3rem;
-        position: fixed;
-        right: 1rem;
-        width: 3rem;
-
-        ${theme.screens.desktop} {
-          display: none;
-        }
-      `}
     />
   )
 }

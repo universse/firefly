@@ -18,7 +18,10 @@ export default function ModalProvider ({ children }) {
 
   const handleWheel = useCallback(e => e.preventDefault(), [])
 
-  const afterModalOpen = useCallback(() => focusable.current.focus(), [])
+  const afterModalOpen = useCallback(
+    () => focusable.current && focusable.current.focus(),
+    []
+  )
 
   const handleModalClose = useCallback(() => {
     window.removeEventListener('wheel', handleWheel)

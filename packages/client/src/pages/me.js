@@ -7,7 +7,9 @@ import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
+import useMedia from 'hooks/useMedia'
 import useSavedCollections from 'hooks/useSavedCollections'
+import { media } from 'constants/Theme'
 import {
   baseWrapper,
   headerHeightInRem,
@@ -25,6 +27,7 @@ export default function MePage (props) {
       }, {}),
     [allCollections]
   )
+  const isDesktop = useMedia(media.desktop)
 
   return (
     <>
@@ -49,25 +52,23 @@ export default function MePage (props) {
             padding: 0;
           `}
         >
-          <div
-            css={theme => css`
-              margin: 0 0 1.5rem 2rem;
-
-              ${theme.screens.nonDesktop} {
-                display: none;
-              }
-            `}
-          >
-            <h1
-              css={theme => css`
-                color: ${theme.colors.gray700};
-                font-size: 1.25rem;
-                line-height: 2rem;
+          {isDesktop && (
+            <div
+              css={css`
+                margin: 0 0 1.5rem 2rem;
               `}
             >
-              My Saved Collections
-            </h1>
-          </div>
+              <h1
+                css={theme => css`
+                  color: ${theme.colors.gray700};
+                  font-size: 1.25rem;
+                  line-height: 2rem;
+                `}
+              >
+                My Saved Collections
+              </h1>
+            </div>
+          )}
           <ul
             css={theme => css`
               background-color: #fff;

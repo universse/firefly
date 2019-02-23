@@ -5,8 +5,10 @@ import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
 import useLocalForage from 'hooks/useLocalForage'
+import useMedia from 'hooks/useMedia'
 import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
 import LocalStorage from 'constants/LocalStorage'
+import { media } from 'constants/Theme'
 
 // TODO:
 // suggestion component
@@ -23,6 +25,8 @@ export default function CollectionView ({
   )
 
   useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
+
+  const isNonMobile = useMedia(media.nonMobile)
 
   const numOfCompleted =
     completedItems &&
@@ -52,23 +56,21 @@ export default function CollectionView ({
           name={name}
           tags={tags}
         />
-        <div
-          css={theme => css`
-            margin: 0 4rem;
-
-            ${theme.screens.mobile} {
-              display: none;
-            }
-          `}
-        >
-          <CollectionActions
-            id={id}
-            isSaved={!!savedCollections[id]}
-            handleSaveClick={onSaveClick}
-            numOfItems={urls.length}
-            numOfCompleted={numOfCompleted}
-          />
-        </div>
+        {isNonMobile && (
+          <div
+            css={css`
+              margin: 0 4rem;
+            `}
+          >
+            <CollectionActions
+              id={id}
+              isSaved={!!savedCollections[id]}
+              handleSaveClick={onSaveClick}
+              numOfItems={urls.length}
+              numOfCompleted={numOfCompleted}
+            />
+          </div>
+        )}
       </div>
       <div
         css={theme => css`

@@ -3,17 +3,21 @@ import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
+import { IconButton, Input, Result } from 'components/common'
+import useMedia from 'hooks/useMedia'
+import { media } from 'constants/Theme'
 import {
   baseWrapper,
   headerHeightInRem,
   mobileHeaderHeightInRem,
   mobileNavigationHeightInRem
 } from 'utils/styles'
-import { IconButton, Input, Result } from 'components/common'
 import { Back, Search } from 'icons'
 
 export default function SearchPage ({ location }) {
   const initialSearchInput = location.state ? location.state.searchInput : ''
+  const isDesktop = useMedia(media.desktop)
+
   return (
     <>
       <SEO title='Search' />
@@ -30,24 +34,22 @@ export default function SearchPage ({ location }) {
           }
         `}
       >
-        <div
-          css={theme => css`
-            position: fixed;
-            top: 2rem;
-            left: 1rem;
-
-            ${theme.screens.nonDesktop} {
-              display: none;
-            }
-          `}
-        >
-          <IconButton
-            aria-label='Go Back to Previous Screen'
-            onClick={() => window.history.back()}
+        {isDesktop && (
+          <div
+            css={css`
+              position: fixed;
+              top: 2rem;
+              left: 1rem;
+            `}
           >
-            <Back />
-          </IconButton>
-        </div>
+            <IconButton
+              aria-label='Go Back to Previous Screen'
+              onClick={() => window.history.back()}
+            >
+              <Back />
+            </IconButton>
+          </div>
+        )}
         <div
           css={theme => css`
             ${baseWrapper};
@@ -55,6 +57,7 @@ export default function SearchPage ({ location }) {
             position: relative;
 
             ${theme.screens.desktop} {
+              max-width: 44rem;
               top: -2rem;
             }
           `}
@@ -87,21 +90,3 @@ export default function SearchPage ({ location }) {
     </>
   )
 }
-
-/* <form onSubmit={handleSubmit}>
-  eslint-disable-next-line
-  <Input
-    aria-label='What do you want to learn today?'
-    name='search'
-    onChange={handleSearchInput}
-    placeholder='What do you want to learn today?'
-  />
-</form>
-<ul
-  css={css`
-    margin-top: 1rem;
-  `}
->
-  {searchInput &&
-    results.map(({ node: { id, name } }) => <li key={id}>{name}</li>)}
-</ul> */

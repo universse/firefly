@@ -5,7 +5,7 @@ import { ModalContext } from 'components/ModalProvider'
 
 ReactModal.setAppElement('#___gatsby')
 
-export default function Modal ({ children, contentLabel, type }) {
+export default function Modal ({ children, className, contentLabel, type }) {
   const { activeModalType, afterModalOpen, handleModalClose } = useContext(
     ModalContext
   )
@@ -15,7 +15,7 @@ export default function Modal ({ children, contentLabel, type }) {
   return (
     isOpen && (
       <ReactModal
-        className='Modal'
+        className={`Modal ${className}`}
         closeTimeoutMS={280}
         contentLabel={contentLabel}
         isOpen={isOpen}

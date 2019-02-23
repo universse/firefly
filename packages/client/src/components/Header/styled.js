@@ -2,29 +2,27 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
+import useMedia from 'hooks/useMedia'
+import { media } from 'constants/Theme'
 import {
   baseWrapper,
   headerHeightInRem,
   mobileHeaderHeightInRem
 } from 'utils/styles'
 
-const headerStyle = css`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 500;
-`
-
 export function HeaderTag (props) {
   return (
     <header
       css={theme => css`
         background-color: ${theme.colors.white};
-        height: ${headerHeightInRem}rem;
-        ${headerStyle};
+        height: ${mobileHeaderHeightInRem}rem;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 500;
 
-        ${theme.screens.nonDesktop} {
-          display: none;
+        ${theme.screens.desktop} {
+          height: ${headerHeightInRem}rem;
         }
       `}
       {...props}
@@ -81,23 +79,6 @@ export function Item ({ isActive, ...props }) {
   )
 }
 
-export function MobileHeaderTag (props) {
-  return (
-    <header
-      css={theme => css`
-        background-color: ${theme.colors.white};
-        height: ${mobileHeaderHeightInRem}rem;
-        ${headerStyle};
-
-        ${theme.screens.desktop} {
-          display: none;
-        }
-      `}
-      {...props}
-    />
-  )
-}
-
 export function Result ({ as: Tag, ...props }) {
   return (
     <Tag
@@ -137,19 +118,19 @@ export function ResultBox (props) {
 }
 
 export function Root ({ innerRef, ...props }) {
-  return (
-    <div
-      css={theme => css`
-        display: none;
+  const isDesktop = useMedia(media.isDesktop)
 
-        ${theme.screens.desktop} {
+  return (
+    isDesktop && (
+      <div
+        css={css`
           display: block;
           position: relative;
           width: 30rem;
-        }
-      `}
-      ref={innerRef}
-      {...props}
-    />
+        `}
+        ref={innerRef}
+        {...props}
+      />
+    )
   )
 }
