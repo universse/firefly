@@ -13,6 +13,10 @@ export function Count ({ isActive, ...props }) {
           font-size: inherit;
           margin-left: 0.75rem;
         }
+
+        ${theme.screens.desktop} {
+          font-weight: ${isActive ? 700 : 400};
+        }
       `}
       {...props}
     />

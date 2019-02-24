@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ThemeContext } from '@emotion/core'
 
-export function Logo ({ color, title }) {
+export function Logo ({ title }) {
+  const theme = useContext(ThemeContext)
+
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -12,12 +15,17 @@ export function Logo ({ color, title }) {
       role='img'
     >
       <title>{title}</title>
-      <circle cx='18' cy='18' r='15' stroke={color} strokeWidth='6' />
+      <circle
+        cx='18'
+        cy='18'
+        r='15'
+        stroke={theme.colors.brand500}
+        strokeWidth='6'
+      />
     </svg>
   )
 }
 
 Logo.defaultProps = {
-  color: '#e4234f',
   title: 'Firefly'
 }
