@@ -19,7 +19,7 @@ function NavLink ({ isActive, label, Icon, ...props }) {
         color: ${isActive ? theme.colors.brand500 : theme.colors.gray500};
         display: flex;
         flex-direction: column;
-        height: 100%;
+        height: ${mobileNavigationHeightInRem}rem;
         padding: 0.5rem 0 0.5rem;
       `}
       {...props}

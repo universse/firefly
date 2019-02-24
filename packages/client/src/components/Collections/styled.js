@@ -26,12 +26,13 @@ export function CollectionTitle ({ id, name }) {
     >
       <h3
         css={theme => css`
-          color: ${theme.colors.gray700};
+          color: ${theme.colors.gray900};
           font-size: 1.25rem;
           font-weight: 700;
           line-height: 1.5rem;
 
           ${theme.screens.nonMobile} {
+            color: ${theme.colors.gray700};
             font-size: 1.5rem;
             line-height: 2rem;
           }

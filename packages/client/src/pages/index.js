@@ -96,6 +96,7 @@ export const collections = graphql`
         category
         level
         name
+        numOfItems
         tags
       }
     }

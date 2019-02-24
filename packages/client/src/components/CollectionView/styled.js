@@ -6,10 +6,16 @@ export function CollectionTitle (props) {
     // eslint-disable-next-line
     <h1
       css={theme => css`
-        color: ${theme.colors.gray700};
-        font-size: 2.25rem;
+        color: ${theme.colors.gray900};
+        font-size: 1.75rem;
         font-weight: 700;
-        line-height: 2.75rem;
+        line-height: 2.25rem;
+
+        ${theme.screens.desktop} {
+          color: ${theme.colors.gray700};
+          font-size: 2.25rem;
+          line-height: 2.75rem;
+        }
       `}
       {...props}
     />
@@ -26,7 +32,7 @@ export function LinkTitle ({ href, title }) {
         padding: 0.5rem 0.75rem 0 3.25rem;
 
         ${theme.screens.tablet} {
-          padding: 0.5rem 3.75rem 0 3.25rem;
+          padding: 0.5rem 3.75rem 0 4.25rem;
         }
 
         ${theme.screens.desktop} {
@@ -59,14 +65,14 @@ export function LinkTitle ({ href, title }) {
   )
 }
 
-export function ProgressBar ({ percentage }) {
+export function ProgressBar ({ percentage, width }) {
   return (
     <div
       css={theme =>
         css`
           background-color: ${theme.colors.gray300};
           border-radius: 0.375rem;
-          width: 12rem;
+          width: ${width || '100%'};
         `
       }
     >
@@ -75,9 +81,13 @@ export function ProgressBar ({ percentage }) {
           css`
             background-color: ${theme.colors.brand500};
             border-radius: 0.375rem;
-            height: 0.75rem;
+            height: 0.5rem;
             width: ${percentage}%;
             transition: width 0.75s;
+
+            ${theme.screens.desktop} {
+              height: 0.75rem;
+            }
           `
         }
       />

@@ -31,7 +31,9 @@ export default function Layout ({ children, location }) {
           >
             {location.pathname !== '/search' && <Header location={location} />}
             <SavedCollections>{children}</SavedCollections>
-            <MobileNavigation location={location} />
+            {!location.pathname.includes('/collection/') && (
+              <MobileNavigation location={location} />
+            )}
           </div>
           <SignUpForm />
         </ModalProvider>

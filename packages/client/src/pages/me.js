@@ -32,24 +32,31 @@ export default function MePage (props) {
   return (
     <>
       <SEO title='My Library' />
-      <MobileHeader title='My Saved Collections' />
+      <MobileHeader shadow title='My Saved Collections' />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          padding: 2rem 0;
-          min-height: calc(100vh - ${headerHeightInRem}rem);
+          min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
+          padding: 0 0 1rem;
 
-          ${theme.screens.nonDesktop} {
-            min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
+          ${theme.screens.tablet} {
             padding: 1rem 0;
+          }
+
+          ${theme.screens.desktop} {
+            padding: 2rem 0;
+            min-height: calc(100vh - ${headerHeightInRem}rem);
           }
         `}
       >
         <div
-          css={css`
+          css={theme => css`
             ${baseWrapper};
             max-width: 48rem;
-            padding: 0;
+
+            ${theme.screens.mobile} {
+              padding: 0;
+            }
           `}
         >
           {isDesktop && (
@@ -77,9 +84,9 @@ export default function MePage (props) {
                 border: none;
               }
 
-              ${theme.screens.desktop} {
+              ${theme.screens.nonMobile} {
                 border-radius: 8px;
-                box-shadow: ${theme.shadows.subtle};
+                box-shadow: ${theme.shadows[0]};
               }
             `}
           >

@@ -86,6 +86,7 @@ function Scroll ({ display, handleClick, side }) {
           `
         }
         onClick={handleClick}
+        type='button'
       >
         {side === 'left' ? <ChevronLeft /> : <ChevronRight />}
       </button>

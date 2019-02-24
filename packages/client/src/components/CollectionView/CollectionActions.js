@@ -32,7 +32,10 @@ function CollectionActions ({
           justify-content: space-between;
         `}
       >
-        <ProgressBar percentage={(numOfCompleted / numOfItems) * 100} />
+        <ProgressBar
+          percentage={(numOfCompleted / numOfItems) * 100}
+          width='15rem'
+        />
         <div
           css={css`
             margin-left: 1rem;
@@ -50,7 +53,6 @@ function CollectionActions ({
           </span>
         </div>
       </div>
-
       <ActionBar>
         <IconButton
           aria-label='Save to My Library'

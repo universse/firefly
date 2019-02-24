@@ -5,9 +5,35 @@ export function Count ({ isActive, ...props }) {
   return (
     <span
       css={theme => css`
-        color: ${theme.colors.gray600};
+        color: ${theme.colors.gray900};
         font-size: 1rem;
-        font-weight: ${isActive ? 700 : 400};
+
+        ${theme.screens.nonDesktop} {
+          color: inherit;
+          font-size: inherit;
+          margin-left: 0.75rem;
+        }
+      `}
+      {...props}
+    />
+  )
+}
+
+export function MobileTag ({ isActive, ...props }) {
+  return (
+    // eslint-disable-next-line
+    <a
+      css={theme => css`
+        background-color: ${isActive
+          ? theme.colors.gray900
+          : theme.colors.gray300};
+        border-radius: 1rem;
+        color: ${isActive ? theme.colors.white : theme.colors.gray700};
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 2rem;
+        padding: 0 1rem;
       `}
       {...props}
     />

@@ -53,7 +53,7 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
             margin: -0.875rem 0 0 -0.5rem;
 
             ${theme.screens.tablet} {
-              margin: -0.375rem 0 0 -0.5rem;
+              margin: -0.375rem 0 0 0.5rem;
             }
 
             ${theme.screens.desktop} {
@@ -71,6 +71,10 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
             display: flex;
             align-items: center;
             margin-left: 2.25rem;
+
+            ${theme.screens.tablet} {
+              margin-left: 3.25rem;
+            }
 
             ${theme.screens.desktop} {
               margin-left: 2.5rem;

@@ -66,19 +66,20 @@ export function Difficulty (props) {
   )
 }
 
-export function FAB ({ display, ...props }) {
+export function FAB (props) {
   return (
     <button
       css={theme => css`
         background-color: ${theme.colors.brand500};
         border-radius: 1.5rem;
         bottom: ${mobileNavigationHeightInRem + 1}rem;
-        display: ${display ? 'block' : 'none'};
         height: 3rem;
         position: fixed;
         right: 1rem;
         width: 3rem;
       `}
+      type='button'
+      {...props}
     />
   )
 }
@@ -181,7 +182,7 @@ export function Sidebar (props) {
 
         ${theme.screens.nonDesktop} {
           background-color: ${theme.colors.white};
-          box-shadow: ${theme.shadows.subtle};
+          box-shadow: ${theme.shadows[1]};
           top: ${mobileHeaderHeightInRem}rem;
           z-index: 500;
         }

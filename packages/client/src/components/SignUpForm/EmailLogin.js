@@ -43,14 +43,11 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
     }
   }
 
-  const isValid = isValidEmail(email) || email === ''
-
   // spinner icon to button
   return (
     <form onSubmit={handleSubmit}>
       <Input
         aria-label='Your Email Address'
-        isValid={isValid}
         name='email'
         onChange={handleChange}
         onFocus={handleFocus}

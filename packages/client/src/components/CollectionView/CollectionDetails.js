@@ -10,11 +10,19 @@ import { createCategoryPath } from '../../../gatsby/utils'
 function CollectionDetails ({ category, level, name, tags }) {
   return (
     <div
-      css={css`
+      css={theme => css`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 2rem 4rem 2rem;
+        padding: 1rem;
+
+        ${theme.screens.tablet} {
+          padding: 1.5rem 2rem;
+        }
+
+        ${theme.screens.desktop} {
+          padding: 2rem 4rem;
+        }
       `}
     >
       <div
@@ -28,11 +36,7 @@ function CollectionDetails ({ category, level, name, tags }) {
         <Category to={createCategoryPath(category)}>{category}</Category>
         <Difficulty>{DifficultyLevels[level]}</Difficulty>
       </div>
-      <div
-        css={css`
-          margin-top: 0.5rem;
-        `}
-      >
+      <div>
         <CollectionTitle>{name}</CollectionTitle>
       </div>
       <div

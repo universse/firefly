@@ -2,8 +2,6 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import useMedia from 'hooks/useMedia'
-import { media } from 'constants/Theme'
 import {
   baseWrapper,
   headerHeightInRem,
@@ -30,15 +28,16 @@ export function HeaderTag (props) {
   )
 }
 
-export function HeaderWrapper (props) {
+export function HeaderWrapper ({ shadow, ...props }) {
   return (
     <div
-      css={css`
+      css={theme => css`
         align-items: center;
+        box-shadow: ${shadow ? theme.shadows[1] : 'none'};
         display: flex;
         height: 100%;
         justify-content: space-between;
-        ${baseWrapper}
+        ${baseWrapper};
       `}
       {...props}
     />
@@ -118,19 +117,15 @@ export function ResultBox (props) {
 }
 
 export function Root ({ innerRef, ...props }) {
-  const isDesktop = useMedia(media.isDesktop)
-
   return (
-    isDesktop && (
-      <div
-        css={css`
-          display: block;
-          position: relative;
-          width: 30rem;
-        `}
-        ref={innerRef}
-        {...props}
-      />
-    )
+    <div
+      css={css`
+        display: block;
+        position: relative;
+        width: 30rem;
+      `}
+      ref={innerRef}
+      {...props}
+    />
   )
 }

@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import Modal from 'components/Modal'
 import { Title } from 'components/common'
-import { Count, Tag } from './styled'
+import { Count, MobileTag, Tag } from './styled'
 import { URLUtilsContext } from 'pages'
 import useMedia from 'hooks/useMedia'
 import ModalTypes from 'constants/ModalTypes'
@@ -32,11 +32,13 @@ export default function TagFilter ({ aggregatedTags, tags }) {
       >
         <Title>TAGS</Title>
         <button
+          aria-label='Reset Filters'
           css={theme => css`
-            color: ${theme.colors.gray500};
+            color: ${theme.colors.gray700};
             font-size: 0.875rem;
           `}
           onClick={onTagResetClick}
+          type='button'
         >
           reset
         </button>
@@ -48,7 +50,6 @@ export default function TagFilter ({ aggregatedTags, tags }) {
             css={css`
               align-items: center;
               display: flex;
-              height: 1.5rem;
               justify-content: space-between;
               margin: 0.375rem 0 0.375rem calc(1rem + 4px);
             `}
@@ -74,9 +75,46 @@ export default function TagFilter ({ aggregatedTags, tags }) {
       contentLabel='Filter Collections by Tags'
       type={ModalTypes.MOBILE_TAG_FILTER}
     >
-      <div>
-        <span>testing</span>
+      <div
+        css={css`
+          margin-bottom: 1.25rem;
+        `}
+      >
+        <h4
+          css={theme => css`
+            color: ${theme.colors.gray700};
+            font-size: 1.125rem;
+            font-weight: 700;
+            line-height: 1.5rem;
+          `}
+        >
+          Filter by Tags
+        </h4>
       </div>
+      <ul>
+        {aggregatedTags.map(([tag, count]) => (
+          <li
+            key={tag}
+            css={css`
+              align-items: center;
+              display: flex;
+              margin-bottom: 0.75rem;
+            `}
+          >
+            <MobileTag
+              isActive={tags.includes(tag)}
+              onClick={e => {
+                e.preventDefault()
+                updateQuery(tag)
+              }}
+              href={constructUrl(tag).href}
+            >
+              {tag}
+              <Count isActive={tags.includes(tag)}>{count}</Count>
+            </MobileTag>
+          </li>
+        ))}
+      </ul>
     </Modal>
   )
 }

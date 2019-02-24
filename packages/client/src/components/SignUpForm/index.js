@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { css } from '@emotion/core'
 
 import Modal from 'components/Modal'
@@ -14,9 +14,23 @@ export default function SignUpForm () {
     email: '',
     socialLogin: ''
   })
-  const { focusable, handleModalClose } = useContext(ModalContext)
 
-  // TODO style p
+  const { activeModalType, focusable, handleModalClose } = useContext(
+    ModalContext
+  )
+
+  const isOpen = useRef()
+
+  !activeModalType &&
+    isOpen.current &&
+    setSignUpState({
+      loading: false,
+      email: '',
+      socialLogin: ''
+    })
+
+  isOpen.current = activeModalType === ModalTypes.SIGN_UP_FORM
+
   return (
     <Modal
       className='SignUpModal'
@@ -39,7 +53,7 @@ export default function SignUpForm () {
               `}
             >
               Thank you for signing up. To confirm your email address, click on
-              the sign-in link we sent to <strong>{signUpState.email}</strong>.
+              the link we've just sent to <strong>{signUpState.email}</strong>.
             </p>
           </div>
           <CloseButton onClick={handleModalClose} />

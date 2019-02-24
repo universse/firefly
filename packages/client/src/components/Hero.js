@@ -71,7 +71,9 @@ export default function Hero () {
             margin-top: 1.5rem;
           `}
         >
-          <CTA onClick={handleClick}>EXPLORE</CTA>
+          <CTA aria-label='Explore Learning Collections' onClick={handleClick}>
+            EXPLORE
+          </CTA>
         </div>
       </div>
     </section>

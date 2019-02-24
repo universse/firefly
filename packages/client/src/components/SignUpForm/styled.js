@@ -53,7 +53,7 @@ export function ErrorMessage (props) {
   )
 }
 
-export function Input ({ inputRef, isValid, ...props }) {
+export function Input ({ inputRef, ...props }) {
   return (
     <input
       autoComplete='off'
@@ -70,9 +70,13 @@ export function Input ({ inputRef, isValid, ...props }) {
           color: ${theme.colors.gray600};
           opacity: 1;
         }
+
+        &:invalid {
+          box-shadow: 0 0 0 4px rgba(218, 68, 83, 0.9);
+        }
       `}
       ref={inputRef}
-      type='text'
+      type='email'
       {...props}
     />
   )

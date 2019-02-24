@@ -61,13 +61,13 @@ export default function Header ({ location: { pathname } }) {
   )
 }
 
-export function MobileHeader ({ actions, navIcon, title }) {
+export function MobileHeader ({ actions, navIcon, shadow, title }) {
   const isNonDesktop = useMedia(media.nonDesktop)
 
   return (
     isNonDesktop && (
       <HeaderTag>
-        <HeaderWrapper>
+        <HeaderWrapper shadow={shadow}>
           <div
             css={css`
               align-items: center;

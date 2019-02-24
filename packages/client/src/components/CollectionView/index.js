@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
+import { ProgressBar } from './styled'
 import useLocalForage from 'hooks/useLocalForage'
 import useMedia from 'hooks/useMedia'
 import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
@@ -26,7 +27,9 @@ export default function CollectionView ({
 
   useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
 
-  const isNonMobile = useMedia(media.nonMobile)
+  const isDesktop = useMedia(media.desktop)
+
+  const numOfItems = urls.length
 
   const numOfCompleted =
     completedItems &&
@@ -44,8 +47,12 @@ export default function CollectionView ({
 
           ${theme.screens.nonMobile} {
             border-radius: 8px;
-            box-shadow: ${theme.shadows.subtle};
+            box-shadow: ${theme.shadows[0]};
             margin-bottom: 2rem;
+          }
+
+          ${theme.screens.tablet} {
+            margin-bottom: 1rem;
           }
         `}
       >
@@ -56,7 +63,7 @@ export default function CollectionView ({
           name={name}
           tags={tags}
         />
-        {isNonMobile && (
+        {isDesktop && (
           <div
             css={css`
               margin: 0 4rem;
@@ -66,7 +73,7 @@ export default function CollectionView ({
               id={id}
               isSaved={!!savedCollections[id]}
               handleSaveClick={onSaveClick}
-              numOfItems={urls.length}
+              numOfItems={numOfItems}
               numOfCompleted={numOfCompleted}
             />
           </div>
@@ -78,7 +85,7 @@ export default function CollectionView ({
 
           ${theme.screens.nonMobile} {
             border-radius: 8px;
-            box-shadow: ${theme.shadows.subtle};
+            box-shadow: ${theme.shadows[0]};
           }
         `}
       >
@@ -88,6 +95,46 @@ export default function CollectionView ({
           urls={urls}
         />
       </div>
+      {!isDesktop && (
+        <div
+          css={theme => css`
+            align-items: center;
+            background-color: ${theme.colors.white};
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            left: 0;
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+          `}
+        >
+          <div
+            css={css`
+              flex: 1 0 auto;
+            `}
+          >
+            <ProgressBar percentage={(numOfCompleted / numOfItems) * 100} />
+          </div>
+          <div
+            css={css`
+              text-align: right;
+              width: 3.5rem;
+            `}
+          >
+            <span
+              css={theme => css`
+                color: ${theme.colors.gray700};
+                font-size: 0.875rem;
+                font-weight: 600;
+                line-height: 1.25rem;
+              `}
+            >
+              {numOfCompleted} of {numOfItems}
+            </span>
+          </div>
+        </div>
+      )}
     </>
   ) : null
 }
