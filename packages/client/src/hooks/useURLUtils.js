@@ -1,49 +1,76 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { navigate } from 'gatsby'
 import qs from 'qs'
+
+const constructHref = (pathname, sort, tags) => {
+  sort = sort === '' ? [] : sort
+  tags = tags.length === 0 ? [] : tags.join(',')
+
+  const queryString = qs.stringify({ sort, tags }, { encode: false })
+  return `${pathname}${queryString ? `?${queryString}` : ''}`
+}
 
 export default function useURLUtils (queryValues, pathname, dispatch) {
   const { sort, tags } = queryValues
 
-  return useMemo(() => {
-    const constructUrl = tag => {
-      const updatedTags = tags.includes(tag)
-        ? tags.filter(t => t !== tag)
-        : [...tags, tag]
-
-      if (updatedTags.length === 0) {
-        return { href: pathname, updatedTags }
-      } else {
-        const queryString = qs.stringify(
-          { tags: updatedTags.join(',') },
-          { encode: false }
-        )
-        return {
-          href: `${pathname}?${queryString}`,
-          updatedTags
-        }
+  const constructUrl = useCallback((tag, isButton) => {
+    if (isButton) {
+      return {
+        href: constructHref(pathname, sort, [tag])
       }
     }
 
-    const updateQuery = tag => {
-      const { href, updatedTags } = constructUrl(tag)
-      navigate(href)
-      dispatch({ payload: { sort, tags: updatedTags } })
-    }
-
-    const onFilterClick = () => dispatch({ payload: { sort: '', tags: [] } })
-    const onTagClick = tag => {
-      navigate(`/?tags=${tag}`)
-      dispatch({ payload: { sort: '', tags: [tag] } })
-    }
-    const onTagResetClick = tag => dispatch({ payload: { sort, tags: [] } })
+    const updatedTags = tags.includes(tag)
+      ? tags.filter(t => t !== tag)
+      : [...tags, tag]
 
     return {
+      href: constructHref(pathname, sort, updatedTags),
+      updatedTags
+    }
+  }, [pathname, sort, tags])
+
+  const updateQuery = useCallback(updatedTags => {
+    dispatch({ payload: { sort, tags: updatedTags } })
+  }, [dispatch, sort])
+
+  const onCategoryFilterClick = useCallback(
+    () => dispatch({ payload: { sort: '', tags: [] } }),
+    [dispatch]
+  )
+
+  const onSortClick = useCallback(e => {
+    navigate(constructHref(pathname, e.currentTarget.value, tags))
+    dispatch({ payload: { sort: e.currentTarget.value, tags } })
+  }, [dispatch, pathname, tags])
+
+  const onTagClick = useCallback(tag => {
+    const tags = [tag]
+    navigate(constructHref(pathname, sort, tags))
+    dispatch({ payload: { sort, tags } })
+  }, [dispatch, pathname, sort])
+
+  const onTagClearClick = useCallback(
+    tag => dispatch({ payload: { sort, tags: [] } }),
+    [dispatch, sort]
+  )
+
+  return useMemo(
+    () => ({
       constructUrl,
       updateQuery,
-      onFilterClick,
+      onCategoryFilterClick,
+      onSortClick,
       onTagClick,
-      onTagResetClick
-    }
-  }, [dispatch, pathname, sort, tags])
+      onTagClearClick
+    }),
+    [
+      constructUrl,
+      onCategoryFilterClick,
+      onSortClick,
+      onTagClick,
+      onTagClearClick,
+      updateQuery
+    ]
+  )
 }

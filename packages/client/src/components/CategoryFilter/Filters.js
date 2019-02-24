@@ -8,7 +8,7 @@ import { createCategoryPath } from '../../../gatsby/utils'
 import { URLUtilsContext } from 'pages'
 
 function Filters ({ handleScroll, location: { pathname }, slider }) {
-  const { onFilterClick } = useContext(URLUtilsContext)
+  const { onCategoryFilterClick } = useContext(URLUtilsContext)
 
   return (
     <nav>
@@ -40,7 +40,7 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
             <Category
               isActive={pathname === '/' || pathname === '/category/all'}
               category='all'
-              handleClick={onFilterClick}
+              handleClick={onCategoryFilterClick}
               to='/category/all'
             />
           </li>
@@ -54,7 +54,7 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
               <Category
                 isActive={pathname === createCategoryPath(category)}
                 category={category}
-                handleClick={onFilterClick}
+                handleClick={onCategoryFilterClick}
                 to={createCategoryPath(category)}
               />
             </li>

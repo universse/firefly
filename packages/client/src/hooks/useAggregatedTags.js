@@ -1,8 +1,6 @@
 import { useMemo } from 'react'
 
-export default function useAggregatedTags (collections, queryValues) {
-  const { tags } = queryValues
-
+export default function useAggregatedTags (collections, tags) {
   return useMemo(() => {
     const tagCounts = collections.reduce((counts, collection) => {
       collection.node.tags.forEach(tag => {

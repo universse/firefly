@@ -1,4 +1,4 @@
 export default {
-  MOBILE_TAG_FILTER: 'mobileTagFilter',
+  MOBILE_FILTER: 'mobileFilter',
   SIGN_UP_FORM: 'signUpForm'
 }

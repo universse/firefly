@@ -15,7 +15,7 @@ export default function Collection ({
   handleSaveClick,
   isSaved
 }) {
-  const { onFilterClick } = useContext(URLUtilsContext) || {}
+  const { onCategoryFilterClick } = useContext(URLUtilsContext) || {}
 
   return (
     <>
@@ -38,7 +38,10 @@ export default function Collection ({
             justify-content: space-between;
           `}
         >
-          <Category onClick={onFilterClick} to={createCategoryPath(category)}>
+          <Category
+            onClick={onCategoryFilterClick}
+            to={createCategoryPath(category)}
+          >
             {category}
           </Category>
           <Difficulty>{DifficultyLevels[level]}</Difficulty>

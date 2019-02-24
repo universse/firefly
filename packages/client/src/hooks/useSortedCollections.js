@@ -1,17 +1,14 @@
 import { useMemo } from 'react'
 
-export default function useSortedCollections (data, queryValues) {
-  const { sort, tags } = queryValues
-
+export default function useSortedCollections (collections, sort) {
   return useMemo(
     () =>
-      data[`allCollections${sort ? sort.toUpperCase() : ''}`].edges.filter(
-        collection =>
-          tags.reduce(
-            (bool, tag) => bool && collection.node.tags.includes(tag),
-            true
+      sort
+        ? [...collections].sort(
+            ({ node: { level: level1 } }, { node: { level: level2 } }) =>
+              sort === 'asc' ? level1 > level2 : level1 < level2
           )
-      ),
-    [data, sort, tags]
+        : collections,
+    [collections, sort]
   )
 }

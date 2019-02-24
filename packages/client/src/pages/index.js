@@ -6,27 +6,43 @@ import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
 import { MobileHeader } from 'components/Header'
+import Modal from 'components/Modal'
 import { ModalContext } from 'components/ModalProvider'
 import SEO from 'components/SEO'
-import TagFilter from 'components/TagFilter'
+import SortByDifficulty, {
+  MobileSortByDifficulty
+} from 'components/SortByDifficulty'
+import TagFilter, { MobileTagFilter } from 'components/TagFilter'
 import { IconButton, Sidebar } from 'components/common'
 import { Filter } from 'icons'
 import useAggregatedTags from 'hooks/useAggregatedTags'
+import useMedia from 'hooks/useMedia'
 import useParams from 'hooks/useParams'
+import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
 import useURLUtils from 'hooks/useURLUtils'
 import { baseWrapper, mobileNavigationHeightInRem } from 'utils/styles'
 import hasSignedIn from 'utils/hasSignedIn'
 import ModalTypes from 'constants/ModalTypes'
+import { media } from 'constants/Theme'
 
 export const URLUtilsContext = createContext()
 
 export default function IndexPage ({ data, location: { pathname, search } }) {
   const [queryValues, dispatch] = useParams(search)
-  const collections = useSortedCollections(data, queryValues)
-  const aggregatedTags = useAggregatedTags(collections, queryValues)
+
+  const { sort, tags } = queryValues
+
+  // TODO: delete after add data
+  const filteredCollections = useFilteredCollections(
+    data.allCollections ? data.allCollections.edges : [],
+    tags
+  )
+  const sortedCollections = useSortedCollections(filteredCollections, sort)
+  const aggregatedTags = useAggregatedTags(filteredCollections, tags)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
   const { openModal } = useContext(ModalContext)
+  const isDesktop = useMedia(media.desktop)
 
   if (!hasSignedIn) {
     return (
@@ -36,7 +52,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
           actions={
             <IconButton
               aria-label='Filter Collections by Tags'
-              onClick={() => openModal(ModalTypes.MOBILE_TAG_FILTER)}
+              onClick={() => openModal(ModalTypes.MOBILE_FILTER)}
             >
               <Filter />
             </IconButton>
@@ -73,12 +89,36 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
             <URLUtilsContext.Provider value={urlUtils}>
               <Sidebar>
                 <CategoryFilter />
-                <TagFilter
-                  aggregatedTags={aggregatedTags}
-                  tags={queryValues.tags}
-                />
+                {isDesktop && (
+                  <TagFilter aggregatedTags={aggregatedTags} tags={tags} />
+                )}
               </Sidebar>
-              <Collections collections={collections} />
+              {!isDesktop && (
+                <Modal
+                  className='FilterModal'
+                  contentLabel='Filter Collections by Tags'
+                  type={ModalTypes.MOBILE_FILTER}
+                >
+                  <MobileSortByDifficulty sort={sort} />
+                  <MobileTagFilter
+                    aggregatedTags={aggregatedTags}
+                    tags={tags}
+                  />
+                </Modal>
+              )}
+              <div
+                css={theme => css`
+                  height: 100%;
+                  width: 100%;
+
+                  ${theme.screens.desktop} {
+                    width: 70%;
+                  }
+                `}
+              >
+                {isDesktop && <SortByDifficulty sort={sort} />}
+                <Collections collections={sortedCollections} />
+              </div>
             </URLUtilsContext.Provider>
           </div>
         </main>
@@ -105,21 +145,7 @@ export const collections = graphql`
 
 export const query = graphql`
   query($category: String) {
-    allCollections: allCollections(filter: { category: { eq: $category } }) {
-      ...collections
-    }
-
-    allCollectionsASC: allCollections(
-      filter: { category: { eq: $category } }
-      sort: { fields: [level], order: ASC }
-    ) {
-      ...collections
-    }
-
-    allCollectionsDESC: allCollections(
-      filter: { category: { eq: $category } }
-      sort: { fields: [level], order: DESC }
-    ) {
+    allCollections(filter: { category: { eq: $category } }) {
       ...collections
     }
   }

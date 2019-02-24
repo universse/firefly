@@ -25,7 +25,7 @@ const listStyle = theme => css`
   ${theme.screens.desktop} {
     border-radius: 8px;
     box-shadow: ${theme.shadows[0]};
-    width: 70%;
+    width: 100%;
   }
 `
 

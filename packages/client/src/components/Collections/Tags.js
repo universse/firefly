@@ -33,7 +33,7 @@ function Tags ({ location: { pathname }, tags }) {
             }}
             href={
               isIndexPage(pathname)
-                ? `${pathname}?tags=${tag}`
+                ? urlUtils.constructUrl(tag, true).href
                 : `/?tags=${tag}`
             }
           >
