@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import Modal from 'components/Modal'
 import { ModalContext } from 'components/ModalProvider'
 import EmailLogin from './EmailLogin'
-import SocialLogin from './SocialLogin'
+// import SocialLogin from './SocialLogin'
 import { CloseButton } from './styled'
 import ModalTypes from 'constants/ModalTypes'
 
@@ -42,14 +42,14 @@ export default function SignUpForm () {
           <div
             css={css`
               text-align: center;
-              width: 18rem;
+              width: 20rem;
             `}
           >
             <p
               css={theme => css`
-                color: $ ${theme.colors.gray900};
+                color: ${theme.colors.gray900};
                 font-size: 1rem;
-                line-height: 1.5 rem;
+                line-height: 1.5rem;
               `}
             >
               Thank you for signing up. To confirm your email address, click on
@@ -61,7 +61,7 @@ export default function SignUpForm () {
       ) : (
         <>
           <EmailLogin inputRef={focusable} setSignUpState={setSignUpState} />
-          <div
+          {/* <div
             css={css`
               margin-top: 0.75rem;
             `}
@@ -80,7 +80,7 @@ export default function SignUpForm () {
           <SocialLogin
             signUpState={signUpState}
             setSignUpState={setSignUpState}
-          />
+          /> */}
           <CloseButton onClick={handleModalClose} />
         </>
       )}

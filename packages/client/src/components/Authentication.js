@@ -10,13 +10,10 @@ export default function Authentication ({ children }) {
   const firebase = useContext(FirebaseContext)
 
   useEffect(() => {
-    const stopAuthListener = firebase.setAuthListener(currentUser => {
-      setUser(currentUser)
-    })
-
-    return () => {
-      stopAuthListener()
-    }
+    firebase.addEventListener(
+      'message',
+      e => e.data.type === 'auth' && setUser(e.data.payload)
+    )
   }, [firebase])
 
   return (

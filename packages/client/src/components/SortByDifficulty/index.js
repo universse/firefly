@@ -47,9 +47,11 @@ export default function SortByDifficulty ({ sort }) {
                 'aria-expanded': isOpen,
                 id: 'toggler',
                 'data-toggle': 'dropdown',
-                onBlur: () =>
-                  highlightedIndex !== null &&
-                  selectItem(SortOptions[highlightedIndex])
+                onKeyDown: e => {
+                  e.key === 'Tab' &&
+                    highlightedIndex !== null &&
+                    selectItem(SortOptions[highlightedIndex])
+                }
               })}
             >
               <div>

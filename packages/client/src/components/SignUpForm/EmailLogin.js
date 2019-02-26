@@ -62,7 +62,7 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
       )}
       <div
         css={css`
-          margin-top: 0.5rem;
+          margin-top: 1rem;
         `}
       >
         <AuthButton type='submit'>Continue</AuthButton>

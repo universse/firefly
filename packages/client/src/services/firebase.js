@@ -5,7 +5,7 @@ import LocalStorage from 'constants/LocalStorage'
 
 const config = JSON.parse(process.env.GATSBY_FIREBASE_CONFIG)
 
-const setHasSignedIn = () => {
+const onSignIn = () => {
   window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
   window.location.reload()
 }
@@ -28,21 +28,19 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password)
 
   signInWithEmailAndPassword = (email, password) =>
-    this.auth.signInWithEmailAndPassword(email, password).then(setHasSignedIn)
+    this.auth.signInWithEmailAndPassword(email, password).then(onSignIn)
 
   sendSignInLinkToEmail = email =>
     this.auth.sendSignInLinkToEmail(email, this.actionCodeSettings)
 
   signInWithEmailLink = email =>
-    this.auth
-      .signInWithEmailLink(email, window.location.href)
-      .then(setHasSignedIn)
+    this.auth.signInWithEmailLink(email, window.location.href).then(onSignIn)
 
   signInWithGoogle = () =>
-    this.auth.signInWithPopup(this.googleProvider).then(setHasSignedIn)
+    this.auth.signInWithPopup(this.googleProvider).then(onSignIn)
 
   signInWithFacebook = () =>
-    this.auth.signInWithPopup(this.facebookProvider).then(setHasSignedIn)
+    this.auth.signInWithPopup(this.facebookProvider).then(onSignIn)
 
   signOut = () =>
     this.auth.signOut().then(() => {

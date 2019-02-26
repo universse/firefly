@@ -3,7 +3,8 @@ import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
 import { ModalContext } from 'components/ModalProvider'
-// import FirebaseContext from 'contexts/FirebaseContext'
+import FirebaseContext from 'contexts/FirebaseContext'
+import LocalStorage from 'constants/LocalStorage'
 import hasSignedIn from 'utils/hasSignedIn'
 
 // darker shade hover
@@ -83,38 +84,47 @@ function NavLink (props) {
 
 export default function Navigation () {
   const { openModal } = useContext(ModalContext)
-  // const firebase = useContext(FirebaseContext)
+  const firebase = useContext(FirebaseContext)
 
-  /* FLAG */
-
-  // const authNav = hasSignedIn ? (
-  //   <li
-  //     css={css`
-  //       margin-left: 2rem;
-  //     `}
-  //   >
-  //     <GhostButton onClick={firebase.signOut}>Log Out</GhostButton>
-  //   </li>
-  // ) : (
-  //   <>
-  //     <li
-  //       css={css`
-  //         margin-left: 2rem;
-  //       `}
-  //     >
-  //       <GhostButton onClick={() => openModal('signUpForm')}>
-  //         Log In
-  //       </GhostButton>
-  //     </li>
-  //     <li
-  //       css={css`
-  //         margin-left: 1rem;
-  //       `}
-  //     >
-  //       <PrimaryButton onClick={handleModalOpen}>Get Started</PrimaryButton>
-  //     </li>
-  //   </>
-  // )
+  const authNav = hasSignedIn ? (
+    <li
+      css={css`
+        margin-left: 2rem;
+      `}
+    >
+      <GhostButton
+        onClick={() =>
+          firebase.signOut().then(() => {
+            window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
+            window.location.reload()
+          })
+        }
+      >
+        Log Out
+      </GhostButton>
+    </li>
+  ) : (
+    <>
+      <li
+        css={css`
+          margin-left: 2rem;
+        `}
+      >
+        <GhostButton onClick={() => openModal('signUpForm')}>
+          Sign In
+        </GhostButton>
+      </li>
+      {/* <li
+        css={css`
+          margin-left: 1rem;
+        `}
+      >
+        <PrimaryButton onClick={() => openModal('signUpForm')}>
+          Get Started
+        </PrimaryButton>
+      </li> */}
+    </>
+  )
 
   return (
     <nav>
@@ -131,8 +141,7 @@ export default function Navigation () {
         >
           <NavLink to='/me'>My Library</NavLink>
         </li>
-
-        {/* {authNav} */}
+        {authNav}
       </ul>
     </nav>
   )
