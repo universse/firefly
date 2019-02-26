@@ -8,9 +8,10 @@ import { ThemeProvider } from 'emotion-theming'
 import ModalProvider from 'components/ModalProvider'
 import AllCollections from 'components/AllCollections'
 import Header from 'components/Header'
+import Media from 'components/Media'
 import MobileNavigation from 'components/MobileNavigation'
 import SavedCollections from 'components/SavedCollections'
-import SignUpForm from 'components/SignUpForm'
+// import SignUpForm from 'components/SignUpForm'
 import Theme from 'constants/Theme'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'utils/styles'
 
@@ -18,26 +19,30 @@ export default function Layout ({ children, location }) {
   return (
     <AllCollections location={location}>
       <ThemeProvider theme={Theme}>
-        {/* <Authentication> */}
-        <ModalProvider>
-          <div
-            css={theme => css`
-              padding-top: ${mobileHeaderHeightInRem}rem;
+        <Media>
+          {/* <Authentication> */}
+          <ModalProvider>
+            <div
+              css={theme => css`
+                padding-top: ${mobileHeaderHeightInRem}rem;
 
-              ${theme.screens.desktop} {
-                padding-top: ${headerHeightInRem}rem;
-              }
-            `}
-          >
-            {location.pathname !== '/search' && <Header location={location} />}
-            <SavedCollections>{children}</SavedCollections>
-            {!location.pathname.includes('/collection/') && (
-              <MobileNavigation location={location} />
-            )}
-          </div>
-          <SignUpForm />
-        </ModalProvider>
-        {/* </Authentication> */}
+                ${theme.screens.desktop} {
+                  padding-top: ${headerHeightInRem}rem;
+                }
+              `}
+            >
+              {location.pathname !== '/search' && (
+                <Header location={location} />
+              )}
+              <SavedCollections>{children}</SavedCollections>
+              {!location.pathname.includes('/collection/') && (
+                <MobileNavigation location={location} />
+              )}
+            </div>
+            {/* <SignUpForm /> */}
+          </ModalProvider>
+          {/* </Authentication> */}
+        </Media>
       </ThemeProvider>
     </AllCollections>
   )

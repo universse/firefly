@@ -51,13 +51,7 @@ export default function SearchBar ({
               z-index: 1;
             `}
           >
-            {/* eslint-disable-next-line */}
-            <label
-              css={css`
-                display: none;
-              `}
-              {...getLabelProps()}
-            >
+            <label className='visually-hidden' {...getLabelProps()}>
               What do you want to learn today?
             </label>
             <Input
@@ -79,7 +73,7 @@ export default function SearchBar ({
                       {...getItemProps({
                         item,
                         index,
-                        isActive: highlightedIndex === index
+                        isHighlighted: highlightedIndex === index
                       })}
                     >
                       <Result
@@ -97,7 +91,7 @@ export default function SearchBar ({
                       {...getItemProps({
                         item: { node: { id: 'search' } },
                         index: numOfResults,
-                        isActive: highlightedIndex === numOfResults
+                        isHighlighted: highlightedIndex === numOfResults
                       })}
                     >
                       <Result to='/search' state={{ searchInput }}>

@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
 import { IconButton, Input, Result } from 'components/common'
-import useMedia from 'hooks/useMedia'
-import { media } from 'constants/Theme'
+import { MediaContext } from 'components/Media'
 import {
   baseWrapper,
   headerHeightInRem,
@@ -16,7 +15,7 @@ import { Back, Search } from 'icons'
 
 export default function SearchPage ({ location }) {
   const initialSearchInput = location.state ? location.state.searchInput : ''
-  const isDesktop = useMedia(media.desktop)
+  const isDesktop = useContext(MediaContext)
 
   return (
     <>

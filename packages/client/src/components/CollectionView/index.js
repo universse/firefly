@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
 import { ProgressBar } from './styled'
+import { MediaContext } from 'components/Media'
 import useLocalForage from 'hooks/useLocalForage'
-import useMedia from 'hooks/useMedia'
 import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
 import LocalStorage from 'constants/LocalStorage'
-import { media } from 'constants/Theme'
 
 // TODO:
 // suggestion component
@@ -27,7 +26,7 @@ export default function CollectionView ({
 
   useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
 
-  const isDesktop = useMedia(media.desktop)
+  const isDesktop = useContext(MediaContext)
 
   const numOfItems = urls.length
 

@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
 import { Title } from 'components/common'
-import { Count, MobileTag, Tag } from './styled'
+import { ClearFilterButton, Count, MobileTag, Tag } from './styled'
 import { URLUtilsContext } from 'pages'
 
 export default function TagFilter ({ aggregatedTags, sort, tags }) {
@@ -26,17 +26,9 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
         `}
       >
         <Title>TAGS</Title>
-        <button
-          aria-label='Reset Filters'
-          css={theme => css`
-            color: ${theme.colors.gray700};
-            font-size: 0.875rem;
-          `}
-          onClick={onTagClearClick}
-          type='button'
-        >
+        <ClearFilterButton aria-label='Reset Filters' onClick={onTagClearClick}>
           clear
-        </button>
+        </ClearFilterButton>
       </div>
       <ul>
         {aggregatedTags.map(([tag, count]) => {
@@ -81,19 +73,26 @@ export function MobileTagFilter ({ aggregatedTags, sort, tags }) {
     <>
       <div
         css={css`
-          margin-bottom: 1rem;
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 0.75rem;
         `}
       >
         <h4
           css={theme => css`
             color: ${theme.colors.gray700};
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             font-weight: 700;
-            line-height: 1.5rem;
+            line-height: 1.25rem;
+            text-transform: uppercase;
           `}
         >
           Filter by Tags
         </h4>
+        <ClearFilterButton aria-label='Reset Filters' onClick={onTagClearClick}>
+          CLEAR
+        </ClearFilterButton>
       </div>
       <ul>
         {aggregatedTags.map(([tag, count]) => {

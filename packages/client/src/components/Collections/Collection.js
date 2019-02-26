@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import Tags from './Tags'
-import { Heart, Save } from '../../icons'
+import { Heart, Level, Save } from '../../icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'pages'
@@ -44,7 +44,21 @@ export default function Collection ({
           >
             {category}
           </Category>
-          <Difficulty>{DifficultyLevels[level]}</Difficulty>
+          <div
+            css={css`
+              height: 100%;
+            `}
+          >
+            <div
+              css={css`
+                display: inline-block;
+                margin-right: 0.5rem;
+              `}
+            >
+              <Level level={level} />
+            </div>
+            <Difficulty>{DifficultyLevels[level]}</Difficulty>
+          </div>
         </div>
         <div
           css={css`

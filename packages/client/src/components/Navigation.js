@@ -102,7 +102,9 @@ export default function Navigation () {
   //         margin-left: 2rem;
   //       `}
   //     >
-  //       <GhostButton onClick={handleModalOpen}>Log In</GhostButton>
+  //       <GhostButton onClick={() => openModal('signUpForm')}>
+  //         Log In
+  //       </GhostButton>
   //     </li>
   //     <li
   //       css={css`
@@ -129,15 +131,7 @@ export default function Navigation () {
         >
           <NavLink to='/me'>My Library</NavLink>
         </li>
-        <li
-          css={css`
-            margin-left: 2rem;
-          `}
-        >
-          <GhostButton onClick={() => openModal('signUpForm')}>
-            Log In
-          </GhostButton>
-        </li>
+
         {/* {authNav} */}
       </ul>
     </nav>

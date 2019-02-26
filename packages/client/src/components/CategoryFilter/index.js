@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
 import { ScrollButton } from './styled'
+import { MediaContext } from 'components/Media'
 import { Title } from 'components/common'
 import useSlider from 'hooks/useSlider'
-import useMedia from 'hooks/useMedia'
-import { media } from 'constants/Theme'
 
 export default function CategoryFilter () {
   const {
@@ -18,7 +17,7 @@ export default function CategoryFilter () {
     slider
   } = useSlider()
 
-  const isDesktop = useMedia(media.desktop)
+  const isDesktop = useContext(MediaContext)
 
   return (
     <div

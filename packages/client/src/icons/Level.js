@@ -7,23 +7,26 @@ export function Level ({ level, small }) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      className={small ? 'feather feather-small' : 'feather'}
-      viewBox='0 0 24 24'
+      viewBox='0 0 17 17'
       aria-label='level'
       role='img'
+      height='17'
+      width='17'
+      strokeWidth='2'
+      strokeLinejoin='round'
     >
       <title>level</title>
-      <path d='M14.5 22L14.5 6' stroke={theme.colors.brand500} />
+      <path d='M1 19L1 12' stroke={theme.colors.brand500} />
       <path
-        d='M19.5 22L19.5 2'
+        d='M6 19L6 8'
         stroke={level > 0 ? theme.colors.brand500 : theme.colors.gray400}
       />
       <path
-        d='M9.5 22L9.5 10'
+        d='M11 19L11 4'
         stroke={level > 1 ? theme.colors.brand500 : theme.colors.gray400}
       />
       <path
-        d='M4.5 22L4.5 14'
+        d='M16 19L16 0'
         stroke={level > 2 ? theme.colors.brand500 : theme.colors.gray400}
       />
     </svg>

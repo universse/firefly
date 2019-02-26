@@ -35,6 +35,10 @@ export default {
     nonMobile: `@media ${media.nonMobile}`,
     tablet: `@media ${media.tablet}`
   },
-  shadows: ['0 1px 2px rgba(0, 0, 0, 0.05)', '0 2px 4px rgba(0, 0, 0, 0.05)'],
+  shadows: [
+    '0 1px 2px rgba(0, 0, 0, 0.05)',
+    '0 2px 4px rgba(0, 0, 0, 0.1)',
+    '0 4px 8px rgba(0, 0, 0, 0.2)'
+  ],
   typography: {}
 }

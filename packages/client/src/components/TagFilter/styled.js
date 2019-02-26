@@ -1,6 +1,19 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
+export function ClearFilterButton (props) {
+  return (
+    <button
+      css={theme => css`
+        color: ${theme.colors.gray700};
+        font-size: 0.875rem;
+      `}
+      type='button'
+      {...props}
+    />
+  )
+}
+
 export function Count ({ isActive, ...props }) {
   return (
     <span

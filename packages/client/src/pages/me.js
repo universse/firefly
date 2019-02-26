@@ -5,11 +5,10 @@ import { css } from '@emotion/core'
 
 import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
+import { MediaContext } from 'components/Media'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
-import useMedia from 'hooks/useMedia'
 import useSavedCollections from 'hooks/useSavedCollections'
-import { media } from 'constants/Theme'
 import {
   baseWrapper,
   headerHeightInRem,
@@ -27,7 +26,7 @@ export default function MePage (props) {
       }, {}),
     [allCollections]
   )
-  const isDesktop = useMedia(media.desktop)
+  const isDesktop = useContext(MediaContext)
 
   return (
     <>

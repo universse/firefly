@@ -39,9 +39,9 @@ export default function useURLUtils (queryValues, pathname, dispatch) {
     [dispatch]
   )
 
-  const onSortClick = useCallback(e => {
-    navigate(constructHref(pathname, e.currentTarget.value, tags))
-    dispatch({ payload: { sort: e.currentTarget.value, tags } })
+  const onSortClick = useCallback(sort => {
+    navigate(constructHref(pathname, sort, tags))
+    dispatch({ payload: { sort, tags } })
   }, [dispatch, pathname, tags])
 
   const onTagClick = useCallback(tag => {

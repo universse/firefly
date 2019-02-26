@@ -189,7 +189,7 @@ export function Sidebar (props) {
 
         ${theme.screens.desktop} {
           align-self: flex-start;
-          padding-top: 1rem;
+          margin-top: 1rem;
           top: ${headerHeightInRem}rem;
           width: 22.5%;
         }
@@ -235,7 +235,7 @@ export function Title (props) {
           display: block;
           font-size: 0.875rem;
           font-weight: 700;
-          line-height: 1.25rem;
+          line-height: 1.5rem;
           padding-left: calc(1rem + 4px);
         `
       }

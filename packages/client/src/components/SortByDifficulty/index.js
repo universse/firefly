@@ -1,72 +1,109 @@
-import React, { useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
+import Downshift from 'downshift'
 
 import { URLUtilsContext } from 'pages'
+import {
+  Item,
+  Label,
+  OptionList,
+  Root,
+  SortButton,
+  SortOption,
+  ToggleButton,
+  TogglerLabel,
+  TogglerValue
+} from './styled'
+import SortOptions from 'constants/SortOptions'
+import { ChevronDown } from 'icons'
 
 export default function SortByDifficulty ({ sort }) {
   const { onSortClick } = useContext(URLUtilsContext)
 
+  const handleChange = useCallback(({ value }) => onSortClick(value), [
+    onSortClick
+  ])
+
   return (
-    <div
-      css={css`
-        margin-bottom: 1.5rem;
-      `}
-      role='group'
-      aria-labelledby='sort'
+    <Downshift
+      initialSelectedItem={SortOptions.find(({ value }) => value === sort)}
+      itemToString={({ value }) => value}
+      onChange={handleChange}
     >
-      <div
-        css={css`
-          margin-bottom: 1rem;
-        `}
-      >
-        <h4
-          css={theme => css`
-            color: ${theme.colors.gray700};
-            font-size: 1.125rem;
-            font-weight: 700;
-            line-height: 1.5rem;
-          `}
-          id='sort'
-        >
-          Sort by Difficulty Level
-        </h4>
-      </div>
-      <div>
-        <input
-          checked={sort === ''}
-          id='default'
-          name='sort'
-          onChange={onSortClick}
-          type='radio'
-          value=''
-        />
-        <label htmlFor='default'>Default</label>
-        <input
-          checked={sort === 'asc'}
-          id='asc'
-          name='sort'
-          onChange={onSortClick}
-          type='radio'
-          value='asc'
-        />
-        <label htmlFor='asc'>Ascending</label>
-        <input
-          checked={sort === 'desc'}
-          id='desc'
-          name='sort'
-          onChange={onSortClick}
-          type='radio'
-          value='desc'
-        />
-        <label htmlFor='desc'>Descending</label>
-      </div>
-    </div>
+      {({
+        getToggleButtonProps,
+        getItemProps,
+        getLabelProps,
+        getRootProps,
+        highlightedIndex,
+        isOpen,
+        selectItem,
+        selectedItem
+      }) => (
+        <Root {...getRootProps({ refKey: 'innerRef' })}>
+          <div>
+            <ToggleButton
+              {...getToggleButtonProps({
+                'aria-expanded': isOpen,
+                id: 'toggler',
+                'data-toggle': 'dropdown',
+                onBlur: () =>
+                  highlightedIndex !== null &&
+                  selectItem(SortOptions[highlightedIndex])
+              })}
+            >
+              <div>
+                <TogglerLabel {...getLabelProps({ htmlFor: 'toggler' })}>
+                  Sort By:
+                </TogglerLabel>
+                <TogglerValue>{selectedItem.label}</TogglerValue>
+              </div>
+              <div
+                css={theme =>
+                  css`
+                    color: ${theme.colors.gray500};
+                    height: 1.5rem;
+                  `
+                }
+              >
+                <ChevronDown />
+              </div>
+            </ToggleButton>
+          </div>
+          {isOpen && (
+            <OptionList>
+              {SortOptions.map((option, index) => (
+                <Item
+                  {...getItemProps({
+                    item: option,
+                    index,
+                    isHighlighted: highlightedIndex === index
+                  })}
+                  key={option.value}
+                >
+                  <SortButton
+                    aria-label={option.label}
+                    isSelected={option === selectedItem}
+                  >
+                    {option.label}
+                  </SortButton>
+                </Item>
+              ))}
+            </OptionList>
+          )}
+        </Root>
+      )}
+    </Downshift>
   )
 }
 
 export function MobileSortByDifficulty ({ sort }) {
   const { onSortClick } = useContext(URLUtilsContext)
 
+  const handleChange = useCallback(e => onSortClick(e.currentTarget.value), [
+    onSortClick
+  ])
+
   return (
     <div
       css={css`
@@ -77,15 +114,16 @@ export function MobileSortByDifficulty ({ sort }) {
     >
       <div
         css={css`
-          margin-bottom: 1rem;
+          margin-bottom: 0.5rem;
         `}
       >
         <h4
           css={theme => css`
             color: ${theme.colors.gray700};
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             font-weight: 700;
-            line-height: 1.5rem;
+            line-height: 1.25rem;
+            text-transform: uppercase;
           `}
           id='sort'
         >
@@ -93,33 +131,24 @@ export function MobileSortByDifficulty ({ sort }) {
         </h4>
       </div>
       <div>
-        <input
-          checked={sort === ''}
-          id='default'
-          name='sort'
-          onChange={onSortClick}
-          type='radio'
-          value=''
-        />
-        <label htmlFor='default'>Default</label>
-        <input
-          checked={sort === 'asc'}
-          id='asc'
-          name='sort'
-          onChange={onSortClick}
-          type='radio'
-          value='asc'
-        />
-        <label htmlFor='asc'>Ascending</label>
-        <input
-          checked={sort === 'desc'}
-          id='desc'
-          name='sort'
-          onChange={onSortClick}
-          type='radio'
-          value='desc'
-        />
-        <label htmlFor='desc'>Descending</label>
+        {SortOptions.map(({ label, value }) => (
+          <div
+            key={value}
+            css={css`
+              align-items: center;
+              display: flex;
+              height: 2rem;
+            `}
+          >
+            <SortOption
+              checked={sort === value}
+              id={label}
+              onChange={handleChange}
+              value={value}
+            />
+            <Label htmlFor={label}>{label}</Label>
+          </div>
+        ))}
       </div>
     </div>
   )

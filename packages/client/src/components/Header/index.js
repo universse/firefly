@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -15,11 +15,10 @@ import {
   ResultBox,
   Root
 } from './styled'
-import useMedia from 'hooks/useMedia'
-import { media } from 'constants/Theme'
+import { MediaContext } from 'components/Media'
 
 export default function Header ({ location: { pathname } }) {
-  const isDesktop = useMedia(media.desktop)
+  const isDesktop = useContext(MediaContext)
 
   return (
     isDesktop && (
@@ -62,10 +61,10 @@ export default function Header ({ location: { pathname } }) {
 }
 
 export function MobileHeader ({ actions, navIcon, shadow, title }) {
-  const isNonDesktop = useMedia(media.nonDesktop)
+  const isDesktop = useContext(MediaContext)
 
   return (
-    isNonDesktop && (
+    !isDesktop && (
       <HeaderTag>
         <HeaderWrapper shadow={shadow}>
           <div

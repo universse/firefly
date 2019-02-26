@@ -67,11 +67,11 @@ export function Input (props) {
   )
 }
 
-export function Item ({ isActive, ...props }) {
+export function Item ({ isHighlighted, ...props }) {
   return (
     <li
       css={css`
-        background-color: ${isActive ? '#fff' : 'transparent'};
+        background-color: ${isHighlighted ? '#fff' : 'transparent'};
       `}
       {...props}
     />

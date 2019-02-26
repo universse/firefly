@@ -13,10 +13,10 @@ import SortByDifficulty, {
   MobileSortByDifficulty
 } from 'components/SortByDifficulty'
 import TagFilter, { MobileTagFilter } from 'components/TagFilter'
+import { MediaContext } from 'components/Media'
 import { IconButton, Sidebar } from 'components/common'
 import { Filter } from 'icons'
 import useAggregatedTags from 'hooks/useAggregatedTags'
-import useMedia from 'hooks/useMedia'
 import useParams from 'hooks/useParams'
 import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
@@ -24,7 +24,6 @@ import useURLUtils from 'hooks/useURLUtils'
 import { baseWrapper, mobileNavigationHeightInRem } from 'utils/styles'
 import hasSignedIn from 'utils/hasSignedIn'
 import ModalTypes from 'constants/ModalTypes'
-import { media } from 'constants/Theme'
 
 export const URLUtilsContext = createContext()
 
@@ -42,7 +41,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
   const aggregatedTags = useAggregatedTags(filteredCollections, tags)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
   const { openModal } = useContext(ModalContext)
-  const isDesktop = useMedia(media.desktop)
+  const isDesktop = useContext(MediaContext)
 
   if (!hasSignedIn) {
     return (
@@ -112,6 +111,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
                   width: 100%;
 
                   ${theme.screens.desktop} {
+                    margin-top: 1rem;
                     width: 70%;
                   }
                 `}
