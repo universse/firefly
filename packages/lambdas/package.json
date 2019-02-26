@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "apollo-server-lambda": "^2.4.6",
+    "apollo-server-lambda": "^2.4.8",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1"
   },
@@ -14,7 +14,7 @@
     "babel-loader": "^8.0.5",
     "jest": "^24.1.0",
     "serverless-dynamodb-local": "^0.2.36",
-    "serverless-offline": "^4.6.0",
+    "serverless-offline": "^4.7.0",
     "serverless-webpack": "^5.2.0",
     "webpack": "^4.29.5",
     "webpack-node-externals": "^1.7.2"

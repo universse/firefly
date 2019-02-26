@@ -15,7 +15,6 @@ const firebase =
   workerize(`
 importScripts('https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js')
 importScripts('https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js')
-importScripts('https://apis.google.com/js/platform.js')
 
 firebase.initializeApp(${config})
 const auth = firebase.auth()
@@ -28,8 +27,7 @@ export function isSignInWithEmailLink (href) {
 }
 
 export function sendSignInLinkToEmail (email) {
-  return auth
-    .sendSignInLinkToEmail(email, actionCodeSettings)
+  return auth.sendSignInLinkToEmail(email, actionCodeSettings)
 }
 
 export function signInWithEmailLink (email, href) {
