@@ -13,7 +13,7 @@ ReactModal.setAppElement('#___gatsby')
 export const ModalContext = createContext()
 
 export default function ModalProvider ({ children }) {
-  const [activeModalType, setActiveModalType] = useState(null)
+  const [activeModalType, setActiveModalType] = useState()
   const focusable = useRef()
 
   const handleWheel = useCallback(e => e.preventDefault(), [])

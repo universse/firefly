@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-export default function useMedia (query, defaultState = true) {
-  const [matches, setMatches] = useState(defaultState)
+export default function useMedia (query) {
+  const [matches, setMatches] = useState()
 
   useEffect(() => {
     let mounted = true

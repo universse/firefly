@@ -1,8 +1,6 @@
 import { createContext } from 'react'
 import workerize from 'workerize'
 
-// import firebase from '../services/firebase'
-
 const config = process.env.GATSBY_FIREBASE_CONFIG
 
 const actionCodeSettings = JSON.stringify({
@@ -18,9 +16,24 @@ importScripts('https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js')
 
 firebase.initializeApp(${config})
 const auth = firebase.auth()
-const googleProvider = new firebase.auth.GoogleAuthProvider()
-const facebookProvider = new firebase.auth.FacebookAuthProvider()
 const actionCodeSettings = ${actionCodeSettings}
+
+const stopAuthListener = auth.onAuthStateChanged(user => {
+    stopAuthListener()
+
+    user 
+      ? user.getIdToken().then(idToken => self.postMessage({ type: 'auth', payload: idToken }))
+      : self.postMessage({ type: 'auth', payload: null })
+  }
+)
+
+export function createUserWithEmailAndPassword (email, password) {
+  return this.auth.createUserWithEmailAndPassword(email, password)
+}
+
+export function signInWithEmailAndPassword (email, password) {
+  return this.auth.signInWithEmailAndPassword(email, password)
+}
 
 export function isSignInWithEmailLink (href) {
   return auth.isSignInWithEmailLink(href)
@@ -34,22 +47,17 @@ export function signInWithEmailLink (email, href) {
   auth.signInWithEmailLink(email, href)
 }
 
-export function signInWithGoogle () {
-  return auth.signInWithRedirect(googleProvider)
-}
-
 export function signOut () { 
   return auth.signOut()
 }
 
-const stopAuthListener = auth.onAuthStateChanged(user => {
-    stopAuthListener()
+export function sendPasswordResetEmail (email) {
+  this.auth.sendPasswordResetEmail(email)
+}
 
-    user 
-      ? user.getIdToken().then(idToken => self.postMessage({ type: 'auth', payload: idToken }))
-      : self.postMessage({ type: 'auth', payload: null })
-  }
-)
+export function updatePassword (password) {
+  this.auth.currentUser.updatePassword(password)
+}
 `)
 
 const FirebaseContext = createContext(firebase)

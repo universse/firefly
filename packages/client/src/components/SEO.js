@@ -27,12 +27,12 @@ export default function SEO ({
   const metaDescription = description || siteMetadata.description
   const metaTitle = title
     ? {
-        titleTemplate: `%s | ${siteMetadata.title}`,
-        title
-      }
+      titleTemplate: `%s | ${siteMetadata.title}`,
+      title
+    }
     : {
-        title: siteMetadata.title
-      }
+      title: siteMetadata.title
+    }
   // const url = `${siteMetadata.siteUrl}${slug}`
 
   return (
@@ -87,9 +87,9 @@ export default function SEO ({
         .concat(
           keywords.length > 0
             ? {
-                name: 'keywords',
-                content: keywords.join(', ')
-              }
+              name: 'keywords',
+              content: keywords.join(', ')
+            }
             : []
         )
         .concat(meta)}

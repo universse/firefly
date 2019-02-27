@@ -6,8 +6,8 @@ export function Item ({ isHighlighted, ...props }) {
     <li
       css={theme => css`
         background-color: ${isHighlighted
-          ? theme.colors.gray300
-          : 'transparent'};
+      ? theme.colors.gray300
+      : 'transparent'};
       `}
       {...props}
     />
@@ -103,18 +103,6 @@ export function ToggleButton (props) {
         font-weight: 600;
         justify-content: space-between;
         padding-left: 1rem;
-      `}
-      {...props}
-    />
-  )
-}
-
-export function TogglerLabel (props) {
-  return (
-    <label
-      css={css`
-        line-height: 1.5rem;
-        padding-right: 0.5rem;
       `}
       {...props}
     />

@@ -10,7 +10,9 @@ export default function Media ({ children }) {
   const isDesktop = useMedia(media.desktop)
 
   return (
-    <MediaContext.Provider value={isDesktop}>{children}</MediaContext.Provider>
+    <MediaContext.Provider value={isDesktop}>
+      {isDesktop !== undefined && children}
+    </MediaContext.Provider>
   )
 }
 

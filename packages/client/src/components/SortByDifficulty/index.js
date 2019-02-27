@@ -11,7 +11,6 @@ import {
   SortButton,
   SortOption,
   ToggleButton,
-  TogglerLabel,
   TogglerValue
 } from './styled'
 import SortOptions from 'constants/SortOptions'
@@ -41,7 +40,14 @@ export default function SortByDifficulty ({ sort }) {
         selectedItem
       }) => (
         <Root {...getRootProps({ refKey: 'innerRef' })}>
-          <div>
+          <div
+            css={css`
+              align-items: center;
+              display: flex;
+              justify-content: flex-end;
+            `}
+          >
+            <label {...getLabelProps({ htmlFor: 'toggler' })}>Sort By:</label>
             <ToggleButton
               {...getToggleButtonProps({
                 'aria-expanded': isOpen,
@@ -54,12 +60,7 @@ export default function SortByDifficulty ({ sort }) {
                 }
               })}
             >
-              <div>
-                <TogglerLabel {...getLabelProps({ htmlFor: 'toggler' })}>
-                  Sort By:
-                </TogglerLabel>
-                <TogglerValue>{selectedItem.label}</TogglerValue>
-              </div>
+              <TogglerValue>{selectedItem.label}</TogglerValue>
               <div
                 css={theme =>
                   css`
