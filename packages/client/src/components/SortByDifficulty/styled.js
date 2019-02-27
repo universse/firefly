@@ -102,20 +102,8 @@ export function ToggleButton (props) {
         font-weight: 600;
         justify-content: space-between;
         padding-left: 1rem;
-      `}
-      {...props}
-    />
-  )
-}
-
-export function TogglerValue (props) {
-  return (
-    <span
-      css={css`
-        display: inline-block;
-        text-align: left;
         text-transform: uppercase;
-        width: 11rem;
+        width: 13.5rem;
       `}
       {...props}
     />

@@ -10,8 +10,7 @@ import {
   Root,
   SortButton,
   SortOption,
-  ToggleButton,
-  TogglerValue
+  ToggleButton
 } from './styled'
 import SortOptions from 'constants/SortOptions'
 import { ChevronDown } from 'icons'
@@ -60,7 +59,7 @@ export default function SortByDifficulty ({ sort }) {
                 }
               })}
             >
-              <TogglerValue>{selectedItem.label}</TogglerValue>
+              {selectedItem.label}
               <div
                 css={theme =>
                   css`
