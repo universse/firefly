@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { navigate } from 'gatsby'
 import qs from 'qs'
 
@@ -55,22 +55,12 @@ export default function useURLUtils (queryValues, pathname, dispatch) {
     [dispatch, sort]
   )
 
-  return useMemo(
-    () => ({
-      constructUrl,
-      updateQuery,
-      onCategoryFilterClick,
-      onSortClick,
-      onTagClick,
-      onTagClearClick
-    }),
-    [
-      constructUrl,
-      onCategoryFilterClick,
-      onSortClick,
-      onTagClick,
-      onTagClearClick,
-      updateQuery
-    ]
-  )
+  return {
+    constructUrl,
+    updateQuery,
+    onCategoryFilterClick,
+    onSortClick,
+    onTagClick,
+    onTagClearClick
+  }
 }

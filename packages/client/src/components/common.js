@@ -117,7 +117,6 @@ export function IconButton (props) {
 export function Input (props) {
   return (
     <input
-      autoFocus
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 1.25rem;
@@ -189,7 +188,7 @@ export function Sidebar (props) {
 
         ${theme.screens.desktop} {
           align-self: flex-start;
-          margin-top: 1rem;
+          margin-top: 2.25rem;
           top: ${headerHeightInRem}rem;
           width: 22.5%;
         }

@@ -30,7 +30,7 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     'gatsby-plugin-layout',
-    // 'gatsby-plugin-subfont',
+    'gatsby-plugin-subfont',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',
     {

@@ -107,7 +107,6 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
                 width: 100%;
 
                 ${theme.screens.desktop} {
-                  margin-top: 1rem;
                   width: 70%;
                 }
               `}

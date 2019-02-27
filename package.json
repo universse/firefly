@@ -8,7 +8,6 @@
   "lint-staged": {
     "packages/*/src/**/*.{js,json}": [
       "prettier-standard",
-      "standard --fix",
       "git add"
     ]
   },
