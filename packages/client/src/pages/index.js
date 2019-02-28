@@ -14,7 +14,7 @@ import SortByDifficulty, {
   MobileSortByDifficulty
 } from 'components/SortByDifficulty'
 import TagFilter, { MobileTagFilter } from 'components/TagFilter'
-import { MediaContext } from 'components/Media'
+import Media from 'components/Media'
 import { IconButton, Sidebar } from 'components/common'
 import { Filter } from 'icons'
 import useAggregatedTags from 'hooks/useAggregatedTags'
@@ -39,7 +39,6 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
   const aggregatedTags = useAggregatedTags(filteredCollections, tags)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
   const { openModal } = useContext(ModalContext)
-  const isDesktop = useContext(MediaContext)
 
   return (
     <>
@@ -83,35 +82,44 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
           `}
         >
           <URLUtilsContext.Provider value={urlUtils}>
-            <Sidebar>
-              <CategoryFilter />
-              {isDesktop && (
-                <TagFilter aggregatedTags={aggregatedTags} tags={tags} />
-              )}
-            </Sidebar>
-            {!isDesktop && (
-              <Modal
-                className='FilterModal'
-                contentLabel='Filter Collections by Tags'
-                type={ModalTypes.MOBILE_FILTER}
-              >
-                <MobileSortByDifficulty sort={sort} />
-                <MobileTagFilter aggregatedTags={aggregatedTags} tags={tags} />
-              </Modal>
-            )}
-            <div
-              css={theme => css`
-                height: 100%;
-                width: 100%;
+            <Media>
+              {isDesktop => (
+                <>
+                  <Sidebar>
+                    <CategoryFilter />
+                    {isDesktop && (
+                      <TagFilter aggregatedTags={aggregatedTags} tags={tags} />
+                    )}
+                  </Sidebar>
+                  {!isDesktop && (
+                    <Modal
+                      className='FilterModal'
+                      contentLabel='Filter Collections by Tags'
+                      type={ModalTypes.MOBILE_FILTER}
+                    >
+                      <MobileSortByDifficulty sort={sort} />
+                      <MobileTagFilter
+                        aggregatedTags={aggregatedTags}
+                        tags={tags}
+                      />
+                    </Modal>
+                  )}
+                  <div
+                    css={theme => css`
+                      height: 100%;
+                      width: 100%;
 
-                ${theme.screens.desktop} {
-                  width: 70%;
-                }
-              `}
-            >
-              {isDesktop && <SortByDifficulty sort={sort} />}
-              <Collections collections={sortedCollections} />
-            </div>
+                      ${theme.screens.desktop} {
+                        width: 70%;
+                      }
+                    `}
+                  >
+                    {isDesktop && <SortByDifficulty sort={sort} />}
+                    <Collections collections={sortedCollections} />
+                  </div>
+                </>
+              )}
+            </Media>
           </URLUtilsContext.Provider>
         </div>
       </main>

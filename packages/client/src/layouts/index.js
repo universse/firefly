@@ -12,7 +12,28 @@ import MobileNavigation from 'components/MobileNavigation'
 import SavedCollections from 'components/SavedCollections'
 import SignUpForm from 'components/SignUpForm'
 import Theme from 'constants/Theme'
+import isIndexPage from 'utils/isIndexPage'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'utils/styles'
+
+function Site ({ children, location }) {
+  return (
+    <div
+      css={theme => css`
+        padding-top: ${mobileHeaderHeightInRem}rem;
+
+        ${theme.screens.desktop} {
+          padding-top: ${headerHeightInRem}rem;
+        }
+      `}
+    >
+      {location.pathname !== '/search' && <Header location={location} />}
+      <SavedCollections>{children}</SavedCollections>
+      {!location.pathname.includes('/collection/') && (
+        <MobileNavigation location={location} />
+      )}
+    </div>
+  )
+}
 
 export default function Layout ({ children, location }) {
   return (
@@ -20,23 +41,13 @@ export default function Layout ({ children, location }) {
       <ThemeProvider theme={Theme}>
         <Authentication>
           <ModalProvider>
-            {location.pathname !== '/search' && <Header location={location} />}
-            {!location.pathname.includes('/collection/') && (
-              <MobileNavigation location={location} />
-            )}
-            <div
-              css={theme => css`
-                padding-top: ${mobileHeaderHeightInRem}rem;
-
-                ${theme.screens.desktop} {
-                  padding-top: ${headerHeightInRem}rem;
-                }
-              `}
-            >
+            {isIndexPage(location.pathname) ? (
+              <Site location={location}>{children}</Site>
+            ) : (
               <Media>
-                <SavedCollections>{children}</SavedCollections>
+                <Site location={location}>{children}</Site>
               </Media>
-            </div>
+            )}
             <SignUpForm />
           </ModalProvider>
         </Authentication>

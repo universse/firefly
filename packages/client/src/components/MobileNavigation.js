@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 // import { ModalContext } from 'components/ModalProvider'
 // import FirebaseContext from 'contexts/FirebaseContext'
-import { MediaContext } from 'components/Media'
 import { Home, Search, Library } from 'icons'
 import { hasSignedIn } from 'utils/localStorageUtils'
 import isIndexPage from 'utils/isIndexPage'

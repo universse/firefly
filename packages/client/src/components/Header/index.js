@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -15,7 +15,6 @@ import {
   ResultBox,
   Root
 } from './styled'
-import { MediaContext } from 'components/Media'
 
 export default memo(function Header ({ location: { pathname } }) {
   return (
@@ -62,44 +61,51 @@ export default memo(function Header ({ location: { pathname } }) {
   )
 })
 
-export function MobileHeader ({ actions, navIcon, shadow, title }) {
-  const isDesktop = useContext(MediaContext)
-
+export const MobileHeader = memo(function ({
+  actions,
+  navIcon,
+  shadow,
+  title
+}) {
   return (
-    !isDesktop && (
-      <HeaderTag>
-        <HeaderWrapper shadow={shadow}>
-          <div
-            css={css`
-              align-items: center;
-              display: flex;
-            `}
-          >
-            {navIcon && (
-              <div
-                css={css`
-                  margin: 0 1.5rem 0 -0.5rem;
-                `}
-              >
-                {navIcon}
-              </div>
-            )}
-            <div>
-              <h2
-                css={theme => css`
-                  color: ${theme.colors.gray700};
-                  font-size: 1.25rem;
-                  font-weight: 600;
-                  line-height: 1.5rem;
-                `}
-              >
-                {title}
-              </h2>
+    <HeaderTag
+      css={theme => css`
+        ${theme.screens.desktop} {
+          display: none;
+        }
+      `}
+    >
+      <HeaderWrapper shadow={shadow}>
+        <div
+          css={css`
+            align-items: center;
+            display: flex;
+          `}
+        >
+          {navIcon && (
+            <div
+              css={css`
+                margin: 0 1.5rem 0 -0.5rem;
+              `}
+            >
+              {navIcon}
             </div>
+          )}
+          <div>
+            <h2
+              css={theme => css`
+                color: ${theme.colors.gray700};
+                font-size: 1.25rem;
+                font-weight: 600;
+                line-height: 1.5rem;
+              `}
+            >
+              {title}
+            </h2>
           </div>
-          {actions && <ActionBar>{actions}</ActionBar>}
-        </HeaderWrapper>
-      </HeaderTag>
-    )
+        </div>
+        {actions && <ActionBar>{actions}</ActionBar>}
+      </HeaderWrapper>
+    </HeaderTag>
   )
-}
+})
