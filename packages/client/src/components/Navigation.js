@@ -111,7 +111,7 @@ export default function Navigation () {
         `}
       >
         <GhostButton onClick={() => openModal('signUpForm')}>
-          Sign In
+          Get Started
         </GhostButton>
       </li>
       {/* <li

@@ -8,7 +8,12 @@ import { Level } from 'icons'
 import { DifficultyLevels } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function CollectionDetails ({ category, level, name, tags }) {
+export default memo(function CollectionDetails ({
+  category,
+  level,
+  name,
+  tags
+}) {
   return (
     <div
       css={theme => css`
@@ -63,6 +68,4 @@ function CollectionDetails ({ category, level, name, tags }) {
       </div>
     </div>
   )
-}
-
-export default memo(CollectionDetails)
+})

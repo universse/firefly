@@ -4,7 +4,6 @@ import { css } from '@emotion/core'
 import FirebaseContext from 'contexts/FirebaseContext'
 import LocalStorage from 'constants/LocalStorage'
 import { AuthButton, ErrorMessage, Input } from './styled'
-import { isValidEmail } from './utils'
 
 export default function EmailLogin ({ inputRef, setSignUpState }) {
   const [email, setEmail] = useState('')
@@ -20,53 +19,59 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
   const handleSubmit = e => {
     e.preventDefault()
 
-    if (isValidEmail(email)) {
-      setSignUpState({ loading: true })
+    setSignUpState({ loading: true })
 
-      firebase
-        .sendSignInLinkToEmail(email)
-        .then(() => {
-          setSignUpState({ loading: false, email })
-          window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
-        })
-        .catch(error => {
-          switch (error.code) {
-            case 'auth/invalid-email':
-              setIsErrorShown(true)
-              break
-            default:
-              break
-          }
-        })
-    } else {
-      setIsErrorShown(true)
-    }
+    firebase
+      .sendSignInLinkToEmail(email)
+      .then(() => {
+        setSignUpState({ loading: false, email })
+        window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
+      })
+      .catch(() => setIsErrorShown(true))
   }
 
   // spinner icon to button
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        aria-label='Your Email Address'
-        name='email'
-        onChange={handleChange}
-        onFocus={handleFocus}
-        placeholder='username@domain.com'
-        inputRef={inputRef}
-        value={email}
-      />
-      {isErrorShown && (
-        <div>
-          <ErrorMessage>Please enter a valid email address</ErrorMessage>
-        </div>
-      )}
+    <>
       <div
         css={css`
-          margin-top: 1rem;
+          margin-bottom: 1rem;
         `}
       >
-        <AuthButton type='submit'>Continue</AuthButton>
+        <h3
+          css={theme => css`
+            color: ${theme.colors.gray900};
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 2rem;
+          `}
+        >
+          Let's Get Started
+        </h3>
       </div>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <Input
+          aria-label='Your Email Address'
+          name='email'
+          onChange={handleChange}
+          onFocus={handleFocus}
+          placeholder='username@domain.com'
+          inputRef={inputRef}
+          value={email}
+        />
+        {isErrorShown && (
+          <div>
+            <ErrorMessage>Please enter a valid email address</ErrorMessage>
+          </div>
+        )}
+        <div
+          css={css`
+            margin-top: 1rem;
+          `}
+        >
+          <AuthButton type='submit'>Continue</AuthButton>
+        </div>
+      </form>
+    </>
   )
 }

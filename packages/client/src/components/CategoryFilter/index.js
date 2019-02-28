@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
@@ -7,7 +7,7 @@ import { MediaContext } from 'components/Media'
 import { Title } from 'components/common'
 import useSlider from 'hooks/useSlider'
 
-export default function CategoryFilter () {
+export default memo(function CategoryFilter () {
   const {
     isMaxScroll,
     isMinScroll,
@@ -54,4 +54,4 @@ export default function CategoryFilter () {
       )}
     </div>
   )
-}
+})

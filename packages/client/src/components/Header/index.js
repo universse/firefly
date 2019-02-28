@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -17,7 +17,7 @@ import {
 } from './styled'
 import { MediaContext } from 'components/Media'
 
-export default function Header ({ location: { pathname } }) {
+export default memo(function Header ({ location: { pathname } }) {
   const isDesktop = useContext(MediaContext)
 
   return (
@@ -58,7 +58,7 @@ export default function Header ({ location: { pathname } }) {
       </HeaderTag>
     )
   )
-}
+})
 
 export function MobileHeader ({ actions, navIcon, shadow, title }) {
   const isDesktop = useContext(MediaContext)

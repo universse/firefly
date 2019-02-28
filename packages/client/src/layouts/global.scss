@@ -215,10 +215,15 @@ embed,
 
 .SignUpModal {
   align-items: center;
-  border-radius: 8px;
   justify-content: center;
-  padding: 6rem;
+  height: 100%;
   position: relative;
+  width: 100%;
+  @media screen and (min-width: 37.0625rem) {
+    border-radius: 8px;
+    height: 24rem;
+    width: 32rem;
+  }
 }
 
 .FilterModal {

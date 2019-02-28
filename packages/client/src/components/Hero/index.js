@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import Landing from './Landing'
@@ -17,7 +17,7 @@ const renderHero = () => {
   return <LatestActivity />
 }
 
-export default function Hero () {
+export default memo(function Hero () {
   return (
     <section>
       <div
@@ -34,4 +34,4 @@ export default function Hero () {
       </div>
     </section>
   )
-}
+})

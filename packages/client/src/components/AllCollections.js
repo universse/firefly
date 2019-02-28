@@ -14,6 +14,7 @@ export default function AllCollections ({ children, location }) {
             category
             level
             name
+            numOfItems
             tags
           }
         }

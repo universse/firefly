@@ -7,7 +7,14 @@ import { LinkTitle } from './styled'
 import { IconButton } from 'components/common'
 import { getHostname } from './utils'
 
-function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
+export default memo(function LearningItem ({
+  id,
+  url,
+  title,
+  type,
+  checked,
+  handleCheckClick
+}) {
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
   return (
@@ -111,6 +118,4 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
       </div>
     </>
   )
-}
-
-export default memo(LearningItem)
+})

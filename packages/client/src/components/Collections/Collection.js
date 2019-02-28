@@ -10,7 +10,7 @@ import { DifficultyLevels } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 export default function Collection ({
-  collection: { id, name, category, level, tags },
+  collection: { id, name, category, level, numOfItems, tags },
   handleHeartClick,
   handleSaveClick,
   isSaved

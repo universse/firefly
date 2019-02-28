@@ -50,7 +50,7 @@ export function Category ({ isActive, category, handleClick, to }) {
   )
 }
 
-function Scroll ({ display, handleClick, side }) {
+export const ScrollButton = memo(function ({ display, handleClick, side }) {
   const align =
     side === 'left'
       ? css`
@@ -92,6 +92,4 @@ function Scroll ({ display, handleClick, side }) {
       </button>
     </div>
   )
-}
-
-export const ScrollButton = memo(Scroll)
+})
