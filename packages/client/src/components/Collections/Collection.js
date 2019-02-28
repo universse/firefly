@@ -32,7 +32,7 @@ export default function Collection ({
       <CollectionWrapper>
         <div
           css={css`
-            align-items: center;
+            align-items: flex-end;
             display: flex;
             height: 1.25rem;
             justify-content: space-between;
@@ -46,12 +46,14 @@ export default function Collection ({
           </Category>
           <div
             css={css`
-              height: 100%;
+              align-items: flex-end;
+              display: flex;
             `}
           >
             <div
               css={css`
                 display: inline-block;
+                height: 1.25rem;
                 margin-right: 0.5rem;
               `}
             >

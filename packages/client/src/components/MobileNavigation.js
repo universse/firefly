@@ -6,7 +6,7 @@ import { css } from '@emotion/core'
 // import FirebaseContext from 'contexts/FirebaseContext'
 import { MediaContext } from 'components/Media'
 import { Home, Search, Library } from 'icons'
-import hasSignedIn from 'utils/hasSignedIn'
+import { hasSignedIn } from 'utils/localStorageUtils'
 import isIndexPage from 'utils/isIndexPage'
 import { mobileNavigationHeightInRem } from 'utils/styles'
 
@@ -51,7 +51,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
 
   /* FLAG */
 
-  // const authNav = hasSignedIn ? (
+  // const authNav = hasSignedIn() ? (
   //   <li
   //     css={css`
   //       margin-left: 2rem;

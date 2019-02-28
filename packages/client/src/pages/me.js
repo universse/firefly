@@ -18,14 +18,13 @@ import {
 export default function MePage (props) {
   const allCollections = useContext(AllCollectionsContext)
   const [savedCollections, onSaveClick] = useSavedCollections()
-  const allCollectionsById = useMemo(
-    () =>
-      allCollections.reduce((all, { node }) => {
-        all[node.id] = node
-        return all
-      }, {}),
-    [allCollections]
-  )
+  const allCollectionsById = useMemo(() => {
+    const normalizedCollections = {}
+    allCollections.forEach(({ node }) => {
+      normalizedCollections[node.id] = node
+    })
+    return normalizedCollections
+  }, [allCollections])
   const isDesktop = useContext(MediaContext)
 
   return (

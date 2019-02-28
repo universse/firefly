@@ -6,6 +6,7 @@ export default function useLocalForage (key, itemsToSave) {
     const save = () => localforage.setItem(key, itemsToSave)
 
     window.addEventListener('beforeunload', save)
+
     return () => {
       save()
       window.removeEventListener('beforeunload', save)

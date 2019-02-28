@@ -2,6 +2,7 @@ import React, { createContext, useContext } from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
+import { AllCollectionsContext } from 'components/AllCollections'
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
@@ -22,19 +23,16 @@ import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
 import useURLUtils from 'hooks/useURLUtils'
 import { baseWrapper, mobileNavigationHeightInRem } from 'utils/styles'
-import hasSignedIn from 'utils/hasSignedIn'
 import ModalTypes from 'constants/ModalTypes'
 
 export const URLUtilsContext = createContext()
 
 export default function IndexPage ({ data, location: { pathname, search } }) {
   const [queryValues, dispatch] = useParams(search)
-
   const { sort, tags } = queryValues
-
-  // TODO: delete after add data
+  const allCollections = useContext(AllCollectionsContext)
   const filteredCollections = useFilteredCollections(
-    data.allCollections ? data.allCollections.edges : [],
+    data.allCollections ? data.allCollections.edges : allCollections,
     tags
   )
   const sortedCollections = useSortedCollections(filteredCollections, sort)
@@ -57,7 +55,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
         }
         title='Collections'
       />
-      {!hasSignedIn && <Hero />}
+      <Hero />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};

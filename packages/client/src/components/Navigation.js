@@ -5,7 +5,7 @@ import { ThemeContext, css } from '@emotion/core'
 import { ModalContext } from 'components/ModalProvider'
 import FirebaseContext from 'contexts/FirebaseContext'
 import LocalStorage from 'constants/LocalStorage'
-import hasSignedIn from 'utils/hasSignedIn'
+import { hasSignedIn } from 'utils/localStorageUtils'
 
 // darker shade hover
 function GhostButton (props) {
@@ -86,7 +86,7 @@ export default function Navigation () {
   const { openModal } = useContext(ModalContext)
   const firebase = useContext(FirebaseContext)
 
-  const authNav = hasSignedIn ? (
+  const authNav = hasSignedIn() ? (
     <li
       css={css`
         margin-left: 2rem;

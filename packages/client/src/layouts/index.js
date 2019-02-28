@@ -19,8 +19,8 @@ export default function Layout ({ children, location }) {
     <AllCollections location={location}>
       <ThemeProvider theme={Theme}>
         <Authentication>
-          <ModalProvider>
-            <Media>
+          <Media>
+            <ModalProvider>
               <div
                 css={theme => css`
                   padding-top: ${mobileHeaderHeightInRem}rem;
@@ -39,8 +39,8 @@ export default function Layout ({ children, location }) {
                 )}
               </div>
               <SignUpForm />
-            </Media>
-          </ModalProvider>
+            </ModalProvider>
+          </Media>
         </Authentication>
       </ThemeProvider>
     </AllCollections>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useCallback, useState, useEffect, useContext } from 'react'
 import { css } from '@emotion/core'
 
 import FirebaseContext from '../contexts/FirebaseContext'
@@ -9,6 +9,12 @@ export default function WelcomePage () {
   const [message, setMessage] = useState('')
 
   const firebase = useContext(FirebaseContext)
+  const handleSignIn = useCallback(
+    e =>
+      e.data.type === 'emailLinkSignIn' &&
+      window.localStorage.setItem(LocalStorage.IS_NEW_USER, e.data.payload),
+    []
+  )
 
   useEffect(() => {
     if (firebase.isSignInWithEmailLink(window.location.href)) {
@@ -18,10 +24,11 @@ export default function WelcomePage () {
 
       firebase
         .signInWithEmailLink(email, window.location.href)
-        .then(() => {
+        .then(result => {
           setMessage('Welcome')
           window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
           window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+          // TODO welcome redirecting to homepage
         })
         .catch(
           ({ code }) =>
@@ -30,7 +37,13 @@ export default function WelcomePage () {
             setMessage('Invalid/Expired URL')
         )
     }
-  }, [firebase])
+
+    firebase.addEventListener('message', handleSignIn)
+
+    return () => {
+      firebase.removeEventListener('message', handleSignIn)
+    }
+  }, [firebase, handleSignIn])
 
   return (
     <p

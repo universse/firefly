@@ -1,7 +1,9 @@
 import LocalStorage from 'constants/LocalStorage'
 
-const hasSignedIn =
-  typeof window === 'object' &&
+export const isNewUser = () =>
+  window.localStorage.getItem(LocalStorage.IS_NEW_USER) === 'true'
+
+export const hasSignedIn = () =>
   window.localStorage.getItem(LocalStorage.HAS_SIGNED_IN) === 'true'
 
 export default hasSignedIn

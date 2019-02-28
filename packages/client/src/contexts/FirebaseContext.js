@@ -28,11 +28,11 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
 )
 
 export function createUserWithEmailAndPassword (email, password) {
-  return this.auth.createUserWithEmailAndPassword(email, password)
+  return auth.createUserWithEmailAndPassword(email, password)
 }
 
 export function signInWithEmailAndPassword (email, password) {
-  return this.auth.signInWithEmailAndPassword(email, password)
+  return auth.signInWithEmailAndPassword(email, password)
 }
 
 export function isSignInWithEmailLink (href) {
@@ -44,7 +44,12 @@ export function sendSignInLinkToEmail (email) {
 }
 
 export function signInWithEmailLink (email, href) {
-  auth.signInWithEmailLink(email, href)
+  return auth.signInWithEmailLink(email, href).then(
+    result => self.postMessage({
+      type: 'emailLinkSignIn',
+      payload: result.additionalUserInfo.isNewUser
+    })
+  )
 }
 
 export function signOut () { 
