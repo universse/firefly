@@ -14,9 +14,9 @@
     "babel-loader": "^8.0.5",
     "jest": "^24.1.0",
     "serverless-dynamodb-local": "^0.2.36",
-    "serverless-offline": "^4.7.0",
+    "serverless-offline": "^4.7.1",
     "serverless-webpack": "^5.2.0",
-    "webpack": "^4.29.5",
+    "webpack": "^4.29.6",
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {

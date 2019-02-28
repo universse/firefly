@@ -1,6 +1,8 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
+import { ChevronDown } from 'icons'
+
 export function Item ({ isHighlighted, ...props }) {
   return (
     <li
@@ -91,7 +93,7 @@ export function SortOption (props) {
   )
 }
 
-export function ToggleButton (props) {
+export function ToggleButton ({ children, ...props }) {
   return (
     <button
       css={theme => css`
@@ -104,6 +106,31 @@ export function ToggleButton (props) {
         padding-left: 1rem;
         text-transform: uppercase;
         width: 13.5rem;
+      `}
+      {...props}
+    >
+      {children}
+      <div
+        css={theme =>
+          css`
+            color: ${theme.colors.gray500};
+            height: 1.5rem;
+          `
+        }
+      >
+        <ChevronDown />
+      </div>
+    </button>
+  )
+}
+
+export function TogglerLabel (props) {
+  return (
+    <label
+      css={theme => css`
+        color: ${theme.colors.gray900};
+        font-size: 1rem;
+        line-height: 1.5rem;
       `}
       {...props}
     />

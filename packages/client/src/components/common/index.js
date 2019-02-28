@@ -66,6 +66,8 @@ export function Difficulty (props) {
   )
 }
 
+export { default as Dropdown } from './Dropdown'
+
 export function FAB (props) {
   return (
     <button

@@ -1,8 +1,8 @@
 import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
-import Downshift from 'downshift'
 
 import { URLUtilsContext } from 'pages'
+import { Dropdown } from 'components/common'
 import {
   Item,
   Label,
@@ -10,10 +10,10 @@ import {
   Root,
   SortButton,
   SortOption,
-  ToggleButton
+  ToggleButton,
+  TogglerLabel
 } from './styled'
 import SortOptions from 'constants/SortOptions'
-import { ChevronDown } from 'icons'
 
 export default function SortByDifficulty ({ sort }) {
   const { onSortClick } = useContext(URLUtilsContext)
@@ -23,79 +23,18 @@ export default function SortByDifficulty ({ sort }) {
   ])
 
   return (
-    <Downshift
-      initialSelectedItem={SortOptions.find(({ value }) => value === sort)}
-      itemToString={({ value }) => value}
-      onChange={handleChange}
-    >
-      {({
-        getToggleButtonProps,
-        getItemProps,
-        getLabelProps,
-        getRootProps,
-        highlightedIndex,
-        isOpen,
-        selectItem,
-        selectedItem
-      }) => (
-        <Root {...getRootProps({ refKey: 'innerRef' })}>
-          <div
-            css={css`
-              align-items: center;
-              display: flex;
-              justify-content: flex-end;
-            `}
-          >
-            <label {...getLabelProps({ htmlFor: 'toggler' })}>Sort By:</label>
-            <ToggleButton
-              {...getToggleButtonProps({
-                'aria-expanded': isOpen,
-                id: 'toggler',
-                'data-toggle': 'dropdown',
-                onKeyDown: e => {
-                  e.key === 'Tab' &&
-                    highlightedIndex !== null &&
-                    selectItem(SortOptions[highlightedIndex])
-                }
-              })}
-            >
-              {selectedItem.label}
-              <div
-                css={theme =>
-                  css`
-                    color: ${theme.colors.gray500};
-                    height: 1.5rem;
-                  `
-                }
-              >
-                <ChevronDown />
-              </div>
-            </ToggleButton>
-          </div>
-          {isOpen && (
-            <OptionList>
-              {SortOptions.map((option, index) => (
-                <Item
-                  {...getItemProps({
-                    item: option,
-                    index,
-                    isHighlighted: highlightedIndex === index
-                  })}
-                  key={option.value}
-                >
-                  <SortButton
-                    aria-label={option.label}
-                    isSelected={option === selectedItem}
-                  >
-                    {option.label}
-                  </SortButton>
-                </Item>
-              ))}
-            </OptionList>
-          )}
-        </Root>
-      )}
-    </Downshift>
+    <Dropdown
+      handleChange={handleChange}
+      initialValue={sort}
+      items={SortOptions}
+      label='Sort By:'
+      Item={Item}
+      OptionList={OptionList}
+      Root={Root}
+      SortButton={SortButton}
+      ToggleButton={ToggleButton}
+      TogglerLabel={TogglerLabel}
+    />
   )
 }
 
