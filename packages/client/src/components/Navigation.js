@@ -89,7 +89,7 @@ export default function Navigation () {
   const authNav = hasSignedIn() ? (
     <li
       css={css`
-        margin-left: 2rem;
+        margin-left: 1.5rem;
       `}
     >
       <GhostButton
@@ -107,7 +107,7 @@ export default function Navigation () {
     <>
       <li
         css={css`
-          margin-left: 2rem;
+          margin-left: 1.5rem;
         `}
       >
         <GhostButton onClick={() => openModal('signUpForm')}>
@@ -136,7 +136,7 @@ export default function Navigation () {
       >
         <li
           css={css`
-            margin-left: 2rem;
+            margin-left: 1.5rem;
           `}
         >
           <NavLink to='/me'>My Library</NavLink>

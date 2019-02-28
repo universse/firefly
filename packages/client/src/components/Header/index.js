@@ -18,45 +18,47 @@ import {
 import { MediaContext } from 'components/Media'
 
 export default memo(function Header ({ location: { pathname } }) {
-  const isDesktop = useContext(MediaContext)
-
   return (
-    isDesktop && (
-      <HeaderTag>
-        <HeaderWrapper>
+    <HeaderTag
+      css={theme => css`
+        ${theme.screens.nonDesktop} {
+          display: none;
+        }
+      `}
+    >
+      <HeaderWrapper>
+        <div
+          css={css`
+            align-items: center;
+            display: flex;
+          `}
+        >
           <div
             css={css`
-              align-items: center;
-              display: flex;
+              margin-right: 1.5rem;
             `}
           >
-            <div
+            <Link
               css={css`
-                margin-right: 1.5rem;
+                display: block;
+                height: 2.25rem;
               `}
+              to='/'
             >
-              <Link
-                css={css`
-                  display: block;
-                  height: 2.25rem;
-                `}
-                to='/'
-              >
-                <Logo />
-              </Link>
-            </div>
-            <SearchBar
-              Input={Input}
-              Item={Item}
-              Result={Result}
-              ResultBox={ResultBox}
-              Root={Root}
-            />
+              <Logo />
+            </Link>
           </div>
-          <Navigation />
-        </HeaderWrapper>
-      </HeaderTag>
-    )
+          <SearchBar
+            Input={Input}
+            Item={Item}
+            Result={Result}
+            ResultBox={ResultBox}
+            Root={Root}
+          />
+        </div>
+        <Navigation />
+      </HeaderWrapper>
+    </HeaderTag>
   )
 })
 

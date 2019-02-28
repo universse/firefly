@@ -20,26 +20,24 @@ export default function Layout ({ children, location }) {
       <ThemeProvider theme={Theme}>
         <Authentication>
           <ModalProvider>
-            <Media>
-              <div
-                css={theme => css`
-                  padding-top: ${mobileHeaderHeightInRem}rem;
+            {location.pathname !== '/search' && <Header location={location} />}
+            {!location.pathname.includes('/collection/') && (
+              <MobileNavigation location={location} />
+            )}
+            <div
+              css={theme => css`
+                padding-top: ${mobileHeaderHeightInRem}rem;
 
-                  ${theme.screens.desktop} {
-                    padding-top: ${headerHeightInRem}rem;
-                  }
-                `}
-              >
-                {location.pathname !== '/search' && (
-                  <Header location={location} />
-                )}
+                ${theme.screens.desktop} {
+                  padding-top: ${headerHeightInRem}rem;
+                }
+              `}
+            >
+              <Media>
                 <SavedCollections>{children}</SavedCollections>
-                {!location.pathname.includes('/collection/') && (
-                  <MobileNavigation location={location} />
-                )}
-              </div>
-              <SignUpForm />
-            </Media>
+              </Media>
+            </div>
+            <SignUpForm />
           </ModalProvider>
         </Authentication>
       </ThemeProvider>
