@@ -7,7 +7,7 @@ import { media } from 'constants/Theme'
 export const MediaContext = createContext()
 
 const renderChildren = (isDesktop, children) => {
-  if (!isDesktop) {
+  if (isDesktop === 'undefined') {
     return null
   }
   return typeof children === 'object' ? children : children(isDesktop)
