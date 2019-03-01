@@ -33,8 +33,8 @@
     "gatsby-source-filesystem": "^2.0.23",
     "gatsby-source-firestore": "^1.0.3",
     "gatsby-source-graphql": "^2.0.11",
-    "gatsby-transformer-sharp": "^2.1.14",
-    "immer": "^2.0.0",
+    "gatsby-transformer-sharp": "^2.1.15",
+    "immer": "^2.1.0",
     "isomorphic-fetch": "^2.2.1",
     "localforage": "^1.7.3",
     "match-sorter": "^2.3.0",
@@ -50,7 +50,7 @@
     "react-window": "^1.5.2",
     "redux": "^4.0.1",
     "speakingurl": "^14.0.1",
-    "typeface-playfair-display": "^0.0.54",
+    "typeface-playfair-display": "^0.0.72",
     "workerize": "^0.1.7"
   },
   "devDependencies": {
@@ -62,9 +62,10 @@
   },
   "scripts": {
     "build": "run-p build:**",
-    "build:app": "gatsby build",
-    "build:lambda": "netlify-lambda build src/lambda",
-    "clean": "rm -rf .cache && rm -rf lambda && rm -rf public",
+    "build:app": "yarn clean:app && gatsby build",
+    "build:lambda": "yarn clean:lambda && netlify-lambda build src/lambda",
+    "clean:app": "rm -rf .cache && rm -rf public",
+    "clean:lambda": "rm -rf lambda",
     "serve": "gatsby serve -o -p 3000",
     "start": "run-p start:**",
     "start:app": "gatsby develop -o -p 3000",

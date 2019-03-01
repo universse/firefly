@@ -33,7 +33,7 @@ export default memo(function CollectionDetails ({
     >
       <div
         css={css`
-          align-items: center;
+          align-items: flex-end;
           display: flex;
           height: 1.25rem;
           justify-content: space-between;
@@ -42,12 +42,14 @@ export default memo(function CollectionDetails ({
         <Category to={createCategoryPath(category)}>{category}</Category>
         <div
           css={css`
-            height: 100%;
+            align-items: flex-end;
+            display: flex;
           `}
         >
           <div
             css={css`
               display: inline-block;
+              height: 1.25rem;
               margin-right: 0.5rem;
             `}
           >
