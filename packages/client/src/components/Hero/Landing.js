@@ -6,7 +6,7 @@ import { CTA } from './styled'
 export default function Landing () {
   const handleClick = () =>
     window.scrollTo({
-      top: document.getElementById('main').offsetTop,
+      top: document.getElementById('hero').offsetHeight,
       behavior: 'smooth'
     })
 

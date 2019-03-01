@@ -70,6 +70,8 @@ export const MobileHeader = memo(function ({
   return (
     <HeaderTag
       css={theme => css`
+        position: sticky;
+
         ${theme.screens.desktop} {
           display: none;
         }

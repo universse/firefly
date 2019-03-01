@@ -9,18 +9,17 @@ import AllCollections from 'components/AllCollections'
 import Header from 'components/Header'
 import Media from 'components/Media'
 import MobileNavigation from 'components/MobileNavigation'
+import NormalizedCollections from 'components/NormalizedCollections'
 import SavedCollections from 'components/SavedCollections'
 import SignUpForm from 'components/SignUpForm'
 import Theme from 'constants/Theme'
 import isIndexPage from 'utils/isIndexPage'
-import { headerHeightInRem, mobileHeaderHeightInRem } from 'utils/styles'
+import { headerHeightInRem } from 'utils/styles'
 
 function Site ({ children, location }) {
   return (
     <div
       css={theme => css`
-        padding-top: ${mobileHeaderHeightInRem}rem;
-
         ${theme.screens.desktop} {
           padding-top: ${headerHeightInRem}rem;
         }
@@ -39,18 +38,20 @@ export default function Layout ({ children, location }) {
   return (
     <AllCollections location={location}>
       <ThemeProvider theme={Theme}>
-        <Authentication>
-          <ModalProvider>
-            {isIndexPage(location.pathname) ? (
-              <Site location={location}>{children}</Site>
-            ) : (
-              <Media>
+        <NormalizedCollections>
+          <Authentication>
+            <ModalProvider>
+              {isIndexPage(location.pathname) ? (
                 <Site location={location}>{children}</Site>
-              </Media>
-            )}
-            <SignUpForm />
-          </ModalProvider>
-        </Authentication>
+              ) : (
+                <Media>
+                  <Site location={location}>{children}</Site>
+                </Media>
+              )}
+              <SignUpForm />
+            </ModalProvider>
+          </Authentication>
+        </NormalizedCollections>
       </ThemeProvider>
     </AllCollections>
   )

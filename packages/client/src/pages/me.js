@@ -1,13 +1,13 @@
 // sign up bottom pop up to sync across devices
 // page
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { AllCollectionsContext } from 'components/AllCollections'
 import Collection from 'components/Collections/Collection'
-import { MediaContext } from 'components/Media'
 import { MobileHeader } from 'components/Header'
+import { MediaContext } from 'components/Media'
 import SEO from 'components/SEO'
+import useNormalizedCollections from 'hooks/useNormalizedCollections'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
@@ -16,15 +16,8 @@ import {
 } from 'utils/styles'
 
 export default function MePage (props) {
-  const allCollections = useContext(AllCollectionsContext)
+  const normalizedCollections = useNormalizedCollections()
   const [savedCollections, onSaveClick] = useSavedCollections()
-  const allCollectionsById = useMemo(() => {
-    const normalizedCollections = {}
-    allCollections.forEach(({ node }) => {
-      normalizedCollections[node.id] = node
-    })
-    return normalizedCollections
-  }, [allCollections])
   const isDesktop = useContext(MediaContext)
 
   return (
@@ -88,7 +81,8 @@ export default function MePage (props) {
               }
             `}
           >
-            {savedCollections &&
+            {normalizedCollections &&
+              savedCollections &&
               Object.keys(savedCollections).map(id => (
                 <li
                   css={css`
@@ -97,7 +91,7 @@ export default function MePage (props) {
                   key={id}
                 >
                   <Collection
-                    collection={allCollectionsById[id]}
+                    collection={normalizedCollections[id]}
                     // handleHeartClick={onHeartClick}
                     handleSaveClick={onSaveClick}
                     isSaved

@@ -10,13 +10,13 @@ module.exports = ({ page, actions }) => {
     createPage({
       ...page,
       path: '/',
-      context: { category: null }
+      context: { category: 'all' }
     })
 
     createPage({
       ...page,
       path: createCategoryPath('all'),
-      context: { category: null }
+      context: { category: 'all' }
     })
 
     Categories.forEach(category =>

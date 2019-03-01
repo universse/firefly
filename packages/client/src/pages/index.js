@@ -43,6 +43,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
   return (
     <>
       <SEO />
+      <Hero />
       <MobileHeader
         actions={
           <IconButton
@@ -54,17 +55,16 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
         }
         title='Collections'
       />
-      <Hero />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
+          min-height: 100vh;
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
           ${theme.screens.desktop} {
             padding: 2rem 0;
           }
         `}
-        id='main'
       >
         <div
           css={theme => css`

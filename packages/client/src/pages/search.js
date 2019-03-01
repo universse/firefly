@@ -8,7 +8,6 @@ import { MediaContext } from 'components/Media'
 import {
   baseWrapper,
   headerHeightInRem,
-  mobileHeaderHeightInRem,
   mobileNavigationHeightInRem
 } from 'utils/styles'
 import { Back, Search } from 'icons'
@@ -28,8 +27,6 @@ export default function SearchPage ({ location }) {
           ${theme.screens.nonDesktop} {
             min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
             padding: 1rem 0;
-            position: relative;
-            top: -${mobileHeaderHeightInRem}rem;
           }
         `}
       >

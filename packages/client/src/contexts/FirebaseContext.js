@@ -63,6 +63,10 @@ export function sendPasswordResetEmail (email) {
 export function updatePassword (password) {
   this.auth.currentUser.updatePassword(password)
 }
+
+export function fetchCollection (id) {
+  
+}
 `)
 
 const FirebaseContext = createContext(firebase)

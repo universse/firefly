@@ -19,7 +19,7 @@ const renderHero = () => {
 
 export default memo(function Hero () {
   return (
-    <section>
+    <section id='hero'>
       <div
         css={css`
           background-color: #fff;
