@@ -6,8 +6,8 @@ import { css } from '@emotion/core'
 import Collection from 'components/Collections/Collection'
 import { MobileHeader } from 'components/Header'
 import { MediaContext } from 'components/Media'
+import { NormalizedCollectionsContext } from 'components/NormalizedCollections'
 import SEO from 'components/SEO'
-import useNormalizedCollections from 'hooks/useNormalizedCollections'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
@@ -16,7 +16,7 @@ import {
 } from 'utils/styles'
 
 export default function MePage (props) {
-  const normalizedCollections = useNormalizedCollections()
+  const normalizedCollections = useContext(NormalizedCollectionsContext)
   const [savedCollections, onSaveClick] = useSavedCollections()
   const isDesktop = useContext(MediaContext)
 

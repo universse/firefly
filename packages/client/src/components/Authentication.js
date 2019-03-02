@@ -8,6 +8,7 @@ import React, {
 import PropTypes from 'prop-types'
 
 import FirebaseContext from 'contexts/FirebaseContext'
+import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
 export const AuthenticationContext = createContext()
 
@@ -16,7 +17,9 @@ export default function Authentication ({ children }) {
   const firebase = useContext(FirebaseContext)
 
   const handleAuth = useCallback(
-    e => e.data.type === 'auth' && setUser(e.data.payload),
+    e =>
+      e.data.type === FirebaseWorkerEvents.AUTH_STATE_CHANGED &&
+      setUser(e.data.payload),
     []
   )
 

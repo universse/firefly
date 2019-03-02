@@ -35,7 +35,7 @@ module.exports = {
     // 'gatsby-plugin-apollo-client',
     {
       resolve: 'gatsby-plugin-create-client-paths',
-      options: { prefixes: ['/new-collection/*'] }
+      options: { prefixes: ['/collection/*'] }
     },
     'gatsby-plugin-remove-trailing-slashes',
     {

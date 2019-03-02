@@ -51,6 +51,7 @@
     "react-window": "^1.5.2",
     "redux": "^4.0.1",
     "speakingurl": "^14.0.1",
+    "stylelint-config-prettier": "^5.0.0",
     "typeface-playfair-display": "^0.0.72",
     "workerize": "^0.1.7"
   },
@@ -58,8 +59,7 @@
     "http-proxy-middleware": "^0.19.1",
     "netlify-lambda": "^1.4.2",
     "npm-run-all": "^4.1.5",
-    "preval.macro": "^3.0.0",
-    "workerize-loader": "^1.0.4"
+    "preval.macro": "^3.0.0"
   },
   "scripts": {
     "build": "run-p build:**",

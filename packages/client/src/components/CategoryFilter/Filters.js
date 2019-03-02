@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 import { Location } from '@reach/router'
+import { Categories } from 'common'
 
 import { Category } from './styled'
-import { Categories } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 import { URLUtilsContext } from 'pages'
 

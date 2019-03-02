@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
+import { Categories, ItemTypes } from 'common'
 
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
+import { NormalizedCollectionsContext } from 'components/NormalizedCollections'
 import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
 import FirebaseContext from 'contexts/FirebaseContext'
 import { Back, Save, Share } from 'icons'
 import useIsFirstMount from 'hooks/useIsFirstMount'
-import useNormalizedCollections from 'hooks/useNormalizedCollections'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
@@ -17,13 +18,29 @@ import {
   mobileHeaderHeightInRem
 } from 'utils/styles'
 import copyToClipboard from 'utils/copyToClipboard'
+import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 import { createCollectionPath } from '../../gatsby/utils'
 
-export default function NewCollectionPage ({ location }) {
-  const normalizedCollections = useNormalizedCollections()
+const parseCollectionData = ({ c, l, n, s, t, us }) => ({
+  category: Categories[c],
+  level: l,
+  name: n,
+  numOfItems: us.length,
+  suggestions: s,
+  tags: t,
+  urls: us.map(({ id, ti, ty, u }) => ({
+    id,
+    title: ti,
+    url: u,
+    type: ItemTypes[ty]
+  }))
+})
+
+export default function CollectionPage ({ location }) {
+  const normalizedCollections = useContext(NormalizedCollectionsContext)
   const [savedCollections, onSaveClick] = useSavedCollections()
 
-  // const firebase = useContext(FirebaseContext)
+  const firebase = useContext(FirebaseContext)
   const pathname = location.pathname
   const id = pathname.substring(pathname.lastIndexOf('/') + 1)
 
@@ -31,7 +48,17 @@ export default function NewCollectionPage ({ location }) {
     () => location.state && location.state.collection
   )
 
+  const [hasError, setHasError] = useState(false)
+
   const isFirstMount = useIsFirstMount()
+
+  const handleCollectionFetch = useCallback(e => {
+    if (e.data.type === FirebaseWorkerEvents.COLLECTION_FETCH_SUCCESS) {
+      setCollection(parseCollectionData(e.data.payload))
+    } else if (e.data.type === FirebaseWorkerEvents.COLLECTION_FETCH_ERROR) {
+      setHasError(true)
+    }
+  }, [])
 
   useEffect(() => {
     if (isFirstMount) {
@@ -44,13 +71,18 @@ export default function NewCollectionPage ({ location }) {
       return
     }
 
-    console.log('firebase')
-    // firebase.fetchCollection(id).then(collection => setCollection(collection))
-  }, [id, isFirstMount, normalizedCollections])
+    // 5dJtAc6eJIenU7g9nO4F
+    firebase.fetchCollection(id)
+    firebase.addEventListener('message', handleCollectionFetch)
+
+    return () => {
+      firebase.removeEventListener('message', handleCollectionFetch)
+    }
+  }, [firebase, handleCollectionFetch, id, isFirstMount, normalizedCollections])
 
   return (
     <>
-      <SEO title='New Collection' />
+      <SEO title='Collection' />
       {savedCollections && (
         <>
           <MobileHeader
@@ -116,8 +148,10 @@ export default function NewCollectionPage ({ location }) {
                   savedCollections={savedCollections}
                 />
               </div>
-            ) : // TODO error screen
-            null}
+            ) : (
+              // TODO error screen
+              'loading'
+            )}
           </main>
         </>
       )}

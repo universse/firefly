@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
 import { css } from '@emotion/core'
+import { DifficultyLevels } from 'common'
 
 import Tags from 'components/Collections/Tags'
 import { CollectionTitle } from './styled'
 import { Category, Difficulty } from 'components/common'
 import { Level } from 'icons'
-import { DifficultyLevels } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 export default memo(function CollectionDetails ({

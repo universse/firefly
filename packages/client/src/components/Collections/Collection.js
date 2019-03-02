@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
+import { DifficultyLevels } from 'common'
 
 import Tags from './Tags'
 import { Heart, Level, Save } from '../../icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'pages'
-import { DifficultyLevels } from 'common'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 export default function Collection ({
