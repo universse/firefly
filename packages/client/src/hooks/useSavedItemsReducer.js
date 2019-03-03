@@ -2,8 +2,8 @@ import { useReducer, useEffect, useCallback } from 'react'
 import produce from 'immer'
 import localforage from 'localforage'
 
-function reducer (state, { type, payload }) {
-  return produce(state, draft => {
+function reducer (_, { type, payload }) {
+  return produce(_, draft => {
     switch (type) {
       case 'load':
         return payload || {}

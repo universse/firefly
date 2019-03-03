@@ -54,21 +54,13 @@ export function sendSignInLinkToEmail (email) {
   return auth.sendSignInLinkToEmail(email, actionCodeSettings)
 }
 
-export function signInWithEmailLink (email, href) {
-  return auth
-    .signInWithEmailLink(email, href)
-    .then(result =>
-      self.postMessage({
-        type: '${FirebaseWorkerEvents.EMAIL_LINK_SIGN_IN_SUCCESS}',
-        payload: result.additionalUserInfo.isNewUser
-      })
-    )
-    .catch(({ code }) =>
-      self.postMessage({
-        type: '${FirebaseWorkerEvents.EMAIL_LINK_SIGN_IN_ERROR}',
-        payload: code
-      })
-    )
+export async function signInWithEmailLink (email, href) {
+  try {
+    const result = await auth.signInWithEmailLink(email, href)
+    return { isNewUser: result.additionalUserInfo.isNewUser }
+  } catch (e) {
+    return { error: e.code }
+  }
 }
 
 export function signOut () {
@@ -83,7 +75,7 @@ export function updatePassword (password) {
   return auth.currentUser.updatePassword(password)
 }
 
-export function createCollection (collection) {
+export async function createCollection (collection) {
   const { name, category, level, urls, tags } = collection
 
   const newCollection = {
@@ -108,20 +100,19 @@ export function createCollection (collection) {
 
   batch.set(collectionDoc, newCollection)
   
-  // return batch
-  // .commit()
-  // .then(() =>
-  //   self.postMessage({
-  //     type: '${FirebaseWorkerEvents.COLLECTION_CREATED}',
-  //     payload: { id: collectionDoc.id, ...collection }
-  //   })
-  // )
+  try {
+    await batch.commit()
+    return { id: collectionDoc.id, ...collection }
+  } catch () {
+    return { error: true }
+  }
 }
 
-export function fetchCollection (id) {
+export async function fetchCollection (id) {
   const docRef = firestore.collection('collections').doc(id)
 
-  docRef.get().then(async doc => {
+  try {
+    const doc = await docRef.get()
     if (doc.exists) {
       const collection = doc.data()
       const urlIds = collection.us
@@ -132,20 +123,13 @@ export function fetchCollection (id) {
         collection.us[i] = { id, ...doc.data() }
       }))
 
-      self.postMessage({
-        type: '${FirebaseWorkerEvents.COLLECTION_FETCH_SUCCESS}',
-        payload: collection
-      })
+      return collection
     } else {
-      self.postMessage({
-        type: '${FirebaseWorkerEvents.COLLECTION_FETCH_ERROR}'
-      })
+      return { error: true }
     }
-  }).catch(() => {
-    self.postMessage({
-      type: '${FirebaseWorkerEvents.COLLECTION_FETCH_ERROR}'
-    })
-  })
+  } catch () {
+    return { error: true }
+  }
 }
 `)
 

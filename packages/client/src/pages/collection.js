@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 import { Categories, ItemTypes } from 'common'
@@ -18,7 +18,6 @@ import {
   mobileHeaderHeightInRem
 } from 'utils/styles'
 import copyToClipboard from 'utils/copyToClipboard'
-import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 import { createCollectionPath } from '../../gatsby/utils'
 
 const parseCollectionData = ({ c, l, n, s, t, us }) => ({
@@ -52,14 +51,6 @@ export default function CollectionPage ({ location }) {
 
   const isFirstMount = useIsFirstMount()
 
-  const handleCollectionFetch = useCallback(e => {
-    if (e.data.type === FirebaseWorkerEvents.COLLECTION_FETCH_SUCCESS) {
-      setCollection(parseCollectionData(e.data.payload))
-    } else if (e.data.type === FirebaseWorkerEvents.COLLECTION_FETCH_ERROR) {
-      setHasError(true)
-    }
-  }, [])
-
   useEffect(() => {
     if (isFirstMount) {
       return
@@ -72,13 +63,15 @@ export default function CollectionPage ({ location }) {
     }
 
     // 5dJtAc6eJIenU7g9nO4F
-    firebase.fetchCollection(id)
-    firebase.addEventListener('message', handleCollectionFetch)
-
-    return () => {
-      firebase.removeEventListener('message', handleCollectionFetch)
-    }
-  }, [firebase, handleCollectionFetch, id, isFirstMount, normalizedCollections])
+    firebase
+      .fetchCollection(id)
+      .then(result =>
+        result.error
+          ? setHasError(true)
+          : setCollection(parseCollectionData(result))
+      )
+      .catch(setHasError)
+  }, [firebase, id, isFirstMount, normalizedCollections])
 
   return (
     <>
