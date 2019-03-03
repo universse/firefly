@@ -11456,19 +11456,6 @@ known-css-properties@^0.11.0:
   resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.11.0.tgz#0da784f115ea77c76b81536d7052e90ee6c86a8a"
   integrity sha512-bEZlJzXo5V/ApNNa5z375mJC6Nrz4vG43UgcSCrg2OHC+yuB6j0iDSrY7RQ/+PRofFB03wNIIt9iXIVLr4wc7w==
 
-ky-universal@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/ky-universal/-/ky-universal-0.1.0.tgz#17dd27020427d7fcb6fa5cfcac792a970fcb1cb0"
-  integrity sha512-QyKx159E/gAQFdSxApD+fdTb0ho5dPUgf+DtW5GMFg8chNZfyzaVnzlCO6cWFE67Lrgzz6/xrWae8cm5lZ5/AQ==
-  dependencies:
-    abort-controller "^2.0.2"
-    node-fetch "^2.3.0"
-
-ky@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/ky/-/ky-0.9.0.tgz#f6ca68417e1c95e0292d083d5c3c4c39558c13fe"
-  integrity sha512-5OgdeZ/HROtJh6ghuSARGIe4Y0SzY+eM7EY5YEvlVVBmp3V2ioz1erGRYaf55uMUG0jTkE+L8USxD+oiRmgX8A==
-
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/last-call-webpack-plugin/-/last-call-webpack-plugin-3.0.0.tgz#9742df0e10e3cf46e5c0381c2de90d3a7a2d7555"
