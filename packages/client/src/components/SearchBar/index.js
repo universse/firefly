@@ -6,26 +6,28 @@ import useSearch from 'hooks/useSearch'
 import { DefaultItem, DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 
-// TODO add X icon
+// TODO add X icon, isLoading spinner
 export default function SearchBar ({
   controlledProps,
+  initialIsLoading,
   initialSearchInput,
-  showAllResults,
+  numOfResults,
   Input,
   Item,
   Result,
   ResultBox,
   Root
 }) {
-  const { searchInput, handleChange, handleSearchInput, results } = useSearch(
-    initialSearchInput
-  )
+  const {
+    handleChange,
+    handleSearchInput,
+    isLoading,
+    isTyping,
+    results,
+    searchInput
+  } = useSearch(initialSearchInput, initialIsLoading)
 
   const totalNumOfResults = results.length
-
-  const numOfResults = showAllResults
-    ? totalNumOfResults
-    : Math.min(totalNumOfResults, 7)
 
   return (
     <Downshift
@@ -94,12 +96,15 @@ export default function SearchBar ({
                         isHighlighted: highlightedIndex === numOfResults
                       })}
                     >
-                      <Result to='/search' state={{ searchInput }}>
+                      <Result
+                        to='/search'
+                        state={{ searchInput, initialIsLoading: true }}
+                      >
                         See all results
                       </Result>
                     </Item>
                   )}
-                  {!totalNumOfResults && (
+                  {!isTyping && !isLoading && !totalNumOfResults && (
                     <li
                       css={theme => css`
                         span {
@@ -125,8 +130,9 @@ export default function SearchBar ({
 
 SearchBar.defaultProps = {
   controlledProps: {},
+  initialIsLoading: false,
   initialSearchInput: '',
-  showAllResults: false,
+  numOfResults: Infinity,
   Item: DefaultItem,
   ResultBox: DefaultResultBox,
   Root: DefaultRoot

@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-export function DefaultItem ({ isActive, ...props }) {
+export function DefaultItem ({ isHighlighted, ...props }) {
   return <li {...props} />
 }
 

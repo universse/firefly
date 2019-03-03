@@ -36,6 +36,8 @@
     "gatsby-transformer-sharp": "^2.1.15",
     "immer": "^2.1.0",
     "isomorphic-fetch": "^2.2.1",
+    "ky": "^0.9.0",
+    "ky-universal": "^0.1.0",
     "localforage": "^1.7.3",
     "match-sorter": "^2.3.0",
     "node-sass": "^4.11.0",

@@ -48,6 +48,7 @@ export default memo(function Header ({ location: { pathname } }) {
             </Link>
           </div>
           <SearchBar
+            numOfResults={2}
             Input={Input}
             Item={Item}
             Result={Result}

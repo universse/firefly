@@ -70,7 +70,7 @@ export function SortButton ({ isSelected, ...props }) {
         padding-left: 1rem;
         text-align: left;
         text-transform: uppercase;
-        width: 13.5rem;
+        width: 11.5rem;
       `}
       tabIndex='-1'
       type='button'
@@ -105,7 +105,7 @@ export function ToggleButton ({ children, ...props }) {
         justify-content: space-between;
         padding-left: 1rem;
         text-transform: uppercase;
-        width: 13.5rem;
+        width: 11.5rem;
       `}
       {...props}
     >

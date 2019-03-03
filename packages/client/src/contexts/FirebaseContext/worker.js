@@ -102,8 +102,8 @@ export async function createCollection (collection) {
   
   try {
     await batch.commit()
-    return { id: collectionDoc.id, ...collection }
-  } catch () {
+    return { id: collectionDoc.id.toLowerCase() , ...collection }
+  } catch {
     return { error: true }
   }
 }
@@ -127,7 +127,7 @@ export async function fetchCollection (id) {
     } else {
       return { error: true }
     }
-  } catch () {
+  } catch {
     return { error: true }
   }
 }

@@ -14,6 +14,11 @@ import { Back, Search } from 'icons'
 
 export default function SearchPage ({ location }) {
   const initialSearchInput = location.state ? location.state.searchInput : ''
+
+  const initialIsLoading = location.state
+    ? location.state.initialIsLoading
+    : false
+
   const isDesktop = useContext(MediaContext)
 
   return (
@@ -76,8 +81,8 @@ export default function SearchPage ({ location }) {
           </div>
           <SearchBar
             controlledProps={{ isOpen: true }}
+            initialIsLoading={initialIsLoading}
             initialSearchInput={initialSearchInput}
-            showAllResults
             Input={Input}
             Result={Result}
           />

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
-import { Categories, ItemTypes } from 'common'
 
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
@@ -18,22 +17,8 @@ import {
   mobileHeaderHeightInRem
 } from 'utils/styles'
 import copyToClipboard from 'utils/copyToClipboard'
+import parseCollectionData from 'utils/parseCollectionData'
 import { createCollectionPath } from '../../gatsby/utils'
-
-const parseCollectionData = ({ c, l, n, s, t, us }) => ({
-  category: Categories[c],
-  level: l,
-  name: n,
-  numOfItems: us.length,
-  suggestions: s,
-  tags: t,
-  urls: us.map(({ id, ti, ty, u }) => ({
-    id,
-    title: ti,
-    url: u,
-    type: ItemTypes[ty]
-  }))
-})
 
 export default function CollectionPage ({ location }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
@@ -70,7 +55,7 @@ export default function CollectionPage ({ location }) {
           ? setHasError(true)
           : setCollection(parseCollectionData(result))
       )
-      .catch(setHasError)
+      .catch(() => setHasError(true))
   }, [firebase, id, isFirstMount, normalizedCollections])
 
   return (
@@ -124,27 +109,28 @@ export default function CollectionPage ({ location }) {
               }
             `}
           >
-            {collection ? (
-              <div
-                css={theme => css`
-                  ${baseWrapper};
-                  max-width: 50rem;
+            <div
+              css={theme => css`
+                ${baseWrapper};
+                max-width: 50rem;
 
-                  ${theme.screens.mobile} {
-                    padding: 0 0 1rem;
-                  }
-                `}
-              >
+                ${theme.screens.mobile} {
+                  padding: 0 0 1rem;
+                }
+              `}
+            >
+              {collection ? (
                 <CollectionView
                   collection={collection}
                   onSaveClick={onSaveClick}
                   savedCollections={savedCollections}
                 />
-              </div>
-            ) : (
-              // TODO error screen
-              'loading'
-            )}
+              ) : hasError ? (
+                'error'
+              ) : (
+                'loading'
+              )}
+            </div>
           </main>
         </>
       )}

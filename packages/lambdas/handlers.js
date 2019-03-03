@@ -1,6 +1,9 @@
 import { ApolloServer } from 'apollo-server-lambda'
 import typeDefs from './typeDefs'
 import resolvers from './resolvers'
+// import preval from 'preval.macro'
+
+// const one = preval`module.exports = 1 + 2 - 1 - 1`
 
 const server = new ApolloServer({
   typeDefs,

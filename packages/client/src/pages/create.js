@@ -5,15 +5,21 @@ import { navigate } from 'gatsby'
 
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
+import URLInput from 'components/URLInput'
 import { IconButton } from 'components/common'
 import FirebaseContext from 'contexts/FirebaseContext'
 import { Back } from 'icons'
+import {
+  baseWrapper,
+  headerHeightInRem,
+  mobileHeaderHeightInRem
+} from 'utils/styles'
 
 const initialValue = {
   name: '',
-  category: '', // index of
+  category: '',
   level: 0,
-  urls: [{ title: '', type: '', url: '' }],
+  urls: [],
   tags: []
 }
 
@@ -25,6 +31,7 @@ function reducer (state, { type, payload }) {
         break
 
       case 'addUrl':
+        draft.tags.push(payload)
         break
 
       case 'addTag':
@@ -50,6 +57,8 @@ export default function CreatePage () {
     )
   }, [collection, firebase])
 
+  // confirm URL
+
   // const handleUrlInput = e => {
   //   const url = e.target.value
   //   // fetch title
@@ -71,9 +80,41 @@ export default function CreatePage () {
         shadow
         title='Create'
       />
-      <form onSubmit={handleSubmit}>
-        <input />
-      </form>
+      <main
+        css={theme => css`
+          background-color: ${theme.colors.gray100};
+          min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
+
+          ${theme.screens.nonMobile} {
+            padding: 1rem 0;
+          }
+
+          ${theme.screens.desktop} {
+            min-height: calc(100vh - ${headerHeightInRem}rem);
+            padding: 2rem 0;
+          }
+        `}
+      >
+        <div
+          css={theme => css`
+            ${baseWrapper};
+            max-width: 50rem;
+
+            ${theme.screens.mobile} {
+              padding: 0 0 1rem;
+            }
+          `}
+        >
+          <form onSubmit={handleSubmit}>
+            <input />
+            <input />
+            {/* dropdown category */}
+            {/* dropdown level */}
+            {/* tag */}
+            {/* url */}
+          </form>
+        </div>
+      </main>
     </>
   )
 }

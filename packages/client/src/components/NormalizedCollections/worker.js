@@ -7,7 +7,7 @@ export function normalizeCollections (allCollections) {
   const normalizedCollections = {}
 
   allCollections.forEach(({ node }) => {
-    normalizedCollections[node.id] = node
+    normalizedCollections[node.id.toLowerCase()] = node
   })
 
   return normalizedCollections

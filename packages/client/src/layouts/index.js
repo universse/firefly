@@ -14,6 +14,7 @@ import SavedCollections from 'components/SavedCollections'
 import SignUpForm from 'components/SignUpForm'
 import Theme from 'constants/Theme'
 import isIndexPage from 'utils/isIndexPage'
+import shouldNotHaveMobileNavigation from 'utils/shouldNotHaveMobileNavigation'
 import { headerHeightInRem } from 'utils/styles'
 
 function Site ({ children, location }) {
@@ -27,7 +28,7 @@ function Site ({ children, location }) {
     >
       {location.pathname !== '/search' && <Header location={location} />}
       <SavedCollections>{children}</SavedCollections>
-      {!location.pathname.includes('/collection/') && (
+      {!shouldNotHaveMobileNavigation(location.pathname) && (
         <MobileNavigation location={location} />
       )}
     </div>

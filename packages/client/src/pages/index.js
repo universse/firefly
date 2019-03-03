@@ -22,7 +22,11 @@ import useParams from 'hooks/useParams'
 import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
 import useURLUtils from 'hooks/useURLUtils'
-import { baseWrapper, mobileNavigationHeightInRem } from 'utils/styles'
+import {
+  baseWrapper,
+  headerHeightInRem,
+  mobileNavigationHeightInRem
+} from 'utils/styles'
 import ModalTypes from 'constants/ModalTypes'
 
 export const URLUtilsContext = createContext()
@@ -58,7 +62,7 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          min-height: 100vh;
+          min-height: calc(100vh - ${headerHeightInRem}rem);
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
           ${theme.screens.desktop} {
