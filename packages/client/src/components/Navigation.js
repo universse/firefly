@@ -110,11 +110,9 @@ export default function Navigation () {
           margin-left: 1.5rem;
         `}
       >
-        <GhostButton onClick={() => openModal('signUpForm')}>
-          Get Started
-        </GhostButton>
+        <GhostButton onClick={() => openModal('signUpForm')}>Join</GhostButton>
       </li>
-      {/* <li
+      <li
         css={css`
           margin-left: 1rem;
         `}
@@ -122,7 +120,7 @@ export default function Navigation () {
         <PrimaryButton onClick={() => openModal('signUpForm')}>
           Get Started
         </PrimaryButton>
-      </li> */}
+      </li>
     </>
   )
 
