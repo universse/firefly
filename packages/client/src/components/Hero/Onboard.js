@@ -6,7 +6,7 @@ import LocalStorage from 'constants/LocalStorage'
 export default function Onboard () {
   useEffect(() => {
     const removeIsNewUser = () =>
-      window.localStorage.setItem(LocalStorage.IS_NEW_USER)
+      window.localStorage.removeItem(LocalStorage.IS_NEW_USER)
 
     window.addEventListener('beforeunload', removeIsNewUser)
 

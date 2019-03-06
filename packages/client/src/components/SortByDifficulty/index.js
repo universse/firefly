@@ -1,8 +1,8 @@
 import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { URLUtilsContext } from 'pages'
 import { Dropdown } from 'components/common'
+import URLUtilsContext from 'contexts/URLUtilsContext'
 import {
   Item,
   Label,

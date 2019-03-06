@@ -6,7 +6,7 @@ import Tags from './Tags'
 import { Heart, Level, Save } from '../../icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
-import { URLUtilsContext } from 'pages'
+import URLUtilsContext from 'contexts/URLUtilsContext'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 export default function Collection ({

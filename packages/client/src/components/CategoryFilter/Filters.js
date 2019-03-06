@@ -3,9 +3,9 @@ import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 import { Categories } from 'common'
 
+import URLUtilsContext from 'contexts/URLUtilsContext'
 import { Category } from './styled'
 import { createCategoryPath } from '../../../gatsby/utils'
-import { URLUtilsContext } from 'pages'
 
 function Filters ({ handleScroll, location: { pathname }, slider }) {
   const { onCategoryFilterClick } = useContext(URLUtilsContext)

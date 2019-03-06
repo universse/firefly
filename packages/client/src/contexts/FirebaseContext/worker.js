@@ -102,7 +102,8 @@ export async function createCollection (collection) {
   
   try {
     await batch.commit()
-    return { id: collectionDoc.id.toLowerCase() , ...collection }
+    collection.id = collectionDoc.id.toLowerCase()
+    return { collection }
   } catch {
     return { error: true }
   }
@@ -123,7 +124,7 @@ export async function fetchCollection (id) {
         collection.us[i] = { id, ...doc.data() }
       }))
 
-      return collection
+      return { collection }
     } else {
       return { error: true }
     }

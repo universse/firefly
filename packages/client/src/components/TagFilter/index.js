@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
+import URLUtilsContext from 'contexts/URLUtilsContext'
 import { Title } from 'components/common'
 import { ClearFilterButton, Count, MobileTag, Tag } from './styled'
-import { URLUtilsContext } from 'pages'
 
 export default function TagFilter ({ aggregatedTags, sort, tags }) {
   const { updateQuery, constructUrl, onTagClearClick } = useContext(

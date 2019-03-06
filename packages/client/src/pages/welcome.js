@@ -21,9 +21,9 @@ export default function WelcomePage () {
 
           firebase
             .signInWithEmailLink(email, window.location.href)
-            .then(result => {
-              if (result.error) {
-                const code = result.error
+            .then(({ error, isNewUser }) => {
+              if (error) {
+                const code = error
 
                 if (
                   code === AuthErrors.EXPIRED_ACTION_CODE ||
@@ -35,10 +35,7 @@ export default function WelcomePage () {
                 setMessage('Welcome')
                 window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
                 window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-                window.localStorage.setItem(
-                  LocalStorage.IS_NEW_USER,
-                  result.isNewUser
-                )
+                window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
 
                 // TODO welcome redirecting to homepage
               }

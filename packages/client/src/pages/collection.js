@@ -9,7 +9,6 @@ import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
 import FirebaseContext from 'contexts/FirebaseContext'
 import { Back, Save, Share } from 'icons'
-import useIsFirstMount from 'hooks/useIsFirstMount'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
@@ -20,24 +19,32 @@ import copyToClipboard from 'utils/copyToClipboard'
 import parseCollectionData from 'utils/parseCollectionData'
 import { createCollectionPath } from '../../gatsby/utils'
 
+const getCollectionIdFromPathname = pathname => {
+  const normalizedPathname = pathname.endsWith('/')
+    ? pathname.slice(0, -1)
+    : pathname
+
+  return normalizedPathname
+    .split('/')
+    .pop()
+    .toLowerCase()
+}
+
 export default function CollectionPage ({ location }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
   const [savedCollections, onSaveClick] = useSavedCollections()
-
   const firebase = useContext(FirebaseContext)
-  const pathname = location.pathname
-  const id = pathname.substring(pathname.lastIndexOf('/') + 1)
+
+  const id = getCollectionIdFromPathname(location.pathname)
 
   const [collection, setCollection] = useState(
     () => location.state && location.state.collection
   )
-
+  const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-  const isFirstMount = useIsFirstMount()
-
   useEffect(() => {
-    if (isFirstMount) {
+    if (!normalizedCollections || collection) {
       return
     }
 
@@ -50,13 +57,14 @@ export default function CollectionPage ({ location }) {
     // 5dJtAc6eJIenU7g9nO4F
     firebase
       .fetchCollection(id)
-      .then(result =>
-        result.error
+      .then(({ collection, error }) =>
+        error
           ? setHasError(true)
-          : setCollection(parseCollectionData(result))
+          : setCollection(parseCollectionData(collection))
       )
       .catch(() => setHasError(true))
-  }, [firebase, id, isFirstMount, normalizedCollections])
+      .finally(() => setIsLoading(false))
+  }, [collection, firebase, id, normalizedCollections])
 
   return (
     <>
@@ -119,17 +127,15 @@ export default function CollectionPage ({ location }) {
                 }
               `}
             >
-              {collection ? (
+              {collection && (
                 <CollectionView
                   collection={collection}
                   onSaveClick={onSaveClick}
                   savedCollections={savedCollections}
                 />
-              ) : hasError ? (
-                'error'
-              ) : (
-                'loading'
               )}
+              {hasError && 'error'}
+              {isLoading && 'loading'}
             </div>
           </main>
         </>

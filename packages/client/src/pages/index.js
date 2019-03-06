@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -15,6 +15,7 @@ import SortByDifficulty, {
 } from 'components/SortByDifficulty'
 import TagFilter, { MobileTagFilter } from 'components/TagFilter'
 import Media from 'components/Media'
+import URLUtilsContext from 'contexts/URLUtilsContext'
 import { IconButton, Sidebar } from 'components/common'
 import { Filter } from 'icons'
 import useAggregatedTags from 'hooks/useAggregatedTags'
@@ -28,8 +29,6 @@ import {
   mobileNavigationHeightInRem
 } from 'utils/styles'
 import ModalTypes from 'constants/ModalTypes'
-
-export const URLUtilsContext = createContext()
 
 export default function IndexPage ({ data, location: { pathname, search } }) {
   const [queryValues, dispatch] = useParams(search)

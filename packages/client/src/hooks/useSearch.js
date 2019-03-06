@@ -1,9 +1,9 @@
-import { useState, useContext, useMemo, useCallback } from 'react'
+import { useState, useContext, useCallback, useEffect } from 'react'
 import { navigate } from 'gatsby'
 import matchSorter from 'match-sorter'
 
 import { AllCollectionsContext } from 'components/AllCollections'
-import useDebounce from 'hooks/useDebounce'
+import useDebouncedValue from 'hooks/useDebouncedValue'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function useSearch (initialSearchInput, initialIsLoading) {
@@ -12,28 +12,6 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(initialIsLoading)
   const [isTyping, setIsTyping] = useState(false)
-
-  const deps = useMemo(() => [allCollections, searchInput], [
-    allCollections,
-    searchInput
-  ])
-
-  const searchCollections = useCallback(() => {
-    if (!searchInput) {
-      setResults([])
-    } else {
-      setIsTyping(false)
-      setIsLoading(true)
-      setResults(
-        matchSorter(allCollections, searchInput, {
-          keys: ['node.name']
-        })
-      )
-      setIsLoading(false)
-    }
-  }, [allCollections, searchInput])
-
-  useDebounce(searchCollections, 300, deps)
 
   const handleChange = useCallback(({ node: { id, name } }) => {
     if (name) {
@@ -47,10 +25,26 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   }, [searchInput])
 
   const handleSearchInput = useCallback(e => {
-    setIsLoading(false)
     setIsTyping(true)
     setSearchInput(e.target.value)
   }, [])
+
+  const debouncedSearchInput = useDebouncedValue(searchInput, 300)
+
+  useEffect(() => {
+    if (debouncedSearchInput) {
+      setIsTyping(false)
+      setIsLoading(true)
+      setResults(
+        matchSorter(allCollections, debouncedSearchInput, {
+          keys: ['node.name']
+        })
+      )
+      setIsLoading(false)
+    } else {
+      setResults([])
+    }
+  }, [allCollections, debouncedSearchInput])
 
   return {
     handleChange,

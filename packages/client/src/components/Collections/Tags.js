@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
 import { Tag } from 'components/common'
-import { URLUtilsContext } from 'pages'
+import URLUtilsContext from 'contexts/URLUtilsContext'
 import isIndexPage from 'utils/isIndexPage'
 
 function Tags ({ location: { pathname }, tags }) {
