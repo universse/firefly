@@ -26,7 +26,7 @@ function Site ({ children, location }) {
         }
       `}
     >
-      {location.pathname !== '/search' && <Header location={location} />}
+      {location.pathname !== '/search' && <Header />}
       <SavedCollections>{children}</SavedCollections>
       {!shouldNotHaveMobileNavigation(location.pathname) && (
         <MobileNavigation location={location} />
@@ -37,7 +37,7 @@ function Site ({ children, location }) {
 
 export default function Layout ({ children, location }) {
   return (
-    <AllCollections location={location}>
+    <AllCollections>
       <ThemeProvider theme={Theme}>
         <NormalizedCollections>
           <Authentication>

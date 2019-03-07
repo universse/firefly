@@ -1,11 +1,11 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
 
 import { Heart, Save, Share } from '../../icons'
 import { ProgressBar } from './styled'
 import { ActionBar, IconButton } from 'components/common'
 import copyToClipboard from 'utils/copyToClipboard'
+import withLocation from 'utils/withLocation'
 
 function CollectionActions ({
   id,
@@ -76,10 +76,4 @@ function CollectionActions ({
   )
 }
 
-export default function WithLocation (props) {
-  return (
-    <Location>
-      {({ location }) => <CollectionActions location={location} {...props} />}
-    </Location>
-  )
-}
+export default withLocation(CollectionActions)

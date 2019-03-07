@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
 
 import { Tag } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
+import withLocation from 'utils/withLocation'
 
 function Tags ({ location: { pathname }, tags }) {
   const urlUtils = useContext(URLUtilsContext)
@@ -40,10 +40,4 @@ function Tags ({ location: { pathname }, tags }) {
   )
 }
 
-export default function WithLocation (props) {
-  return (
-    <Location>
-      {({ location }) => <Tags location={location} {...props} />}
-    </Location>
-  )
-}
+export default withLocation(Tags)

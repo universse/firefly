@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
-import { Categories } from 'common'
 
+import { Categories } from 'common'
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { Category } from './styled'
+import withLocation from 'utils/withLocation'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 function Filters ({ handleScroll, location: { pathname }, slider }) {
@@ -65,10 +65,4 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
   )
 }
 
-export default function WithLocation (props) {
-  return (
-    <Location>
-      {({ location }) => <Filters location={location} {...props} />}
-    </Location>
-  )
-}
+export default withLocation(Filters)

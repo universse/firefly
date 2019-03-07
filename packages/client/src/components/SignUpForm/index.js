@@ -49,26 +49,23 @@ export default function SignUpForm () {
       type={ModalTypes.SIGN_UP_FORM}
     >
       {!signUpState.loading && signUpState.email ? (
-        <>
-          <div
-            css={css`
-              text-align: center;
-              width: 20rem;
+        <div
+          css={css`
+            text-align: center;
+            width: 20rem;
+          `}
+        >
+          <p
+            css={theme => css`
+              color: ${theme.colors.gray900};
+              font-size: 1rem;
+              line-height: 1.5rem;
             `}
           >
-            <p
-              css={theme => css`
-                color: ${theme.colors.gray900};
-                font-size: 1rem;
-                line-height: 1.5rem;
-              `}
-            >
-              Thank you for signing up. To confirm your email address, click on
-              the link we've just sent to <strong>{signUpState.email}</strong>.
-            </p>
-          </div>
-          <CloseButton onClick={handleModalClose} />
-        </>
+            Thank you for signing up. To confirm your email address, click on
+            the link we've just sent to <strong>{signUpState.email}</strong>.
+          </p>
+        </div>
       ) : (
         <>
           <div
@@ -108,9 +105,9 @@ export default function SignUpForm () {
             signUpState={signUpState}
             setSignUpState={setSignUpState}
           /> */}
-          <CloseButton onClick={handleModalClose} />
         </>
       )}
+      <CloseButton onClick={handleModalClose} />
     </Modal>
   )
 }

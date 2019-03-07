@@ -16,7 +16,7 @@ import {
   Root
 } from './styled'
 
-export default memo(function Header ({ location: { pathname } }) {
+export default memo(function Header () {
   return (
     <HeaderTag
       css={theme => css`

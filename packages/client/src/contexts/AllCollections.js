@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 export const AllCollectionsContext = createContext()
 
-export default function AllCollections ({ children, location }) {
+export default function AllCollections ({ children }) {
   const data = useStaticQuery(graphql`
     query {
       allCollections {

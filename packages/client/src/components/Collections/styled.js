@@ -2,11 +2,16 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
+import withLocation from 'utils/withLocation'
 import { createCollectionPath } from '../../../gatsby/utils'
 
 export const collectionHeightInRem = 9
 
-export function CollectionTitle ({ id, name }) {
+export const CollectionTitle = withLocation(function ({
+  id,
+  location: { pathname },
+  name
+}) {
   return (
     <Link
       css={theme => css`
@@ -23,6 +28,7 @@ export function CollectionTitle ({ id, name }) {
         }
       `}
       to={createCollectionPath({ id, name })}
+      state={{ pathname }}
     >
       <h3
         css={theme => css`
@@ -42,7 +48,7 @@ export function CollectionTitle ({ id, name }) {
       </h3>
     </Link>
   )
-}
+})
 
 export function CollectionWrapper (props) {
   return (
