@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { SavedCollectionsContext } from 'components/SavedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
 import useLocalForage from './useLocalForage'
 import LocalStorage from 'constants/LocalStorage'
 

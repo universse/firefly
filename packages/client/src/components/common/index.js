@@ -207,7 +207,7 @@ export function Tag (props) {
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 0.75rem;
-        color: ${theme.colors.gray700};
+        color: ${theme.colors.gray900};
         display: block;
         font-size: 0.875rem;
         font-weight: 600;
@@ -216,10 +216,6 @@ export function Tag (props) {
 
         &:hover {
           background-color: ${theme.colors.gray400};
-        }
-
-        ${theme.screens.desktop} {
-          color: ${theme.colors.gray900};
         }
       `}
       {...props}

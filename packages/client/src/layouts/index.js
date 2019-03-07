@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 
-import Authentication from 'components/Authentication'
-import ModalProvider from 'components/ModalProvider'
-import AllCollections from 'components/AllCollections'
 import Header from 'components/Header'
-import Media from 'components/Media'
 import MobileNavigation from 'components/MobileNavigation'
-import NormalizedCollections from 'components/NormalizedCollections'
-import SavedCollections from 'components/SavedCollections'
+import Media from 'contexts/Media'
+import Modal from 'contexts/Modal'
+import AllCollections from 'contexts/AllCollections'
+import Authentication from 'contexts/Authentication'
+import NormalizedCollections from 'contexts/NormalizedCollections'
+import SavedCollections from 'contexts/SavedCollections'
 import SignUpForm from 'components/SignUpForm'
 import Theme from 'constants/Theme'
 import isIndexPage from 'utils/isIndexPage'
@@ -41,7 +41,7 @@ export default function Layout ({ children, location }) {
       <ThemeProvider theme={Theme}>
         <NormalizedCollections>
           <Authentication>
-            <ModalProvider>
+            <Modal>
               {isIndexPage(location.pathname) ? (
                 <Site location={location}>{children}</Site>
               ) : (
@@ -50,7 +50,7 @@ export default function Layout ({ children, location }) {
                 </Media>
               )}
               <SignUpForm />
-            </ModalProvider>
+            </Modal>
           </Authentication>
         </NormalizedCollections>
       </ThemeProvider>

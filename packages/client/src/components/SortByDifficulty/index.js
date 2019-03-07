@@ -2,7 +2,6 @@ import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { Dropdown } from 'components/common'
-import URLUtilsContext from 'contexts/URLUtilsContext'
 import {
   Item,
   Label,
@@ -13,6 +12,7 @@ import {
   ToggleButton,
   TogglerLabel
 } from './styled'
+import { URLUtilsContext } from 'contexts/URLUtils'
 import SortOptions from 'constants/SortOptions'
 
 export default function SortByDifficulty ({ sort }) {

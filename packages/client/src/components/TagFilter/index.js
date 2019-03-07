@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
-import URLUtilsContext from 'contexts/URLUtilsContext'
+import { URLUtilsContext } from 'contexts/URLUtils'
 import { Title } from 'components/common'
 import { ClearFilterButton, Count, MobileTag, Tag } from './styled'
 

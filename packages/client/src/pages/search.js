@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
 import { IconButton, Input, Result } from 'components/common'
-import { MediaContext } from 'components/Media'
+import { MediaContext } from 'contexts/Media'
 import {
   baseWrapper,
   headerHeightInRem,

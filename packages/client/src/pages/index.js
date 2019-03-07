@@ -1,21 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, memo } from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { AllCollectionsContext } from 'components/AllCollections'
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import Hero from 'components/Hero'
 import { MobileHeader } from 'components/Header'
 import Modal from 'components/Modal'
-import { ModalContext } from 'components/ModalProvider'
 import SEO from 'components/SEO'
 import SortByDifficulty, {
   MobileSortByDifficulty
 } from 'components/SortByDifficulty'
 import TagFilter, { MobileTagFilter } from 'components/TagFilter'
-import Media from 'components/Media'
-import URLUtilsContext from 'contexts/URLUtilsContext'
+import { AllCollectionsContext } from 'contexts/AllCollections'
+import Media from 'contexts/Media'
+import { ModalContext } from 'contexts/Modal'
+import { URLUtilsContext } from 'contexts/URLUtils'
 import { IconButton, Sidebar } from 'components/common'
 import { Filter } from 'icons'
 import useAggregatedTags from 'hooks/useAggregatedTags'
@@ -30,7 +30,11 @@ import {
 } from 'utils/styles'
 import ModalTypes from 'constants/ModalTypes'
 
-export default function IndexPage ({ data, location: { pathname, search } }) {
+const IndexPage = memo(function ({
+  data,
+  location: { pathname, search },
+  openModal
+}) {
   const [queryValues, dispatch] = useParams(search)
   const { sort, tags } = queryValues
   const allCollections = useContext(AllCollectionsContext)
@@ -41,7 +45,6 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
   const sortedCollections = useSortedCollections(filteredCollections, sort)
   const aggregatedTags = useAggregatedTags(filteredCollections, tags)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
-  const { openModal } = useContext(ModalContext)
 
   return (
     <>
@@ -128,6 +131,12 @@ export default function IndexPage ({ data, location: { pathname, search } }) {
       </main>
     </>
   )
+})
+
+export default function (props) {
+  const { openModal } = useContext(ModalContext)
+
+  return <IndexPage {...props} openModal={openModal} />
 }
 
 export const collections = graphql`

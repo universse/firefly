@@ -1,14 +1,25 @@
 import React, { useState, useRef, useContext } from 'react'
 import { css } from '@emotion/core'
+import { graphql, useStaticQuery } from 'gatsby'
 
 import Modal from 'components/Modal'
-import { ModalContext } from 'components/ModalProvider'
 import EmailLogin from './EmailLogin'
 // import SocialLogin from './SocialLogin'
 import { CloseButton } from './styled'
+import { ModalContext } from 'contexts/Modal'
 import ModalTypes from 'constants/ModalTypes'
 
 export default function SignUpForm () {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
+
   const [signUpState, setSignUpState] = useState({
     loading: false,
     email: '',
@@ -60,6 +71,22 @@ export default function SignUpForm () {
         </>
       ) : (
         <>
+          <div
+            css={css`
+              margin-bottom: 1rem;
+            `}
+          >
+            <h3
+              css={theme => css`
+                color: ${theme.colors.gray900};
+                font-size: 1.25rem;
+                font-weight: 700;
+                line-height: 2rem;
+              `}
+            >
+              Welcome to {data.site.siteMetadata.title}
+            </h3>
+          </div>
           <EmailLogin inputRef={focusable} setSignUpState={setSignUpState} />
           {/* <div
             css={css`

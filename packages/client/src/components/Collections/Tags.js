@@ -4,8 +4,7 @@ import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 
 import { Tag } from 'components/common'
-import URLUtilsContext from 'contexts/URLUtilsContext'
-import isIndexPage from 'utils/isIndexPage'
+import { URLUtilsContext } from 'contexts/URLUtils'
 
 function Tags ({ location: { pathname }, tags }) {
   const urlUtils = useContext(URLUtilsContext)
@@ -27,14 +26,10 @@ function Tags ({ location: { pathname }, tags }) {
           <Tag
             onClick={e => {
               e.preventDefault()
-              isIndexPage(pathname)
-                ? urlUtils.onTagClick(tag)
-                : navigate(`/?tags=${tag}`)
+              urlUtils ? urlUtils.onTagClick(tag) : navigate(`/?tags=${tag}`)
             }}
             href={
-              isIndexPage(pathname)
-                ? urlUtils.constructUrl(tag, true).href
-                : `/?tags=${tag}`
+              urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`
             }
           >
             {tag}

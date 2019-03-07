@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import FirebaseContext from '../contexts/FirebaseContext'
+import { FirebaseContext } from 'contexts/Firebase'
 import LocalStorage from 'constants/LocalStorage'
 import AuthErrors from 'constants/AuthErrors'
 

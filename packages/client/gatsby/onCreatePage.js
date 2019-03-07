@@ -9,7 +9,6 @@ module.exports = ({ page, actions }) => {
 
     createPage({
       ...page,
-      path: '/',
       context: { category: 'all' }
     })
 

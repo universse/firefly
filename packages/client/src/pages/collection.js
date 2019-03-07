@@ -4,10 +4,10 @@ import { navigate } from 'gatsby'
 
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
-import { NormalizedCollectionsContext } from 'components/NormalizedCollections'
 import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
-import FirebaseContext from 'contexts/FirebaseContext'
+import { FirebaseContext } from 'contexts/Firebase'
+import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { Back, Save, Share } from 'icons'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {

@@ -2,7 +2,7 @@ import { useState, useContext, useCallback, useEffect } from 'react'
 import { navigate } from 'gatsby'
 import matchSorter from 'match-sorter'
 
-import { AllCollectionsContext } from 'components/AllCollections'
+import { AllCollectionsContext } from 'contexts/AllCollections'
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import { createCollectionPath } from '../../gatsby/utils'
 

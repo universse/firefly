@@ -3,12 +3,12 @@ const { resolve } = require('path')
 const { Categories, ItemTypes } = require('common')
 
 require('dotenv').config({
-  path: resolve(__dirname, `.env.${process.env.NODE_ENV}`)
+  path: resolve(__dirname, `.env.${process.env.NODE_ENV || 'development'}`)
 })
 
 module.exports = {
   siteMetadata: {
-    title: 'Firefly - Follow your curiosity.',
+    title: 'Firefly',
     description:
       'Discover the best learning resources, curated by the community.'
     // siteUrl: 'https://'

@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 
-import FirebaseContext from 'contexts/FirebaseContext'
+import { FirebaseContext } from 'contexts/Firebase'
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
 export const AuthenticationContext = createContext()

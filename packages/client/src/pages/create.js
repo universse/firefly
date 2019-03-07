@@ -7,7 +7,7 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import URLInput from 'components/URLInput'
 import { IconButton } from 'components/common'
-import FirebaseContext from 'contexts/FirebaseContext'
+import { FirebaseContext } from 'contexts/Firebase'
 import { Back } from 'icons'
 import {
   baseWrapper,

@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { AllCollectionsContext } from 'components/AllCollections'
+import { AllCollectionsContext } from 'contexts/AllCollections'
 import worker from './worker'
 
 export const NormalizedCollectionsContext = createContext()

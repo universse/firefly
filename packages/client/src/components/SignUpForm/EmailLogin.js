@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import FirebaseContext from 'contexts/FirebaseContext'
+import { FirebaseContext } from 'contexts/Firebase'
 import LocalStorage from 'constants/LocalStorage'
 import { AuthButton, ErrorMessage, Input } from './styled'
 
@@ -32,46 +32,28 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
 
   // spinner icon to button
   return (
-    <>
+    <form onSubmit={handleSubmit}>
+      <Input
+        aria-label='Your Email Address'
+        name='email'
+        onChange={handleChange}
+        onFocus={handleFocus}
+        placeholder='username@domain.com'
+        inputRef={inputRef}
+        value={email}
+      />
+      {isErrorShown && (
+        <div>
+          <ErrorMessage>Please enter a valid email address</ErrorMessage>
+        </div>
+      )}
       <div
         css={css`
-          margin-bottom: 1rem;
+          margin-top: 1rem;
         `}
       >
-        <h3
-          css={theme => css`
-            color: ${theme.colors.gray900};
-            font-size: 1.25rem;
-            font-weight: 700;
-            line-height: 2rem;
-          `}
-        >
-          Let's Get Started
-        </h3>
+        <AuthButton type='submit'>Continue</AuthButton>
       </div>
-      <form onSubmit={handleSubmit}>
-        <Input
-          aria-label='Your Email Address'
-          name='email'
-          onChange={handleChange}
-          onFocus={handleFocus}
-          placeholder='username@domain.com'
-          inputRef={inputRef}
-          value={email}
-        />
-        {isErrorShown && (
-          <div>
-            <ErrorMessage>Please enter a valid email address</ErrorMessage>
-          </div>
-        )}
-        <div
-          css={css`
-            margin-top: 1rem;
-          `}
-        >
-          <AuthButton type='submit'>Continue</AuthButton>
-        </div>
-      </form>
-    </>
+    </form>
   )
 }

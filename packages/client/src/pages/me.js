@@ -5,9 +5,9 @@ import { css } from '@emotion/core'
 
 import Collection from 'components/Collections/Collection'
 import { MobileHeader } from 'components/Header'
-import { MediaContext } from 'components/Media'
-import { NormalizedCollectionsContext } from 'components/NormalizedCollections'
 import SEO from 'components/SEO'
+import { MediaContext } from 'contexts/Media'
+import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
@@ -91,7 +91,7 @@ export default function MePage (props) {
                   key={id}
                 >
                   <Collection
-                    collection={normalizedCollections[id]}
+                    collection={normalizedCollections[id.toLowerCase()]}
                     // handleHeartClick={onHeartClick}
                     handleSaveClick={onSaveClick}
                     isSaved

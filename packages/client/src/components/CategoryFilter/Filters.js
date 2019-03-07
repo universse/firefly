@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { Location } from '@reach/router'
 import { Categories } from 'common'
 
-import URLUtilsContext from 'contexts/URLUtilsContext'
+import { URLUtilsContext } from 'contexts/URLUtils'
 import { Category } from './styled'
 import { createCategoryPath } from '../../../gatsby/utils'
 

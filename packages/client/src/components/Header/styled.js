@@ -122,7 +122,7 @@ export function Root ({ innerRef, ...props }) {
       css={css`
         display: block;
         position: relative;
-        width: 30rem;
+        width: 28rem;
       `}
       ref={innerRef}
       {...props}

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import ReactModal from 'react-modal'
 
-import { ModalContext } from 'components/ModalProvider'
+import { ModalContext } from 'contexts/Modal'
 
 ReactModal.setAppElement('#___gatsby')
 

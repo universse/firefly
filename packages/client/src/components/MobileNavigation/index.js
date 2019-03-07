@@ -1,80 +1,60 @@
-import React from 'react'
-import { Link } from 'gatsby'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
-// import { ModalContext } from 'components/ModalProvider'
-// import FirebaseContext from 'contexts/FirebaseContext'
+import { NavLink } from './styled'
 import { Home, Search, Library } from 'icons'
+import { FirebaseContext } from 'contexts/Firebase'
+import { ModalContext } from 'contexts/Modal'
 import { hasSignedIn } from 'utils/localStorageUtils'
 import isIndexPage from 'utils/isIndexPage'
 import { mobileNavigationHeightInRem } from 'utils/styles'
 
-function NavLink ({ isActive, label, Icon, ...props }) {
-  return (
-    <Link
-      css={theme => css`
-        align-items: center;
-        color: ${isActive ? theme.colors.brand500 : theme.colors.gray500};
-        display: flex;
-        flex-direction: column;
-        height: ${mobileNavigationHeightInRem}rem;
-        padding: 0.5rem 0 0.5rem;
-      `}
-      {...props}
-    >
-      <div
-        css={css`
-          margin-bottom: 0.25rem;
-        `}
-      >
-        <Icon />
-      </div>
-      <span
-        css={css`
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-        `}
-      >
-        {label}
-      </span>
-    </Link>
-  )
-}
+function AuthNav () {
+  const { openModal } = useContext(ModalContext)
+  const firebase = useContext(FirebaseContext)
 
-export default function MobileNavigation ({ location: { pathname } }) {
-  // const { handleModalOpen } = useContext(ModalContext)
-  // const firebase = useContext(FirebaseContext)
-
-  /* FLAG */
-
-  // const authNav = hasSignedIn() ? (
+  // return hasSignedIn() ? (
   //   <li
   //     css={css`
-  //       margin-left: 2rem;
+  //       margin-left: 1.5rem;
   //     `}
   //   >
-  //     <GhostButton onClick={firebase.signOut}>Log Out</GhostButton>
+  //     <GhostButton
+  //       onClick={() =>
+  //         firebase.signOut().then(() => {
+  //           window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
+  //           window.location.reload()
+  //         })
+  //       }
+  //     >
+  //       Log Out
+  //     </GhostButton>
   //   </li>
   // ) : (
   //   <>
   //     <li
   //       css={css`
-  //         margin-left: 2rem;
+  //         margin-left: 1.5rem;
   //       `}
   //     >
-  //       <GhostButton onClick={handleModalOpen}>Log In</GhostButton>
+  //       <GhostButton onClick={() => openModal('signUpForm')}>
+  //         Sign In
+  //       </GhostButton>
   //     </li>
   //     <li
   //       css={css`
   //         margin-left: 1rem;
   //       `}
   //     >
-  //       <PrimaryButton onClick={handleModalOpen}>Get Started</PrimaryButton>
+  //       <PrimaryButton onClick={() => openModal('signUpForm')}>
+  //         Register
+  //       </PrimaryButton>
   //     </li>
   //   </>
   // )
+}
 
+export default function MobileNavigation ({ location: { pathname } }) {
   return (
     <nav
       css={theme => css`

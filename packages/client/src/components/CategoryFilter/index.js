@@ -3,8 +3,8 @@ import { css } from '@emotion/core'
 
 import Filters from './Filters'
 import { ScrollButton } from './styled'
-import { MediaContext } from 'components/Media'
 import { Title } from 'components/common'
+import { MediaContext } from 'contexts/Media'
 import useSlider from 'hooks/useSlider'
 
 export default memo(function CategoryFilter () {

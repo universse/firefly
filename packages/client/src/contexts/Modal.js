@@ -12,7 +12,7 @@ ReactModal.setAppElement('#___gatsby')
 
 export const ModalContext = createContext()
 
-export default function ModalProvider ({ children }) {
+export default function Modal ({ children }) {
   const [activeModalType, setActiveModalType] = useState()
   const focusable = useRef()
 
@@ -47,6 +47,6 @@ export default function ModalProvider ({ children }) {
   return <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
 }
 
-ModalProvider.propTypes = {
+Modal.propTypes = {
   children: PropTypes.node.isRequired
 }
