@@ -12,6 +12,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(initialIsLoading)
   const [isTyping, setIsTyping] = useState(false)
+  const debouncedSearchInput = useDebouncedValue(searchInput, 300)
 
   const handleChange = useCallback(({ node: { id, name } }) => {
     if (name) {
@@ -29,18 +30,16 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
     setSearchInput(e.target.value)
   }, [])
 
-  const debouncedSearchInput = useDebouncedValue(searchInput, 300)
-
   useEffect(() => {
     if (debouncedSearchInput) {
       setIsTyping(false)
-      setIsLoading(true)
+      // setIsLoading(true)
       setResults(
         matchSorter(allCollections, debouncedSearchInput, {
           keys: ['node.name']
         })
       )
-      setIsLoading(false)
+      // setIsLoading(false)
     } else {
       setResults([])
     }

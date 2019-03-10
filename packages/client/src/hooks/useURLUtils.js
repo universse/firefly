@@ -51,7 +51,7 @@ export default function useURLUtils (queryValues, pathname, dispatch) {
   }, [dispatch, pathname, sort])
 
   const onTagClearClick = useCallback(
-    tag => dispatch({ payload: { sort, tags: [] } }),
+    () => dispatch({ payload: { sort, tags: [] } }),
     [dispatch, sort]
   )
 

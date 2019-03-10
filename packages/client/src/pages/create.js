@@ -1,70 +1,20 @@
-import React, { useState, useReducer, useContext, useCallback } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
-import produce from 'immer'
-import { navigate } from 'gatsby'
 
+import CreateCollection from 'components/CreateCollection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
-import URLInput from 'components/URLInput'
+import SignUpReminder from 'components/SignUpReminder'
 import { IconButton } from 'components/common'
-import { FirebaseContext } from 'contexts/Firebase'
 import { Back } from 'icons'
+import { hasSignedIn } from 'utils/localStorageUtils'
 import {
   baseWrapper,
   headerHeightInRem,
   mobileHeaderHeightInRem
 } from 'utils/styles'
 
-const initialValue = {
-  name: '',
-  category: '',
-  level: 0,
-  urls: [],
-  tags: []
-}
-
-function reducer (state, { type, payload }) {
-  return produce(state, draft => {
-    switch (type) {
-      case 'set':
-        draft[payload.key] = payload.value
-        break
-
-      case 'addUrl':
-        draft.tags.push(payload)
-        break
-
-      case 'addTag':
-        draft.tags.push(payload.tag)
-        break
-    }
-  })
-}
-
 export default function CreatePage () {
-  const [collection, dispatch] = useReducer(reducer, initialValue)
-  const firebase = useContext(FirebaseContext)
-  const [hasError, setHasError] = useState(false)
-
-  const handleSubmit = useCallback(e => {
-    e.preventDefault()
-    firebase.createCollection(collection).then(payload =>
-      payload.error
-        ? setHasError(true)
-        : navigate(`/collection/${payload.collection.id}`, {
-            state: { collection: payload.collection }
-          })
-    )
-  }, [collection, firebase])
-
-  // confirm URL
-
-  // const handleUrlInput = e => {
-  //   const url = e.target.value
-  //   // fetch title
-  //   fetch('')
-  // }
-
   return (
     <>
       <SEO title='Create Collection' />
@@ -105,14 +55,8 @@ export default function CreatePage () {
             }
           `}
         >
-          <form onSubmit={handleSubmit}>
-            <input />
-            <input />
-            {/* dropdown category */}
-            {/* dropdown level */}
-            {/* tag */}
-            {/* url */}
-          </form>
+          <CreateCollection />
+          {/* {hasSignedIn() ? <CreateCollection /> : <SignUpReminder />} */}
         </div>
       </main>
     </>

@@ -23,7 +23,7 @@ export default function Modal ({ children }) {
     []
   )
 
-  const handleModalClose = useCallback(() => {
+  const closeModal = useCallback(() => {
     window.removeEventListener('wheel', handleWheel)
     setActiveModalType(null)
   }, [handleWheel])
@@ -38,10 +38,10 @@ export default function Modal ({ children }) {
       activeModalType,
       afterModalOpen,
       focusable,
-      handleModalClose,
+      closeModal,
       openModal
     }),
-    [activeModalType, afterModalOpen, handleModalClose, openModal]
+    [activeModalType, afterModalOpen, closeModal, openModal]
   )
 
   return <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>

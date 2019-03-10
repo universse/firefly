@@ -37,6 +37,7 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
 })
 
 const firestore = firebase.firestore()
+const cache = {}
 
 export function createUserWithEmailAndPassword (email, password) {
   return auth.createUserWithEmailAndPassword(email, password)
@@ -82,7 +83,7 @@ export async function createCollection (collection) {
     n: name,
     c: category,
     l: level,
-    us: urls.map(({ title, type, url }) => ({ ti: title, ty: type, u: url })),
+    us: urls.map(({ title, type, url, description}) => ({ ti: title, ty: type, u: url, d: description })),
     t: tags,
     s: ['']
   }
@@ -110,8 +111,12 @@ export async function createCollection (collection) {
 }
 
 export async function fetchCollection (id) {
-  const docRef = firestore.collection('collections').doc(id)
+  if (cache[id]) {
+    return { collection: cache[id] }
+  }
 
+  const docRef = firestore.collection('collections').doc(id)
+  
   try {
     const doc = await docRef.get()
     if (doc.exists) {
@@ -123,6 +128,8 @@ export async function fetchCollection (id) {
         const doc = await urlRef.get()
         collection.us[i] = { id, ...doc.data() }
       }))
+
+      cache[id] = collection
 
       return { collection }
     } else {

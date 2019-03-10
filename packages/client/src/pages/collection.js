@@ -24,10 +24,7 @@ const getCollectionIdFromPathname = pathname => {
     ? pathname.slice(0, -1)
     : pathname
 
-  return normalizedPathname
-    .split('/')
-    .pop()
-    .toLowerCase()
+  return normalizedPathname.split('/').pop()
 }
 
 export default function CollectionPage ({ location }) {
@@ -48,8 +45,8 @@ export default function CollectionPage ({ location }) {
       return
     }
 
-    if (normalizedCollections[id]) {
-      const { name } = normalizedCollections[id]
+    if (normalizedCollections[id.toLowerCase()]) {
+      const { name } = normalizedCollections[id.toLowerCase()]
       navigate(createCollectionPath({ id, name }), { replace: true })
       return
     }

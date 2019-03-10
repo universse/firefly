@@ -5,6 +5,14 @@
     "packages/*",
     "packages/database-functions/functions"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "installConfig": {
+    "pnp": false
+  },
   "lint-staged": {
     "packages/*/src/**/*.{js,json}": [
       "prettier-standard",
@@ -21,7 +29,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^1.4.0",
+    "eslint-plugin-react-hooks": "^1.5.0",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^1.3.1",
     "lerna": "^3.13.1",
@@ -38,7 +46,7 @@
     "stylelint-processor-styled-components": "^1.5.2"
   },
   "scripts": {
-    "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf yarn.lock && yarn",
+    "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf .pnp && rm -rf .pnp.js && rm -rf yarn.lock",
     "commit": "shjs ./scripts/commit.js",
     "flow": "flow",
     "flow start": "flow start",
@@ -46,13 +54,13 @@
     "flow status": "flow status",
     "flow coverage": "flow coverage",
     "lint": "eslint packages/*/src/**/*.js",
+    "prebuild": "echo transfer data",
+    "build": "run-p build:**",
+    "build:client": "yarn workspace client build",
+    "build:netlify-functions": "yarn workspace netlify-functions build",
+    "postbuild": "echo clean data before timestamp",
     "start": "run-p start:**",
     "start:client": "yarn workspace client start",
-    "start:lambdas": "yarn workspace lambdas start"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "start:netlify-functions": "yarn workspace netlify-functions start"
   }
 }

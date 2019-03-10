@@ -15,6 +15,10 @@ export function AuthButton ({ backgroundColor, ...props }) {
         height: 2.5rem;
         padding-left: 1rem;
         width: 18rem;
+
+        &:hover {
+          background-color: ${theme.colors.brand900};
+        }
       `}
       type='button'
       {...props}

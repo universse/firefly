@@ -46,6 +46,7 @@ const IndexPage = memo(function ({
   const aggregatedTags = useAggregatedTags(filteredCollections, tags)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
+  // TODO create collection
   return (
     <>
       <SEO />
@@ -120,7 +121,16 @@ const IndexPage = memo(function ({
                       }
                     `}
                   >
-                    {isDesktop && <SortByDifficulty sort={sort} />}
+                    <div
+                      css={css`
+                        align-items: center;
+                        display: flex;
+                        justify-content: flex-end;
+                        margin-bottom: 0.75rem;
+                      `}
+                    >
+                      {isDesktop && <SortByDifficulty sort={sort} />}
+                    </div>
                     <Collections collections={sortedCollections} />
                   </div>
                 </>

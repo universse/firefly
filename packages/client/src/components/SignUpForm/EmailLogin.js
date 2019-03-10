@@ -7,27 +7,27 @@ import { AuthButton, ErrorMessage, Input } from './styled'
 
 export default function EmailLogin ({ inputRef, setSignUpState }) {
   const [email, setEmail] = useState('')
-  const [isErrorShown, setIsErrorShown] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   const firebase = useContext(FirebaseContext)
 
   const handleChange = e => {
-    setIsErrorShown(false)
+    setHasError(false)
     setEmail(e.target.value)
   }
-  const handleFocus = e => setIsErrorShown(false)
+  const handleFocus = e => setHasError(false)
   const handleSubmit = e => {
     e.preventDefault()
 
-    setSignUpState({ loading: true })
+    setSignUpState({ isLoading: true })
 
     firebase
       .sendSignInLinkToEmail(email)
       .then(() => {
-        setSignUpState({ loading: false, email })
+        setSignUpState({ isLoading: false, email })
         window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
       })
-      .catch(() => setIsErrorShown(true))
+      .catch(() => setHasError(true))
   }
 
   // spinner icon to button
@@ -42,7 +42,7 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
         inputRef={inputRef}
         value={email}
       />
-      {isErrorShown && (
+      {hasError && (
         <div>
           <ErrorMessage>Please enter a valid email address</ErrorMessage>
         </div>

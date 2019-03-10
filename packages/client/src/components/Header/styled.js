@@ -47,6 +47,7 @@ export function HeaderWrapper ({ shadow, ...props }) {
 export function Input (props) {
   return (
     <input
+      autoComplete='off'
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 1.25rem;

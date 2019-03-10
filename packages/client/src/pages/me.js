@@ -1,14 +1,9 @@
-// sign up bottom pop up to sync across devices
-// page
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
-import Collection from 'components/Collections/Collection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { MediaContext } from 'contexts/Media'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
-import useSavedCollections from 'hooks/useSavedCollections'
 import {
   baseWrapper,
   headerHeightInRem,
@@ -16,14 +11,13 @@ import {
 } from 'utils/styles'
 
 export default function MePage (props) {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const [savedCollections, onSaveClick] = useSavedCollections()
   const isDesktop = useContext(MediaContext)
-
+  // sign up modal
+  // created collections
   return (
     <>
-      <SEO title='My Library' />
-      <MobileHeader shadow title='My Saved Collections' />
+      <SEO title='Profile' />
+      <MobileHeader shadow title='Profile' />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
@@ -35,8 +29,8 @@ export default function MePage (props) {
           }
 
           ${theme.screens.desktop} {
-            padding: 2rem 0;
             min-height: calc(100vh - ${headerHeightInRem}rem);
+            padding: 2rem 0;
           }
         `}
       >
@@ -49,57 +43,7 @@ export default function MePage (props) {
               padding: 0;
             }
           `}
-        >
-          {isDesktop && (
-            <div
-              css={css`
-                margin: 0 0 1.5rem 2rem;
-              `}
-            >
-              <h1
-                css={theme => css`
-                  color: ${theme.colors.gray700};
-                  font-size: 1.25rem;
-                  line-height: 2rem;
-                `}
-              >
-                My Saved Collections
-              </h1>
-            </div>
-          )}
-          <ul
-            css={theme => css`
-              background-color: #fff;
-
-              li:last-child div {
-                border: none;
-              }
-
-              ${theme.screens.nonMobile} {
-                border-radius: 8px;
-                box-shadow: ${theme.shadows[0]};
-              }
-            `}
-          >
-            {normalizedCollections &&
-              savedCollections &&
-              Object.keys(savedCollections).map(id => (
-                <li
-                  css={css`
-                    position: relative;
-                  `}
-                  key={id}
-                >
-                  <Collection
-                    collection={normalizedCollections[id.toLowerCase()]}
-                    // handleHeartClick={onHeartClick}
-                    handleSaveClick={onSaveClick}
-                    isSaved
-                  />
-                </li>
-              ))}
-          </ul>
-        </div>
+        />
       </main>
     </>
   )

@@ -119,6 +119,7 @@ export function IconButton (props) {
 export function Input (props) {
   return (
     <input
+      autoComplete='off'
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 1.25rem;
@@ -140,6 +141,29 @@ export function Input (props) {
         }
       `}
       type='text'
+      {...props}
+    />
+  )
+}
+
+export function PrimaryButton (props) {
+  return (
+    <button
+      css={theme => css`
+        background-color: ${theme.colors.brand500};
+        border-radius: 1.25rem;
+        color: #fff;
+        font-size: 0.9375rem;
+        border-bottom: 1px solid transparent;
+        font-weight: 700;
+        height: 2.5rem;
+        padding: 0 3rem;
+
+        &:hover {
+          background-color: ${theme.colors.brand900};
+        }
+      `}
+      type='button'
       {...props}
     />
   )

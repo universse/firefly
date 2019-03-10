@@ -6,7 +6,7 @@ import { ModalContext } from 'contexts/Modal'
 ReactModal.setAppElement('#___gatsby')
 
 export default function Modal ({ children, className, contentLabel, type }) {
-  const { activeModalType, afterModalOpen, handleModalClose } = useContext(
+  const { activeModalType, afterModalOpen, closeModal } = useContext(
     ModalContext
   )
 
@@ -20,7 +20,7 @@ export default function Modal ({ children, className, contentLabel, type }) {
         contentLabel={contentLabel}
         isOpen={isOpen}
         onAfterOpen={afterModalOpen}
-        onRequestClose={handleModalClose}
+        onRequestClose={closeModal}
         overlayClassName='Overlay'
         shouldCloseOnOverlayClick
       >

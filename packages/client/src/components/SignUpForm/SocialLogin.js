@@ -6,16 +6,16 @@ import { ModalContext } from 'contexts/ModalProvider'
 import { AuthButton } from './styled'
 
 export default function SocialLogin ({
-  signUpState: { loading, socialLogin },
+  signUpState: { isLoading, socialLogin },
   setSignUpState
 }) {
   const firebase = useContext(FirebaseContext)
-  const { handleModalClose } = useContext(ModalContext)
+  const { closeModal } = useContext(ModalContext)
 
   const handleError = error => {
     switch (error.code) {
       case 'auth/popup-closed-by-user':
-        setSignUpState({ loading: false, socialLogin: '' })
+        setSignUpState({ isLoading: false, socialLogin: '' })
         break
       default:
         break
@@ -23,24 +23,24 @@ export default function SocialLogin ({
   }
 
   const handleGoogleSignIn = () => {
-    setSignUpState({ loading: true, socialLogin: 'google' })
+    setSignUpState({ isLoading: true, socialLogin: 'google' })
 
     firebase
       .signInWithGoogle()
-      .then(handleModalClose)
+      .then(closeModal)
       .catch(handleError)
   }
 
   // TODO: facebook
   const handleFacebookSignIn = () => {
-    setSignUpState({ loading: true, socialLogin: 'facebook' })
+    setSignUpState({ isLoading: true, socialLogin: 'facebook' })
 
     firebase
       .signInWithFacebook()
-      .then(handleModalClose)
+      .then(closeModal)
       .catch(handleError)
   }
-  // TODO spinner for loading state
+  // TODO spinner for isLoading state
   return (
     <>
       <div
@@ -49,7 +49,7 @@ export default function SocialLogin ({
         `}
       >
         <AuthButton backgroundColor='#4285f4' onClick={handleGoogleSignIn}>
-          {loading && socialLogin === 'google'
+          {isLoading && socialLogin === 'google'
             ? 'Loading'
             : 'Countinue with Google'}
         </AuthButton>
@@ -60,7 +60,7 @@ export default function SocialLogin ({
         `}
       >
         <AuthButton backgroundColor='#4267b2' onClick={handleFacebookSignIn}>
-          {loading && socialLogin === 'facebook'
+          {isLoading && socialLogin === 'facebook'
             ? 'Loading'
             : 'Countinue with Facebook'}
         </AuthButton>

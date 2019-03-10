@@ -46,20 +46,7 @@ export function OptionList (props) {
   )
 }
 
-export function Root ({ innerRef, ...props }) {
-  return (
-    <div
-      css={css`
-        margin-bottom: 0.75rem;
-        position: relative;
-      `}
-      ref={innerRef}
-      {...props}
-    />
-  )
-}
-
-export function SortButton ({ isSelected, ...props }) {
+export function OptionButton ({ isSelected, ...props }) {
   return (
     <button
       css={theme => css`

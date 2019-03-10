@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import CollectionView from 'components/CollectionView'
@@ -15,7 +15,7 @@ import {
 } from 'utils/styles'
 import copyToClipboard from 'utils/copyToClipboard'
 
-export default function ({ data: { collections }, location: { href, state } }) {
+export default function ({ data: { collections }, location: { href } }) {
   const [savedCollections, onSaveClick] = useSavedCollections()
   const { id, name } = collections
 
@@ -45,7 +45,7 @@ export default function ({ data: { collections }, location: { href, state } }) {
             navIcon={
               <IconButton
                 aria-label='Go Back to Previous Screen'
-                onClick={() => navigate(state.pathname)}
+                onClick={() => window.history.back()}
               >
                 <Back />
               </IconButton>

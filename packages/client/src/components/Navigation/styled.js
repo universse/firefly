@@ -50,28 +50,3 @@ export function NavLink (props) {
     />
   )
 }
-
-export function PrimaryButton (props) {
-  return (
-    <button
-      css={theme => css`
-        align-items: center;
-        background-color: ${theme.colors.brand500};
-        border-radius: 1rem;
-        color: #fff;
-        display: flex;
-        font-size: 0.9375rem;
-        border-bottom: 1px solid transparent;
-        font-weight: 700;
-        height: 2rem;
-        padding: 0 1rem;
-
-        &:hover {
-          background-color: ${theme.colors.brand900};
-        }
-      `}
-      type='button'
-      {...props}
-    />
-  )
-}

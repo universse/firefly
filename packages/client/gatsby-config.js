@@ -1,6 +1,6 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const { Categories, ItemTypes } = require('common')
+const { Categories, ItemTypes, NetlifyFunction } = require('common')
 
 require('dotenv').config({
   path: resolve(__dirname, `.env.${process.env.NODE_ENV || 'development'}`)
@@ -16,11 +16,11 @@ module.exports = {
 
   developMiddleware: app => {
     app.use(
-      '/.netlify/functions/',
+      NetlifyFunction,
       proxy({
         target: 'http://localhost:9000',
         pathRewrite: {
-          '/.netlify/functions/': ''
+          [NetlifyFunction]: ''
         }
       })
     )
@@ -81,6 +81,19 @@ module.exports = {
       resolve: 'gatsby-plugin-emotion',
       options: {
         labelFormat: '[filename]--[local]'
+      }
+    },
+    'gatsby-plugin-react-axe',
+    {
+      resolve: `gatsby-plugin-accessibilityjs`,
+      options: {
+        injectStyles: `
+        .accessibility-error {
+          border: 3px solid #f00;
+        }
+      `,
+        errorClassName: `accessibility-error`,
+        onError: error => console.log(error)
       }
     },
     // {
