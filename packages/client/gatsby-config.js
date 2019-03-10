@@ -48,6 +48,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-firestore',
       options: {
+        // credential: JSON.parse(process.env.FIREBASE_COLLECTIONS),
         credential: JSON.parse(process.env.FIREBASE_CREDENTIALS),
         types: [
           {

@@ -2,6 +2,7 @@ import workerize from 'workerize'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
+// const config = process.env.GATSBY_FIREBASE_USERS
 const config = process.env.GATSBY_FIREBASE_CONFIG
 
 const actionCodeSettings = JSON.stringify({
@@ -12,9 +13,9 @@ const actionCodeSettings = JSON.stringify({
 const worker =
   typeof window === 'object' &&
   workerize(`
-importScripts('https://www.gstatic.com/firebasejs/5.8.5/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/5.8.5/firebase-auth.js')
-importScripts('https://www.gstatic.com/firebasejs/5.8.5/firebase-firestore.js')
+importScripts('https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.8.6/firebase-auth.js')
+importScripts('https://www.gstatic.com/firebasejs/5.8.6/firebase-firestore.js')
 
 firebase.initializeApp(${config})
 const auth = firebase.auth()

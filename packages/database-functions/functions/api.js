@@ -7,9 +7,6 @@ const cors = require('cors')({
 
 admin.initializeApp()
 const firestore = admin.firestore()
-firestore.settings({
-  timestampsInSnapshots: true
-})
 
 const app = express()
 
