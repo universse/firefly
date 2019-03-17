@@ -13,54 +13,58 @@ const constructHref = (pathname, sort, tags) => {
 export default function useURLUtils (queryValues, pathname, dispatch) {
   const { sort, tags } = queryValues
 
-  const constructUrl = useCallback((tag, isButton) => {
-    if (isButton) {
-      return {
-        href: constructHref(pathname, sort, [tag])
+  const constructUrl = useCallback(
+    (tag, isButton) => {
+      if (isButton) {
+        return {
+          href: constructHref(pathname, sort, [tag])
+        }
       }
-    }
 
-    const updatedTags = tags.includes(tag)
-      ? tags.filter(t => t !== tag)
-      : [...tags, tag]
+      const updatedTags = tags.includes(tag)
+        ? tags.filter(t => t !== tag)
+        : [tag, ...tags]
 
-    return {
-      href: constructHref(pathname, sort, updatedTags),
-      updatedTags
-    }
-  }, [pathname, sort, tags])
-
-  const updateQuery = useCallback(updatedTags => {
-    dispatch({ payload: { sort, tags: updatedTags } })
-  }, [dispatch, sort])
+      return {
+        href: constructHref(pathname, sort, updatedTags),
+        updatedTags
+      }
+    },
+    [pathname, sort, tags]
+  )
 
   const onCategoryFilterClick = useCallback(
     () => dispatch({ payload: { sort: '', tags: [] } }),
     [dispatch]
   )
 
-  const onSortClick = useCallback(sort => {
-    navigate(constructHref(pathname, sort, tags))
-    dispatch({ payload: { sort, tags } })
-  }, [dispatch, pathname, tags])
+  const updateQuery = useCallback(
+    updatedTags => {
+      dispatch({ payload: { tags: updatedTags } })
+    },
+    [dispatch]
+  )
 
-  const onTagClick = useCallback(tag => {
-    const tags = [tag]
-    navigate(constructHref(pathname, sort, tags))
-    dispatch({ payload: { sort, tags } })
-  }, [dispatch, pathname, sort])
+  const onQueryClick = useCallback(
+    ({ sort: clickedSort, tag: clickedTag }) => {
+      const updatedSort = typeof clickedSort === 'string' ? clickedSort : sort
 
-  const onTagClearClick = useCallback(
-    () => dispatch({ payload: { sort, tags: [] } }),
-    [dispatch, sort]
+      const updatedTags = clickedTag
+        ? [clickedTag]
+        : clickedTag === ''
+          ? []
+          : tags
+
+      navigate(constructHref(pathname, updatedSort, updatedTags))
+      dispatch({ payload: { sort: updatedSort, tags: updatedTags } })
+    },
+    [dispatch, pathname, sort, tags]
   )
 
   return {
     constructUrl,
-    updateQuery,
     onCategoryFilterClick,
-    onSortClick,
-    onTagClick,
-    onTagClearClick
+    onQueryClick,
+    updateQuery
   }
 }

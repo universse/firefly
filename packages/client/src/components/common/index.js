@@ -35,16 +35,11 @@ export function Category (props) {
         color: ${theme.colors.brand500};
         font-size: 0.875rem;
         font-weight: 600;
-        line-height: 1.25rem;
         text-transform: capitalize;
         z-index: 1;
 
         &:hover {
           text-decoration: underline;
-        }
-
-        ${theme.screens.nonMobile} {
-          text-transform: uppercase;
         }
       `}
       {...props}
@@ -151,10 +146,10 @@ export function PrimaryButton (props) {
     <button
       css={theme => css`
         background-color: ${theme.colors.brand500};
+        border-bottom: 1px solid transparent;
         border-radius: 1.25rem;
         color: #fff;
         font-size: 0.9375rem;
-        border-bottom: 1px solid transparent;
         font-weight: 700;
         height: 2.5rem;
         padding: 0 3rem;
@@ -231,7 +226,7 @@ export function Tag (props) {
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 0.75rem;
-        color: ${theme.colors.gray900};
+        color: ${theme.colors.gray700};
         display: block;
         font-size: 0.875rem;
         font-weight: 600;

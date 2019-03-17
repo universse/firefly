@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useCallback } from 'react'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
@@ -7,9 +7,13 @@ import { Title } from 'components/common'
 import { ClearFilterButton, Count, MobileTag, Tag } from './styled'
 
 export default function TagFilter ({ aggregatedTags, sort, tags }) {
-  const { updateQuery, constructUrl, onTagClearClick } = useContext(
+  const { constructUrl, onQueryClick, updateQuery } = useContext(
     URLUtilsContext
   )
+
+  const handleClearFilterClick = useCallback(() => onQueryClick({ tag: '' }), [
+    onQueryClick
+  ])
 
   return (
     <div
@@ -26,7 +30,10 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
         `}
       >
         <Title>TAGS</Title>
-        <ClearFilterButton aria-label='Reset Filters' onClick={onTagClearClick}>
+        <ClearFilterButton
+          aria-label='Reset Filters'
+          onClick={handleClearFilterClick}
+        >
           clear
         </ClearFilterButton>
       </div>
@@ -38,7 +45,6 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
             <li
               key={tag}
               css={css`
-                align-items: center;
                 display: flex;
                 justify-content: space-between;
                 margin: 0.375rem 0 0.375rem calc(1rem + 4px);
@@ -65,9 +71,13 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
 }
 
 export function MobileTagFilter ({ aggregatedTags, sort, tags }) {
-  const { updateQuery, constructUrl, onTagClearClick } = useContext(
+  const { constructUrl, onQueryClick, updateQuery } = useContext(
     URLUtilsContext
   )
+
+  const handleClearFilterClick = useCallback(() => onQueryClick({ tag: '' }), [
+    onQueryClick
+  ])
 
   return (
     <>
@@ -90,7 +100,10 @@ export function MobileTagFilter ({ aggregatedTags, sort, tags }) {
         >
           Filter by Tags
         </h4>
-        <ClearFilterButton aria-label='Reset Filters' onClick={onTagClearClick}>
+        <ClearFilterButton
+          aria-label='Reset Filters'
+          onClick={handleClearFilterClick}
+        >
           CLEAR
         </ClearFilterButton>
       </div>

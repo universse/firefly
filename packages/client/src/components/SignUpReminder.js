@@ -15,8 +15,8 @@ export default function SignUpReminder () {
         bottom: 0;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         height: 100vh;
+        justify-content: center;
         left: 0;
         position: fixed;
         right: 0;

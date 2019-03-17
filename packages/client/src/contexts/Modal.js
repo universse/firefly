@@ -12,11 +12,11 @@ ReactModal.setAppElement('#___gatsby')
 
 export const ModalContext = createContext()
 
+const handleWheel = e => e.preventDefault()
+
 export default function Modal ({ children }) {
   const [activeModalType, setActiveModalType] = useState()
   const focusable = useRef()
-
-  const handleWheel = useCallback(e => e.preventDefault(), [])
 
   const afterModalOpen = useCallback(
     () => focusable.current && focusable.current.focus(),
@@ -26,12 +26,12 @@ export default function Modal ({ children }) {
   const closeModal = useCallback(() => {
     window.removeEventListener('wheel', handleWheel)
     setActiveModalType(null)
-  }, [handleWheel])
+  }, [])
 
   const openModal = useCallback(type => {
     window.addEventListener('wheel', handleWheel)
     setActiveModalType(type)
-  }, [handleWheel])
+  }, [])
 
   const modal = useMemo(
     () => ({
@@ -44,7 +44,9 @@ export default function Modal ({ children }) {
     [activeModalType, afterModalOpen, closeModal, openModal]
   )
 
-  return <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
+  return (
+    <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
+  )
 }
 
 Modal.propTypes = {

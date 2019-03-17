@@ -26,7 +26,7 @@ export default function useSavedItemsReducer (key) {
     localforage
       .getItem(key)
       .then(value => dispatch({ type: 'load', payload: value }))
-  }, [dispatch, key])
+  }, [key])
 
   const onClick = useCallback(
     e =>
@@ -34,7 +34,7 @@ export default function useSavedItemsReducer (key) {
         type: 'click',
         payload: { id: e.currentTarget.value }
       }),
-    [dispatch]
+    []
   )
 
   return [savedItems, onClick]

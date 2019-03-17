@@ -4,11 +4,11 @@ import { css } from '@emotion/core'
 import { baseWrapper } from 'utils/styles'
 
 const wrapper = css`
+  ${baseWrapper}
   align-items: center;
   display: flex;
   height: 3.5rem;
   justify-content: space-between;
-  ${baseWrapper}
 `
 
 export default function Footer () {

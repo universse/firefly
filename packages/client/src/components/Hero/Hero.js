@@ -22,12 +22,12 @@ export default memo(function Hero () {
     <section id='hero'>
       <div
         css={css`
+          ${baseWrapper}
           background-color: #fff;
           display: flex;
           flex-direction: column;
           height: 30rem;
           justify-content: center;
-          ${baseWrapper}
         `}
       >
         {renderHero()}

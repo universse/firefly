@@ -75,8 +75,8 @@ export default memo(function LearningItem ({
         {/* TODO: author */}
         <div
           css={theme => css`
-            display: flex;
             align-items: center;
+            display: flex;
             margin-left: 2.25rem;
 
             ${theme.screens.tablet} {

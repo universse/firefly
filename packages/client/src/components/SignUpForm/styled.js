@@ -31,10 +31,10 @@ export function CloseButton (props) {
     <div
       css={css`
         height: 1.5rem;
-        width: 1.5rem;
         position: absolute;
         right: 1.5rem;
         top: 1.5rem;
+        width: 1.5rem;
       `}
     >
       <button aria-label='Close Modal' type='button' {...props}>

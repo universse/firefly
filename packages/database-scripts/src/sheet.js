@@ -8,13 +8,13 @@ const { writeFileSync } = require('fs')
 const { resolve } = require('path')
 const { toTitleCase } = require('common')
 
-const workbook = XLSX.readFile(resolve(__dirname, './data/raw.xlsx'))
+const workbook = XLSX.readFile(resolve(__dirname, '../data/raw.xlsx'))
 const worksheet = workbook.Sheets['Sheet1']
 
 const NUMBER_OF_URLS = 20
-const processed = { collections: [] }
+const processed = { collections: [] };
 
-;(async () => {
+(async () => {
   await Promise.all(
     XLSX.utils.sheet_to_json(worksheet).map(async row => {
       const urls = []
@@ -23,10 +23,10 @@ const processed = { collections: [] }
         Array(NUMBER_OF_URLS)
           .fill(null)
           .map(async (_, i) => {
-            const urlStr = row[`url${i}`]
+            const targetUrl = row[`url${i}`]
 
-            if (urlStr) {
-              const [targetUrl, type] = urlStr.split(';')
+            if (targetUrl) {
+              const type = row[`url${i}type`]
               const { body: html, url } = await got(targetUrl)
               const { title, description } = await metascraper({ html, url })
 
@@ -52,7 +52,7 @@ const processed = { collections: [] }
   )
 
   writeFileSync(
-    resolve(__dirname, './data/processed.json'),
+    resolve(__dirname, '../data/processed.json'),
     JSON.stringify(processed, null, 2)
   )
 })()

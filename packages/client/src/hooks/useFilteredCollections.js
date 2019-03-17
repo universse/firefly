@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 export default function useFilteredCollections (collections, tags) {
   return useMemo(() => {
     if (tags.length === 0) return collections
+
     const filteredCollections = []
 
     collections.forEach(collection => {

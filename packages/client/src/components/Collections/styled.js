@@ -12,14 +12,14 @@ export function CollectionTitle ({ id, name }) {
       css={theme => css`
         display: block;
         height: 100%;
-        padding: 1.5rem 0.75rem 0;
+        padding: 1.75rem 0.75rem 0;
 
         ${theme.screens.tablet} {
-          padding: 1.75rem 0.75rem 0;
+          padding: 2rem 0.75rem 0;
         }
 
         ${theme.screens.desktop} {
-          padding: 1.75rem 1.75rem 0;
+          padding: 2rem 1.75rem 0;
         }
       `}
       to={createCollectionPath({ id, name })}
@@ -27,14 +27,12 @@ export function CollectionTitle ({ id, name }) {
       <h3
         css={theme => css`
           color: ${theme.colors.gray900};
-          font-size: 1.25rem;
-          font-weight: 700;
+          font-size: 1.125rem;
+          font-weight: 600;
           line-height: 1.5rem;
 
           ${theme.screens.nonMobile} {
-            color: ${theme.colors.gray700};
-            font-size: 1.5rem;
-            line-height: 2rem;
+            line-height: 1.75rem;
           }
         `}
       >

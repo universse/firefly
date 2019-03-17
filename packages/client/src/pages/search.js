@@ -38,9 +38,9 @@ export default function SearchPage ({ location }) {
         {isDesktop && (
           <div
             css={css`
+              left: 1rem;
               position: fixed;
               top: 2rem;
-              left: 1rem;
             `}
           >
             <IconButton

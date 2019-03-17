@@ -58,16 +58,19 @@ export default function useCreateCollection () {
     []
   )
 
-  const handleSubmit = useCallback(e => {
-    e.preventDefault()
-    firebase.createCollection(collection).then(payload =>
-      payload.error
-        ? setHasError(true)
-        : navigate(`/collection/${payload.collection.id}`, {
+  const handleSubmit = useCallback(
+    e => {
+      e.preventDefault()
+      firebase.createCollection(collection).then(payload =>
+        payload.error
+          ? setHasError(true)
+          : navigate(`/collection/${payload.collection.id}`, {
             state: { collection: payload.collection }
           })
-    )
-  }, [collection, firebase])
+      )
+    },
+    [collection, firebase]
+  )
 
   return {
     collection,

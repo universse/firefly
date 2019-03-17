@@ -5,11 +5,11 @@ const { resolve } = require('path')
 require('./config')
 const { writeBatchesToDB } = require('./utils')
 
-const processed = require('./data/processed.json')
-const final = require('./data/final.json')
+const processed = require('../data/processed.json')
+const final = require('../data/final.json')
 const { Categories, DifficultyLevels, ItemTypes } = require('common')
 
-const firebaseKey = JSON.parse(process.env.FIREBASE_CREDENTIALS_DEV)
+const firebaseKey = JSON.parse(process.env.FIREBASE_CREDENTIALS)
 // const firebaseKey = JSON.parse(process.env.FIREBASE_COLLECTIONS)
 
 admin.initializeApp({
@@ -69,12 +69,12 @@ processed.collections.forEach(
       urlIds: us
     }
   }
-)
-;(async () => {
+);
+(async () => {
   writeBatchesToDB(batches)
 
   writeFileSync(
-    resolve(__dirname, './data/final.json'),
+    resolve(__dirname, '../data/final.json'),
     JSON.stringify(final, null, 2)
   )
 })()

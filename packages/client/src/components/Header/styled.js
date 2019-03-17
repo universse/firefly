@@ -32,12 +32,12 @@ export function HeaderWrapper ({ shadow, ...props }) {
   return (
     <div
       css={theme => css`
+        ${baseWrapper};
         align-items: center;
         box-shadow: ${shadow ? theme.shadows[1] : 'none'};
         display: flex;
         height: 100%;
         justify-content: space-between;
-        ${baseWrapper};
       `}
       {...props}
     />

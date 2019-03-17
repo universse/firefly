@@ -26,7 +26,9 @@ function Tags ({ location: { pathname }, tags }) {
           <Tag
             onClick={e => {
               e.preventDefault()
-              urlUtils ? urlUtils.onTagClick(tag) : navigate(`/?tags=${tag}`)
+              urlUtils
+                ? urlUtils.onQueryClick({ tag })
+                : navigate(`/?tags=${tag}`)
             }}
             href={
               urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`

@@ -87,12 +87,12 @@ time,
 mark,
 audio,
 video {
-  min-width: 0;
-  padding: 0;
   border: 0;
-  margin: 0;
   font: inherit;
   font-size: 100%;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
   vertical-align: baseline;
 }
 
@@ -112,9 +112,9 @@ section {
 
 html {
   font-size: 16px;
-  text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -129,17 +129,17 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
+  -webkit-appearance: button;
   background: transparent;
   outline: 0;
-  -webkit-appearance: button;
 }
 
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
-  padding: 0;
   border-style: none;
+  padding: 0;
 }
 
 button:hover {
@@ -215,8 +215,8 @@ embed,
 
 .SignUpModal {
   align-items: center;
-  justify-content: center;
   height: 100%;
+  justify-content: center;
   position: relative;
   width: 100%;
   @media screen and (min-width: 37.0625rem) {
@@ -228,16 +228,16 @@ embed,
 
 .FilterModal {
   bottom: 0;
+  max-width: 20rem;
   padding: 1.5rem;
   position: fixed;
   right: 0;
   top: 0;
-  max-width: 20rem;
-  width: calc(100% - 3.5rem);
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  width: calc(100% - 3.5rem);
 }
 
 .Overlay {
@@ -247,12 +247,12 @@ embed,
   display: flex;
   justify-content: center;
   left: 0;
+  opacity: 0;
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 999;
-  opacity: 0;
   transition: opacity 0.28s;
+  z-index: 999;
 }
 
 .ReactModal__Body--open {
@@ -281,8 +281,8 @@ embed,
 }
 
 .feather-small {
-  width: 16px;
   height: 16px;
+  width: 16px;
 }
 
 .visually-hidden {

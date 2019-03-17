@@ -17,8 +17,8 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
           position: relative;
 
           ${theme.screens.nonDesktop} {
-            overflow: hidden;
             height: 3rem;
+            overflow: hidden;
           }
         `}
       >
@@ -33,30 +33,40 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
           ref={slider}
         >
           <li
-            css={css`
+            css={theme => css`
               flex: 1 0 auto;
+
+              ${theme.screens.desktop} {
+                margin: 0.125rem 0;
+              }
             `}
           >
             <Category
               isActive={pathname === '/' || pathname === '/category/all'}
-              category='all'
-              handleClick={onCategoryFilterClick}
+              onClick={onCategoryFilterClick}
               to='/category/all'
-            />
+            >
+              all
+            </Category>
           </li>
           {Categories.map(category => (
             <li
               key={category}
-              css={css`
+              css={theme => css`
                 flex: 1 0 auto;
+
+                ${theme.screens.desktop} {
+                  margin: 0.125rem 0;
+                }
               `}
             >
               <Category
                 isActive={pathname === createCategoryPath(category)}
-                category={category}
-                handleClick={onCategoryFilterClick}
+                onClick={onCategoryFilterClick}
                 to={createCategoryPath(category)}
-              />
+              >
+                {category}
+              </Category>
             </li>
           ))}
         </ul>

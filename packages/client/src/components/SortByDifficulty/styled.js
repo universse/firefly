@@ -8,8 +8,8 @@ export function Item ({ isHighlighted, ...props }) {
     <li
       css={theme => css`
         background-color: ${isHighlighted
-          ? theme.colors.gray300
-          : 'transparent'};
+      ? theme.colors.gray300
+      : 'transparent'};
       `}
       {...props}
     />

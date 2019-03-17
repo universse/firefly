@@ -17,10 +17,16 @@
       "jsx": true
     }
   },
-  "plugins": ["jsx-a11y", "flowtype", "react-hooks"],
+  "plugins": [
+    "jsx-a11y",
+    "flowtype",
+    "react-hooks"
+  ],
   "rules": {
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/no-onchange": 0,
+    "no-unused-vars": 1,
+    "react/prop-types": 1,
     "react-hooks/exhaustive-deps": 2,
     "react-hooks/rules-of-hooks": 2
   }

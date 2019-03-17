@@ -3,7 +3,7 @@ const { resolve } = require('path')
 const { Categories, ItemTypes, NetlifyFunction } = require('common')
 
 require('dotenv').config({
-  path: resolve(__dirname, `.env.${process.env.NODE_ENV || 'development'}`)
+  path: resolve(__dirname, '../../.env')
 })
 
 module.exports = {

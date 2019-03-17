@@ -62,15 +62,13 @@ export function Tag ({ isActive, ...props }) {
     // eslint-disable-next-line
     <a
       css={theme => css`
-        border-bottom: 2px solid transparent;
         color: ${theme.colors.gray900};
         display: block;
         font-size: 1rem;
         font-weight: ${isActive ? 700 : 400};
+        height: 1.25rem;
 
         &:hover {
-          border-bottom: 2px solid
-            ${isActive ? theme.colors.gray900 : theme.colors.brand500};
           color: ${isActive ? theme.colors.gray900 : theme.colors.brand500};
         }
       `}

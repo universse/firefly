@@ -1,97 +1,115 @@
 {
   "collections": {
-    "YD43XV9O5gKqGUe3trHr": {
-      "id": "YD43XV9O5gKqGUe3trHr",
-      "name": "acxc",
-      "category": "programming",
+    "mUXNvN43ilNdyUMQNTJY": {
+      "id": "mUXNvN43ilNdyUMQNTJY",
+      "name": "React Hooks",
+      "category": "web development",
       "level": "intermediate",
       "tags": [
-        "safsa",
-        "safsaf"
+        "react",
+        "hooks",
+        "state management"
       ],
       "suggestions": [
         ""
       ],
       "urlIds": [
-        "8HIrJVgEpCRiWp8FyOpW"
+        "a9jCoq5YnQoNQxA3iaZV"
       ]
     },
-    "sz7XwSP0qnW80m6qSs7i": {
-      "id": "sz7XwSP0qnW80m6qSs7i",
-      "name": "asda",
-      "category": "startup",
-      "level": "introductory",
-      "tags": [
-        "asd",
-        "as"
-      ],
-      "suggestions": [
-        ""
-      ],
-      "urlIds": [
-        "8rQ0DC7k2jXgRRyy764V"
-      ]
-    },
-    "bXmJOlLXFphUxsKfIYJF": {
-      "id": "bXmJOlLXFphUxsKfIYJF",
-      "name": "asdadsa",
+    "eWMnOlIJpBC67ol90zYX": {
+      "id": "eWMnOlIJpBC67ol90zYX",
+      "name": "Design Fundamental",
       "category": "design",
       "level": "fundamental",
       "tags": [
-        "a",
-        "s"
+        "visual design",
+        "design principles"
       ],
       "suggestions": [
         ""
       ],
       "urlIds": [
-        "BhxoIsh5UYzBK5UuC0A9"
+        "ELWKscEmWGAj64naspxZ"
       ]
     },
-    "FecUG8kWnxYHvrOsfVQ5": {
-      "id": "FecUG8kWnxYHvrOsfVQ5",
-      "name": "asda",
+    "6UG1kRctJJK3SYyaPVYA": {
+      "id": "6UG1kRctJJK3SYyaPVYA",
+      "name": "Getting Started with GraphQL",
+      "category": "programming",
+      "level": "advanced",
+      "tags": [
+        "GraphQL",
+        "backend"
+      ],
+      "suggestions": [
+        ""
+      ],
+      "urlIds": [
+        "p0vJZlYMm7c5Vlkkwdgl"
+      ]
+    },
+    "i7VsAYdVFZrbkGtVsBsd": {
+      "id": "i7VsAYdVFZrbkGtVsBsd",
+      "name": "Getting Started with Machine Learning",
       "category": "artificial intelligence",
       "level": "introductory",
       "tags": [
-        "a"
+        "machine learning",
+        "data science"
       ],
       "suggestions": [
         ""
       ],
       "urlIds": [
-        "QnZaaYdPchh2M8SD5HH2"
+        "OuCJdGq19tZ6rutOS3G6",
+        "hROhUDZmpLZmjFCnIHEk",
+        "U48ejU2ud80liKTqLGJF"
       ]
     }
   },
   "urls": {
-    "8HIrJVgEpCRiWp8FyOpW": {
-      "id": "8HIrJVgEpCRiWp8FyOpW",
-      "url": "https://www.techrepublic.com/blog/microsoft-office/how-to-add-a-drop-down-list-to-an-excel-cell/",
-      "title": "How to Add a Drop-Down List to an Excel Cell",
-      "description": "Drop-down lists can greatly facilitate data entry. Here’s a look at how to use Excel’s data validation feature to create handy lists within your worksheets.",
-      "type": "video"
+    "a9jCoq5YnQoNQxA3iaZV": {
+      "id": "a9jCoq5YnQoNQxA3iaZV",
+      "url": "https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889",
+      "title": "Making Sense of React Hooks",
+      "description": "This week, Sophie Alpert and I presented the “Hooks” proposal at React Conf, followed by a deep dive from Ryan Florence:",
+      "type": "article"
     },
-    "8rQ0DC7k2jXgRRyy764V": {
-      "id": "8rQ0DC7k2jXgRRyy764V",
-      "url": "https://stackoverflow.com/questions/47189234/modify-routing-in-gatsby-site",
-      "title": "Modify Routing in Gatsby Site",
-      "description": "I want to set up pagination in a Gatsby blog. In my pages/index.js page I am storing the posts, the “chunked” posts (e.g. chunks of 4 posts per page), and the current page number: this.state = {",
+    "ELWKscEmWGAj64naspxZ": {
+      "id": "ELWKscEmWGAj64naspxZ",
+      "url": "https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889",
+      "title": "Making Sense of React Hooks",
+      "description": "This week, Sophie Alpert and I presented the “Hooks” proposal at React Conf, followed by a deep dive from Ryan Florence:",
+      "type": "article"
+    },
+    "p0vJZlYMm7c5Vlkkwdgl": {
+      "id": "p0vJZlYMm7c5Vlkkwdgl",
+      "url": "https://medium.freecodecamp.org/a-beginners-guide-to-graphql-86f849ce1bec?gi=2be592fba6bd",
+      "title": "A Beginner’s Guide to GraphQL",
+      "description": "One of the most commonly discussed terms today is the API. A lot of people don’t know exactly what an API is. Basically, API stands for…",
+      "type": "article"
+    },
+    "OuCJdGq19tZ6rutOS3G6": {
+      "id": "OuCJdGq19tZ6rutOS3G6",
+      "url": "https://www.coursera.org/learn/machine-learning",
+      "title": "Machine Learning | Coursera",
+      "description": "Machine Learning from Stanford University. Machine learning is the science of getting computers to act without being explicitly programmed. In the past decade, machine learning has given us self-driving cars, practical speech recognition, ...",
       "type": "course"
     },
-    "BhxoIsh5UYzBK5UuC0A9": {
-      "id": "BhxoIsh5UYzBK5UuC0A9",
-      "url": "https://medium.freecodecamp.org/before-you-can-master-design-you-must-first-master-the-fundamentals-1981a2af1fda?gi=6d816803b398",
-      "title": "Before You Can Master Design, You Must First Master the Fundamentals",
-      "description": "Last week, one of my readers sent in a question: How do I become a better visual designer?",
+    "hROhUDZmpLZmjFCnIHEk": {
+      "id": "hROhUDZmpLZmjFCnIHEk",
+      "url": "https://medium.com/machine-learning-for-humans/why-machine-learning-matters-6164faf1df12",
+      "title": "A Beginner’s Guide to AI/ML 🤖👶",
+      "description": "The ultimate guide to machine learning. Simple, plain-English explanations accompanied by math, code, and real-world examples.",
       "type": "article"
     },
-    "QnZaaYdPchh2M8SD5HH2": {
-      "id": "QnZaaYdPchh2M8SD5HH2",
-      "url": "https://medium.freecodecamp.org/before-you-can-master-design-you-must-first-master-the-fundamentals-1981a2af1fda?gi=6dfe138a2aff",
-      "title": "Before You Can Master Design, You Must First Master the Fundamentals",
-      "description": "Last week, one of my readers sent in a question: How do I become a better visual designer?",
-      "type": "article"
+    "U48ejU2ud80liKTqLGJF": {
+      "id": "U48ejU2ud80liKTqLGJF",
+      "url": "https://medium.com/@ageitgey/machine-learning-is-fun-80ea3ec3c471",
+      "title": "Machine Learning Is Fun!",
+      "description": "The world’s easiest introduction to Machine Learning",
+      "type": "video"
     }
   }
 }

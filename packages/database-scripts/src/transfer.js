@@ -6,8 +6,10 @@ require('./config')
 // const firebaseCollectionsKey = JSON.parse(process.env.FIREBASE_COLLECTIONS)
 // const firebaseUsersKey = JSON.parse(process.env.FIREBASE_USERS)
 
-const firebaseCollectionsKey = JSON.parse(process.env.FIREBASE_CREDENTIALS_PROD)
-const firebaseUsersKey = JSON.parse(process.env.FIREBASE_CREDENTIALS_DEV)
+const firebaseCollectionsKey = JSON.parse(
+  process.env.FIREBASE_CREDENTIALS_PROD
+)
+const firebaseUsersKey = JSON.parse(process.env.FIREBASE_CREDENTIALS)
 
 const collections = admin.initializeApp(
   {
@@ -30,9 +32,9 @@ const usersDB = users.firestore()
 
 let count = 0
 let batchNo = 0
-const batches = []
+const batches = [];
 
-;(async () => {
+(async () => {
   await Promise.all(
     Object.keys(schema).map(async collection => {
       await usersDB

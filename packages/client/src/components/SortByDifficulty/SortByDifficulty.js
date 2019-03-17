@@ -15,11 +15,12 @@ import { URLUtilsContext } from 'contexts/URLUtils'
 import SortOptions from 'constants/SortOptions'
 
 export default function SortByDifficulty ({ sort }) {
-  const { onSortClick } = useContext(URLUtilsContext)
+  const { onQueryClick } = useContext(URLUtilsContext)
 
-  const handleChange = useCallback(({ value }) => onSortClick(value), [
-    onSortClick
-  ])
+  const handleChange = useCallback(
+    ({ value }) => onQueryClick({ sort: value }),
+    [onQueryClick]
+  )
 
   return (
     <Dropdown
@@ -37,11 +38,12 @@ export default function SortByDifficulty ({ sort }) {
 }
 
 export function MobileSortByDifficulty ({ sort }) {
-  const { onSortClick } = useContext(URLUtilsContext)
+  const { onQueryClick } = useContext(URLUtilsContext)
 
-  const handleChange = useCallback(e => onSortClick(e.currentTarget.value), [
-    onSortClick
-  ])
+  const handleChange = useCallback(
+    e => onQueryClick({ sort: e.currentTarget.value }),
+    [onQueryClick]
+  )
 
   return (
     <div

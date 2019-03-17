@@ -7,14 +7,14 @@ export function CollectionTitle (props) {
     <h1
       css={theme => css`
         color: ${theme.colors.gray900};
-        font-size: 1.75rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        line-height: 2.25rem;
+        line-height: 2rem;
 
         ${theme.screens.desktop} {
           color: ${theme.colors.gray700};
-          font-size: 2.25rem;
-          line-height: 2.75rem;
+          font-size: 1.5rem;
+          line-height: 2.5rem;
         }
       `}
       {...props}
@@ -82,8 +82,8 @@ export function ProgressBar ({ percentage, width }) {
             background-color: ${theme.colors.brand500};
             border-radius: 0.375rem;
             height: 0.5rem;
-            width: ${percentage}%;
             transition: width 0.75s;
+            width: ${percentage}%;
 
             ${theme.screens.desktop} {
               height: 0.75rem;

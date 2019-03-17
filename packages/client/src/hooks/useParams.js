@@ -11,13 +11,12 @@ function init (query) {
   }
 }
 
-function reducer (_, { payload }) {
-  return payload
+function reducer (state, { payload }) {
+  return { ...state, ...payload }
 }
 
 export default function useParams (query) {
-  const paramsReducer = useReducer(reducer, query, init)
-  const [, dispatch] = paramsReducer
+  const [params, dispatch] = useReducer(reducer, query, init)
 
   useEffect(() => {
     const unlisten = globalHistory.listen(({ location: { search } }) =>
@@ -27,7 +26,7 @@ export default function useParams (query) {
     return () => {
       unlisten()
     }
-  }, [dispatch])
+  }, [])
 
-  return paramsReducer
+  return [params, dispatch]
 }

@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 
 import { ChevronLeft, ChevronRight } from 'icons'
 
-export function Category ({ isActive, category, handleClick, to }) {
+export function Category ({ isActive, ...props }) {
   return (
     <Link
       css={theme => css`
@@ -34,7 +34,6 @@ export function Category ({ isActive, category, handleClick, to }) {
           border-left: 4px solid
             ${isActive ? theme.colors.brand500 : 'transparent'};
           height: 1.5rem;
-          margin: 0.25rem 0;
           padding: 0 0 0 1rem;
 
           &:hover {
@@ -42,11 +41,8 @@ export function Category ({ isActive, category, handleClick, to }) {
           }
         }
       `}
-      onClick={handleClick}
-      to={to}
-    >
-      {category}
-    </Link>
+      {...props}
+    />
   )
 }
 
@@ -66,9 +62,9 @@ export const ScrollButton = memo(function ({ display, handleClick, side }) {
       css={theme => css`
         align-items: center;
         display: ${display ? 'flex' : 'none'};
+        ${align};
         position: absolute;
         top: 0;
-        ${align};
       `}
     >
       <button

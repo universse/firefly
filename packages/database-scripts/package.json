@@ -4,12 +4,12 @@
   "private": true,
   "dependencies": {
     "common": "*",
-    "dotenv": "^6.2.0",
-    "firebase-admin": "^7.0.0",
+    "dotenv": "^7.0.0",
+    "firebase-admin": "^7.1.0",
     "got": "^9.6.0",
-    "metascraper": "^4.10.1",
-    "metascraper-description": "^4.10.1",
-    "metascraper-title": "^4.10.1",
+    "metascraper": "^4.10.2",
+    "metascraper-description": "^4.10.2",
+    "metascraper-title": "^4.10.2",
     "xlsx": "^0.14.1"
   },
   "devDependencies": {},

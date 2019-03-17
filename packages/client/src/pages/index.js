@@ -46,7 +46,6 @@ const IndexPage = memo(function ({
   const aggregatedTags = useAggregatedTags(filteredCollections, tags)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
-  // TODO create collection
   return (
     <>
       <SEO />
