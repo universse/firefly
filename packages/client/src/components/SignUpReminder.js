@@ -4,7 +4,6 @@ import { css } from '@emotion/core'
 import { PrimaryButton } from 'components/common'
 import { ModalContext } from 'contexts/Modal'
 import ModalTypes from 'constants/ModalTypes'
-
 export default function SignUpReminder () {
   const { openModal } = useContext(ModalContext)
 

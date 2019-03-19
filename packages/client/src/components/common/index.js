@@ -226,9 +226,9 @@ export function Tag (props) {
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: 0.75rem;
-        color: ${theme.colors.gray700};
+        color: ${theme.colors.gray900};
         display: block;
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
         font-weight: 600;
         line-height: 1.5rem;
         padding: 0 0.75rem;

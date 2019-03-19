@@ -17,7 +17,7 @@ export default {
     gray300: '#f1f1f1',
     gray400: '#cfcfcf',
     gray500: '#666',
-    gray600: 'rgba(0, 0, 0, 0.55)',
+    gray600: 'rgba(0, 0, 0, 0.5)',
     gray700: 'rgba(0, 0, 0, 0.7)',
     gray900: 'rgba(0, 0, 0, 0.87)',
     success: '#13ae36'

@@ -37,6 +37,17 @@ export default function CollectionView ({
       0
     )
 
+  const isSaved = !!savedCollections[id]
+
+  useLocalForage(
+    LocalStorage.LATEST_ACTIVITY,
+    isSaved && {
+      id,
+      name,
+      percentage: (numOfCompleted / numOfItems) * 100
+    }
+  )
+
   return completedItems ? (
     <>
       <div
@@ -70,7 +81,7 @@ export default function CollectionView ({
           >
             <CollectionActions
               id={id}
-              isSaved={!!savedCollections[id]}
+              isSaved={isSaved}
               handleSaveClick={onSaveClick}
               numOfItems={numOfItems}
               numOfCompleted={numOfCompleted}

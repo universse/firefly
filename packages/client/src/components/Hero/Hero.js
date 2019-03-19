@@ -1,37 +1,39 @@
-import React, { memo } from 'react'
-import { css } from '@emotion/core'
+import React, { memo, useState, useEffect } from 'react'
+import localforage from 'localforage'
 
 import Landing from './Landing'
 import LatestActivity from './LatestActivity'
 import Onboard from './Onboard'
+import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
-import { baseWrapper } from 'utils/styles'
 
-const renderHero = () => {
+export default memo(function Hero () {
+  const [latestActivity, setLatestActivity] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    localforage
+      .getItem(LocalStorage.LATEST_ACTIVITY)
+      .then(setLatestActivity)
+      .catch(() => setLatestActivity(false))
+      .finally(() => setIsLoading(false))
+  }, [])
+
   if (!hasSignedIn()) {
     return <Landing />
   }
+
   if (isNewUser()) {
     return <Onboard />
   }
-  return <LatestActivity />
-}
 
-export default memo(function Hero () {
-  return (
-    <section id='hero'>
-      <div
-        css={css`
-          ${baseWrapper}
-          background-color: #fff;
-          display: flex;
-          flex-direction: column;
-          height: 30rem;
-          justify-content: center;
-        `}
-      >
-        {renderHero()}
-      </div>
-    </section>
+  if (isLoading) {
+    return <>Loading</>
+  }
+
+  return latestActivity ? (
+    <LatestActivity latestActivity={latestActivity} />
+  ) : (
+    <Onboard />
   )
 })

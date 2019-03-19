@@ -40,28 +40,31 @@ export default function CollectionPage ({ location }) {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-  useEffect(() => {
-    if (!normalizedCollections || collection) {
-      return
-    }
+  useEffect(
+    () => {
+      if (!normalizedCollections || collection) {
+        return
+      }
 
-    if (normalizedCollections[id.toLowerCase()]) {
-      const { name } = normalizedCollections[id.toLowerCase()]
-      navigate(createCollectionPath({ id, name }), { replace: true })
-      return
-    }
+      if (normalizedCollections[id.toLowerCase()]) {
+        const { name } = normalizedCollections[id.toLowerCase()]
+        navigate(createCollectionPath({ id, name }), { replace: true })
+        return
+      }
 
-    // 5dJtAc6eJIenU7g9nO4F
-    firebase
-      .fetchCollection(id)
-      .then(({ collection, error }) =>
-        error
-          ? setHasError(true)
-          : setCollection(parseCollectionData(collection))
-      )
-      .catch(() => setHasError(true))
-      .finally(() => setIsLoading(false))
-  }, [collection, firebase, id, normalizedCollections])
+      // 5dJtAc6eJIenU7g9nO4F
+      firebase
+        .fetchCollection(id)
+        .then(({ collection, error }) =>
+          error
+            ? setHasError(true)
+            : setCollection(parseCollectionData(collection))
+        )
+        .catch(() => setHasError(true))
+        .finally(() => setIsLoading(false))
+    },
+    [collection, firebase, id, normalizedCollections]
+  )
 
   return (
     <>

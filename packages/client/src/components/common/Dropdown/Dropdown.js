@@ -9,7 +9,6 @@ function Dropdown ({
   initialValue,
   items,
   label,
-  Item,
   OptionList,
   Root,
   OptionButton,
@@ -60,21 +59,21 @@ function Dropdown ({
           {isOpen && (
             <OptionList>
               {items.map((option, index) => (
-                <Item
+                <li
                   {...getItemProps({
                     item: option,
-                    index,
-                    isHighlighted: highlightedIndex === index
+                    index
                   })}
                   key={option.value}
                 >
                   <OptionButton
                     aria-label={option.label}
+                    isHighlighted={highlightedIndex === index}
                     isSelected={option === selectedItem}
                   >
                     {option.label}
                   </OptionButton>
-                </Item>
+                </li>
               ))}
             </OptionList>
           )}

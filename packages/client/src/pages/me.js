@@ -3,7 +3,9 @@ import { css } from '@emotion/core'
 
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
+import SignUpReminder from 'components/SignUpReminder'
 import { MediaContext } from 'contexts/Media'
+import { hasSignedIn } from 'utils/localStorageUtils'
 import {
   baseWrapper,
   headerHeightInRem,
@@ -43,7 +45,9 @@ export default function MePage (props) {
               padding: 0;
             }
           `}
-        />
+        >
+          {hasSignedIn() ? <SignUpReminder /> : <SignUpReminder />}
+        </div>
       </main>
     </>
   )

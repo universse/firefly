@@ -3,19 +3,6 @@ import { css } from '@emotion/core'
 
 import { ChevronDown } from 'icons'
 
-export function Item ({ isHighlighted, ...props }) {
-  return (
-    <li
-      css={theme => css`
-        background-color: ${isHighlighted
-      ? theme.colors.gray300
-      : 'transparent'};
-      `}
-      {...props}
-    />
-  )
-}
-
 export function OptionList (props) {
   return (
     <ul
@@ -33,7 +20,7 @@ export function OptionList (props) {
   )
 }
 
-export function OptionButton ({ isSelected, ...props }) {
+export function OptionButton ({ isHighlighted, isSelected, ...props }) {
   return (
     <button
       css={theme => css`

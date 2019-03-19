@@ -7,9 +7,9 @@
     "dotenv": "^7.0.0",
     "firebase-admin": "^7.1.0",
     "got": "^9.6.0",
-    "metascraper": "^4.10.2",
-    "metascraper-description": "^4.10.2",
-    "metascraper-title": "^4.10.2",
+    "metascraper": "^5.0.0",
+    "metascraper-description": "^5.0.1",
+    "metascraper-title": "^5.0.1",
     "xlsx": "^0.14.1"
   },
   "devDependencies": {},

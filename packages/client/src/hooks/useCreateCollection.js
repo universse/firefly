@@ -34,30 +34,6 @@ export default function useCreateCollection () {
   const firebase = useContext(FirebaseContext)
   const [hasError, setHasError] = useState(false)
 
-  const handleCategoryChange = useCallback(
-    ({ value }) => dispatch({ type: 'set', payload: { category: value } }),
-    []
-  )
-
-  const handleLearningItemChange = useCallback(
-    item => dispatch({ type: 'addItem', payload: { item } }),
-    []
-  )
-
-  const handleLevelChange = useCallback(
-    ({ value }) => dispatch({ type: 'set', payload: { level: value } }),
-    []
-  )
-
-  const handleNameChange = useCallback(
-    e =>
-      dispatch({
-        type: 'set',
-        payload: { name: e.target.value }
-      }),
-    []
-  )
-
   const handleSubmit = useCallback(
     e => {
       e.preventDefault()
@@ -74,10 +50,7 @@ export default function useCreateCollection () {
 
   return {
     collection,
-    handleCategoryChange,
-    handleLearningItemChange,
-    handleLevelChange,
-    handleNameChange,
+    dispatch,
     handleSubmit,
     hasError
   }

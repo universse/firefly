@@ -3,7 +3,6 @@ import { css } from '@emotion/core'
 
 import { Dropdown } from 'components/common'
 import {
-  Item,
   Label,
   OptionList,
   OptionButton,
@@ -28,7 +27,6 @@ export default function SortByDifficulty ({ sort }) {
       initialValue={sort}
       items={SortOptions}
       label='Sort By:'
-      Item={Item}
       OptionList={OptionList}
       OptionButton={OptionButton}
       ToggleButton={ToggleButton}

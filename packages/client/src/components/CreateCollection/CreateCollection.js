@@ -3,26 +3,20 @@ import { css } from '@emotion/core'
 
 import LearningItemInput from './LearningItemInput'
 import { Dropdown, IconButton } from 'components/common'
-import {
-  Item,
-  OptionList,
-  OptionButton,
-  ToggleButton,
-  TogglerLabel
-} from './styled'
+import { OptionList, OptionButton, ToggleButton, TogglerLabel } from './styled'
+import useCreateChangeHandlers from 'hooks/useCreateChangeHandlers'
 import useCreateCollection from 'hooks/useCreateCollection'
 import DropdownOptions from 'constants/DropdownOptions'
 
 export default function CreateCollection () {
+  const { collection, dispatch, handleSubmit, hasError } = useCreateCollection()
+
   const {
-    collection,
     handleCategoryChange,
     handleLearningItemChange,
     handleLevelChange,
-    handleNameChange,
-    handleSubmit,
-    hasError
-  } = useCreateCollection()
+    handleNameChange
+  } = useCreateChangeHandlers(dispatch)
 
   // const handleUrlInput = e => {
   //   const url = e.target.value
@@ -46,7 +40,6 @@ export default function CreateCollection () {
         initialValue={collection.category}
         items={DropdownOptions.CATEGORY_OPTIONS}
         label=''
-        Item={Item}
         OptionList={OptionList}
         OptionButton={OptionButton}
         ToggleButton={ToggleButton}
@@ -57,7 +50,6 @@ export default function CreateCollection () {
         initialValue={collection.level}
         items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
         label=''
-        Item={Item}
         OptionList={OptionList}
         OptionButton={OptionButton}
         ToggleButton={ToggleButton}

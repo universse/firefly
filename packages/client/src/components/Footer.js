@@ -3,14 +3,6 @@ import { css } from '@emotion/core'
 
 import { baseWrapper } from 'utils/styles'
 
-const wrapper = css`
-  ${baseWrapper}
-  align-items: center;
-  display: flex;
-  height: 3.5rem;
-  justify-content: space-between;
-`
-
 export default function Footer () {
   return (
     <footer
@@ -20,7 +12,15 @@ export default function Footer () {
         }
       }
     >
-      <div css={wrapper}>
+      <div
+        css={css`
+          ${baseWrapper}
+          align-items: center;
+          display: flex;
+          height: 3.5rem;
+          justify-content: space-between;
+        `}
+      >
         <div
           css={css`
             align-items: center;

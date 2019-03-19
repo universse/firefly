@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { css } from '@emotion/core'
 
 import LocalStorage from 'constants/LocalStorage'
 
-export default function Onboard () {
+export default memo(function Onboard () {
   useEffect(() => {
     const removeIsNewUser = () =>
       window.localStorage.removeItem(LocalStorage.IS_NEW_USER)
@@ -17,4 +17,4 @@ export default function Onboard () {
   }, [])
 
   return <>Onboard</>
-}
+})

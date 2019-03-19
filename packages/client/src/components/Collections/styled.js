@@ -30,10 +30,6 @@ export function CollectionTitle ({ id, name }) {
           font-size: 1.125rem;
           font-weight: 600;
           line-height: 1.5rem;
-
-          ${theme.screens.nonMobile} {
-            line-height: 1.75rem;
-          }
         `}
       >
         {name}

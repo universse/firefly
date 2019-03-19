@@ -3,19 +3,6 @@ import { css } from '@emotion/core'
 
 import { ChevronDown } from 'icons'
 
-export function Item ({ isHighlighted, ...props }) {
-  return (
-    <li
-      css={theme => css`
-        background-color: ${isHighlighted
-      ? theme.colors.gray300
-      : 'transparent'};
-      `}
-      {...props}
-    />
-  )
-}
-
 export function Label (props) {
   return (
     <label
@@ -46,10 +33,13 @@ export function OptionList (props) {
   )
 }
 
-export function OptionButton ({ isSelected, ...props }) {
+export function OptionButton ({ isHighlighted, isSelected, ...props }) {
   return (
     <button
       css={theme => css`
+        background-color: ${isHighlighted
+      ? theme.colors.gray300
+      : 'transparent'};
         color: ${isSelected ? theme.colors.gray700 : theme.colors.gray600};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
@@ -85,12 +75,13 @@ export function ToggleButton ({ children, ...props }) {
     <button
       css={theme => css`
         align-items: center;
+        border-left: 4px solid transparent;
         color: ${theme.colors.gray700};
         display: flex;
         font-size: 0.875rem;
         font-weight: 600;
         justify-content: space-between;
-        padding-left: 1rem;
+        padding-left: calc(1rem - 4px);
         text-transform: uppercase;
         width: 11.5rem;
       `}

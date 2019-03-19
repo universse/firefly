@@ -49,7 +49,9 @@ const IndexPage = memo(function ({
   return (
     <>
       <SEO />
-      <Hero />
+      <section id='hero'>
+        <Hero />
+      </section>
       <MobileHeader
         actions={
           <IconButton
@@ -120,16 +122,18 @@ const IndexPage = memo(function ({
                       }
                     `}
                   >
-                    <div
-                      css={css`
-                        align-items: center;
-                        display: flex;
-                        justify-content: flex-end;
-                        margin-bottom: 0.75rem;
-                      `}
-                    >
-                      {isDesktop && <SortByDifficulty sort={sort} />}
-                    </div>
+                    {isDesktop && (
+                      <div
+                        css={css`
+                          align-items: center;
+                          display: flex;
+                          justify-content: flex-end;
+                          margin-bottom: 0.75rem;
+                        `}
+                      >
+                        <SortByDifficulty sort={sort} />
+                      </div>
+                    )}
                     <Collections collections={sortedCollections} />
                   </div>
                 </>
