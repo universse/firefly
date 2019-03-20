@@ -36,7 +36,6 @@ export default memo(function CategoryFilter () {
           <Title>CATEGORIES</Title>
         </div>
       )}
-
       <Filters handleScroll={onScroll} slider={slider} />
       {!isDesktop && (
         <div>

@@ -201,9 +201,10 @@ embed,
 *[contenteditable] {
   &:focus {
     outline: none;
-    @media screen and (min-width: 52.0625rem) {
-      box-shadow: 0 0 0 4px rgba(59, 175, 218, 0.7);
-    }
+  }
+
+  body.keyboard-in-use &:focus {
+    box-shadow: 0 0 0 4px rgba(59, 175, 218, 0.7);
   }
 }
 

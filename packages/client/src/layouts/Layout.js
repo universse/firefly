@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider } from 'emotion-theming'
 
+import CommonLayout from './CommonLayout'
+import IndexLayout from './IndexLayout'
 import SignUpForm from 'components/SignUpForm'
-import Site from 'components/Site'
 import AllCollections from 'contexts/AllCollections'
 import Authentication from 'contexts/Authentication'
-import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
 import NormalizedCollections from 'contexts/NormalizedCollections'
 import Theme from 'constants/Theme'
@@ -24,11 +24,9 @@ export default function Layout ({ children, location }) {
           <Authentication>
             <Modal>
               {isIndexPage(location.pathname) ? (
-                <Site location={location}>{children}</Site>
+                <IndexLayout location={location}>{children}</IndexLayout>
               ) : (
-                <Media>
-                  <Site location={location}>{children}</Site>
-                </Media>
+                <CommonLayout location={location}>{children}</CommonLayout>
               )}
               <SignUpForm />
             </Modal>

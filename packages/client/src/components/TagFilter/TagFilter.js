@@ -40,6 +40,7 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
       <ul>
         {aggregatedTags.map(([tag, count]) => {
           const { href, updatedTags } = constructUrl(tag)
+          const isActive = tags.includes(tag)
 
           return (
             <li
@@ -51,7 +52,7 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
               `}
             >
               <Tag
-                isActive={tags.includes(tag)}
+                isActive={isActive}
                 onClick={e => {
                   e.preventDefault()
                   updateQuery(updatedTags)
@@ -61,7 +62,7 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
               >
                 {tag}
               </Tag>
-              <Count isActive={tags.includes(tag)}>{count}</Count>
+              <Count isActive={isActive}>{count}</Count>
             </li>
           )
         })}
@@ -110,6 +111,7 @@ export function MobileTagFilter ({ aggregatedTags, sort, tags }) {
       <ul>
         {aggregatedTags.map(([tag, count]) => {
           const { href, updatedTags } = constructUrl(tag)
+          const isActive = tags.includes(tag)
 
           return (
             <li
@@ -121,7 +123,7 @@ export function MobileTagFilter ({ aggregatedTags, sort, tags }) {
               `}
             >
               <MobileTag
-                isActive={tags.includes(tag)}
+                isActive={isActive}
                 onClick={e => {
                   e.preventDefault()
                   updateQuery(updatedTags)
@@ -130,7 +132,7 @@ export function MobileTagFilter ({ aggregatedTags, sort, tags }) {
                 href={href}
               >
                 {tag}
-                <Count isActive={tags.includes(tag)}>{count}</Count>
+                <Count isActive={isActive}>{count}</Count>
               </MobileTag>
             </li>
           )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
 
@@ -7,7 +7,7 @@ import { DefaultItem, DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 
 // TODO add X icon, isLoading spinner
-export default function SearchBar ({
+function SearchBar ({
   controlledProps,
   initialIsLoading,
   initialSearchInput,
@@ -127,6 +127,8 @@ export default function SearchBar ({
     </Downshift>
   )
 }
+
+export default memo(SearchBar)
 
 SearchBar.defaultProps = {
   controlledProps: {},

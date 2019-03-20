@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { FirebaseContext } from 'contexts/Firebase'
 import { ModalContext } from 'contexts/Modal'
-import { GhostButton, NavLink, PrimaryButton } from './styled'
+import { GhostButton, NavLink } from './styled'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
-function AuthNav () {
+const AuthNav = memo(function () {
   const { openModal } = useContext(ModalContext)
   const firebase = useContext(FirebaseContext)
 
@@ -40,9 +40,9 @@ function AuthNav () {
       </GhostButton>
     </li>
   )
-}
+})
 
-export default function Navigation () {
+export default memo(function Navigation () {
   return (
     <nav>
       <ul
@@ -62,4 +62,4 @@ export default function Navigation () {
       </ul>
     </nav>
   )
-}
+})

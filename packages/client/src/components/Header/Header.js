@@ -62,12 +62,7 @@ export default memo(function Header () {
   )
 })
 
-export const MobileHeader = memo(function ({
-  actions,
-  navIcon,
-  shadow,
-  title
-}) {
+export const MobileHeader = memo(function ({ actions, navIcon, shadow, title }) {
   return (
     <HeaderTag
       css={theme => css`
