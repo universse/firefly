@@ -26,7 +26,7 @@ export default function SignUpForm () {
     socialLogin: ''
   })
 
-  const { activeModalType, focusable, closeModal } = useContext(ModalContext)
+  const { activeModalType, closeModal } = useContext(ModalContext)
 
   const isOpen = useRef()
 
@@ -82,7 +82,7 @@ export default function SignUpForm () {
               Welcome to {data.site.siteMetadata.title}
             </h3>
           </div>
-          <EmailLogin inputRef={focusable} setSignUpState={setSignUpState} />
+          <EmailLogin setSignUpState={setSignUpState} />
           {/* <div
             css={css`
               margin-top: 0.75rem;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
@@ -9,7 +9,7 @@ import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-export default function Collection ({
+function Collection ({
   collection: { id, name, category, level, numOfItems, tags },
   handleHeartClick,
   handleSaveClick,
@@ -88,3 +88,5 @@ export default function Collection ({
     </>
   )
 }
+
+export default memo(Collection)

@@ -1,1 +1,2 @@
-export { default, MobileTagFilter } from './TagFilter'
+export { default } from './TagFilter'
+export { default as MobileTagFilter } from './MobileTagFilter'

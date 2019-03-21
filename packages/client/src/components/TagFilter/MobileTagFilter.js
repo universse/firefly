@@ -3,10 +3,9 @@ import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
 import { URLUtilsContext } from 'contexts/URLUtils'
-import { Title } from 'components/common'
-import { ClearFilterButton, Count, Tag } from './styled'
+import { ClearFilterButton, Count, MobileTag } from './styled'
 
-export default function TagFilter ({ aggregatedTags, sort, tags }) {
+export default function MobileTagFilter ({ aggregatedTags, sort, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
     URLUtilsContext
   )
@@ -16,11 +15,7 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
   ])
 
   return (
-    <div
-      css={theme => css`
-        margin-bottom: 2rem;
-      `}
-    >
+    <>
       <div
         css={css`
           align-items: center;
@@ -29,12 +24,22 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
           margin-bottom: 0.75rem;
         `}
       >
-        <Title>TAGS</Title>
+        <h4
+          css={theme => css`
+            color: ${theme.colors.gray700};
+            font-size: 0.875rem;
+            font-weight: 700;
+            line-height: 1.25rem;
+            text-transform: uppercase;
+          `}
+        >
+          Filter by Tags
+        </h4>
         <ClearFilterButton
           aria-label='Reset Filters'
           onClick={handleClearFilterClick}
         >
-          clear
+          CLEAR
         </ClearFilterButton>
       </div>
       <ul>
@@ -46,12 +51,12 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
             <li
               key={tag}
               css={css`
+                align-items: center;
                 display: flex;
-                justify-content: space-between;
-                margin: 0.375rem 0 0.375rem calc(1rem + 4px);
+                margin-bottom: 0.75rem;
               `}
             >
-              <Tag
+              <MobileTag
                 isActive={isActive}
                 onClick={e => {
                   e.preventDefault()
@@ -61,12 +66,12 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
                 href={href}
               >
                 {tag}
-              </Tag>
-              <Count isActive={isActive}>{count}</Count>
+                <Count isActive={isActive}>{count}</Count>
+              </MobileTag>
             </li>
           )
         })}
       </ul>
-    </div>
+    </>
   )
 }

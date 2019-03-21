@@ -5,13 +5,13 @@ import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
 // import { AuthenticationContext } from 'contexts/Authentication'
 // import { ModalContext } from 'contexts/Modal'
-import Collection from './Collection'
+import Item from './Item'
 import useSavedCollections from 'hooks/useSavedCollections'
 import { collectionHeightInRem } from './styled'
 import { baseFontSize } from 'utils/styles'
 
 function itemKey (index, data) {
-  return data[index].node.id
+  return data.collections[index].node.id
 }
 
 const listStyle = theme => css`
@@ -48,25 +48,12 @@ export default function Collections ({ collections }) {
         height={window.innerHeight}
         innerElementType='ul'
         itemCount={collections.length}
-        itemData={collections}
+        itemData={{ collections, onSaveClick, savedCollections }}
         itemKey={itemKey}
         itemSize={collectionHeightInRem * baseFontSize}
         ref={listRef}
       >
-        {({ data, index, style }) => {
-          const collection = data[index].node
-
-          return (
-            <li style={style}>
-              <Collection
-                collection={collection}
-                // handleHeartClick={onHeartClick}
-                handleSaveClick={onSaveClick}
-                isSaved={!!savedCollections[collection.id]}
-              />
-            </li>
-          )
-        }}
+        {Item}
       </List>
     </>
   ) : null

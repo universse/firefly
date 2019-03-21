@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 
 import Header from 'components/Header'
-import MobileNavigation from 'components/MobileNavigation'
+import { MobileNavigation } from 'components/Navigation'
 import Media from 'contexts/Media'
 import SavedCollections from 'contexts/SavedCollections'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'

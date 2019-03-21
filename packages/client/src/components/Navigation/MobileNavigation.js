@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { NavLink } from './styled'
+import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'icons'
 import isIndexPage from 'utils/isIndexPage'
 import { mobileNavigationHeightInRem } from 'utils/styles'
@@ -35,7 +35,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
             flex: 1;
           `}
         >
-          <NavLink
+          <MobileNavLink
             isActive={isIndexPage(pathname)}
             Icon={Home}
             label='Home'
@@ -47,7 +47,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
             flex: 1;
           `}
         >
-          <NavLink
+          <MobileNavLink
             isActive={pathname === '/search'}
             Icon={Search}
             label='Search'
@@ -59,7 +59,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
             flex: 1;
           `}
         >
-          <NavLink
+          <MobileNavLink
             isActive={pathname === '/my-library'}
             Icon={Library}
             label='My Library'
@@ -71,7 +71,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
             flex: 1;
           `}
         >
-          <NavLink
+          <MobileNavLink
             isActive={pathname === '/me'}
             Icon={User}
             label='Profile'

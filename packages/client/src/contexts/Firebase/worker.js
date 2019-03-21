@@ -13,9 +13,9 @@ const actionCodeSettings = JSON.stringify({
 const worker =
   typeof window === 'object' &&
   workerize(`
-importScripts('https://www.gstatic.com/firebasejs/5.8.6/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/5.8.6/firebase-auth.js')
-importScripts('https://www.gstatic.com/firebasejs/5.8.6/firebase-firestore.js')
+importScripts('https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js')
+importScripts('https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js')
 
 firebase.initializeApp(${config})
 const auth = firebase.auth()
@@ -44,8 +44,26 @@ export function createUserWithEmailAndPassword (email, password) {
   return auth.createUserWithEmailAndPassword(email, password)
 }
 
-export function signInWithEmailAndPassword (email, password) {
-  return auth.signInWithEmailAndPassword(email, password)
+export async function fetchSignInMethodsForEmail (email) {
+  try {
+    const signInMethods = await auth.fetchSignInMethodsForEmail(email)
+    if (
+      signInMethods.includes(
+        firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
+      )
+    ) {
+    
+    }
+    if (
+      signInMethods.includes(
+        firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+      )
+    ) {
+    
+    }
+  } catch (e) {
+
+  }
 }
 
 export function isSignInWithEmailLink (href) {
@@ -54,6 +72,10 @@ export function isSignInWithEmailLink (href) {
 
 export function sendSignInLinkToEmail (email) {
   return auth.sendSignInLinkToEmail(email, actionCodeSettings)
+}
+
+export function signInWithEmailAndPassword (email, password) {
+  return auth.signInWithEmailAndPassword(email, password)
 }
 
 export async function signInWithEmailLink (email, href) {

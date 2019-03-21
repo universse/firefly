@@ -1,1 +1,2 @@
-export { default, MobileHeader } from './Header'
+export { default } from './Header'
+export { default as MobileHeader } from './MobileHeader'

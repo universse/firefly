@@ -60,7 +60,6 @@ export function SortOption (props) {
   return (
     <input
       css={css`
-        margin-left: 0;
         margin-right: 1rem;
       `}
       name='sort'

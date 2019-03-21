@@ -16,12 +16,6 @@ const handleWheel = e => e.preventDefault()
 
 export default function Modal ({ children }) {
   const [activeModalType, setActiveModalType] = useState()
-  const focusable = useRef()
-
-  const afterModalOpen = useCallback(
-    () => focusable.current && focusable.current.focus(),
-    []
-  )
 
   const closeModal = useCallback(() => {
     window.removeEventListener('wheel', handleWheel)
@@ -36,17 +30,13 @@ export default function Modal ({ children }) {
   const modal = useMemo(
     () => ({
       activeModalType,
-      afterModalOpen,
-      focusable,
       closeModal,
       openModal
     }),
-    [activeModalType, afterModalOpen, closeModal, openModal]
+    [activeModalType, closeModal, openModal]
   )
 
-  return (
-    <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
-  )
+  return <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
 }
 
 Modal.propTypes = {

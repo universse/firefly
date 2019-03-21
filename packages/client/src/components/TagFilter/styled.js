@@ -45,12 +45,12 @@ export function MobileTag ({ isActive, ...props }) {
       ? theme.colors.gray900
       : theme.colors.gray300};
         border-radius: 1rem;
-        color: ${isActive ? theme.colors.white : theme.colors.gray700};
+        color: ${isActive ? theme.colors.white : theme.colors.gray900};
         display: block;
-        font-size: 1rem;
+        font-size: 0.875rem;
         font-weight: 600;
         line-height: 2rem;
-        padding: 0 1rem;
+        padding: 0 0.75rem;
       `}
       {...props}
     />

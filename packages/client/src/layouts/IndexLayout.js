@@ -1,10 +1,10 @@
-import React, { memo, useContext } from 'react'
+import React, { memo, useContext, useMemo } from 'react'
 import { css } from '@emotion/core'
 
 import CategoryFilter from 'components/CategoryFilter'
 import Header, { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
-import MobileNavigation from 'components/MobileNavigation'
+import { MobileNavigation } from 'components/Navigation'
 import SEO from 'components/SEO'
 import { IconButton, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
@@ -31,6 +31,18 @@ const IndexLayout = memo(function ({ children, location, openModal }) {
 
   useAccessibleFocusIndicator()
 
+  const actions = useMemo(
+    () => (
+      <IconButton
+        aria-label='Filter Collections by Tags'
+        onClick={() => openModal(ModalTypes.MOBILE_FILTER)}
+      >
+        <Filter />
+      </IconButton>
+    ),
+    [openModal]
+  )
+
   return (
     <>
       <SEO />
@@ -42,20 +54,10 @@ const IndexLayout = memo(function ({ children, location, openModal }) {
         `}
       >
         <Header />
-        <MobileHeader
-          actions={
-            <IconButton
-              aria-label='Filter Collections by Tags'
-              onClick={() => openModal(ModalTypes.MOBILE_FILTER)}
-            >
-              <Filter />
-            </IconButton>
-          }
-          title='Collections'
-        />
         <section id='hero'>
           <Hero />
         </section>
+        <MobileHeader actions={actions} title='Collections' />
         <main
           css={theme => css`
             background-color: ${theme.colors.gray100};

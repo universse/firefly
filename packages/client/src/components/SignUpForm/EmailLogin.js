@@ -5,7 +5,7 @@ import { FirebaseContext } from 'contexts/Firebase'
 import LocalStorage from 'constants/LocalStorage'
 import { AuthButton, ErrorMessage, Input } from './styled'
 
-export default function EmailLogin ({ inputRef, setSignUpState }) {
+export default function EmailLogin ({ setSignUpState }) {
   const [email, setEmail] = useState('')
   const [hasError, setHasError] = useState(false)
 
@@ -39,7 +39,6 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
         onChange={handleChange}
         onFocus={handleFocus}
         placeholder='username@domain.com'
-        inputRef={inputRef}
         value={email}
       />
       {hasError && (
@@ -52,7 +51,7 @@ export default function EmailLogin ({ inputRef, setSignUpState }) {
           margin-top: 1rem;
         `}
       >
-        <AuthButton type='submit'>Continue</AuthButton>
+        <AuthButton type='submit'>Sign In with Email Link</AuthButton>
       </div>
     </form>
   )

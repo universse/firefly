@@ -22,11 +22,14 @@ function reducer (_, { type, payload }) {
 export default function useSavedItemsReducer (key) {
   const [savedItems, dispatch] = useReducer(reducer)
 
-  useEffect(() => {
-    localforage
-      .getItem(key)
-      .then(value => dispatch({ type: 'load', payload: value }))
-  }, [key])
+  useEffect(
+    () => {
+      localforage
+        .getItem(key)
+        .then(value => dispatch({ type: 'load', payload: value }))
+    },
+    [key]
+  )
 
   const onClick = useCallback(
     e =>

@@ -11,9 +11,8 @@ export function AuthButton ({ backgroundColor, ...props }) {
         border-radius: 1.25rem;
         color: #fff;
         font-size: 0.9375rem;
-        font-weight: 700;
+        font-weight: 600;
         height: 2.5rem;
-        padding-left: 1rem;
         width: 18rem;
 
         &:hover {
@@ -57,7 +56,7 @@ export function ErrorMessage (props) {
   )
 }
 
-export function Input ({ inputRef, ...props }) {
+export function Input (props) {
   return (
     <input
       autoComplete='off'
@@ -79,7 +78,6 @@ export function Input ({ inputRef, ...props }) {
           box-shadow: 0 0 0 4px rgba(218, 68, 83, 0.9);
         }
       `}
-      ref={inputRef}
       type='email'
       {...props}
     />
