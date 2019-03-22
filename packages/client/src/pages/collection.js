@@ -16,16 +16,9 @@ import {
   mobileHeaderHeightInRem
 } from 'utils/styles'
 import copyToClipboard from 'utils/copyToClipboard'
+import getCollectionIdFromPathname from 'utils/getCollectionIdFromPathname'
 import parseCollectionData from 'utils/parseCollectionData'
 import { createCollectionPath } from '../../gatsby/utils'
-
-const getCollectionIdFromPathname = pathname => {
-  const normalizedPathname = pathname.endsWith('/')
-    ? pathname.slice(0, -1)
-    : pathname
-
-  return normalizedPathname.split('/').pop()
-}
 
 export default function CollectionPage ({ location }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)

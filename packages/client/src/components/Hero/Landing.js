@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { CTA } from './styled'
 import { baseWrapper } from 'utils/styles'
 
-export default memo(function Landing () {
+function Landing () {
   const handleClick = () =>
     window.scrollTo({
       top: document.getElementById('hero').offsetHeight,
@@ -24,7 +24,7 @@ export default memo(function Landing () {
     >
       <h1
         css={theme => css`
-          color: ${theme.colors.gray700};
+          color: ${theme.colors.gray800};
           font-family: 'Playfair Display', serif;
           font-size: 2.75rem;
           font-weight: 900;
@@ -53,4 +53,6 @@ export default memo(function Landing () {
       </div>
     </div>
   )
-})
+}
+
+export default memo(Landing)

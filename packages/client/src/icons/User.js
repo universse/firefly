@@ -3,12 +3,12 @@ import React from 'react'
 export function User ({ color }) {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='feather'
-      viewBox='0 0 24 24'
-      stroke={color}
       aria-label='user'
+      className='feather'
       role='img'
+      stroke={color}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
     >
       <title>user</title>
       <path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2' />

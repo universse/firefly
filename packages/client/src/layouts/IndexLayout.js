@@ -2,6 +2,7 @@ import React, { memo, useContext, useMemo } from 'react'
 import { css } from '@emotion/core'
 
 import CategoryFilter from 'components/CategoryFilter'
+import Footer from 'components/Footer'
 import Header, { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import { MobileNavigation } from 'components/Navigation'
@@ -19,13 +20,14 @@ import useURLUtils from 'hooks/useURLUtils'
 import {
   baseWrapper,
   headerHeightInRem,
-  mobileNavigationHeightInRem
+  mobileNavigationHeightInRem,
+  mobileBarsHeightInRem
 } from 'utils/styles'
 import ModalTypes from 'constants/ModalTypes'
 
-const IndexLayout = memo(function ({ children, location, openModal }) {
+function IndexLayout ({ children, location, openModal }) {
   const { pathname, search } = location
-
+  // set title for SEO
   const [queryValues, dispatch] = useParams(search)
   const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
@@ -61,7 +63,7 @@ const IndexLayout = memo(function ({ children, location, openModal }) {
         <main
           css={theme => css`
             background-color: ${theme.colors.gray100};
-            min-height: calc(100vh - ${headerHeightInRem}rem);
+            min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
             padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
             ${theme.screens.desktop} {
@@ -104,11 +106,12 @@ const IndexLayout = memo(function ({ children, location, openModal }) {
             </SavedCollections>
           </div>
         </main>
+        <Footer />
         <MobileNavigation location={location} />
       </div>
     </>
   )
-})
+}
 
 export default function (props) {
   const { openModal } = useContext(ModalContext)

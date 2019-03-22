@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useMemo } from 'react'
 import { css } from '@emotion/core'
 import { FixedSizeList as List } from 'react-window'
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
@@ -40,18 +40,27 @@ export default function Collections ({ collections }) {
   const handleScroll = ({ scrollTop }) =>
     listRef.current && listRef.current.scrollTo(scrollTop)
 
+  const itemData = useMemo(
+    () => ({
+      collections,
+      onSaveClick,
+      savedCollections
+    }),
+    [collections, onSaveClick, savedCollections]
+  )
+
   return savedCollections ? (
     <>
       <WindowScroller onScroll={handleScroll}>{() => <div />}</WindowScroller>
       <List
+        ref={listRef}
         css={listStyle}
         height={window.innerHeight}
         innerElementType='ul'
         itemCount={collections.length}
-        itemData={{ collections, onSaveClick, savedCollections }}
+        itemData={itemData}
         itemKey={itemKey}
         itemSize={collectionHeightInRem * baseFontSize}
-        ref={listRef}
       >
         {Item}
       </List>

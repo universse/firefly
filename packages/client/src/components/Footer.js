@@ -1,41 +1,52 @@
-import React from 'react'
+import React, { memo } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { baseWrapper } from 'utils/styles'
 
-export default function Footer () {
-  return (
-    <footer
-      css={
-        {
-          // borderBottom: '1px solid rgba(0, 0, 0, 0.1)'
+function Footer () {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
         }
       }
+    }
+  `)
+
+  return (
+    <footer
+      css={theme => css`
+        background-color: ${theme.colors.gray100};
+
+        ${theme.screens.nonDesktop} {
+          display: none;
+        }
+      `}
     >
       <div
-        css={css`
+        css={theme => css`
           ${baseWrapper}
           align-items: center;
+          border-top: 1px solid ${theme.colors.gray300};
           display: flex;
-          height: 3.5rem;
-          justify-content: space-between;
+          height: 3rem;
+          justify-content: space-around;
         `}
       >
-        <div
-          css={css`
-            align-items: center;
-            display: flex;
+        <p
+          css={theme => css`
+            color: ${theme.colors.gray800};
+            font-size: 0.8125rem;
+            font-weight: 600;
           `}
         >
-          <div
-            css={css`
-              margin-right: 1.5rem;
-            `}
-          >
-            placeholder
-          </div>
-        </div>
+          © {new Date().getFullYear()} {data.site.siteMetadata.title}
+        </p>
       </div>
     </footer>
   )
 }
+
+export default memo(Footer)

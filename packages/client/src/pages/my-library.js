@@ -57,7 +57,7 @@ export default function MyLibraryPage (props) {
             >
               <h1
                 css={theme => css`
-                  color: ${theme.colors.gray700};
+                  color: ${theme.colors.gray800};
                   font-size: 1.25rem;
                   line-height: 2rem;
                 `}
@@ -84,15 +84,15 @@ export default function MyLibraryPage (props) {
               savedCollections &&
               Object.keys(savedCollections).map(id => (
                 <li
+                  key={id}
                   css={css`
                     position: relative;
                   `}
-                  key={id}
                 >
                   <Collection
                     collection={normalizedCollections[id.toLowerCase()]}
-                    // handleHeartClick={onHeartClick}
                     handleSaveClick={onSaveClick}
+                    // handleHeartClick={onHeartClick}
                     isSaved
                   />
                 </li>

@@ -71,10 +71,10 @@ export default function LearningItemInput ({ index }) {
         aria-label='Learning Item URL'
         autoComplete='off'
         name={`url-${index}`}
-        placeholder='https://example.com'
         onChange={handleChange}
-        value={item.url}
+        placeholder='https://example.com'
         type='url'
+        value={item.url}
       />
       {/*  for item types, empty default, please choose one */}
     </div>

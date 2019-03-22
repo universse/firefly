@@ -8,12 +8,7 @@ import { Category, Difficulty } from 'components/common'
 import { Level } from 'icons'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-export default memo(function CollectionDetails ({
-  category,
-  level,
-  name,
-  tags
-}) {
+function CollectionDetails ({ category, level, name, tags }) {
   return (
     <div
       css={theme => css`
@@ -48,7 +43,8 @@ export default memo(function CollectionDetails ({
         >
           <div
             css={css`
-              display: inline-block;
+              align-items: flex-end;
+              display: flex;
               height: 1.25rem;
               margin-right: 0.5rem;
             `}
@@ -70,4 +66,6 @@ export default memo(function CollectionDetails ({
       </div>
     </div>
   )
-})
+}
+
+export default memo(CollectionDetails)

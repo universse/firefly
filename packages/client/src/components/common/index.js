@@ -1,4 +1,4 @@
-import React, { Children, Fragment } from 'react'
+import React, { Children, Fragment, forwardRef } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -51,7 +51,7 @@ export function Difficulty (props) {
   return (
     <span
       css={theme => css`
-        color: ${theme.colors.gray700};
+        color: ${theme.colors.gray800};
         font-size: 0.875rem;
         font-weight: 600;
         text-transform: capitalize;
@@ -94,9 +94,10 @@ export function Heading ({ as, serif, ...props }) {
   )
 }
 
-export function IconButton (props) {
+export const IconButton = forwardRef(function ({ children, ...props }, ref) {
   return (
     <button
+      ref={ref}
       css={theme =>
         css`
           color: ${theme.colors.gray500};
@@ -107,9 +108,26 @@ export function IconButton (props) {
       }
       type='button'
       {...props}
-    />
+    >
+      <div
+        css={theme => css`
+          align-items: center;
+          border-radius: 50%;
+          display: flex;
+          height: 2.5rem;
+          justify-content: space-around;
+          width: 2.5rem;
+
+          &:hover {
+            background-color: ${theme.colors.gray300};
+          }
+        `}
+      >
+        {children}
+      </div>
+    </button>
   )
-}
+})
 
 export function Input (props) {
   return (
@@ -125,7 +143,7 @@ export function Input (props) {
         width: 100%;
 
         ::placeholder {
-          color: ${theme.colors.gray600};
+          color: ${theme.colors.gray700};
           opacity: 1;
         }
 
@@ -219,18 +237,18 @@ export function Sidebar (props) {
   )
 }
 
-export function Tag (props) {
+export function Tag ({ small, ...props }) {
   return (
     // eslint-disable-next-line
     <a
       css={theme => css`
         background-color: ${theme.colors.gray300};
-        border-radius: 0.75rem;
+        border-radius: ${small ? 0.625 : 0.75}rem;
         color: ${theme.colors.gray900};
         display: block;
         font-size: 0.8125rem;
         font-weight: 600;
-        line-height: 1.5rem;
+        line-height: ${small ? 1.25 : 1.5}rem;
         padding: 0 0.75rem;
 
         &:hover {

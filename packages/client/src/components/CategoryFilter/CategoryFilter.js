@@ -7,7 +7,7 @@ import { Title } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import useSlider from 'hooks/useSlider'
 
-export default memo(function CategoryFilter () {
+function CategoryFilter () {
   const {
     isMaxScroll,
     isMinScroll,
@@ -53,4 +53,6 @@ export default memo(function CategoryFilter () {
       )}
     </div>
   )
-})
+}
+
+export default memo(CategoryFilter)

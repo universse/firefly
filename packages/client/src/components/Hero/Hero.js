@@ -7,7 +7,7 @@ import Onboard from './Onboard'
 import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
-export default memo(function Hero () {
+function Hero () {
   const [latestActivity, setLatestActivity] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
@@ -36,4 +36,6 @@ export default memo(function Hero () {
   ) : (
     <Onboard />
   )
-})
+}
+
+export default memo(Hero)

@@ -3,12 +3,12 @@ import React from 'react'
 export function Google () {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      height='20'
-      width='20'
-      viewBox='0 0 512 512'
       aria-label='google'
+      height='20'
       role='img'
+      viewBox='0 0 512 512'
+      width='20'
+      xmlns='http://www.w3.org/2000/svg'
     >
       <title>google</title>
       <g fill='none' fillRule='evenodd'>

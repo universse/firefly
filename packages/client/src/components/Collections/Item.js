@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
+import { areEqual } from 'react-window'
 
 import Collection from './Collection'
 
-export default function Item ({ data, index, style }) {
+function Item ({ data, index, style }) {
   const { collections, onSaveClick, savedCollections } = data
   const collection = collections[index].node
 
@@ -17,3 +18,5 @@ export default function Item ({ data, index, style }) {
     </li>
   )
 }
+
+export default memo(Item, areEqual)

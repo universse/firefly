@@ -7,6 +7,11 @@ export function ClearFilterButton (props) {
       css={theme => css`
         color: ${theme.colors.gray700};
         font-size: 0.875rem;
+
+        &:hover {
+          color: ${theme.colors.gray900};
+          text-decoration: underline;
+        }
       `}
       type='button'
       {...props}

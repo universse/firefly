@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react'
+import React, { memo, useState, useRef, useContext } from 'react'
 import { css } from '@emotion/core'
 import { graphql, useStaticQuery } from 'gatsby'
 
@@ -9,7 +9,7 @@ import { CloseButton } from './styled'
 import { ModalContext } from 'contexts/Modal'
 import ModalTypes from 'constants/ModalTypes'
 
-export default function SignUpForm () {
+function SignUpForm () {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -109,3 +109,5 @@ export default function SignUpForm () {
     </Modal>
   )
 }
+
+export default memo(SignUpForm)

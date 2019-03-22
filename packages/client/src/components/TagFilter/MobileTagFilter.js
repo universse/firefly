@@ -26,7 +26,7 @@ export default function MobileTagFilter ({ aggregatedTags, sort, tags }) {
       >
         <h4
           css={theme => css`
-            color: ${theme.colors.gray700};
+            color: ${theme.colors.gray800};
             font-size: 0.875rem;
             font-weight: 700;
             line-height: 1.25rem;
@@ -57,13 +57,13 @@ export default function MobileTagFilter ({ aggregatedTags, sort, tags }) {
               `}
             >
               <MobileTag
+                href={href}
                 isActive={isActive}
                 onClick={e => {
                   e.preventDefault()
                   updateQuery(updatedTags)
                   navigate(href)
                 }}
-                href={href}
               >
                 {tag}
                 <Count isActive={isActive}>{count}</Count>

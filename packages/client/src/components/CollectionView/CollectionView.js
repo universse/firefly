@@ -67,8 +67,8 @@ export default function CollectionView ({
         `}
       >
         <CollectionDetails
-          id={id}
           category={category}
+          id={id}
           level={level}
           name={name}
           tags={tags}
@@ -80,11 +80,11 @@ export default function CollectionView ({
             `}
           >
             <CollectionActions
+              handleSaveClick={onSaveClick}
               id={id}
               isSaved={isSaved}
-              handleSaveClick={onSaveClick}
-              numOfItems={numOfItems}
               numOfCompleted={numOfCompleted}
+              numOfItems={numOfItems}
             />
           </div>
         )}
@@ -134,7 +134,7 @@ export default function CollectionView ({
           >
             <span
               css={theme => css`
-                color: ${theme.colors.gray700};
+                color: ${theme.colors.gray800};
                 font-size: 0.875rem;
                 font-weight: 600;
                 line-height: 1.25rem;

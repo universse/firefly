@@ -47,9 +47,9 @@ function Header () {
             </Link>
           </div>
           <SearchBar
-            numOfResults={2}
             Input={Input}
             Item={Item}
+            numOfResults={2}
             Result={Result}
             ResultBox={ResultBox}
             Root={Root}

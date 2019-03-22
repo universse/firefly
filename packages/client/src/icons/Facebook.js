@@ -4,12 +4,12 @@ import React from 'react'
 export function Facebook () {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      height='24'
-      width='24'
-      viewBox='0 0 24 24'
       aria-label='facebook'
+      height='24'
       role='img'
+      viewBox='0 0 24 24'
+      width='24'
+      xmlns='http://www.w3.org/2000/svg'
     >
       <title>facebook</title>
       <path

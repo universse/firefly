@@ -40,7 +40,7 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
         background-color: ${isHighlighted
       ? theme.colors.gray300
       : 'transparent'};
-        color: ${isSelected ? theme.colors.gray700 : theme.colors.gray600};
+        color: ${isSelected ? theme.colors.gray800 : theme.colors.gray700};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
         height: 2.5rem;
@@ -75,7 +75,7 @@ export function ToggleButton ({ children, ...props }) {
       css={theme => css`
         align-items: center;
         border-left: 4px solid transparent;
-        color: ${theme.colors.gray700};
+        color: ${theme.colors.gray800};
         display: flex;
         font-size: 0.875rem;
         font-weight: 600;

@@ -34,7 +34,7 @@ function MobileHeader ({ actions, navIcon, shadow, title }) {
           <div>
             <h2
               css={theme => css`
-                color: ${theme.colors.gray700};
+                color: ${theme.colors.gray800};
                 font-size: 1.25rem;
                 font-weight: 600;
                 line-height: 1.5rem;

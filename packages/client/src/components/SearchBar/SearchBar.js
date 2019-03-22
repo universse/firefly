@@ -97,8 +97,8 @@ function SearchBar ({
                       })}
                     >
                       <Result
-                        to='/search'
                         state={{ searchInput, initialIsLoading: true }}
+                        to='/search'
                       >
                         See all results
                       </Result>

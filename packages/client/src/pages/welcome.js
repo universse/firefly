@@ -7,7 +7,8 @@ import LocalStorage from 'constants/LocalStorage'
 import AuthErrors from 'constants/AuthErrors'
 
 export default function WelcomePage () {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('Signing in...')
+  const [isLoading, setIsLoading] = useState(true)
 
   const firebase = useContext(FirebaseContext)
 
@@ -19,22 +20,25 @@ export default function WelcomePage () {
           if (isSignInWithEmailLink) {
             const email =
               window.localStorage.getItem(LocalStorage.EMAIL_SIGN_IN) ||
-              window.prompt('Please provide your email for confirmation')
+              window.prompt('Please enter your email for confirmation.')
 
             firebase
               .signInWithEmailLink(email, window.location.href)
               .then(({ error, isNewUser }) => {
                 if (error) {
+                  setIsLoading(false)
+
                   const code = error
 
                   if (
                     code === AuthErrors.EXPIRED_ACTION_CODE ||
                     code === AuthErrors.INVALID_ACTION_CODE
                   ) {
-                    setMessage('Invalid/Expired URL')
+                    setMessage(
+                      'Seems like this sign-in link has expired. Please try again later!'
+                    )
                   }
                 } else {
-                  setMessage('Welcome')
                   window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
                   window.localStorage.setItem(
                     LocalStorage.HAS_SIGNED_IN,
@@ -44,12 +48,16 @@ export default function WelcomePage () {
                     LocalStorage.IS_NEW_USER,
                     isNewUser
                   )
-
-                  // TODO welcome redirecting to homepage
+                  navigate('/')
                 }
               })
-              .catch()
-              .finally(() => navigate('/'))
+              .catch(() => {
+                setIsLoading(false)
+                setMessage('Something went wrong. Please try again later!')
+              })
+          } else {
+            setIsLoading(false)
+            setMessage('Something went wrong. Please try again later!')
           }
         })
     },
@@ -57,12 +65,41 @@ export default function WelcomePage () {
   )
 
   return (
-    <p
+    <div
       css={css`
-        font-size: 1rem;
+        align-items: center;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
       `}
     >
-      {message}
-    </p>
+      <div
+        css={css`
+          height: 1.5rem;
+          margin: 0 0 1rem;
+          width: 1.5rem;
+        `}
+      >
+        {isLoading && 'spinner'}
+      </div>
+      <div>
+        <span
+          css={theme => css`
+            color: ${theme.colors.gray900};
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 2rem;
+            text-align: center;
+          `}
+        >
+          {message}
+        </span>
+      </div>
+    </div>
   )
 }

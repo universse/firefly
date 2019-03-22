@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useRef, useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { Heart, Save, Share } from '../../icons'
-import { ProgressBar } from './styled'
 import { ActionBar, IconButton } from 'components/common'
+import { ModalContext } from 'contexts/Modal'
+import { ProgressBar } from './styled'
+import { Heart, Save, Share } from 'icons'
+import ModalTypes from 'constants/ModalTypes'
 import copyToClipboard from 'utils/copyToClipboard'
 import withLocation from 'utils/withLocation'
 
@@ -15,6 +17,17 @@ function CollectionActions ({
   numOfItems,
   numOfCompleted
 }) {
+  const { openModal } = useContext(ModalContext)
+  const shareButton = useRef()
+
+  const handleShareClick = useCallback(
+    () => {
+      copyToClipboard(href)
+      shareButton.current.focus()
+    },
+    [href]
+  )
+
   return (
     <div
       css={theme => css`
@@ -43,7 +56,7 @@ function CollectionActions ({
         >
           <span
             css={theme => css`
-              color: ${theme.colors.gray700};
+              color: ${theme.colors.gray800};
               font-size: 0.875rem;
               font-weight: 600;
               line-height: 1.25rem;
@@ -61,7 +74,11 @@ function CollectionActions ({
         >
           <Save filled={isSaved} />
         </IconButton>
-        <IconButton aria-label='Share' onClick={() => copyToClipboard(href)}>
+        <IconButton
+          ref={shareButton}
+          aria-label='Share'
+          onClick={handleShareClick}
+        >
           <Share />
         </IconButton>
         {/* FLAG

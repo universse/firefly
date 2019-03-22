@@ -17,9 +17,9 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
 
   return (
     <div
-      css={theme => css`
-        margin-bottom: 2rem;
-      `}
+    // css={theme => css`
+    //   margin-bottom: 2rem;
+    // `}
     >
       <div
         css={css`
@@ -52,13 +52,13 @@ export default function TagFilter ({ aggregatedTags, sort, tags }) {
               `}
             >
               <Tag
+                href={href}
                 isActive={isActive}
                 onClick={e => {
                   e.preventDefault()
                   updateQuery(updatedTags)
                   navigate(href)
                 }}
-                href={href}
               >
                 {tag}
               </Tag>

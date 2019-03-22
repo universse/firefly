@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
 import Tags from './Tags'
-import { Heart, Level, Save } from '../../icons'
+import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
@@ -52,7 +52,8 @@ function Collection ({
           >
             <div
               css={css`
-                display: inline-block;
+                align-items: flex-end;
+                display: flex;
                 height: 1.25rem;
                 margin-right: 0.5rem;
               `}
@@ -69,7 +70,57 @@ function Collection ({
             justify-content: space-between;
           `}
         >
-          <Tags tags={tags} />
+          <div
+            css={css`
+              align-items: center;
+              display: flex;
+            `}
+          >
+            <div
+              css={theme =>
+                css`
+                  align-items: center;
+                  color: ${theme.colors.gray500};
+                  display: flex;
+                  height: 1.5rem;
+                  margin-right: 0.25rem;
+                `
+              }
+            >
+              <Resources small />
+            </div>
+            <div
+              css={css`
+                margin-right: 0.5rem;
+              `}
+            >
+              <span
+                css={theme => css`
+                  color: ${theme.colors.gray800};
+                  font-size: 0.8125rem;
+                  font-weight: 600;
+                  line-height: 1.5rem;
+                `}
+              >
+                {numOfItems}
+              </span>
+              <span
+                css={theme => css`
+                  color: ${theme.colors.gray800};
+                  font-size: 0.8125rem;
+                  font-weight: 600;
+                  line-height: 1.5rem;
+
+                  ${theme.screens.mobile} {
+                    display: none;
+                  }
+                `}
+              >
+                {` resource${numOfItems > 1 ? 's' : ''}`}
+              </span>
+            </div>
+            <Tags tags={tags} />
+          </div>
           <ActionBar>
             <IconButton
               aria-label='Save to My Library'

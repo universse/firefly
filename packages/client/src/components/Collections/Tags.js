@@ -24,15 +24,16 @@ function Tags ({ location: { pathname }, tags }) {
           `}
         >
           <Tag
+            href={
+              urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`
+            }
             onClick={e => {
               e.preventDefault()
               urlUtils
                 ? urlUtils.onQueryClick({ tag })
                 : navigate(`/?tags=${tag}`)
             }}
-            href={
-              urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`
-            }
+            small={!!urlUtils}
           >
             {tag}
           </Tag>

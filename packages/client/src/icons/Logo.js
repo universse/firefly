@@ -1,20 +1,30 @@
 import React, { useContext } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import { ThemeContext } from '@emotion/core'
 
-export function Logo ({ title }) {
+export function Logo () {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
   const theme = useContext(ThemeContext)
 
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      width='36'
-      height='36'
-      viewBox='0 0 36 36'
-      fill='none'
       aria-label='logo'
+      fill='none'
+      height='36'
       role='img'
+      viewBox='0 0 36 36'
+      width='36'
+      xmlns='http://www.w3.org/2000/svg'
     >
-      <title>{title}</title>
+      <title>{data.site.siteMetadata.title}</title>
       <circle
         cx='18'
         cy='18'
@@ -24,8 +34,4 @@ export function Logo ({ title }) {
       />
     </svg>
   )
-}
-
-Logo.defaultProps = {
-  title: 'Firefly'
 }

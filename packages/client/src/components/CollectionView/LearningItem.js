@@ -7,14 +7,7 @@ import { LinkTitle } from './styled'
 import { IconButton } from 'components/common'
 import { getHostname } from './utils'
 
-export default memo(function LearningItem ({
-  id,
-  url,
-  title,
-  type,
-  checked,
-  handleCheckClick
-}) {
+function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
   return (
@@ -37,12 +30,13 @@ export default memo(function LearningItem ({
           border-bottom: 1px solid ${theme.colors.gray400};
           display: flex;
           flex-direction: column;
-          height: 7rem;
+          height: 6rem;
           justify-content: space-between;
           margin: 0 1rem;
           padding: 0.75rem 0;
 
           ${theme.screens.tablet} {
+            height: 7rem;
             padding: 0.5rem 0;
           }
 
@@ -118,4 +112,6 @@ export default memo(function LearningItem ({
       </div>
     </>
   )
-})
+}
+
+export default memo(LearningItem)

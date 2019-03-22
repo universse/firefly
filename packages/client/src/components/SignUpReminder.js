@@ -14,7 +14,6 @@ export default function SignUpReminder () {
         bottom: 0;
         display: flex;
         flex-direction: column;
-        height: 100vh;
         justify-content: center;
         left: 0;
         position: fixed;
@@ -24,7 +23,7 @@ export default function SignUpReminder () {
     >
       <div
         css={css`
-          margin: 0 1rem 1rem;
+          margin: 0 0 1rem;
         `}
       >
         <h3

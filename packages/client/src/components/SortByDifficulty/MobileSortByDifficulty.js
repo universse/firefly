@@ -15,11 +15,11 @@ export default function MobileSortByDifficulty ({ sort }) {
 
   return (
     <div
+      aria-labelledby='sort'
       css={css`
         margin-bottom: 1.5rem;
       `}
       role='group'
-      aria-labelledby='sort'
     >
       <div
         css={css`
@@ -28,7 +28,7 @@ export default function MobileSortByDifficulty ({ sort }) {
       >
         <h4
           css={theme => css`
-            color: ${theme.colors.gray700};
+            color: ${theme.colors.gray800};
             font-size: 0.875rem;
             font-weight: 700;
             line-height: 1.25rem;

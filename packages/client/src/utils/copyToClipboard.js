@@ -1,4 +1,4 @@
-const copyToClipboard = str => {
+const copyToClipboard = (str, curr) => {
   const el = document.createElement('textarea')
 
   el.value = str

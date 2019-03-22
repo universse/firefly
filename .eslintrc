@@ -26,7 +26,22 @@
     "jsx-a11y/label-has-associated-control": 0,
     "jsx-a11y/no-onchange": 0,
     "no-unused-vars": 1,
+    "react/jsx-sort-props": [
+      1,
+      {
+        "ignoreCase": true,
+        "reservedFirst": true
+      }
+    ],
     "react/prop-types": 1,
+    "react/sort-prop-types": [
+      1,
+      {
+        "ignoreCase": true,
+        "requiredFirst": true,
+        "sortShapeProp": true
+      }
+    ],
     "react-hooks/exhaustive-deps": 2,
     "react-hooks/rules-of-hooks": 2
   }

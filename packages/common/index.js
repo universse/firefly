@@ -1,3 +1,7 @@
+const smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|so|the|to|v.?|vs.?|via)$/i
+const alphanumericPattern = /([A-Za-z0-9\u00C0-\u00FF])/
+const wordSeparators = /([ :–—-])/
+
 module.exports = {
   Categories: [
     'artificial intelligence',
@@ -13,10 +17,6 @@ module.exports = {
   ItemTypes: ['article', 'book', 'code', 'course', 'podcast', 'url', 'video'],
   NetlifyFunction: '/.netlify/functions/',
   toTitleCase (str) {
-    const smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|so|the|to|v.?|vs.?|via)$/i
-    const alphanumericPattern = /([A-Za-z0-9\u00C0-\u00FF])/
-    const wordSeparators = /([ :–—-])/
-
     return str
       .split(wordSeparators)
       .map(function (current, index, array) {

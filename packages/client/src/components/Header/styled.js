@@ -58,7 +58,7 @@ export function Input (props) {
         width: 100%;
 
         ::placeholder {
-          color: ${theme.colors.gray600};
+          color: ${theme.colors.gray700};
           opacity: 1;
         }
       `}
@@ -120,12 +120,12 @@ export function ResultBox (props) {
 export function Root ({ innerRef, ...props }) {
   return (
     <div
+      ref={innerRef}
       css={css`
         display: block;
         position: relative;
         width: 28rem;
       `}
-      ref={innerRef}
       {...props}
     />
   )

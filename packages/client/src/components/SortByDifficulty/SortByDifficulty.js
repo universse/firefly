@@ -19,8 +19,8 @@ export default function SortByDifficulty ({ sort }) {
       initialValue={sort}
       items={SortOptions}
       label='Sort By:'
-      OptionList={OptionList}
       OptionButton={OptionButton}
+      OptionList={OptionList}
       ToggleButton={ToggleButton}
       TogglerLabel={TogglerLabel}
     />

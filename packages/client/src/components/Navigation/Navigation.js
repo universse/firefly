@@ -42,7 +42,7 @@ const AuthNav = memo(function () {
   )
 })
 
-export default memo(function Navigation () {
+function Navigation () {
   return (
     <nav>
       <ul
@@ -62,4 +62,6 @@ export default memo(function Navigation () {
       </ul>
     </nav>
   )
-})
+}
+
+export default memo(Navigation)

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import LearningItem from './LearningItem'
 
-export default function LearningList ({ completedItems, onCheckClick, urls }) {
+function LearningList ({ completedItems, onCheckClick, urls }) {
   return (
     <ul
       css={css`
@@ -14,10 +14,10 @@ export default function LearningList ({ completedItems, onCheckClick, urls }) {
     >
       {urls.map(url => (
         <li
+          key={url.id}
           css={css`
             position: relative;
           `}
-          key={url.id}
         >
           <LearningItem
             {...url}
@@ -29,3 +29,5 @@ export default function LearningList ({ completedItems, onCheckClick, urls }) {
     </ul>
   )
 }
+
+export default memo(LearningList)

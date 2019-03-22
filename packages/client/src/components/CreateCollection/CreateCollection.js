@@ -40,8 +40,8 @@ export default function CreateCollection () {
         initialValue={collection.category}
         items={DropdownOptions.CATEGORY_OPTIONS}
         label=''
-        OptionList={OptionList}
         OptionButton={OptionButton}
+        OptionList={OptionList}
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}
       />
@@ -50,8 +50,8 @@ export default function CreateCollection () {
         initialValue={collection.level}
         items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
         label=''
-        OptionList={OptionList}
         OptionButton={OptionButton}
+        OptionList={OptionList}
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}
       />

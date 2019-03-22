@@ -3,14 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
-export default function SEO ({
-  description,
-  keywords,
-  lang,
-  meta,
-  slug,
-  title
-}) {
+export default function SEO ({ description, lang, meta, slug, title }) {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -31,7 +24,7 @@ export default function SEO ({
       title
     }
     : {
-      title: `${siteMetadata.title} - Follow your curiosity.`
+      title: `${siteMetadata.title} - Follow your curiosity`
     }
   // const url = `${siteMetadata.siteUrl}${slug}`
 
@@ -83,22 +76,12 @@ export default function SEO ({
           name: 'apple-mobile-web-app-status-bar-style',
           content: 'default'
         }
-      ]
-        .concat(
-          keywords.length > 0
-            ? {
-              name: 'keywords',
-              content: keywords.join(', ')
-            }
-            : []
-        )
-        .concat(meta)}
+      ].concat(meta)}
     />
   )
 }
 
 SEO.defaultProps = {
-  keywords: [],
   lang: 'en',
   meta: [],
   slug: ''
@@ -106,7 +89,6 @@ SEO.defaultProps = {
 
 SEO.propTypes = {
   description: PropTypes.string,
-  keywords: PropTypes.arrayOf(PropTypes.string),
   lang: PropTypes.string,
   meta: PropTypes.array,
   slug: PropTypes.string,

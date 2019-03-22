@@ -3,12 +3,12 @@ import React from 'react'
 export function Search ({ color }) {
   return (
     <svg
-      xmlns='http://www.w3.org/2000/svg'
-      className='feather'
-      viewBox='0 0 24 24'
-      stroke={color}
       aria-label='search'
+      className='feather'
       role='img'
+      stroke={color}
+      viewBox='0 0 24 24'
+      xmlns='http://www.w3.org/2000/svg'
     >
       <title>search</title>
       <circle cx='11' cy='11' r='8' />

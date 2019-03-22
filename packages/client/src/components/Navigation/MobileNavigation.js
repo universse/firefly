@@ -36,8 +36,8 @@ export default function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <MobileNavLink
-            isActive={isIndexPage(pathname)}
             Icon={Home}
+            isActive={isIndexPage(pathname)}
             label='Home'
             to='/'
           />
@@ -48,8 +48,8 @@ export default function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <MobileNavLink
-            isActive={pathname === '/search'}
             Icon={Search}
+            isActive={pathname === '/search'}
             label='Search'
             to='/search'
           />
@@ -60,8 +60,8 @@ export default function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <MobileNavLink
-            isActive={pathname === '/my-library'}
             Icon={Library}
+            isActive={pathname === '/my-library'}
             label='My Library'
             to='/my-library'
           />
@@ -72,8 +72,8 @@ export default function MobileNavigation ({ location: { pathname } }) {
           `}
         >
           <MobileNavLink
-            isActive={pathname === '/me'}
             Icon={User}
+            isActive={pathname === '/me'}
             label='Profile'
             to='/me'
           />

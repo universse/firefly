@@ -23,6 +23,7 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
         `}
       >
         <ul
+          ref={slider}
           css={theme => css`
             ${theme.screens.nonDesktop} {
               display: flex;
@@ -30,7 +31,6 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
             }
           `}
           onScroll={handleScroll}
-          ref={slider}
         >
           <li
             css={theme => css`

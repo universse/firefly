@@ -70,7 +70,7 @@ export function Input (props) {
         width: 18rem;
 
         ::placeholder {
-          color: ${theme.colors.gray600};
+          color: ${theme.colors.gray700};
           opacity: 1;
         }
 
