@@ -1,40 +1,53 @@
-import React, { memo, useState, useEffect } from 'react'
-import localforage from 'localforage'
+import React, { memo, useContext } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { css } from '@emotion/core'
 
 import Landing from './Landing'
 import LatestActivity from './LatestActivity'
+import Loading from './Loading'
 import Onboard from './Onboard'
-import LocalStorage from 'constants/LocalStorage'
+import { LatestActivityContext } from 'contexts/LatestActivity'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
+import { baseWrapper } from 'utils/styles'
 
 function Hero () {
-  const [latestActivity, setLatestActivity] = useState()
-  const [isLoading, setIsLoading] = useState(true)
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `)
 
-  useEffect(() => {
-    localforage
-      .getItem(LocalStorage.LATEST_ACTIVITY)
-      .then(setLatestActivity)
-      .catch(() => setLatestActivity(false))
-      .finally(() => setIsLoading(false))
-  }, [])
+  const { isLoading, latestActivity } = useContext(LatestActivityContext)
 
   if (!hasSignedIn()) {
     return <Landing />
   }
 
-  if (isNewUser()) {
-    return <Onboard />
-  }
-
-  if (isLoading) {
-    return <>Loading</>
-  }
-
-  return latestActivity ? (
-    <LatestActivity latestActivity={latestActivity} />
-  ) : (
-    <Onboard />
+  return (
+    <div
+      css={css`
+        ${baseWrapper}
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        height: 18rem;
+        justify-content: center;
+      `}
+    >
+      {isNewUser() ? (
+        <Onboard message={`Welcome to $${data.site.siteMetadata.title}!`} />
+      ) : isLoading ? (
+        <Loading />
+      ) : latestActivity ? (
+        <LatestActivity latestActivity={latestActivity} />
+      ) : (
+        <Onboard message='Welcome back!' />
+      )}
+    </div>
   )
 }
 

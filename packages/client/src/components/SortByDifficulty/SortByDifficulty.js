@@ -16,6 +16,7 @@ export default function SortByDifficulty ({ sort }) {
   return (
     <Dropdown
       handleChange={handleChange}
+      id='sort-menu'
       initialValue={sort}
       items={SortOptions}
       label='Sort By:'

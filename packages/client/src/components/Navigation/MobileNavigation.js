@@ -10,7 +10,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
   return (
     <nav
       css={theme => css`
-        background-color: ${theme.colors.white};
+        background-color: ${theme.colors.white900};
         border-top: 1px solid ${theme.colors.gray300};
         bottom: 0;
         height: ${mobileNavigationHeightInRem}rem;

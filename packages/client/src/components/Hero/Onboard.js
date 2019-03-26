@@ -1,22 +1,48 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
-import LocalStorage from 'constants/LocalStorage'
+import { PrimaryButton } from 'components/common'
+import { scrollToHero } from '../../../gatsby/utils'
 
-function Onboard () {
-  useEffect(() => {
-    const removeIsNewUser = () =>
-      window.localStorage.removeItem(LocalStorage.IS_NEW_USER)
-
-    window.addEventListener('beforeunload', removeIsNewUser)
-
-    return () => {
-      removeIsNewUser()
-      window.removeEventListener('beforeunload', removeIsNewUser)
-    }
-  }, [])
-
-  return <>Onboard</>
+function Onboard ({ message }) {
+  return (
+    <>
+      <hgroup>
+        <h1
+          css={theme => css`
+            color: ${theme.colors.gray800};
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 2.5rem;
+          `}
+        >
+          {message}
+        </h1>
+        <h2
+          css={theme => css`
+            color: ${theme.colors.gray900};
+            font-size: 1.125rem;
+            line-height: 2rem;
+          `}
+        >
+          Discover the best learning resources, curated by the community.
+        </h2>
+      </hgroup>
+      <div
+        css={css`
+          margin-top: 1.5rem;
+        `}
+      >
+        <PrimaryButton
+          aria-label='Explore Learning Collections'
+          onClick={scrollToHero}
+        >
+          Explore
+        </PrimaryButton>
+      </div>
+    </>
+  )
 }
 
 export default memo(Onboard)

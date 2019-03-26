@@ -1,3 +1,4 @@
+import { scrollToHero } from './gatsby/utils'
 import './src/layouts/global.scss'
 import 'typeface-playfair-display'
 
@@ -30,14 +31,9 @@ export const shouldUpdateScroll = ({
 
   if (isCurrentCategoryFilter) {
     if (isPreviousCategoryFilter || prevRouterProps.location.pathname === '/') {
-      window.scrollTo({
-        top: document.getElementById('hero').offsetHeight,
-        behavior: 'smooth'
-      })
+      scrollToHero(true)
     } else {
-      window.scrollTo({
-        top: document.getElementById('hero').offsetHeight
-      })
+      scrollToHero()
     }
     return false
   }

@@ -44,17 +44,10 @@ function Collection ({
           >
             {category}
           </Category>
-          <div
-            css={css`
-              align-items: flex-end;
-              display: flex;
-            `}
-          >
+          <div>
             <div
               css={css`
-                align-items: flex-end;
-                display: flex;
-                height: 1.25rem;
+                display: inline-block;
                 margin-right: 0.5rem;
               `}
             >
@@ -103,20 +96,15 @@ function Collection ({
                 `}
               >
                 {numOfItems}
-              </span>
-              <span
-                css={theme => css`
-                  color: ${theme.colors.gray800};
-                  font-size: 0.8125rem;
-                  font-weight: 600;
-                  line-height: 1.5rem;
-
-                  ${theme.screens.mobile} {
-                    display: none;
-                  }
-                `}
-              >
-                {` resource${numOfItems > 1 ? 's' : ''}`}
+                <span
+                  css={theme => css`
+                    ${theme.screens.mobile} {
+                      display: none;
+                    }
+                  `}
+                >
+                  {` resource${numOfItems > 1 ? 's' : ''}`}
+                </span>
               </span>
             </div>
             <Tags tags={tags} />

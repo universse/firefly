@@ -8,8 +8,6 @@ html,
 body,
 div,
 span,
-applet,
-object,
 iframe,
 h1,
 h2,
@@ -25,7 +23,6 @@ a,
 abbr,
 acronym,
 address,
-big,
 cite,
 code,
 del,
@@ -34,11 +31,9 @@ dialog,
 em,
 img,
 ins,
-kbd,
 q,
 s,
 samp,
-small,
 strike,
 strong,
 sub,
@@ -71,13 +66,11 @@ article,
 aside,
 canvas,
 details,
-embed,
 figure,
 figcaption,
 footer,
 header,
 hgroup,
-menu,
 nav,
 output,
 ruby,
@@ -104,7 +97,6 @@ figure,
 footer,
 header,
 hgroup,
-menu,
 nav,
 section {
   display: block;
@@ -196,8 +188,6 @@ select:not([disabled]),
 textarea:not([disabled]),
 button:not([disabled]),
 iframe,
-object,
-embed,
 *[tabindex]:not([tabindex="0"]):not([tabindex^="-"]),
 *[contenteditable] {
   &:focus {
@@ -221,6 +211,7 @@ embed,
   justify-content: center;
   position: relative;
   width: 100%;
+
   @media screen and (min-width: 37.0625rem) {
     border-radius: 8px;
     height: 24rem;
@@ -269,6 +260,19 @@ embed,
   opacity: 0;
 }
 
+.Snackbar {
+  bottom: 0;
+  display: none;
+  margin: 0.5rem auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.Snackbar--open {
+  display: block;
+}
+
 .feather {
   fill: none;
   height: 24px;
@@ -297,4 +301,28 @@ embed,
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+$black100: rgba(0, 0, 0, 0.04);
+$black200: rgba(0, 0, 0, 0.08);
+
+@keyframes wave {
+  0% { background-position: -468px 0; }
+  100% {background-position: 468px 0; }
+}
+
+.wave {
+  animation: wave 0.5s linear infinite forwards;
+  background: linear-gradient(to right, $black100 8%, $black200 18%, $black100 33%);
+  background-size: 800px 104px;
+}
+
+@keyframes pulse {
+  0% { background-color: $black100; }
+  50% { background-color: $black200; }
+  100% { background-color: $black100; }
+}
+
+.pulse {
+  animation: pulse 0.5s ease-in-out infinite;
 }

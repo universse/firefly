@@ -14,10 +14,6 @@ export function CollectionTitle ({ id, name }) {
         height: 100%;
         padding: 1.75rem 0.75rem 0;
 
-        ${theme.screens.tablet} {
-          padding: 2rem 0.75rem 0;
-        }
-
         ${theme.screens.desktop} {
           padding: 2rem 1.75rem 0;
         }
@@ -48,10 +44,6 @@ export function CollectionWrapper (props) {
         height: ${collectionHeightInRem}rem;
         justify-content: space-between;
         padding: 0.5rem 1rem 0.25rem;
-
-        ${theme.screens.tablet} {
-          padding: 0.75rem 1rem 0.25rem;
-        }
 
         ${theme.screens.desktop} {
           padding: 0.75rem 2rem 0.25rem;

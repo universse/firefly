@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext, useMemo } from 'react'
 import { css } from '@emotion/core'
 
 import CollectionDetails from './CollectionDetails'
 import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
-import { ProgressBar } from './styled'
+import { ProgressBar } from 'components/common'
+import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
 import useLocalForage from 'hooks/useLocalForage'
 import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
@@ -27,26 +28,30 @@ export default function CollectionView ({
   useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
 
   const isDesktop = useContext(MediaContext)
-
   const numOfItems = urls.length
 
-  const numOfCompleted =
-    completedItems &&
-    urls.reduce(
-      (total, current) => (completedItems[current.id] ? total + 1 : total),
-      0
-    )
+  const numOfCompleted = useMemo(
+    () =>
+      completedItems &&
+      urls.reduce(
+        (total, current) => (completedItems[current.id] ? total + 1 : total),
+        0
+      ),
+    [completedItems, urls]
+  )
 
   const isSaved = !!savedCollections[id]
 
-  useLocalForage(
-    LocalStorage.LATEST_ACTIVITY,
-    isSaved && {
-      id,
-      name,
-      percentage: (numOfCompleted / numOfItems) * 100
-    }
-  )
+  const { setLatestActivity } = useContext(LatestActivityContext)
+
+  useEffect(() => {
+    isSaved &&
+      setLatestActivity({
+        id,
+        name,
+        percentage: (numOfCompleted / numOfItems) * 100
+      })
+  }, [id, isSaved, name, numOfCompleted, numOfItems, setLatestActivity])
 
   return completedItems ? (
     <>
@@ -109,7 +114,7 @@ export default function CollectionView ({
         <div
           css={theme => css`
             align-items: center;
-            background-color: ${theme.colors.white};
+            background-color: ${theme.colors.white900};
             bottom: 0;
             display: flex;
             justify-content: space-between;

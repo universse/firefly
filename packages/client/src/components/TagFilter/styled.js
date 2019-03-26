@@ -47,10 +47,10 @@ export function MobileTag ({ isActive, ...props }) {
     <a
       css={theme => css`
         background-color: ${isActive
-      ? theme.colors.gray900
-      : theme.colors.gray300};
+          ? theme.colors.gray900
+          : theme.colors.gray300};
         border-radius: 1rem;
-        color: ${isActive ? theme.colors.white : theme.colors.gray900};
+        color: ${isActive ? theme.colors.white900 : theme.colors.gray900};
         display: block;
         font-size: 0.875rem;
         font-weight: 600;

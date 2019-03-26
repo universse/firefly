@@ -19,6 +19,7 @@ const AuthNav = memo(function () {
       `}
     >
       <GhostButton
+        aria-label='Sign Out'
         onClick={() =>
           firebase.signOut().then(() => {
             window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
@@ -35,7 +36,10 @@ const AuthNav = memo(function () {
         margin-left: 1.5rem;
       `}
     >
-      <GhostButton onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}>
+      <GhostButton
+        aria-label='Log In or Register'
+        onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}
+      >
         Log In / Register
       </GhostButton>
     </li>

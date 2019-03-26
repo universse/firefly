@@ -12,7 +12,7 @@ export function HeaderTag (props) {
   return (
     <header
       css={theme => css`
-        background-color: ${theme.colors.white};
+        background-color: ${theme.colors.white900};
         height: ${mobileHeaderHeightInRem}rem;
         position: fixed;
         top: 0;

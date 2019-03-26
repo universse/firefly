@@ -37,6 +37,7 @@ export default function CreateCollection () {
       />
       <Dropdown
         handleChange={handleCategoryChange}
+        id=''
         initialValue={collection.category}
         items={DropdownOptions.CATEGORY_OPTIONS}
         label=''
@@ -47,6 +48,7 @@ export default function CreateCollection () {
       />
       <Dropdown
         handleChange={handleLevelChange}
+        id=''
         initialValue={collection.level}
         items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
         label=''

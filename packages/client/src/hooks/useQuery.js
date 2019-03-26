@@ -2,8 +2,8 @@ import { useEffect, useReducer } from 'react'
 import { globalHistory } from '@reach/router/lib/history'
 import qs from 'qs'
 
-function init (query) {
-  const values = qs.parse(query, { ignoreQueryPrefix: true })
+function init (search) {
+  const values = qs.parse(search, { ignoreQueryPrefix: true })
 
   return {
     sort: values.sort || '',
@@ -15,8 +15,8 @@ function reducer (state, { payload }) {
   return { ...state, ...payload }
 }
 
-export default function useParams (query) {
-  const [params, dispatch] = useReducer(reducer, query, init)
+export default function useQuery (search) {
+  const [query, dispatch] = useReducer(reducer, search, init)
 
   useEffect(() => {
     const unlisten = globalHistory.listen(({ location: { search } }) =>
@@ -28,5 +28,5 @@ export default function useParams (query) {
     }
   }, [])
 
-  return [params, dispatch]
+  return [query, dispatch]
 }

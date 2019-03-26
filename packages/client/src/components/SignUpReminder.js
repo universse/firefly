@@ -39,7 +39,10 @@ export default function SignUpReminder () {
         </h3>
       </div>
       <div>
-        <PrimaryButton onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}>
+        <PrimaryButton
+          aria-label='Log In or Register'
+          onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}
+        >
           Log In / Register
         </PrimaryButton>
       </div>

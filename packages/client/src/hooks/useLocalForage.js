@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import localforage from 'localforage'
 
 export default function useLocalForage (key, itemsToSave) {
-  useEffect(
-    () => {
+  useEffect(() => {
+    if (itemsToSave) {
       const save = () => localforage.setItem(key, itemsToSave)
 
       window.addEventListener('beforeunload', save)
@@ -12,7 +12,6 @@ export default function useLocalForage (key, itemsToSave) {
         save()
         window.removeEventListener('beforeunload', save)
       }
-    },
-    [itemsToSave, key]
-  )
+    }
+  }, [itemsToSave, key])
 }

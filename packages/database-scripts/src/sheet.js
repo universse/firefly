@@ -12,9 +12,9 @@ const workbook = XLSX.readFile(resolve(__dirname, '../data/raw.xlsx'))
 const worksheet = workbook.Sheets['Sheet1']
 
 const NUMBER_OF_URLS = 20
-const processed = { collections: [] };
+const processed = { collections: [] }
 
-(async () => {
+;(async () => {
   await Promise.all(
     XLSX.utils.sheet_to_json(worksheet).map(async row => {
       const urls = []
@@ -41,7 +41,7 @@ const processed = { collections: [] };
       )
 
       processed.collections.push({
-        name: row.name,
+        name: toTitleCase(row.name),
         category: row.category,
         level: row.level,
         tags: row.tags.split(';'),

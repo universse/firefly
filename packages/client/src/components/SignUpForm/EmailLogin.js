@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { css } from '@emotion/core'
 
+import { PrimaryButton } from 'components/common'
 import { FirebaseContext } from 'contexts/Firebase'
 import LocalStorage from 'constants/LocalStorage'
-import { AuthButton, ErrorMessage, Input } from './styled'
+import { ErrorMessage, Input } from './styled'
 
 export default function EmailLogin ({ setSignUpState }) {
   const [email, setEmail] = useState('')
@@ -51,7 +52,13 @@ export default function EmailLogin ({ setSignUpState }) {
           margin-top: 1rem;
         `}
       >
-        <AuthButton type='submit'>Sign In with Email Link</AuthButton>
+        <PrimaryButton
+          aria-label='Sign In with Email Link'
+          type='submit'
+          width='18rem'
+        >
+          Sign In with Email Link
+        </PrimaryButton>
       </div>
     </form>
   )

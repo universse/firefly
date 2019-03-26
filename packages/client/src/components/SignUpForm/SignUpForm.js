@@ -2,10 +2,11 @@ import React, { memo, useState, useRef, useContext } from 'react'
 import { css } from '@emotion/core'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Modal from 'components/Modal'
 import EmailLogin from './EmailLogin'
+import Modal from 'components/Modal'
+import { IconButton } from 'components/common'
 // import SocialLogin from './SocialLogin'
-import { CloseButton } from './styled'
+import { Cross } from 'icons'
 import { ModalContext } from 'contexts/Modal'
 import ModalTypes from 'constants/ModalTypes'
 
@@ -105,7 +106,17 @@ function SignUpForm () {
           /> */}
         </>
       )}
-      <CloseButton onClick={closeModal} />
+      <div
+        css={css`
+          position: absolute;
+          right: 1.5rem;
+          top: 1.5rem;
+        `}
+      >
+        <IconButton aria-label='Close Modal' onClick={closeModal}>
+          <Cross />
+        </IconButton>
+      </div>
     </Modal>
   )
 }

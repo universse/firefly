@@ -1,16 +1,11 @@
 import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
-import { CTA } from './styled'
+import { PrimaryButton } from 'components/common'
 import { baseWrapper } from 'utils/styles'
+import { scrollToHero } from '../../../gatsby/utils'
 
 function Landing () {
-  const handleClick = () =>
-    window.scrollTo({
-      top: document.getElementById('hero').offsetHeight,
-      behavior: 'smooth'
-    })
-
   return (
     <div
       css={css`
@@ -18,38 +13,44 @@ function Landing () {
         background-color: #fff;
         display: flex;
         flex-direction: column;
-        height: 30rem;
+        height: 24rem;
         justify-content: center;
       `}
     >
-      <h1
-        css={theme => css`
-          color: ${theme.colors.gray800};
-          font-family: 'Playfair Display', serif;
-          font-size: 2.75rem;
-          font-weight: 900;
-          line-height: 4rem;
-        `}
-      >
-        Follow your curiosity.
-      </h1>
-      <h2
-        css={theme => css`
-          color: ${theme.colors.gray900};
-          font-size: 1.5rem;
-          line-height: 2rem;
-        `}
-      >
-        Discover the best learning resources, curated by the community.
-      </h2>
+      <hgroup>
+        <h1
+          css={theme => css`
+            color: ${theme.colors.gray800};
+            font-family: 'Playfair Display', serif;
+            font-size: 2.75rem;
+            font-weight: 900;
+            line-height: 4rem;
+          `}
+        >
+          Follow your curiosity.
+        </h1>
+        <h2
+          css={theme => css`
+            color: ${theme.colors.gray900};
+            font-size: 1.5rem;
+            line-height: 2rem;
+          `}
+        >
+          Discover the best learning resources, curated by the community.
+        </h2>
+      </hgroup>
       <div
         css={css`
           margin-top: 1.5rem;
         `}
       >
-        <CTA aria-label='Explore Learning Collections' onClick={handleClick}>
+        <PrimaryButton
+          aria-label='Explore Learning Collections'
+          large
+          onClick={scrollToHero}
+        >
           EXPLORE
-        </CTA>
+        </PrimaryButton>
       </div>
     </div>
   )

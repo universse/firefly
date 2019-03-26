@@ -10,28 +10,30 @@ import SEO from 'components/SEO'
 import { IconButton, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
 import { ModalContext } from 'contexts/Modal'
-import { ParamsContext } from 'contexts/Params'
+import { URLQueryContext } from 'contexts/URLQuery'
 import SavedCollections from 'contexts/SavedCollections'
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { Filter } from 'icons'
-import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
-import useParams from 'hooks/useParams'
+import useQuery from 'hooks/useQuery'
 import useURLUtils from 'hooks/useURLUtils'
 import {
   baseWrapper,
   headerHeightInRem,
-  mobileNavigationHeightInRem,
-  mobileBarsHeightInRem
+  mobileNavigationHeightInRem
 } from 'utils/styles'
 import ModalTypes from 'constants/ModalTypes'
+import { toTitleCase } from 'common'
 
-function IndexLayout ({ children, location, openModal }) {
+const IndexLayout = memo(function ({
+  category,
+  children,
+  location,
+  openModal
+}) {
   const { pathname, search } = location
-  // set title for SEO
-  const [queryValues, dispatch] = useParams(search)
-  const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
-  useAccessibleFocusIndicator()
+  const [queryValues, dispatch] = useQuery(search)
+  const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
   const actions = useMemo(
     () => (
@@ -45,9 +47,11 @@ function IndexLayout ({ children, location, openModal }) {
     [openModal]
   )
 
+  const title = category === 'all' ? '' : toTitleCase(category)
+
   return (
     <>
-      <SEO />
+      <SEO title={title} />
       <div
         css={theme => css`
           ${theme.screens.desktop} {
@@ -63,7 +67,7 @@ function IndexLayout ({ children, location, openModal }) {
         <main
           css={theme => css`
             background-color: ${theme.colors.gray100};
-            min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
+            min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
             ${theme.screens.desktop} {
@@ -87,7 +91,7 @@ function IndexLayout ({ children, location, openModal }) {
             `}
           >
             <SavedCollections>
-              <ParamsContext.Provider value={queryValues}>
+              <URLQueryContext.Provider value={queryValues}>
                 <URLUtilsContext.Provider value={urlUtils}>
                   <Media>
                     {isDesktop => (
@@ -102,7 +106,7 @@ function IndexLayout ({ children, location, openModal }) {
                     )}
                   </Media>
                 </URLUtilsContext.Provider>
-              </ParamsContext.Provider>
+              </URLQueryContext.Provider>
             </SavedCollections>
           </div>
         </main>
@@ -111,7 +115,7 @@ function IndexLayout ({ children, location, openModal }) {
       </div>
     </>
   )
-}
+})
 
 export default function (props) {
   const { openModal } = useContext(ModalContext)

@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useCallback,
-  useMemo,
-  useRef
-} from 'react'
+import React, { createContext, useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 

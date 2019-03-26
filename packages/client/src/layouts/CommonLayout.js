@@ -5,13 +5,10 @@ import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import Media from 'contexts/Media'
 import SavedCollections from 'contexts/SavedCollections'
-import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
 import shouldNotHaveMobileNavigation from 'utils/shouldNotHaveMobileNavigation'
 import { headerHeightInRem } from 'utils/styles'
 
 export default function CommonLayout ({ children, location }) {
-  useAccessibleFocusIndicator()
-
   return (
     <Media>
       <div

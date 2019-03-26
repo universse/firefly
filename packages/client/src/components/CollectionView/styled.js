@@ -28,14 +28,14 @@ export function LinkTitle ({ href, title }) {
         color: ${theme.colors.gray800};
         display: flex;
         height: 100%;
-        padding: 0.5rem 0.75rem 0 3.25rem;
+        padding: 0.625rem 0.75rem 0 3.25rem;
 
         ${theme.screens.tablet} {
           padding: 0.875rem 3.75rem 0 4.25rem;
         }
 
         ${theme.screens.desktop} {
-          padding: 1.25rem 3.75rem 0 6.25rem;
+          padding: 1.375rem 3.75rem 0 6.25rem;
         }
       `}
       href={href}
@@ -67,35 +67,5 @@ export function LinkTitle ({ href, title }) {
         {title}
       </h3>
     </a>
-  )
-}
-
-export function ProgressBar ({ percentage, width }) {
-  return (
-    <div
-      css={theme =>
-        css`
-          background-color: ${theme.colors.gray300};
-          border-radius: 0.375rem;
-          width: ${width || '100%'};
-        `
-      }
-    >
-      <div
-        css={theme =>
-          css`
-            background-color: ${theme.colors.brand500};
-            border-radius: 0.375rem;
-            height: 0.5rem;
-            transition: width 0.75s;
-            width: ${percentage}%;
-
-            ${theme.screens.desktop} {
-              height: 0.75rem;
-            }
-          `
-        }
-      />
-    </div>
   )
 }

@@ -35,17 +35,10 @@ function CollectionDetails ({ category, level, name, tags }) {
         `}
       >
         <Category to={createCategoryPath(category)}>{category}</Category>
-        <div
-          css={css`
-            align-items: flex-end;
-            display: flex;
-          `}
-        >
+        <div>
           <div
             css={css`
-              align-items: flex-end;
-              display: flex;
-              height: 1.25rem;
+              display: inline-block;
               margin-right: 0.5rem;
             `}
           >

@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import Downshift from 'downshift'
 
@@ -6,6 +7,7 @@ import { DefaultRoot } from './styled'
 
 function Dropdown ({
   handleChange,
+  id,
   initialValue,
   items,
   label,
@@ -38,14 +40,14 @@ function Dropdown ({
               display: flex;
             `}
           >
-            <TogglerLabel {...getLabelProps({ htmlFor: 'toggler' })}>
+            <TogglerLabel {...getLabelProps({ htmlFor: id })}>
               {label}
             </TogglerLabel>
             <ToggleButton
               {...getToggleButtonProps({
                 'aria-expanded': isOpen,
-                id: 'toggler',
                 'data-toggle': 'dropdown',
+                id,
                 onKeyDown: e => {
                   e.key === 'Tab' &&
                     highlightedIndex !== null &&
@@ -87,4 +89,8 @@ export default memo(Dropdown)
 
 Dropdown.defaultProps = {
   Root: DefaultRoot
+}
+
+Dropdown.propTypes = {
+  id: PropTypes.string.isRequired
 }

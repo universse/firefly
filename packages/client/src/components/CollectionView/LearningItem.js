@@ -62,7 +62,11 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
             }
           `}
         >
-          <IconButton onClick={handleCheckClick} value={id}>
+          <IconButton
+            aria-label='Complete'
+            onClick={handleCheckClick}
+            value={id}
+          >
             <Check checked={checked} />
           </IconButton>
         </div>

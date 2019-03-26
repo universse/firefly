@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
-
 import { Categories } from 'common'
+
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { Category } from './styled'
 import withLocation from 'utils/withLocation'

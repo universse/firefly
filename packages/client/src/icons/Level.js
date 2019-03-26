@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { ThemeContext } from '@emotion/core'
+import { DifficultyLevels } from 'common'
 
 export function Level ({ level, small }) {
   const theme = useContext(ThemeContext)
@@ -15,7 +16,7 @@ export function Level ({ level, small }) {
       width='21'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <title>level</title>
+      <title>{DifficultyLevels[level]}</title>
       <path d='M1.5 17V9' stroke={theme.colors.brand500} />
       <path
         d='M7.5 17V6'

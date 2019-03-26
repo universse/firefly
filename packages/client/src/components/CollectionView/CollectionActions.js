@@ -1,9 +1,8 @@
 import React, { useRef, useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { ActionBar, IconButton } from 'components/common'
+import { ActionBar, IconButton, ProgressBar } from 'components/common'
 import { ModalContext } from 'contexts/Modal'
-import { ProgressBar } from './styled'
 import { Heart, Save, Share } from 'icons'
 import ModalTypes from 'constants/ModalTypes'
 import copyToClipboard from 'utils/copyToClipboard'
@@ -20,13 +19,10 @@ function CollectionActions ({
   const { openModal } = useContext(ModalContext)
   const shareButton = useRef()
 
-  const handleShareClick = useCallback(
-    () => {
-      copyToClipboard(href)
-      shareButton.current.focus()
-    },
-    [href]
-  )
+  const handleShareClick = useCallback(() => {
+    copyToClipboard(href)
+    shareButton.current.focus()
+  }, [href])
 
   return (
     <div

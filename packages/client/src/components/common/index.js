@@ -1,4 +1,4 @@
-import React, { Children, Fragment, forwardRef } from 'react'
+import React, { Children, Fragment, memo } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -81,53 +81,7 @@ export function FAB (props) {
   )
 }
 
-export function Heading ({ as, serif, ...props }) {
-  const Tag = as || 'h1'
-  return (
-    <Tag
-      css={css`
-        font-size: 1rem;
-        font-weight: 2rem;
-      `}
-      {...props}
-    />
-  )
-}
-
-export const IconButton = forwardRef(function ({ children, ...props }, ref) {
-  return (
-    <button
-      ref={ref}
-      css={theme =>
-        css`
-          color: ${theme.colors.gray500};
-          height: 3rem;
-          width: 2.5rem;
-          z-index: 1;
-        `
-      }
-      type='button'
-      {...props}
-    >
-      <div
-        css={theme => css`
-          align-items: center;
-          border-radius: 50%;
-          display: flex;
-          height: 2.5rem;
-          justify-content: space-around;
-          width: 2.5rem;
-
-          &:hover {
-            background-color: ${theme.colors.gray300};
-          }
-        `}
-      >
-        {children}
-      </div>
-    </button>
-  )
-})
+export { default as IconButton } from './IconButton'
 
 export function Input (props) {
   return (
@@ -159,18 +113,19 @@ export function Input (props) {
   )
 }
 
-export function PrimaryButton (props) {
+export function PrimaryButton ({ large, width, ...props }) {
   return (
     <button
       css={theme => css`
         background-color: ${theme.colors.brand500};
-        border-bottom: 1px solid transparent;
-        border-radius: 1.25rem;
+        border-radius: ${large ? 1.5 : 1.25}rem;
         color: #fff;
-        font-size: 0.9375rem;
-        font-weight: 700;
-        height: 2.5rem;
-        padding: 0 3rem;
+        font-size: ${large ? 1 : 0.9375}rem;
+        font-weight: ${large ? 700 : 600};
+        height: ${large ? 3 : 2.5}rem;
+        ${large && 'letter-spacing: 1px;'}
+        ${!width && `padding: 0 ${large ? 3.5 : 3}rem;`}
+        ${width && `width: ${width};`}
 
         &:hover {
           background-color: ${theme.colors.brand900};
@@ -181,6 +136,32 @@ export function PrimaryButton (props) {
     />
   )
 }
+
+export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
+  return (
+    <div
+      css={theme =>
+        css`
+          background-color: ${theme.colors.gray300};
+          border-radius: 0.25rem;
+          width: ${width || '100%'};
+        `
+      }
+    >
+      <div
+        css={theme =>
+          css`
+            background-color: ${theme.colors.brand500};
+            border-radius: 0.25rem;
+            height: 0.5rem;
+            transition: width 0.75s;
+            width: ${percentage}%;
+          `
+        }
+      />
+    </div>
+  )
+})
 
 export function Result ({ as: Tag, ...props }) {
   return (
@@ -219,7 +200,7 @@ export function Sidebar (props) {
         position: sticky;
 
         ${theme.screens.nonDesktop} {
-          background-color: ${theme.colors.white};
+          background-color: ${theme.colors.white900};
           box-shadow: ${theme.shadows[1]};
           top: ${mobileHeaderHeightInRem}rem;
           z-index: 500;
@@ -236,6 +217,8 @@ export function Sidebar (props) {
     />
   )
 }
+
+export { default as Spinner } from './Spinner'
 
 export function Tag ({ small, ...props }) {
   return (

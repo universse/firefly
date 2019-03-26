@@ -1,48 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { Cross } from '../../icons'
-
-export function AuthButton ({ backgroundColor, ...props }) {
-  return (
-    <button
-      css={theme => css`
-        background-color: ${backgroundColor || theme.colors.brand500};
-        border-radius: 1.25rem;
-        color: #fff;
-        font-size: 0.9375rem;
-        font-weight: 600;
-        height: 2.5rem;
-        width: 18rem;
-
-        &:hover {
-          background-color: ${theme.colors.brand900};
-        }
-      `}
-      type='button'
-      {...props}
-    />
-  )
-}
-
-export function CloseButton (props) {
-  return (
-    <div
-      css={css`
-        height: 1.5rem;
-        position: absolute;
-        right: 1.5rem;
-        top: 1.5rem;
-        width: 1.5rem;
-      `}
-    >
-      <button aria-label='Close Modal' type='button' {...props}>
-        <Cross />
-      </button>
-    </div>
-  )
-}
-
 export function ErrorMessage (props) {
   return (
     <span
