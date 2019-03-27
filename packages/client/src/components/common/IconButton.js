@@ -1,11 +1,11 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-const IconButton = forwardRef(function ({ children, light, ...props }, ref) {
+// TODO focus state
+export default function IconButton ({ children, light, ...props }) {
   return (
     <button
-      ref={ref}
       css={theme =>
         css`
           color: ${light ? theme.colors.white900 : theme.colors.gray500};
@@ -42,9 +42,7 @@ const IconButton = forwardRef(function ({ children, light, ...props }, ref) {
       </div>
     </button>
   )
-})
-
-export default IconButton
+}
 
 IconButton.propTypes = {
   'aria-label': PropTypes.string.isRequired,

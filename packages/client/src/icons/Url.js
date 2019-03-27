@@ -4,7 +4,7 @@ export function Url ({ color, small }) {
   return (
     <svg
       aria-label='url'
-      className={small ? 'feather feather-small' : 'feather'}
+      className={small ? 'feather feather--small' : 'feather'}
       role='img'
       stroke={color}
       viewBox='0 0 24 24'

@@ -199,6 +199,67 @@ iframe,
   }
 }
 
+.feather {
+  fill: none;
+  height: 24px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 24px;
+}
+
+.feather--filled {
+  fill: currentColor;
+}
+
+.feather--small {
+  height: 16px;
+  width: 16px;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+$black100: rgba(0, 0, 0, 0.04);
+$black200: rgba(0, 0, 0, 0.08);
+
+@keyframes wave {
+  0% { background-position: -468px 0; }
+  100% {background-position: 468px 0; }
+}
+
+.wave {
+  animation: wave 0.5s linear infinite forwards;
+  background: linear-gradient(to right, $black100 8%, $black200 18%, $black100 33%);
+  background-size: 800px 104px;
+}
+
+@keyframes pulse {
+  0% { background-color: $black100; }
+  50% { background-color: $black200; }
+  100% { background-color: $black100; }
+}
+
+.pulse {
+  animation: pulse 0.5s ease-in-out infinite;
+}
+
+.base {
+  margin: 0 auto;
+  max-width: 64rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+
 .Modal {
   background-color: #fff;
   display: flex;
@@ -271,58 +332,4 @@ iframe,
 
 .Snackbar--open {
   display: block;
-}
-
-.feather {
-  fill: none;
-  height: 24px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
-  width: 24px;
-}
-
-.feather-filled {
-  fill: currentColor;
-}
-
-.feather-small {
-  height: 16px;
-  width: 16px;
-}
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-}
-
-$black100: rgba(0, 0, 0, 0.04);
-$black200: rgba(0, 0, 0, 0.08);
-
-@keyframes wave {
-  0% { background-position: -468px 0; }
-  100% {background-position: 468px 0; }
-}
-
-.wave {
-  animation: wave 0.5s linear infinite forwards;
-  background: linear-gradient(to right, $black100 8%, $black200 18%, $black100 33%);
-  background-size: 800px 104px;
-}
-
-@keyframes pulse {
-  0% { background-color: $black100; }
-  50% { background-color: $black200; }
-  100% { background-color: $black100; }
-}
-
-.pulse {
-  animation: pulse 0.5s ease-in-out infinite;
 }

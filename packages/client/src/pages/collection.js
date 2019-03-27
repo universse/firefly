@@ -10,11 +10,7 @@ import { FirebaseContext } from 'contexts/Firebase'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { Back, Save, Share } from 'icons'
 import useSavedCollections from 'hooks/useSavedCollections'
-import {
-  baseWrapper,
-  headerHeightInRem,
-  mobileHeaderHeightInRem
-} from 'utils/styles'
+import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 import copyToClipboard from 'utils/copyToClipboard'
 import getParamFromPathname from 'utils/getParamFromPathname'
 import parseCollectionData from 'utils/parseCollectionData'
@@ -108,8 +104,8 @@ export default function CollectionPage ({ location }) {
             `}
           >
             <div
+              className='base'
               css={theme => css`
-                ${baseWrapper};
                 max-width: 50rem;
 
                 ${theme.screens.mobile} {

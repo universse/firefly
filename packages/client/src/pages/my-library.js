@@ -7,11 +7,7 @@ import SEO from 'components/SEO'
 import { MediaContext } from 'contexts/Media'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useSavedCollections from 'hooks/useSavedCollections'
-import {
-  baseWrapper,
-  headerHeightInRem,
-  mobileBarsHeightInRem
-} from 'utils/styles'
+import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
 
 export default function MyLibraryPage (props) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
@@ -40,8 +36,8 @@ export default function MyLibraryPage (props) {
         `}
       >
         <div
+          className='base'
           css={theme => css`
-            ${baseWrapper};
             max-width: 48rem;
 
             ${theme.screens.mobile} {

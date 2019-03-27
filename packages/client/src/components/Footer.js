@@ -2,8 +2,6 @@ import React, { memo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { baseWrapper } from 'utils/styles'
-
 function Footer () {
   const data = useStaticQuery(graphql`
     query {
@@ -26,8 +24,8 @@ function Footer () {
       `}
     >
       <div
+        className='base'
         css={theme => css`
-          ${baseWrapper}
           align-items: center;
           border-top: 1px solid ${theme.colors.gray300};
           display: flex;

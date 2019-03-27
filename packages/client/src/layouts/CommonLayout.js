@@ -6,7 +6,7 @@ import { MobileNavigation } from 'components/Navigation'
 import Media from 'contexts/Media'
 import SavedCollections from 'contexts/SavedCollections'
 import shouldNotHaveMobileNavigation from 'utils/shouldNotHaveMobileNavigation'
-import { headerHeightInRem } from 'utils/styles'
+import { headerHeightInRem } from 'constants/Styles'
 
 export default function CommonLayout ({ children, location }) {
   return (

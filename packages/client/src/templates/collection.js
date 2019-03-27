@@ -8,11 +8,7 @@ import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
 import { Back, Save, Share } from 'icons'
 import useSavedCollections from 'hooks/useSavedCollections'
-import {
-  baseWrapper,
-  headerHeightInRem,
-  mobileHeaderHeightInRem
-} from 'utils/styles'
+import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 import copyToClipboard from 'utils/copyToClipboard'
 
 export default function ({ data: { collections }, location: { href } }) {
@@ -69,8 +65,8 @@ export default function ({ data: { collections }, location: { href } }) {
             `}
           >
             <div
+              className='base'
               css={theme => css`
-                ${baseWrapper};
                 max-width: 50rem;
 
                 ${theme.screens.mobile} {

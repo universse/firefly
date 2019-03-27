@@ -8,7 +8,7 @@ import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 import Item from './Item'
 import useSavedCollections from 'hooks/useSavedCollections'
 import { collectionHeightInRem } from './styled'
-import { baseFontSize } from 'utils/styles'
+import { baseFontSize } from 'constants/Styles'
 
 function itemKey (index, data) {
   return data.collections[index].node.id

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useContext } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { ActionBar, IconButton, ProgressBar } from 'components/common'
@@ -17,11 +17,10 @@ function CollectionActions ({
   numOfCompleted
 }) {
   const { openModal } = useContext(ModalContext)
-  const shareButton = useRef()
 
-  const handleShareClick = useCallback(() => {
+  const handleShareClick = useCallback(e => {
     copyToClipboard(href)
-    shareButton.current.focus()
+    e.currentTarget.focus()
   }, [href])
 
   return (
@@ -70,11 +69,7 @@ function CollectionActions ({
         >
           <Save filled={isSaved} />
         </IconButton>
-        <IconButton
-          ref={shareButton}
-          aria-label='Share'
-          onClick={handleShareClick}
-        >
+        <IconButton aria-label='Share' onClick={handleShareClick}>
           <Share />
         </IconButton>
         {/* FLAG

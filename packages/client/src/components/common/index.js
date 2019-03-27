@@ -6,7 +6,7 @@ import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
   mobileNavigationHeightInRem
-} from 'utils/styles'
+} from 'constants/Styles'
 
 export function ActionBar ({ children }) {
   const childrenCount =
@@ -170,7 +170,6 @@ export function Result ({ as: Tag, ...props }) {
         color: ${theme.colors.gray900};
         display: flex;
         font-size: 1.125rem;
-        font-weight: 600;
         line-height: 2.5rem;
         padding-left: 1rem;
 
@@ -203,7 +202,7 @@ export function Sidebar (props) {
           background-color: ${theme.colors.white900};
           box-shadow: ${theme.shadows[1]};
           top: ${mobileHeaderHeightInRem}rem;
-          z-index: 500;
+          z-index: 100;
         }
 
         ${theme.screens.desktop} {

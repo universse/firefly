@@ -1,7 +1,7 @@
 import React from 'react'
 
 export function Heart ({ color, filled }) {
-  const className = filled ? 'feather feather-filled' : 'feather'
+  const className = filled ? 'feather feather--filled' : 'feather'
 
   return (
     <svg

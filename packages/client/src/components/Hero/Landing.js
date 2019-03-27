@@ -2,14 +2,13 @@ import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import { PrimaryButton } from 'components/common'
-import { baseWrapper } from 'utils/styles'
 import { scrollToHero } from '../../../gatsby/utils'
 
 function Landing () {
   return (
     <div
+      className='base'
       css={css`
-        ${baseWrapper}
         background-color: #fff;
         display: flex;
         flex-direction: column;

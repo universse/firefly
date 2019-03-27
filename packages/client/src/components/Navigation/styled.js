@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
-import { mobileNavigationHeightInRem } from 'utils/styles'
+import { mobileNavigationHeightInRem } from 'constants/Styles'
 
 export function GhostButton (props) {
   return (

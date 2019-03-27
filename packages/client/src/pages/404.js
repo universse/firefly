@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import SEO from 'components/SEO'
 import { Ghost } from '../icons'
-import { headerHeightInRem } from 'utils/styles'
+import { headerHeightInRem } from 'constants/Styles'
 
 export default function NotFoundPage () {
   return (

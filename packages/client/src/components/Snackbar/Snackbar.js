@@ -7,18 +7,16 @@ import { Message, ActionButton } from './styled'
 import { Cross } from 'icons'
 
 export default function Snackbar () {
-  const { snackbar, setSnackbar } = useContext(SnackbarContext)
+  const [snackbar, setSnackbar] = useContext(SnackbarContext)
 
   const dismissSnackbar = useCallback(() => setSnackbar(null), [setSnackbar])
 
   const { ariaLabel, handleClick, label, message } = snackbar
 
+  const className = snackbar ? 'Snackbar Snackbar--open' : 'Snackbar'
+
   return (
-    <div
-      aria-live='polite'
-      className={`Snackbar Snackbar${snackbar ? '--open' : ''}`}
-      role='status'
-    >
+    <div aria-live='polite' className={className} role='status'>
       <div
         css={theme => css`
           background-color: ${theme.colors.gray600};

@@ -6,10 +6,9 @@ import SEO from 'components/SEO'
 import { IconButton, Input, Result } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import {
-  baseWrapper,
   headerHeightInRem,
   mobileNavigationHeightInRem
-} from 'utils/styles'
+} from 'constants/Styles'
 import { Back, Search } from 'icons'
 
 export default function SearchPage ({ location }) {
@@ -52,8 +51,8 @@ export default function SearchPage ({ location }) {
           </div>
         )}
         <div
+          className='base'
           css={theme => css`
-            ${baseWrapper};
             color: ${theme.colors.gray500};
             position: relative;
 

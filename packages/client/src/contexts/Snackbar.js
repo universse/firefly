@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 export const SnackbarContext = createContext()
 
 export default function Snackbar ({ children }) {
-  const [snackbar, setSnackbar] = useState()
+  const snackbarState = useState()
+
+  const [snackbar, setSnackbar] = snackbarState
 
   useEffect(() => {
     if (snackbar) {
@@ -17,18 +19,10 @@ export default function Snackbar ({ children }) {
         window.removeEventListener('keydown', dismissOnEscape)
       }
     }
-  }, [snackbar])
-
-  const value = useMemo(
-    () => ({
-      snackbar,
-      setSnackbar
-    }),
-    [snackbar]
-  )
+  }, [setSnackbar, snackbar])
 
   return (
-    <SnackbarContext.Provider value={value}>
+    <SnackbarContext.Provider value={snackbarState}>
       {children}
     </SnackbarContext.Provider>
   )

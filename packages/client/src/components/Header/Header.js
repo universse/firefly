@@ -49,7 +49,7 @@ function Header () {
           <SearchBar
             Input={Input}
             Item={Item}
-            numOfResults={2}
+            numOfResults={10}
             Result={Result}
             ResultBox={ResultBox}
             Root={Root}

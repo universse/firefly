@@ -8,11 +8,7 @@ import SignUpReminder from 'components/SignUpReminder'
 import { IconButton } from 'components/common'
 import { Back } from 'icons'
 import { hasSignedIn } from 'utils/localStorageUtils'
-import {
-  baseWrapper,
-  headerHeightInRem,
-  mobileHeaderHeightInRem
-} from 'utils/styles'
+import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 
 export default function CreatePage () {
   return (
@@ -46,8 +42,8 @@ export default function CreatePage () {
         `}
       >
         <div
+          className='base'
           css={theme => css`
-            ${baseWrapper};
             max-width: 50rem;
 
             ${theme.screens.mobile} {

@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'icons'
 import isIndexPage from 'utils/isIndexPage'
-import { mobileNavigationHeightInRem } from 'utils/styles'
+import { mobileNavigationHeightInRem } from 'constants/Styles'
 
 export default function MobileNavigation ({ location: { pathname } }) {
   return (
@@ -16,7 +16,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         height: ${mobileNavigationHeightInRem}rem;
         position: fixed;
         width: 100%;
-        z-index: 500;
+        z-index: 200;
 
         ${theme.screens.desktop} {
           display: none;

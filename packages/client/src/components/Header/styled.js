@@ -2,11 +2,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import {
-  baseWrapper,
-  headerHeightInRem,
-  mobileHeaderHeightInRem
-} from 'utils/styles'
+import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 
 export function HeaderTag (props) {
   return (
@@ -17,7 +13,7 @@ export function HeaderTag (props) {
         position: fixed;
         top: 0;
         width: 100%;
-        z-index: 500;
+        z-index: 200;
 
         ${theme.screens.desktop} {
           height: ${headerHeightInRem}rem;
@@ -31,8 +27,8 @@ export function HeaderTag (props) {
 export function HeaderWrapper ({ shadow, ...props }) {
   return (
     <div
+      className='base'
       css={theme => css`
-        ${baseWrapper};
         align-items: center;
         box-shadow: ${shadow ? theme.shadows[1] : 'none'};
         display: flex;

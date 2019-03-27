@@ -17,10 +17,9 @@ import { Filter } from 'icons'
 import useQuery from 'hooks/useQuery'
 import useURLUtils from 'hooks/useURLUtils'
 import {
-  baseWrapper,
   headerHeightInRem,
   mobileNavigationHeightInRem
-} from 'utils/styles'
+} from 'constants/Styles'
 import ModalTypes from 'constants/ModalTypes'
 import { toTitleCase } from 'common'
 
@@ -76,8 +75,8 @@ const IndexLayout = memo(function ({
           `}
         >
           <div
+            className='base'
             css={theme => css`
-              ${baseWrapper};
               display: flex;
 
               ${theme.screens.nonDesktop} {

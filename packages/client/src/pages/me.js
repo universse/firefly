@@ -6,11 +6,7 @@ import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
 import { MediaContext } from 'contexts/Media'
 import { hasSignedIn } from 'utils/localStorageUtils'
-import {
-  baseWrapper,
-  headerHeightInRem,
-  mobileBarsHeightInRem
-} from 'utils/styles'
+import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
 
 export default function MePage (props) {
   const isDesktop = useContext(MediaContext)
@@ -37,8 +33,8 @@ export default function MePage (props) {
         `}
       >
         <div
+          className='base'
           css={theme => css`
-            ${baseWrapper};
             max-width: 48rem;
 
             ${theme.screens.mobile} {

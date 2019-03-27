@@ -8,7 +8,6 @@ import Loading from './Loading'
 import Onboard from './Onboard'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
-import { baseWrapper } from 'utils/styles'
 
 function Hero () {
   const data = useStaticQuery(graphql`
@@ -29,8 +28,8 @@ function Hero () {
 
   return (
     <div
+      className='base'
       css={css`
-        ${baseWrapper}
         background-color: #fff;
         display: flex;
         flex-direction: column;
