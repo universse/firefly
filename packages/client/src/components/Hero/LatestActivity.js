@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
 import { PrimaryButton, ProgressBar } from 'components/common'
-import { createCollectionPath, scrollToHero } from '../../../gatsby/utils'
+import { createCollectionPath } from '../../../gatsby/utils'
 
 export default function LatestActivity ({
   latestActivity: { id, name, percentage }

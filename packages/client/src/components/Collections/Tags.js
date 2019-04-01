@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { Tag } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
+import { logClickTag } from 'utils/amplitudeUtils'
 import withLocation from 'utils/withLocation'
 
 function Tags ({ location: { pathname }, tags }) {
@@ -24,16 +24,14 @@ function Tags ({ location: { pathname }, tags }) {
           `}
         >
           <Tag
-            href={
-              urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`
-            }
-            onClick={e => {
-              e.preventDefault()
-              urlUtils
-                ? urlUtils.onQueryClick({ tag })
-                : navigate(`/?tags=${tag}`)
+            onClick={() => {
+              urlUtils && urlUtils.onQueryClick({ tag })
+              logClickTag({ tag })
             }}
             small={!!urlUtils}
+            to={
+              urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`
+            }
           >
             {tag}
           </Tag>

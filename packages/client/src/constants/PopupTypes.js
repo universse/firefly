@@ -1,4 +1,5 @@
 export default {
-  SIGN_UP: 'signUpPopup',
-  SNACKBAR: 'snackbar'
+  SIGN_UP: 'signUp',
+  SNACKBAR: 'snackbar',
+  SUGGEST: 'suggest'
 }

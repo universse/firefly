@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
+import { OutboundLink } from 'gatsby-plugin-amplitude-analytics'
 
 export function CollectionTitle (props) {
   return (
@@ -23,7 +24,7 @@ export function CollectionTitle (props) {
 
 export function LinkTitle ({ href, title }) {
   return (
-    <a
+    <OutboundLink
       css={theme => css`
         color: ${theme.colors.gray800};
         display: flex;
@@ -42,7 +43,7 @@ export function LinkTitle ({ href, title }) {
       rel='noopener noreferrer'
       target='_blank'
     >
-      <h3
+      <h2
         css={theme =>
           css`
             color: ${theme.colors.gray900};
@@ -65,7 +66,7 @@ export function LinkTitle ({ href, title }) {
         }
       >
         {title}
-      </h3>
-    </a>
+      </h2>
+    </OutboundLink>
   )
 }

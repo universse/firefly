@@ -1,9 +1,9 @@
 import React, { useContext, useCallback } from 'react'
 import { css } from '@emotion/core'
-import { navigate } from 'gatsby'
 
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { ClearFilterButton, Count, MobileTag } from './styled'
+import { logClickTagFilter } from 'utils/amplitudeUtils'
 
 export default function MobileTagFilter ({ aggregatedTags, sort, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
@@ -62,7 +62,8 @@ export default function MobileTagFilter ({ aggregatedTags, sort, tags }) {
                 onClick={e => {
                   e.preventDefault()
                   updateQuery(updatedTags)
-                  navigate(href)
+                  window.history.pushState({}, '', href)
+                  logClickTagFilter({ tag, updatedTags })
                 }}
               >
                 {tag}

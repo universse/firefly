@@ -40,7 +40,20 @@ function Footer () {
             font-weight: 600;
           `}
         >
-          © {new Date().getFullYear()} {data.site.siteMetadata.title}
+          Made with{' '}
+          <span
+            aria-label='Love'
+            css={theme =>
+              css`
+                color: ${theme.colors.brand500};
+                font-size: 1rem;
+              `
+            }
+            role='img'
+          >
+            ❤
+          </span>
+          . ©️ {new Date().getFullYear()} {data.site.siteMetadata.title}.
         </p>
       </div>
     </footer>

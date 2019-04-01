@@ -6,14 +6,21 @@ import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
+import { LovedCollectionsContext } from 'contexts/LovedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
 import { URLUtilsContext } from 'contexts/URLUtils'
+import {
+  createLoveCollectionLabel,
+  createSaveCollectionLabel
+} from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function Collection ({
+const Collection = memo(function ({
   collection: { id, name, category, level, numOfItems, tags },
-  handleHeartClick,
-  handleSaveClick,
-  isSaved
+  isLoved,
+  isSaved,
+  onLoveClick,
+  onSaveClick
 }) {
   const { onCategoryFilterClick } = useContext(URLUtilsContext) || {}
 
@@ -111,21 +118,37 @@ function Collection ({
           </div>
           <ActionBar>
             <IconButton
-              aria-label='Save to My Library'
-              onClick={handleSaveClick}
+              aria-label={createSaveCollectionLabel(name)}
+              onClick={onSaveClick}
               value={id}
             >
               <Save filled={isSaved} />
             </IconButton>
-            {/* FLAG
-            <IconButton aria-label='Love' onClick={handleHeartClick} value={id}>
-              <Heart color='#f00' />
+            {/* <IconButton
+              aria-label={createLoveCollectionLabel(name)}
+              onClick={onLoveClick}
+              value={id}
+            >
+              <Heart filled={isLoved} />
             </IconButton> */}
           </ActionBar>
         </div>
       </CollectionWrapper>
     </>
   )
-}
+})
 
-export default memo(Collection)
+export default function (props) {
+  const [savedCollections, onSaveClick] = useContext(SavedCollectionsContext)
+  const [lovedCollections, onLoveClick] = useContext(LovedCollectionsContext)
+
+  return (
+    <Collection
+      {...props}
+      isLoved={!!lovedCollections[props.collection.id]}
+      isSaved={!!savedCollections[props.collection.id]}
+      onLoveClick={onLoveClick}
+      onSaveClick={onSaveClick}
+    />
+  )
+}

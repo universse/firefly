@@ -1,15 +1,19 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
+import { Location } from '@reach/router'
 
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { Category } from './styled'
-import withLocation from 'utils/withLocation'
+import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function Filters ({ handleScroll, location: { pathname }, slider }) {
-  const { onCategoryFilterClick } = useContext(URLUtilsContext)
-
+const Filters = memo(function ({
+  handleScroll,
+  onCategoryFilterClick,
+  pathname,
+  slider
+}) {
   return (
     <nav>
       <div
@@ -42,7 +46,10 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
             `}
           >
             <Category
-              isActive={pathname === '/' || pathname === '/category/all'}
+              isActive={
+                pathname === '/' ||
+                getNormalizedPathname(pathname) === '/category/all'
+              }
               onClick={onCategoryFilterClick}
               to='/category/all'
             >
@@ -61,7 +68,10 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
               `}
             >
               <Category
-                isActive={pathname === createCategoryPath(category)}
+                isActive={
+                  getNormalizedPathname(pathname) ===
+                  createCategoryPath(category)
+                }
                 onClick={onCategoryFilterClick}
                 to={createCategoryPath(category)}
               >
@@ -73,6 +83,20 @@ function Filters ({ handleScroll, location: { pathname }, slider }) {
       </div>
     </nav>
   )
-}
+})
 
-export default withLocation(Filters)
+export default function (props) {
+  const { onCategoryFilterClick } = useContext(URLUtilsContext)
+
+  return (
+    <Location>
+      {({ location }) => (
+        <Filters
+          onCategoryFilterClick={onCategoryFilterClick}
+          pathname={location.pathname}
+          {...props}
+        />
+      )}
+    </Location>
+  )
+}

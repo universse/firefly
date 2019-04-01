@@ -3,13 +3,14 @@ import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
+import { Back, Search } from 'icons'
 import { IconButton, Input, Result } from 'components/common'
 import { MediaContext } from 'contexts/Media'
+import AriaLabels from 'constants/AriaLabels'
 import {
   headerHeightInRem,
   mobileNavigationHeightInRem
 } from 'constants/Styles'
-import { Back, Search } from 'icons'
 
 export default function SearchPage ({ location }) {
   const initialSearchInput = location.state ? location.state.searchInput : ''
@@ -43,7 +44,7 @@ export default function SearchPage ({ location }) {
             `}
           >
             <IconButton
-              aria-label='Go Back to Previous Screen'
+              aria-label={AriaLabels.GO_BACK}
               onClick={() => window.history.back()}
             >
               <Back />

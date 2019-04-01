@@ -7,7 +7,9 @@ module.exports = {
 
   createCategoryPath: category => `/category/${getSlug(category)}`,
 
-  scrollToHero: smooth =>
+  isIndexPage: pathname => pathname.includes('/category/') || pathname === '/',
+
+  scrollToHero: (smooth = true) =>
     window.scrollTo({
       top: document.getElementById('hero').offsetHeight,
       behavior: smooth ? 'smooth' : 'auto'

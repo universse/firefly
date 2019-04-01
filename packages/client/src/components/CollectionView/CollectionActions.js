@@ -1,27 +1,26 @@
 import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
+// import ShareDropdown from 'components/ShareDropdown'
 import { ActionBar, IconButton, ProgressBar } from 'components/common'
-import { ModalContext } from 'contexts/Modal'
-import { Heart, Save, Share } from 'icons'
-import ModalTypes from 'constants/ModalTypes'
-import copyToClipboard from 'utils/copyToClipboard'
-import withLocation from 'utils/withLocation'
+import { LovedCollectionsContext } from 'contexts/LovedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
+import { Heart, Save } from 'icons'
+import {
+  createLoveCollectionLabel,
+  createSaveCollectionLabel
+} from 'utils/ariaLabelUtils'
 
-function CollectionActions ({
+export default function CollectionActions ({
   id,
+  isLoved,
   isSaved,
-  handleSaveClick,
-  location: { href },
+  name,
   numOfItems,
   numOfCompleted
 }) {
-  const { openModal } = useContext(ModalContext)
-
-  const handleShareClick = useCallback(e => {
-    copyToClipboard(href)
-    e.currentTarget.focus()
-  }, [href])
+  const [, onSaveClick] = useContext(SavedCollectionsContext)
+  const [, onLoveClick] = useContext(LovedCollectionsContext)
 
   return (
     <div
@@ -63,25 +62,21 @@ function CollectionActions ({
       </div>
       <ActionBar>
         <IconButton
-          aria-label='Save to My Library'
-          onClick={handleSaveClick}
+          aria-label={createSaveCollectionLabel(name)}
+          onClick={onSaveClick}
           value={id}
         >
           <Save filled={isSaved} />
         </IconButton>
-        <IconButton aria-label='Share' onClick={handleShareClick}>
-          <Share />
-        </IconButton>
-        {/* FLAG
-            <IconButton
-          aria-label='Love'
-          // onClick={handleHeartClick}
+        {/* <ShareDropdown name={name} /> */}
+        {/* <IconButton
+          aria-label={createLoveCollectionLabel(name)}
+          onClick={onLoveClick}
+          value={id}
         >
-          <Heart />
+          <Heart filled={isLoved} />
         </IconButton> */}
       </ActionBar>
     </div>
   )
 }
-
-export default withLocation(CollectionActions)

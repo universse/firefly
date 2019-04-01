@@ -8,17 +8,18 @@ import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
 import { FirebaseContext } from 'contexts/Firebase'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
 import { Back, Save, Share } from 'icons'
-import useSavedCollections from 'hooks/useSavedCollections'
+import AriaLabels from 'constants/AriaLabels'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 import copyToClipboard from 'utils/copyToClipboard'
-import getParamFromPathname from 'utils/getParamFromPathname'
 import parseCollectionData from 'utils/parseCollectionData'
+import { getParamFromPathname } from 'utils/pathnameUtils'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function CollectionPage ({ location }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const [savedCollections, onSaveClick] = useSavedCollections()
+  const [savedCollections, onSaveClick] = useContext(SavedCollectionsContext)
   const firebase = useContext(FirebaseContext)
 
   const id = getParamFromPathname(location.pathname)
@@ -79,7 +80,7 @@ export default function CollectionPage ({ location }) {
             }
             navIcon={
               <IconButton
-                aria-label='Go Back to Previous Screen'
+                aria-label={AriaLabels.GO_BACK}
                 onClick={() => window.history.back()}
               >
                 <Back />
@@ -116,7 +117,6 @@ export default function CollectionPage ({ location }) {
               {collection && (
                 <CollectionView
                   collection={collection}
-                  onSaveClick={onSaveClick}
                   savedCollections={savedCollections}
                 />
               )}

@@ -7,15 +7,11 @@ import Header, { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import { MobileNavigation } from 'components/Navigation'
 import SEO from 'components/SEO'
-import { IconButton, Sidebar } from 'components/common'
+import { FABDesktop, IconButton, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
 import { ModalContext } from 'contexts/Modal'
-import { URLQueryContext } from 'contexts/URLQuery'
-import SavedCollections from 'contexts/SavedCollections'
-import { URLUtilsContext } from 'contexts/URLUtils'
-import { Filter } from 'icons'
-import useQuery from 'hooks/useQuery'
-import useURLUtils from 'hooks/useURLUtils'
+import URLParams from 'contexts/URLParams'
+import { Filter, Suggest } from 'icons'
 import {
   headerHeightInRem,
   mobileNavigationHeightInRem
@@ -30,9 +26,6 @@ const IndexLayout = memo(function ({
   openModal
 }) {
   const { pathname, search } = location
-
-  const [queryValues, dispatch] = useQuery(search)
-  const urlUtils = useURLUtils(queryValues, pathname, dispatch)
 
   const actions = useMemo(
     () => (
@@ -89,25 +82,24 @@ const IndexLayout = memo(function ({
               }
             `}
           >
-            <SavedCollections>
-              <URLQueryContext.Provider value={queryValues}>
-                <URLUtilsContext.Provider value={urlUtils}>
-                  <Media>
-                    {isDesktop => (
-                      <>
-                        {!isDesktop && (
-                          <Sidebar>
-                            <CategoryFilter />
-                          </Sidebar>
-                        )}
-                        {children}
-                      </>
+            <URLParams pathname={pathname} search={search}>
+              <Media>
+                {isDesktop => (
+                  <>
+                    {!isDesktop && (
+                      <Sidebar>
+                        <CategoryFilter />
+                      </Sidebar>
                     )}
-                  </Media>
-                </URLUtilsContext.Provider>
-              </URLQueryContext.Provider>
-            </SavedCollections>
+                    {children}
+                  </>
+                )}
+              </Media>
+            </URLParams>
           </div>
+          <FABDesktop href='https://docs.google.com/forms/'>
+            <Suggest />
+          </FABDesktop>
         </main>
         <Footer />
         <MobileNavigation location={location} />

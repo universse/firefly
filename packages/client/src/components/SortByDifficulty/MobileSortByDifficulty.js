@@ -4,14 +4,15 @@ import { css } from '@emotion/core'
 import { Label, SortOption } from './styled'
 import { URLUtilsContext } from 'contexts/URLUtils'
 import SortOptions from 'constants/SortOptions'
+import { logSortDifficulty } from 'utils/amplitudeUtils'
 
 export default function MobileSortByDifficulty ({ sort }) {
   const { onQueryClick } = useContext(URLUtilsContext)
 
-  const handleChange = useCallback(
-    e => onQueryClick({ sort: e.currentTarget.value }),
-    [onQueryClick]
-  )
+  const handleChange = useCallback(e => {
+    onQueryClick({ sort: e.currentTarget.value })
+    logSortDifficulty({ sort: e.currentTarget.value })
+  }, [onQueryClick])
 
   return (
     <div

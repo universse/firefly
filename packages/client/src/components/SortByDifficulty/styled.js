@@ -20,7 +20,7 @@ export function OptionList (props) {
   return (
     <ul
       css={theme => css`
-        background-color: white;
+        background-color: #fff;
         border-radius: 8px;
         box-shadow: ${theme.shadows[1]};
         margin-top: 0.25rem;
@@ -38,8 +38,8 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
     <button
       css={theme => css`
         background-color: ${isHighlighted
-      ? theme.colors.gray300
-      : 'transparent'};
+          ? theme.colors.gray300
+          : 'transparent'};
         color: ${isSelected ? theme.colors.gray800 : theme.colors.gray700};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};

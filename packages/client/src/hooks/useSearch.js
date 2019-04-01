@@ -4,6 +4,7 @@ import matchSorter from 'match-sorter'
 
 import { AllCollectionsContext } from 'contexts/AllCollections'
 import useDebouncedValue from 'hooks/useDebouncedValue'
+import { logInputSearch } from 'utils/amplitudeUtils'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function useSearch (initialSearchInput, initialIsLoading) {
@@ -40,6 +41,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
         })
       )
       // setIsLoading(false)
+      logInputSearch(debouncedSearchInput)
     } else {
       setResults([])
     }

@@ -1,6 +1,8 @@
 import React, { Children, Fragment, memo } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
+import { OutboundLink } from 'gatsby-plugin-amplitude-analytics'
 
 import {
   headerHeightInRem,
@@ -61,7 +63,7 @@ export function Difficulty (props) {
   )
 }
 
-export { default as Dropdown } from './Dropdown'
+export { Dropdown, ExposedDropdown } from './Dropdown'
 
 export function FAB (props) {
   return (
@@ -70,12 +72,57 @@ export function FAB (props) {
         background-color: ${theme.colors.brand500};
         border-radius: 1.5rem;
         bottom: ${mobileNavigationHeightInRem + 1}rem;
+        color: ${theme.colors.white900};
         height: 3rem;
         position: fixed;
         right: 1rem;
         width: 3rem;
+
+        &:hover {
+          background-color: ${theme.colors.brand900};
+        }
+
+        ${theme.screens.desktop} {
+          display: none;
+        }
       `}
       type='button'
+      {...props}
+    />
+  )
+}
+
+FAB.propTypes = {
+  'aria-label': PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired
+}
+
+export function FABDesktop (props) {
+  return (
+    <OutboundLink
+      css={theme => css`
+        align-items: center;
+        background-color: ${theme.colors.brand500};
+        border-radius: 1.75rem;
+        bottom: 2.5rem;
+        color: ${theme.colors.white900};
+        display: flex;
+        height: 3.5rem;
+        justify-content: space-around;
+        position: fixed;
+        right: 2.5rem;
+        width: 3.5rem;
+
+        &:hover {
+          background-color: ${theme.colors.brand900};
+        }
+
+        ${theme.screens.nonDesktop} {
+          display: none;
+        }
+      `}
+      rel='noopener noreferrer'
+      target='_blank'
       {...props}
     />
   )
@@ -221,8 +268,7 @@ export { default as Spinner } from './Spinner'
 
 export function Tag ({ small, ...props }) {
   return (
-    // eslint-disable-next-line
-    <a
+    <Link
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-radius: ${small ? 0.625 : 0.75}rem;

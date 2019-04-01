@@ -2,6 +2,8 @@ import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import { PrimaryButton } from 'components/common'
+import AriaLabels from 'constants/AriaLabels'
+import { logClickCTA } from 'utils/amplitudeUtils'
 import { scrollToHero } from '../../../gatsby/utils'
 
 function Landing () {
@@ -44,9 +46,12 @@ function Landing () {
         `}
       >
         <PrimaryButton
-          aria-label='Explore Learning Collections'
+          aria-label={AriaLabels.EXPLORE}
           large
-          onClick={scrollToHero}
+          onClick={() => {
+            scrollToHero()
+            logClickCTA()
+          }}
         >
           EXPLORE
         </PrimaryButton>

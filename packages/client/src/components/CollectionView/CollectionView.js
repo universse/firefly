@@ -7,7 +7,6 @@ import LearningList from './LearningList'
 import { ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
-import useLocalForage from 'hooks/useLocalForage'
 import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
 import LocalStorage from 'constants/LocalStorage'
 
@@ -16,16 +15,11 @@ import LocalStorage from 'constants/LocalStorage'
 
 export default function CollectionView ({
   collection: { id, category, level, name, tags, urls },
-  onSaveClick,
   savedCollections
 }) {
-  // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
-
   const [completedItems, onCheckClick] = useSavedItemsReducer(
     LocalStorage.COMPLETED_ITEMS
   )
-
-  useLocalForage(LocalStorage.COMPLETED_ITEMS, completedItems)
 
   const isDesktop = useContext(MediaContext)
   const numOfItems = urls.length
@@ -85,9 +79,9 @@ export default function CollectionView ({
             `}
           >
             <CollectionActions
-              handleSaveClick={onSaveClick}
               id={id}
               isSaved={isSaved}
+              name={name}
               numOfCompleted={numOfCompleted}
               numOfItems={numOfItems}
             />

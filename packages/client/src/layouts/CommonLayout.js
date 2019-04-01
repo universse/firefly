@@ -4,9 +4,8 @@ import { css } from '@emotion/core'
 import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import Media from 'contexts/Media'
-import SavedCollections from 'contexts/SavedCollections'
-import shouldNotHaveMobileNavigation from 'utils/shouldNotHaveMobileNavigation'
 import { headerHeightInRem } from 'constants/Styles'
+import { shouldNotHaveMobileNavigation } from 'utils/pathnameUtils'
 
 export default function CommonLayout ({ children, location }) {
   return (
@@ -19,7 +18,7 @@ export default function CommonLayout ({ children, location }) {
         `}
       >
         {location.pathname !== '/search' && <Header />}
-        <SavedCollections>{children}</SavedCollections>
+        {children}
         {!shouldNotHaveMobileNavigation(location.pathname) && (
           <MobileNavigation location={location} />
         )}

@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 
 import LearningItemInput from './LearningItemInput'
-import { Dropdown, IconButton } from 'components/common'
+import { ExposedDropdown, IconButton } from 'components/common'
 import { OptionList, OptionButton, ToggleButton, TogglerLabel } from './styled'
 import useCreateChangeHandlers from 'hooks/useCreateChangeHandlers'
 import useCreateCollection from 'hooks/useCreateCollection'
@@ -35,7 +35,7 @@ export default function CreateCollection () {
         type='text'
         value={collection.name}
       />
-      <Dropdown
+      <ExposedDropdown
         handleChange={handleCategoryChange}
         id=''
         initialValue={collection.category}
@@ -46,7 +46,7 @@ export default function CreateCollection () {
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}
       />
-      <Dropdown
+      <ExposedDropdown
         handleChange={handleLevelChange}
         id=''
         initialValue={collection.level}

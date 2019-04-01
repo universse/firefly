@@ -4,5 +4,6 @@ export default {
   HAS_SIGNED_IN: 'fireflyHasSignedIn',
   IS_NEW_USER: 'fireflyIsNewUser',
   LATEST_ACTIVITY: 'fireflyLatestActivity',
+  LOVED_COLLECTIONS: 'fireflyLovedCollections',
   SAVED_COLLECTIONS: 'fireflySavedCollections'
 }

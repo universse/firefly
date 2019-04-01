@@ -2,8 +2,7 @@ import workerize from 'workerize'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
-// const config = process.env.GATSBY_FIREBASE_USERS
-const config = process.env.GATSBY_FIREBASE_CONFIG
+const config = process.env.GATSBY_FIREBASE_USERS
 
 const actionCodeSettings = JSON.stringify({
   url: `${process.env.GATSBY_HOME_PAGE}/welcome`,
@@ -29,7 +28,7 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
       .getIdToken()
       .then(idToken => self.postMessage({
         type: '${FirebaseWorkerEvents.AUTH_STATE_CHANGED}',
-        payload: idToken
+        payload: { idToken, uid: user.uid }
       }))
     : self.postMessage({
         type: '${FirebaseWorkerEvents.AUTH_STATE_CHANGED}',
@@ -158,6 +157,88 @@ export async function fetchCollection (id) {
     } else {
       return { error: true }
     }
+  } catch {
+    return { error: true }
+  }
+}
+
+function oneSecond () {
+  return new Promise(resolve => setTimeout(resolve, 1010))
+}
+
+export async function loveCollection (id) {
+  if (!auth.currentUser) {
+    await oneSecond()
+  }
+  const userDocRef = firestore.collection('users').doc(auth.currentUser.uid)
+  const lovesDocRef = firestore.collection('loves').doc(id)
+
+  try {
+    await firestore.runTransaction(async transaction => {
+      try {
+        const [userDoc, lovesDoc] = await Promise.all([
+          transaction.get(userDocRef),
+          transaction.get(lovesDocRef)
+        ])
+        
+        if (!userDoc.exists) {
+          transaction.set(userDocRef, { loved: { [id]: true } })
+
+          !lovesDoc.exists
+            ? transaction.set(lovesDocRef, { count: 1 })
+            : transaction.update(lovesDocRef, {
+              count: lovesDoc.data().count + 1
+            })
+        } else {
+          const loved = userDoc.data().loved
+
+          if (loved[id]) {
+            delete loved[id]
+            transaction.update(lovesDocRef, {
+              count: lovesDoc.data().count - 1
+            })
+          } else {
+            loved[id] = true
+            
+            !lovesDoc.exists
+              ? transaction.set(lovesDocRef, { count: 1 })
+              : transaction.update(lovesDocRef, {
+                count: lovesDoc.data().count + 1
+              })
+          }
+          transaction.update(userDocRef, { loved })
+        }
+      } catch (e) {
+        console.log(e)
+        return { error: true }
+      }
+    })
+    return {}
+  } catch (e) {
+    console.log(e)
+    return { error: true }
+  }
+}
+
+export async function saveCollections (collections) {
+  if (!auth.currentUser) {
+    await oneSecond()
+  }
+  const userDocRef = firestore.collection('users').doc(auth.currentUser.uid)
+
+  try {
+    await firestore.runTransaction(async transaction => {
+      try {
+        const userDoc = await transaction.get(userDocRef)
+        
+        !userDoc.exists
+          ? transaction.set(userDocRef, { saved: collections })
+          : transaction.update(userDocRef, { saved: collections })
+      } catch {
+        return { error: true }
+      }
+    })
+    return {}
   } catch {
     return { error: true }
   }

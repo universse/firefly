@@ -6,32 +6,25 @@ import Downshift from 'downshift'
 import { DefaultRoot } from './styled'
 
 function Dropdown ({
-  handleChange,
+  Icon,
   id,
-  initialValue,
   items,
   label,
+  onToggleButtonClick,
   OptionList,
-  Root,
   OptionButton,
-  ToggleButton,
-  TogglerLabel
+  Root,
+  ToggleButton
 }) {
   return (
-    <Downshift
-      initialSelectedItem={items.find(({ value }) => value === initialValue)}
-      itemToString={({ value }) => value}
-      onChange={handleChange}
-    >
+    <Downshift itemToString={({ value }) => value}>
       {({
         getToggleButtonProps,
         getItemProps,
         getLabelProps,
         getRootProps,
         highlightedIndex,
-        isOpen,
-        selectItem,
-        selectedItem
+        isOpen
       }) => (
         <Root {...getRootProps({ refKey: 'innerRef' })}>
           <div
@@ -40,43 +33,45 @@ function Dropdown ({
               display: flex;
             `}
           >
-            <TogglerLabel {...getLabelProps({ htmlFor: id })}>
+            <label
+              className='visually-hidden'
+              {...getLabelProps({ htmlFor: id })}
+            >
               {label}
-            </TogglerLabel>
+            </label>
             <ToggleButton
               {...getToggleButtonProps({
                 'aria-expanded': isOpen,
                 'data-toggle': 'dropdown',
                 id,
-                onKeyDown: e => {
-                  e.key === 'Tab' &&
-                    highlightedIndex !== null &&
-                    selectItem(items[highlightedIndex])
-                }
+                onClick: onToggleButtonClick
               })}
             >
-              {selectedItem.label}
+              <Icon />
             </ToggleButton>
           </div>
           {isOpen && (
             <OptionList>
-              {items.map((option, index) => (
-                <li
-                  {...getItemProps({
-                    item: option,
-                    index
-                  })}
-                  key={option.value}
-                >
-                  <OptionButton
-                    aria-label={option.label}
-                    isHighlighted={highlightedIndex === index}
-                    isSelected={option === selectedItem}
+              {items.map((option, index) => {
+                const { label, ...props } = option
+
+                return (
+                  <li
+                    {...getItemProps({
+                      item: option,
+                      index
+                    })}
+                    key={label}
                   >
-                    {option.label}
-                  </OptionButton>
-                </li>
-              ))}
+                    <OptionButton
+                      {...props}
+                      isHighlighted={highlightedIndex === index}
+                    >
+                      {label}
+                    </OptionButton>
+                  </li>
+                )
+              })}
             </OptionList>
           )}
         </Root>

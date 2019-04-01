@@ -1,14 +1,4 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-
-import LocalStorage from 'constants/LocalStorage'
-
-const config = JSON.parse(process.env.GATSBY_FIREBASE_CONFIG)
-
-const onSignIn = () => {
-  window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-  window.location.reload()
-}
+/* eslint-disable */
 
 class Firebase {
   constructor (firebase) {
@@ -52,5 +42,3 @@ class Firebase {
 
   updatePassword = password => this.auth.currentUser.updatePassword(password)
 }
-
-export default typeof window === 'object' && new Firebase(firebase)

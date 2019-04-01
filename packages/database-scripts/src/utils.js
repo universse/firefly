@@ -1,9 +1,5 @@
 function oneSecond () {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, 1010)
-  })
+  return new Promise(resolve => setTimeout(resolve, 1010))
 }
 
 module.exports = {

@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import localforage from 'localforage'
 
-import useLocalForage from 'hooks/useLocalForage'
+import useOfflinePersistence from 'hooks/useOfflinePersistence'
 import LocalStorage from 'constants/LocalStorage'
 
 export const LatestActivityContext = createContext()
@@ -19,7 +19,7 @@ export default function LatestActivity ({ children }) {
       .finally(() => setIsLoading(false))
   }, [])
 
-  useLocalForage(LocalStorage.LATEST_ACTIVITY, latestActivity)
+  useOfflinePersistence(LocalStorage.LATEST_ACTIVITY, latestActivity)
 
   const activity = useMemo(
     () => ({ latestActivity, isLoading, setLatestActivity }),

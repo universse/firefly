@@ -1,16 +1,23 @@
 const admin = require('firebase-admin')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
+const { Categories, DifficultyLevels, ItemTypes } = require('common')
 
 require('./config')
 const { writeBatchesToDB } = require('./utils')
 
 const processed = require('../data/processed.json')
-const final = require('../data/final.json')
-const { Categories, DifficultyLevels, ItemTypes } = require('common')
 
-const firebaseKey = JSON.parse(process.env.FIREBASE_CREDENTIALS)
-// const firebaseKey = JSON.parse(process.env.FIREBASE_COLLECTIONS)
+let final
+
+try {
+  final = require('../data/final.json')
+} catch {
+  final = { collections: {}, urls: {} }
+}
+
+// production
+const firebaseKey = JSON.parse(process.env.FIREBASE_COLLECTIONS)
 
 admin.initializeApp({
   credential: admin.credential.cert(firebaseKey)
@@ -69,8 +76,8 @@ processed.collections.forEach(
       urlIds: us
     }
   }
-);
-(async () => {
+)
+;(() => {
   writeBatchesToDB(batches)
 
   writeFileSync(

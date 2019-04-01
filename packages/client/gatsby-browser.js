@@ -1,4 +1,4 @@
-import { scrollToHero } from './gatsby/utils'
+import { isIndexPage, scrollToHero } from './gatsby/utils'
 import './src/layouts/global.scss'
 import 'typeface-playfair-display'
 
@@ -21,19 +21,17 @@ export const shouldUpdateScroll = ({
     return false
   }
 
-  const isCurrentCategoryFilter = routerProps.location.pathname.includes(
-    '/category/'
-  )
+  const isCurrentCategoryFilter = isIndexPage(routerProps.location.pathname)
 
-  const isPreviousCategoryFilter = prevRouterProps.location.pathname.includes(
-    '/category/'
+  const isPreviousCategoryFilter = isIndexPage(
+    prevRouterProps.location.pathname
   )
 
   if (isCurrentCategoryFilter) {
     if (isPreviousCategoryFilter || prevRouterProps.location.pathname === '/') {
-      scrollToHero(true)
-    } else {
       scrollToHero()
+    } else {
+      scrollToHero(false)
     }
     return false
   }

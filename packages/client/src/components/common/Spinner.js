@@ -13,7 +13,7 @@ export default function Spinner () {
         animation: ${spin} 0.6s linear infinite;
         border: 0.25rem solid ${theme.colors.gray300};
         border-radius: 50%;
-        border-top: 0.25rem solid ${theme.colors.brand500};
+        border-top-color: ${theme.colors.brand500};
         height: 2rem;
         width: 2rem;
       `}

@@ -48,8 +48,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-firestore',
       options: {
-        // credential: JSON.parse(process.env.FIREBASE_COLLECTIONS),
-        credential: JSON.parse(process.env.FIREBASE_CREDENTIALS),
+        credential: JSON.parse(process.env.FIREBASE_COLLECTIONS),
         types: [
           {
             type: 'urls',
@@ -97,42 +96,39 @@ module.exports = {
         onError: error => console.log(error)
       }
     },
+    {
+      resolve: 'gatsby-plugin-amplitude-analytics',
+      options: {
+        apiKey: process.env.AMPLITUDE_API_KEY,
+        head: true,
+        respectDNT: false,
+        amplitudeConfig: {
+          saveEvents: true,
+          includeUtm: true,
+          includeReferrer: true
+        }
+      }
+    },
     // {
-    //   resolve: 'gatsby-plugin-amplitude-analytics',
+    //   resolve: 'gatsby-plugin-google-gtag',
     //   options: {
-    //     // Specify the API key for your Amplitude Project (required)
-    //     apiKey: 'YOUR_AMPLITUDE_ANALYTICS_API_KEY',
-    //     // Puts tracking script in the head instead of the body (optional)
-    //     head: false,
-    //     // Prevents loading Amplitude and logging events if visitors have "Do Not Track" enabled (optional)
-    //     respectDNT: true,
-    //     // Avoids sending pageview hits from custom paths (optional)
-    //     exclude: ['/preview/**', '/do-not-track/me/too/'],
-    //     // Override the default event types (optional)
-    //     eventTypes: {
-    //       outboundLinkClick: 'OUTBOUND_LINK_CLICK',
-    //       pageView: 'PAGE_VIEW'
+    //     // You can add multiple tracking ids and a pageview event will be fired for all of them.
+    //     trackingIds: [
+    //       'GA-TRACKING_ID', // Google Analytics / GA
+    //       'AW-CONVERSION_ID', // Google Ads / Adwords / AW
+    //       'DC-FLOODIGHT_ID' // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
+    //     ],
+    //     // This object gets passed directly to the gtag config command
+    //     // This config will be shared accross all trackingIds
+    //     gtagConfig: {
+    //       optimize_id: 'OPT_CONTAINER_ID',
+    //       anonymize_ip: true,
+    //       cookie_expires: 0
     //     },
-    //     // Amplitude JS SDK configuration options (optional)
-    //     amplitudeConfig: {
-    //       saveEvents: true,
-    //       includeUtm: true,
-    //       includeReferrer: true
+    //     pluginConfig: {
+    //       head: true,
+    //       respectDNT: false
     //     }
-    //   }
-    // },
-    // {
-    //   resolve: 'gatsby-plugin-google-tagmanager',
-    //   options: {
-    //     id: 'YOUR_GOOGLE_TAGMANAGER_ID',
-
-    //     // Include GTM in development.
-    //     // Defaults to false meaning GTM will only be loaded in production.
-    //     includeInDevelopment: false,
-
-    //     // Specify optional GTM environment details.
-    //     gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIROMENT_AUTH_STRING',
-    //     gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIROMENT_PREVIEW_NAME'
     //   }
     // },
     // {

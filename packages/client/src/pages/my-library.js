@@ -6,12 +6,12 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { MediaContext } from 'contexts/Media'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
-import useSavedCollections from 'hooks/useSavedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
 import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
 
 export default function MyLibraryPage (props) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const [savedCollections, onSaveClick] = useSavedCollections()
+  const [savedCollections] = useContext(SavedCollectionsContext)
   const isDesktop = useContext(MediaContext)
 
   // TODO: pop up - sign up reminder
@@ -87,9 +87,6 @@ export default function MyLibraryPage (props) {
                 >
                   <Collection
                     collection={normalizedCollections[id.toLowerCase()]}
-                    handleSaveClick={onSaveClick}
-                    // handleHeartClick={onHeartClick}
-                    isSaved
                   />
                 </li>
               ))}

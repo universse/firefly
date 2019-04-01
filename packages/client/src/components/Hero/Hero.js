@@ -10,44 +10,46 @@ import { LatestActivityContext } from 'contexts/LatestActivity'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
 function Hero () {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  return <Landing />
 
-  const { isLoading, latestActivity } = useContext(LatestActivityContext)
+  // const data = useStaticQuery(graphql`
+  //   query {
+  //     site {
+  //       siteMetadata {
+  //         title
+  //       }
+  //     }
+  //   }
+  // `)
 
-  if (!hasSignedIn()) {
-    return <Landing />
-  }
+  // const { isLoading, latestActivity } = useContext(LatestActivityContext)
 
-  return (
-    <div
-      className='base'
-      css={css`
-        background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        height: 18rem;
-        justify-content: center;
-      `}
-    >
-      {isNewUser() ? (
-        <Onboard message={`Welcome to $${data.site.siteMetadata.title}!`} />
-      ) : isLoading ? (
-        <Loading />
-      ) : latestActivity ? (
-        <LatestActivity latestActivity={latestActivity} />
-      ) : (
-        <Onboard message='Welcome back!' />
-      )}
-    </div>
-  )
+  // if (!hasSignedIn()) {
+  //   return <Landing />
+  // }
+
+  // return (
+  //   <div
+  //     className='base'
+  //     css={css`
+  //       background-color: #fff;
+  //       display: flex;
+  //       flex-direction: column;
+  //       height: 18rem;
+  //       justify-content: center;
+  //     `}
+  //   >
+  //     {isNewUser() ? (
+  //       <Onboard message={`Welcome to $${data.site.siteMetadata.title}!`} />
+  //     ) : isLoading ? (
+  //       <Loading />
+  //     ) : latestActivity ? (
+  //       <LatestActivity latestActivity={latestActivity} />
+  //     ) : (
+  //       <Onboard message='Welcome back!' />
+  //     )}
+  //   </div>
+  // )
 }
 
 export default memo(Hero)

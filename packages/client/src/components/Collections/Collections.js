@@ -1,17 +1,15 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useCallback, useRef, useContext } from 'react'
 import { css } from '@emotion/core'
 import { FixedSizeList as List } from 'react-window'
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
-// import { AuthenticationContext } from 'contexts/Authentication'
-// import { ModalContext } from 'contexts/Modal'
 import Item from './Item'
-import useSavedCollections from 'hooks/useSavedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
 import { collectionHeightInRem } from './styled'
 import { baseFontSize } from 'constants/Styles'
 
 function itemKey (index, data) {
-  return data.collections[index].node.id
+  return data[index].node.id
 }
 
 const listStyle = theme => css`
@@ -29,41 +27,31 @@ const listStyle = theme => css`
   }
 `
 
-// flag
 export default function Collections ({ collections }) {
-  // const user = useContext(AuthenticationContext)
-  // const { handleModalOpen } = useContext(ModalContext)
-  const [savedCollections, onSaveClick] = useSavedCollections()
-  // const handleHeartClick = () => (user ? handleModalOpen() : handleModalOpen())
-
   const listRef = useRef()
-  const handleScroll = ({ scrollTop }) =>
-    listRef.current && listRef.current.scrollTo(scrollTop)
-
-  const itemData = useMemo(
-    () => ({
-      collections,
-      onSaveClick,
-      savedCollections
-    }),
-    [collections, onSaveClick, savedCollections]
+  const [savedCollections] = useContext(SavedCollectionsContext)
+  const handleScroll = useCallback(
+    ({ scrollTop }) => listRef.current && listRef.current.scrollTo(scrollTop),
+    []
   )
 
-  return savedCollections ? (
+  return (
     <>
       <WindowScroller onScroll={handleScroll}>{() => <div />}</WindowScroller>
-      <List
-        ref={listRef}
-        css={listStyle}
-        height={window.innerHeight}
-        innerElementType='ul'
-        itemCount={collections.length}
-        itemData={itemData}
-        itemKey={itemKey}
-        itemSize={collectionHeightInRem * baseFontSize}
-      >
-        {Item}
-      </List>
+      {savedCollections && (
+        <List
+          ref={listRef}
+          css={listStyle}
+          height={window.innerHeight}
+          innerElementType='ul'
+          itemCount={collections.length}
+          itemData={collections}
+          itemKey={itemKey}
+          itemSize={collectionHeightInRem * baseFontSize}
+        >
+          {Item}
+        </List>
+      )}
     </>
-  ) : null
+  )
 }

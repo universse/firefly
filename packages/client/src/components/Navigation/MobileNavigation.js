@@ -3,8 +3,8 @@ import { css } from '@emotion/core'
 
 import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'icons'
-import isIndexPage from 'utils/isIndexPage'
 import { mobileNavigationHeightInRem } from 'constants/Styles'
+import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
 
 export default function MobileNavigation ({ location: { pathname } }) {
   return (
@@ -49,7 +49,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         >
           <MobileNavLink
             Icon={Search}
-            isActive={pathname === '/search'}
+            isActive={getNormalizedPathname(pathname) === '/search'}
             label='Search'
             to='/search'
           />
@@ -61,23 +61,23 @@ export default function MobileNavigation ({ location: { pathname } }) {
         >
           <MobileNavLink
             Icon={Library}
-            isActive={pathname === '/my-library'}
+            isActive={getNormalizedPathname(pathname) === '/my-library'}
             label='My Library'
             to='/my-library'
           />
         </li>
-        <li
+        {/* <li
           css={css`
             flex: 1;
           `}
         >
           <MobileNavLink
             Icon={User}
-            isActive={pathname === '/me'}
+            isActive={getNormalizedPathname(pathname) === '/me'}
             label='Profile'
             to='/me'
           />
-        </li>
+        </li> */}
       </ul>
     </nav>
   )

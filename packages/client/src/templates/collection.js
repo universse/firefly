@@ -1,46 +1,64 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
-import { IconButton } from 'components/common'
-import { Back, Save, Share } from 'icons'
-import useSavedCollections from 'hooks/useSavedCollections'
+import { FABDesktop, IconButton } from 'components/common'
+import { LovedCollectionsContext } from 'contexts/LovedCollections'
+import { SavedCollectionsContext } from 'contexts/SavedCollections'
+import { Back, Heart, Save, Share, Suggest } from 'icons'
+import AriaLabels from 'constants/AriaLabels'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
+import {
+  createLoveCollectionLabel,
+  createSaveCollectionLabel
+} from 'utils/ariaLabelUtils'
 import copyToClipboard from 'utils/copyToClipboard'
 
-export default function ({ data: { collections }, location: { href } }) {
-  const [savedCollections, onSaveClick] = useSavedCollections()
+export default function CollectionTemplate ({
+  data: { collections },
+  location: { href }
+}) {
+  const [savedCollections, onSaveClick] = useContext(SavedCollectionsContext)
+  const [lovedCollections, onLoveClick] = useContext(LovedCollectionsContext)
+
   const { id, name } = collections
 
   return (
     <>
       <SEO title={name} />
-      {savedCollections && (
+      {savedCollections && lovedCollections && (
         <>
           <MobileHeader
             actions={
               <>
                 <IconButton
-                  aria-label='Save to My Library'
+                  aria-label={createSaveCollectionLabel(name)}
                   onClick={onSaveClick}
                   value={id}
                 >
                   <Save filled={!!savedCollections[id]} />
                 </IconButton>
-                <IconButton
+                {/* <IconButton
+                  aria-label={createLoveCollectionLabel(name)}
+                  onClick={onLoveClick}
+                  value={id}
+                >
+                  <Heart filled={!!lovedCollections[id]} />
+                </IconButton> */}
+                {/* <IconButton
                   aria-label='Share'
                   onClick={() => copyToClipboard(href)}
                 >
                   <Share />
-                </IconButton>
+                </IconButton> */}
               </>
             }
             navIcon={
               <IconButton
-                aria-label='Go Back to Previous Screen'
+                aria-label={AriaLabels.GO_BACK}
                 onClick={() => window.history.back()}
               >
                 <Back />
@@ -76,10 +94,12 @@ export default function ({ data: { collections }, location: { href } }) {
             >
               <CollectionView
                 collection={collections}
-                onSaveClick={onSaveClick}
                 savedCollections={savedCollections}
               />
             </div>
+            <FABDesktop href='https://docs.google.com/forms/'>
+              <Suggest />
+            </FABDesktop>
           </main>
         </>
       )}

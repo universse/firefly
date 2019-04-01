@@ -7,8 +7,9 @@ import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
 import { IconButton } from 'components/common'
 import { Back } from 'icons'
-import { hasSignedIn } from 'utils/localStorageUtils'
+import AriaLabels from 'constants/AriaLabels'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
+import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function CreatePage () {
   return (
@@ -17,7 +18,7 @@ export default function CreatePage () {
       <MobileHeader
         navIcon={
           <IconButton
-            aria-label='Go Back to Previous Screen'
+            aria-label={AriaLabels.GO_BACK}
             onClick={() => window.history.back()}
           >
             <Back />
