@@ -8,10 +8,9 @@ import SignUpForm from 'components/SignUpForm'
 import AllCollections from 'contexts/AllCollections'
 import Authentication from 'contexts/Authentication'
 import LatestActivity from 'contexts/LatestActivity'
-import LovedCollections from 'contexts/LovedCollections'
-import SavedCollections from 'contexts/SavedCollections'
 import Modal from 'contexts/Modal'
 import NormalizedCollections from 'contexts/NormalizedCollections'
+import UserData from 'contexts/UserData'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
 import Theme from 'constants/Theme'
 import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
@@ -34,19 +33,15 @@ export default function Layout ({
           <Authentication>
             <Modal>
               <LatestActivity>
-                <LovedCollections>
-                  <SavedCollections>
-                    {isIndexPage(location.pathname) ? (
-                      <IndexLayout category={category} location={location}>
-                        {children}
-                      </IndexLayout>
-                    ) : (
-                      <CommonLayout location={location}>
-                        {children}
-                      </CommonLayout>
-                    )}
-                  </SavedCollections>
-                </LovedCollections>
+                <UserData>
+                  {isIndexPage(location.pathname) ? (
+                    <IndexLayout category={category} location={location}>
+                      {children}
+                    </IndexLayout>
+                  ) : (
+                    <CommonLayout location={location}>{children}</CommonLayout>
+                  )}
+                </UserData>
               </LatestActivity>
               <SignUpForm />
             </Modal>

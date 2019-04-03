@@ -7,6 +7,7 @@ import { Dropdown, IconButton } from 'components/common'
 import { Root, OptionButton, OptionList } from './styled'
 import { Share } from 'icons'
 import { logClickAction } from 'utils/amplitudeUtils'
+import { createActionLabel } from 'utils/ariaLabelUtils'
 import copyToClipboard from 'utils/copyToClipboard'
 import withLocation from 'utils/withLocation'
 
@@ -41,7 +42,7 @@ function ShareDropdown ({ id, name, location: { href } }) {
       Icon={Share}
       id='share-menu'
       items={items}
-      label={`Share Collection ${name}`}
+      label={createActionLabel('share', name)}
       onToggleButtonClick={onToggleButtonClick}
       OptionButton={OptionButton}
       OptionList={OptionList}

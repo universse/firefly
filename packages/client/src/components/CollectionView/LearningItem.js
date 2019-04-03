@@ -6,6 +6,7 @@ import LinkIcons from 'constants/LinkIcons'
 import { LinkTitle } from './styled'
 import { IconButton } from 'components/common'
 import { getHostname } from './utils'
+import { createActionLabel } from 'utils/ariaLabelUtils'
 
 function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
   const LinkIcon = LinkIcons[type.toUpperCase()]
@@ -63,7 +64,7 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
           `}
         >
           <IconButton
-            aria-label='Complete'
+            aria-label={createActionLabel('check', title)}
             onClick={handleCheckClick}
             value={id}
           >

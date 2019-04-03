@@ -3,24 +3,19 @@ import { css } from '@emotion/core'
 
 // import ShareDropdown from 'components/ShareDropdown'
 import { ActionBar, IconButton, ProgressBar } from 'components/common'
-import { LovedCollectionsContext } from 'contexts/LovedCollections'
-import { SavedCollectionsContext } from 'contexts/SavedCollections'
+import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Heart, Save } from 'icons'
-import {
-  createLoveCollectionLabel,
-  createSaveCollectionLabel
-} from 'utils/ariaLabelUtils'
+import { createActionLabel } from 'utils/ariaLabelUtils'
 
 export default function CollectionActions ({
   id,
   isLoved,
   isSaved,
   name,
-  numOfItems,
-  numOfCompleted
+  itemCount,
+  completedCount
 }) {
-  const [, onSaveClick] = useContext(SavedCollectionsContext)
-  const [, onLoveClick] = useContext(LovedCollectionsContext)
+  const onClick = useContext(UserDataDispatchContext)
 
   return (
     <div
@@ -40,7 +35,7 @@ export default function CollectionActions ({
         `}
       >
         <ProgressBar
-          percentage={(numOfCompleted / numOfItems) * 100}
+          percentage={(completedCount / itemCount) * 100}
           width='15rem'
         />
         <div
@@ -56,22 +51,22 @@ export default function CollectionActions ({
               line-height: 1.25rem;
             `}
           >
-            {numOfCompleted} of {numOfItems} items completed
+            {completedCount} of {itemCount} items completed
           </span>
         </div>
       </div>
       <ActionBar>
         <IconButton
-          aria-label={createSaveCollectionLabel(name)}
-          onClick={onSaveClick}
+          aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
+          onClick={onClick}
           value={id}
         >
           <Save filled={isSaved} />
         </IconButton>
         {/* <ShareDropdown name={name} /> */}
         {/* <IconButton
-          aria-label={createLoveCollectionLabel(name)}
-          onClick={onLoveClick}
+          aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
+          onClick={onClick}
           value={id}
         >
           <Heart filled={isLoved} />

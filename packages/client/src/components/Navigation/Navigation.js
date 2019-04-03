@@ -1,5 +1,6 @@
 import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
+import localforage from 'localforage'
 
 import { FirebaseContext } from 'contexts/Firebase'
 import { ModalContext } from 'contexts/Modal'
@@ -27,6 +28,7 @@ const AuthNav = memo(function () {
               window.amplitude.getInstance().setUserId(null)
               window.amplitude.getInstance().regenerateDeviceId()
             }
+            localforage.clear()
             window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
             window.location.reload()
           })

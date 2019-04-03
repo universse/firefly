@@ -24,8 +24,11 @@ function Tags ({ location: { pathname }, tags }) {
           `}
         >
           <Tag
-            onClick={() => {
-              urlUtils && urlUtils.onQueryClick({ tag })
+            onClick={e => {
+              if (urlUtils) {
+                e.preventDefault()
+                urlUtils.onQueryClick({ tag })
+              }
               logClickTag({ tag })
             }}
             small={!!urlUtils}

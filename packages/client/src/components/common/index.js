@@ -30,7 +30,7 @@ export function ActionBar ({ children }) {
   )
 }
 
-export function Category (props) {
+export const Category = memo(function (props) {
   return (
     <Link
       css={theme => css`
@@ -47,9 +47,9 @@ export function Category (props) {
       {...props}
     />
   )
-}
+})
 
-export function Difficulty (props) {
+export const Difficulty = memo(function (props) {
   return (
     <span
       css={theme => css`
@@ -61,7 +61,7 @@ export function Difficulty (props) {
       {...props}
     />
   )
-}
+})
 
 export { Dropdown, ExposedDropdown } from './Dropdown'
 

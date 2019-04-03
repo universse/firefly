@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -6,7 +6,7 @@ import { createCollectionPath } from '../../../gatsby/utils'
 
 export const collectionHeightInRem = 9
 
-export function CollectionTitle ({ id, name }) {
+export const CollectionTitle = memo(function ({ id, name }) {
   return (
     <Link
       css={theme => css`
@@ -32,7 +32,7 @@ export function CollectionTitle ({ id, name }) {
       </h3>
     </Link>
   )
-}
+})
 
 export function CollectionWrapper (props) {
   return (

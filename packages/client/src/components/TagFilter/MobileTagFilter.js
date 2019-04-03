@@ -5,7 +5,7 @@ import { URLUtilsContext } from 'contexts/URLUtils'
 import { ClearFilterButton, Count, MobileTag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
-export default function MobileTagFilter ({ aggregatedTags, sort, tags }) {
+export default function MobileTagFilter ({ aggregatedTags, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
     URLUtilsContext
   )

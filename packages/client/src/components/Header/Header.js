@@ -49,9 +49,9 @@ function Header () {
           <SearchBar
             Input={Input}
             Item={Item}
-            numOfResults={10}
             Result={Result}
             ResultBox={ResultBox}
+            resultCount={10}
             Root={Root}
           />
         </div>

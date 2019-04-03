@@ -1,8 +1,14 @@
 import { useEffect } from 'react'
 import localforage from 'localforage'
 
-export default function useOfflinePersistence (key, itemsToSave) {
+export default function useOfflinePersistence (values) {
   useEffect(() => {
-    itemsToSave && localforage.setItem(key, itemsToSave)
-  }, [itemsToSave, key])
+    if (values) {
+      Promise.all(
+        Object.entries(values).map(([key, value]) =>
+          localforage.setItem(key, value)
+        )
+      )
+    }
+  }, [values])
 }

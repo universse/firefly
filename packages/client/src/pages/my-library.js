@@ -6,12 +6,12 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { MediaContext } from 'contexts/Media'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
-import { SavedCollectionsContext } from 'contexts/SavedCollections'
+import { UserDataContext } from 'contexts/UserData'
 import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
 
 export default function MyLibraryPage (props) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const [savedCollections] = useContext(SavedCollectionsContext)
+  const { save } = useContext(UserDataContext)
   const isDesktop = useContext(MediaContext)
 
   // TODO: pop up - sign up reminder
@@ -77,8 +77,7 @@ export default function MyLibraryPage (props) {
             `}
           >
             {normalizedCollections &&
-              savedCollections &&
-              Object.keys(savedCollections).map(id => (
+              Object.keys(save).map(id => (
                 <li
                   key={id}
                   css={css`

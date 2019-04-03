@@ -14,7 +14,7 @@ export default function AllCollections ({ children }) {
             category
             level
             name
-            numOfItems
+            itemCount
             tags
           }
         }

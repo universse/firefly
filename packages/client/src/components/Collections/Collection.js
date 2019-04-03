@@ -6,23 +6,19 @@ import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
-import { LovedCollectionsContext } from 'contexts/LovedCollections'
-import { SavedCollectionsContext } from 'contexts/SavedCollections'
 import { URLUtilsContext } from 'contexts/URLUtils'
-import {
-  createLoveCollectionLabel,
-  createSaveCollectionLabel
-} from 'utils/ariaLabelUtils'
+import { UserDataContext } from 'contexts/UserData'
+import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
+import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 const Collection = memo(function ({
-  collection: { id, name, category, level, numOfItems, tags },
+  collection: { id, name, category, level, itemCount, tags },
   isLoved,
-  isSaved,
-  onLoveClick,
-  onSaveClick
+  isSaved
 }) {
   const { onCategoryFilterClick } = useContext(URLUtilsContext) || {}
+  const onClick = useContext(UserDataDispatchContext)
 
   return (
     <>
@@ -102,7 +98,7 @@ const Collection = memo(function ({
                   line-height: 1.5rem;
                 `}
               >
-                {numOfItems}
+                {itemCount}
                 <span
                   css={theme => css`
                     ${theme.screens.mobile} {
@@ -110,7 +106,7 @@ const Collection = memo(function ({
                     }
                   `}
                 >
-                  {` resource${numOfItems > 1 ? 's' : ''}`}
+                  {` resource${itemCount > 1 ? 's' : ''}`}
                 </span>
               </span>
             </div>
@@ -118,15 +114,15 @@ const Collection = memo(function ({
           </div>
           <ActionBar>
             <IconButton
-              aria-label={createSaveCollectionLabel(name)}
-              onClick={onSaveClick}
+              aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
+              onClick={onClick}
               value={id}
             >
               <Save filled={isSaved} />
             </IconButton>
             {/* <IconButton
-              aria-label={createLoveCollectionLabel(name)}
-              onClick={onLoveClick}
+              aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
+              onClick={onClick}
               value={id}
             >
               <Heart filled={isLoved} />
@@ -139,16 +135,13 @@ const Collection = memo(function ({
 })
 
 export default function (props) {
-  const [savedCollections, onSaveClick] = useContext(SavedCollectionsContext)
-  const [lovedCollections, onLoveClick] = useContext(LovedCollectionsContext)
+  const { love, save } = useContext(UserDataContext)
 
   return (
     <Collection
       {...props}
-      isLoved={!!lovedCollections[props.collection.id]}
-      isSaved={!!savedCollections[props.collection.id]}
-      onLoveClick={onLoveClick}
-      onSaveClick={onSaveClick}
+      isLoved={!!love[props.collection.id]}
+      isSaved={!!save[props.collection.id]}
     />
   )
 }

@@ -9,15 +9,13 @@ export default function Snackbar ({ children }) {
   const [snackbar, setSnackbar] = snackbarState
 
   useEffect(() => {
-    if (snackbar) {
-      const dismissOnEscape = e =>
-        (e.key === 'Esc' || e.key === 'Escape') && setSnackbar(null)
+    const dismissOnEscape = e =>
+      (e.key === 'Esc' || e.key === 'Escape') && setSnackbar(null)
 
-      window.addEventListener('keydown', dismissOnEscape)
+    window.addEventListener('keydown', dismissOnEscape)
 
-      return () => {
-        window.removeEventListener('keydown', dismissOnEscape)
-      }
+    return () => {
+      window.removeEventListener('keydown', dismissOnEscape)
     }
   }, [setSnackbar, snackbar])
 

@@ -7,34 +7,33 @@ import LearningList from './LearningList'
 import { ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
-import useSavedItemsReducer from 'hooks/useSavedItemsReducer'
-import LocalStorage from 'constants/LocalStorage'
+import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 
 // TODO:
 // suggestion component
 
 export default function CollectionView ({
   collection: { id, category, level, name, tags, urls },
-  savedCollections
+  check,
+  love,
+  save
 }) {
-  const [completedItems, onCheckClick] = useSavedItemsReducer(
-    LocalStorage.COMPLETED_ITEMS
-  )
+  const onClick = useContext(UserDataDispatchContext)
 
   const isDesktop = useContext(MediaContext)
-  const numOfItems = urls.length
+  const itemCount = urls.length
 
-  const numOfCompleted = useMemo(
+  const completedCount = useMemo(
     () =>
-      completedItems &&
+      check &&
       urls.reduce(
-        (total, current) => (completedItems[current.id] ? total + 1 : total),
+        (total, current) => (check[current.id] ? total + 1 : total),
         0
       ),
-    [completedItems, urls]
+    [check, urls]
   )
 
-  const isSaved = !!savedCollections[id]
+  const isSaved = !!save[id]
 
   const { setLatestActivity } = useContext(LatestActivityContext)
 
@@ -43,11 +42,11 @@ export default function CollectionView ({
       setLatestActivity({
         id,
         name,
-        percentage: (numOfCompleted / numOfItems) * 100
+        percentage: (completedCount / itemCount) * 100
       })
-  }, [id, isSaved, name, numOfCompleted, numOfItems, setLatestActivity])
+  }, [id, isSaved, name, completedCount, itemCount, setLatestActivity])
 
-  return completedItems ? (
+  return (
     <>
       <div
         css={theme => css`
@@ -79,11 +78,11 @@ export default function CollectionView ({
             `}
           >
             <CollectionActions
+              completedCount={completedCount}
               id={id}
               isSaved={isSaved}
+              itemCount={itemCount}
               name={name}
-              numOfCompleted={numOfCompleted}
-              numOfItems={numOfItems}
             />
           </div>
         )}
@@ -98,11 +97,7 @@ export default function CollectionView ({
           }
         `}
       >
-        <LearningList
-          completedItems={completedItems}
-          onCheckClick={onCheckClick}
-          urls={urls}
-        />
+        <LearningList check={check} onCheckClick={onClick} urls={urls} />
       </div>
       {!isDesktop && (
         <div
@@ -123,7 +118,7 @@ export default function CollectionView ({
               flex: 1 0 auto;
             `}
           >
-            <ProgressBar percentage={(numOfCompleted / numOfItems) * 100} />
+            <ProgressBar percentage={(completedCount / itemCount) * 100} />
           </div>
           <div
             css={css`
@@ -139,11 +134,11 @@ export default function CollectionView ({
                 line-height: 1.25rem;
               `}
             >
-              {numOfCompleted} of {numOfItems}
+              {completedCount} of {itemCount}
             </span>
           </div>
         </div>
       )}
     </>
-  ) : null
+  )
 }

@@ -6,7 +6,7 @@ import { Title } from 'components/common'
 import { ClearFilterButton, Count, Tag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
-export default function TagFilter ({ aggregatedTags, sort, tags }) {
+export default function TagFilter ({ aggregatedTags, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
     URLUtilsContext
   )

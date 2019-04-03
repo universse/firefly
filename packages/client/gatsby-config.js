@@ -66,7 +66,7 @@ module.exports = {
               category: Categories[c],
               level: l,
               name: n,
-              numOfItems: us.length,
+              itemCount: us.length,
               suggestions: s,
               tags: t,
               urls___NODE: us.map(id => id)

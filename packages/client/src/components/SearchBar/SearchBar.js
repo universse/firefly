@@ -11,7 +11,7 @@ function SearchBar ({
   controlledProps,
   initialIsLoading,
   initialSearchInput,
-  numOfResults,
+  resultCount,
   Input,
   Item,
   Result,
@@ -27,7 +27,7 @@ function SearchBar ({
     searchInput
   } = useSearch(initialSearchInput, initialIsLoading)
 
-  const totalNumOfResults = results.length
+  const totalResultCount = results.length
 
   return (
     <Downshift
@@ -69,7 +69,7 @@ function SearchBar ({
             <ul {...getMenuProps()}>
               {isOpen && searchInput && (
                 <>
-                  {results.slice(0, numOfResults).map((item, index) => (
+                  {results.slice(0, resultCount).map((item, index) => (
                     <Item
                       key={item.node.id}
                       {...getItemProps({
@@ -88,12 +88,12 @@ function SearchBar ({
                       </Result>
                     </Item>
                   ))}
-                  {totalNumOfResults > 0 && numOfResults < totalNumOfResults && (
+                  {totalResultCount > 0 && resultCount < totalResultCount && (
                     <Item
                       {...getItemProps({
                         item: { node: { id: 'search' } },
-                        index: numOfResults,
-                        isHighlighted: highlightedIndex === numOfResults
+                        index: resultCount,
+                        isHighlighted: highlightedIndex === resultCount
                       })}
                     >
                       <Result
@@ -104,7 +104,7 @@ function SearchBar ({
                       </Result>
                     </Item>
                   )}
-                  {!isTyping && !isLoading && !totalNumOfResults && (
+                  {!isTyping && !isLoading && !totalResultCount && (
                     <li
                       css={theme => css`
                         span {
@@ -134,7 +134,7 @@ SearchBar.defaultProps = {
   controlledProps: {},
   initialIsLoading: false,
   initialSearchInput: '',
-  numOfResults: Infinity,
+  resultCount: Infinity,
   Item: DefaultItem,
   ResultBox: DefaultResultBox,
   Root: DefaultRoot

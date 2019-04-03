@@ -19,7 +19,7 @@ export default function LatestActivity ({ children }) {
       .finally(() => setIsLoading(false))
   }, [])
 
-  useOfflinePersistence(LocalStorage.LATEST_ACTIVITY, latestActivity)
+  useOfflinePersistence({ [LocalStorage.LATEST_ACTIVITY]: latestActivity })
 
   const activity = useMemo(
     () => ({ latestActivity, isLoading, setLatestActivity }),
