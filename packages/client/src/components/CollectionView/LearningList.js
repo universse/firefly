@@ -21,8 +21,8 @@ function LearningList ({ check, onCheckClick, urls }) {
         >
           <LearningItem
             {...url}
-            checked={!!check[url.id]}
             handleCheckClick={onCheckClick}
+            isChecked={!!check[url.id]}
           />
         </li>
       ))}

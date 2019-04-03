@@ -12,6 +12,7 @@ import Modal from 'contexts/Modal'
 import NormalizedCollections from 'contexts/NormalizedCollections'
 import UserData from 'contexts/UserData'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
+// // import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
 import Theme from 'constants/Theme'
 import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
 
@@ -21,6 +22,7 @@ export default function Layout ({
   location
 }) {
   useAccessibleFocusIndicator()
+  // useSyncOfflineQueue()
 
   if (getNormalizedPathname(location.pathname) === '/welcome') {
     return <ThemeProvider theme={Theme}>{children}</ThemeProvider>

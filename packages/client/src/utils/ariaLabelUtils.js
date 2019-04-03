@@ -1,5 +1,9 @@
 export const createActionLabel = (action, name) => {
   switch (action) {
+    case 'check':
+      return `Check Item ${name}`
+    case 'uncheck':
+      return `Uncheck Item ${name}`
     case 'love':
       return `Love Collection ${name}`
     case 'unlove':
@@ -11,6 +15,5 @@ export const createActionLabel = (action, name) => {
     case 'unsave':
       return `Unsave Collection ${name} from My Library`
     default:
-      break
   }
 }

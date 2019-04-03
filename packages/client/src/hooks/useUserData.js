@@ -6,8 +6,7 @@ import { FirebaseContext } from 'contexts/Firebase'
 import { SnackbarContext } from 'contexts/Snackbar'
 import useFetchUserData from './useFetchUserData'
 import useOfflinePersistence from './useOfflinePersistence'
-import useOfflineQueue from './useOfflineQueue'
-import useSaveToDatabase from './useSaveToDatabase'
+import useSaveUserData from './useSaveUserData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
 import LocalStorage from 'constants/LocalStorage'
 import PopupTypes from 'constants/PopupTypes'
@@ -61,8 +60,7 @@ export default function useUserData () {
 
   const [change, trackChange] = useTrackToggleStateChange()
 
-  useSaveToDatabase(firebase, change)
-  useOfflineQueue(change)
+  useSaveUserData(change, firebase, user)
 
   const onClick = useCallback(e => {
     const id = e.currentTarget.value

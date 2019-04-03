@@ -8,7 +8,7 @@ import { IconButton } from 'components/common'
 import { getHostname } from './utils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
-function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
+function LearningItem ({ id, url, title, type, isChecked, handleCheckClick }) {
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
   return (
@@ -64,11 +64,14 @@ function LearningItem ({ id, url, title, type, checked, handleCheckClick }) {
           `}
         >
           <IconButton
-            aria-label={createActionLabel('check', title)}
+            aria-label={createActionLabel(
+              isChecked ? 'check' : 'uncheck',
+              title
+            )}
             onClick={handleCheckClick}
             value={id}
           >
-            <Check checked={checked} />
+            <Check filled={isChecked} />
           </IconButton>
         </div>
         {/* TODO: author */}
