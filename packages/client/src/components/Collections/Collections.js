@@ -1,9 +1,9 @@
-import React, { useCallback, useRef, useContext } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { css } from '@emotion/core'
 import { FixedSizeList as List } from 'react-window'
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
-import Item from './Item'
+import Collection from './Collection'
 import { collectionHeightInRem } from './styled'
 import { baseFontSize } from 'constants/Styles'
 
@@ -12,17 +12,20 @@ function itemKey (index, data) {
 }
 
 const listStyle = theme => css`
-  background-color: #fff;
   height: 100% !important;
+  width: 100%;
+
+  ul:not(:empty) {
+    background-color: #fff;
+
+    ${theme.screens.desktop} {
+      border-radius: 8px;
+      box-shadow: ${theme.shadows[0]};
+    }
+  }
 
   li:last-child div {
     border: none;
-  }
-
-  ${theme.screens.desktop} {
-    border-radius: 8px;
-    box-shadow: ${theme.shadows[0]};
-    width: 100%;
   }
 `
 
@@ -46,7 +49,7 @@ export default function Collections ({ collections }) {
         itemKey={itemKey}
         itemSize={collectionHeightInRem * baseFontSize}
       >
-        {Item}
+        {Collection}
       </List>
     </>
   )

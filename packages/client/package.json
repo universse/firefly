@@ -11,7 +11,7 @@
     "emotion": "^10.0.9",
     "emotion-theming": "^10.0.10",
     "fromfrom": "^1.2.0",
-    "gatsby": "^2.3.10",
+    "gatsby": "^2.3.11",
     "gatsby-image": "^2.0.37",
     "gatsby-plugin-accessibilityjs": "^1.0.3",
     "gatsby-plugin-amplitude-analytics": "^1.5.0",

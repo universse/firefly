@@ -21,7 +21,13 @@ function reducer (_, { type, payload }) {
   return produce(_, draft => {
     switch (type) {
       case 'load':
-        return payload
+        return (
+          payload || {
+            check: {},
+            love: {},
+            save: {}
+          }
+        )
 
       case 'click':
         const { action, id } = payload
@@ -37,28 +43,22 @@ function reducer (_, { type, payload }) {
   })
 }
 
-const initialUserData = {
-  check: {},
-  love: {},
-  save: {}
-}
-
 export default function useUserData () {
-  const [userData, dispatch] = useReducer(reducer, initialUserData)
+  const [userData, dispatch] = useReducer(reducer)
   const user = useContext(AuthenticationContext)
   // const [, setSnackbar] = useContext(SnackbarContext)
   const firebase = useContext(FirebaseContext)
 
   useFetchUserData(dispatch, firebase, user)
 
+  const [change, trackChange] = useTrackToggleStateChange()
+
   useOfflinePersistence(
-    userData !== initialUserData && {
+    change && {
       [LocalStorage.COMPLETED_ITEMS]: userData.check,
       [LocalStorage.SAVED_COLLECTIONS]: userData.save
     }
   )
-
-  const [change, trackChange] = useTrackToggleStateChange()
 
   useSaveUserData(change, firebase, user)
 

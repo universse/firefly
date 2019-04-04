@@ -134,14 +134,17 @@ const Collection = memo(function ({
   )
 })
 
-export default function (props) {
-  const { love, save } = useContext(UserDataContext)
+export default function ({ data, index, style }) {
+  const collection = data[index].node
+  const userData = useContext(UserDataContext)
 
-  return (
-    <Collection
-      {...props}
-      isLoved={!!love[props.collection.id]}
-      isSaved={!!save[props.collection.id]}
-    />
-  )
+  return userData ? (
+    <li style={style}>
+      <Collection
+        collection={collection}
+        isLoved={!!userData.love[collection.id]}
+        isSaved={!!userData.save[collection.id]}
+      />
+    </li>
+  ) : null
 }
