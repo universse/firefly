@@ -7,12 +7,11 @@ import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
-import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-const Collection = memo(function ({
+function Collection ({
   collection: { id, name, category, level, itemCount, tags },
   isLoved,
   isSaved
@@ -132,19 +131,6 @@ const Collection = memo(function ({
       </CollectionWrapper>
     </>
   )
-})
-
-export default function ({ data, index, style }) {
-  const collection = data[index].node
-  const userData = useContext(UserDataContext)
-
-  return userData ? (
-    <li style={style}>
-      <Collection
-        collection={collection}
-        isLoved={!!userData.love[collection.id]}
-        isSaved={!!userData.save[collection.id]}
-      />
-    </li>
-  ) : null
 }
+
+export default memo(Collection)

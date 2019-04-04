@@ -10,9 +10,10 @@ import { FirebaseContext } from 'contexts/Firebase'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
-import { Back, Save, Share } from 'icons'
+import { Back, Heart, Save, Share } from 'icons'
 import AriaLabels from 'constants/AriaLabels'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
+import { createActionLabel } from 'utils/ariaLabelUtils'
 import copyToClipboard from 'utils/copyToClipboard'
 import parseCollectionData from 'utils/parseCollectionData'
 import { getParamFromPathname } from 'utils/pathnameUtils'
@@ -20,7 +21,8 @@ import { createCollectionPath } from '../../gatsby/utils'
 
 export default function CollectionPage ({ location }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const { check, love, save } = useContext(UserDataContext)
+  const userData = useContext(UserDataContext)
+  const { check, love, save } = userData || {}
   const onClick = useContext(UserDataDispatchContext)
   const firebase = useContext(FirebaseContext)
 
@@ -55,85 +57,99 @@ export default function CollectionPage ({ location }) {
       .finally(() => setIsLoading(false))
   }, [collection, firebase, id, normalizedCollections])
 
+  const isSaved = save && !!save[id]
+
+  const isLoved = love && !!love[id]
+
   return (
     <>
       <SEO title='Collection' />
-      <MobileHeader
-        actions={
-          collection && (
-            <>
-              {/* <IconButton
-                aria-label={createSaveCollectionLabel(name)}
-                onClick={onClick}
-                value={id}
-              >
-                <Save filled={!!save[id]} />
-              </IconButton>
-              <IconButton
-                aria-label={createLoveCollectionLabel(name)}
-                onClick={onClick}
-                value={id}
-              >
-                <Heart filled={!!love[id]} />
-              </IconButton>
-              <IconButton
-                aria-label='Share'
-                onClick={() => copyToClipboard(href)}
-              >
-                <Share />
-              </IconButton> */}
-            </>
-          )
-        }
-        navIcon={
-          <IconButton
-            aria-label={AriaLabels.GO_BACK}
-            onClick={() => window.history.back()}
-          >
-            <Back />
-          </IconButton>
-        }
-        shadow
-        title='Collection'
-      />
-      <main
-        css={theme => css`
-          background-color: ${theme.colors.gray100};
-          min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
-
-          ${theme.screens.nonMobile} {
-            padding: 1rem 0;
-          }
-
-          ${theme.screens.desktop} {
-            min-height: calc(100vh - ${headerHeightInRem}rem);
-            padding: 2rem 0;
-          }
-        `}
-      >
-        <div
-          className='base'
-          css={theme => css`
-            max-width: 50rem;
-
-            ${theme.screens.mobile} {
-              padding: 0 0 1rem;
+      {userData && (
+        <>
+          <MobileHeader
+            actions={
+              collection && (
+                <>
+                  {/* <IconButton
+                    aria-label={createActionLabel(
+                      isSaved ? 'unsave' : 'save',
+                      name
+                    )}
+                    onClick={onClick}
+                    value={id}
+                  >
+                    <Save filled={isSaved} />
+                  </IconButton>
+                  <IconButton
+                    aria-label={createActionLabel(
+                      isLoved ? 'unlove' : 'love',
+                      name
+                    )}
+                    onClick={onClick}
+                    value={id}
+                  >
+                    <Heart filled={isLoved} />
+                  </IconButton>
+                  <IconButton
+                    aria-label='Share'
+                    onClick={() => copyToClipboard(href)}
+                  >
+                    <Share />
+                  </IconButton> */}
+                </>
+              )
             }
-          `}
-        >
-          {collection && (
-            <CollectionView
-              check={check}
-              collection={collection}
-              love={love}
-              onClick={onClick}
-              save={save}
-            />
-          )}
-          {hasError && 'error'}
-          {isLoading && 'loading'}
-        </div>
-      </main>
+            navIcon={
+              <IconButton
+                aria-label={AriaLabels.GO_BACK}
+                onClick={() => window.history.back()}
+              >
+                <Back />
+              </IconButton>
+            }
+            shadow
+            title='Collection'
+          />
+          <main
+            css={theme => css`
+              background-color: ${theme.colors.gray100};
+              min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
+
+              ${theme.screens.nonMobile} {
+                padding: 1rem 0;
+              }
+
+              ${theme.screens.desktop} {
+                min-height: calc(100vh - ${headerHeightInRem}rem);
+                padding: 2rem 0;
+              }
+            `}
+          >
+            <div
+              className='base'
+              css={theme => css`
+                max-width: 50rem;
+
+                ${theme.screens.mobile} {
+                  padding: 0 0 1rem;
+                }
+              `}
+            >
+              {collection && (
+                <CollectionView
+                  check={check}
+                  collection={collection}
+                  isLoved={isLoved}
+                  isSaved={isSaved}
+                  onClick={onClick}
+                />
+              )}
+              {hasError && 'error'}
+              {isLoading && 'loading'}
+            </div>
+          </main>
+        </>
+      )}
     </>
   )
 }

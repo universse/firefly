@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import { FixedSizeList as List } from 'react-window'
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
-import Collection from './Collection'
+import Item from './Item'
 import { collectionHeightInRem } from './styled'
 import { baseFontSize } from 'constants/Styles'
 
@@ -49,7 +49,7 @@ export default function Collections ({ collections }) {
         itemKey={itemKey}
         itemSize={collectionHeightInRem * baseFontSize}
       >
-        {Collection}
+        {Item}
       </List>
     </>
   )

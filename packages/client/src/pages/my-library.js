@@ -11,7 +11,7 @@ import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
 
 export default function MyLibraryPage (props) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const { save } = useContext(UserDataContext)
+  const userData = useContext(UserDataContext)
   const isDesktop = useContext(MediaContext)
 
   // TODO: pop up - sign up reminder
@@ -77,7 +77,8 @@ export default function MyLibraryPage (props) {
             `}
           >
             {normalizedCollections &&
-              Object.keys(save).map(id => (
+              userData &&
+              Object.keys(userData.save).map(id => (
                 <li
                   key={id}
                   css={css`
@@ -86,6 +87,8 @@ export default function MyLibraryPage (props) {
                 >
                   <Collection
                     collection={normalizedCollections[id.toLowerCase()]}
+                    isLoved={userData.love[id]}
+                    isSaved
                   />
                 </li>
               ))}

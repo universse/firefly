@@ -14,9 +14,9 @@ import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 
 export default function CollectionView ({
   collection: { id, category, level, name, tags, urls },
-  check,
-  love,
-  save
+  isLoved,
+  isSaved,
+  check
 }) {
   const onClick = useContext(UserDataDispatchContext)
 
@@ -32,8 +32,6 @@ export default function CollectionView ({
       ),
     [check, urls]
   )
-
-  const isSaved = !!save[id]
 
   const { setLatestActivity } = useContext(LatestActivityContext)
 
@@ -80,6 +78,7 @@ export default function CollectionView ({
             <CollectionActions
               completedCount={completedCount}
               id={id}
+              isLoved={isLoved}
               isSaved={isSaved}
               itemCount={itemCount}
               name={name}
