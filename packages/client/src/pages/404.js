@@ -14,7 +14,7 @@ export default function NotFoundPage () {
           align-items: center;
           background-color: ${theme.colors.gray100};
           display: flex;
-          justify-content: space-around;
+          justify-content: center;
           min-height: calc(100vh - ${headerHeightInRem}rem);
           padding: 2rem 0;
         `}

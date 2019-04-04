@@ -3,7 +3,9 @@ import { ThemeContext } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
 export function Level ({ level, small }) {
-  const theme = useContext(ThemeContext)
+  const {
+    colors: { brand500, gray400 }
+  } = useContext(ThemeContext)
 
   return (
     <svg
@@ -17,19 +19,10 @@ export function Level ({ level, small }) {
       xmlns='http://www.w3.org/2000/svg'
     >
       <title>{DifficultyLevels[level]}</title>
-      <path d='M1.5 17V9' stroke={theme.colors.brand500} />
-      <path
-        d='M7.5 17V6'
-        stroke={level > 0 ? theme.colors.brand500 : theme.colors.gray400}
-      />
-      <path
-        d='M13.5 17V3'
-        stroke={level > 1 ? theme.colors.brand500 : theme.colors.gray400}
-      />
-      <path
-        d='M19.5 17V0'
-        stroke={level > 2 ? theme.colors.brand500 : theme.colors.gray400}
-      />
+      <path d='M1.5 17V9' stroke={brand500} />
+      <path d='M7.5 17V6' stroke={level > 0 ? brand500 : gray400} />
+      <path d='M13.5 17V3' stroke={level > 1 ? brand500 : gray400} />
+      <path d='M19.5 17V0' stroke={level > 2 ? brand500 : gray400} />
     </svg>
   )
 }

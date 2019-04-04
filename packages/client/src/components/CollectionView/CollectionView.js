@@ -7,19 +7,16 @@ import LearningList from './LearningList'
 import { ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
-import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 
 // TODO:
 // suggestion component
 
 export default function CollectionView ({
+  check,
   collection: { id, category, level, name, tags, urls },
   isLoved,
-  isSaved,
-  check
+  isSaved
 }) {
-  const onClick = useContext(UserDataDispatchContext)
-
   const isDesktop = useContext(MediaContext)
   const itemCount = urls.length
 
@@ -96,7 +93,7 @@ export default function CollectionView ({
           }
         `}
       >
-        <LearningList check={check} onCheckClick={onClick} urls={urls} />
+        <LearningList check={check} urls={urls} />
       </div>
       {!isDesktop && (
         <div

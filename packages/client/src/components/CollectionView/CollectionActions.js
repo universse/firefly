@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 // import ShareDropdown from 'components/ShareDropdown'
@@ -15,7 +15,7 @@ export default function CollectionActions ({
   itemCount,
   completedCount
 }) {
-  const onClick = useContext(UserDataDispatchContext)
+  const onActionClick = useContext(UserDataDispatchContext)
 
   return (
     <div
@@ -58,7 +58,7 @@ export default function CollectionActions ({
       <ActionBar>
         <IconButton
           aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
-          onClick={onClick}
+          onClick={onActionClick}
           value={id}
         >
           <Save filled={isSaved} />
@@ -66,7 +66,7 @@ export default function CollectionActions ({
         {/* <ShareDropdown name={name} /> */}
         {/* <IconButton
           aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
-          onClick={onClick}
+          onClick={onActionClick}
           value={id}
         >
           <Heart filled={isLoved} />

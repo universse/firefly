@@ -3,7 +3,7 @@ import produce from 'immer'
 
 import { AuthenticationContext } from 'contexts/Authentication'
 import { FirebaseContext } from 'contexts/Firebase'
-import { SnackbarContext } from 'contexts/Snackbar'
+import { SnackbarContext } from 'contexts/SnackbarProvider'
 import useFetchUserData from './useFetchUserData'
 import useOfflinePersistence from './useOfflinePersistence'
 import useSaveUserData from './useSaveUserData'
@@ -46,7 +46,7 @@ function reducer (_, { type, payload }) {
 export default function useUserData () {
   const [userData, dispatch] = useReducer(reducer)
   const user = useContext(AuthenticationContext)
-  // const [, setSnackbar] = useContext(SnackbarContext)
+  const [, setSnackbar] = useContext(SnackbarContext)
   const firebase = useContext(FirebaseContext)
 
   useFetchUserData(dispatch, firebase, user)
@@ -62,7 +62,7 @@ export default function useUserData () {
 
   useSaveUserData(change, firebase, user)
 
-  const onClick = useCallback(e => {
+  const onActionClick = useCallback(e => {
     const id = e.currentTarget.value
     const action = e.currentTarget.textContent
 
@@ -71,24 +71,25 @@ export default function useUserData () {
       action: getActionKey(action)
     }
 
-    if (action.endsWith('love')) {
-      if (hasSignedIn() || user) {
-        dispatch({
-          type: 'click',
-          payload
-        })
-      } else {
-        // setSnackbar(PopupTypes.SIGN_UP_FORM)
-      }
-    } else {
-      dispatch({
+    logClickAction({ id, action })
+
+    if (!action.endsWith('love')) {
+      trackChange(payload)
+      return dispatch({
         type: 'click',
         payload
       })
     }
-    trackChange(payload)
-    logClickAction({ id, action })
-  }, [trackChange, user])
 
-  return [userData, onClick]
+    // hasSignedIn() || user
+    //   ? navigator.onLine
+    //     ? dispatch({
+    //       type: 'click',
+    //       payload
+    //     })
+    //     : console.log('offline')
+    //   : console.log('unauthenticated')
+  }, [trackChange])
+
+  return [userData, onActionClick]
 }

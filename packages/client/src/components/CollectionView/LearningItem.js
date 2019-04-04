@@ -1,14 +1,16 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { Check } from '../../icons'
-import LinkIcons from 'constants/LinkIcons'
-import { LinkTitle } from './styled'
 import { IconButton } from 'components/common'
+import { Check } from 'icons'
+import { LinkTitle } from './styled'
+import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
+import LinkIcons from 'constants/LinkIcons'
 import { getHostname } from './utils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
-function LearningItem ({ id, url, title, type, isChecked, handleCheckClick }) {
+function LearningItem ({ id, url, title, type, isChecked }) {
+  const onActionClick = useContext(UserDataDispatchContext)
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
   return (
@@ -68,7 +70,7 @@ function LearningItem ({ id, url, title, type, isChecked, handleCheckClick }) {
               isChecked ? 'check' : 'uncheck',
               title
             )}
-            onClick={handleCheckClick}
+            onClick={onActionClick}
             value={id}
           >
             <Check filled={isChecked} />

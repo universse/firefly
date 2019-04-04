@@ -17,7 +17,7 @@ function Collection ({
   isSaved
 }) {
   const { onCategoryFilterClick } = useContext(URLUtilsContext) || {}
-  const onClick = useContext(UserDataDispatchContext)
+  const onActionClick = useContext(UserDataDispatchContext)
 
   return (
     <>
@@ -114,14 +114,14 @@ function Collection ({
           <ActionBar>
             <IconButton
               aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
-              onClick={onClick}
+              onClick={onActionClick}
               value={id}
             >
               <Save filled={isSaved} />
             </IconButton>
             {/* <IconButton
               aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
-              onClick={onClick}
+              onClick={onActionClick}
               value={id}
             >
               <Heart filled={isLoved} />

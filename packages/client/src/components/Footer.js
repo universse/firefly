@@ -30,7 +30,7 @@ function Footer () {
           border-top: 1px solid ${theme.colors.gray300};
           display: flex;
           height: 3rem;
-          justify-content: space-around;
+          justify-content: center;
         `}
       >
         <p

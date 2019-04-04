@@ -17,5 +17,5 @@ export function Cross ({ color }) {
 }
 
 Cross.defaultProps = {
-  color: '#000'
+  color: 'currentColor'
 }

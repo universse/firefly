@@ -23,7 +23,7 @@ export default function IconButton ({ children, light, ...props }) {
           border-radius: 50%;
           display: flex;
           height: 2.5rem;
-          justify-content: space-around;
+          justify-content: center;
           width: 2.5rem;
 
           &:focus {

@@ -23,7 +23,7 @@ export default function CollectionPage ({ location }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
   const userData = useContext(UserDataContext)
   const { check, love, save } = userData || {}
-  const onClick = useContext(UserDataDispatchContext)
+  const onActionClick = useContext(UserDataDispatchContext)
   const firebase = useContext(FirebaseContext)
 
   const id = getParamFromPathname(location.pathname)
@@ -75,7 +75,7 @@ export default function CollectionPage ({ location }) {
                       isSaved ? 'unsave' : 'save',
                       name
                     )}
-                    onClick={onClick}
+                    onClick={onActionClick}
                     value={id}
                   >
                     <Save filled={isSaved} />
@@ -85,7 +85,7 @@ export default function CollectionPage ({ location }) {
                       isLoved ? 'unlove' : 'love',
                       name
                     )}
-                    onClick={onClick}
+                    onClick={onActionClick}
                     value={id}
                   >
                     <Heart filled={isLoved} />
@@ -141,7 +141,6 @@ export default function CollectionPage ({ location }) {
                   collection={collection}
                   isLoved={isLoved}
                   isSaved={isSaved}
-                  onClick={onClick}
                 />
               )}
               {hasError && 'error'}

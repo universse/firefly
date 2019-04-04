@@ -20,7 +20,7 @@ export default function CollectionTemplate ({
 }) {
   const userData = useContext(UserDataContext)
   const { check, love, save } = userData || {}
-  const onClick = useContext(UserDataDispatchContext)
+  const onActionClick = useContext(UserDataDispatchContext)
 
   const { id, name } = collections
 
@@ -40,7 +40,7 @@ export default function CollectionTemplate ({
                     isSaved ? 'unsave' : 'save',
                     name
                   )}
-                  onClick={onClick}
+                  onClick={onActionClick}
                   value={id}
                 >
                   <Save filled={isSaved} />
@@ -50,7 +50,7 @@ export default function CollectionTemplate ({
                     isLoved ? 'unlove' : 'love',
                     name
                   )}
-                  onClick={onClick}
+                  onClick={onActionClick}
                   value={id}
                 >
                   <Heart filled={isLoved} />
@@ -104,7 +104,6 @@ export default function CollectionTemplate ({
                 collection={collections}
                 isLoved={isLoved}
                 isSaved={isSaved}
-                onClick={onClick}
               />
             </div>
             <FABDesktop href='https://docs.google.com/forms/'>

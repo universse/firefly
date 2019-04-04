@@ -5,11 +5,13 @@ import { ThemeProvider } from 'emotion-theming'
 import CommonLayout from './CommonLayout'
 import IndexLayout from './IndexLayout'
 import SignUpForm from 'components/SignUpForm'
+import Snackbar from 'components/Snackbar'
 import AllCollections from 'contexts/AllCollections'
 import Authentication from 'contexts/Authentication'
 import LatestActivity from 'contexts/LatestActivity'
 import Modal from 'contexts/Modal'
 import NormalizedCollections from 'contexts/NormalizedCollections'
+import SnackbarProvider from 'contexts/SnackbarProvider'
 import UserData from 'contexts/UserData'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
 // // import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
@@ -35,15 +37,20 @@ export default function Layout ({
           <Authentication>
             <Modal>
               <LatestActivity>
-                <UserData>
-                  {isIndexPage(location.pathname) ? (
-                    <IndexLayout category={category} location={location}>
-                      {children}
-                    </IndexLayout>
-                  ) : (
-                    <CommonLayout location={location}>{children}</CommonLayout>
-                  )}
-                </UserData>
+                <SnackbarProvider>
+                  <UserData>
+                    {isIndexPage(location.pathname) ? (
+                      <IndexLayout category={category} location={location}>
+                        {children}
+                      </IndexLayout>
+                    ) : (
+                      <CommonLayout location={location}>
+                        {children}
+                      </CommonLayout>
+                    )}
+                  </UserData>
+                  <Snackbar />
+                </SnackbarProvider>
               </LatestActivity>
               <SignUpForm />
             </Modal>

@@ -7,11 +7,11 @@ import useUserData from 'hooks/useUserData'
 export const UserDataContext = createContext()
 
 export default function UserData ({ children }) {
-  const [userData, onClick] = useUserData()
+  const [userData, onActionClick] = useUserData()
 
   return (
     <UserDataContext.Provider value={userData}>
-      <UserDataDispatchContext.Provider value={onClick}>
+      <UserDataDispatchContext.Provider value={onActionClick}>
         {children}
       </UserDataDispatchContext.Provider>
     </UserDataContext.Provider>

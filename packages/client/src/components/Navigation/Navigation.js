@@ -72,7 +72,7 @@ function Navigation () {
         >
           <NavLink to='/my-library'>My Library</NavLink>
         </li>
-        {/* <AuthNav /> */}
+        <AuthNav />
       </ul>
     </nav>
   )

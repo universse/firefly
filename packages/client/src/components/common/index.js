@@ -22,7 +22,7 @@ export function ActionBar ({ children }) {
         display: flex;
         justify-content: space-between;
         margin-right: -0.5rem;
-        width: ${2.5 * childrenCount + 0.5 * (childrenCount - 1)}rem;
+        width: ${2.5 * childrenCount}rem;
       `}
     >
       {children}
@@ -108,7 +108,7 @@ export function FABDesktop (props) {
         color: ${theme.colors.white900};
         display: flex;
         height: 3.5rem;
-        justify-content: space-around;
+        justify-content: center;
         position: fixed;
         right: 2.5rem;
         width: 3.5rem;
@@ -201,7 +201,7 @@ export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
             background-color: ${theme.colors.brand500};
             border-radius: 0.25rem;
             height: 0.5rem;
-            transition: width 0.75s;
+            transition: width 0.75s ease;
             width: ${percentage}%;
           `
         }

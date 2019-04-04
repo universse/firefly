@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import LearningItem from './LearningItem'
 
-function LearningList ({ check, onCheckClick, urls }) {
+function LearningList ({ check, urls }) {
   return (
     <ul
       css={css`
@@ -19,11 +19,7 @@ function LearningList ({ check, onCheckClick, urls }) {
             position: relative;
           `}
         >
-          <LearningItem
-            {...url}
-            handleCheckClick={onCheckClick}
-            isChecked={!!check[url.id]}
-          />
+          <LearningItem {...url} isChecked={!!check[url.id]} />
         </li>
       ))}
     </ul>
