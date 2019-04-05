@@ -32,12 +32,10 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
 export function Message (props) {
   return (
     <span
-      aria-live='polite'
       css={theme => css`
         color: ${theme.colors.white900};
         font-size: 1rem;
       `}
-      role='status'
       {...props}
     />
   )

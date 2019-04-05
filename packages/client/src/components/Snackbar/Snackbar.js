@@ -5,11 +5,11 @@ import { IconButton } from 'components/common'
 import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'icons'
 
-export default function Snackbar ({ setSnackbar, snackbar }) {
+export default function Snackbar ({ dismissSnackbar, setSnackbar, snackbar }) {
   const { buttonProps, message } = snackbar || { buttonProps: {} }
 
   return (
-    <Wrapper isOpen={!!snackbar}>
+    <Wrapper isOpen={snackbar.isOpen}>
       <Surface
         onMouseEnter={() =>
           setSnackbar(snackbar => snackbar && { ...snackbar, timeout: null })
@@ -19,9 +19,11 @@ export default function Snackbar ({ setSnackbar, snackbar }) {
         }
       >
         <div
+          aria-live='polite'
           css={css`
-            margin-right: 0.5rem;
+            margin-right: 1rem;
           `}
+          role='status'
         >
           <Message>{message}</Message>
         </div>
@@ -31,18 +33,14 @@ export default function Snackbar ({ setSnackbar, snackbar }) {
             display: flex;
           `}
         >
-          <div
-            css={css`
-              margin-right: 0.5rem;
-            `}
-          >
-            <ActionButton onActionClick={setSnackbar} {...buttonProps} />
+          <div>
+            <ActionButton onActionClick={dismissSnackbar} {...buttonProps} />
           </div>
           <div>
             <IconButton
               aria-label='Dismiss Message'
               light
-              onClick={() => setSnackbar()}
+              onClick={dismissSnackbar}
             >
               <Cross />
             </IconButton>

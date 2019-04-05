@@ -21,7 +21,7 @@ export default function Modal ({ children }) {
     setActiveModalType(type)
   }, [])
 
-  const modal = useMemo(
+  const value = useMemo(
     () => ({
       activeModalType,
       closeModal,
@@ -30,7 +30,7 @@ export default function Modal ({ children }) {
     [activeModalType, closeModal, openModal]
   )
 
-  return <ModalContext.Provider value={modal}>{children}</ModalContext.Provider>
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
 }
 
 Modal.propTypes = {

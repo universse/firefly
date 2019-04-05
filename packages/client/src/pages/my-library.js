@@ -21,27 +21,24 @@ const MyLibraryPage = memo(function ({ openModal }) {
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
-  const setSnackbar = useContext(SetSnackbarContext)
+  const { openSnackbar } = useContext(SetSnackbarContext)
 
-  // useEffect(
-  //   () => {
-  //     if (!hasSignedIn() && !user) {
-  //       setSnackbar({
-  //         buttonProps: {
-  //           'aria-label': AriaLabels.SIGNIN_REGISTER,
-  //           children: 'Sign In',
-  //           onClick: () => {
-  //             openModal(ModalTypes.SIGN_UP_FORM)
-  //             logSignUpIntent()
-  //           }
-  //         },
-  //         message: 'Sign in to sync saved collections across devices.',
-  //         timeout: 5000
-  //       })
-  //     }
-  //   },
-  //   [openModal, setSnackbar, user]
-  // )
+  useEffect(() => {
+    if (!hasSignedIn() && !user) {
+      openSnackbar({
+        buttonProps: {
+          'aria-label': AriaLabels.SIGNIN_REGISTER,
+          children: 'Sign In',
+          onClick: () => {
+            openModal(ModalTypes.SIGN_UP_FORM)
+            logSignUpIntent()
+          }
+        },
+        message: 'Sign in to sync saved collections across devices.',
+        timeout: 5000
+      })
+    }
+  }, [openModal, openSnackbar, user])
 
   return (
     <>

@@ -3,9 +3,9 @@ import { useContext, useEffect } from 'react'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 
 export default function useCloseSnackbar () {
-  const setSnackbar = useContext(SetSnackbarContext)
+  const { dismissSnackbar } = useContext(SetSnackbarContext)
 
   useEffect(() => {
-    setSnackbar()
-  }, [setSnackbar])
+    dismissSnackbar()
+  }, [dismissSnackbar])
 }

@@ -17,7 +17,7 @@ export default function useActionClickHandler (
   trackChange,
   user
 ) {
-  const setSnackbar = useContext(SetSnackbarContext)
+  const { openSnackbar } = useContext(SetSnackbarContext)
   const { openModal } = useContext(ModalContext)
 
   return useCallback(e => {
@@ -42,18 +42,19 @@ export default function useActionClickHandler (
       return (
         canUndo &&
         action === 'unsave' &&
-        setSnackbar({
+        openSnackbar({
           buttonProps: {
             'aria-label': 'Undo Removing Collection',
             children: 'Undo',
             onClick: () => {
+              trackChange(payload)
+
               dispatch({
                 type: 'undo-unsave'
               })
             }
           },
-          message: 'Collection removed from library.',
-          timeout: 4000
+          message: 'Collection removed from library.'
         })
       )
     }
@@ -65,7 +66,7 @@ export default function useActionClickHandler (
           payload
         })
       } else {
-        setSnackbar({
+        openSnackbar({
           buttonProps: {
             'aria-label': 'Retry',
             children: 'Retry',
@@ -80,7 +81,7 @@ export default function useActionClickHandler (
         })
       }
     } else {
-      setSnackbar({
+      openSnackbar({
         buttonProps: {
           'aria-label': AriaLabels.SIGNIN_REGISTER,
           children: 'Sign In',
@@ -89,9 +90,8 @@ export default function useActionClickHandler (
             logSignUpIntent()
           }
         },
-        message: 'Please sign in to continue.',
-        timeout: 4000
+        message: 'Please sign in to continue.'
       })
     }
-  }, [canUndo, dispatch, openModal, setSnackbar, trackChange, user])
+  }, [canUndo, dispatch, openModal, openSnackbar, trackChange, user])
 }
