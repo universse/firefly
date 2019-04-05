@@ -5,6 +5,7 @@ import localforage from 'localforage'
 import { FirebaseContext } from 'contexts/Firebase'
 import { ModalContext } from 'contexts/Modal'
 import { GhostButton, NavLink } from './styled'
+import AriaLabels from 'constants/AriaLabels'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
 import { logSignUpIntent } from 'utils/amplitudeUtils'
@@ -44,7 +45,7 @@ const AuthNav = memo(function () {
       `}
     >
       <GhostButton
-        aria-label='Log In or Register'
+        aria-label={AriaLabels.LOGIN_REGISTER}
         onClick={() => {
           openModal(ModalTypes.SIGN_UP_FORM)
           logSignUpIntent()
@@ -72,7 +73,7 @@ function Navigation () {
         >
           <NavLink to='/my-library'>My Library</NavLink>
         </li>
-        <AuthNav />
+        {/* <AuthNav /> */}
       </ul>
     </nav>
   )

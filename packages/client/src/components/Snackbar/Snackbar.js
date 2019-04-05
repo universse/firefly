@@ -1,25 +1,28 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { css } from '@emotion/core'
 
 import { IconButton } from 'components/common'
-import { SnackbarContext } from 'contexts/SnackbarProvider'
 import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'icons'
 
-export default function Snackbar () {
-  const [snackbar, setSnackbar] = useContext(SnackbarContext)
-
-  const dismissSnackbar = useCallback(() => setSnackbar(), [setSnackbar])
-
-  const {
-    button: { ariaLabel, onClick, label },
-    message
-  } = snackbar || { button: {} }
+export default function Snackbar ({ setSnackbar, snackbar }) {
+  const { buttonProps, message } = snackbar || { buttonProps: {} }
 
   return (
     <Wrapper isOpen={!!snackbar}>
-      <Surface>
-        <div>
+      <Surface
+        onMouseEnter={() =>
+          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: null })
+        }
+        onMouseLeave={() =>
+          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: 4000 })
+        }
+      >
+        <div
+          css={css`
+            margin-right: 0.5rem;
+          `}
+        >
           <Message>{message}</Message>
         </div>
         <div
@@ -33,15 +36,13 @@ export default function Snackbar () {
               margin-right: 0.5rem;
             `}
           >
-            <ActionButton aria-label={ariaLabel} onClick={onClick}>
-              {label}
-            </ActionButton>
+            <ActionButton onActionClick={setSnackbar} {...buttonProps} />
           </div>
           <div>
             <IconButton
               aria-label='Dismiss Message'
               light
-              onClick={dismissSnackbar}
+              onClick={() => setSnackbar()}
             >
               <Cross />
             </IconButton>

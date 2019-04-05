@@ -6,8 +6,8 @@ import useUserData from 'hooks/useUserData'
 
 export const UserDataContext = createContext()
 
-export default function UserData ({ children }) {
-  const [userData, onActionClick] = useUserData()
+export default function UserData ({ children, canUndo }) {
+  const [userData, onActionClick] = useUserData(canUndo)
 
   return (
     <UserDataContext.Provider value={userData}>

@@ -1,21 +1,14 @@
-import { useReducer, useContext, useCallback } from 'react'
+import { useReducer, useContext } from 'react'
 import produce from 'immer'
 
 import { AuthenticationContext } from 'contexts/Authentication'
 import { FirebaseContext } from 'contexts/Firebase'
-import { SnackbarContext } from 'contexts/SnackbarProvider'
+import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
 import useOfflinePersistence from './useOfflinePersistence'
 import useSaveUserData from './useSaveUserData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
 import LocalStorage from 'constants/LocalStorage'
-import PopupTypes from 'constants/PopupTypes'
-import { logClickAction } from 'utils/amplitudeUtils'
-import { hasSignedIn } from 'utils/localStorageUtils'
-
-function getActionKey (action) {
-  return action.startsWith('un') ? action.slice(2) : action
-}
 
 function reducer (_, { type, payload }) {
   return produce(_, draft => {
@@ -33,20 +26,27 @@ function reducer (_, { type, payload }) {
         const { action, id } = payload
 
         if (draft[action][id]) {
+          if (action === 'save') {
+            draft.prevSave = { ...draft['save'] }
+          }
           delete draft[action][id]
         } else {
           draft[action][id] = true
         }
 
         break
+
+      case 'undo-unsave':
+        draft.save = draft.prevSave
+        draft.prevSave = null
+        break
     }
   })
 }
 
-export default function useUserData () {
+export default function useUserData (canUndo) {
   const [userData, dispatch] = useReducer(reducer)
   const user = useContext(AuthenticationContext)
-  const [, setSnackbar] = useContext(SnackbarContext)
   const firebase = useContext(FirebaseContext)
 
   useFetchUserData(dispatch, firebase, user)
@@ -62,34 +62,12 @@ export default function useUserData () {
 
   useSaveUserData(change, firebase, user)
 
-  const onActionClick = useCallback(e => {
-    const id = e.currentTarget.value
-    const action = e.currentTarget.textContent
-
-    const payload = {
-      id,
-      action: getActionKey(action)
-    }
-
-    logClickAction({ id, action })
-
-    if (!action.endsWith('love')) {
-      trackChange(payload)
-      return dispatch({
-        type: 'click',
-        payload
-      })
-    }
-
-    // hasSignedIn() || user
-    //   ? navigator.onLine
-    //     ? dispatch({
-    //       type: 'click',
-    //       payload
-    //     })
-    //     : console.log('offline')
-    //   : console.log('unauthenticated')
-  }, [trackChange])
+  const onActionClick = useActionClickHandler(
+    canUndo,
+    dispatch,
+    trackChange,
+    user
+  )
 
   return [userData, onActionClick]
 }

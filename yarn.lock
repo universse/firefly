@@ -3756,10 +3756,10 @@ autoprefixer@^9.0.0, autoprefixer@^9.4.3:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
-aws-sdk@^2.435.0:
-  version "2.435.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.435.0.tgz#f1f10a9776ad3ac4e658f7d9834aa56fcac93f51"
-  integrity sha512-cXHe3V7Syv2JT/0xMO2xPO9T0Y1LZ5ccXeb7ZB/q54xzP1JIv0d7KIVIAoRx8gGn8VZTAd/6UV/D+r/dKTo9+g==
+aws-sdk@^2.436.0:
+  version "2.436.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.436.0.tgz#8882b823818cdb593cdc5540e6261ed7d7357be3"
+  integrity sha512-ncUefjtddjums7B4j8JGChwArc48is5SKFKxmf3UEixLvRW509SaiC+Di2NfO5YpUnYHGTbpcgCF+DFtxJXChA==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -8559,10 +8559,10 @@ gatsby-cli@^1.1.58:
     yargs "^11.1.0"
     yurnalist "^0.2.1"
 
-gatsby-cli@^2.5.4:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.5.4.tgz#d11a00f61227a6db7965e71ac93e142d73b25587"
-  integrity sha512-tjkE0+H6ZV0hVwH/A4ld3/M2C12Apd5HMgjfI9r5hjSeN0yMEsohnky/mm4uFF8Pt3zfqPrL8XXpg2D9kY16Hg==
+gatsby-cli@^2.5.5:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.5.5.tgz#2cfe893810f00fb69ab91b4b04cb260b5746130c"
+  integrity sha512-wS9PURzzRzSSwUVksAOjgx2i4QzYnkfZDfSEA+l4+Cp9dzCCGWkKPTrFdMoq2YcjuijPxjAM0eTHZZAcLIelGA==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
@@ -8574,7 +8574,7 @@ gatsby-cli@^2.5.4:
     execa "^0.8.0"
     fs-exists-cached "^1.0.0"
     fs-extra "^4.0.1"
-    gatsby-telemetry "^1.0.4"
+    gatsby-telemetry "^1.0.5"
     hosted-git-info "^2.6.0"
     lodash "^4.17.10"
     meant "^1.0.1"
@@ -8734,10 +8734,10 @@ gatsby-plugin-react-axe@^0.2.0:
   dependencies:
     react-axe "^3.0.2"
 
-gatsby-plugin-react-helmet@^3.0.11:
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-3.0.11.tgz#0e8aa39d89b06be613177835e1300590be67b499"
-  integrity sha512-VBCO7qlQMBfFQadpNauvZO1CYKVF5aE52jiNEXMiYNuchJWLBEy3FXN/FHdCGo37KipKlkh0iDXCRLSGY00TqQ==
+gatsby-plugin-react-helmet@^3.0.12:
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-react-helmet/-/gatsby-plugin-react-helmet-3.0.12.tgz#805252b54ea4044d286d2158991429aa4f60aa02"
+  integrity sha512-x1DXKceTuEDePN9HcQymzQ+oBgmT3PKVQLSFbxrOECiC71cQRp03FJK0i/ClAkMJ3IJNLCGJDvi7dKydkc6dvw==
   dependencies:
     "@babel/runtime" "^7.0.0"
 
@@ -8848,10 +8848,10 @@ gatsby-source-graphql@^2.0.15:
     node-fetch "^1.7.3"
     uuid "^3.1.0"
 
-gatsby-telemetry@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.0.4.tgz#309e982919831200400e590b3fcff33735b188fd"
-  integrity sha512-MWICzC8nVlzUOqP0JXDZW0fWey7KSyf/EVqkIhL1MdHNULvCXi8r2keyJfxAbmVL+S/gNb6hnrOJ+LxDpRb4DA==
+gatsby-telemetry@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/gatsby-telemetry/-/gatsby-telemetry-1.0.5.tgz#2f56175657ec9423dacb0fddb4c90efbd325de40"
+  integrity sha512-pMi8XTCXn+wMdUIZxRHlw7mZMCN/IU8VqG3G67fCKm7EHyqrnBK6AEuHiAQKv69kMIYp/h3kBsxcP/FqhFYUmg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
@@ -8879,10 +8879,10 @@ gatsby-transformer-sharp@^2.1.17:
     probe-image-size "^4.0.0"
     sharp "^0.21.3"
 
-gatsby@^2.3.12:
-  version "2.3.12"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.3.12.tgz#22f1eda449723b4afb3c12ca379fa17d9b19e300"
-  integrity sha512-bHqlP0qP8AZt/W6nBE+N9YVgG/BYTlmVt5HgY2uqq5rj3Y9JKRuyUjtGxyxfM4Q5cpKIOfDJ7wBqdTWxjNiSkw==
+gatsby@^2.3.13:
+  version "2.3.13"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.3.13.tgz#c381ba209edff8b9716dbcc3cf63b96588225799"
+  integrity sha512-6P56yCiOcIJxNjZucJihPc6GwrOHTcFdBgIjxt5hniqUojM5IR+wcxSiLrhYUKtIGEl/JgiuINhiHG1S7BbUSg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -8939,11 +8939,11 @@ gatsby@^2.3.12:
     flat "^4.0.0"
     fs-exists-cached "1.0.0"
     fs-extra "^5.0.0"
-    gatsby-cli "^2.5.4"
+    gatsby-cli "^2.5.5"
     gatsby-link "^2.0.16"
     gatsby-plugin-page-creator "^2.0.12"
     gatsby-react-router-scroll "^2.0.7"
-    gatsby-telemetry "^1.0.4"
+    gatsby-telemetry "^1.0.5"
     glob "^7.1.1"
     graphql "^14.1.1"
     graphql-compose "^6.0.3"
@@ -10363,10 +10363,10 @@ immediate@~3.0.5:
   resolved "https://registry.yarnpkg.com/immediate/-/immediate-3.0.6.tgz#9db1dbd0faf8de6fbe0f5dd5e56bb606280de69b"
   integrity sha1-nbHb0Pr43m++D13V5Wu2BigN5ps=
 
-immer@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-2.1.4.tgz#92545e07c2c28b94afe0752364a35f5693b6ffaa"
-  integrity sha512-6UPbG/DIXFSWp10oJJaCPl5/lp5GhGEscDH0QGYKc5EMT5PLZ9+L8hhyc44zRHksI7CQXJp8r6nlDR3n09X6SA==
+immer@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-2.1.5.tgz#0389947455c5a2c7a47f1e6f415c9d1a62a1ebed"
+  integrity sha512-xyjQyTBYIeiz6jd02Hg12jV+9QISwF1crLcwTlzHpWH4e0ryNWj1kacpTwimK3bJV5NKKXw458G2vpqoB/inFA==
 
 immutable-tuple@^0.4.9:
   version "0.4.10"
@@ -12914,10 +12914,10 @@ metascraper-title@^5.1.0:
     "@metascraper/helpers" "^5.1.0"
     lodash "~4.17.11"
 
-metascraper@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/metascraper/-/metascraper-5.1.0.tgz#45fdc5fbec1942632926f3c59a3080881e56ba9c"
-  integrity sha512-jNCijpMrRDOn4gJWOlHMgMY3Cg487kejxg3DuFk3FWEwOTtMVowtxjfbvf9ZwVmDA9RnpcotS57JNXes24MLbg==
+metascraper@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/metascraper/-/metascraper-5.1.1.tgz#6c24c688aec0a548582ff1142a7811fdbf24c5d7"
+  integrity sha512-phPPXEme8a5X0Klg0o2te1q7hXjWtF1Ro35GKtDzP927cjoFjebHKHinrYHXsa5wDdditTqykqzeMrye8CZvEA==
   dependencies:
     "@metascraper/helpers" "^5.1.0"
     cheerio "~1.0.0-rc.2"
@@ -16864,10 +16864,10 @@ serverless-http@^1.9.1:
   resolved "https://registry.yarnpkg.com/serverless-http/-/serverless-http-1.9.1.tgz#16637159972f65bfae99ffa3a037abcb31f702c7"
   integrity sha512-vq6rK/vwAMcUqScc+B6QIaYZ2OhEx4M8ObqWNek8eDJRvxpKsMQllnDywe+AGAMFVUOX9KxfB2a6XzXLTsRGYQ==
 
-serverless-offline@^4.9.3:
-  version "4.9.3"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-4.9.3.tgz#c109695e8875bba78103b187bca507eb51a02dc2"
-  integrity sha512-pkGZyPIrqmAf54NHet1UlvQdsPhRpUPxL17YRf076lQ/l7H3Ma7av2RJpf+uegX7BGwolRkPa7TyO6s5mD72iw==
+serverless-offline@^4.9.4:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-4.9.4.tgz#30809c1544f399e2556d7bd2535d44d9501ff7c4"
+  integrity sha512-UmHajWaInaFDrt+KOM3g9PeZF8nIFH+8d4ZxeVW+Qb+QJ+zeup55s2zYRTPGc9yfnKX33Uy3WJUiPMUdrqGjsg==
   dependencies:
     boom "^7.3.0"
     cryptiles "^4.1.3"

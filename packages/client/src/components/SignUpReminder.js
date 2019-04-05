@@ -4,6 +4,8 @@ import { css } from '@emotion/core'
 import { PrimaryButton } from 'components/common'
 import { ModalContext } from 'contexts/Modal'
 import ModalTypes from 'constants/ModalTypes'
+import AriaLabels from 'constants/AriaLabels'
+
 export default function SignUpReminder () {
   const { openModal } = useContext(ModalContext)
 
@@ -40,7 +42,7 @@ export default function SignUpReminder () {
       </div>
       <div>
         <PrimaryButton
-          aria-label='Log In or Register'
+          aria-label={AriaLabels.LOGIN_REGISTER}
           onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}
         >
           Log In / Register

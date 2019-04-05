@@ -8,7 +8,7 @@ export const media = {
 
 export default {
   colors: {
-    brand100: '#ed5567',
+    brand100: '#f67090',
     brand500: '#e4234f',
     brand900: '#c70e3a',
     danger: '#da4453',

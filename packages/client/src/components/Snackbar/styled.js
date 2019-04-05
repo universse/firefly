@@ -1,12 +1,14 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-export function ActionButton (props) {
+import { mobileNavigationHeightInRem } from 'constants/Styles'
+
+export function ActionButton ({ onActionClick, onClick, ...props }) {
   return (
     <button
       css={theme => css`
         border-radius: 4px;
-        color: ${theme.colors.brand500};
+        color: ${theme.colors.brand100};
         font-size: 1rem;
         font-weight: 600;
         height: 2.25rem;
@@ -17,6 +19,10 @@ export function ActionButton (props) {
           background-color: ${theme.colors.white100};
         }
       `}
+      onClick={() => {
+        onActionClick()
+        onClick()
+      }}
       type='button'
       {...props}
     />
@@ -59,14 +65,19 @@ export function Wrapper ({ isOpen, ...props }) {
   return (
     <div
       aria-live='polite'
-      css={css`
-        bottom: 0;
+      css={theme => css`
+        bottom: ${mobileNavigationHeightInRem};
         display: ${isOpen ? 'flex' : 'none'};
         justify-content: center;
         left: 0;
         margin: 0.5rem auto;
         position: fixed;
         right: 0;
+        z-index: 900;
+
+        ${theme.screens.desktop} {
+          bottom: 0;
+        }
       `}
       role='status'
       {...props}
