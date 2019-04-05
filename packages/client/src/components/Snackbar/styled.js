@@ -43,8 +43,7 @@ export function Message (props) {
   )
 }
 
-// TODO: transition
-export function Surface ({ isOpen, ...props }) {
+export function Surface (props) {
   return (
     <div
       css={theme => css`
@@ -57,27 +56,30 @@ export function Surface ({ isOpen, ...props }) {
         justify-content: space-between;
         max-width: 40rem;
         min-width: 22.5rem;
-        opacity: ${isOpen ? 1 : 0};
         padding: 0 0.5rem 0 1rem;
-        transform: scale(${isOpen ? 1 : 0});
-        transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
       `}
       {...props}
     />
   )
 }
 
-export function Wrapper (props) {
+export function Wrapper ({ isOpen, ...props }) {
   return (
     <div
+      aria-hidden={!isOpen}
       css={theme => css`
         bottom: ${mobileNavigationHeightInRem}rem;
         display: flex;
         justify-content: center;
         left: 0;
         margin: 0.5rem auto;
+        opacity: ${isOpen ? 1 : 0};
         position: fixed;
         right: 0;
+        transform: scale(${isOpen ? 1 : 0});
+        transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out,
+          visibility 0.15s;
+        visibility: ${isOpen ? 'visible' : 'hidden'};
         z-index: 900;
 
         ${theme.screens.desktop} {

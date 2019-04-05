@@ -9,9 +9,8 @@ export default function Snackbar ({ setSnackbar, snackbar }) {
   const { buttonProps, message } = snackbar || { buttonProps: {} }
 
   return (
-    <Wrapper aria-hidden={!snackbar}>
+    <Wrapper isOpen={!!snackbar}>
       <Surface
-        isOpen={!!snackbar}
         onMouseEnter={() =>
           setSnackbar(snackbar => snackbar && { ...snackbar, timeout: null })
         }
