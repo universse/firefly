@@ -36,7 +36,7 @@ const MyLibraryPage = memo(function ({ openModal }) {
   //           }
   //         },
   //         message: 'Sign in to sync saved collections across devices.',
-  //         timeout: 4000
+  //         timeout: 5000
   //       })
   //     }
   //   },

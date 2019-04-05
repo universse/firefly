@@ -12,6 +12,7 @@ import Media from 'contexts/Media'
 import { ModalContext } from 'contexts/Modal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
+import useCloseSnackbar from 'hooks/useCloseSnackbar'
 import {
   headerHeightInRem,
   mobileNavigationHeightInRem
@@ -26,6 +27,8 @@ const IndexLayout = memo(function ({
   openModal
 }) {
   const { pathname, search } = location
+
+  useCloseSnackbar()
 
   const actions = useMemo(
     () => (

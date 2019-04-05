@@ -65,33 +65,33 @@ export default function useActionClickHandler (
           payload
         })
       } else {
-        // setSnackbar({
-        //   buttonProps: {
-        //     'aria-label': 'Retry',
-        //     children: 'Retry',
-        //     onClick: () => {
-        //       dispatch({
-        //         type: 'click',
-        //         payload
-        //       })
-        //     }
-        //   },
-        //   message: 'The Internet connection appears to be offline.'
-        // })
+        setSnackbar({
+          buttonProps: {
+            'aria-label': 'Retry',
+            children: 'Retry',
+            onClick: () => {
+              dispatch({
+                type: 'click',
+                payload
+              })
+            }
+          },
+          message: 'The Internet connection appears to be offline.'
+        })
       }
     } else {
-      // setSnackbar({
-      //   buttonProps: {
-      //     'aria-label': AriaLabels.SIGNIN_REGISTER,
-      //     children: 'Sign In',
-      //     onClick: () => {
-      //       openModal(ModalTypes.SIGN_UP_FORM)
-      //       logSignUpIntent()
-      //     }
-      //   },
-      //   message: 'Please sign in to continue.',
-      //   timeout: 4000
-      // })
+      setSnackbar({
+        buttonProps: {
+          'aria-label': AriaLabels.SIGNIN_REGISTER,
+          children: 'Sign In',
+          onClick: () => {
+            openModal(ModalTypes.SIGN_UP_FORM)
+            logSignUpIntent()
+          }
+        },
+        message: 'Please sign in to continue.',
+        timeout: 4000
+      })
     }
-  }, [canUndo, dispatch, setSnackbar, trackChange, user])
+  }, [canUndo, dispatch, openModal, setSnackbar, trackChange, user])
 }

@@ -15,7 +15,7 @@ export default function Snackbar ({ setSnackbar, snackbar }) {
           setSnackbar(snackbar => snackbar && { ...snackbar, timeout: null })
         }
         onMouseLeave={() =>
-          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: 2000 })
+          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: 3000 })
         }
       >
         <div
