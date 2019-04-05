@@ -229,6 +229,10 @@ iframe,
   width: 1px;
 }
 
+[aria-hidden="true"] {
+  visibility: hidden;
+}
+
 $black100: rgba(0, 0, 0, 0.04);
 $black200: rgba(0, 0, 0, 0.08);
 

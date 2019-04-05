@@ -53,7 +53,7 @@ export default function useUserData (canUndo) {
   const [change, trackChange] = useTrackToggleStateChange()
 
   useOfflinePersistence(
-    change && {
+    userData && {
       [LocalStorage.COMPLETED_ITEMS]: userData.check,
       [LocalStorage.SAVED_COLLECTIONS]: userData.save
     }

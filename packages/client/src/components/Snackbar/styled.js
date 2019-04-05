@@ -32,17 +32,19 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
 export function Message (props) {
   return (
     <span
+      aria-live='polite'
       css={theme => css`
         color: ${theme.colors.white900};
         font-size: 1rem;
       `}
+      role='status'
       {...props}
     />
   )
 }
 
 // TODO: transition
-export function Surface (props) {
+export function Surface ({ isOpen, ...props }) {
   return (
     <div
       css={theme => css`
@@ -55,20 +57,22 @@ export function Surface (props) {
         justify-content: space-between;
         max-width: 40rem;
         min-width: 22.5rem;
+        opacity: ${isOpen ? 1 : 0};
         padding: 0 0.5rem 0 1rem;
+        transform: scale(${isOpen ? 1 : 0});
+        transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
       `}
       {...props}
     />
   )
 }
 
-export function Wrapper ({ isOpen, ...props }) {
+export function Wrapper (props) {
   return (
     <div
-      aria-live='polite'
       css={theme => css`
         bottom: ${mobileNavigationHeightInRem}rem;
-        display: ${isOpen ? 'flex' : 'none'};
+        display: flex;
         justify-content: center;
         left: 0;
         margin: 0.5rem auto;
@@ -80,7 +84,6 @@ export function Wrapper ({ isOpen, ...props }) {
           bottom: 1rem;
         }
       `}
-      role='status'
       {...props}
     />
   )
