@@ -38,7 +38,6 @@ function reducer (_, { type, payload }) {
 
       case 'undo-unsave':
         draft.save = draft.prevSave
-        draft.prevSave = null
         break
     }
   })

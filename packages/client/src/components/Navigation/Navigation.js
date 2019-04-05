@@ -45,13 +45,13 @@ const AuthNav = memo(function () {
       `}
     >
       <GhostButton
-        aria-label={AriaLabels.LOGIN_REGISTER}
+        aria-label={AriaLabels.SIGNIN_REGISTER}
         onClick={() => {
           openModal(ModalTypes.SIGN_UP_FORM)
           logSignUpIntent()
         }}
       >
-        Log In / Register
+        Sign In / Register
       </GhostButton>
     </li>
   )

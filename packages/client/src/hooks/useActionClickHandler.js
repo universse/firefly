@@ -82,16 +82,16 @@ export default function useActionClickHandler (
     } else {
       // setSnackbar({
       //   buttonProps: {
-      //     'aria-label': AriaLabels.LOGIN_REGISTER,
-      //     children: 'Log In',
+      //     'aria-label': AriaLabels.SIGNIN_REGISTER,
+      //     children: 'Sign In',
       //     onClick: () => {
       //       openModal(ModalTypes.SIGN_UP_FORM)
       //       logSignUpIntent()
       //     }
       //   },
-      //   message: 'Please log in to continue.',
+      //   message: 'Please sign in to continue.',
       //   timeout: 4000
       // })
     }
-  }, [dispatch, canUndo, setSnackbar, trackChange, user])
+  }, [canUndo, dispatch, setSnackbar, trackChange, user])
 }

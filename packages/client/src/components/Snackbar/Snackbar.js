@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
 import { IconButton } from 'components/common'
@@ -15,7 +15,7 @@ export default function Snackbar ({ setSnackbar, snackbar }) {
           setSnackbar(snackbar => snackbar && { ...snackbar, timeout: null })
         }
         onMouseLeave={() =>
-          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: 4000 })
+          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: 2000 })
         }
       >
         <div

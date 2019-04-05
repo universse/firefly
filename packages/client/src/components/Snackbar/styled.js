@@ -8,7 +8,7 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
     <button
       css={theme => css`
         border-radius: 4px;
-        color: ${theme.colors.brand100};
+        color: ${theme.colors.brand300};
         font-size: 1rem;
         font-weight: 600;
         height: 2.25rem;
@@ -49,6 +49,7 @@ export function Surface (props) {
         align-items: center;
         background-color: ${theme.colors.gray600};
         border-radius: 4px;
+        box-shadow: ${theme.shadows[2]};
         display: flex;
         height: 3rem;
         justify-content: space-between;
@@ -66,7 +67,7 @@ export function Wrapper ({ isOpen, ...props }) {
     <div
       aria-live='polite'
       css={theme => css`
-        bottom: ${mobileNavigationHeightInRem};
+        bottom: ${mobileNavigationHeightInRem}rem;
         display: ${isOpen ? 'flex' : 'none'};
         justify-content: center;
         left: 0;
@@ -76,7 +77,7 @@ export function Wrapper ({ isOpen, ...props }) {
         z-index: 900;
 
         ${theme.screens.desktop} {
-          bottom: 0;
+          bottom: 1rem;
         }
       `}
       role='status'

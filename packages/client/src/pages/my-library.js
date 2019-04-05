@@ -1,20 +1,48 @@
-import React, { useContext } from 'react'
+import React, { memo, useContext, useEffect } from 'react'
 import { css } from '@emotion/core'
 
 import { Collection } from 'components/Collections'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
+import { AuthenticationContext } from 'contexts/Authentication'
 import { MediaContext } from 'contexts/Media'
+import { ModalContext } from 'contexts/Modal'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
+import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
+import AriaLabels from 'constants/AriaLabels'
+import ModalTypes from 'constants/ModalTypes'
 import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
+import { logSignUpIntent } from 'utils/amplitudeUtils'
+import { hasSignedIn } from 'utils/localStorageUtils'
 
-export default function MyLibraryPage (props) {
+const MyLibraryPage = memo(function ({ openModal }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
   const userData = useContext(UserDataContext)
+  const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
+  const setSnackbar = useContext(SetSnackbarContext)
 
-  // TODO: pop up - sign up reminder
+  // useEffect(
+  //   () => {
+  //     if (!hasSignedIn() && !user) {
+  //       setSnackbar({
+  //         buttonProps: {
+  //           'aria-label': AriaLabels.SIGNIN_REGISTER,
+  //           children: 'Sign In',
+  //           onClick: () => {
+  //             openModal(ModalTypes.SIGN_UP_FORM)
+  //             logSignUpIntent()
+  //           }
+  //         },
+  //         message: 'Sign in to sync saved collections across devices.',
+  //         timeout: 4000
+  //       })
+  //     }
+  //   },
+  //   [openModal, setSnackbar, user]
+  // )
+
   return (
     <>
       <SEO title='My Library' />
@@ -97,4 +125,10 @@ export default function MyLibraryPage (props) {
       </main>
     </>
   )
+})
+
+export default function (props) {
+  const { openModal } = useContext(ModalContext)
+
+  return <MyLibraryPage {...props} openModal={openModal} />
 }

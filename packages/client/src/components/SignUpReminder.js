@@ -37,15 +37,15 @@ export default function SignUpReminder () {
             text-align: center;
           `}
         >
-          Please Log In or Register to Continue
+          Please Sign In or Register to Continue
         </h3>
       </div>
       <div>
         <PrimaryButton
-          aria-label={AriaLabels.LOGIN_REGISTER}
+          aria-label={AriaLabels.SIGNIN_REGISTER}
           onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}
         >
-          Log In / Register
+          Sign In / Register
         </PrimaryButton>
       </div>
     </div>

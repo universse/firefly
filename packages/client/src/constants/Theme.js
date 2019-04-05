@@ -8,7 +8,8 @@ export const media = {
 
 export default {
   colors: {
-    brand100: '#f67090',
+    brand100: '#fce9ed',
+    brand300: '#f67090',
     brand500: '#e4234f',
     brand900: '#c70e3a',
     danger: '#da4453',
@@ -40,7 +41,7 @@ export default {
   shadows: [
     '0 1px 2px rgba(0, 0, 0, 0.05)',
     '0 2px 4px rgba(0, 0, 0, 0.1)',
-    '0 4px 8px rgba(0, 0, 0, 0.2)'
+    '0 4px 8px rgba(0, 0, 0, 0.5)'
   ],
   typography: {}
 }

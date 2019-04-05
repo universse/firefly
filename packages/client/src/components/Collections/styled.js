@@ -25,7 +25,7 @@ export const CollectionTitle = memo(function ({ id, name }) {
           color: ${theme.colors.gray900};
           font-size: 1.125rem;
           font-weight: 600;
-          line-height: 1.5rem;
+          line-height: 1.75rem;
         `}
       >
         {name}

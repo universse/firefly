@@ -35,7 +35,7 @@ export default function CollectionTemplate ({
           <MobileHeader
             actions={
               <>
-                {/* <IconButton
+                <IconButton
                   aria-label={createActionLabel(
                     isSaved ? 'unsave' : 'save',
                     name
@@ -45,7 +45,7 @@ export default function CollectionTemplate ({
                 >
                   <Save filled={isSaved} />
                 </IconButton>
-                <IconButton
+                {/* <IconButton
                   aria-label={createActionLabel(
                     isLoved ? 'unlove' : 'love',
                     name
@@ -106,7 +106,9 @@ export default function CollectionTemplate ({
                 isSaved={isSaved}
               />
             </div>
-            <FABDesktop href='https://docs.google.com/forms/'>
+            <FABDesktop
+              href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
+            >
               <Suggest />
             </FABDesktop>
           </main>
