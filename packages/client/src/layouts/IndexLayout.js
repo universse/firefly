@@ -1,4 +1,4 @@
-import React, { memo, useContext, useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { css } from '@emotion/core'
 
 import CategoryFilter from 'components/CategoryFilter'
@@ -9,7 +9,7 @@ import { MobileNavigation } from 'components/Navigation'
 import SEO from 'components/SEO'
 import { FABDesktop, IconButton, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
-import { ModalContext } from 'contexts/Modal'
+import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
 import useCloseSnackbar from 'hooks/useCloseSnackbar'
@@ -20,12 +20,8 @@ import {
 import ModalTypes from 'constants/ModalTypes'
 import { toTitleCase } from 'common'
 
-const IndexLayout = memo(function ({
-  category,
-  children,
-  location,
-  openModal
-}) {
+export default function IndexLayout ({ category, children, location }) {
+  const { openModal } = useContext(SetModalContext)
   const { pathname, search } = location
 
   useCloseSnackbar()
@@ -56,7 +52,8 @@ const IndexLayout = memo(function ({
       >
         <Header />
         <section id='hero'>
-          <Hero />
+          {/* v2 */}
+          {/* <Hero /> */}
         </section>
         <MobileHeader actions={actions} title='Collections' />
         <main
@@ -111,10 +108,4 @@ const IndexLayout = memo(function ({
       </div>
     </>
   )
-})
-
-export default function (props) {
-  const { openModal } = useContext(ModalContext)
-
-  return <IndexLayout {...props} openModal={openModal} />
 }

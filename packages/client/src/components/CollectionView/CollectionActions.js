@@ -63,7 +63,7 @@ export default function CollectionActions ({
         >
           <Save filled={isSaved} />
         </IconButton>
-        {/* <ShareDropdown name={name} /> */}
+        {/* v3 */}
         {/* <IconButton
           aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
           onClick={onActionClick}
@@ -71,6 +71,7 @@ export default function CollectionActions ({
         >
           <Heart filled={isLoved} />
         </IconButton> */}
+        {/* <ShareDropdown name={name} /> */}
       </ActionBar>
     </div>
   )

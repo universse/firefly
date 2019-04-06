@@ -53,9 +53,9 @@ function Collection ({
                 margin-right: 0.5rem;
               `}
             >
-              <Level level={level} />
+              <Level level={Math.floor(level)} />
             </div>
-            <Difficulty>{DifficultyLevels[level]}</Difficulty>
+            <Difficulty>{DifficultyLevels[Math.floor(level)]}</Difficulty>
           </div>
         </div>
         <div
@@ -119,6 +119,7 @@ function Collection ({
             >
               <Save filled={isSaved} />
             </IconButton>
+            {/* v3 */}
             {/* <IconButton
               aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
               onClick={onActionClick}

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { FirebaseContext } from 'contexts/Firebase'
-import { ModalContext } from 'contexts/ModalProvider'
+import { SetModalContext } from 'contexts/SetModal'
 import { AuthButton } from './styled'
 
 export default function SocialLogin ({
@@ -10,7 +10,7 @@ export default function SocialLogin ({
   setSignUpState
 }) {
   const firebase = useContext(FirebaseContext)
-  const { closeModal } = useContext(ModalContext)
+  const { closeModal } = useContext(SetModalContext)
 
   const handleError = error => {
     switch (error.code) {

@@ -58,7 +58,6 @@ export default function CollectionPage ({ location }) {
   }, [collection, firebase, id, normalizedCollections])
 
   const isSaved = save && !!save[id]
-
   const isLoved = love && !!love[id]
 
   return (
@@ -70,27 +69,28 @@ export default function CollectionPage ({ location }) {
             actions={
               collection && (
                 <>
-                  {/* <IconButton
+                  <IconButton
                     aria-label={createActionLabel(
                       isSaved ? 'unsave' : 'save',
-                      name
+                      collection.name
                     )}
                     onClick={onActionClick}
                     value={id}
                   >
                     <Save filled={isSaved} />
                   </IconButton>
-                  <IconButton
+                  {/* v3 */}
+                  {/* <IconButton
                     aria-label={createActionLabel(
                       isLoved ? 'unlove' : 'love',
-                      name
+                      collection.name
                     )}
                     onClick={onActionClick}
                     value={id}
                   >
                     <Heart filled={isLoved} />
-                  </IconButton>
-                  <IconButton
+                  </IconButton> */}
+                  {/* <IconButton
                     aria-label='Share'
                     onClick={() => copyToClipboard(href)}
                   >

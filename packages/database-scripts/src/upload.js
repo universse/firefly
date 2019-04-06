@@ -58,7 +58,7 @@ processed.collections.forEach(
     batch.set(collectionDoc, {
       n: name,
       c: Categories.indexOf(category),
-      l: DifficultyLevels.indexOf(level),
+      l: DifficultyLevels.indexOf(Math.floor(level)),
       us,
       t: tags,
       s: suggestions

@@ -2,9 +2,9 @@ import React, { memo, useContext } from 'react'
 import { css } from '@emotion/core'
 import localforage from 'localforage'
 
-import { FirebaseContext } from 'contexts/Firebase'
-import { ModalContext } from 'contexts/Modal'
 import { GhostButton, NavLink } from './styled'
+import { FirebaseContext } from 'contexts/Firebase'
+import { SetModalContext } from 'contexts/SetModal'
 import AriaLabels from 'constants/AriaLabels'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
@@ -12,7 +12,7 @@ import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 const AuthNav = memo(function () {
-  const { openModal } = useContext(ModalContext)
+  const { openModal } = useContext(SetModalContext)
   const firebase = useContext(FirebaseContext)
 
   return hasSignedIn() ? (
@@ -73,6 +73,7 @@ function Navigation () {
         >
           <NavLink to='/my-library'>My Library</NavLink>
         </li>
+        {/* v2 */}
         {/* <AuthNav /> */}
       </ul>
     </nav>

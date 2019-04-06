@@ -74,7 +74,7 @@ export function Wrapper ({ isOpen, ...props }) {
         opacity: ${isOpen ? 1 : 0};
         position: fixed;
         right: 0;
-        transform: scale(${isOpen ? 1 : 0});
+        transform: scale(${isOpen ? 1 : 0.8});
         transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out,
           visibility 0.15s;
         visibility: ${isOpen ? 'visible' : 'hidden'};

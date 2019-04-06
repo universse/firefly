@@ -45,6 +45,7 @@ export default function CollectionTemplate ({
                 >
                   <Save filled={isSaved} />
                 </IconButton>
+                {/* v3 */}
                 {/* <IconButton
                   aria-label={createActionLabel(
                     isLoved ? 'unlove' : 'love',
@@ -54,8 +55,8 @@ export default function CollectionTemplate ({
                   value={id}
                 >
                   <Heart filled={isLoved} />
-                </IconButton>
-                <IconButton
+                </IconButton> */}
+                {/* <IconButton
                   aria-label='Share'
                   onClick={() => copyToClipboard(href)}
                 >

@@ -42,9 +42,9 @@ function CollectionDetails ({ category, level, name, tags }) {
               margin-right: 0.5rem;
             `}
           >
-            <Level level={level} />
+            <Level level={Math.floor(level)} />
           </div>
-          <Difficulty>{DifficultyLevels[level]}</Difficulty>
+          <Difficulty>{DifficultyLevels[Math.floor(level)]}</Difficulty>
         </div>
       </div>
       <div>

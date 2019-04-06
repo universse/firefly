@@ -13,7 +13,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(initialIsLoading)
   const [isTyping, setIsTyping] = useState(false)
-  const debouncedSearchInput = useDebouncedValue(searchInput, 300)
+  const debouncedSearchInput = useDebouncedValue(searchInput, 350)
 
   const handleChange = useCallback(({ node: { id, name } }) => {
     if (name) {

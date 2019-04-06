@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 
-import { ModalContext } from 'contexts/Modal'
+import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
@@ -17,8 +17,8 @@ export default function useActionClickHandler (
   trackChange,
   user
 ) {
+  const { openModal } = useContext(SetModalContext)
   const { openSnackbar } = useContext(SetSnackbarContext)
-  const { openModal } = useContext(ModalContext)
 
   return useCallback(e => {
     const id = e.currentTarget.value

@@ -2,11 +2,13 @@ import React, { useContext } from 'react'
 import ReactModal from 'react-modal'
 
 import { ModalContext } from 'contexts/Modal'
+import { SetModalContext } from 'contexts/SetModal'
 
 ReactModal.setAppElement('#___gatsby')
 
 export default function Modal ({ children, className, contentLabel, type }) {
-  const { activeModalType, closeModal } = useContext(ModalContext)
+  const activeModalType = useContext(ModalContext)
+  const { closeModal } = useContext(SetModalContext)
 
   const isOpen = activeModalType === type
 

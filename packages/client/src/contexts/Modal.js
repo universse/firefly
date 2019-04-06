@@ -1,6 +1,8 @@
-import React, { createContext, useState, useCallback, useMemo } from 'react'
+import React, { createContext, useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
+
+import { SetModalContext } from './SetModal'
 
 ReactModal.setAppElement('#___gatsby')
 
@@ -11,26 +13,27 @@ const handleWheel = e => e.preventDefault()
 export default function Modal ({ children }) {
   const [activeModalType, setActiveModalType] = useState()
 
-  const closeModal = useCallback(() => {
-    window.removeEventListener('wheel', handleWheel)
-    setActiveModalType(null)
-  }, [])
-
-  const openModal = useCallback(type => {
-    window.addEventListener('wheel', handleWheel)
-    setActiveModalType(type)
-  }, [])
-
   const value = useMemo(
     () => ({
-      activeModalType,
-      closeModal,
-      openModal
+      closeModal () {
+        window.removeEventListener('wheel', handleWheel)
+        setActiveModalType(null)
+      },
+      openModal (type) {
+        window.addEventListener('wheel', handleWheel)
+        setActiveModalType(type)
+      }
     }),
-    [activeModalType, closeModal, openModal]
+    []
   )
 
-  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+  return (
+    <ModalContext.Provider value={activeModalType}>
+      <SetModalContext.Provider value={value}>
+        {children}
+      </SetModalContext.Provider>
+    </ModalContext.Provider>
+  )
 }
 
 Modal.propTypes = {

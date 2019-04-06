@@ -8,6 +8,7 @@ import { IconButton } from 'components/common'
 // import SocialLogin from './SocialLogin'
 import { Cross } from 'icons'
 import { ModalContext } from 'contexts/Modal'
+import { SetModalContext } from 'contexts/SetModal'
 import ModalTypes from 'constants/ModalTypes'
 
 function SignUpForm () {
@@ -27,7 +28,8 @@ function SignUpForm () {
     socialLogin: ''
   })
 
-  const { activeModalType, closeModal } = useContext(ModalContext)
+  const activeModalType = useContext(ModalContext)
+  const { closeModal } = useContext(SetModalContext)
 
   const isOpen = useRef()
 

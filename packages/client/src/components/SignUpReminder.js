@@ -2,12 +2,12 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { PrimaryButton } from 'components/common'
-import { ModalContext } from 'contexts/Modal'
+import { SetModalContext } from 'contexts/SetModal'
 import ModalTypes from 'constants/ModalTypes'
 import AriaLabels from 'constants/AriaLabels'
 
 export default function SignUpReminder () {
-  const { openModal } = useContext(ModalContext)
+  const { openModal } = useContext(SetModalContext)
 
   return (
     <div
