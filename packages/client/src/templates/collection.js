@@ -7,14 +7,13 @@ import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { FABDesktop, IconButton } from 'components/common'
-import { Back, Heart, Save, Share, Suggest } from 'icons'
+import { Back, Heart, Save, Suggest } from 'icons'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import AriaLabels from 'constants/AriaLabels'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-import copyToClipboard from 'utils/copyToClipboard'
 
 export default function CollectionTemplate ({
   data: { collections },
@@ -142,7 +141,6 @@ export const query = graphql`
         url
       }
       tags
-      suggestions
     }
   }
 `

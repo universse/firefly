@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { PrimaryButton } from 'components/common'
@@ -31,7 +32,6 @@ export default function EmailLogin ({ setSignUpState }) {
       .catch(() => setHasError(true))
   }
 
-  // spinner icon to button
   return (
     <form onSubmit={handleSubmit}>
       <Input
@@ -62,4 +62,8 @@ export default function EmailLogin ({ setSignUpState }) {
       </div>
     </form>
   )
+}
+
+EmailLogin.propTypes = {
+  setSignUpState: PropTypes.func.isRequired
 }

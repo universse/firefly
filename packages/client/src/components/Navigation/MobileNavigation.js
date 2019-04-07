@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { MobileNavLink } from './styled'
@@ -81,4 +82,8 @@ export default function MobileNavigation ({ location: { pathname } }) {
       </ul>
     </nav>
   )
+}
+
+MobileNavigation.propTypes = {
+  location: PropTypes.object.isRequired
 }

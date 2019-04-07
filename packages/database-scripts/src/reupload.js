@@ -1,5 +1,5 @@
 const admin = require('firebase-admin')
-const { Categories, DifficultyLevels, ItemTypes } = require('common')
+const { Categories, ItemTypes } = require('common')
 
 require('./config')
 const { writeBatchesToDB } = require('./utils')
@@ -16,7 +16,7 @@ const firestore = admin.firestore()
 const collectionBatches = []
 
 Object.values(final.collections).forEach(
-  ({ id, name, category, level, tags, suggestions, urlIds }, i) => {
+  ({ id, name, category, level, tags, urlIds }, i) => {
     const batchNo = Math.floor(i / 15)
 
     if (!collectionBatches[batchNo]) {
@@ -30,10 +30,9 @@ Object.values(final.collections).forEach(
     batch.set(collectionDoc, {
       n: name,
       c: Categories.indexOf(category),
-      l: DifficultyLevels.indexOf(Math.floor(level)),
+      l: level,
       us: urlIds,
-      t: tags,
-      s: suggestions
+      t: tags
     })
   }
 )

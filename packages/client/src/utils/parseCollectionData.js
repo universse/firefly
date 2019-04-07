@@ -5,7 +5,6 @@ const parseCollectionData = ({ c, l, n, s, t, us }) => ({
   level: l,
   name: n,
   itemCount: us.length,
-  suggestions: s,
   tags: t,
   urls: us.map(({ id, ti, ty, u }) => ({
     id,

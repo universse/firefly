@@ -1,4 +1,5 @@
 import React, { memo, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
 import { Location } from '@reach/router'

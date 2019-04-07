@@ -67,7 +67,6 @@ module.exports = {
               level: l,
               name: n,
               itemCount: us.length,
-              suggestions: s,
               tags: t,
               urls___NODE: us.map(id => id)
             })

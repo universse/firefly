@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { mobileNavigationHeightInRem } from 'constants/Styles'
@@ -27,6 +28,11 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
       {...props}
     />
   )
+}
+
+ActionButton.propTypes = {
+  onActionClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func
 }
 
 export function Message (props) {
@@ -87,4 +93,8 @@ export function Wrapper ({ isOpen, ...props }) {
       {...props}
     />
   )
+}
+
+Wrapper.propTypes = {
+  isOpen: PropTypes.bool.isRequired
 }

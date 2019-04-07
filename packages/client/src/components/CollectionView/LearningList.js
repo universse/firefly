@@ -31,6 +31,6 @@ function LearningList ({ check, urls }) {
 export default memo(LearningList)
 
 LearningList.propTypes = {
-  check: PropTypes.objectOf(PropTypes.bool.isRequired).isRequired,
+  check: PropTypes.objectOf(PropTypes.bool).isRequired,
   urls: UrlsType
 }

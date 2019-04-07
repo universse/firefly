@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { UserDataContext } from 'contexts/UserData'
 
 import Collection from './Collection'
+import { CollectionsType } from 'constants/Types'
 
 export default function Item ({ data, index, style }) {
   const collection = data[index].node
@@ -16,4 +18,10 @@ export default function Item ({ data, index, style }) {
       />
     </li>
   ) : null
+}
+
+Item.propTypes = {
+  data: CollectionsType.isRequired,
+  index: PropTypes.number.isRequired,
+  style: PropTypes.object.isRequired
 }

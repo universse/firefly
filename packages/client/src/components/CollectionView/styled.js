@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { OutboundLink } from 'gatsby-plugin-amplitude-analytics'
 
@@ -69,4 +70,9 @@ export function LinkTitle ({ href, title }) {
       </h2>
     </OutboundLink>
   )
+}
+
+LinkTitle.propTypes = {
+  href: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 }

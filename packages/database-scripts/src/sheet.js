@@ -45,7 +45,6 @@ const processed = { collections: [] }
         category: row.category,
         level: row.level,
         tags: row.tags.split(';'),
-        suggestions: [''],
         urls
       })
     })

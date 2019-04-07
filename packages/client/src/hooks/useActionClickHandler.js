@@ -34,30 +34,30 @@ export default function useActionClickHandler (
     if (!action.endsWith('love')) {
       trackChange(payload)
 
-      return dispatch({
+      dispatch({
         type: 'click',
         payload
       })
 
       // v2
-      // return (
-      //   canUndo &&
-      //   action === 'unsave' &&
-      //   openSnackbar({
-      //     buttonProps: {
-      //       'aria-label': 'Undo Removing Collection',
-      //       children: 'Undo',
-      //       onClick: () => {
-      //         trackChange(payload)
+      return (
+        canUndo &&
+        action === 'unsave' &&
+        openSnackbar({
+          buttonProps: {
+            'aria-label': 'Undo Removing Collection',
+            children: 'Undo',
+            onClick: () => {
+              trackChange(payload)
 
-      //         dispatch({
-      //           type: 'undo-unsave'
-      //         })
-      //       }
-      //     },
-      //     message: 'Collection removed from library.'
-      //   })
-      // )
+              dispatch({
+                type: 'undo-unsave'
+              })
+            }
+          },
+          message: 'Collection removed from library.'
+        })
+      )
     }
 
     if (hasSignedIn() || user) {
@@ -94,5 +94,5 @@ export default function useActionClickHandler (
         message: 'Please sign in to continue.'
       })
     }
-  }, [dispatch, openModal, openSnackbar, trackChange, user])
+  }, [canUndo, dispatch, openModal, openSnackbar, trackChange, user])
 }

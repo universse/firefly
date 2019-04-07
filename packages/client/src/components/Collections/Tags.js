@@ -1,8 +1,10 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { Tag } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
+import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
 import withLocation from 'utils/withLocation'
 
@@ -45,3 +47,8 @@ function Tags ({ location: { pathname }, tags }) {
 }
 
 export default withLocation(Tags)
+
+Tags.propTypes = {
+  location: PropTypes.object.isRequired,
+  tags: TagsType
+}

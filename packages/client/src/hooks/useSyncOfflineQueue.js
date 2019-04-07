@@ -5,6 +5,7 @@ import { FirebaseContext } from 'contexts/Firebase'
 import useInterval from './useInterval'
 import LocalStorage from 'constants/LocalStorage'
 
+// v2
 export default function useSyncOfflineQueue () {
   const firebase = useContext(FirebaseContext)
   const [shouldSync, setShouldSync] = useState(!navigator.onLine)

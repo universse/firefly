@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { URLUtilsContext } from 'contexts/URLUtils'
@@ -75,4 +76,9 @@ export default function MobileTagFilter ({ aggregatedTags, tags }) {
       </ul>
     </>
   )
+}
+
+MobileTagFilter.propTypes = {
+  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired
 }

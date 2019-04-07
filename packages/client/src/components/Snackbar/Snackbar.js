@@ -59,7 +59,11 @@ Snackbar.propTypes = {
   setSnackbar: PropTypes.func.isRequired,
   snackbar: PropTypes.shape({
     isOpen: PropTypes.bool.isRequired,
-    buttonProps: PropTypes.object,
+    buttonProps: PropTypes.exact({
+      'aria-label': PropTypes.string.isRequired,
+      children: PropTypes.node.isRequired,
+      onClick: PropTypes.func.isRequired
+    }),
     message: PropTypes.string
   }).isRequired
 }
