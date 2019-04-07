@@ -7,7 +7,10 @@ import { MobileNavigation } from 'components/Navigation'
 import Media from 'contexts/Media'
 import useCloseSnackbar from 'hooks/useCloseSnackbar'
 import { headerHeightInRem } from 'constants/Styles'
-import { shouldNotHaveMobileNavigation } from 'utils/pathnameUtils'
+import {
+  getNormalizedPathname,
+  shouldNotHaveMobileNavigation
+} from 'utils/pathnameUtils'
 
 export default function CommonLayout ({ children, location }) {
   useCloseSnackbar()
@@ -21,7 +24,7 @@ export default function CommonLayout ({ children, location }) {
           }
         `}
       >
-        {location.pathname !== '/search' && <Header />}
+        {getNormalizedPathname(location.pathname) !== '/search' && <Header />}
         {children}
         {!shouldNotHaveMobileNavigation(location.pathname) && (
           <MobileNavigation location={location} />

@@ -30,6 +30,10 @@ export function ActionBar ({ children }) {
   )
 }
 
+ActionBar.propTypes = {
+  children: PropTypes.node.isRequired
+}
+
 export const Category = memo(function (props) {
   return (
     <Link
@@ -184,6 +188,15 @@ export function PrimaryButton ({ large, width, ...props }) {
   )
 }
 
+PrimaryButton.defaultProps = {
+  large: false
+}
+
+PrimaryButton.propTypes = {
+  large: PropTypes.bool.isRequired,
+  width: PropTypes.string
+}
+
 export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
   return (
     <div
@@ -209,6 +222,11 @@ export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
     </div>
   )
 })
+
+ProgressBar.propTypes = {
+  percentage: PropTypes.number.isRequired,
+  width: PropTypes.string
+}
 
 export function Result ({ as: Tag, ...props }) {
   return (
@@ -237,6 +255,10 @@ export function Result ({ as: Tag, ...props }) {
 
 Result.defaultProps = {
   as: Link
+}
+
+Result.propTypes = {
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]).isRequired
 }
 
 export function Sidebar (props) {
@@ -286,6 +308,14 @@ export function Tag ({ small, ...props }) {
       {...props}
     />
   )
+}
+
+Tag.defaultProps = {
+  small: false
+}
+
+Tag.propTypes = {
+  small: PropTypes.bool.isRequired
 }
 
 export function Title (props) {

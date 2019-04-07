@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
 
@@ -138,4 +139,16 @@ SearchBar.defaultProps = {
   Item: DefaultItem,
   ResultBox: DefaultResultBox,
   Root: DefaultRoot
+}
+
+SearchBar.propTypes = {
+  controlledProps: PropTypes.object.isRequired,
+  initialIsLoading: PropTypes.bool.isRequired,
+  initialSearchInput: PropTypes.string.isRequired,
+  Input: PropTypes.elementType.isRequired,
+  Item: PropTypes.elementType.isRequired,
+  Result: PropTypes.elementType.isRequired,
+  ResultBox: PropTypes.elementType.isRequired,
+  resultCount: PropTypes.number.isRequired,
+  Root: PropTypes.elementType.isRequired
 }

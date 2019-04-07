@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 
+export const RefType = PropTypes.shape({ current: PropTypes.object }).isRequired
 export const TagsType = PropTypes.arrayOf(PropTypes.string).isRequired
 
 export const CollectionType = PropTypes.exact({

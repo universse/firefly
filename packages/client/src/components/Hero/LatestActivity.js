@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
@@ -77,4 +78,12 @@ export default function LatestActivity ({
       </div>
     </>
   )
+}
+
+LatestActivity.propTypes = {
+  latestActivity: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    percentage: PropTypes.number.isRequired
+  })
 }

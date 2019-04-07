@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
@@ -6,6 +7,7 @@ import Tags from 'components/Collections/Tags'
 import { CollectionTitle } from './styled'
 import { Category, Difficulty } from 'components/common'
 import { Level } from 'icons'
+import { TagsType } from 'constants/Types'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 function CollectionDetails ({ category, level, name, tags }) {
@@ -62,3 +64,10 @@ function CollectionDetails ({ category, level, name, tags }) {
 }
 
 export default memo(CollectionDetails)
+
+CollectionDetails.propTypes = {
+  category: PropTypes.string.isRequired,
+  level: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  tags: TagsType
+}

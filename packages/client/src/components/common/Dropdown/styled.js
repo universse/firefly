@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 export function DefaultRoot ({ innerRef, ...props }) {
@@ -12,4 +13,8 @@ export function DefaultRoot ({ innerRef, ...props }) {
       {...props}
     />
   )
+}
+
+DefaultRoot.propTypes = {
+  innerRef: PropTypes.func.isRequired
 }

@@ -92,5 +92,14 @@ ExposedDropdown.defaultProps = {
 }
 
 ExposedDropdown.propTypes = {
-  id: PropTypes.string.isRequired
+  handleChange: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  initialValue: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
+  label: PropTypes.string.isRequired,
+  OptionButton: PropTypes.elementType.isRequired,
+  OptionList: PropTypes.elementType.isRequired,
+  Root: PropTypes.elementType.isRequired,
+  ToggleButton: PropTypes.elementType.isRequired,
+  TogglerLabel: PropTypes.elementType.isRequired
 }

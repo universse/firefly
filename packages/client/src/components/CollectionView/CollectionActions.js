@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 // import ShareDropdown from 'components/ShareDropdown'
@@ -75,4 +76,13 @@ export default function CollectionActions ({
       </ActionBar>
     </div>
   )
+}
+
+CollectionActions.propTypes = {
+  completedCount: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  isLoved: PropTypes.bool.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  itemCount: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
 }

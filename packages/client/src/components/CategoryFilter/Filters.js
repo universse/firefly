@@ -6,6 +6,7 @@ import { Location } from '@reach/router'
 
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { Category } from './styled'
+import { RefType } from 'constants/Types'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
@@ -100,4 +101,11 @@ export default function (props) {
       )}
     </Location>
   )
+}
+
+Filters.propTypes = {
+  handleScroll: PropTypes.func.isRequired,
+  onCategoryFilterClick: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
+  slider: RefType
 }

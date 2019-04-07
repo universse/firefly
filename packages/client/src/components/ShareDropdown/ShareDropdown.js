@@ -56,5 +56,6 @@ export default withLocation(ShareDropdown)
 
 ShareDropdown.propTypes = {
   id: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired
 }

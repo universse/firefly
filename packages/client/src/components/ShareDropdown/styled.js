@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 export const OptionButton = memo(function ({
@@ -36,6 +37,11 @@ export const OptionButton = memo(function ({
   )
 })
 
+OptionButton.propTypes = {
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]).isRequired,
+  isHighlighted: PropTypes.bool.isRequired
+}
+
 export function OptionList (props) {
   return (
     <ul
@@ -63,4 +69,8 @@ export function Root ({ innerRef, ...props }) {
       {...props}
     />
   )
+}
+
+Root.propTypes = {
+  innerRef: PropTypes.func.isRequired
 }

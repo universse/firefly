@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
@@ -40,6 +41,14 @@ export function HeaderWrapper ({ shadow, ...props }) {
   )
 }
 
+HeaderWrapper.defaultProps = {
+  shadow: false
+}
+
+HeaderWrapper.propTypes = {
+  shadow: PropTypes.bool.isRequired
+}
+
 export function Input (props) {
   return (
     <input
@@ -75,6 +84,10 @@ export function Item ({ isHighlighted, ...props }) {
   )
 }
 
+Item.propTypes = {
+  isHighlighted: PropTypes.bool.isRequired
+}
+
 export function Result ({ as: Tag, ...props }) {
   return (
     <Tag
@@ -93,6 +106,10 @@ export function Result ({ as: Tag, ...props }) {
 
 Result.defaultProps = {
   as: Link
+}
+
+Result.propTypes = {
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]).isRequired
 }
 
 export function ResultBox (props) {
@@ -125,4 +142,8 @@ export function Root ({ innerRef, ...props }) {
       {...props}
     />
   )
+}
+
+Root.propTypes = {
+  innerRef: PropTypes.func.isRequired
 }

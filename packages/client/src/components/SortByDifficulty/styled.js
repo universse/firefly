@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { ChevronDown } from 'icons'
@@ -40,7 +41,7 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
         background-color: ${isHighlighted
           ? theme.colors.gray300
           : 'transparent'};
-        color: ${isSelected ? theme.colors.gray800 : theme.colors.gray700};
+        color: ${isSelected ? theme.colors.gray900 : theme.colors.gray800};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
         height: 2.5rem;
@@ -54,6 +55,11 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
       {...props}
     />
   )
+}
+
+OptionButton.propTypes = {
+  isHighlighted: PropTypes.bool.isRequired,
+  isSelected: PropTypes.bool.isRequired
 }
 
 export function SortOption (props) {
@@ -99,6 +105,10 @@ export function ToggleButton ({ children, ...props }) {
       </div>
     </button>
   )
+}
+
+ToggleButton.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 export function TogglerLabel (props) {

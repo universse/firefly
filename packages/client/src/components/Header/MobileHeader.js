@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { ActionBar } from 'components/common'
@@ -51,3 +52,14 @@ function MobileHeader ({ actions, navIcon, shadow, title }) {
 }
 
 export default memo(MobileHeader)
+
+MobileHeader.defaultProps = {
+  shadow: false
+}
+
+MobileHeader.propTypes = {
+  shadow: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  actions: PropTypes.element,
+  navIcon: PropTypes.element
+}

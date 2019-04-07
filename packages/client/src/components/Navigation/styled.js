@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { ThemeContext, css } from '@emotion/core'
 
@@ -60,6 +61,12 @@ export function MobileNavLink ({ isActive, label, Icon, ...props }) {
       </span>
     </Link>
   )
+}
+
+MobileNavLink.propTypes = {
+  Icon: PropTypes.elementType.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired
 }
 
 export function NavLink (props) {
