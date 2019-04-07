@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function ChevronDown ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function ChevronDown ({ color }) {
 
 ChevronDown.defaultProps = {
   color: 'currentColor'
+}
+
+ChevronDown.propTypes = {
+  color: PropTypes.string.isRequired
 }

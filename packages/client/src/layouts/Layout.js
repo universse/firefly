@@ -64,5 +64,9 @@ export default function Layout ({
 }
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  location: PropTypes.object.isRequired,
+  pageContext: PropTypes.shape({
+    category: PropTypes.string
+  }).isRequired
 }

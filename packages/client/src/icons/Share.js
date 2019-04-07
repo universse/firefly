@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Share ({ color }) {
   return (
@@ -22,4 +23,8 @@ export function Share ({ color }) {
 
 Share.defaultProps = {
   color: 'currentColor'
+}
+
+Share.propTypes = {
+  color: PropTypes.string.isRequired
 }

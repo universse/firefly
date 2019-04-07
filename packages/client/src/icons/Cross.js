@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Cross ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Cross ({ color }) {
 
 Cross.defaultProps = {
   color: 'currentColor'
+}
+
+Cross.propTypes = {
+  color: PropTypes.string.isRequired
 }

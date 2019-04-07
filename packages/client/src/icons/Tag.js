@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Tag ({ color, small }) {
   return (
@@ -18,5 +19,11 @@ export function Tag ({ color, small }) {
 }
 
 Tag.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: true
+}
+
+Tag.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

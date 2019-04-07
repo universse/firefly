@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 export function ClearFilterButton (props) {
@@ -41,6 +42,10 @@ export function Count ({ isActive, ...props }) {
   )
 }
 
+Count.propTypes = {
+  isActive: PropTypes.bool.isRequired
+}
+
 export function MobileTag ({ isActive, ...props }) {
   return (
     // eslint-disable-next-line
@@ -62,6 +67,10 @@ export function MobileTag ({ isActive, ...props }) {
   )
 }
 
+MobileTag.propTypes = {
+  isActive: PropTypes.bool.isRequired
+}
+
 export function Tag ({ isActive, ...props }) {
   return (
     // eslint-disable-next-line
@@ -80,4 +89,8 @@ export function Tag ({ isActive, ...props }) {
       {...props}
     />
   )
+}
+
+Tag.propTypes = {
+  isActive: PropTypes.bool.isRequired
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Search ({ color }) {
   return (
@@ -19,4 +20,8 @@ export function Search ({ color }) {
 
 Search.defaultProps = {
   color: 'currentColor'
+}
+
+Search.propTypes = {
+  color: PropTypes.string.isRequired
 }

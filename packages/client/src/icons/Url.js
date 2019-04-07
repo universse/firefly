@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Url ({ color, small }) {
   return (
@@ -18,5 +19,11 @@ export function Url ({ color, small }) {
 }
 
 Url.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: false
+}
+
+Url.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

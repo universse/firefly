@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Move ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Move ({ color }) {
 
 Move.defaultProps = {
   color: 'currentColor'
+}
+
+Move.propTypes = {
+  color: PropTypes.string.isRequired
 }

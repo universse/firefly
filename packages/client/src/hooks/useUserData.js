@@ -39,6 +39,9 @@ function reducer (_, { type, payload }) {
       case 'undo-unsave':
         draft.save = draft.prevSave
         break
+
+      default:
+        throw new Error('Unknow action type.')
     }
   })
 }

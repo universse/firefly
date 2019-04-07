@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Book ({ color, small }) {
   return (
@@ -18,5 +19,11 @@ export function Book ({ color, small }) {
 }
 
 Book.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: true
+}
+
+Book.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

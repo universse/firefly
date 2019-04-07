@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Library ({ color }) {
   return (
@@ -23,4 +24,8 @@ export function Library ({ color }) {
 
 Library.defaultProps = {
   color: 'currentColor'
+}
+
+Library.propTypes = {
+  color: PropTypes.string.isRequired
 }

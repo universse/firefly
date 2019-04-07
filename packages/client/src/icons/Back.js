@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Back ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Back ({ color }) {
 
 Back.defaultProps = {
   color: 'currentColor'
+}
+
+Back.propTypes = {
+  color: PropTypes.string.isRequired
 }

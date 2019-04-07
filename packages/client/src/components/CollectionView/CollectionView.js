@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import CollectionDetails from './CollectionDetails'
@@ -7,6 +8,7 @@ import LearningList from './LearningList'
 import { ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
+import { CollectionViewType } from 'constants/Types'
 
 // TODO:
 // suggestion component
@@ -137,4 +139,11 @@ export default function CollectionView ({
       )}
     </>
   )
+}
+
+CollectionView.propTypes = {
+  check: PropTypes.objectOf(PropTypes.bool.isRequired).isRequired,
+  isLoved: PropTypes.bool.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  collection: CollectionViewType
 }

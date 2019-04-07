@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Filter ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Filter ({ color }) {
 
 Filter.defaultProps = {
   color: 'currentColor'
+}
+
+Filter.propTypes = {
+  color: PropTypes.string.isRequired
 }

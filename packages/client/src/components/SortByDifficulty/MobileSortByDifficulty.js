@@ -1,4 +1,5 @@
 import React, { useCallback, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { Label, SortOption } from './styled'
@@ -62,4 +63,8 @@ export default function MobileSortByDifficulty ({ sort }) {
       </div>
     </div>
   )
+}
+
+MobileSortByDifficulty.propTypes = {
+  sort: PropTypes.string.isRequired
 }

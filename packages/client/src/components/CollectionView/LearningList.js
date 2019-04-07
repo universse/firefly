@@ -1,7 +1,9 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import LearningItem from './LearningItem'
+import { UrlsType } from 'constants/Types'
 
 function LearningList ({ check, urls }) {
   return (
@@ -27,3 +29,8 @@ function LearningList ({ check, urls }) {
 }
 
 export default memo(LearningList)
+
+LearningList.propTypes = {
+  check: PropTypes.objectOf(PropTypes.bool.isRequired).isRequired,
+  urls: UrlsType
+}

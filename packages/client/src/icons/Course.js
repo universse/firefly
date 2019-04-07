@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Course ({ color, small }) {
   return (
@@ -18,5 +19,11 @@ export function Course ({ color, small }) {
 }
 
 Course.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: true
+}
+
+Course.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

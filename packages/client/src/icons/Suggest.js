@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Suggest ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Suggest ({ color }) {
 
 Suggest.defaultProps = {
   color: 'currentColor'
+}
+
+Suggest.propTypes = {
+  color: PropTypes.string.isRequired
 }

@@ -1,4 +1,5 @@
 import React, { memo, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
@@ -8,6 +9,7 @@ import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { URLUtilsContext } from 'contexts/URLUtils'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
+import { CollectionType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
@@ -135,3 +137,9 @@ function Collection ({
 }
 
 export default memo(Collection)
+
+Collection.propTypes = {
+  isLoved: PropTypes.bool.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  collection: CollectionType
+}

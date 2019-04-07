@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { ThemeContext } from '@emotion/core'
 
 export function Check ({ filled }) {
@@ -29,4 +30,8 @@ export function Check ({ filled }) {
 
 Check.defaultProps = {
   filled: false
+}
+
+Check.propTypes = {
+  filled: PropTypes.bool.isRequired
 }

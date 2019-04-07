@@ -1,4 +1,5 @@
 import React, { useCallback, useContext } from 'react'
+import PropTypes from 'prop-types'
 
 import { ExposedDropdown } from 'components/common'
 import { OptionList, OptionButton, ToggleButton, TogglerLabel } from './styled'
@@ -27,4 +28,8 @@ export default function SortByDifficulty ({ sort }) {
       TogglerLabel={TogglerLabel}
     />
   )
+}
+
+SortByDifficulty.propTypes = {
+  sort: PropTypes.string.isRequired
 }

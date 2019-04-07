@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import Header from 'components/Header'
@@ -28,4 +29,9 @@ export default function CommonLayout ({ children, location }) {
       </div>
     </Media>
   )
+}
+
+CommonLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+  location: PropTypes.object.isRequired
 }

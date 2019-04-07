@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Save ({ color, filled }) {
   const className = filled ? 'feather feather--filled' : 'feather'
@@ -22,4 +23,9 @@ export function Save ({ color, filled }) {
 Save.defaultProps = {
   color: 'currentColor',
   filled: false
+}
+
+Save.propTypes = {
+  color: PropTypes.string.isRequired,
+  filled: PropTypes.bool.isRequired
 }

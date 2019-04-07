@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Home ({ color }) {
   return (
@@ -19,4 +20,8 @@ export function Home ({ color }) {
 
 Home.defaultProps = {
   color: 'currentColor'
+}
+
+Home.propTypes = {
+  color: PropTypes.string.isRequired
 }

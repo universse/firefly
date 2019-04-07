@@ -1,21 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { IconButton } from 'components/common'
 import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'icons'
 
-export default function Snackbar ({ dismissSnackbar, setSnackbar, snackbar }) {
-  const { buttonProps, message } = snackbar || { buttonProps: {} }
-
+export default function Snackbar ({
+  dismissSnackbar,
+  setSnackbar,
+  snackbar: { buttonProps, isOpen, message }
+}) {
   return (
-    <Wrapper isOpen={snackbar.isOpen}>
+    <Wrapper isOpen={isOpen}>
       <Surface
         onMouseEnter={() =>
-          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: null })
+          setSnackbar(snackbar => ({ ...snackbar, timeout: null }))
         }
         onMouseLeave={() =>
-          setSnackbar(snackbar => snackbar && { ...snackbar, timeout: 2000 })
+          setSnackbar(snackbar => ({ ...snackbar, timeout: 2000 }))
         }
       >
         <div
@@ -49,4 +52,14 @@ export default function Snackbar ({ dismissSnackbar, setSnackbar, snackbar }) {
       </Surface>
     </Wrapper>
   )
+}
+
+Snackbar.propTypes = {
+  dismissSnackbar: PropTypes.func.isRequired,
+  setSnackbar: PropTypes.func.isRequired,
+  snackbar: PropTypes.shape({
+    isOpen: PropTypes.bool.isRequired,
+    buttonProps: PropTypes.object,
+    message: PropTypes.string
+  }).isRequired
 }

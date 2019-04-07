@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -33,6 +34,11 @@ export const CollectionTitle = memo(function ({ id, name }) {
     </Link>
   )
 })
+
+CollectionTitle.propTypes = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
+}
 
 export function CollectionWrapper (props) {
   return (

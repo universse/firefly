@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -11,6 +12,7 @@ import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import AriaLabels from 'constants/AriaLabels'
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
+import { CollectionViewType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import copyToClipboard from 'utils/copyToClipboard'
 
@@ -117,6 +119,13 @@ export default function CollectionTemplate ({
       )}
     </>
   )
+}
+
+CollectionTemplate.propTypes = {
+  data: PropTypes.shape({
+    collections: CollectionViewType
+  }).isRequired,
+  location: PropTypes.object.isRequired
 }
 
 export const query = graphql`

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
@@ -90,4 +91,8 @@ export default function SearchPage ({ location }) {
       </main>
     </>
   )
+}
+
+SearchPage.propTypes = {
+  location: PropTypes.object.isRequired
 }

@@ -1,4 +1,5 @@
 import React, { memo, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { IconButton } from 'components/common'
@@ -6,6 +7,7 @@ import { Check } from 'icons'
 import { LinkTitle } from './styled'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import LinkIcons from 'constants/LinkIcons'
+import { UrlType } from 'constants/Types'
 import { getHostname } from './utils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
@@ -125,3 +127,8 @@ function LearningItem ({ id, url, title, type, isChecked }) {
 }
 
 export default memo(LearningItem)
+
+LearningItem.propTypes = {
+  ...UrlType,
+  isChecked: PropTypes.bool.isRequired
+}

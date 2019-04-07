@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Article ({ color, small }) {
   return (
@@ -18,5 +19,11 @@ export function Article ({ color, small }) {
 }
 
 Article.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: true
+}
+
+Article.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

@@ -25,6 +25,9 @@ function reducer (state, { type, payload }) {
       case 'addTag':
         draft.tags.push(payload.tag)
         break
+
+      default:
+        throw new Error('Unknow action type.')
     }
   })
 }
@@ -34,19 +37,16 @@ export default function useCreateCollection () {
   const firebase = useContext(FirebaseContext)
   const [hasError, setHasError] = useState(false)
 
-  const handleSubmit = useCallback(
-    e => {
-      e.preventDefault()
-      firebase.createCollection(collection).then(payload =>
-        payload.error
-          ? setHasError(true)
-          : navigate(`/collection/${payload.collection.id}`, {
+  const handleSubmit = useCallback(e => {
+    e.preventDefault()
+    firebase.createCollection(collection).then(payload =>
+      payload.error
+        ? setHasError(true)
+        : navigate(`/collection/${payload.collection.id}`, {
             state: { collection: payload.collection }
           })
-      )
-    },
-    [collection, firebase]
-  )
+    )
+  }, [collection, firebase])
 
   return {
     collection,

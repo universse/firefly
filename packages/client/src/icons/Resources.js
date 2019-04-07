@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Resources ({ color, small }) {
   return (
@@ -17,5 +18,11 @@ export function Resources ({ color, small }) {
 }
 
 Resources.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: true
+}
+
+Resources.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

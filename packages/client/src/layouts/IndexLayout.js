@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import CategoryFilter from 'components/CategoryFilter'
@@ -103,9 +104,16 @@ export default function IndexLayout ({ category, children, location }) {
             <Suggest />
           </FABDesktop>
         </main>
-        <Footer />
+        {/* v2 */}
+        {/* <Footer /> */}
         <MobileNavigation location={location} />
       </div>
     </>
   )
+}
+
+IndexLayout.propTypes = {
+  category: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  location: PropTypes.object.isRequired
 }

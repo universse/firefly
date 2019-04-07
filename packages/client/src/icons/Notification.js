@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Notification ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Notification ({ color }) {
 
 Notification.defaultProps = {
   color: 'currentColor'
+}
+
+Notification.propTypes = {
+  color: PropTypes.string.isRequired
 }

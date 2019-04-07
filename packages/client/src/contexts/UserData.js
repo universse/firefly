@@ -19,5 +19,6 @@ export default function UserData ({ canUndo, children }) {
 }
 
 UserData.propTypes = {
+  canUndo: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired
 }

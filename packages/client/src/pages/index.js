@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -16,8 +17,8 @@ import { Sidebar } from 'components/common'
 import useAggregatedTags from 'hooks/useAggregatedTags'
 import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
-
 import ModalTypes from 'constants/ModalTypes'
+import { CollectionsType } from 'constants/Types'
 
 export default function IndexPage ({ data }) {
   const isDesktop = useContext(MediaContext)
@@ -76,6 +77,10 @@ export default function IndexPage ({ data }) {
       </div>
     </>
   )
+}
+
+IndexPage.propTypes = {
+  data: PropTypes.shape({ edges: CollectionsType }).isRequired
 }
 
 export const collections = graphql`

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { ThemeContext } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
-export function Level ({ level, small }) {
+export function Level ({ level }) {
   const {
     colors: { brand500, gray400 }
   } = useContext(ThemeContext)
@@ -27,6 +28,6 @@ export function Level ({ level, small }) {
   )
 }
 
-Level.defaultProps = {
-  color: 'currentColor'
+Level.propTypes = {
+  level: PropTypes.number.isRequired
 }

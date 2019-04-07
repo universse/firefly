@@ -15,5 +15,6 @@ export const createActionLabel = (action, name) => {
     case 'unsave':
       return `Unsave Collection ${name} from My Library`
     default:
+      throw new Error('Unknow action.')
   }
 }

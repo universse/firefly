@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Delete ({ color }) {
   return (
@@ -18,4 +19,8 @@ export function Delete ({ color }) {
 
 Delete.defaultProps = {
   color: 'currentColor'
+}
+
+Delete.propTypes = {
+  color: PropTypes.string.isRequired
 }

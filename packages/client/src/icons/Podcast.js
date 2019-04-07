@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export function Podcast ({ color, small }) {
   return (
@@ -17,5 +18,11 @@ export function Podcast ({ color, small }) {
 }
 
 Podcast.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: true
+}
+
+Podcast.propTypes = {
+  color: PropTypes.string.isRequired,
+  small: PropTypes.bool.isRequired
 }

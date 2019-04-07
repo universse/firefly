@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
@@ -151,4 +152,8 @@ export default function CollectionPage ({ location }) {
       )}
     </>
   )
+}
+
+CollectionPage.propTypes = {
+  location: PropTypes.object.isRequired
 }

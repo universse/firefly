@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { PrimaryButton } from 'components/common'
@@ -44,3 +45,7 @@ function Onboard ({ message }) {
 }
 
 export default memo(Onboard)
+
+Onboard.propTypes = {
+  message: PropTypes.string.isRequired
+}

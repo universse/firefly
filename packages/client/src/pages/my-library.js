@@ -114,7 +114,7 @@ export default function MyLibraryPage () {
                 >
                   <Collection
                     collection={normalizedCollections[id.toLowerCase()]}
-                    isLoved={userData.love[id]}
+                    isLoved={!!userData.love[id]}
                     isSaved
                   />
                 </li>

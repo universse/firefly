@@ -6,7 +6,7 @@ import worker from './worker'
 
 export const NormalizedCollectionsContext = createContext()
 
-export default function NormalizedCollections ({ children, location }) {
+export default function NormalizedCollections ({ children }) {
   const [normalizedCollections, setNormalizedCollections] = useState()
   const allCollections = useContext(AllCollectionsContext)
 
