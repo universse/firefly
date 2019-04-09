@@ -139,6 +139,7 @@ export const query = graphql`
         title
         type
         url
+        collectionId
       }
       tags
     }

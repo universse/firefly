@@ -30,7 +30,6 @@ module.exports = {
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sass',
     'gatsby-plugin-layout',
-    // 'gatsby-plugin-subfont',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',
     {
@@ -53,10 +52,11 @@ module.exports = {
           {
             type: 'urls',
             collection: 'urls',
-            map: ({ ti, ty, u }) => ({
+            map: ({ ti, ty, u, c }) => ({
               title: ti,
               url: u,
-              type: ItemTypes[ty]
+              type: ItemTypes[ty],
+              collectionId: c
             })
           },
           {
@@ -96,54 +96,6 @@ module.exports = {
       }
     },
     {
-      resolve: 'gatsby-plugin-amplitude-analytics',
-      options: {
-        apiKey: process.env.AMPLITUDE_API_KEY,
-        head: true,
-        respectDNT: false,
-        amplitudeConfig: {
-          saveEvents: true,
-          includeUtm: true,
-          includeReferrer: true
-        }
-      }
-    },
-    // {
-    //   resolve: 'gatsby-plugin-google-gtag',
-    //   options: {
-    //     // You can add multiple tracking ids and a pageview event will be fired for all of them.
-    //     trackingIds: [
-    //       'GA-TRACKING_ID', // Google Analytics / GA
-    //       'AW-CONVERSION_ID', // Google Ads / Adwords / AW
-    //       'DC-FLOODIGHT_ID' // Marketing Platform advertising products (Display & Video 360, Search Ads 360, and Campaign Manager)
-    //     ],
-    //     // This object gets passed directly to the gtag config command
-    //     // This config will be shared accross all trackingIds
-    //     gtagConfig: {
-    //       optimize_id: 'OPT_CONTAINER_ID',
-    //       anonymize_ip: true,
-    //       cookie_expires: 0
-    //     },
-    //     pluginConfig: {
-    //       head: true,
-    //       respectDNT: false
-    //     }
-    //   }
-    // },
-    // {
-    //   resolve: 'gatsby-plugin-guess-js',
-    //   options: {
-    //     // Find the view id in the GA admin in a section labeled "views"
-    //     GAViewID: 'VIEW_ID',
-    //     minimumThreshold: 0.03,
-    //     // The "period" for fetching analytic data.
-    //     period: {
-    //       startDate: new Date('2018-1-1'),
-    //       endDate: new Date()
-    //     }
-    //   }
-    // },
-    {
       resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'Firefly',
@@ -155,14 +107,8 @@ module.exports = {
         icon: 'src/images/icon.png' // This path is relative to the root of the site.
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
-    {
-      resolve: 'gatsby-plugin-offline'
-      // options: {
-      //   maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
-      // }
-    },
+    // 'gatsby-plugin-offline',
+    'gatsby-plugin-remove-serviceworker',
     // 'gatsby-plugin-sitemap',
     'gatsby-plugin-no-sourcemaps',
     'gatsby-plugin-netlify-cache',

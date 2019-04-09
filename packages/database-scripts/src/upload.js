@@ -36,6 +36,7 @@ processed.collections.forEach(({ name, category, level, tags, urls }, i) => {
   const batch = batches[batchNo]
 
   const collectionDoc = firestore.collection('collections').doc()
+  const collectionId = collectionDoc.id
 
   const us = []
   urls.forEach(({ url, title, description, type }, i) => {
@@ -46,12 +47,13 @@ processed.collections.forEach(({ name, category, level, tags, urls }, i) => {
       u: url,
       ti: title,
       d: description,
-      ty: ItemTypes.indexOf(type)
+      ty: ItemTypes.indexOf(type),
+      c: collectionId
     })
 
     us[i] = id
 
-    final.urls[id] = { id, url, title, description, type }
+    final.urls[id] = { id, url, title, description, type, collectionId }
   })
 
   batch.set(collectionDoc, {
@@ -62,10 +64,8 @@ processed.collections.forEach(({ name, category, level, tags, urls }, i) => {
     t: tags
   })
 
-  const id = collectionDoc.id
-
-  final.collections[id] = {
-    id,
+  final.collections[collectionId] = {
+    id: collectionId,
     name,
     category,
     level,

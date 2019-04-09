@@ -2,13 +2,13 @@ import React, { Children, Fragment, memo } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
-import { OutboundLink } from 'gatsby-plugin-amplitude-analytics'
-
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
   mobileNavigationHeightInRem
 } from 'constants/Styles'
+
+import OutboundLink from './OutboundLink'
 
 export function ActionBar ({ children }) {
   const childrenCount =
@@ -163,6 +163,8 @@ export function Input (props) {
     />
   )
 }
+
+export { OutboundLink }
 
 export function PrimaryButton ({ large, width, ...props }) {
   return (

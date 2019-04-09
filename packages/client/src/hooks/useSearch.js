@@ -4,7 +4,7 @@ import matchSorter from 'match-sorter'
 
 import { AllCollectionsContext } from 'contexts/AllCollections'
 import useDebouncedValue from 'hooks/useDebouncedValue'
-import { logInputSearch } from 'utils/amplitudeUtils'
+import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function useSearch (initialSearchInput, initialIsLoading) {
@@ -17,7 +17,9 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
 
   const handleChange = useCallback(({ node: { id, name } }) => {
     if (name) {
-      navigate(createCollectionPath({ id, name }))
+      const to = createCollectionPath({ id, name })
+      logClickSearchResult({ input: searchInput, to })
+      navigate(to)
       setSearchInput(name)
     } else {
       navigate('/search', {
@@ -29,6 +31,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   const handleSearchInput = useCallback(e => {
     setIsTyping(true)
     setSearchInput(e.target.value)
+    logInputSearch(e.target.value)
   }, [])
 
   useEffect(() => {
@@ -41,7 +44,6 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
         })
       )
       // setIsLoading(false)
-      logInputSearch(debouncedSearchInput)
     } else {
       setResults([])
     }

@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { OutboundLink } from 'gatsby-plugin-amplitude-analytics'
+
+import { OutboundLink } from 'components/common'
 
 export function CollectionTitle (props) {
   return (
@@ -23,7 +24,7 @@ export function CollectionTitle (props) {
   )
 }
 
-export function LinkTitle ({ href, title }) {
+export function LinkTitle ({ href, onClick, title }) {
   return (
     <OutboundLink
       css={theme => css`
@@ -41,6 +42,7 @@ export function LinkTitle ({ href, title }) {
         }
       `}
       href={href}
+      onClick={onClick}
       rel='noopener noreferrer'
       target='_blank'
     >
@@ -74,5 +76,6 @@ export function LinkTitle ({ href, title }) {
 
 LinkTitle.propTypes = {
   href: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired
 }

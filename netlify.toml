@@ -4,3 +4,8 @@
   publish = "packages/client/public"
 [build.environment]
   YARN_VERSION = "1.15.2"
+[[redirects]]
+  from = "/api/fire/*"
+  to = "https://api.amplitude.com/:splat"
+  status = 200
+  force = false

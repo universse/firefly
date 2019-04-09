@@ -1,9 +1,8 @@
 import React, { useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import { OutboundLink } from 'gatsby-plugin-amplitude-analytics'
 
-import { Dropdown, IconButton } from 'components/common'
+import { Dropdown, IconButton, OutboundLink } from 'components/common'
 import { Root, OptionButton, OptionList } from './styled'
 import { Share } from 'icons'
 import { logClickAction } from 'utils/amplitudeUtils'

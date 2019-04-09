@@ -2,16 +2,6 @@ import { isIndexPage, scrollToHero } from './gatsby/utils'
 import './src/layouts/global.scss'
 import 'typeface-playfair-display'
 
-// export const onServiceWorkerUpdateFound = () => {
-//   const answer = window.confirm(
-//     'This application has been updated. Reload to display the latest version?'
-//   )
-
-//   if (answer === true) {
-//     window.location.reload()
-//   }
-// }
-
 export const shouldUpdateScroll = ({
   routerProps,
   prevRouterProps,
@@ -37,4 +27,35 @@ export const shouldUpdateScroll = ({
   }
 
   return true
+}
+
+export const onRouteUpdate = ({ location }) => {
+  if (window.amplitude) {
+    window.amplitude.getInstance().logEvent('page view', {
+      location: location
+        ? location.pathname + location.search + location.hash
+        : undefined
+    })
+  } else {
+    import('amplitude-js').then(module => {
+      const amplitude = module.default
+
+      amplitude.getInstance().init(process.env.GATSBY_AMPLITUDE_API_KEY, null, {
+        includeReferrer: true,
+        includeUtm: true,
+        saveEvents: true,
+        ...(process.env.NODE_ENV === 'production' && {
+          apiEndpoint: 'firefly-dev.netlify.com/api/fire'
+        })
+      })
+
+      amplitude.getInstance().logEvent('page view', {
+        location: location
+          ? location.pathname + location.search + location.hash
+          : undefined
+      })
+
+      window.amplitude = amplitude
+    })
+  }
 }

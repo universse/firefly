@@ -51,7 +51,7 @@ Category.propTypes = {
   isActive: PropTypes.bool.isRequired
 }
 
-export const ScrollButton = memo(function ({ display, handleClick, side }) {
+export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
   const align =
     side === 'left'
       ? css`
@@ -66,7 +66,7 @@ export const ScrollButton = memo(function ({ display, handleClick, side }) {
     <div
       css={theme => css`
         align-items: center;
-        display: ${display ? 'flex' : 'none'};
+        display: ${isShown ? 'flex' : 'none'};
         ${align};
         position: absolute;
         top: 0;
@@ -96,7 +96,7 @@ export const ScrollButton = memo(function ({ display, handleClick, side }) {
 })
 
 ScrollButton.propTypes = {
-  display: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
+  isShown: PropTypes.bool.isRequired,
   side: PropTypes.oneOf(['left', 'right'])
 }

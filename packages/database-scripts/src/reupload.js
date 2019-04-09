@@ -40,7 +40,7 @@ Object.values(final.collections).forEach(
 const urlBatches = []
 
 Object.values(final.urls).forEach(
-  ({ id, url, title, description, type }, i) => {
+  ({ id, url, title, description, type, collectionId }, i) => {
     const batchNo = Math.floor(i / 15)
 
     if (!urlBatches[batchNo]) {
@@ -55,7 +55,8 @@ Object.values(final.urls).forEach(
       u: url,
       ti: title,
       d: description,
-      ty: ItemTypes.indexOf(type)
+      ty: ItemTypes.indexOf(type),
+      c: collectionId
     })
   }
 )

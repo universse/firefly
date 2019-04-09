@@ -40,13 +40,13 @@ function CategoryFilter () {
       {!isDesktop && (
         <div>
           <ScrollButton
-            display={!isMinScroll}
             handleClick={onScrollLeftClick}
+            isShown={!isMinScroll}
             side='left'
           />
           <ScrollButton
-            display={!isMaxScroll}
             handleClick={onScrollRightClick}
+            isShown={!isMaxScroll}
             side='right'
           />
         </div>

@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react'
+import React, { memo, useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
@@ -9,11 +9,16 @@ import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import LinkIcons from 'constants/LinkIcons'
 import { UrlType } from 'constants/Types'
 import { getHostname } from './utils'
+import { logClickLearningResource } from 'utils/amplitudeUtils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
-function LearningItem ({ id, url, title, type, isChecked }) {
+function LearningItem ({ id, url, title, type, collectionId, isChecked }) {
   const onActionClick = useContext(UserDataDispatchContext)
   const LinkIcon = LinkIcons[type.toUpperCase()]
+  const onClick = useCallback(
+    () => logClickLearningResource({ id, collectionId }),
+    [collectionId, id]
+  )
 
   return (
     <>
@@ -28,7 +33,7 @@ function LearningItem ({ id, url, title, type, isChecked }) {
           }
         `}
       >
-        <LinkTitle href={url} title={title} />
+        <LinkTitle href={url} onClick={onClick} title={title} />
       </div>
       <div
         css={theme => css`
