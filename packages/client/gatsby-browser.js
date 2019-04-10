@@ -29,13 +29,14 @@ export const shouldUpdateScroll = ({
   return true
 }
 
-export const onRouteUpdate = ({ location }) => {
+export const onRouteUpdate = ({ location: { pathname, search, hash } }) => {
+  const properties = {
+    location: pathname + search + hash
+  }
   if (window.amplitude) {
-    window.amplitude.getInstance().logEvent('page view', {
-      location: location
-        ? location.pathname + location.search + location.hash
-        : undefined
-    })
+    pathname.includes('/collections/')
+      ? window.amplitude.getInstance().logEvent('view collection', properties)
+      : window.amplitude.getInstance().logEvent('view page', properties)
   } else {
     import('amplitude-js').then(module => {
       const amplitude = module.default
@@ -49,13 +50,11 @@ export const onRouteUpdate = ({ location }) => {
         })
       })
 
-      amplitude.getInstance().logEvent('page view', {
-        location: location
-          ? location.pathname + location.search + location.hash
-          : undefined
-      })
-
       window.amplitude = amplitude
+
+      pathname.includes('/collections/')
+        ? window.amplitude.getInstance().logEvent('view collection', properties)
+        : window.amplitude.getInstance().logEvent('view page', properties)
     })
   }
 }

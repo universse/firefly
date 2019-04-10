@@ -3,13 +3,14 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { Tag } from 'components/common'
-import { URLUtilsContext } from 'contexts/URLUtils'
+import { URLParamsContext } from 'contexts/URLParams'
 import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
 import withLocation from 'utils/withLocation'
+import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
 
 function Tags ({ location: { pathname }, tags }) {
-  const urlUtils = useContext(URLUtilsContext)
+  const { constructUrl, onQueryClick } = useContext(URLParamsContext)
 
   return (
     <ul
@@ -27,15 +28,17 @@ function Tags ({ location: { pathname }, tags }) {
         >
           <Tag
             onClick={e => {
-              if (urlUtils) {
+              if (isIndexPage(pathname)) {
                 e.preventDefault()
-                urlUtils.onQueryClick({ tag })
+                onQueryClick({ tag })
               }
               logClickTag({ tag })
             }}
-            small={!!urlUtils}
+            small={!getNormalizedPathname(pathname).includes('/collections/')}
             to={
-              urlUtils ? urlUtils.constructUrl(tag, true).href : `/?tags=${tag}`
+              isIndexPage(pathname)
+                ? constructUrl(tag, false).href
+                : `/?tags=${tag}`
             }
           >
             {tag}

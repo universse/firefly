@@ -7,7 +7,7 @@ import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
-import { URLUtilsContext } from 'contexts/URLUtils'
+import { URLParamsContext } from 'contexts/URLParams'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { CollectionType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
@@ -18,7 +18,7 @@ function Collection ({
   isLoved,
   isSaved
 }) {
-  const { onCategoryFilterClick } = useContext(URLUtilsContext) || {}
+  const { onCategoryFilterClick } = useContext(URLParamsContext)
   const onActionClick = useContext(UserDataDispatchContext)
 
   return (

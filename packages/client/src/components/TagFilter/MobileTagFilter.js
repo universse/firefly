@@ -2,13 +2,13 @@ import React, { useContext, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { URLUtilsContext } from 'contexts/URLUtils'
+import { URLParamsContext } from 'contexts/URLParams'
 import { ClearFilterButton, Count, MobileTag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
 export default function MobileTagFilter ({ aggregatedTags, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
-    URLUtilsContext
+    URLParamsContext
   )
 
   const handleClearFilterClick = useCallback(() => onQueryClick({ tag: '' }), [

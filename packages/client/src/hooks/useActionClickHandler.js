@@ -18,7 +18,7 @@ export default function useActionClickHandler (
   user
 ) {
   const { openModal } = useContext(SetModalContext)
-  const { openSnackbar } = useContext(SetSnackbarContext)
+  const openSnackbar = useContext(SetSnackbarContext)
 
   return useCallback(e => {
     const id = e.currentTarget.value

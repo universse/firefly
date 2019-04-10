@@ -21,7 +21,7 @@ export default function MyLibraryPage () {
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
-  const { openSnackbar } = useContext(SetSnackbarContext)
+  const openSnackbar = useContext(SetSnackbarContext)
   const { openModal } = useContext(SetModalContext)
 
   // v2

@@ -13,11 +13,8 @@ export default function EmailLogin ({ setSignUpState }) {
 
   const firebase = useContext(FirebaseContext)
 
-  const handleChange = e => {
-    setHasError(false)
-    setEmail(e.target.value)
-  }
-  const handleFocus = e => setHasError(false)
+  const handleChange = e => setEmail(e.target.value)
+
   const handleSubmit = e => {
     e.preventDefault()
 
@@ -38,7 +35,6 @@ export default function EmailLogin ({ setSignUpState }) {
         aria-label='Your Email Address'
         name='email'
         onChange={handleChange}
-        onFocus={handleFocus}
         placeholder='username@domain.com'
         value={email}
       />

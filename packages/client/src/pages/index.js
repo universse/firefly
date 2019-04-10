@@ -11,7 +11,7 @@ import SortByDifficulty, {
 } from 'components/SortByDifficulty'
 import TagFilter, { MobileTagFilter } from 'components/TagFilter'
 import { AllCollectionsContext } from 'contexts/AllCollections'
-import { URLQueryContext } from 'contexts/URLQuery'
+import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import { Sidebar } from 'components/common'
 import useAggregatedTags from 'hooks/useAggregatedTags'
@@ -22,14 +22,19 @@ import { CollectionsType } from 'constants/Types'
 
 export default function IndexPage ({ data }) {
   const isDesktop = useContext(MediaContext)
-  const { sort, tags } = useContext(URLQueryContext)
+  const {
+    query: { sort, tags }
+  } = useContext(URLParamsContext)
+
   const allCollections = useContext(AllCollectionsContext)
+
   const filteredCollections = useFilteredCollections(
     data.allCollections.edges.length
       ? data.allCollections.edges
       : allCollections,
     tags
   )
+
   const sortedCollections = useSortedCollections(filteredCollections, sort)
   const aggregatedTags = useAggregatedTags(filteredCollections, tags)
 

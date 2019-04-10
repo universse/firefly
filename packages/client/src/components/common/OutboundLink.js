@@ -27,7 +27,7 @@ function OutboundLink ({ onClick, ...props }) {
 
         if (window.amplitude) {
           window.amplitude.getInstance().logEvent(
-            'outbound link click',
+            'click outbound link',
             {
               href: props.href
             },

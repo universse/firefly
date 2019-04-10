@@ -23,7 +23,7 @@
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
-    "eslint-plugin-flowtype": "^3.6.0",
+    "eslint-plugin-flowtype": "^3.6.1",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-node": "^8.0.1",
@@ -42,7 +42,7 @@
     "stylelint-config-prettier": "^5.0.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-order": "^2.2.0",
+    "stylelint-order": "^2.2.1",
     "stylelint-processor-styled-components": "^1.6.0"
   },
   "scripts": {
@@ -51,7 +51,7 @@
     "build:client": "yarn workspace client build",
     "build:netlify-functions": "yarn workspace netlify-functions build",
     "postbuild": "echo clean data before timestamp",
-    "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf .pnp && rm -rf .pnp.js && rm -rf yarn.lock",
+    "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf .pnp && rm -rf .pnp.js",
     "commit": "shjs ./scripts/commit.js",
     "flow": "flow",
     "flow coverage": "flow coverage",

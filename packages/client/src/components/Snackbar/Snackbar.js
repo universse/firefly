@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
@@ -6,10 +6,12 @@ import { IconButton } from 'components/common'
 import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'icons'
 
-export default function Snackbar ({
+function Snackbar ({
   dismissSnackbar,
   setSnackbar,
-  snackbar: { buttonProps, isOpen, message }
+  buttonProps,
+  isOpen,
+  message
 }) {
   return (
     <Wrapper isOpen={isOpen}>
@@ -54,16 +56,16 @@ export default function Snackbar ({
   )
 }
 
+export default memo(Snackbar)
+
 Snackbar.propTypes = {
   dismissSnackbar: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   setSnackbar: PropTypes.func.isRequired,
-  snackbar: PropTypes.shape({
-    isOpen: PropTypes.bool.isRequired,
-    buttonProps: PropTypes.exact({
-      'aria-label': PropTypes.string.isRequired,
-      children: PropTypes.node.isRequired,
-      onClick: PropTypes.func.isRequired
-    }),
-    message: PropTypes.string
-  }).isRequired
+  buttonProps: PropTypes.exact({
+    'aria-label': PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    onClick: PropTypes.func.isRequired
+  }),
+  message: PropTypes.string
 }

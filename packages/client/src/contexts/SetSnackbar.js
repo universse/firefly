@@ -1,47 +1,56 @@
-import React, { createContext, useState, useEffect, useMemo } from 'react'
+import React, {
+  createContext,
+  useState,
+  useLayoutEffect,
+  useEffect,
+  useCallback
+} from 'react'
 import PropTypes from 'prop-types'
 
 import Snackbar from 'components/Snackbar'
 
 export const SetSnackbarContext = createContext()
 
-export default function SetSnackbar ({ children }) {
+export default function SetSnackbar ({ children, location }) {
   const [snackbar, setSnackbar] = useState({ isOpen: false })
 
-  const value = useMemo(
-    () => ({
-      dismissSnackbar () {
-        setSnackbar(snackbar => ({ ...snackbar, isOpen: false }))
-      },
-      openSnackbar (snackbar) {
-        setSnackbar({ timeout: 4000, isOpen: true, ...snackbar })
-      }
-    }),
+  const openSnackbar = useCallback(
+    snackbar => setSnackbar({ timeout: 4000, isOpen: true, ...snackbar }),
+    []
+  )
+
+  const dismissSnackbar = useCallback(
+    () => setSnackbar(snackbar => ({ ...snackbar, isOpen: false })),
     []
   )
 
   useEffect(() => {
     if (snackbar.isOpen && snackbar.timeout) {
-      const timeout = setTimeout(value.dismissSnackbar, snackbar.timeout)
+      const timeout = setTimeout(dismissSnackbar, snackbar.timeout)
 
       return () => {
         clearTimeout(timeout)
       }
     }
-  }, [snackbar, value.dismissSnackbar])
+  }, [dismissSnackbar, snackbar])
+
+  useLayoutEffect(() => {
+    dismissSnackbar()
+  }, [dismissSnackbar, location])
 
   return (
-    <SetSnackbarContext.Provider value={value}>
+    <SetSnackbarContext.Provider value={openSnackbar}>
       {children}
       <Snackbar
-        dismissSnackbar={value.dismissSnackbar}
+        dismissSnackbar={dismissSnackbar}
         setSnackbar={setSnackbar}
-        snackbar={snackbar}
+        {...snackbar}
       />
     </SetSnackbarContext.Provider>
   )
 }
 
 SetSnackbar.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  location: PropTypes.object.isRequired
 }

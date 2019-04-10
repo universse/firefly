@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { Label, SortOption } from './styled'
-import { URLUtilsContext } from 'contexts/URLUtils'
+import { URLParamsContext } from 'contexts/URLParams'
 import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
 
 export default function MobileSortByDifficulty ({ sort }) {
-  const { onQueryClick } = useContext(URLUtilsContext)
+  const { onQueryClick } = useContext(URLParamsContext)
 
   const handleChange = useCallback(e => {
     onQueryClick({ sort: e.currentTarget.value })

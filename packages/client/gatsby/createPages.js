@@ -19,14 +19,6 @@ module.exports = async ({ graphql, actions }) => {
     `
   )
 
-  // db.data.allUrls.edges.forEach(({ node: { id } }) => {
-  //   createPage({
-  //     path: id,
-  //     component: resolve('./src/templates/article.js'),
-  //     context: { id }
-  //   })
-  // })
-
   db.data.allCollections.edges.forEach(({ node: { id, name } }) =>
     createPage({
       path: createCollectionPath({ id, name }).slice(1),

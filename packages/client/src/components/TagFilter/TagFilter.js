@@ -1,27 +1,19 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { URLUtilsContext } from 'contexts/URLUtils'
+import { URLParamsContext } from 'contexts/URLParams'
 import { Title } from 'components/common'
 import { ClearFilterButton, Count, Tag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
 export default function TagFilter ({ aggregatedTags, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
-    URLUtilsContext
+    URLParamsContext
   )
 
-  const handleClearFilterClick = useCallback(() => onQueryClick({ tag: '' }), [
-    onQueryClick
-  ])
-
   return (
-    <div
-    // css={theme => css`
-    //   margin-bottom: 2rem;
-    // `}
-    >
+    <div>
       <div
         css={css`
           align-items: center;
@@ -33,7 +25,7 @@ export default function TagFilter ({ aggregatedTags, tags }) {
         <Title>TAGS</Title>
         <ClearFilterButton
           aria-label='Reset Filters'
-          onClick={handleClearFilterClick}
+          onClick={() => onQueryClick({ tag: '' })}
         >
           clear
         </ClearFilterButton>

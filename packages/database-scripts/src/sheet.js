@@ -40,11 +40,17 @@ const processed = { collections: [] }
           })
       )
 
+      const tags = []
+
+      for (let i = 0; i < 3; i++) {
+        row[`tag${i}`] && tags.push(row[`tag${i}`])
+      }
+
       processed.collections.push({
         name: toTitleCase(row.name),
         category: row.category,
         level: row.level,
-        tags: row.tags.split(';'),
+        tags,
         urls
       })
     })

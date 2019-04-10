@@ -8,6 +8,8 @@ import { mobileNavigationHeightInRem } from 'constants/Styles'
 import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
 
 export default function MobileNavigation ({ location: { pathname } }) {
+  const normalizedPathname = getNormalizedPathname(pathname)
+
   return (
     <nav
       css={theme => css`
@@ -50,7 +52,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         >
           <MobileNavLink
             Icon={Search}
-            isActive={getNormalizedPathname(pathname) === '/search'}
+            isActive={normalizedPathname === '/search'}
             label='Search'
             to='/search'
           />
@@ -62,7 +64,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         >
           <MobileNavLink
             Icon={Library}
-            isActive={getNormalizedPathname(pathname) === '/my-library'}
+            isActive={normalizedPathname === '/my-library'}
             label='My Library'
             to='/my-library'
           />
@@ -74,7 +76,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         >
           <MobileNavLink
             Icon={User}
-            isActive={getNormalizedPathname(pathname) === '/me'}
+            isActive={normalizedPathname === '/me'}
             label='Profile'
             to='/me'
           />

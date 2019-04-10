@@ -41,7 +41,7 @@ function reducer (_, { type, payload }) {
         break
 
       default:
-        throw new Error('Unknow action type.')
+        throw new Error('Unknown action type.')
     }
   })
 }

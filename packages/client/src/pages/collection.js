@@ -45,7 +45,6 @@ export default function CollectionPage ({ location }) {
       return
     }
 
-    // 5dJtAc6eJIenU7g9nO4F
     firebase
       .fetchCollection(id)
       .then(({ collection, error }) =>

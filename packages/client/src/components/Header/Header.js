@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -14,8 +14,11 @@ import {
   ResultBox,
   Root
 } from './styled'
+import { URLParamsContext } from 'contexts/URLParams'
 
 function Header () {
+  const { onCategoryFilterClick } = useContext(URLParamsContext)
+
   return (
     <HeaderTag
       css={theme => css`
@@ -41,6 +44,7 @@ function Header () {
                 display: block;
                 height: 2.25rem;
               `}
+              onClick={onCategoryFilterClick}
               to='/'
             >
               <Logo />

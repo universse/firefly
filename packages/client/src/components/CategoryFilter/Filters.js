@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { Categories } from 'common'
 import { Location } from '@reach/router'
 
-import { URLUtilsContext } from 'contexts/URLUtils'
+import { URLParamsContext } from 'contexts/URLParams'
 import { Category } from './styled'
 import { RefType } from 'constants/Types'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
@@ -16,6 +16,8 @@ const Filters = memo(function ({
   pathname,
   slider
 }) {
+  const normalizedPathname = getNormalizedPathname(pathname)
+
   return (
     <nav>
       <div
@@ -49,8 +51,7 @@ const Filters = memo(function ({
           >
             <Category
               isActive={
-                pathname === '/' ||
-                getNormalizedPathname(pathname) === '/category/all'
+                pathname === '/' || normalizedPathname === '/category/all'
               }
               onClick={onCategoryFilterClick}
               to='/category/all'
@@ -70,10 +71,7 @@ const Filters = memo(function ({
               `}
             >
               <Category
-                isActive={
-                  getNormalizedPathname(pathname) ===
-                  createCategoryPath(category)
-                }
+                isActive={normalizedPathname === createCategoryPath(category)}
                 onClick={onCategoryFilterClick}
                 to={createCategoryPath(category)}
               >
@@ -88,7 +86,7 @@ const Filters = memo(function ({
 })
 
 export default function (props) {
-  const { onCategoryFilterClick } = useContext(URLUtilsContext)
+  const { onCategoryFilterClick } = useContext(URLParamsContext)
 
   return (
     <Location>
