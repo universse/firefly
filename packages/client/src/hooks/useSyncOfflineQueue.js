@@ -13,12 +13,10 @@ export default function useSyncOfflineQueue () {
   const stopSyncing = useCallback(() => setShouldSync(false), [])
   const startSyncing = useCallback(() => setShouldSync(true), [])
 
-  const syncOfflineQueue = useCallback(async () => {
+  const syncOfflineQueue = useCallback(() => {
     const failure = []
 
-    try {
-      const changes = await localforage.getItem(LocalStorage.OFFLINE_QUEUE)
-
+    localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes =>
       changes && changes.length
         ? changes
             .reduce((chain, curr, i) => {
@@ -38,7 +36,7 @@ export default function useSyncOfflineQueue () {
               !failure.length && stopSyncing()
             })
         : stopSyncing()
-    } catch {}
+    )
   }, [stopSyncing])
 
   useInterval(syncOfflineQueue, shouldSync ? 5000 : null, true)
