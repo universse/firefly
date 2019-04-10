@@ -7,9 +7,6 @@ export const getParamFromPathname = pathname => {
     .pop()
 }
 
-export const isIndexPage = pathname =>
-  pathname.includes('/category/') || pathname === '/'
-
 export const shouldNotHaveMobileNavigation = pathname =>
   pathname.includes('/collection/') ||
   pathname.includes('/collections/') ||

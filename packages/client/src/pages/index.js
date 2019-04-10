@@ -26,7 +26,7 @@ export default function IndexPage ({ data }) {
     query: { sort, tags }
   } = useContext(URLParamsContext)
 
-  const allCollections = useContext(AllCollectionsContext)
+  const { allCollections } = useContext(AllCollectionsContext)
 
   const filteredCollections = useFilteredCollections(
     data.allCollections.edges.length

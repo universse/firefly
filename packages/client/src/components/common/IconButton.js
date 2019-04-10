@@ -44,6 +44,10 @@ export default function IconButton ({ children, light, ...props }) {
   )
 }
 
+IconButton.defaultProps = {
+  light: false
+}
+
 IconButton.propTypes = {
   'aria-label': PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,

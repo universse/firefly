@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
 
+import { IconButton } from 'components/common'
+import { Cross } from 'icons'
 import useSearch from 'hooks/useSearch'
 import { DefaultItem, DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 
-// TODO add X icon, isLoading spinner
 function SearchBar ({
   controlledProps,
   initialIsLoading,
   initialSearchInput,
   resultCount,
+  ClearSearchWrapper,
   Input,
   Item,
   Result,
@@ -25,7 +27,8 @@ function SearchBar ({
     isLoading,
     isTyping,
     results,
-    searchInput
+    searchInput,
+    setSearchInput
   } = useSearch(initialSearchInput, initialIsLoading)
 
   const totalResultCount = results.length
@@ -65,6 +68,16 @@ function SearchBar ({
                 onChange: handleSearchInput
               })}
             />
+            {searchInput && (
+              <ClearSearchWrapper>
+                <IconButton
+                  aria-label='Clear Search Field'
+                  onClick={() => setSearchInput('')}
+                >
+                  <Cross small />
+                </IconButton>
+              </ClearSearchWrapper>
+            )}
           </form>
           <ResultBox>
             <ul {...getMenuProps()}>
@@ -142,13 +155,14 @@ SearchBar.defaultProps = {
 }
 
 SearchBar.propTypes = {
-  controlledProps: PropTypes.object.isRequired,
-  initialIsLoading: PropTypes.bool.isRequired,
-  initialSearchInput: PropTypes.string.isRequired,
+  ClearSearchWrapper: PropTypes.elementType.isRequired,
   Input: PropTypes.elementType.isRequired,
-  Item: PropTypes.elementType.isRequired,
   Result: PropTypes.elementType.isRequired,
-  ResultBox: PropTypes.elementType.isRequired,
   resultCount: PropTypes.number.isRequired,
-  Root: PropTypes.elementType.isRequired
+  controlledProps: PropTypes.object,
+  initialIsLoading: PropTypes.bool,
+  initialSearchInput: PropTypes.string,
+  Item: PropTypes.elementType,
+  ResultBox: PropTypes.elementType,
+  Root: PropTypes.elementType
 }

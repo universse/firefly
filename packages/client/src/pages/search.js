@@ -5,7 +5,12 @@ import { css } from '@emotion/core'
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
 import { Back, Search } from 'icons'
-import { IconButton, Input, Result } from 'components/common'
+import {
+  ClearSearchWrapper,
+  IconButton,
+  Input,
+  Result
+} from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
 import {
@@ -13,6 +18,7 @@ import {
   mobileNavigationHeightInRem
 } from 'constants/Styles'
 
+// TODO: loading state
 export default function SearchPage ({ location }) {
   const initialSearchInput = location.state ? location.state.searchInput : ''
 
@@ -81,6 +87,7 @@ export default function SearchPage ({ location }) {
             <Search />
           </div>
           <SearchBar
+            ClearSearchWrapper={ClearSearchWrapper}
             controlledProps={{ isOpen: true }}
             initialIsLoading={initialIsLoading}
             initialSearchInput={initialSearchInput}

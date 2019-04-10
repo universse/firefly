@@ -22,5 +22,5 @@ Back.defaultProps = {
 }
 
 Back.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

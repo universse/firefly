@@ -27,5 +27,5 @@ Library.defaultProps = {
 }
 
 Library.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

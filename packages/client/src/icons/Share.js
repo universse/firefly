@@ -26,5 +26,5 @@ Share.defaultProps = {
 }
 
 Share.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

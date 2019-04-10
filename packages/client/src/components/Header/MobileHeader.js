@@ -58,8 +58,8 @@ MobileHeader.defaultProps = {
 }
 
 MobileHeader.propTypes = {
-  shadow: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   actions: PropTypes.element,
-  navIcon: PropTypes.element
+  navIcon: PropTypes.element,
+  shadow: PropTypes.bool
 }

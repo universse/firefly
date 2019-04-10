@@ -23,6 +23,6 @@ Podcast.defaultProps = {
 }
 
 Podcast.propTypes = {
-  color: PropTypes.string.isRequired,
-  small: PropTypes.bool.isRequired
+  color: PropTypes.string,
+  small: PropTypes.bool
 }

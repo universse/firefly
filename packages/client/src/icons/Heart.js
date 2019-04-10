@@ -26,6 +26,6 @@ Heart.defaultProps = {
 }
 
 Heart.propTypes = {
-  color: PropTypes.string.isRequired,
-  filled: PropTypes.bool.isRequired
+  color: PropTypes.string,
+  filled: PropTypes.bool
 }

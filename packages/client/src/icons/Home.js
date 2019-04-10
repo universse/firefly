@@ -23,5 +23,5 @@ Home.defaultProps = {
 }
 
 Home.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

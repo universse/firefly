@@ -5,7 +5,8 @@ import { css } from '@emotion/core'
 import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'icons'
 import { mobileNavigationHeightInRem } from 'constants/Styles'
-import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
+import { getNormalizedPathname } from 'utils/pathnameUtils'
+import { isIndexPage } from '../../../gatsby/utils'
 
 export default function MobileNavigation ({ location: { pathname } }) {
   const normalizedPathname = getNormalizedPathname(pathname)

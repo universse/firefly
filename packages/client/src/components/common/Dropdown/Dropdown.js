@@ -94,6 +94,6 @@ Dropdown.propTypes = {
   onToggleButtonClick: PropTypes.func.isRequired,
   OptionButton: PropTypes.elementType.isRequired,
   OptionList: PropTypes.elementType.isRequired,
-  Root: PropTypes.elementType.isRequired,
-  ToggleButton: PropTypes.elementType.isRequired
+  ToggleButton: PropTypes.elementType.isRequired,
+  Root: PropTypes.elementType
 }

@@ -8,46 +8,40 @@ import LocalStorage from 'constants/LocalStorage'
 // v2
 export default function useSyncOfflineQueue () {
   const firebase = useContext(FirebaseContext)
-  const [shouldSync, setShouldSync] = useState(!navigator.onLine)
+  const [shouldSync, setShouldSync] = useState(true)
 
   const stopSyncing = useCallback(() => setShouldSync(false), [])
   const startSyncing = useCallback(() => setShouldSync(true), [])
 
   const syncOfflineQueue = useCallback(async () => {
-    const success = []
+    const failure = []
 
     try {
       const changes = await localforage.getItem(LocalStorage.OFFLINE_QUEUE)
 
-      changes.reduce((prev, curr, i) => {
-        const promise = new Promise((resolve, reject) =>
-          setTimeout(() => {
-            i % 2 === 0 ? reject(new Error()) : resolve(curr)
-          }, i * 500)
-        )
+      changes && changes.length
+        ? changes
+            .reduce((chain, curr, i) => {
+              // create firebase action promise
+              const promise = new Promise((resolve, reject) =>
+                setTimeout(() => resolve(curr), 1)
+              )
 
-        return Promise.resolve(prev).then(() =>
-          promise
-            .then(() => success.concat(i))
+              return chain.then(() => promise.catch(() => failure.push(i)))
+            }, Promise.resolve([]))
             .then(() => {
-              if (i === changes.length - 1) {
-                const failure = changes.filter((_, i) => !success.includes(i))
+              localforage.setItem(
+                LocalStorage.OFFLINE_QUEUE,
+                changes.filter((_, i) => failure.includes(i))
+              )
 
-                failure.length
-                  ? localforage.setItem(
-                      LocalStorage.OFFLINE_QUEUE,
-                      changes.filter((_, i) => !success.includes(i))
-                    )
-                  : stopSyncing()
-              }
+              !failure.length && stopSyncing()
             })
-            .catch(() => new Error())
-        )
-      }, [])
+        : stopSyncing()
     } catch {}
   }, [stopSyncing])
 
-  useInterval(syncOfflineQueue, shouldSync ? 30000 : null)
+  useInterval(syncOfflineQueue, shouldSync ? 5000 : null, true)
 
   useEffect(() => {
     window.addEventListener('online', startSyncing)

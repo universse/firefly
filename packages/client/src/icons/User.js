@@ -23,5 +23,5 @@ User.defaultProps = {
 }
 
 User.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

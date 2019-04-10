@@ -6,6 +6,7 @@ import SearchBar from 'components/SearchBar'
 import Navigation from 'components/Navigation'
 import { Logo } from 'icons'
 import {
+  ClearSearchWrapper,
   HeaderTag,
   HeaderWrapper,
   Input,
@@ -51,6 +52,7 @@ function Header () {
             </Link>
           </div>
           <SearchBar
+            ClearSearchWrapper={ClearSearchWrapper}
             Input={Input}
             Item={Item}
             Result={Result}

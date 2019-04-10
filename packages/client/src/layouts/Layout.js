@@ -11,18 +11,17 @@ import Authentication from 'contexts/Authentication'
 import LatestActivity from 'contexts/LatestActivity'
 import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
-import NormalizedCollections from 'contexts/NormalizedCollections'
 import SetSnackbar from 'contexts/SetSnackbar'
 import URLParams from 'contexts/URLParams'
 import UserData from 'contexts/UserData'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
-// import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
+import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
 import Theme from 'constants/Theme'
 import {
   getNormalizedPathname,
-  isIndexPage,
   shouldNotHaveMobileNavigation
 } from 'utils/pathnameUtils'
+import { isIndexPage } from '../../gatsby/utils'
 
 export default function Layout ({
   pageContext: { category },
@@ -30,7 +29,7 @@ export default function Layout ({
   location
 }) {
   useAccessibleFocusIndicator()
-  // useSyncOfflineQueue()
+  useSyncOfflineQueue()
 
   const { pathname } = location
 
@@ -41,36 +40,32 @@ export default function Layout ({
   }
 
   return (
-    <AllCollections>
-      <ThemeProvider theme={Theme}>
-        <NormalizedCollections>
-          <Authentication>
-            <Modal>
-              <LatestActivity>
-                <SetSnackbar location={location}>
-                  <UserData canUndo={normalizedPathname === '/my-library'}>
-                    <URLParams location={location}>
-                      {normalizedPathname !== '/search' && <Header />}
-                      {isIndexPage(pathname) ? (
-                        <IndexLayout category={category}>
-                          {children}
-                        </IndexLayout>
-                      ) : (
-                        <Media>{children}</Media>
-                      )}
-                      {!shouldNotHaveMobileNavigation(pathname) && (
-                        <MobileNavigation location={location} />
-                      )}
-                    </URLParams>
-                  </UserData>
-                </SetSnackbar>
-              </LatestActivity>
-              <SignUpForm />
-            </Modal>
-          </Authentication>
-        </NormalizedCollections>
-      </ThemeProvider>
-    </AllCollections>
+    <ThemeProvider theme={Theme}>
+      <AllCollections>
+        <Authentication>
+          <Modal>
+            <LatestActivity>
+              <SetSnackbar location={location}>
+                <UserData canUndo={normalizedPathname === '/my-library'}>
+                  <URLParams location={location}>
+                    {normalizedPathname !== '/search' && <Header />}
+                    {isIndexPage(pathname) ? (
+                      <IndexLayout category={category}>{children}</IndexLayout>
+                    ) : (
+                      <Media>{children}</Media>
+                    )}
+                    {!shouldNotHaveMobileNavigation(pathname) && (
+                      <MobileNavigation location={location} />
+                    )}
+                  </URLParams>
+                </UserData>
+              </SetSnackbar>
+            </LatestActivity>
+            <SignUpForm />
+          </Modal>
+        </Authentication>
+      </AllCollections>
+    </ThemeProvider>
   )
 }
 

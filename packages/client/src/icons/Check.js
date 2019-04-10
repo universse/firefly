@@ -33,5 +33,5 @@ Check.defaultProps = {
 }
 
 Check.propTypes = {
-  filled: PropTypes.bool.isRequired
+  filled: PropTypes.bool
 }

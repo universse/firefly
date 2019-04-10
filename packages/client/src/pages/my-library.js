@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { css } from '@emotion/core'
 
 import { Collection } from 'components/Collections'
@@ -6,7 +6,7 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { AuthenticationContext } from 'contexts/Authentication'
 import { MediaContext } from 'contexts/Media'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
+import { AllCollectionsContext } from 'contexts/AllCollections'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
@@ -17,7 +17,7 @@ import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function MyLibraryPage () {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
+  const { normalizedCollections } = useContext(AllCollectionsContext)
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
@@ -25,22 +25,39 @@ export default function MyLibraryPage () {
   const { openModal } = useContext(SetModalContext)
 
   // v2
-  // useEffect(() => {
-  //   if (!hasSignedIn() && !user) {
-  //     openSnackbar({
-  //       buttonProps: {
-  //         'aria-label': AriaLabels.SIGNIN_REGISTER,
-  //         children: 'Sign In',
-  //         onClick: () => {
-  //           openModal(ModalTypes.SIGN_UP_FORM)
-  //           logSignUpIntent()
-  //         }
-  //       },
-  //       message: 'Sign in to sync saved collections across devices.',
-  //       timeout: 5000
-  //     })
-  //   }
-  // }, [openModal, openSnackbar, user])
+  // const [initialSavedCount, setInitialSavedCount] = useState()
+
+  // useEffect(
+  //   () => {
+  //     if (isNaN(initialSavedCount) && userData) {
+  //       setInitialSavedCount(Object.keys(userData.save).length)
+  //     }
+  //   },
+  //   [initialSavedCount, userData]
+  // )
+
+  // useEffect(
+  //   () => {
+  //     if (isNaN(initialSavedCount)) return
+
+  //     if (!hasSignedIn() && !user) {
+  //       initialSavedCount &&
+  //         openSnackbar({
+  //           buttonProps: {
+  //             'aria-label': AriaLabels.SIGNIN_REGISTER,
+  //             children: 'Sign In',
+  //             onClick: () => {
+  //               openModal(ModalTypes.SIGN_UP_FORM)
+  //               logSignUpIntent()
+  //             }
+  //           },
+  //           message: 'Sign in to sync saved collections across devices.',
+  //           timeout: 5000
+  //         })
+  //     }
+  //   },
+  //   [openModal, openSnackbar, initialSavedCount, user]
+  // )
 
   return (
     <>

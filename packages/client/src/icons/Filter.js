@@ -22,5 +22,5 @@ Filter.defaultProps = {
 }
 
 Filter.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

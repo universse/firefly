@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
-export default function SEO ({ description, lang, meta, slug, title }) {
+function SEO ({ description, lang, meta, slug, title }) {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -20,12 +20,12 @@ export default function SEO ({ description, lang, meta, slug, title }) {
   const metaDescription = description || siteMetadata.description
   const metaTitle = title
     ? {
-      titleTemplate: `%s | ${siteMetadata.title}`,
-      title
-    }
+        titleTemplate: `%s | ${siteMetadata.title}`,
+        title
+      }
     : {
-      title: `${siteMetadata.title} - Follow your curiosity`
-    }
+        title: `${siteMetadata.title} - Follow your curiosity`
+      }
   // const url = `${siteMetadata.siteUrl}${slug}`
 
   return (
@@ -80,6 +80,8 @@ export default function SEO ({ description, lang, meta, slug, title }) {
     />
   )
 }
+
+export default memo(SEO)
 
 SEO.defaultProps = {
   lang: 'en',

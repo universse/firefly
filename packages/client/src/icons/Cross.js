@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Cross ({ color }) {
+export function Cross ({ color, small }) {
   return (
     <svg
       aria-label='cross'
-      className='feather'
+      className={small ? 'feather feather--small' : 'feather'}
       role='img'
       stroke={color}
       viewBox='0 0 24 24'
@@ -18,9 +18,11 @@ export function Cross ({ color }) {
 }
 
 Cross.defaultProps = {
-  color: 'currentColor'
+  color: 'currentColor',
+  small: false
 }
 
 Cross.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string,
+  small: PropTypes.bool
 }

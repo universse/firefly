@@ -7,8 +7,8 @@ import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
+import { AllCollectionsContext } from 'contexts/AllCollections'
 import { FirebaseContext } from 'contexts/Firebase'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Back, Heart, Save } from 'icons'
@@ -20,7 +20,7 @@ import { getParamFromPathname } from 'utils/pathnameUtils'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function CollectionPage ({ location }) {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
+  const { normalizedCollections } = useContext(AllCollectionsContext)
   const userData = useContext(UserDataContext)
   const { check, love, save } = userData || {}
   const onActionClick = useContext(UserDataDispatchContext)

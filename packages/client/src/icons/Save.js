@@ -26,6 +26,6 @@ Save.defaultProps = {
 }
 
 Save.propTypes = {
-  color: PropTypes.string.isRequired,
-  filled: PropTypes.bool.isRequired
+  color: PropTypes.string,
+  filled: PropTypes.bool
 }

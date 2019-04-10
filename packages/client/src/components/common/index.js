@@ -53,6 +53,24 @@ export const Category = memo(function (props) {
   )
 })
 
+export function ClearSearchWrapper (props) {
+  return (
+    <div
+      css={theme => css`
+        position: absolute;
+        right: 0.25rem;
+        top: -0.25rem;
+
+        ${theme.screens.desktop} {
+          right: 0.5rem;
+          top: 0;
+        }
+      `}
+      {...props}
+    />
+  )
+}
+
 export const Difficulty = memo(function (props) {
   return (
     <span
@@ -195,7 +213,7 @@ PrimaryButton.defaultProps = {
 }
 
 PrimaryButton.propTypes = {
-  large: PropTypes.bool.isRequired,
+  large: PropTypes.bool,
   width: PropTypes.string
 }
 
@@ -260,7 +278,7 @@ Result.defaultProps = {
 }
 
 Result.propTypes = {
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]).isRequired
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
 }
 
 export function Sidebar (props) {
@@ -317,7 +335,7 @@ Tag.defaultProps = {
 }
 
 Tag.propTypes = {
-  small: PropTypes.bool.isRequired
+  small: PropTypes.bool
 }
 
 export function Title (props) {

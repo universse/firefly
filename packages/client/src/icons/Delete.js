@@ -22,5 +22,5 @@ Delete.defaultProps = {
 }
 
 Delete.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

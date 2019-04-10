@@ -99,7 +99,7 @@ ExposedDropdown.propTypes = {
   label: PropTypes.string.isRequired,
   OptionButton: PropTypes.elementType.isRequired,
   OptionList: PropTypes.elementType.isRequired,
-  Root: PropTypes.elementType.isRequired,
   ToggleButton: PropTypes.elementType.isRequired,
-  TogglerLabel: PropTypes.elementType.isRequired
+  TogglerLabel: PropTypes.elementType.isRequired,
+  Root: PropTypes.elementType
 }

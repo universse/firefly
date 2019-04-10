@@ -22,5 +22,5 @@ Suggest.defaultProps = {
 }
 
 Suggest.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

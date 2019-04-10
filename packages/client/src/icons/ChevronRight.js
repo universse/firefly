@@ -22,5 +22,5 @@ ChevronRight.defaultProps = {
 }
 
 ChevronRight.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string
 }

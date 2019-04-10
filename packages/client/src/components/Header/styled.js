@@ -5,6 +5,19 @@ import { Link } from 'gatsby'
 
 import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
 
+export function ClearSearchWrapper (props) {
+  return (
+    <div
+      css={css`
+        position: absolute;
+        right: 0.25rem;
+        top: -0.25rem;
+      `}
+      {...props}
+    />
+  )
+}
+
 export function HeaderTag (props) {
   return (
     <header
@@ -46,7 +59,7 @@ HeaderWrapper.defaultProps = {
 }
 
 HeaderWrapper.propTypes = {
-  shadow: PropTypes.bool.isRequired
+  shadow: PropTypes.bool
 }
 
 export function Input (props) {
@@ -109,7 +122,7 @@ Result.defaultProps = {
 }
 
 Result.propTypes = {
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]).isRequired
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
 }
 
 export function ResultBox (props) {

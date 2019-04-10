@@ -8,7 +8,7 @@ import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function useSearch (initialSearchInput, initialIsLoading) {
-  const allCollections = useContext(AllCollectionsContext)
+  const { allCollections } = useContext(AllCollectionsContext)
   const [searchInput, setSearchInput] = useState(initialSearchInput)
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(initialIsLoading)
@@ -55,6 +55,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
     isLoading,
     isTyping,
     results,
-    searchInput
+    searchInput,
+    setSearchInput
   }
 }

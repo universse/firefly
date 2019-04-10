@@ -7,7 +7,8 @@ import { URLParamsContext } from 'contexts/URLParams'
 import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
 import withLocation from 'utils/withLocation'
-import { getNormalizedPathname, isIndexPage } from 'utils/pathnameUtils'
+import { getNormalizedPathname } from 'utils/pathnameUtils'
+import { isIndexPage } from '../../../gatsby/utils'
 
 function Tags ({ location: { pathname }, tags }) {
   const { constructUrl, onQueryClick } = useContext(URLParamsContext)

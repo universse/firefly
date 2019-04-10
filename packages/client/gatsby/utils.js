@@ -1,6 +1,6 @@
 var getSlug = require('speakingurl')
 
-// TODO get unique categories
+// TODO get unique categories for automation, unique tags for search
 module.exports = {
   createCollectionPath: ({ id, name }) =>
     `/collections/${getSlug(`${name} ${id}`)}`,
