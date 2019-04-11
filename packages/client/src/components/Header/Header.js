@@ -1,5 +1,4 @@
-import React, { memo, useContext } from 'react'
-import { Link } from 'gatsby'
+import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
@@ -15,11 +14,8 @@ import {
   ResultBox,
   Root
 } from './styled'
-import { URLParamsContext } from 'contexts/URLParams'
 
 function Header () {
-  const { onCategoryFilterClick } = useContext(URLParamsContext)
-
   return (
     <HeaderTag
       css={theme => css`
@@ -40,16 +36,15 @@ function Header () {
               margin-right: 1.5rem;
             `}
           >
-            <Link
+            <a
               css={css`
                 display: block;
                 height: 2.25rem;
               `}
-              onClick={onCategoryFilterClick}
-              to='/'
+              href='/'
             >
               <Logo />
-            </Link>
+            </a>
           </div>
           <SearchBar
             ClearSearchWrapper={ClearSearchWrapper}

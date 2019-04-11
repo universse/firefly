@@ -8,12 +8,12 @@ import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
 
 export default function SortByDifficulty ({ sort }) {
-  const { onQueryClick } = useContext(URLParamsContext)
+  const { queryDispatch } = useContext(URLParamsContext)
 
   const handleChange = useCallback(({ value }) => {
-    onQueryClick({ sort: value })
+    queryDispatch({ sort: value })
     logSortDifficulty({ sort: value })
-  }, [onQueryClick])
+  }, [queryDispatch])
 
   return (
     <ExposedDropdown

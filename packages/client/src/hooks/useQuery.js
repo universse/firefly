@@ -1,6 +1,6 @@
-import { useReducer, useCallback, useMemo } from 'react'
+import { useEffect, useReducer, useCallback, useMemo } from 'react'
 import qs from 'qs'
-
+import { globalHistory } from '@reach/router/lib/history'
 import constructHref from 'utils/constructHref'
 
 function init (search) {
@@ -8,18 +8,21 @@ function init (search) {
 
   return {
     sort: values.sort || '',
-    tags: values.tags ? values.tags.split(',') : []
+    tags: values.tags ? values.tags.split(',') : [],
+    action: 'init'
   }
 }
 
 function reducer (state, payload) {
-  return { ...state, ...payload }
+  return payload.action
+    ? { ...state, ...payload }
+    : { ...state, ...payload, action: undefined }
 }
 
 export default function useQuery (pathname, search) {
-  const [query, dispatch] = useReducer(reducer, search, init)
+  const [query, queryDispatch] = useReducer(reducer, search, init)
 
-  const { sort, tags } = query
+  const { sort, tags, action } = query
 
   const constructUrl = useCallback((tag, isTagFilter = true) => {
     if (!isTagFilter) {
@@ -38,40 +41,30 @@ export default function useQuery (pathname, search) {
     }
   }, [pathname, sort, tags])
 
-  const onCategoryFilterClick = useCallback(
-    () => dispatch({ sort: '', tags: [] }),
-    []
-  )
+  const onCategoryFilterClick = useCallback(() => queryDispatch(init('')), [])
 
-  const updateQuery = useCallback(updatedTags => {
-    dispatch({ tags: updatedTags })
+  useEffect(() => {
+    !action &&
+      window.history.pushState({}, '', constructHref(pathname, sort, tags))
+  }, [action, pathname, sort, tags])
+
+  useEffect(() => {
+    const unlisten = globalHistory.listen(({ location: { search } }) => {
+      queryDispatch(init(search))
+    })
+
+    return () => {
+      unlisten()
+    }
   }, [])
-
-  const onQueryClick = useCallback(({ sort: clickedSort, tag: clickedTag }) => {
-    const updatedSort = typeof clickedSort === 'string' ? clickedSort : sort
-
-    const updatedTags = clickedTag
-      ? [clickedTag]
-      : clickedTag === ''
-      ? []
-      : tags
-
-    window.history.pushState(
-      {},
-      '',
-      constructHref(pathname, updatedSort, updatedTags)
-    )
-    dispatch({ sort: updatedSort, tags: updatedTags })
-  }, [pathname, sort, tags])
 
   return useMemo(
     () => ({
       constructUrl,
       onCategoryFilterClick,
-      onQueryClick,
       query,
-      updateQuery
+      queryDispatch
     }),
-    [constructUrl, onCategoryFilterClick, onQueryClick, query, updateQuery]
+    [constructUrl, onCategoryFilterClick, query]
   )
 }

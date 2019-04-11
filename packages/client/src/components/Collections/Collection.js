@@ -18,7 +18,7 @@ function Collection ({
   isLoved,
   isSaved
 }) {
-  const { onCategoryFilterClick } = useContext(URLParamsContext)
+  const { onCategoryFilterClick } = useContext(URLParamsContext) || {}
   const onActionClick = useContext(UserDataDispatchContext)
 
   return (

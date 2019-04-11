@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState
-} from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { FirebaseContext } from 'contexts/Firebase'
@@ -14,29 +8,29 @@ import LocalStorage from 'constants/LocalStorage'
 export const AuthenticationContext = createContext()
 
 export default function Authentication ({ children }) {
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState(null)
   const firebase = useContext(FirebaseContext)
 
-  const handleAuth = useCallback(e => {
-    if (e.data.type === FirebaseWorkerEvents.AUTH_STATE_CHANGED) {
-      setUser(e.data.payload)
+  useEffect(() => {
+    const handleAuth = e => {
+      if (e.data.type === FirebaseWorkerEvents.AUTH_STATE_CHANGED) {
+        setUser(e.data.payload)
 
-      if (e.data.payload) {
-        window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+        if (e.data.payload) {
+          window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
 
-        window.amplitude &&
-          window.amplitude.getInstance().setUserId(e.data.payload.uid)
+          window.amplitude &&
+            window.amplitude.getInstance().setUserId(e.data.payload.uid)
+        }
       }
     }
-  }, [])
 
-  useEffect(() => {
     firebase.addEventListener('message', handleAuth)
 
     return () => {
       firebase.removeEventListener('message', handleAuth)
     }
-  }, [firebase, handleAuth])
+  }, [firebase])
 
   return (
     <AuthenticationContext.Provider value={user}>

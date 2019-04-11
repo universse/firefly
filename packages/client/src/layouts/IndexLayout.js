@@ -10,6 +10,7 @@ import SEO from 'components/SEO'
 import { FABDesktop, IconButton, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
+import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
 import {
   headerHeightInRem,
@@ -18,7 +19,7 @@ import {
 import ModalTypes from 'constants/ModalTypes'
 import { toTitleCase } from 'common'
 
-export default function IndexLayout ({ category, children }) {
+export default function IndexLayout ({ category, children, location }) {
   const { openModal } = useContext(SetModalContext)
 
   const actions = useMemo(
@@ -36,7 +37,7 @@ export default function IndexLayout ({ category, children }) {
   const title = category === 'all' ? '' : toTitleCase(category)
 
   return (
-    <>
+    <URLParams location={location}>
       <SEO title={title} />
       <MobileHeader actions={actions} title='Collections' />
       <section id='hero'>
@@ -90,11 +91,12 @@ export default function IndexLayout ({ category, children }) {
       </main>
       {/* v2 */}
       {/* <Footer /> */}
-    </>
+    </URLParams>
   )
 }
 
 IndexLayout.propTypes = {
   category: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  location: PropTypes.object.isRequired
 }

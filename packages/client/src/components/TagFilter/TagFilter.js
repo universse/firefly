@@ -8,9 +8,7 @@ import { ClearFilterButton, Count, Tag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
 export default function TagFilter ({ aggregatedTags, tags }) {
-  const { constructUrl, onQueryClick, updateQuery } = useContext(
-    URLParamsContext
-  )
+  const { constructUrl, queryDispatch } = useContext(URLParamsContext)
 
   return (
     <div>
@@ -25,7 +23,7 @@ export default function TagFilter ({ aggregatedTags, tags }) {
         <Title>TAGS</Title>
         <ClearFilterButton
           aria-label='Reset Filters'
-          onClick={() => onQueryClick({ tag: '' })}
+          onClick={() => queryDispatch({ tags: [] })}
         >
           clear
         </ClearFilterButton>
@@ -49,8 +47,7 @@ export default function TagFilter ({ aggregatedTags, tags }) {
                 isActive={isActive}
                 onClick={e => {
                   e.preventDefault()
-                  updateQuery(updatedTags)
-                  window.history.pushState({}, '', href)
+                  queryDispatch({ tags: updatedTags })
                   logClickTagFilter({ tag, updatedTags })
                 }}
               >

@@ -12,7 +12,6 @@ import LatestActivity from 'contexts/LatestActivity'
 import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
 import SetSnackbar from 'contexts/SetSnackbar'
-import URLParams from 'contexts/URLParams'
 import UserData from 'contexts/UserData'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
 import Theme from 'constants/Theme'
@@ -45,17 +44,17 @@ export default function Layout ({
             <LatestActivity>
               <SetSnackbar location={location}>
                 <UserData canUndo={normalizedPathname === '/my-library'}>
-                  <URLParams location={location}>
-                    {normalizedPathname !== '/search' && <Header />}
-                    {isIndexPage(pathname) ? (
-                      <IndexLayout category={category}>{children}</IndexLayout>
-                    ) : (
-                      <Media>{children}</Media>
-                    )}
-                    {!shouldNotHaveMobileNavigation(pathname) && (
-                      <MobileNavigation location={location} />
-                    )}
-                  </URLParams>
+                  {normalizedPathname !== '/search' && <Header />}
+                  {isIndexPage(pathname) ? (
+                    <IndexLayout category={category} location={location}>
+                      {children}
+                    </IndexLayout>
+                  ) : (
+                    <Media>{children}</Media>
+                  )}
+                  {!shouldNotHaveMobileNavigation(pathname) && (
+                    <MobileNavigation location={location} />
+                  )}
                 </UserData>
               </SetSnackbar>
             </LatestActivity>

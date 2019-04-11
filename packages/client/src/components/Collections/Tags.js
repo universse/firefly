@@ -11,7 +11,7 @@ import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { isIndexPage } from '../../../gatsby/utils'
 
 function Tags ({ location: { pathname }, tags }) {
-  const { constructUrl, onQueryClick } = useContext(URLParamsContext)
+  const { constructUrl, queryDispatch } = useContext(URLParamsContext) || {}
 
   return (
     <ul
@@ -31,7 +31,7 @@ function Tags ({ location: { pathname }, tags }) {
             onClick={e => {
               if (isIndexPage(pathname)) {
                 e.preventDefault()
-                onQueryClick({ tag })
+                queryDispatch({ tags: [tag] })
               }
               logClickTag({ tag })
             }}

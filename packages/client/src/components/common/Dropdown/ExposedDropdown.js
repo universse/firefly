@@ -19,9 +19,9 @@ function ExposedDropdown ({
 }) {
   return (
     <Downshift
-      initialSelectedItem={items.find(({ value }) => value === initialValue)}
       itemToString={({ value }) => value}
       onChange={handleChange}
+      selectedItem={items.find(({ value }) => value === initialValue)}
     >
       {({
         getToggleButtonProps,

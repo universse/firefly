@@ -8,12 +8,12 @@ import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
 
 export default function MobileSortByDifficulty ({ sort }) {
-  const { onQueryClick } = useContext(URLParamsContext)
+  const { queryDispatch } = useContext(URLParamsContext)
 
   const handleChange = useCallback(e => {
-    onQueryClick({ sort: e.currentTarget.value })
+    queryDispatch({ sort: e.currentTarget.value })
     logSortDifficulty({ sort: e.currentTarget.value })
-  }, [onQueryClick])
+  }, [queryDispatch])
 
   return (
     <div
