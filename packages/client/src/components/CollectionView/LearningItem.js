@@ -135,5 +135,6 @@ export default memo(LearningItem)
 
 LearningItem.propTypes = {
   ...UrlType,
+  collectionId: PropTypes.string.isRequired,
   isChecked: PropTypes.bool.isRequired
 }

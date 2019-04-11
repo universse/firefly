@@ -55,8 +55,7 @@ module.exports = {
             map: ({ ti, ty, u, c }) => ({
               title: ti,
               url: u,
-              type: ItemTypes[ty],
-              collectionId: c
+              type: ItemTypes[ty]
             })
           },
           {

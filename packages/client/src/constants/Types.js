@@ -22,8 +22,7 @@ export const UrlType = PropTypes.exact({
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  collectionId: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired
 }).isRequired
 
 export const UrlsType = PropTypes.arrayOf(UrlType).isRequired

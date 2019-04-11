@@ -31,10 +31,9 @@ export const shouldUpdateScroll = ({
 
 const logViewPage = ({ location, prevLocation }) => {
   const properties = {
-    location: location.pathname + location.search + location.hash,
+    location: location.pathname + location.search,
     ...(prevLocation && {
-      prevLocation:
-        prevLocation.pathname + prevLocation.search + prevLocation.hash
+      prevLocation: prevLocation.pathname + prevLocation.search
     })
   }
 

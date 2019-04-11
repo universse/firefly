@@ -7,6 +7,7 @@ import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
 import useOfflinePersistence from './useOfflinePersistence'
 import useSaveUserData from './useSaveUserData'
+import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
 import LocalStorage from 'constants/LocalStorage'
 
@@ -63,6 +64,9 @@ export default function useUserData (canUndo) {
   )
 
   useSaveUserData(change, firebase, user)
+
+  // v2
+  useSyncOfflineQueue(firebase, user)
 
   const onActionClick = useActionClickHandler(
     canUndo,

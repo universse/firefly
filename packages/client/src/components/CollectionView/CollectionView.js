@@ -95,7 +95,7 @@ export default function CollectionView ({
           }
         `}
       >
-        <LearningList check={check} urls={urls} />
+        <LearningList check={check} collectionId={id} urls={urls} />
       </div>
       {!isDesktop && (
         <div

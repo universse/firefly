@@ -15,7 +15,6 @@ import SetSnackbar from 'contexts/SetSnackbar'
 import URLParams from 'contexts/URLParams'
 import UserData from 'contexts/UserData'
 import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
-import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
 import Theme from 'constants/Theme'
 import {
   getNormalizedPathname,
@@ -29,7 +28,6 @@ export default function Layout ({
   location
 }) {
   useAccessibleFocusIndicator()
-  useSyncOfflineQueue()
 
   const { pathname } = location
 

@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 import LearningItem from './LearningItem'
 import { UrlsType } from 'constants/Types'
 
-function LearningList ({ check, urls }) {
+function LearningList ({ check, collectionId, urls }) {
   return (
     <ul
       css={css`
@@ -21,7 +21,11 @@ function LearningList ({ check, urls }) {
             position: relative;
           `}
         >
-          <LearningItem {...url} isChecked={!!check[url.id]} />
+          <LearningItem
+            collectionId={collectionId}
+            isChecked={!!check[url.id]}
+            {...url}
+          />
         </li>
       ))}
     </ul>
@@ -32,5 +36,6 @@ export default memo(LearningList)
 
 LearningList.propTypes = {
   check: PropTypes.objectOf(PropTypes.bool).isRequired,
+  collectionId: PropTypes.string.isRequired,
   urls: UrlsType
 }

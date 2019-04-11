@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
@@ -10,10 +10,6 @@ export default function MobileTagFilter ({ aggregatedTags, tags }) {
   const { constructUrl, onQueryClick, updateQuery } = useContext(
     URLParamsContext
   )
-
-  const handleClearFilterClick = useCallback(() => onQueryClick({ tag: '' }), [
-    onQueryClick
-  ])
 
   return (
     <>
@@ -38,7 +34,7 @@ export default function MobileTagFilter ({ aggregatedTags, tags }) {
         </h4>
         <ClearFilterButton
           aria-label='Reset Filters'
-          onClick={handleClearFilterClick}
+          onClick={() => onQueryClick({ tag: '' })}
         >
           CLEAR
         </ClearFilterButton>

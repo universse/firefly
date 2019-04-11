@@ -160,7 +160,7 @@ export function Input (props) {
         background-color: ${theme.colors.gray300};
         border-radius: 1.25rem;
         color: ${theme.colors.gray900};
-        font-size: 1rem;
+        font-size: 0.9375rem;
         height: 2.5rem;
         padding-left: 3.25rem;
         width: 100%;
@@ -172,7 +172,7 @@ export function Input (props) {
 
         ${theme.screens.desktop} {
           border-radius: 1.5rem;
-          font-size: 1.25rem;
+          font-size: 1.125rem;
           height: 3rem;
         }
       `}
@@ -254,7 +254,7 @@ export function Result ({ as: Tag, ...props }) {
       css={theme => css`
         color: ${theme.colors.gray900};
         display: flex;
-        font-size: 1.125rem;
+        font-size: 1rem;
         line-height: 2.5rem;
         padding-left: 1rem;
 
@@ -264,7 +264,7 @@ export function Result ({ as: Tag, ...props }) {
         }
 
         ${theme.screens.desktop} {
-          font-size: 1.25rem;
+          font-size: 1.125rem;
           line-height: 3rem;
         }
       `}
