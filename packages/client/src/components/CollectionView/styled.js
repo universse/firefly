@@ -38,7 +38,7 @@ export function LinkTitle ({ href, onClick, title }) {
         }
 
         ${theme.screens.desktop} {
-          padding: 1.375rem 3.75rem 0 6.25rem;
+          padding: 0.875rem 3.75rem 0 6.25rem;
         }
       `}
       href={href}

@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 import SearchBar from 'components/SearchBar'
@@ -36,15 +37,15 @@ function Header () {
               margin-right: 1.5rem;
             `}
           >
-            <a
+            <Link
               css={css`
                 display: block;
                 height: 2.25rem;
               `}
-              href='/'
+              to='/'
             >
               <Logo />
-            </a>
+            </Link>
           </div>
           <SearchBar
             ClearSearchWrapper={ClearSearchWrapper}

@@ -41,10 +41,10 @@ export default function Layout ({
       <AllCollections>
         <Authentication>
           <Modal>
+            {normalizedPathname !== '/search' && <Header />}
             <LatestActivity>
               <SetSnackbar location={location}>
                 <UserData canUndo={normalizedPathname === '/my-library'}>
-                  {normalizedPathname !== '/search' && <Header />}
                   {isIndexPage(pathname) ? (
                     <IndexLayout category={category} location={location}>
                       {children}
@@ -52,15 +52,15 @@ export default function Layout ({
                   ) : (
                     <Media>{children}</Media>
                   )}
-                  {!shouldNotHaveMobileNavigation(pathname) && (
-                    <MobileNavigation location={location} />
-                  )}
                 </UserData>
               </SetSnackbar>
             </LatestActivity>
             <SignUpForm />
           </Modal>
         </Authentication>
+        {!shouldNotHaveMobileNavigation(pathname) && (
+          <MobileNavigation normalizedPathname={normalizedPathname} />
+        )}
       </AllCollections>
     </ThemeProvider>
   )

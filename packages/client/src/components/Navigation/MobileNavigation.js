@@ -5,12 +5,9 @@ import { css } from '@emotion/core'
 import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'icons'
 import { mobileNavigationHeightInRem } from 'constants/Styles'
-import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { isIndexPage } from '../../../gatsby/utils'
 
-export default function MobileNavigation ({ location: { pathname } }) {
-  const normalizedPathname = getNormalizedPathname(pathname)
-
+export default function MobileNavigation ({ normalizedPathname }) {
   return (
     <nav
       css={theme => css`
@@ -41,7 +38,7 @@ export default function MobileNavigation ({ location: { pathname } }) {
         >
           <MobileNavLink
             Icon={Home}
-            isActive={isIndexPage(pathname)}
+            isActive={isIndexPage(normalizedPathname)}
             label='Home'
             to='/'
           />
@@ -88,5 +85,5 @@ export default function MobileNavigation ({ location: { pathname } }) {
 }
 
 MobileNavigation.propTypes = {
-  location: PropTypes.object.isRequired
+  normalizedPathname: PropTypes.string.isRequired
 }

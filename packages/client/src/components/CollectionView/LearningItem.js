@@ -51,9 +51,9 @@ function LearningItem ({ id, url, title, type, collectionId, isChecked }) {
           }
 
           ${theme.screens.desktop} {
-            height: 9rem;
+            height: 8rem;
             margin: 0 4rem;
-            padding: 1.5rem 0;
+            padding: 1rem 0;
           }
         `}
       >
