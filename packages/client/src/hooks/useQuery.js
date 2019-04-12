@@ -14,9 +14,7 @@ function init (search) {
 }
 
 function reducer (state, payload) {
-  return payload.action
-    ? { ...state, ...payload }
-    : { ...state, ...payload, action: undefined }
+  return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 
 export default function useQuery (pathname, search) {
