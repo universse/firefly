@@ -7,7 +7,6 @@ import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
-import { URLParamsContext } from 'contexts/URLParams'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { CollectionType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
@@ -16,9 +15,9 @@ import { createCategoryPath } from '../../../gatsby/utils'
 function Collection ({
   collection: { id, name, category, level, itemCount, tags },
   isLoved,
-  isSaved
+  isSaved,
+  onCategoryFilterClick
 }) {
-  const { onCategoryFilterClick } = useContext(URLParamsContext) || {}
   const onActionClick = useContext(UserDataDispatchContext)
 
   return (
@@ -141,5 +140,6 @@ export default memo(Collection)
 Collection.propTypes = {
   isLoved: PropTypes.bool.isRequired,
   isSaved: PropTypes.bool.isRequired,
-  collection: CollectionType
+  collection: CollectionType,
+  onCategoryFilterClick: PropTypes.func
 }

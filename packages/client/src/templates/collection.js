@@ -108,11 +108,11 @@ export default function CollectionTemplate ({
                 isSaved={isSaved}
               />
             </div>
-            <FABDesktop
+            {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
               <Suggest />
-            </FABDesktop>
+            </FABDesktop> */}
           </main>
         </>
       )}

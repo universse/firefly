@@ -7,7 +7,7 @@ import { createCollectionPath } from '../../../gatsby/utils'
 
 export const collectionHeightInRem = 9
 
-export const CollectionTitle = memo(function ({ id, name }) {
+export function CollectionTitle ({ id, name }) {
   return (
     <Link
       css={theme => css`
@@ -33,7 +33,7 @@ export const CollectionTitle = memo(function ({ id, name }) {
       </h3>
     </Link>
   )
-})
+}
 
 CollectionTitle.propTypes = {
   id: PropTypes.string.isRequired,

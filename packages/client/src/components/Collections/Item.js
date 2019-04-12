@@ -3,11 +3,13 @@ import PropTypes from 'prop-types'
 import { UserDataContext } from 'contexts/UserData'
 
 import Collection from './Collection'
+import { URLParamsContext } from 'contexts/URLParams'
 import { CollectionsType } from 'constants/Types'
 
 export default function Item ({ data, index, style }) {
   const collection = data[index].node
   const userData = useContext(UserDataContext)
+  const { onCategoryFilterClick } = useContext(URLParamsContext) || {}
 
   return userData ? (
     <li style={style}>
@@ -15,6 +17,7 @@ export default function Item ({ data, index, style }) {
         collection={collection}
         isLoved={!!userData.love[collection.id]}
         isSaved={!!userData.save[collection.id]}
+        onCategoryFilterClick={onCategoryFilterClick}
       />
     </li>
   ) : null
