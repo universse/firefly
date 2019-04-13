@@ -15,8 +15,7 @@ import { createCategoryPath } from '../../../gatsby/utils'
 function Collection ({
   collection: { id, name, category, level, itemCount, tags },
   isLoved,
-  isSaved,
-  onCategoryFilterClick
+  isSaved
 }) {
   const onActionClick = useContext(UserDataDispatchContext)
 
@@ -41,12 +40,7 @@ function Collection ({
             justify-content: space-between;
           `}
         >
-          <Category
-            onClick={onCategoryFilterClick}
-            to={createCategoryPath(category)}
-          >
-            {category}
-          </Category>
+          <Category to={createCategoryPath(category)}>{category}</Category>
           <div>
             <div
               css={css`
@@ -140,6 +134,5 @@ export default memo(Collection)
 Collection.propTypes = {
   isLoved: PropTypes.bool.isRequired,
   isSaved: PropTypes.bool.isRequired,
-  collection: CollectionType,
-  onCategoryFilterClick: PropTypes.func
+  collection: CollectionType
 }

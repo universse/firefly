@@ -8,3 +8,5 @@ export const mobileNavigationHeightInRem = 3.5
 
 export const mobileBarsHeightInRem =
   mobileHeaderHeightInRem + mobileNavigationHeightInRem
+
+export const mobileProgressBarHeight = 2.25

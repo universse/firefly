@@ -8,13 +8,12 @@ import { Share } from 'icons'
 import { logClickAction } from 'utils/amplitudeUtils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import copyToClipboard from 'utils/copyToClipboard'
-import withLocation from 'utils/withLocation'
 
-function ShareDropdown ({ id, name, location: { href } }) {
+export default function ShareDropdown ({ id, name }) {
   const onCopyClick = useCallback(e => {
-    copyToClipboard(href)
+    copyToClipboard(window.location.href)
     e.currentTarget.focus()
-  }, [href])
+  }, [])
 
   const items = useMemo(
     () => [
@@ -50,8 +49,6 @@ function ShareDropdown ({ id, name, location: { href } }) {
     />
   )
 }
-
-export default withLocation(ShareDropdown)
 
 ShareDropdown.propTypes = {
   id: PropTypes.string.isRequired,

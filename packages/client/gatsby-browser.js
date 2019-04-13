@@ -42,6 +42,10 @@ const logViewPage = ({ location, prevLocation }) => {
     : window.amplitude.getInstance().logEvent('view page', properties)
 }
 
+export const onClientEntry = () => {
+  process.env.NODE_ENV === 'development' && console.clear()
+}
+
 export const onRouteUpdate = ({ location, prevLocation }) => {
   if (window.amplitude) {
     logViewPage({ location, prevLocation })

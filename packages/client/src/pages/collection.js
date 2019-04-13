@@ -13,7 +13,11 @@ import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Back, Heart, Save } from 'icons'
 import AriaLabels from 'constants/AriaLabels'
-import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
+import {
+  headerHeightInRem,
+  mobileHeaderHeightInRem,
+  mobileProgressBarHeight
+} from 'constants/Styles'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import parseCollectionData from 'utils/parseCollectionData'
 import { getParamFromPathname } from 'utils/pathnameUtils'
@@ -113,9 +117,10 @@ export default function CollectionPage ({ location }) {
             css={theme => css`
               background-color: ${theme.colors.gray100};
               min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
+              padding: 0 0 ${mobileProgressBarHeight + 1}rem;
 
               ${theme.screens.nonMobile} {
-                padding: 1rem 0;
+                padding: 1rem 0 ${mobileProgressBarHeight + 1}rem;
               }
 
               ${theme.screens.desktop} {
@@ -130,7 +135,7 @@ export default function CollectionPage ({ location }) {
                 max-width: 50rem;
 
                 ${theme.screens.mobile} {
-                  padding: 0 0 1rem;
+                  padding: 0;
                 }
               `}
             >

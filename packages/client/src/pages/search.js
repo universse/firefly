@@ -38,7 +38,7 @@ export default function SearchPage ({ location }) {
 
           ${theme.screens.nonDesktop} {
             min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
-            padding: 1rem 0;
+            padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
           }
         `}
       >

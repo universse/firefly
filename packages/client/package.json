@@ -15,7 +15,7 @@
     "emotion": "^10.0.9",
     "emotion-theming": "^10.0.10",
     "fromfrom": "^1.2.0",
-    "gatsby": "^2.3.21",
+    "gatsby": "^2.3.22",
     "gatsby-image": "^2.0.38",
     "gatsby-plugin-accessibilityjs": "^1.0.3",
     "gatsby-plugin-create-client-paths": "^2.0.5",
@@ -35,7 +35,7 @@
     "gatsby-plugin-sitemap": "^2.0.12",
     "gatsby-source-filesystem": "^2.0.29",
     "gatsby-source-firestore": "^1.0.3",
-    "gatsby-source-graphql": "^2.0.17",
+    "gatsby-source-graphql": "^2.0.18",
     "gatsby-transformer-sharp": "^2.1.18",
     "immer": "^2.1.5",
     "isomorphic-fetch": "^2.2.1",
@@ -49,9 +49,9 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-modal": "^3.8.1",
-    "react-redux": "^7.0.1",
+    "react-redux": "^7.0.2",
     "react-virtualized": "^9.21.0",
-    "react-window": "^1.7.2",
+    "react-window": "^1.8.1",
     "redux": "^4.0.1",
     "speakingurl": "^14.0.1",
     "typeface-playfair-display": "^0.0.72",
@@ -71,9 +71,9 @@
     "react-testing-library": "^6.1.2"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "yarn clean && gatsby build",
     "clean": "rm -rf .cache && rm -rf public",
-    "serve": "gatsby serve -o -p 3000",
+    "serve": "yarn build && gatsby serve -o -p 3000",
     "start": "gatsby develop -o -p 3000",
     "test": "jest"
   }

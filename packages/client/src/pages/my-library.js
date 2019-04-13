@@ -12,7 +12,11 @@ import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
-import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
+import {
+  headerHeightInRem,
+  mobileBarsHeightInRem,
+  mobileNavigationHeightInRem
+} from 'constants/Styles'
 import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
@@ -67,10 +71,10 @@ export default function MyLibraryPage () {
         css={theme => css`
           background-color: ${theme.colors.gray100};
           min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
-          padding: 0 0 1rem;
+          padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
           ${theme.screens.tablet} {
-            padding: 1rem 0;
+            padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
           }
 
           ${theme.screens.desktop} {

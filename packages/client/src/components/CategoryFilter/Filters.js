@@ -1,21 +1,15 @@
-import React, { memo, useContext } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
-import { Location } from '@reach/router'
 
-import { URLParamsContext } from 'contexts/URLParams'
 import { Category } from './styled'
 import { RefType } from 'constants/Types'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-const Filters = memo(function ({
-  handleScroll,
-  onCategoryFilterClick,
-  pathname,
-  slider
-}) {
+function Filters ({ handleScroll, slider }) {
+  const pathname = window.location.pathname
   const normalizedPathname = getNormalizedPathname(pathname)
 
   return (
@@ -53,7 +47,6 @@ const Filters = memo(function ({
               isActive={
                 pathname === '/' || normalizedPathname === '/category/all'
               }
-              onClick={onCategoryFilterClick}
               to='/category/all'
             >
               all
@@ -72,7 +65,6 @@ const Filters = memo(function ({
             >
               <Category
                 isActive={normalizedPathname === createCategoryPath(category)}
-                onClick={onCategoryFilterClick}
                 to={createCategoryPath(category)}
               >
                 {category}
@@ -83,27 +75,11 @@ const Filters = memo(function ({
       </div>
     </nav>
   )
-})
-
-export default function (props) {
-  const { onCategoryFilterClick } = useContext(URLParamsContext)
-
-  return (
-    <Location>
-      {({ location }) => (
-        <Filters
-          onCategoryFilterClick={onCategoryFilterClick}
-          pathname={location.pathname}
-          {...props}
-        />
-      )}
-    </Location>
-  )
 }
+
+export default memo(Filters)
 
 Filters.propTypes = {
   handleScroll: PropTypes.func.isRequired,
-  onCategoryFilterClick: PropTypes.func.isRequired,
-  pathname: PropTypes.string.isRequired,
   slider: RefType
 }

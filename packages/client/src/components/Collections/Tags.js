@@ -1,17 +1,16 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { Tag } from 'components/common'
 import { URLParamsContext } from 'contexts/URLParams'
 import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
-import withLocation from 'utils/withLocation'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { isIndexPage } from '../../../gatsby/utils'
 
-function Tags ({ location: { pathname }, tags }) {
+export default function Tags ({ tags }) {
   const { constructUrl, queryDispatch } = useContext(URLParamsContext) || {}
+  const pathname = window.location.pathname
 
   return (
     <ul
@@ -50,9 +49,6 @@ function Tags ({ location: { pathname }, tags }) {
   )
 }
 
-export default withLocation(Tags)
-
 Tags.propTypes = {
-  location: PropTypes.object.isRequired,
   tags: TagsType
 }

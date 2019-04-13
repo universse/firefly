@@ -1,6 +1,6 @@
-import { useEffect, useReducer, useCallback, useMemo } from 'react'
+import { useEffect, useReducer, useCallback, useMemo, useRef } from 'react'
 import qs from 'qs'
-import { globalHistory } from '@reach/router/lib/history'
+
 import constructHref from 'utils/constructHref'
 
 function init (search) {
@@ -25,7 +25,7 @@ export default function useQuery (pathname, search) {
   const constructUrl = useCallback((tag, isTagFilter = true) => {
     if (!isTagFilter) {
       return {
-        href: constructHref(pathname, sort, [tag])
+        href: constructHref(sort, [tag])
       }
     }
 
@@ -34,35 +34,31 @@ export default function useQuery (pathname, search) {
       : [tag, ...tags]
 
     return {
-      href: constructHref(pathname, sort, updatedTags),
+      href: constructHref(sort, updatedTags),
       updatedTags
     }
-  }, [pathname, sort, tags])
+  }, [sort, tags])
 
-  const onCategoryFilterClick = useCallback(() => queryDispatch(init('')), [])
-
-  useEffect(() => {
-    !action &&
-      window.history.pushState({}, '', constructHref(pathname, sort, tags))
-  }, [action, pathname, sort, tags])
+  const firstMount = useRef(true)
 
   useEffect(() => {
-    const unlisten = globalHistory.listen(({ location: { search } }) => {
-      queryDispatch(init(search))
-    })
-
-    return () => {
-      unlisten()
+    if (firstMount.current) {
+      firstMount.current = false
+      return
     }
-  }, [])
+    queryDispatch(init(search))
+  }, [pathname, search])
+
+  useEffect(() => {
+    !action && window.history.pushState({}, '', constructHref(sort, tags))
+  }, [action, sort, tags])
 
   return useMemo(
     () => ({
       constructUrl,
-      onCategoryFilterClick,
       query,
       queryDispatch
     }),
-    [constructUrl, onCategoryFilterClick, query]
+    [constructUrl, query]
   )
 }

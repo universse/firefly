@@ -1,11 +1,11 @@
 import qs from 'qs'
 
-const constructHref = (pathname, sort, tags) => {
+const constructHref = (sort, tags) => {
   sort = sort === '' ? [] : sort
   tags = tags.length === 0 ? [] : [...tags].reverse().join(',')
 
   const queryString = qs.stringify({ sort, tags }, { encode: false })
-  return `${pathname}${queryString ? `?${queryString}` : ''}`
+  return `${window.location.pathname}${queryString ? `?${queryString}` : ''}`
 }
 
 export default constructHref
