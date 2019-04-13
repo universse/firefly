@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 import { ActionBar } from 'components/common'
 import { HeaderTag, HeaderWrapper } from './styled'
 
-function MobileHeader ({ actions, navIcon, shadow, title }) {
+function MobileHeader ({ actions, isScrollingDown, navIcon, shadow, title }) {
   return (
     <HeaderTag
       css={theme => css`
@@ -15,6 +15,7 @@ function MobileHeader ({ actions, navIcon, shadow, title }) {
           display: none;
         }
       `}
+      isScrollingDown={isScrollingDown}
     >
       <HeaderWrapper shadow={shadow}>
         <div
@@ -54,12 +55,14 @@ function MobileHeader ({ actions, navIcon, shadow, title }) {
 export default memo(MobileHeader)
 
 MobileHeader.defaultProps = {
+  isScrollingDown: false,
   shadow: false
 }
 
 MobileHeader.propTypes = {
   title: PropTypes.string.isRequired,
   actions: PropTypes.element,
+  isScrollingDown: PropTypes.bool,
   navIcon: PropTypes.element,
   shadow: PropTypes.bool
 }

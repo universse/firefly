@@ -68,7 +68,8 @@
     "jest-emotion": "^10.0.10",
     "preval.macro": "^3.0.0",
     "react-test-renderer": "^16.8.6",
-    "react-testing-library": "^6.1.2"
+    "react-testing-library": "^6.1.2",
+    "webpack-bundle-analyzer": "^3.3.2"
   },
   "scripts": {
     "build": "yarn clean && gatsby build",

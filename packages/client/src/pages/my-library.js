@@ -66,7 +66,7 @@ export default function MyLibraryPage () {
   return (
     <>
       <SEO title='My Library' />
-      <MobileHeader shadow title='My Saved Collections' />
+      <MobileHeader shadow title='My Library' />
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};

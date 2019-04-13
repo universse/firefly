@@ -52,6 +52,5 @@ export default function ShareDropdown ({ id, name }) {
 
 ShareDropdown.propTypes = {
   id: PropTypes.string.isRequired,
-  location: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired
 }

@@ -281,7 +281,7 @@ Result.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
 }
 
-export function Sidebar (props) {
+export function Sidebar ({ isScrollingDown, ...props }) {
   return (
     <div
       css={theme => css`
@@ -291,6 +291,11 @@ export function Sidebar (props) {
           background-color: ${theme.colors.white900};
           box-shadow: ${theme.shadows[1]};
           top: ${mobileHeaderHeightInRem}rem;
+          transform: translateY(
+            ${isScrollingDown ? `-${mobileHeaderHeightInRem}rem` : 0}
+          );
+          transition: transform 0.3s;
+          will-change: transform;
           z-index: 100;
         }
 
@@ -304,6 +309,14 @@ export function Sidebar (props) {
       {...props}
     />
   )
+}
+
+Sidebar.defaultProps = {
+  isScrollingDown: false
+}
+
+Sidebar.propTypes = {
+  isScrollingDown: PropTypes.bool
 }
 
 export { default as Spinner } from './Spinner'

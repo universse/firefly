@@ -12,6 +12,7 @@ import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
+import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import {
   headerHeightInRem,
   mobileNavigationHeightInRem
@@ -36,10 +37,16 @@ export default function IndexLayout ({ category, children, location }) {
 
   const title = category === 'all' ? '' : toTitleCase(category)
 
+  const isScrollingDown = useIsScrollingDown()
+
   return (
     <URLParams location={location}>
       <SEO title={title} />
-      <MobileHeader actions={actions} title='Collections' />
+      <MobileHeader
+        actions={actions}
+        isScrollingDown={isScrollingDown}
+        title='Collections'
+      />
       <section id='hero'>
         {/* v2 */}
         {/* <Hero /> */}
@@ -74,7 +81,7 @@ export default function IndexLayout ({ category, children, location }) {
             {isDesktop => (
               <>
                 {!isDesktop && (
-                  <Sidebar>
+                  <Sidebar isScrollingDown={isScrollingDown}>
                     <CategoryFilter />
                   </Sidebar>
                 )}
