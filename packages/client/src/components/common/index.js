@@ -311,12 +311,8 @@ export function Sidebar ({ isScrollingDown, ...props }) {
   )
 }
 
-Sidebar.defaultProps = {
-  isScrollingDown: false
-}
-
 Sidebar.propTypes = {
-  isScrollingDown: PropTypes.bool
+  isScrollingDown: PropTypes.bool.isRequired
 }
 
 export { default as Spinner } from './Spinner'

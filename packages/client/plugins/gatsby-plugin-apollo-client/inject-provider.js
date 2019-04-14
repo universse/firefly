@@ -1,11 +1,11 @@
 import React from 'react'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
-import fetch from 'isomorphic-fetch'
+import ky from 'ky-universal'
 
 const client = new ApolloClient({
   // uri: '',
-  fetch
+  fetch: ky
 })
 
 export default ({ element }) => (

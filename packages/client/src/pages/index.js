@@ -5,11 +5,8 @@ import { css } from '@emotion/core'
 
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
-import Modal from 'components/Modal'
-import SortByDifficulty, {
-  MobileSortByDifficulty
-} from 'components/SortByDifficulty'
-import TagFilter, { MobileTagFilter } from 'components/TagFilter'
+import SortByDifficulty from 'components/SortByDifficulty'
+import TagFilter from 'components/TagFilter'
 import { AllCollectionsContext } from 'contexts/AllCollections'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
@@ -17,10 +14,10 @@ import { Sidebar } from 'components/common'
 import useAggregatedTags from 'hooks/useAggregatedTags'
 import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
-import ModalTypes from 'constants/ModalTypes'
 import { CollectionsType } from 'constants/Types'
+import MobileFilters from 'components/MobileFilters'
 
-export default function IndexPage ({ data }) {
+export default function IndexPage ({ data, isScrollingDown }) {
   const isDesktop = useContext(MediaContext)
   const {
     query: { sort, tags }
@@ -40,21 +37,16 @@ export default function IndexPage ({ data }) {
 
   return (
     <>
-      {isDesktop && (
-        <Sidebar>
-          <CategoryFilter />
-          <TagFilter aggregatedTags={aggregatedTags} tags={tags} />
-        </Sidebar>
-      )}
+      <Sidebar isScrollingDown={isScrollingDown}>
+        <CategoryFilter />
+        {isDesktop && <TagFilter aggregatedTags={aggregatedTags} tags={tags} />}
+      </Sidebar>
       {!isDesktop && (
-        <Modal
-          className='FilterModal'
-          contentLabel='Filter Collections by Tags'
-          type={ModalTypes.MOBILE_FILTER}
-        >
-          <MobileSortByDifficulty sort={sort} />
-          <MobileTagFilter aggregatedTags={aggregatedTags} tags={tags} />
-        </Modal>
+        <MobileFilters
+          aggregatedTags={aggregatedTags}
+          sort={sort}
+          tags={tags}
+        />
       )}
       <div
         css={theme => css`
@@ -85,7 +77,8 @@ export default function IndexPage ({ data }) {
 }
 
 IndexPage.propTypes = {
-  data: PropTypes.shape({ edges: CollectionsType }).isRequired
+  data: PropTypes.shape({ edges: CollectionsType }).isRequired,
+  isScrollingDown: PropTypes.bool.isRequired
 }
 
 export const collections = graphql`

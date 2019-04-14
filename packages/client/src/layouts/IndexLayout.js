@@ -1,14 +1,12 @@
-import React, { useContext, useMemo } from 'react'
+import React, { cloneElement, useContext, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import CategoryFilter from 'components/CategoryFilter'
 import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
-import { FABDesktop, IconButton, Sidebar } from 'components/common'
-import Media from 'contexts/Media'
+import { FABDesktop, IconButton } from 'components/common'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
@@ -77,18 +75,7 @@ export default function IndexLayout ({ category, children, location }) {
             }
           `}
         >
-          <Media>
-            {isDesktop => (
-              <>
-                {!isDesktop && (
-                  <Sidebar isScrollingDown={isScrollingDown}>
-                    <CategoryFilter />
-                  </Sidebar>
-                )}
-                {children}
-              </>
-            )}
-          </Media>
+          {cloneElement(children, { isScrollingDown })}
         </div>
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}

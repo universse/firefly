@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 
 export default function useIsScrollingDown () {
-  const [isScrollingDown, setIsScrollingDown] = useState()
+  const [isScrollingDown, setIsScrollingDown] = useState(false)
 
   const prevScrollPos = useRef(0)
 

@@ -8,14 +8,14 @@ module.exports = ({ actions: { setWebpackConfig }, stage }) => {
     }
   })
 
-  if (stage === 'build-javascript') {
-    setWebpackConfig({
-      plugins: [
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'server',
-          analyzerPort: '3001'
-        })
-      ]
-    })
-  }
+  // if (stage === 'build-javascript') {
+  //   setWebpackConfig({
+  //     plugins: [
+  //       new BundleAnalyzerPlugin({
+  //         analyzerMode: 'server',
+  //         analyzerPort: '3001'
+  //       })
+  //     ]
+  //   })
+  // }
 }
