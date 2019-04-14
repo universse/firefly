@@ -33,8 +33,7 @@ export default function useActionClickHandler (
     if (!action.endsWith('love')) {
       trackChange(payload)
 
-      // v2 remove return
-      return dispatch({
+      dispatch({
         type: 'click',
         payload
       })

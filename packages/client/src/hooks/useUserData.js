@@ -65,7 +65,6 @@ export default function useUserData (canUndo) {
 
   useSaveUserData(change, firebase, user)
 
-  // v2
   useSyncOfflineQueue(firebase, user)
 
   const onActionClick = useActionClickHandler(

@@ -7,12 +7,11 @@ import LocalStorage from 'constants/LocalStorage'
 export default function useSyncOfflineQueue (firebase, user) {
   const [shouldSync, setShouldSync] = useState()
 
+  const startSyncing = useCallback(() => setShouldSync(!!user), [user])
   const stopSyncing = useCallback(() => setShouldSync(false), [])
 
   useEffect(() => {
     setShouldSync(!!user)
-
-    const startSyncing = () => setShouldSync(!!user)
 
     window.addEventListener('online', startSyncing)
     window.addEventListener('offline', stopSyncing)
@@ -21,32 +20,34 @@ export default function useSyncOfflineQueue (firebase, user) {
       window.removeEventListener('online', startSyncing)
       window.removeEventListener('offline', stopSyncing)
     }
-  }, [stopSyncing, user])
+  }, [startSyncing, stopSyncing, user])
 
   const syncOfflineQueue = useCallback(() => {
     const failure = []
 
-    localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes =>
-      changes && changes.length
-        ? changes
-            .reduce(
-              (chain, { id, action }, i) =>
-                chain.then(() =>
-                  firebase[`${action}`](id).catch(() => failure.push(i))
-                ),
-              Promise.resolve([])
+    localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes => {
+      if (changes && changes.length) {
+        stopSyncing()
+
+        changes
+          .reduce(
+            (chain, { id, action }, i) =>
+              chain.then(() =>
+                firebase[`${action}`](id).catch(() => failure.push(i))
+              ),
+            Promise.resolve([])
+          )
+          .then(() => {
+            localforage.setItem(
+              LocalStorage.OFFLINE_QUEUE,
+              changes.filter((_, i) => failure.includes(i))
             )
-            .then(() => {
-              localforage.setItem(
-                LocalStorage.OFFLINE_QUEUE,
-                changes.filter((_, i) => failure.includes(i))
-              )
 
-              !failure.length && stopSyncing()
-            })
-        : stopSyncing()
-    )
-  }, [firebase, stopSyncing])
+            startSyncing()
+          })
+      }
+    })
+  }, [firebase, startSyncing, stopSyncing])
 
-  useInterval(syncOfflineQueue, shouldSync ? 5000 : null, true)
+  useInterval(syncOfflineQueue, shouldSync ? 5000 : null)
 }

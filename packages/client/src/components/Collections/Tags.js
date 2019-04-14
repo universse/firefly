@@ -1,15 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
 import { Tag } from 'components/common'
-import { URLParamsContext } from 'contexts/URLParams'
 import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
-import { isIndexPage } from '../../../gatsby/utils'
 
 export default function Tags ({ tags }) {
-  const { constructUrl, queryDispatch } = useContext(URLParamsContext) || {}
   const pathname = window.location.pathname
 
   return (
@@ -27,19 +24,11 @@ export default function Tags ({ tags }) {
           `}
         >
           <Tag
-            onClick={e => {
-              if (isIndexPage(pathname)) {
-                e.preventDefault()
-                queryDispatch({ tags: [tag] })
-              }
+            onClick={() => {
               logClickTag({ tag })
             }}
             small={!getNormalizedPathname(pathname).includes('/collections/')}
-            to={
-              isIndexPage(pathname)
-                ? constructUrl(tag, false).href
-                : `/?tags=${tag}`
-            }
+            to={`/?tags=${tag}`}
           >
             {tag}
           </Tag>

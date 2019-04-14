@@ -46,8 +46,7 @@ export default function IndexLayout ({ category, children, location }) {
         title='Collections'
       />
       <section id='hero'>
-        {/* v2 */}
-        {/* <Hero /> */}
+        <Hero />
       </section>
       <main
         css={theme => css`

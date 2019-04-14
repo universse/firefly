@@ -5,11 +5,8 @@ import useQuery from 'hooks/useQuery'
 
 export const URLParamsContext = createContext()
 
-export default function URLParams ({
-  children,
-  location: { pathname, search }
-}) {
-  const value = useQuery(pathname, search)
+export default function URLParams ({ children, location }) {
+  const value = useQuery(location)
 
   return (
     <URLParamsContext.Provider value={value}>

@@ -20,9 +20,16 @@ export default function SetSnackbar ({ children, location }) {
   )
 
   const dismissSnackbar = useCallback(
-    () => setSnackbar(snackbar => ({ ...snackbar, isOpen: false })),
+    () =>
+      setSnackbar(snackbar =>
+        snackbar.isOpen ? { ...snackbar, isOpen: false } : snackbar
+      ),
     []
   )
+
+  useLayoutEffect(() => {
+    dismissSnackbar()
+  }, [dismissSnackbar, location])
 
   useEffect(() => {
     if (snackbar.isOpen && snackbar.timeout) {
@@ -33,10 +40,6 @@ export default function SetSnackbar ({ children, location }) {
       }
     }
   }, [dismissSnackbar, snackbar])
-
-  useLayoutEffect(() => {
-    dismissSnackbar()
-  }, [dismissSnackbar, location])
 
   return (
     <SetSnackbarContext.Provider value={openSnackbar}>

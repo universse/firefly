@@ -28,40 +28,35 @@ export default function MyLibraryPage () {
   const openSnackbar = useContext(SetSnackbarContext)
   const { openModal } = useContext(SetModalContext)
 
-  // v2
-  // const [initialSavedCount, setInitialSavedCount] = useState()
+  const [initialSavedCount, setInitialSavedCount] = useState(
+    () => userData && Object.keys(userData.save).length
+  )
 
-  // useEffect(
-  //   () => {
-  //     if (isNaN(initialSavedCount) && userData) {
-  //       setInitialSavedCount(Object.keys(userData.save).length)
-  //     }
-  //   },
-  //   [initialSavedCount, userData]
-  // )
+  useEffect(() => {
+    if (isNaN(initialSavedCount) && userData) {
+      setInitialSavedCount(Object.keys(userData.save).length)
+    }
+  }, [initialSavedCount, userData])
 
-  // useEffect(
-  //   () => {
-  //     if (isNaN(initialSavedCount)) return
+  useEffect(() => {
+    if (isNaN(initialSavedCount)) return
 
-  //     if (!hasSignedIn() && !user) {
-  //       initialSavedCount &&
-  //         openSnackbar({
-  //           buttonProps: {
-  //             'aria-label': AriaLabels.SIGNIN_REGISTER,
-  //             children: 'Sign In',
-  //             onClick: () => {
-  //               openModal(ModalTypes.SIGN_UP_FORM)
-  //               logSignUpIntent()
-  //             }
-  //           },
-  //           message: 'Sign in to sync saved collections across devices.',
-  //           timeout: 5000
-  //         })
-  //     }
-  //   },
-  //   [openModal, openSnackbar, initialSavedCount, user]
-  // )
+    if (!hasSignedIn() && !user) {
+      initialSavedCount &&
+        openSnackbar({
+          buttonProps: {
+            'aria-label': AriaLabels.SIGNIN_REGISTER,
+            children: 'Sign In',
+            onClick: () => {
+              openModal(ModalTypes.SIGN_UP_FORM)
+              logSignUpIntent()
+            }
+          },
+          message: 'Sign in to sync saved collections across devices.',
+          timeout: 5000
+        })
+    }
+  }, [openModal, openSnackbar, initialSavedCount, user])
 
   return (
     <>
@@ -93,7 +88,7 @@ export default function MyLibraryPage () {
             }
           `}
         >
-          {isDesktop && (
+          {isDesktop && !!initialSavedCount && (
             <div
               css={css`
                 margin: 0 0 1.5rem 2rem;

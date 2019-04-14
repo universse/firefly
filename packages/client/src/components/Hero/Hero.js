@@ -10,6 +10,7 @@ import { LatestActivityContext } from 'contexts/LatestActivity'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
 function Hero () {
+  return <Landing />
   const data = useStaticQuery(graphql`
     query {
       site {

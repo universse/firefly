@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useCallback, useMemo, useRef } from 'react'
+import { useEffect, useReducer, useMemo, useRef } from 'react'
 import qs from 'qs'
 
 import constructHref from 'utils/constructHref'
@@ -17,27 +17,8 @@ function reducer (state, payload) {
   return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 
-export default function useQuery (pathname, search) {
-  const [query, queryDispatch] = useReducer(reducer, search, init)
-
-  const { sort, tags, action } = query
-
-  const constructUrl = useCallback((tag, isTagFilter = true) => {
-    if (!isTagFilter) {
-      return {
-        href: constructHref(sort, [tag])
-      }
-    }
-
-    const updatedTags = tags.includes(tag)
-      ? tags.filter(t => t !== tag)
-      : [tag, ...tags]
-
-    return {
-      href: constructHref(sort, updatedTags),
-      updatedTags
-    }
-  }, [sort, tags])
+export default function useQuery (location) {
+  const [query, queryDispatch] = useReducer(reducer, location.search, init)
 
   const firstMount = useRef(true)
 
@@ -46,19 +27,37 @@ export default function useQuery (pathname, search) {
       firstMount.current = false
       return
     }
-    queryDispatch(init(search))
-  }, [pathname, search])
+    queryDispatch(init(location.search))
+  }, [location])
 
   useEffect(() => {
+    const { sort, tags, action } = query
     !action && window.history.pushState({}, '', constructHref(sort, tags))
-  }, [action, sort, tags])
+  }, [query])
 
   return useMemo(
     () => ({
-      constructUrl,
+      constructUrl (tag, isTagFilter = true) {
+        const { sort, tags } = query
+
+        if (!isTagFilter) {
+          return {
+            href: constructHref(sort, [tag])
+          }
+        }
+
+        const updatedTags = tags.includes(tag)
+          ? tags.filter(t => t !== tag)
+          : [tag, ...tags]
+
+        return {
+          href: constructHref(sort, updatedTags),
+          updatedTags
+        }
+      },
       query,
       queryDispatch
     }),
-    [constructUrl, query]
+    [query]
   )
 }
