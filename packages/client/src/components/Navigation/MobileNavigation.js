@@ -11,7 +11,7 @@ export default function MobileNavigation ({ normalizedPathname }) {
   return (
     <nav
       css={theme => css`
-        background-color: ${theme.colors.white900};
+        background-color: #fff;
         border-top: 1px solid ${theme.colors.gray300};
         bottom: 0;
         height: ${mobileNavigationHeightInRem}rem;

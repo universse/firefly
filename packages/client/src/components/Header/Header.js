@@ -18,13 +18,7 @@ import {
 
 function Header () {
   return (
-    <HeaderTag
-      css={theme => css`
-        ${theme.screens.nonDesktop} {
-          display: none;
-        }
-      `}
-    >
+    <HeaderTag>
       <HeaderWrapper>
         <div
           css={css`

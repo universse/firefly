@@ -25,17 +25,27 @@ function Snackbar ({
       >
         <div
           aria-live='polite'
-          css={css`
-            margin-right: 1rem;
+          css={theme => css`
+            margin-right: 0;
+            padding: 0.5rem 0;
+
+            ${theme.screens.nonMobile} {
+              margin-right: 1rem;
+            }
           `}
           role='status'
         >
           <Message>{message}</Message>
         </div>
         <div
-          css={css`
+          css={theme => css`
             align-items: center;
             display: flex;
+
+            ${theme.screens.mobile} {
+              align-self: flex-end;
+              margin-right: -0.5rem;
+            }
           `}
         >
           <div>

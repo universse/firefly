@@ -18,18 +18,20 @@ export function ClearSearchWrapper (props) {
   )
 }
 
-export function HeaderTag ({ isScrollingDown, ...props }) {
+export function HeaderTag ({ isScrollingDown, mobile, ...props }) {
   return (
     <header
       css={theme => css`
         background-color: ${theme.colors.white900};
+        display: ${mobile ? 'none' : 'block'};
         height: ${headerHeightInRem}rem;
-        position: fixed;
+        position: ${mobile ? 'sticky' : 'fixed'};
         top: 0;
         width: 100%;
         z-index: 200;
 
         ${theme.screens.nonDesktop} {
+          display: ${mobile ? 'block' : 'none'};
           height: ${mobileHeaderHeightInRem}rem;
           transform: translateY(${isScrollingDown ? '-100%' : 0});
           transition: transform 0.3s;
@@ -42,11 +44,13 @@ export function HeaderTag ({ isScrollingDown, ...props }) {
 }
 
 HeaderTag.defaultProps = {
-  isScrollingDown: false
+  isScrollingDown: false,
+  mobile: false
 }
 
 HeaderTag.propTypes = {
-  isScrollingDown: PropTypes.bool
+  isScrollingDown: PropTypes.bool,
+  mobile: PropTypes.bool
 }
 
 export function HeaderWrapper ({ shadow, ...props }) {

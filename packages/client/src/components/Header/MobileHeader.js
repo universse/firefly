@@ -7,16 +7,7 @@ import { HeaderTag, HeaderWrapper } from './styled'
 
 function MobileHeader ({ actions, isScrollingDown, navIcon, shadow, title }) {
   return (
-    <HeaderTag
-      css={theme => css`
-        position: sticky;
-
-        ${theme.screens.desktop} {
-          display: none;
-        }
-      `}
-      isScrollingDown={isScrollingDown}
-    >
+    <HeaderTag isScrollingDown={isScrollingDown} mobile>
       <HeaderWrapper shadow={shadow}>
         <div
           css={css`

@@ -41,6 +41,7 @@ export function Message (props) {
       css={theme => css`
         color: ${theme.colors.white900};
         font-size: 1rem;
+        line-height: 1.5rem;
       `}
       {...props}
     />
@@ -56,11 +57,17 @@ export function Surface (props) {
         border-radius: 4px;
         box-shadow: ${theme.shadows[2]};
         display: flex;
-        height: 3rem;
         justify-content: space-between;
         max-width: 40rem;
         min-width: 22.5rem;
         padding: 0 0.5rem 0 1rem;
+
+        ${theme.screens.mobile} {
+          flex-direction: column;
+          margin: 0 1rem;
+          min-width: auto;
+          padding: 0 1rem;
+        }
       `}
       {...props}
     />

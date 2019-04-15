@@ -272,6 +272,11 @@ $black200: rgba(0, 0, 0, 0.08);
   }
 }
 
+#___gatsby > div {
+  display: flex;
+  flex-direction: column;
+}
+
 .Modal {
   background-color: #fff;
   display: flex;

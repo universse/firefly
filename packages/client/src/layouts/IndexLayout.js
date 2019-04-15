@@ -45,7 +45,14 @@ export default function IndexLayout ({ category, children, location }) {
         isScrollingDown={isScrollingDown}
         title='Collections'
       />
-      <section id='hero'>
+      <section
+        css={theme => css`
+          ${theme.screens.nonDesktop} {
+            order: -1;
+          }
+        `}
+        id='hero'
+      >
         <Hero />
       </section>
       <main
