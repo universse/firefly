@@ -28,7 +28,12 @@ module.exports = {
 
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
+    {
+      resolve: 'gatsby-plugin-sass',
+      options: {
+        implementation: require('sass')
+      }
+    },
     'gatsby-plugin-layout',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',

@@ -12,9 +12,9 @@ const actionCodeSettings = JSON.stringify({
 const worker =
   typeof window === 'object' &&
   workerize(`
-importScripts('https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js')
-importScripts('https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js')
+importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js')
+importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-firestore.js')
 
 firebase.initializeApp(${config})
 const auth = firebase.auth()

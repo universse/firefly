@@ -26,11 +26,11 @@ function Snackbar ({
         <div
           aria-live='polite'
           css={theme => css`
-            margin-right: 0;
-            padding: 0.5rem 0;
+            margin-right: 1rem;
 
-            ${theme.screens.nonMobile} {
-              margin-right: 1rem;
+            ${theme.screens.mobile} {
+              margin-right: 0;
+              padding-top: 0.5rem;
             }
           `}
           role='status'

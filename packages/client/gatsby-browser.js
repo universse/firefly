@@ -29,6 +29,10 @@ export const shouldUpdateScroll = ({
   return true
 }
 
+export const onClientEntry = () => {
+  process.env.NODE_ENV === 'development' && console.clear()
+}
+
 const logViewPage = ({ location, prevLocation }) => {
   const properties = {
     location: location.pathname + location.search,
@@ -40,10 +44,6 @@ const logViewPage = ({ location, prevLocation }) => {
   location.pathname.includes('/collections/')
     ? window.amplitude.getInstance().logEvent('view collection', properties)
     : window.amplitude.getInstance().logEvent('view page', properties)
-}
-
-export const onClientEntry = () => {
-  process.env.NODE_ENV === 'development' && console.clear()
 }
 
 export const onRouteUpdate = ({ location, prevLocation }) => {

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { UserDataContext } from 'contexts/UserData'
 
 import Collection from './Collection'
+import { UserDataContext } from 'contexts/UserData'
 import { CollectionsType } from 'constants/Types'
 
 export default function Item ({ data, index, style }) {
