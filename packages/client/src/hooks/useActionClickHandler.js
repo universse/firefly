@@ -16,7 +16,7 @@ export default function useActionClickHandler (
   trackChange,
   user
 ) {
-  const { openModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
   const openSnackbar = useContext(SetSnackbarContext)
 
   return useCallback(e => {
@@ -85,12 +85,12 @@ export default function useActionClickHandler (
           'aria-label': AriaLabels.SIGNIN_REGISTER,
           children: 'Sign In',
           onClick: () => {
-            openModal(ModalTypes.SIGN_UP_FORM)
+            setActiveModalType(ModalTypes.SIGN_UP_FORM)
             logSignUpIntent()
           }
         },
         message: 'Please sign in to continue.'
       })
     }
-  }, [canUndo, dispatch, openModal, openSnackbar, trackChange, user])
+  }, [canUndo, dispatch, openSnackbar, setActiveModalType, trackChange, user])
 }

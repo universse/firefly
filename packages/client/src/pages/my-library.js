@@ -26,7 +26,7 @@ export default function MyLibraryPage () {
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
   const openSnackbar = useContext(SetSnackbarContext)
-  const { openModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
 
   const [initialSavedCount, setInitialSavedCount] = useState(
     () => userData && Object.keys(userData.save).length
@@ -48,7 +48,7 @@ export default function MyLibraryPage () {
             'aria-label': AriaLabels.SIGNIN_REGISTER,
             children: 'Sign In',
             onClick: () => {
-              openModal(ModalTypes.SIGN_UP_FORM)
+              setActiveModalType(ModalTypes.SIGN_UP_FORM)
               logSignUpIntent()
             }
           },
@@ -56,7 +56,7 @@ export default function MyLibraryPage () {
           timeout: 5000
         })
     }
-  }, [openModal, openSnackbar, initialSavedCount, user])
+  }, [setActiveModalType, openSnackbar, initialSavedCount, user])
 
   return (
     <>

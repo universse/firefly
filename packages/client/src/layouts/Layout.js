@@ -13,7 +13,6 @@ import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
 import SetSnackbar from 'contexts/SetSnackbar'
 import UserData from 'contexts/UserData'
-import useAccessibleFocusIndicator from 'hooks/useAccessibleFocusIndicator'
 import Theme from 'constants/Theme'
 import {
   getNormalizedPathname,
@@ -26,8 +25,6 @@ export default function Layout ({
   children,
   location
 }) {
-  useAccessibleFocusIndicator()
-
   const { pathname } = location
 
   const normalizedPathname = getNormalizedPathname(pathname)

@@ -20,18 +20,18 @@ import ModalTypes from 'constants/ModalTypes'
 import { toTitleCase } from 'common'
 
 export default function IndexLayout ({ category, children, location }) {
-  const { openModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
 
   const actions = useMemo(
     () => (
       <IconButton
         aria-label='Filter Collections by Tags'
-        onClick={() => openModal(ModalTypes.MOBILE_FILTER)}
+        onClick={() => setActiveModalType(ModalTypes.MOBILE_FILTER)}
       >
         <Filter />
       </IconButton>
     ),
-    [openModal]
+    [setActiveModalType]
   )
 
   const title = category === 'all' ? '' : toTitleCase(category)

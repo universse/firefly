@@ -29,7 +29,7 @@ function SignUpForm () {
   })
 
   const activeModalType = useContext(ModalContext)
-  const { closeModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
 
   const isOpen = useRef()
 
@@ -115,7 +115,7 @@ function SignUpForm () {
           top: 1.5rem;
         `}
       >
-        <IconButton aria-label='Close Modal' onClick={closeModal}>
+        <IconButton aria-label='Close Modal' onClick={setActiveModalType}>
           <Cross />
         </IconButton>
       </div>

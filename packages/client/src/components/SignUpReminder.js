@@ -7,7 +7,7 @@ import ModalTypes from 'constants/ModalTypes'
 import AriaLabels from 'constants/AriaLabels'
 
 export default function SignUpReminder () {
-  const { openModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
 
   return (
     <div
@@ -43,7 +43,7 @@ export default function SignUpReminder () {
       <div>
         <PrimaryButton
           aria-label={AriaLabels.SIGNIN_REGISTER}
-          onClick={() => openModal(ModalTypes.SIGN_UP_FORM)}
+          onClick={() => setActiveModalType(ModalTypes.SIGN_UP_FORM)}
         >
           Sign In / Register
         </PrimaryButton>

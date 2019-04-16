@@ -10,7 +10,7 @@ export default function SocialLogin ({
   setSignUpState
 }) {
   const firebase = useContext(FirebaseContext)
-  const { closeModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
 
   const handleError = error => {
     switch (error.code) {
@@ -27,7 +27,7 @@ export default function SocialLogin ({
 
     firebase
       .signInWithGoogle()
-      .then(closeModal)
+      .then(setActiveModalType)
       .catch(handleError)
   }
 
@@ -37,7 +37,7 @@ export default function SocialLogin ({
 
     firebase
       .signInWithFacebook()
-      .then(closeModal)
+      .then(setActiveModalType)
       .catch(handleError)
   }
   // TODO spinner for isLoading state

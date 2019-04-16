@@ -12,7 +12,7 @@ import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 const AuthNav = memo(function () {
-  const { openModal } = useContext(SetModalContext)
+  const setActiveModalType = useContext(SetModalContext)
   const firebase = useContext(FirebaseContext)
 
   return hasSignedIn() ? (
@@ -47,7 +47,7 @@ const AuthNav = memo(function () {
       <GhostButton
         aria-label={AriaLabels.SIGNIN_REGISTER}
         onClick={() => {
-          openModal(ModalTypes.SIGN_UP_FORM)
+          setActiveModalType(ModalTypes.SIGN_UP_FORM)
           logSignUpIntent()
         }}
       >
