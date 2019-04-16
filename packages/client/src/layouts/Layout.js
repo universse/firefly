@@ -40,25 +40,23 @@ export default function Layout ({
     <ThemeProvider theme={Theme}>
       <AllCollections>
         <Authentication>
-          <Media>
-            <Modal>
-              {normalizedPathname !== '/search' && <Header />}
-              <LatestActivity>
-                <SetSnackbar location={location}>
-                  <UserData canUndo={normalizedPathname === '/my-library'}>
-                    {isIndexPage(pathname) ? (
-                      <IndexLayout category={category} location={location}>
-                        {children}
-                      </IndexLayout>
-                    ) : (
-                      children
-                    )}
-                  </UserData>
-                </SetSnackbar>
-              </LatestActivity>
-              <SignUpForm />
-            </Modal>
-          </Media>
+          <Modal>
+            {normalizedPathname !== '/search' && <Header />}
+            <LatestActivity>
+              <SetSnackbar location={location}>
+                <UserData canUndo={normalizedPathname === '/my-library'}>
+                  {isIndexPage(pathname) ? (
+                    <IndexLayout category={category} location={location}>
+                      {children}
+                    </IndexLayout>
+                  ) : (
+                    <Media>{children}</Media>
+                  )}
+                </UserData>
+              </SetSnackbar>
+            </LatestActivity>
+            <SignUpForm />
+          </Modal>
         </Authentication>
         {!shouldNotHaveMobileNavigation(pathname) && (
           <MobileNavigation normalizedPathname={normalizedPathname} />

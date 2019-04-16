@@ -7,6 +7,7 @@ import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
 import { FABDesktop, IconButton } from 'components/common'
+import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
@@ -81,7 +82,7 @@ export default function IndexLayout ({ category, children, location }) {
             }
           `}
         >
-          {cloneElement(children, { isScrollingDown })}
+          <Media>{cloneElement(children, { isScrollingDown })}</Media>
         </div>
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}
