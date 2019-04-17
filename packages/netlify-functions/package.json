@@ -11,11 +11,11 @@
     "metascraper": "^5.1.1",
     "metascraper-description": "^5.1.0",
     "metascraper-title": "^5.1.0",
-    "serverless-http": "^1.9.1"
+    "serverless-http": "^1.10.0"
   },
   "devDependencies": {
     "babel-loader": "^8.0.5",
-    "netlify-lambda": "^1.4.4"
+    "netlify-lambda": "^1.4.5"
   },
   "scripts": {
     "build": "netlify-lambda build src",

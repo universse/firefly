@@ -281,7 +281,7 @@ Result.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
 }
 
-export function Sidebar ({ isScrollingDown, ...props }) {
+export function Sidebar ({ isScrollingDown, mobile, ...props }) {
   return (
     <div
       css={theme => css`
@@ -302,6 +302,7 @@ export function Sidebar ({ isScrollingDown, ...props }) {
         ${theme.screens.desktop} {
           align-self: flex-start;
           margin-top: 2.25rem;
+          ${mobile && 'display: none'};
           top: ${headerHeightInRem}rem;
           width: 22.5%;
         }
@@ -311,8 +312,14 @@ export function Sidebar ({ isScrollingDown, ...props }) {
   )
 }
 
+Sidebar.defaultProps = {
+  isScrollingDown: false,
+  mobile: false
+}
+
 Sidebar.propTypes = {
-  isScrollingDown: PropTypes.bool.isRequired
+  isScrollingDown: PropTypes.bool,
+  mobile: PropTypes.bool
 }
 
 export { default as Spinner } from './Spinner'

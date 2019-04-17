@@ -16,11 +16,11 @@ export default function useSlider () {
     setIsMinScroll(slider.current.scrollLeft === 0)
   }, [])
 
-  const onScrollLeftClick = useCallback(e => {
+  const onScrollLeftClick = useCallback(() => {
     slider.current.scrollBy({ left: -scrollByX, behavior: 'smooth' })
   }, [])
 
-  const onScrollRightClick = useCallback(e => {
+  const onScrollRightClick = useCallback(() => {
     slider.current.scrollBy({ left: scrollByX, behavior: 'smooth' })
   }, [])
 

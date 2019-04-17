@@ -6,25 +6,19 @@ export default function useIsScrollingDown () {
   const [isScrollingDown, setIsScrollingDown] = useState(false)
 
   const prevScrollPos = useRef(0)
-  const baseline = useRef()
 
   useEffect(() => {
-    if (isNaN(baseline.current)) {
-      baseline.current =
-        document.getElementById('hero').offsetHeight +
-        baseFontSize * mobileHeaderHeightInRem
-    }
+    const baseline =
+      document.getElementById('hero').offsetHeight +
+      baseFontSize * mobileHeaderHeightInRem
+
     prevScrollPos.current = window.scrollY
 
     const handleScroll = () => {
-      const currentScrollPos = window.scrollY
-      if (currentScrollPos < baseline.current) return
-
-      prevScrollPos.current > currentScrollPos
-        ? setIsScrollingDown(false)
-        : setIsScrollingDown(true)
-
-      prevScrollPos.current = currentScrollPos
+      setIsScrollingDown(
+        window.scrollY > baseline && prevScrollPos.current < window.scrollY
+      )
+      prevScrollPos.current = window.scrollY
     }
 
     window.addEventListener('scroll', handleScroll)

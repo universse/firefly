@@ -1,6 +1,7 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { Location } from '@reach/router'
 import { Categories } from 'common'
 
 import { Category } from './styled'
@@ -8,8 +9,7 @@ import { RefType } from 'constants/Types'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function Filters ({ handleScroll, slider }) {
-  const pathname = window.location.pathname
+function Filters ({ handleScroll, pathname, slider }) {
   const normalizedPathname = getNormalizedPathname(pathname)
 
   return (
@@ -77,9 +77,16 @@ function Filters ({ handleScroll, slider }) {
   )
 }
 
-export default memo(Filters)
+export default props => {
+  return (
+    <Location>
+      {({ location }) => <Filters pathname={location.pathname} {...props} />}
+    </Location>
+  )
+}
 
 Filters.propTypes = {
   handleScroll: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
   slider: RefType
 }

@@ -17,7 +17,7 @@ import useSortedCollections from 'hooks/useSortedCollections'
 import { CollectionsType } from 'constants/Types'
 import MobileFilters from 'components/MobileFilters'
 
-export default function IndexPage ({ data, isScrollingDown }) {
+export default function IndexPage ({ data }) {
   const isDesktop = useContext(MediaContext)
   const {
     query: { sort, tags }
@@ -37,10 +37,12 @@ export default function IndexPage ({ data, isScrollingDown }) {
 
   return (
     <>
-      <Sidebar isScrollingDown={isScrollingDown}>
-        <CategoryFilter />
-        {isDesktop && <TagFilter aggregatedTags={aggregatedTags} tags={tags} />}
-      </Sidebar>
+      {isDesktop && (
+        <Sidebar>
+          <CategoryFilter />
+          <TagFilter aggregatedTags={aggregatedTags} tags={tags} />
+        </Sidebar>
+      )}
       {!isDesktop && (
         <MobileFilters
           aggregatedTags={aggregatedTags}
@@ -77,8 +79,7 @@ export default function IndexPage ({ data, isScrollingDown }) {
 }
 
 IndexPage.propTypes = {
-  data: PropTypes.shape({ edges: CollectionsType }).isRequired,
-  isScrollingDown: PropTypes.bool.isRequired
+  data: PropTypes.shape({ edges: CollectionsType }).isRequired
 }
 
 export const collections = graphql`

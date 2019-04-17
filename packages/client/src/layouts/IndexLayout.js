@@ -1,12 +1,13 @@
-import React, { cloneElement, useContext, useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
+import CategoryFilter from 'components/CategoryFilter'
 import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
-import { FABDesktop, IconButton } from 'components/common'
+import { FABDesktop, IconButton, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
@@ -14,6 +15,7 @@ import { Filter, Suggest } from 'icons'
 import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import {
   headerHeightInRem,
+  mobileHeaderHeightInRem,
   mobileNavigationHeightInRem
 } from 'constants/Styles'
 import ModalTypes from 'constants/ModalTypes'
@@ -59,10 +61,11 @@ export default function IndexLayout ({ category, children, location }) {
       <main
         css={theme => css`
           background-color: ${theme.colors.gray100};
-          min-height: calc(100vh - ${headerHeightInRem}rem);
+          min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
           ${theme.screens.desktop} {
+            min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 2rem 0;
           }
         `}
@@ -82,7 +85,10 @@ export default function IndexLayout ({ category, children, location }) {
             }
           `}
         >
-          <Media>{cloneElement(children, { isScrollingDown })}</Media>
+          <Sidebar isScrollingDown={isScrollingDown} mobile>
+            <CategoryFilter />
+          </Sidebar>
+          <Media>{children}</Media>
         </div>
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}
