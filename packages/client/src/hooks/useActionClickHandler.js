@@ -5,10 +5,7 @@ import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import { logClickAction, logSignUpIntent } from 'utils/amplitudeUtils'
-
-function getActionKey (action) {
-  return action.startsWith('un') ? action.slice(2) : action
-}
+import { getActionKey } from 'utils/userDataUtils'
 
 export default function useActionClickHandler (
   canUndo,
@@ -28,10 +25,12 @@ export default function useActionClickHandler (
       action: getActionKey(action)
     }
 
-    logClickAction({ id, action })
+    const change = { id, action }
+
+    logClickAction(change)
 
     if (!action.endsWith('love')) {
-      trackChange(payload)
+      trackChange(change)
 
       dispatch({
         type: 'click',
@@ -47,7 +46,7 @@ export default function useActionClickHandler (
             children: 'Undo',
             onClick: () => {
               logClickAction({ id, action: 'undo unsave' })
-              trackChange(payload)
+              trackChange(change)
               dispatch({
                 type: 'undo-unsave'
               })

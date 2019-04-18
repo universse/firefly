@@ -1,4 +1,4 @@
-import React, { memo, useState, useRef, useContext } from 'react'
+import React, { memo, useState, useContext } from 'react'
 import { css } from '@emotion/core'
 import { graphql, useStaticQuery } from 'gatsby'
 
@@ -7,9 +7,14 @@ import Modal from 'components/Modal'
 import { IconButton } from 'components/common'
 // import SocialLogin from './SocialLogin'
 import { Cross } from 'icons'
-import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
 import ModalTypes from 'constants/ModalTypes'
+
+const intialState = {
+  isLoading: false,
+  email: '',
+  socialLogin: ''
+}
 
 function SignUpForm () {
   const data = useStaticQuery(graphql`
@@ -22,31 +27,15 @@ function SignUpForm () {
     }
   `)
 
-  const [signUpState, setSignUpState] = useState({
-    isLoading: false,
-    email: '',
-    socialLogin: ''
-  })
+  const [signUpState, setSignUpState] = useState(intialState)
 
-  const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
-
-  const isOpen = useRef()
-
-  !activeModalType &&
-    isOpen.current &&
-    setSignUpState({
-      isLoading: false,
-      email: '',
-      socialLogin: ''
-    })
-
-  isOpen.current = activeModalType === ModalTypes.SIGN_UP_FORM
 
   return (
     <Modal
       className='SignUpModal'
       contentLabel='Sign Up'
+      onCloseModal={() => setSignUpState(intialState)}
       type={ModalTypes.SIGN_UP_FORM}
     >
       {!signUpState.isLoading && signUpState.email ? (
@@ -115,7 +104,13 @@ function SignUpForm () {
           top: 1.5rem;
         `}
       >
-        <IconButton aria-label='Close Modal' onClick={setActiveModalType}>
+        <IconButton
+          aria-label='Close Modal'
+          onClick={() => {
+            setActiveModalType()
+            setSignUpState(intialState)
+          }}
+        >
           <Cross />
         </IconButton>
       </div>

@@ -171,7 +171,7 @@ export async function fetchUserData () {
       userData[doc.id] = doc.data()
     })
 
-    return userData
+    return { userData }
   } catch (e) {
     return { error: true }
   }
@@ -251,7 +251,7 @@ export async function saveCollection (id) {
   }
 }
 
-export async function pushChanges (collections) {
+export async function uploadOfflineData ({ check, save }) {
   const userRef = firestore.collection(auth.currentUser.uid)
 
   try {

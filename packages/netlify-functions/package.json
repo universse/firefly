@@ -6,12 +6,12 @@
     "common": "*",
     "compression": "^1.7.4",
     "express": "^4.16.4",
-    "firebase-admin": "^7.2.0",
+    "firebase-admin": "^7.3.0",
     "got": "^9.6.0",
     "metascraper": "^5.1.1",
     "metascraper-description": "^5.1.0",
     "metascraper-title": "^5.1.0",
-    "serverless-http": "^1.10.0"
+    "serverless-http": "^2.0.0"
   },
   "devDependencies": {
     "babel-loader": "^8.0.5",

@@ -23,31 +23,25 @@ export default function useSyncOfflineQueue (firebase, user) {
   }, [startSyncing, stopSyncing, user])
 
   const syncOfflineQueue = useCallback(() => {
-    const failure = []
-
     localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes => {
-      if (changes && changes.length) {
+      if (['check', 'save'].some(key => Object.values(changes[key]).length)) {
+        localforage.setItem(LocalStorage.OFFLINE_QUEUE, null)
         stopSyncing()
 
-        changes
-          .reduce(
-            (chain, { id, action }, i) =>
-              chain.then(() =>
-                firebase[`${action}`](id).catch(() => failure.push(i))
-              ),
-            Promise.resolve([])
-          )
-          .then(() => {
-            localforage.setItem(
-              LocalStorage.OFFLINE_QUEUE,
-              changes.filter((_, i) => failure.includes(i))
-            )
-
-            startSyncing()
-          })
+        firebase.uploadOfflineData(changes).then(({ error }) => {
+          error &&
+            localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(newChanges => {
+              localforage
+                .setItem(LocalStorage.OFFLINE_QUEUE, {
+                  check: { ...changes.check, ...newChanges.check },
+                  save: { ...changes.save, ...newChanges.save }
+                })
+                .then(() => startSyncing())
+            })
+        })
       }
     })
   }, [firebase, startSyncing, stopSyncing])
 
-  useInterval(syncOfflineQueue, shouldSync ? 5000 : null)
+  useInterval(syncOfflineQueue, shouldSync ? 10000 : null)
 }

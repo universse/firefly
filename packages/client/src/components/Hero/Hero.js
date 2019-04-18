@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react'
+import React, { memo, useContext, useEffect } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -7,10 +7,10 @@ import LatestActivity from './LatestActivity'
 import Loading from './Loading'
 import Onboard from './Onboard'
 import { LatestActivityContext } from 'contexts/LatestActivity'
+import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
 function Hero () {
-  return <Landing />
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -23,9 +23,24 @@ function Hero () {
 
   const { isLoading, latestActivity } = useContext(LatestActivityContext)
 
+  useEffect(() => {
+    if (isNewUser()) {
+      const removeIsNewUser = () =>
+        window.localStorage.removeItem(LocalStorage.IS_NEW_USER)
+
+      window.addEventListener('beforeunload', removeIsNewUser)
+
+      return () => {
+        window.removeEventListener('beforeunload', removeIsNewUser)
+      }
+    }
+  }, [])
+
   if (!hasSignedIn()) {
     return <Landing />
   }
+
+  return <Landing />
 
   return (
     <div
