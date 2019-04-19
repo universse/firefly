@@ -28,7 +28,7 @@ export default function Tags ({ tags }) {
               logClickTag({ tag })
             }}
             small={!getNormalizedPathname(pathname).includes('/collections/')}
-            to={`/?tags=${tag}`}
+            to={`/?tags=${tag.toLowerCase()}`}
           >
             {tag}
           </Tag>
