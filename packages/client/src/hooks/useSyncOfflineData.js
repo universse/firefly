@@ -48,5 +48,5 @@ export default function useSyncOfflineData (firebase, user) {
     })
   }, [firebase, startSyncing, stopSyncing])
 
-  useInterval(syncOfflineQueue, shouldSync ? 15000 : null)
+  useInterval(syncOfflineQueue, shouldSync ? 10000 : null)
 }

@@ -10,7 +10,7 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "aws-sdk": "^2.440.0",
+    "aws-sdk": "^2.441.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-macros": "^2.5.1",
     "jest": "^24.7.1",

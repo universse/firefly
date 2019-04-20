@@ -52,7 +52,7 @@ export default function MyLibraryPage () {
               logSignUpIntent()
             }
           },
-          message: 'Sign in to sync saved collections across devices.',
+          message: 'Sign in to sync your saved collections across devices.',
           timeout: 5000
         })
     }

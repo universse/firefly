@@ -177,32 +177,28 @@ export async function fetchUserData () {
   }
 }
 
-export async function uploadOfflineData ({ check, save }, isNewUser) {
+export async function uploadOfflineData ({ check, save }) {
   const checkKeys = Object.keys(check)
   const saveKeys = Object.keys(save)
 
   if (!checkKeys.length && !saveKeys.length) return {}
-  
+
   const checkRef = firestore.collection(auth.currentUser.uid).doc('check')
   const saveRef = firestore.collection(auth.currentUser.uid).doc('save')
   const batch = firestore.batch()
 
-  if (isNewUser) {
-    checkKeys.length && batch.set(checkRef, check)
-    saveKeys.length && batch.set(saveRef, save)
-  } else {
-    checkKeys.length &&
-      checkKeys.forEach(id => {
-        check[id] = check[id] || firebase.firestore.FieldValue.delete()
-      })
+  if (checkKeys.length) {
+    checkKeys.forEach(
+      id => (check[id] = check[id] || firebase.firestore.FieldValue.delete())
+    )
+    batch.set(checkRef, check, { merge: true })
+  }
 
-    saveKeys.length &&
-      saveKeys.forEach(id => {
-        save[id] = save[id] || firebase.firestore.FieldValue.delete()
-      })
-
-    batch.update(checkRef, check)
-    batch.update(saveRef, save)
+  if (saveKeys.length) {
+    saveKeys.forEach(
+      id => (save[id] = save[id] || firebase.firestore.FieldValue.delete())
+    )
+    batch.set(saveRef, save, { merge: true })
   }
 
   try {
@@ -218,21 +214,17 @@ export async function action ({ id, action }) {
     .collection(auth.currentUser.uid)
     .doc(action.replace('un', ''))
 
+  const data = {
+    [id]: action.startsWith('un')
+      ? firebase.firestore.FieldValue.delete()
+      : true
+  }
+
   if (action.endsWith('love')) {
     const lovesDocRef = firestore.collection('loves').doc(id)
     const batch = firestore.batch()
 
-    action.startsWith('un')
-      ? batch.update(docRef, {
-        [id]: firebase.firestore.FieldValue.delete()
-      })
-      : batch.set(
-        docRef,
-        {
-          [id]: true
-        },
-        { merge: true }
-      )
+    batch.set(docRef, data, { merge: true })
     batch.set(
       lovesDocRef,
       {
@@ -251,16 +243,7 @@ export async function action ({ id, action }) {
     }
   } else {
     try {
-      action.startsWith('un')
-        ? docRef.update({
-          [id]: firebase.firestore.FieldValue.delete()
-        })
-        : docRef.set(
-          {
-            [id]: true
-          },
-          { merge: true }
-        )
+      docRef.set(data, { merge: true })
       return {}
     } catch {
       return { error: true }

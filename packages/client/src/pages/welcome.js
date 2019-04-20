@@ -9,7 +9,6 @@ import LocalStorage from 'constants/LocalStorage'
 import AuthErrors from 'constants/AuthErrors'
 import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
 
-// TODO navigate to homepage on error
 export default function WelcomePage () {
   const [message, setMessage] = useState('Signing in...')
   const [isLoading, setIsLoading] = useState(true)
@@ -21,67 +20,54 @@ export default function WelcomePage () {
     firebase
       .isSignInWithEmailLink(window.location.href)
       .then(isSignInWithEmailLink => {
-        if (isSignInWithEmailLink) {
-          const email =
-            window.localStorage.getItem(LocalStorage.EMAIL_SIGN_IN) ||
-            window.prompt('Please enter your email for confirmation.')
-
-          firebase
-            .signInWithEmailLink(email, window.location.href)
-            .then(({ error, isNewUser }) => {
-              if (error) {
-                setHasError(true)
-                const code = error
-
-                if (
-                  code === AuthErrors.EXPIRED_ACTION_CODE ||
-                  code === AuthErrors.INVALID_ACTION_CODE
-                ) {
-                  setMessage(
-                    'Seems like this sign-in link has expired. Please try again later!'
-                  )
-                }
-              } else {
-                window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
-                window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-                window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
-
-                return isNewUser
-              }
-            })
-            .then(
-              isNewUser =>
-                isNewUser &&
-                Promise.all([
-                  localforage.getItem('check'),
-                  localforage.getItem('save')
-                ]).then(([check, save]) => {
-                  firebase
-                    .uploadOfflineData(
-                      { check: check || {}, save: save || {} },
-                      true
-                    )
-                    .then(
-                      ({ error }) =>
-                        error &&
-                        saveChangeToOfflineQueue({
-                          check: check || {},
-                          save: save || {}
-                        })
-                    )
-                })
-            )
-            .then(() => navigate('/'))
-            .catch(() => {
-              setHasError(true)
-              setMessage('Something went wrong. Please try again later!')
-              setIsLoading(false)
-            })
-        } else {
-          setHasError(true)
-          setMessage('Something went wrong. Please try again later!')
-          setIsLoading(false)
+        if (!isSignInWithEmailLink) {
+          throw new Error('Something went wrong. Please try again later!')
         }
+
+        const email =
+          window.localStorage.getItem(LocalStorage.EMAIL_SIGN_IN) ||
+          window.prompt('Please enter your email for confirmation.')
+
+        firebase
+          .signInWithEmailLink(email, window.location.href)
+          .then(({ error, isNewUser }) => {
+            if (error) {
+              const { code } = error
+
+              if (
+                code === AuthErrors.EXPIRED_ACTION_CODE ||
+                code === AuthErrors.INVALID_ACTION_CODE
+              ) {
+                throw new Error(
+                  'Seems like this sign-in link has expired. Please try again later!'
+                )
+              }
+            } else {
+              window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
+              window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+              window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
+
+              return isNewUser
+            }
+          })
+          .then(
+            isNewUser =>
+              isNewUser &&
+              Promise.all([
+                localforage.getItem('check'),
+                localforage.getItem('save')
+              ]).then(([check, save]) => ({
+                check: check || {},
+                save: save || {}
+              }))
+          )
+          .then(data => data && saveChangeToOfflineQueue(data))
+          .then(() => navigate('/'))
+      })
+      .catch(e => {
+        setHasError(true)
+        setMessage(e.message)
+        setIsLoading(false)
       })
   }, [firebase])
 
