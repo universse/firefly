@@ -59,6 +59,7 @@ export default function useActionClickHandler (
 
     if (user) {
       if (navigator.onLine) {
+        trackChange(change)
         dispatch({
           type: 'click',
           payload
@@ -69,6 +70,7 @@ export default function useActionClickHandler (
             'aria-label': 'Retry',
             children: 'Retry',
             onClick: () => {
+              trackChange(change)
               dispatch({
                 type: 'click',
                 payload

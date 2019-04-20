@@ -15,7 +15,7 @@ export default function useTrackToggleStateChange () {
 
   const debouncedClickCount = useDebouncedValue(
     clickCount,
-    350,
+    500,
     resetClickCount
   )
 

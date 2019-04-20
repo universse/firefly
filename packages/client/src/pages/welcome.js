@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { css } from '@emotion/core'
 import { Link, navigate } from 'gatsby'
+import localforage from 'localforage'
 
 import { FirebaseContext } from 'contexts/Firebase'
 import { Spinner } from 'components/common'
 import LocalStorage from 'constants/LocalStorage'
 import AuthErrors from 'constants/AuthErrors'
+import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
 
 // TODO navigate to homepage on error
 export default function WelcomePage () {
@@ -43,19 +45,44 @@ export default function WelcomePage () {
                 window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
                 window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
                 window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
-                navigate('/')
+
+                return isNewUser
               }
             })
+            .then(
+              isNewUser =>
+                isNewUser &&
+                Promise.all([
+                  localforage.getItem('check'),
+                  localforage.getItem('save')
+                ]).then(([check, save]) => {
+                  firebase
+                    .uploadOfflineData(
+                      { check: check || {}, save: save || {} },
+                      true
+                    )
+                    .then(
+                      ({ error }) =>
+                        error &&
+                        saveChangeToOfflineQueue({
+                          check: check || {},
+                          save: save || {}
+                        })
+                    )
+                })
+            )
+            .then(() => navigate('/'))
             .catch(() => {
               setHasError(true)
               setMessage('Something went wrong. Please try again later!')
+              setIsLoading(false)
             })
         } else {
           setHasError(true)
           setMessage('Something went wrong. Please try again later!')
+          setIsLoading(false)
         }
       })
-      .finally(() => setIsLoading(false))
   }, [firebase])
 
   return (

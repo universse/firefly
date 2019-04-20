@@ -7,14 +7,13 @@ import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
 import useOfflinePersistence from './useOfflinePersistence'
 import useSaveUserData from './useSaveUserData'
-import useSyncOfflineQueue from 'hooks/useSyncOfflineQueue'
+import useSyncOfflineData from 'hooks/useSyncOfflineData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
-import LocalStorage from 'constants/LocalStorage'
 
 function reducer (_, { type, payload }) {
   return produce(_, draft => {
     switch (type) {
-      case 'load':
+      case 'load-local':
         return (
           payload || {
             check: {},
@@ -22,6 +21,12 @@ function reducer (_, { type, payload }) {
             save: {}
           }
         )
+
+      case 'load-database':
+        Object.keys(payload).forEach(
+          key => (draft[key] = { ...payload[key], ...draft[key] })
+        )
+        break
 
       case 'click':
         const { action, id } = payload
@@ -57,15 +62,16 @@ export default function useUserData (canUndo) {
   const [change, trackChange] = useTrackToggleStateChange()
 
   useOfflinePersistence(
-    change && {
-      [LocalStorage.COMPLETED_ITEMS]: userData.check,
-      [LocalStorage.SAVED_COLLECTIONS]: userData.save
-    }
+    change &&
+      !change.action.endsWith('love') && {
+        check: userData.check,
+        save: userData.save
+      }
   )
 
   useSaveUserData(change, firebase, user)
 
-  useSyncOfflineQueue(firebase, user)
+  useSyncOfflineData(firebase, user)
 
   const onActionClick = useActionClickHandler(
     canUndo,

@@ -166,98 +166,105 @@ export async function fetchUserData () {
   const userData = { love: {}, save: {}, check: {} }
 
   try {
-    const data = await firestore.collection(auth.currentUser.uid).get()
-    data.forEach(doc => {
+    const docs = await firestore.collection(auth.currentUser.uid).get()
+    docs.forEach(doc => {
       userData[doc.id] = doc.data()
     })
 
     return { userData }
-  } catch (e) {
+  } catch {
     return { error: true }
   }
 }
 
-export async function loveCollection (id) {
-  const loveDocRef = firestore.collection(auth.currentUser.uid).doc('love')
-  const lovesDocRef = firestore.collection('loves').doc(id)
+export async function uploadOfflineData ({ check, save }, isNewUser) {
+  const checkKeys = Object.keys(check)
+  const saveKeys = Object.keys(save)
+
+  if (!checkKeys.length && !saveKeys.length) return {}
+  
+  const checkRef = firestore.collection(auth.currentUser.uid).doc('check')
+  const saveRef = firestore.collection(auth.currentUser.uid).doc('save')
+  const batch = firestore.batch()
+
+  if (isNewUser) {
+    checkKeys.length && batch.set(checkRef, check)
+    saveKeys.length && batch.set(saveRef, save)
+  } else {
+    checkKeys.length &&
+      checkKeys.forEach(id => {
+        check[id] = check[id] || firebase.firestore.FieldValue.delete()
+      })
+
+    saveKeys.length &&
+      saveKeys.forEach(id => {
+        save[id] = save[id] || firebase.firestore.FieldValue.delete()
+      })
+
+    batch.update(checkRef, check)
+    batch.update(saveRef, save)
+  }
 
   try {
-    await firestore.runTransaction(async transaction => {
-      try {
-        const [loveDoc, lovesDoc] = await Promise.all([
-          transaction.get(loveDocRef),
-          transaction.get(lovesDocRef)
-        ])
-
-        if (loveDoc.exists) {
-          const love = loveDoc.data()
-
-          if (love[id]) {
-            transaction.update(loveDocRef, {
-              [id]: firebase.firestore.FieldValue.delete()
-            })
-
-            transaction.update(lovesDocRef, {
-              count: lovesDoc.data().count - 1
-            })
-          } else {
-            transaction.update(loveDocRef, {
-              [id]: true
-            })
-
-            lovesDoc.exists
-              ? transaction.update(lovesDocRef, {
-                count: lovesDoc.data().count + 1
-              })
-              : transaction.set(lovesDocRef, { count: 1 })
-          }
-        } else {
-          transaction.set(loveDocRef, { [id]: true })
-          transaction.set(lovesDocRef, { count: 1 })
-        }
-      } catch (e) {
-        return { error: true }
-      }
-    })
+    await batch.commit()
     return {}
-  } catch (e) {
+  } catch {
     return { error: true }
   }
 }
 
-export async function saveCollection (id) {
-  const saveDocRef = firestore.collection(auth.currentUser.uid).doc('save')
+export async function action ({ id, action }) {
+  const docRef = firestore
+    .collection(auth.currentUser.uid)
+    .doc(action.replace('un', ''))
 
-  try {
-    const saveDoc = await saveDocRef.get()
+  if (action.endsWith('love')) {
+    const lovesDocRef = firestore.collection('loves').doc(id)
+    const batch = firestore.batch()
 
-    if (saveDoc.exists) {
-      const save = saveDoc.data()
+    action.startsWith('un')
+      ? batch.update(docRef, {
+        [id]: firebase.firestore.FieldValue.delete()
+      })
+      : batch.set(
+        docRef,
+        {
+          [id]: true
+        },
+        { merge: true }
+      )
+    batch.set(
+      lovesDocRef,
+      {
+        count: action.startsWith('un')
+          ? firebase.firestore.FieldValue.increment(-1)
+          : firebase.firestore.FieldValue.increment(1)
+      },
+      { merge: true }
+    )
 
-      if (save[id]) {
-        saveDocRef.update({
+    try {
+      await batch.commit()
+      return {}
+    } catch {
+      return { error: true }
+    }
+  } else {
+    try {
+      action.startsWith('un')
+        ? docRef.update({
           [id]: firebase.firestore.FieldValue.delete()
         })
-      } else {
-        saveDocRef.update({
-          [id]: true
-        })
-      }
-    } else {
-      saveDocRef.set({ [id]: true })
+        : docRef.set(
+          {
+            [id]: true
+          },
+          { merge: true }
+        )
+      return {}
+    } catch {
+      return { error: true }
     }
-  } catch {
-    return { error: true }
-  }
-}
-
-export async function uploadOfflineData ({ check, save }) {
-  const userRef = firestore.collection(auth.currentUser.uid)
-
-  try {
-    return {}
-  } catch {
-    return { error: true }
   }
 }
 `)
