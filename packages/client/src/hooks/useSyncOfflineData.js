@@ -23,7 +23,7 @@ export default function useSyncOfflineData (firebase, user) {
   }, [startSyncing, stopSyncing, user])
 
   const syncOfflineQueue = useCallback(() => {
-    localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes => {
+    localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes =>
       Promise.all([
         localforage.setItem(LocalStorage.SYNCING, changes),
         localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
@@ -33,20 +33,22 @@ export default function useSyncOfflineData (firebase, user) {
       ]).then(() => {
         stopSyncing()
 
-        firebase.uploadOfflineData(changes).then(({ error }) => {
-          error &&
+        firebase
+          .uploadOfflineData(changes)
+          .catch(() =>
             localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(newChanges => {
               localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
                 check: { ...changes.check, ...newChanges.check },
                 save: { ...changes.save, ...newChanges.save }
               })
             })
-
-          localforage.removeItem(LocalStorage.SYNCING).then(startSyncing)
-        })
+          )
+          .finally(() =>
+            localforage.removeItem(LocalStorage.SYNCING).then(startSyncing)
+          )
       })
-    })
+    )
   }, [firebase, startSyncing, stopSyncing])
 
-  useInterval(syncOfflineQueue, shouldSync ? 10000 : null)
+  useInterval(syncOfflineQueue, shouldSync ? 5000 : null)
 }

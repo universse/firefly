@@ -44,6 +44,7 @@ function reducer (_, { type, payload }) {
 
       case 'undo-unsave':
         draft.save = draft.prevSave
+        delete draft.prevSave
         break
 
       default:

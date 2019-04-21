@@ -66,17 +66,6 @@ export default function useActionClickHandler (
         })
       } else {
         openSnackbar({
-          buttonProps: {
-            'aria-label': 'Retry',
-            children: 'Retry',
-            onClick: () => {
-              trackChange(change)
-              dispatch({
-                type: 'click',
-                payload
-              })
-            }
-          },
           message: 'The Internet connection appears to be offline.'
         })
       }

@@ -20,9 +20,9 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
           background-color: ${theme.colors.white100};
         }
       `}
-      onClick={() => {
+      onClick={e => {
         onActionClick()
-        onClick()
+        onClick(e)
       }}
       type='button'
       {...props}

@@ -38,8 +38,10 @@ export default function useFetchUserData (dispatch, firebase, user) {
 
   useEffect(() => {
     user &&
-      firebase.fetchUserData().then(({ error, userData }) => {
-        !error && dispatch({ type: 'load-database', payload: userData })
-      })
+      firebase
+        .fetchUserData()
+        .then(userData =>
+          dispatch({ type: 'load-database', payload: userData })
+        )
   }, [dispatch, firebase, user])
 }

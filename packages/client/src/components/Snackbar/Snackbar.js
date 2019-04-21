@@ -48,9 +48,11 @@ function Snackbar ({
             }
           `}
         >
-          <div>
-            <ActionButton onActionClick={dismissSnackbar} {...buttonProps} />
-          </div>
+          {buttonProps && (
+            <div>
+              <ActionButton onActionClick={dismissSnackbar} {...buttonProps} />
+            </div>
+          )}
           <div>
             <IconButton
               aria-label='Dismiss Message'

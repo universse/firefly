@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { css } from '@emotion/core'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 import localforage from 'localforage'
 
 import { FirebaseContext } from 'contexts/Firebase'
 import { Spinner } from 'components/common'
 import LocalStorage from 'constants/LocalStorage'
-import AuthErrors from 'constants/AuthErrors'
 import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
 
 export default function WelcomePage () {
@@ -19,54 +18,32 @@ export default function WelcomePage () {
   useEffect(() => {
     firebase
       .isSignInWithEmailLink(window.location.href)
-      .then(isSignInWithEmailLink => {
-        if (!isSignInWithEmailLink) {
-          throw new Error('Something went wrong. Please try again later!')
-        }
-
-        const email =
+      .then(
+        () =>
           window.localStorage.getItem(LocalStorage.EMAIL_SIGN_IN) ||
           window.prompt('Please enter your email for confirmation.')
+      )
+      .then(email => firebase.signInWithEmailLink(email, window.location.href))
+      .then(isNewUser => {
+        window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
+        window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+        window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
 
-        firebase
-          .signInWithEmailLink(email, window.location.href)
-          .then(({ error, isNewUser }) => {
-            if (error) {
-              const { code } = error
-
-              if (
-                code === AuthErrors.EXPIRED_ACTION_CODE ||
-                code === AuthErrors.INVALID_ACTION_CODE
-              ) {
-                throw new Error(
-                  'Seems like this sign-in link has expired. Please try again later!'
-                )
-              }
-            } else {
-              window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
-              window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-              window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
-
-              return isNewUser
-            }
-          })
-          .then(
-            isNewUser =>
-              isNewUser &&
-              Promise.all([
-                localforage.getItem('check'),
-                localforage.getItem('save')
-              ]).then(([check, save]) => ({
-                check: check || {},
-                save: save || {}
-              }))
-          )
-          .then(data => data && saveChangeToOfflineQueue(data))
-          .then(() => navigate('/'))
+        return Promise.all([
+          localforage.getItem('check'),
+          localforage.getItem('save')
+        ])
       })
-      .catch(e => {
+      .then(([check, save]) =>
+        saveChangeToOfflineQueue({
+          check: check || {},
+          save: save || {}
+        })
+      )
+      .then(() => window.location.assign('/'))
+      .catch(() => {
         setHasError(true)
-        setMessage(e.message)
+        setMessage('Something went wrong. Please try again later!')
         setIsLoading(false)
       })
   }, [firebase])

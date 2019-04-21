@@ -66,7 +66,10 @@ export async function fetchSignInMethodsForEmail (email) {
 }
 
 export function isSignInWithEmailLink (href) {
-  return auth.isSignInWithEmailLink(href)
+  if (auth.isSignInWithEmailLink(href)) {
+    return true
+  }
+  throw new Error()
 }
 
 export function sendSignInLinkToEmail (email) {
@@ -80,9 +83,9 @@ export function signInWithEmailAndPassword (email, password) {
 export async function signInWithEmailLink (email, href) {
   try {
     const result = await auth.signInWithEmailLink(email, href)
-    return { isNewUser: result.additionalUserInfo.isNewUser }
-  } catch (e) {
-    return { error: e.code }
+    return result.additionalUserInfo.isNewUser
+  } catch {
+    throw new Error()
   }
 }
 
@@ -171,9 +174,9 @@ export async function fetchUserData () {
       userData[doc.id] = doc.data()
     })
 
-    return { userData }
+    return userData
   } catch {
-    return { error: true }
+    throw new Error()
   }
 }
 
@@ -203,9 +206,8 @@ export async function uploadOfflineData ({ check, save }) {
 
   try {
     await batch.commit()
-    return {}
   } catch {
-    return { error: true }
+    throw new Error()
   }
 }
 
@@ -237,16 +239,14 @@ export async function action ({ id, action }) {
 
     try {
       await batch.commit()
-      return {}
     } catch {
-      return { error: true }
+      throw new Error()
     }
   } else {
     try {
       docRef.set(data, { merge: true })
-      return {}
     } catch {
-      return { error: true }
+      throw new Error()
     }
   }
 }

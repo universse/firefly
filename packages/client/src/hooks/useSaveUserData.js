@@ -6,9 +6,7 @@ export default function useSaveUserData (change, firebase, user) {
   useEffect(() => {
     if (change && user) {
       navigator.onLine
-        ? firebase
-            .action(change)
-            .then(({ error }) => error && saveChangeToOfflineQueue(change))
+        ? firebase.action(change).catch(() => saveChangeToOfflineQueue(change))
         : saveChangeToOfflineQueue(change)
     }
   }, [change, firebase, user])
