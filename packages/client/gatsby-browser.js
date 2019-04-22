@@ -22,7 +22,7 @@ const logViewPage = ({ location, prevLocation }) => {
     })
   }
 
-  location.pathname.includes('/collections/')
+  location.pathname.startsWith('/collection')
     ? window.amplitude.getInstance().logEvent('view collection', properties)
     : window.amplitude.getInstance().logEvent('view page', properties)
 }

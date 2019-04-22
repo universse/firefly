@@ -4,7 +4,6 @@ import { css } from '@emotion/core'
 import { Tag } from 'components/common'
 import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
-import { getNormalizedPathname } from 'utils/pathnameUtils'
 
 export default function Tags ({ tags }) {
   const pathname = window.location.pathname
@@ -27,7 +26,7 @@ export default function Tags ({ tags }) {
             onClick={() => {
               logClickTag({ tag })
             }}
-            small={!getNormalizedPathname(pathname).includes('/collections/')}
+            small={!pathname.startsWith('/collection')}
             to={`/?tags=${tag.toLowerCase()}`}
           >
             {tag}

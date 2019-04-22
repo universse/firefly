@@ -5,13 +5,11 @@ export const getNormalizedPathname = pathname =>
     ? pathname.slice(0, -1)
     : pathname
 
-export const getParamFromPathname = pathname => {
-  return getNormalizedPathname(pathname)
+export const getParamFromPathname = pathname =>
+  getNormalizedPathname(pathname)
     .split('/')
     .pop()
-}
 
 export const shouldNotHaveMobileNavigation = pathname =>
-  pathname.includes('/collection/') ||
-  pathname.includes('/collections/') ||
+  pathname.startsWith('/collection') ||
   getNormalizedPathname(pathname) === '/create'

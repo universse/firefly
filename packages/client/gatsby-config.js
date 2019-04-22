@@ -88,14 +88,14 @@ module.exports = {
     },
     'gatsby-plugin-react-axe',
     {
-      resolve: `gatsby-plugin-accessibilityjs`,
+      resolve: 'gatsby-plugin-accessibilityjs',
       options: {
         injectStyles: `
-        .accessibility-error {
-          border: 3px solid #f00;
-        }
-      `,
-        errorClassName: `accessibility-error`,
+          .accessibility-error {
+            border: 3px solid #f00;
+          }
+        `,
+        errorClassName: 'accessibility-error',
         onError: error => console.log(error)
       }
     },

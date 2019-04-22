@@ -181,15 +181,11 @@ export async function fetchUserData () {
 }
 
 export async function uploadOfflineData ({ check, save }) {
-  const checkKeys = Object.keys(check)
-  const saveKeys = Object.keys(save)
-
-  if (!checkKeys.length && !saveKeys.length) return {}
-
   const checkRef = firestore.collection(auth.currentUser.uid).doc('check')
   const saveRef = firestore.collection(auth.currentUser.uid).doc('save')
   const batch = firestore.batch()
 
+  const checkKeys = Object.keys(check)
   if (checkKeys.length) {
     checkKeys.forEach(
       id => (check[id] = check[id] || firebase.firestore.FieldValue.delete())
@@ -197,6 +193,7 @@ export async function uploadOfflineData ({ check, save }) {
     batch.set(checkRef, check, { merge: true })
   }
 
+  const saveKeys = Object.keys(save)
   if (saveKeys.length) {
     saveKeys.forEach(
       id => (save[id] = save[id] || firebase.firestore.FieldValue.delete())

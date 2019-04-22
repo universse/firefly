@@ -7,8 +7,7 @@ export const getActionKey = action => action.replace('un', '')
 export const saveChangeToOfflineQueue = ({ id, action, check, save }) =>
   localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes => {
     if (action) {
-      const key = getActionKey(action)
-      changes[key][id] = !action.startsWith('un')
+      changes[getActionKey(action)][id] = !action.startsWith('un')
       localforage.setItem(LocalStorage.OFFLINE_QUEUE, changes)
     } else {
       localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
