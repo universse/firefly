@@ -51,7 +51,7 @@ function SearchBar ({
         openMenu
       }) => (
         <Root {...getRootProps({ refKey: 'innerRef' })}>
-          <form
+          <div
             css={css`
               position: relative;
               z-index: 1;
@@ -78,63 +78,61 @@ function SearchBar ({
                 </IconButton>
               </ClearSearchWrapper>
             )}
-          </form>
-          <ResultBox>
-            <ul {...getMenuProps()}>
-              {isOpen && searchInput && (
-                <>
-                  {results.slice(0, resultCount).map((item, index) => (
-                    <Item
-                      key={item.node.id}
-                      {...getItemProps({
-                        item,
-                        index,
-                        isHighlighted: highlightedIndex === index
+          </div>
+          <ResultBox {...getMenuProps({ refKey: 'innerRef' })}>
+            {isOpen && searchInput && (
+              <>
+                {results.slice(0, resultCount).map((item, index) => (
+                  <Item
+                    key={item.node.id}
+                    {...getItemProps({
+                      item,
+                      index,
+                      isHighlighted: highlightedIndex === index
+                    })}
+                  >
+                    <Result
+                      to={createCollectionPath({
+                        id: item.node.id,
+                        name: item.node.name
                       })}
                     >
-                      <Result
-                        to={createCollectionPath({
-                          id: item.node.id,
-                          name: item.node.name
-                        })}
-                      >
-                        {item.node.name}
-                      </Result>
-                    </Item>
-                  ))}
-                  {totalResultCount > 0 && resultCount < totalResultCount && (
-                    <Item
-                      {...getItemProps({
-                        item: { node: { id: 'search' } },
-                        index: resultCount,
-                        isHighlighted: highlightedIndex === resultCount
-                      })}
+                      {item.node.name}
+                    </Result>
+                  </Item>
+                ))}
+                {totalResultCount > 0 && resultCount < totalResultCount && (
+                  <Item
+                    {...getItemProps({
+                      item: { node: { id: 'search' } },
+                      index: resultCount,
+                      isHighlighted: highlightedIndex === resultCount
+                    })}
+                  >
+                    <Result
+                      state={{ searchInput, initialIsLoading: true }}
+                      to='/search'
                     >
-                      <Result
-                        state={{ searchInput, initialIsLoading: true }}
-                        to='/search'
-                      >
-                        See all results
-                      </Result>
-                    </Item>
-                  )}
-                  {!isTyping && !isLoading && !totalResultCount && (
-                    <li
-                      css={theme => css`
-                        span {
-                          &:hover {
-                            color: ${theme.colors.gray900};
-                            text-decoration: none;
-                          }
+                      See all results
+                    </Result>
+                  </Item>
+                )}
+                {!isTyping && !isLoading && !totalResultCount && (
+                  <li
+                    css={theme => css`
+                      span {
+                        &:hover {
+                          color: ${theme.colors.gray900};
+                          text-decoration: none;
                         }
-                      `}
-                    >
-                      <Result as='span'>No result found :(</Result>
-                    </li>
-                  )}
-                </>
-              )}
-            </ul>
+                      }
+                    `}
+                  >
+                    <Result as='span'>No result found :(</Result>
+                  </li>
+                )}
+              </>
+            )}
           </ResultBox>
         </Root>
       )}

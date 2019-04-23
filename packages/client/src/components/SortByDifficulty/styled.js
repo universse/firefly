@@ -17,23 +17,6 @@ export function Label (props) {
   )
 }
 
-export function OptionList (props) {
-  return (
-    <ul
-      css={theme => css`
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: ${theme.shadows[1]};
-        margin-top: 0.25rem;
-        position: absolute;
-        right: 0;
-        z-index: 2;
-      `}
-      {...props}
-    />
-  )
-}
-
 export function OptionButton ({ isHighlighted, isSelected, ...props }) {
   return (
     <button
@@ -50,7 +33,6 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
         text-transform: uppercase;
         width: 11.5rem;
       `}
-      tabIndex='-1'
       type='button'
       {...props}
     />

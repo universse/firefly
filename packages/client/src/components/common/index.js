@@ -268,6 +268,7 @@ export function Result ({ as: Tag, ...props }) {
           line-height: 3rem;
         }
       `}
+      onClick={e => e.preventDefault()}
       {...props}
     />
   )

@@ -12,7 +12,7 @@ DefaultItem.propTypes = {
 
 export function DefaultResultBox (props) {
   return (
-    <div
+    <ul
       css={css`
         margin-top: 0.5rem;
       `}

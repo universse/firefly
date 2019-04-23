@@ -3,17 +3,17 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import Downshift from 'downshift'
 
-import { DefaultRoot } from './styled'
+import { OptionList, Root } from './styled'
 
 function ExposedDropdown ({
   handleChange,
   id,
-  initialValue,
   items,
   label,
   OptionList,
   OptionButton,
   Root,
+  selectedItem,
   ToggleButton,
   TogglerLabel
 }) {
@@ -21,13 +21,14 @@ function ExposedDropdown ({
     <Downshift
       itemToString={({ value }) => value}
       onChange={handleChange}
-      selectedItem={items.find(({ value }) => value === initialValue)}
+      selectedItem={items.find(({ value }) => value === selectedItem)}
     >
       {({
-        getToggleButtonProps,
         getItemProps,
         getLabelProps,
+        getMenuProps,
         getRootProps,
+        getToggleButtonProps,
         highlightedIndex,
         isOpen,
         selectItem,
@@ -48,19 +49,18 @@ function ExposedDropdown ({
                 'aria-expanded': isOpen,
                 'data-toggle': 'dropdown',
                 id,
-                onKeyDown: e => {
+                onKeyDown: e =>
                   e.key === 'Tab' &&
-                    highlightedIndex !== null &&
-                    selectItem(items[highlightedIndex])
-                }
+                  highlightedIndex !== null &&
+                  selectItem(items[highlightedIndex])
               })}
             >
               {selectedItem.label}
             </ToggleButton>
           </div>
-          {isOpen && (
-            <OptionList>
-              {items.map((option, index) => (
+          <OptionList {...getMenuProps({ refKey: 'innerRef' })}>
+            {isOpen &&
+              items.map((option, index) => (
                 <li
                   {...getItemProps({
                     item: option,
@@ -77,8 +77,7 @@ function ExposedDropdown ({
                   </OptionButton>
                 </li>
               ))}
-            </OptionList>
-          )}
+          </OptionList>
         </Root>
       )}
     </Downshift>
@@ -88,18 +87,19 @@ function ExposedDropdown ({
 export default memo(ExposedDropdown)
 
 ExposedDropdown.defaultProps = {
-  Root: DefaultRoot
+  OptionList,
+  Root
 }
 
 ExposedDropdown.propTypes = {
   handleChange: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  initialValue: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
   OptionButton: PropTypes.elementType.isRequired,
-  OptionList: PropTypes.elementType.isRequired,
+  selectedItem: PropTypes.string.isRequired,
   ToggleButton: PropTypes.elementType.isRequired,
   TogglerLabel: PropTypes.elementType.isRequired,
+  OptionList: PropTypes.elementType,
   Root: PropTypes.elementType
 }

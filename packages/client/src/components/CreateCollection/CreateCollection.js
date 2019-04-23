@@ -38,22 +38,22 @@ export default function CreateCollection () {
       <ExposedDropdown
         handleChange={handleCategoryChange}
         id=''
-        initialValue={collection.category}
         items={DropdownOptions.CATEGORY_OPTIONS}
         label=''
         OptionButton={OptionButton}
         OptionList={OptionList}
+        selectedItem={collection.category}
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}
       />
       <ExposedDropdown
         handleChange={handleLevelChange}
         id=''
-        initialValue={collection.level}
         items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
         label=''
         OptionButton={OptionButton}
         OptionList={OptionList}
+        selectedItem={collection.level}
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}
       />

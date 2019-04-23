@@ -127,6 +127,7 @@ export function Result ({ as: Tag, ...props }) {
         line-height: 2.5rem;
         padding: 0 0 0 1rem;
       `}
+      onClick={e => e.preventDefault()}
       {...props}
     />
   )
@@ -142,7 +143,7 @@ Result.propTypes = {
 
 export function ResultBox (props) {
   return (
-    <div
+    <ul
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-bottom-left-radius: 1.25rem;

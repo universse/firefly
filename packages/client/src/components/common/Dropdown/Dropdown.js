@@ -2,8 +2,9 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import Downshift from 'downshift'
+import { navigate } from 'gatsby'
 
-import { DefaultRoot } from './styled'
+import { OptionButton, OptionList, Root } from './styled'
 
 function Dropdown ({
   Icon,
@@ -17,12 +18,20 @@ function Dropdown ({
   ToggleButton
 }) {
   return (
-    <Downshift itemToString={({ value }) => value}>
+    <Downshift
+      itemToString={item => item && item.children}
+      onSelect={({ href, onClick, to }) => {
+        href && window.open(href)
+        onClick && onClick()
+        to && navigate(to)
+      }}
+    >
       {({
-        getToggleButtonProps,
         getItemProps,
         getLabelProps,
+        getMenuProps,
         getRootProps,
+        getToggleButtonProps,
         highlightedIndex,
         isOpen
       }) => (
@@ -44,36 +53,31 @@ function Dropdown ({
                 'aria-expanded': isOpen,
                 'data-toggle': 'dropdown',
                 id,
-                onClick: onToggleButtonClick
+                ...(onToggleButtonClick && { onClick: onToggleButtonClick })
               })}
             >
               <Icon />
             </ToggleButton>
           </div>
-          {isOpen && (
-            <OptionList>
-              {items.map((option, index) => {
-                const { label, ...props } = option
-
+          <OptionList {...getMenuProps({ refKey: 'innerRef' })}>
+            {isOpen &&
+              items.map((item, index) => {
                 return (
                   <li
                     {...getItemProps({
-                      item: option,
+                      item,
                       index
                     })}
-                    key={label}
+                    key={index}
                   >
                     <OptionButton
-                      {...props}
+                      {...item}
                       isHighlighted={highlightedIndex === index}
-                    >
-                      {label}
-                    </OptionButton>
+                    />
                   </li>
                 )
               })}
-            </OptionList>
-          )}
+          </OptionList>
         </Root>
       )}
     </Downshift>
@@ -83,7 +87,9 @@ function Dropdown ({
 export default memo(Dropdown)
 
 Dropdown.defaultProps = {
-  Root: DefaultRoot
+  OptionButton,
+  OptionList,
+  Root
 }
 
 Dropdown.propTypes = {
@@ -91,9 +97,9 @@ Dropdown.propTypes = {
   id: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
-  onToggleButtonClick: PropTypes.func.isRequired,
-  OptionButton: PropTypes.elementType.isRequired,
-  OptionList: PropTypes.elementType.isRequired,
   ToggleButton: PropTypes.elementType.isRequired,
+  onToggleButtonClick: PropTypes.func,
+  OptionButton: PropTypes.elementType,
+  OptionList: PropTypes.elementType,
   Root: PropTypes.elementType
 }

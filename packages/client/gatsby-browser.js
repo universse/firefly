@@ -63,11 +63,8 @@ export const shouldUpdateScroll = ({
     return false
   }
 
-  const isCurrentCategoryFilter = isIndexPage(pathname)
-  const isPreviousCategoryFilter = isIndexPage(prevPathname)
-
-  if (isCurrentCategoryFilter) {
-    scrollToHero(isPreviousCategoryFilter)
+  if (isIndexPage(pathname)) {
+    scrollToHero(isIndexPage(prevPathname))
     return false
   }
 
