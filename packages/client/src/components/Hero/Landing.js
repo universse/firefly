@@ -23,7 +23,7 @@ function Landing () {
           css={theme => css`
             color: ${theme.colors.gray800};
             font-family: 'Playfair Display', serif;
-            font-size: 2.75rem;
+            font-size: 2.5rem;
             font-weight: 900;
             line-height: 4rem;
           `}
@@ -33,7 +33,7 @@ function Landing () {
         <h2
           css={theme => css`
             color: ${theme.colors.gray900};
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             line-height: 2rem;
           `}
         >

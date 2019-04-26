@@ -46,6 +46,9 @@ export default function TagFilter ({ aggregatedTags, tags }) {
                 href={href}
                 isActive={isActive}
                 onClick={e => {
+                  if (e.ctrlKey || e.metaKey || e.shiftKey) {
+                    return
+                  }
                   e.preventDefault()
                   queryDispatch({ tags: updatedTags })
                   logClickTagFilter({ tag, updatedTags })

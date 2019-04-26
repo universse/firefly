@@ -101,49 +101,38 @@ export function Input (props) {
   )
 }
 
-export function Item ({ isHighlighted, ...props }) {
-  return (
-    <li
-      css={css`
-        background-color: ${isHighlighted ? '#fff' : 'transparent'};
-      `}
-      {...props}
-    />
-  )
-}
-
-Item.propTypes = {
-  isHighlighted: PropTypes.bool.isRequired
-}
-
-export function Result ({ as: Tag, ...props }) {
+export function Result ({ as: Tag, isHighlighted, ...props }) {
   return (
     <Tag
       css={theme => css`
+        background-color: ${isHighlighted ? '#fff' : 'transparent'};
         color: ${theme.colors.gray900};
         display: flex;
         font-size: 0.9375rem;
         font-weight: 600;
         line-height: 2.5rem;
         padding: 0 0 0 1rem;
+        width: 100%;
       `}
-      onClick={e => e.preventDefault()}
       {...props}
     />
   )
 }
 
 Result.defaultProps = {
+  isHighlighted: false,
   as: Link
 }
 
 Result.propTypes = {
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  isHighlighted: PropTypes.bool
 }
 
-export function ResultBox (props) {
+export function ResultBox ({ innerRef, ...props }) {
   return (
-    <ul
+    <div
+      ref={innerRef}
       css={theme => css`
         background-color: ${theme.colors.gray300};
         border-bottom-left-radius: 1.25rem;
@@ -157,6 +146,10 @@ export function ResultBox (props) {
       {...props}
     />
   )
+}
+
+ResultBox.propTypes = {
+  innerRef: PropTypes.func.isRequired
 }
 
 export function Root ({ innerRef, ...props }) {

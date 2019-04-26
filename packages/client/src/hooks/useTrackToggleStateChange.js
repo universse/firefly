@@ -7,7 +7,7 @@ export default function useTrackToggleStateChange () {
   const [changes, setChanges] = useState()
 
   const trackChange = useCallback(change => {
-    setClickCount(num => num + 1)
+    setClickCount(num => ++num)
     setChanges(change)
   }, [])
 

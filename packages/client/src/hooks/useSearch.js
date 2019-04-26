@@ -15,7 +15,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   const [isTyping, setIsTyping] = useState(false)
   const debouncedSearchInput = useDebouncedValue(searchInput, 350)
 
-  const handleChange = useCallback(({ node: { id, name } }) => {
+  const handleSelect = useCallback(({ node: { id, name } }) => {
     if (name) {
       const to = createCollectionPath({ id, name })
       logClickSearchResult({ input: searchInput, to })
@@ -50,7 +50,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   }, [allCollections, debouncedSearchInput])
 
   return {
-    handleChange,
+    handleSelect,
     handleSearchInput,
     isLoading,
     isTyping,

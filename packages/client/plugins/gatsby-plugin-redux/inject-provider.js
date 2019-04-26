@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 
 import configureStore from './configure-store'
 
-const preloadedState = { test: 'test' }
-const store = configureStore(preloadedState)
+const store = configureStore()
 
+// eslint-disable-next-line
 export default ({ element }) => <Provider store={store}>{element}</Provider>

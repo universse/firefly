@@ -61,21 +61,18 @@ function ExposedDropdown ({
           <OptionList {...getMenuProps({ refKey: 'innerRef' })}>
             {isOpen &&
               items.map((option, index) => (
-                <li
+                <OptionButton
+                  key={option.value}
+                  aria-label={option.label}
                   {...getItemProps({
                     item: option,
-                    index
+                    index,
+                    isHighlighted: highlightedIndex === index,
+                    isSelected: option === selectedItem
                   })}
-                  key={option.value}
                 >
-                  <OptionButton
-                    aria-label={option.label}
-                    isHighlighted={highlightedIndex === index}
-                    isSelected={option === selectedItem}
-                  >
-                    {option.label}
-                  </OptionButton>
-                </li>
+                  {option.label}
+                </OptionButton>
               ))}
           </OptionList>
         </Root>

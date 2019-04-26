@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import LearningItemInput from './LearningItemInput'
 import { ExposedDropdown, IconButton } from 'components/common'
-import { OptionList, OptionButton, ToggleButton, TogglerLabel } from './styled'
+import { OptionButton, ToggleButton, TogglerLabel } from './styled'
 import useCreateChangeHandlers from 'hooks/useCreateChangeHandlers'
 import useCreateCollection from 'hooks/useCreateCollection'
 import DropdownOptions from 'constants/DropdownOptions'
@@ -41,7 +41,6 @@ export default function CreateCollection () {
         items={DropdownOptions.CATEGORY_OPTIONS}
         label=''
         OptionButton={OptionButton}
-        OptionList={OptionList}
         selectedItem={collection.category}
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}
@@ -52,7 +51,6 @@ export default function CreateCollection () {
         items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
         label=''
         OptionButton={OptionButton}
-        OptionList={OptionList}
         selectedItem={collection.level}
         ToggleButton={ToggleButton}
         TogglerLabel={TogglerLabel}

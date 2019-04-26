@@ -10,7 +10,6 @@ import {
   HeaderTag,
   HeaderWrapper,
   Input,
-  Item,
   Result,
   ResultBox,
   Root
@@ -44,7 +43,6 @@ function Header () {
           <SearchBar
             ClearSearchWrapper={ClearSearchWrapper}
             Input={Input}
-            Item={Item}
             Result={Result}
             ResultBox={ResultBox}
             resultCount={10}

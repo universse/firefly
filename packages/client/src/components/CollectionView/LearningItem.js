@@ -8,7 +8,6 @@ import { LinkTitle } from './styled'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import LinkIcons from 'constants/LinkIcons'
 import { UrlType } from 'constants/Types'
-import { getHostname } from './utils'
 import { logClickLearningResource } from 'utils/amplitudeUtils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
@@ -122,7 +121,7 @@ function LearningItem ({ id, url, title, type, collectionId, isChecked }) {
                 line-height: 1.5rem;
               `}
             >
-              {getHostname(url)}
+              {new URL(url).hostname}
             </span>
           </div>
         </div>

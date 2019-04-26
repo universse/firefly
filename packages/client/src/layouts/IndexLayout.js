@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { toTitleCase } from 'common'
 
 import CategoryFilter from 'components/CategoryFilter'
 import Footer from 'components/Footer'
@@ -19,7 +20,6 @@ import {
   mobileNavigationHeightInRem
 } from 'constants/Styles'
 import ModalTypes from 'constants/ModalTypes'
-import { toTitleCase } from 'common'
 
 export default function IndexLayout ({ category, children, location }) {
   const setActiveModalType = useContext(SetModalContext)

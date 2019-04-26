@@ -26,11 +26,14 @@ import { createCollectionPath } from '../../gatsby/utils'
 export default function CollectionPage ({ location }) {
   const { normalizedCollections } = useContext(AllCollectionsContext)
   const userData = useContext(UserDataContext)
-  const { check, love, save } = userData || {}
   const onActionClick = useContext(UserDataDispatchContext)
-  const firebase = useContext(FirebaseContext)
 
   const id = getParamFromPathname(location.pathname)
+  const { check, love, save } = userData || {}
+  const isSaved = save && !!save[id]
+  const isLoved = love && !!love[id]
+
+  const firebase = useContext(FirebaseContext)
 
   const [collection, setCollection] = useState(
     () => location.state && location.state.collection
@@ -59,9 +62,6 @@ export default function CollectionPage ({ location }) {
       .catch(() => setHasError(true))
       .finally(() => setIsLoading(false))
   }, [collection, firebase, id, normalizedCollections])
-
-  const isSaved = save && !!save[id]
-  const isLoved = love && !!love[id]
 
   return (
     <>

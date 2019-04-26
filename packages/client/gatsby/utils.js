@@ -1,4 +1,4 @@
-var getSlug = require('speakingurl')
+const getSlug = require('speakingurl')
 
 // TODO get unique categories for automation, unique tags for search
 module.exports = {

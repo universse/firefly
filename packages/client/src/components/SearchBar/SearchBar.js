@@ -2,11 +2,12 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Downshift from 'downshift'
 import { css } from '@emotion/core'
+import { navigate } from 'gatsby'
 
 import { IconButton } from 'components/common'
 import { Cross } from 'icons'
 import useSearch from 'hooks/useSearch'
-import { DefaultItem, DefaultResultBox, DefaultRoot } from './styled'
+import { DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 
 function SearchBar ({
@@ -16,13 +17,12 @@ function SearchBar ({
   resultCount,
   ClearSearchWrapper,
   Input,
-  Item,
   Result,
   ResultBox,
   Root
 }) {
   const {
-    handleChange,
+    handleSelect,
     handleSearchInput,
     isLoading,
     isTyping,
@@ -37,7 +37,7 @@ function SearchBar ({
     <Downshift
       inputValue={searchInput}
       itemToString={item => (item ? item.node.name : '')}
-      onChange={handleChange}
+      onSelect={handleSelect}
       {...controlledProps}
     >
       {({
@@ -48,7 +48,8 @@ function SearchBar ({
         getRootProps,
         highlightedIndex,
         isOpen,
-        openMenu
+        openMenu,
+        selectItem
       }) => (
         <Root {...getRootProps({ refKey: 'innerRef' })}>
           <div
@@ -83,53 +84,47 @@ function SearchBar ({
             {isOpen && searchInput && (
               <>
                 {results.slice(0, resultCount).map((item, index) => (
-                  <Item
+                  <Result
                     key={item.node.id}
+                    to={createCollectionPath({
+                      id: item.node.id,
+                      name: item.node.name
+                    })}
                     {...getItemProps({
                       item,
                       index,
                       isHighlighted: highlightedIndex === index
                     })}
+                    onClick={e => {
+                      if (e.ctrlKey || e.metaKey || e.shiftKey) {
+                        return
+                      }
+                      e.preventDefault()
+                      selectItem(item)
+                    }}
                   >
-                    <Result
-                      to={createCollectionPath({
-                        id: item.node.id,
-                        name: item.node.name
-                      })}
-                    >
-                      {item.node.name}
-                    </Result>
-                  </Item>
+                    {item.node.name}
+                  </Result>
                 ))}
-                {totalResultCount > 0 && resultCount < totalResultCount && (
-                  <Item
+                {totalResultCount > 0 && totalResultCount > 2 && (
+                  <Result
+                    as='button'
                     {...getItemProps({
                       item: { node: { id: 'search' } },
                       index: resultCount,
                       isHighlighted: highlightedIndex === resultCount
                     })}
+                    onClick={() =>
+                      navigate('/search', {
+                        state: { searchInput, initialIsLoading: true }
+                      })
+                    }
                   >
-                    <Result
-                      state={{ searchInput, initialIsLoading: true }}
-                      to='/search'
-                    >
-                      See all results
-                    </Result>
-                  </Item>
+                    See all results
+                  </Result>
                 )}
                 {!isTyping && !isLoading && !totalResultCount && (
-                  <li
-                    css={theme => css`
-                      span {
-                        &:hover {
-                          color: ${theme.colors.gray900};
-                          text-decoration: none;
-                        }
-                      }
-                    `}
-                  >
-                    <Result as='span'>No result found :(</Result>
-                  </li>
+                  <Result as='span'>No result found :(</Result>
                 )}
               </>
             )}
@@ -147,7 +142,6 @@ SearchBar.defaultProps = {
   initialIsLoading: false,
   initialSearchInput: '',
   resultCount: Infinity,
-  Item: DefaultItem,
   ResultBox: DefaultResultBox,
   Root: DefaultRoot
 }
@@ -160,7 +154,6 @@ SearchBar.propTypes = {
   controlledProps: PropTypes.object,
   initialIsLoading: PropTypes.bool,
   initialSearchInput: PropTypes.string,
-  Item: PropTypes.elementType,
   ResultBox: PropTypes.elementType,
   Root: PropTypes.elementType
 }

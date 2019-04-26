@@ -248,7 +248,7 @@ ProgressBar.propTypes = {
   width: PropTypes.string
 }
 
-export function Result ({ as: Tag, ...props }) {
+export function Result ({ as: Tag, isHighlighted, ...props }) {
   return (
     <Tag
       css={theme => css`
@@ -268,18 +268,19 @@ export function Result ({ as: Tag, ...props }) {
           line-height: 3rem;
         }
       `}
-      onClick={e => e.preventDefault()}
       {...props}
     />
   )
 }
 
 Result.defaultProps = {
+  isHighlighted: false,
   as: Link
 }
 
 Result.propTypes = {
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType])
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  isHighlighted: PropTypes.bool
 }
 
 export function Sidebar ({ isScrollingDown, mobile, ...props }) {

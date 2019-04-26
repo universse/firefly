@@ -5,11 +5,11 @@ import { css } from '@emotion/core'
 import { OutboundLink } from 'components/common'
 
 export function OptionButton ({ as: Tag, isHighlighted, ...props }) {
-  const defaultProps = {
-    onClick: e => e.preventDefault()
-  }
+  const defaultProps = {}
 
-  if (Tag === 'button') defaultProps.type = 'button'
+  if (Tag === 'button') {
+    defaultProps.type = 'button'
+  }
 
   if (Tag === OutboundLink || Tag === 'a') {
     defaultProps.rel = 'noopener noreferrer'
@@ -45,7 +45,7 @@ OptionButton.propTypes = {
 
 export function OptionList ({ innerRef, ...props }) {
   return (
-    <ul
+    <div
       ref={innerRef}
       css={theme => css`
         background-color: #fff;
@@ -55,6 +55,7 @@ export function OptionList ({ innerRef, ...props }) {
         overflow: auto;
         position: absolute;
         right: 0;
+        width: 11.5rem;
         z-index: 2;
       `}
       {...props}

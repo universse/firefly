@@ -1,8 +1,16 @@
 const { resolve } = require('path')
 const { createCollectionPath } = require('./utils')
 
-module.exports = async ({ graphql, actions }) => {
-  const { createPage } = actions
+module.exports = async ({
+  graphql,
+  actions: { createPage, createRedirect }
+}) => {
+  process.env.NODE_ENV === 'production' &&
+    createRedirect({
+      fromPath: '/api/fire/*',
+      toPath: 'https://api.amplitude.com/:splat',
+      statusCode: 200
+    })
 
   const db = await graphql(
     `

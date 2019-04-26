@@ -8,6 +8,7 @@ const client = new ApolloClient({
   fetch: ky
 })
 
+// eslint-disable-next-line
 export default ({ element }) => (
   <ApolloProvider client={client}>{element}</ApolloProvider>
 )

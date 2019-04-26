@@ -86,7 +86,9 @@ module.exports = {
         labelFormat: '[filename]--[local]'
       }
     },
-    'gatsby-plugin-react-axe',
+    ...(process.env.NODE_ENV === 'development'
+      ? ['gatsby-plugin-react-axe']
+      : []),
     {
       resolve: 'gatsby-plugin-accessibilityjs',
       options: {
@@ -99,6 +101,7 @@ module.exports = {
         onError: error => console.log(error)
       }
     },
+    'gatsby-plugin-amplitude',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -108,7 +111,7 @@ module.exports = {
         background_color: '#ffffff',
         theme_color: '#e4234f',
         display: 'standalone',
-        icon: 'src/images/icon.png' // This path is relative to the root of the site.
+        icon: 'src/images/icon.png'
       }
     },
     'gatsby-plugin-offline',

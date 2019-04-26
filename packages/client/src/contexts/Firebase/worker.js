@@ -2,13 +2,6 @@ import workerize from 'workerize'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
-const config = process.env.GATSBY_FIREBASE_USERS
-
-const actionCodeSettings = JSON.stringify({
-  url: `${process.env.GATSBY_HOME_PAGE}/welcome`,
-  handleCodeInApp: true
-})
-
 const worker =
   typeof window === 'object' &&
   workerize(`
@@ -16,9 +9,12 @@ importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js')
 importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js')
 importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-firestore.js')
 
-firebase.initializeApp(${config})
+firebase.initializeApp(${process.env.GATSBY_FIREBASE_USERS})
 const auth = firebase.auth()
-const actionCodeSettings = ${actionCodeSettings}
+const actionCodeSettings = {
+  url: '${window.location.origin}/welcome',
+  handleCodeInApp: true
+}
 
 const stopAuthListener = auth.onAuthStateChanged(user => {
   stopAuthListener()

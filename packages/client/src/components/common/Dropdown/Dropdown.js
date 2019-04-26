@@ -33,7 +33,8 @@ function Dropdown ({
         getRootProps,
         getToggleButtonProps,
         highlightedIndex,
-        isOpen
+        isOpen,
+        selectItem
       }) => (
         <Root {...getRootProps({ refKey: 'innerRef' })}>
           <div
@@ -61,22 +62,24 @@ function Dropdown ({
           </div>
           <OptionList {...getMenuProps({ refKey: 'innerRef' })}>
             {isOpen &&
-              items.map((item, index) => {
-                return (
-                  <li
-                    {...getItemProps({
-                      item,
-                      index
-                    })}
-                    key={index}
-                  >
-                    <OptionButton
-                      {...item}
-                      isHighlighted={highlightedIndex === index}
-                    />
-                  </li>
-                )
-              })}
+              items.map((item, index) => (
+                <OptionButton
+                  key={index}
+                  {...item}
+                  {...getItemProps({
+                    item,
+                    index,
+                    isHighlighted: highlightedIndex === index
+                  })}
+                  onClick={e => {
+                    if (e.ctrlKey || e.metaKey || e.shiftKey) {
+                      return
+                    }
+                    e.preventDefault()
+                    selectItem(item)
+                  }}
+                />
+              ))}
           </OptionList>
         </Root>
       )}

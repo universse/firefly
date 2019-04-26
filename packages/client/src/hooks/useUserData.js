@@ -7,8 +7,9 @@ import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
 import useOfflinePersistence from './useOfflinePersistence'
 import useSaveUserData from './useSaveUserData'
-import useSyncOfflineData from 'hooks/useSyncOfflineData'
+import useSyncOfflineData from './useSyncOfflineData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
+import { getActionKey } from 'utils/userDataUtils'
 
 function reducer (_, { type, payload }) {
   return produce(_, draft => {
@@ -30,16 +31,14 @@ function reducer (_, { type, payload }) {
 
       case 'click':
         const { action, id } = payload
+        const key = getActionKey(action)
 
-        if (draft[action][id]) {
-          if (action === 'save') {
-            draft.prevSave = { ...draft['save'] }
-          }
-          delete draft[action][id]
+        if (draft[key][id]) {
+          if (key === 'save') draft.prevSave = { ...draft[key] }
+          delete draft[key][id]
         } else {
-          draft[action][id] = true
+          draft[key][id] = true
         }
-
         break
 
       case 'undo-unsave':

@@ -16,7 +16,7 @@ import UserData from 'contexts/UserData'
 import Theme from 'constants/Theme'
 import {
   getNormalizedPathname,
-  shouldNotHaveMobileNavigation
+  shouldHaveMobileNavigation
 } from 'utils/pathnameUtils'
 import { isIndexPage } from '../../gatsby/utils'
 
@@ -55,7 +55,7 @@ export default function Layout ({
             <SignUpForm />
           </Modal>
         </Authentication>
-        {!shouldNotHaveMobileNavigation(pathname) && (
+        {shouldHaveMobileNavigation(pathname) && (
           <MobileNavigation normalizedPathname={normalizedPathname} />
         )}
       </AllCollections>
