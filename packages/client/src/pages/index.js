@@ -11,7 +11,6 @@ import { AllCollectionsContext } from 'contexts/AllCollections'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import { Sidebar } from 'components/common'
-import useAggregatedTags from 'hooks/useAggregatedTags'
 import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
 import { CollectionsType } from 'constants/Types'
@@ -25,7 +24,7 @@ export default function IndexPage ({ data }) {
 
   const { allCollections } = useContext(AllCollectionsContext)
 
-  const filteredCollections = useFilteredCollections(
+  const { aggregatedTags, filteredCollections } = useFilteredCollections(
     data.allCollections.edges.length
       ? data.allCollections.edges
       : allCollections,
@@ -33,7 +32,6 @@ export default function IndexPage ({ data }) {
   )
 
   const sortedCollections = useSortedCollections(filteredCollections, sort)
-  const aggregatedTags = useAggregatedTags(filteredCollections, tags)
 
   return (
     <>
