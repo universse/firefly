@@ -106,7 +106,7 @@ function SearchBar ({
                     {item.node.name}
                   </Result>
                 ))}
-                {totalResultCount > 0 && totalResultCount > 2 && (
+                {totalResultCount > 0 && totalResultCount > resultCount && (
                   <Result
                     as='button'
                     {...getItemProps({

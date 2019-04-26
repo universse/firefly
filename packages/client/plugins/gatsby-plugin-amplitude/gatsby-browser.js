@@ -23,7 +23,7 @@ export const onClientEntry = () => {
 
       prevLocation = location
       prevScrollPos = scrollPos
-    }, 500)
+    }, 400)
   })
 }
 

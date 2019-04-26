@@ -16,7 +16,7 @@
     "emotion-theming": "^10.0.10",
     "firebase-admin": "^7.3.0",
     "fromfrom": "^1.2.0",
-    "gatsby": "^2.3.30",
+    "gatsby": "^2.3.31",
     "gatsby-image": "^2.0.40",
     "gatsby-plugin-accessibilityjs": "^1.0.3",
     "gatsby-plugin-create-client-paths": "^2.0.5",
@@ -68,7 +68,7 @@
     "preval.macro": "^3.0.0",
     "react-axe": "^3.1.0",
     "react-test-renderer": "^16.8.6",
-    "react-testing-library": "^6.1.2",
+    "react-testing-library": "^7.0.0",
     "sass": "^1.19.0",
     "webpack-bundle-analyzer": "^3.3.2"
   },

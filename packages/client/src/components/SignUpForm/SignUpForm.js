@@ -2,19 +2,14 @@ import React, { memo, useState, useContext } from 'react'
 import { css } from '@emotion/core'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import EmailLogin from './EmailLogin'
+import { ErrorMessage, Input } from './styled'
 import Modal from 'components/Modal'
-import { IconButton } from 'components/common'
-// import SocialLogin from './SocialLogin'
+import { IconButton, PrimaryButton } from 'components/common'
 import { Cross } from 'icons'
+import { FirebaseContext } from 'contexts/Firebase'
 import { SetModalContext } from 'contexts/SetModal'
+import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
-
-const intialState = {
-  isLoading: false,
-  email: '',
-  socialLogin: ''
-}
 
 function SignUpForm () {
   const data = useStaticQuery(graphql`
@@ -27,18 +22,42 @@ function SignUpForm () {
     }
   `)
 
-  const [signUpState, setSignUpState] = useState(intialState)
-
+  const firebase = useContext(FirebaseContext)
   const setActiveModalType = useContext(SetModalContext)
+
+  const [email, setEmail] = useState('')
+  const [isLoading, setIsloading] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [hasError, setHasError] = useState(false)
+
+  const handleSubmit = e => {
+    e.preventDefault()
+
+    setIsloading(true)
+
+    firebase
+      .sendSignInLinkToEmail(email)
+      .then(() => {
+        setIsSubmitted(true)
+        window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
+      })
+      .catch(() => setHasError(true))
+      .finally(() => setIsloading(false))
+  }
 
   return (
     <Modal
       className='SignUpModal'
       contentLabel='Sign Up'
-      onCloseModal={() => setSignUpState(intialState)}
+      onCloseModal={() => {
+        setEmail('')
+        setIsSubmitted(false)
+        setIsloading(false)
+        setHasError(false)
+      }}
       type={ModalTypes.SIGN_UP_FORM}
     >
-      {!signUpState.isLoading && signUpState.email ? (
+      {isSubmitted ? (
         <div
           css={css`
             text-align: center;
@@ -53,7 +72,7 @@ function SignUpForm () {
             `}
           >
             Thank you for signing up. To confirm your email address, click on
-            the link we've just sent to <strong>{signUpState.email}</strong>.
+            the link we've just sent to <strong>{email}</strong>.
           </p>
         </div>
       ) : (
@@ -74,27 +93,41 @@ function SignUpForm () {
               Welcome to {data.site.siteMetadata.title}
             </h3>
           </div>
-          <EmailLogin setSignUpState={setSignUpState} />
-          {/* <div
-            css={css`
-              margin-top: 0.75rem;
-            `}
-          >
-            <span
-              css={theme => css`
-                color: ${theme.colors.gray900};
-                font-size: 0.9375rem;
-                font-weight: 700;
-                line-height: 1.25rem;
+          <form onSubmit={handleSubmit}>
+            <Input
+              aria-label='Your Email Address'
+              name='email'
+              onChange={e => {
+                setEmail(e.target.value)
+                setHasError(false)
+              }}
+              placeholder='username@domain.com'
+              value={email}
+            />
+            {hasError && (
+              <div
+                css={css`
+                  margin-left: 1rem;
+                  margin-top: 0.125rem;
+                `}
+              >
+                <ErrorMessage>Please enter a valid email address</ErrorMessage>
+              </div>
+            )}
+            <div
+              css={css`
+                margin-top: 1rem;
               `}
             >
-              or
-            </span>
-          </div>
-          <SocialLogin
-            signUpState={signUpState}
-            setSignUpState={setSignUpState}
-          /> */}
+              <PrimaryButton
+                aria-label='Sign In with Email Link'
+                type='submit'
+                width='18rem'
+              >
+                Sign In with Email Link
+              </PrimaryButton>
+            </div>
+          </form>
         </>
       )}
       <div
@@ -108,7 +141,10 @@ function SignUpForm () {
           aria-label='Close Modal'
           onClick={() => {
             setActiveModalType()
-            setSignUpState(intialState)
+            setEmail('')
+            setIsSubmitted(false)
+            setIsloading(false)
+            setHasError(false)
           }}
         >
           <Cross />

@@ -73,7 +73,7 @@ function Dropdown ({
                   })}
                   onClick={e => {
                     if (e.ctrlKey || e.metaKey || e.shiftKey) {
-                      return
+                      if (item.as !== 'button') return
                     }
                     e.preventDefault()
                     selectItem(item)
