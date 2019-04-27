@@ -1,5 +1,4 @@
 import React, { useCallback, useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { Label, SortOption } from './styled'
@@ -7,8 +6,11 @@ import { URLParamsContext } from 'contexts/URLParams'
 import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
 
-export default function MobileSortByDifficulty ({ sort }) {
-  const { queryDispatch } = useContext(URLParamsContext)
+export default function MobileSortByDifficulty () {
+  const {
+    query: { sort },
+    queryDispatch
+  } = useContext(URLParamsContext)
 
   const handleChange = useCallback(e => {
     queryDispatch({ sort: e.currentTarget.value })
@@ -63,8 +65,4 @@ export default function MobileSortByDifficulty ({ sort }) {
       </div>
     </div>
   )
-}
-
-MobileSortByDifficulty.propTypes = {
-  sort: PropTypes.string.isRequired
 }

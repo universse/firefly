@@ -6,8 +6,12 @@ import { URLParamsContext } from 'contexts/URLParams'
 import { ClearFilterButton, Count, MobileTag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
-export default function MobileTagFilter ({ aggregatedTags, tags }) {
-  const { constructUrl, queryDispatch } = useContext(URLParamsContext)
+export default function MobileTagFilter ({ aggregatedTags }) {
+  const {
+    constructUrl,
+    query: { tags },
+    queryDispatch
+  } = useContext(URLParamsContext)
 
   return (
     <>
@@ -72,6 +76,5 @@ export default function MobileTagFilter ({ aggregatedTags, tags }) {
 }
 
 MobileTagFilter.propTypes = {
-  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired
+  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired
 }

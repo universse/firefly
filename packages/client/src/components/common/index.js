@@ -283,7 +283,7 @@ Result.propTypes = {
   isHighlighted: PropTypes.bool
 }
 
-export function Sidebar ({ isScrollingDown, mobile, ...props }) {
+export function Sidebar ({ isScrollingDown, ...props }) {
   return (
     <div
       css={theme => css`
@@ -304,7 +304,6 @@ export function Sidebar ({ isScrollingDown, mobile, ...props }) {
         ${theme.screens.desktop} {
           align-self: flex-start;
           margin-top: 2.25rem;
-          ${mobile && 'display: none'};
           top: ${headerHeightInRem}rem;
           width: 22.5%;
         }
@@ -315,13 +314,11 @@ export function Sidebar ({ isScrollingDown, mobile, ...props }) {
 }
 
 Sidebar.defaultProps = {
-  isScrollingDown: false,
-  mobile: false
+  isScrollingDown: false
 }
 
 Sidebar.propTypes = {
-  isScrollingDown: PropTypes.bool,
-  mobile: PropTypes.bool
+  isScrollingDown: PropTypes.bool
 }
 
 export { default as Spinner } from './Spinner'

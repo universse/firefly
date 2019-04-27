@@ -10,6 +10,7 @@ export function Label (props) {
       css={theme => css`
         color: ${theme.colors.gray900};
         font-size: 0.875rem;
+        font-weight: 500;
         text-transform: capitalize;
       `}
       {...props}

@@ -7,8 +7,12 @@ import { Title } from 'components/common'
 import { ClearFilterButton, Count, Tag } from './styled'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
-export default function TagFilter ({ aggregatedTags, tags }) {
-  const { constructUrl, queryDispatch } = useContext(URLParamsContext)
+export default function TagFilter ({ aggregatedTags }) {
+  const {
+    constructUrl,
+    query: { tags },
+    queryDispatch
+  } = useContext(URLParamsContext)
 
   return (
     <div>
@@ -66,6 +70,5 @@ export default function TagFilter ({ aggregatedTags, tags }) {
 }
 
 TagFilter.propTypes = {
-  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired
+  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired
 }

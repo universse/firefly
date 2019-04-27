@@ -85,10 +85,18 @@ export default function IndexLayout ({ category, children, location }) {
             }
           `}
         >
-          <Sidebar isScrollingDown={isScrollingDown} mobile>
-            <CategoryFilter />
-          </Sidebar>
-          <Media>{children}</Media>
+          <Media>
+            {isDesktop => (
+              <>
+                {!isDesktop && (
+                  <Sidebar isScrollingDown={isScrollingDown}>
+                    <CategoryFilter />
+                  </Sidebar>
+                )}
+                {children}
+              </>
+            )}
+          </Media>
         </div>
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}
