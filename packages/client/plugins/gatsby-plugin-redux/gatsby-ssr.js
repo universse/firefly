@@ -1,3 +1,1 @@
-import injectProvider from './inject-provider'
-
-export const wrapRootElement = injectProvider
+export { default as wrapRootElement } from './wrapRootElement'

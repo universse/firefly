@@ -1,12 +1,12 @@
 import React, { createContext } from 'react'
 import PropTypes from 'prop-types'
 
-import useQuery from 'hooks/useQuery'
+import useURLParams from './useURLParams'
 
 export const URLParamsContext = createContext()
 
 export default function URLParams ({ children, location }) {
-  const value = useQuery(location)
+  const value = useURLParams(location)
 
   return (
     <URLParamsContext.Provider value={value}>

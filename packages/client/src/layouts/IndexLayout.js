@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { toTitleCase } from 'common'
 
+import useIsScrollingDown from './useIsScrollingDown'
 import CategoryFilter from 'components/CategoryFilter'
 import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
@@ -13,7 +14,6 @@ import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'icons'
-import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,

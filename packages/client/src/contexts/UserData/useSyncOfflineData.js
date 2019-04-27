@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import localforage from 'localforage'
 
-import useInterval from './useInterval'
+import useInterval from 'hooks/useInterval'
 import LocalStorage from 'constants/LocalStorage'
 
 export default function useSyncOfflineData (firebase, user) {

@@ -4,9 +4,9 @@ import Downshift from 'downshift'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
+import useSearch from './useSearch'
 import { IconButton } from 'components/common'
 import { Cross } from 'icons'
-import useSearch from 'hooks/useSearch'
 import { DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 

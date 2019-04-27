@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-import useDebouncedValue from './useDebouncedValue'
+import useDebouncedValue from 'hooks/useDebouncedValue'
 
 export default function useTrackToggleStateChange () {
   const [clickCount, setClickCount] = useState(0)

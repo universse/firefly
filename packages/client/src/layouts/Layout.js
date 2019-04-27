@@ -18,7 +18,7 @@ import {
 } from 'utils/pathnameUtils'
 import { isIndexPage } from '../../gatsby/utils'
 
-import './global.scss'
+import './layout.scss'
 import 'fonts/Inter/index.css'
 import 'fonts/PlayfairDisplay/index.css'
 

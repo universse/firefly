@@ -1,8 +1,8 @@
 import React, { createContext } from 'react'
 import PropTypes from 'prop-types'
 
-import { UserDataDispatchContext } from './UserDataDispatch'
-import useUserData from 'hooks/useUserData'
+import { UserDataDispatchContext } from '../UserDataDispatch'
+import useUserData from './useUserData'
 
 export const UserDataContext = createContext()
 

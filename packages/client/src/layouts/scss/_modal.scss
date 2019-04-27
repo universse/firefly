@@ -1,0 +1,63 @@
+
+.Modal {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.SignUpModal {
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+  @media #{$nonMobile} {
+    border-radius: 8px;
+    height: 24rem;
+    width: 32rem;
+  }
+}
+
+.FilterModal {
+  bottom: 0;
+  max-width: 20rem;
+  padding: 1.5rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: calc(100% - 3.5rem);
+}
+
+.Overlay {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.32);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 0.28s;
+  z-index: 999;
+}
+
+.ReactModal__Body--open {
+  overflow: hidden;
+  touch-action: none;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}

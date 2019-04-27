@@ -5,7 +5,7 @@ import matchSorter from 'match-sorter'
 import { AllCollectionsContext } from 'contexts/AllCollections'
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
-import { createCollectionPath } from '../../gatsby/utils'
+import { createCollectionPath } from '../../../gatsby/utils'
 
 export default function useSearch (initialSearchInput, initialIsLoading) {
   const { allCollections } = useContext(AllCollectionsContext)

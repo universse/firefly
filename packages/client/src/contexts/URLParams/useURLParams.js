@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useMemo, useRef } from 'react'
 import qs from 'qs'
 
-import constructHref from 'utils/constructHref'
+import { constructHref } from './utils'
 
 function init (search) {
   const values = qs.parse(search, { ignoreQueryPrefix: true })
@@ -17,7 +17,7 @@ function reducer (state, payload) {
   return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 
-export default function useQuery (location) {
+export default function useURLParams (location) {
   const [query, queryDispatch] = useReducer(reducer, location.search, init)
 
   const firstMount = useRef(true)

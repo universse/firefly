@@ -3,9 +3,9 @@ import { css } from '@emotion/core'
 
 import Filters from './Filters'
 import { ScrollButton } from './styled'
+import useSlider from './useSlider'
 import { Title } from 'components/common'
 import { MediaContext } from 'contexts/Media'
-import useSlider from 'hooks/useSlider'
 import { screens } from 'constants/Styles'
 
 function CategoryFilter () {

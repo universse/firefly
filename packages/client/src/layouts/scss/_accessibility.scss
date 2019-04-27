@@ -1,0 +1,36 @@
+input[type="text"],
+input[type="email"] {
+  &:focus {
+    box-shadow: var(--focus);
+  }
+}
+
+a[href],
+area[href],
+input:not([disabled]),
+select:not([disabled]),
+textarea:not([disabled]),
+button:not([disabled]),
+iframe,
+*[tabindex]:not([tabindex="0"]):not([tabindex^="-"]),
+*[contenteditable] {
+  &:focus {
+    outline: none;
+  }
+
+  body.keyboard-in-use &:focus {
+    box-shadow: var(--focus);
+  }
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

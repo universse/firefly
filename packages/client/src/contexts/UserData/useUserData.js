@@ -1,14 +1,14 @@
 import { useReducer, useContext } from 'react'
 import produce from 'immer'
 
-import { AuthenticationContext } from 'contexts/Authentication'
-import { FirebaseContext } from 'contexts/Firebase'
+import { AuthenticationContext } from '../Authentication'
+import { FirebaseContext } from '../Firebase'
 import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
-import useOfflinePersistence from './useOfflinePersistence'
 import useSaveUserData from './useSaveUserData'
 import useSyncOfflineData from './useSyncOfflineData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
+import useOfflinePersistence from 'hooks/useOfflinePersistence'
 import { getActionKey } from 'utils/userDataUtils'
 
 function reducer (_, { type, payload }) {

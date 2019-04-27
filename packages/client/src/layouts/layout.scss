@@ -1,0 +1,25 @@
+@import 'scss/reset';
+@import 'scss/theme';
+
+@import 'scss/accessibility';
+@import 'scss/animations';
+@import 'scss/icons';
+@import 'scss/modal';
+
+.base {
+  margin: 0 auto;
+  max-width: 64rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+#___gatsby {
+  @media #{$desktop} {
+    padding-top: 4rem;
+  }
+}
+
+#___gatsby > div {
+  display: flex;
+  flex-direction: column;
+}

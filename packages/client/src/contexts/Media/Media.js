@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 import PropTypes from 'prop-types'
 
-import useMedia from 'hooks/useMedia'
+import useMedia from './useMedia'
 import { media } from 'constants/Styles'
 
 export const MediaContext = createContext()

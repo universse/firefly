@@ -5,9 +5,9 @@ import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 const worker =
   typeof window === 'object' &&
   workerize(`
-importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-auth.js')
-importScripts('https://www.gstatic.com/firebasejs/5.9.4/firebase-firestore.js')
+importScripts('https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js')
+importScripts('https://www.gstatic.com/firebasejs/5.10.1/firebase-firestore.js')
 
 firebase.initializeApp(${process.env.GATSBY_FIREBASE_USERS})
 const auth = firebase.auth()
