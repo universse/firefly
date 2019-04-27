@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
 import { PrimaryButton, ProgressBar } from 'components/common'
+import { screens } from 'constants/Styles'
 import { createCollectionPath } from '../../../gatsby/utils'
 
 export default function LatestActivity ({
@@ -26,12 +27,12 @@ export default function LatestActivity ({
     <>
       <div>
         <h2
-          css={theme => css`
-            color: ${theme.colors.gray900};
+          css={css`
+            color: var(--colors-gray900);
             font-size: 1.125rem;
             line-height: 2rem;
 
-            ${theme.screens.desktop} {
+            ${screens.desktop} {
               font-size: 1.25rem;
             }
           `}
@@ -54,8 +55,8 @@ export default function LatestActivity ({
         `}
       >
         <span
-          css={theme => css`
-            color: ${theme.colors.gray800};
+          css={css`
+            color: var(--colors-gray800);
             font-size: 0.8125rem;
             font-weight: 600;
             line-height: 1.25rem;

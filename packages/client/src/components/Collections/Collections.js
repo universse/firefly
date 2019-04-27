@@ -5,20 +5,20 @@ import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
 import Item from './Item'
 import { collectionHeightInRem } from './styled'
-import { baseFontSize } from 'constants/Styles'
+import { baseFontSize, screens } from 'constants/Styles'
 import { CollectionsType } from 'constants/Types'
 
 function itemKey (index, data) {
   return data[index].node.id
 }
 
-const listStyle = theme => css`
+const listStyle = css`
   height: 100% !important;
   width: 100%;
 
-  ${theme.screens.desktop} {
+  ${screens.desktop} {
     border-radius: 8px;
-    box-shadow: ${theme.shadows[0]};
+    box-shadow: var(--shadows-01);
   }
 
   & > ul:not(:empty) {

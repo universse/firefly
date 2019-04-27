@@ -17,7 +17,8 @@ import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
-  mobileNavigationHeightInRem
+  mobileNavigationHeightInRem,
+  screens
 } from 'constants/Styles'
 import ModalTypes from 'constants/ModalTypes'
 
@@ -49,8 +50,8 @@ export default function IndexLayout ({ category, children, location }) {
         title='Collections'
       />
       <section
-        css={theme => css`
-          ${theme.screens.nonDesktop} {
+        css={css`
+          ${screens.nonDesktop} {
             order: -1;
           }
         `}
@@ -59,12 +60,12 @@ export default function IndexLayout ({ category, children, location }) {
         <Hero />
       </section>
       <main
-        css={theme => css`
-          background-color: ${theme.colors.gray100};
+        css={css`
+          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
-          ${theme.screens.desktop} {
+          ${screens.desktop} {
             min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 2rem 0;
           }
@@ -72,15 +73,15 @@ export default function IndexLayout ({ category, children, location }) {
       >
         <div
           className='base'
-          css={theme => css`
+          css={css`
             display: flex;
 
-            ${theme.screens.nonDesktop} {
+            ${screens.nonDesktop} {
               flex-direction: column;
               padding: 0;
             }
 
-            ${theme.screens.desktop} {
+            ${screens.desktop} {
               justify-content: space-between;
             }
           `}

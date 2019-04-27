@@ -8,6 +8,7 @@ import LearningList from './LearningList'
 import { ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
+import { screens } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 
 // TODO:
@@ -46,17 +47,17 @@ export default function CollectionView ({
   return (
     <>
       <div
-        css={theme => css`
+        css={css`
           background-color: #fff;
           margin-bottom: 1rem;
 
-          ${theme.screens.nonMobile} {
+          ${screens.nonMobile} {
             border-radius: 8px;
-            box-shadow: ${theme.shadows[0]};
+            box-shadow: var(--shadows-01);
             margin-bottom: 2rem;
           }
 
-          ${theme.screens.tablet} {
+          ${screens.tablet} {
             margin-bottom: 1rem;
           }
         `}
@@ -86,12 +87,12 @@ export default function CollectionView ({
         )}
       </div>
       <div
-        css={theme => css`
+        css={css`
           background-color: #fff;
 
-          ${theme.screens.nonMobile} {
+          ${screens.nonMobile} {
             border-radius: 8px;
-            box-shadow: ${theme.shadows[0]};
+            box-shadow: var(--shadows-01);
           }
         `}
       >
@@ -99,9 +100,9 @@ export default function CollectionView ({
       </div>
       {!isDesktop && (
         <div
-          css={theme => css`
+          css={css`
             align-items: center;
-            background-color: ${theme.colors.white900};
+            background-color: var(--colors-white900);
             bottom: 0;
             display: flex;
             justify-content: space-between;
@@ -125,8 +126,8 @@ export default function CollectionView ({
             `}
           >
             <span
-              css={theme => css`
-                color: ${theme.colors.gray800};
+              css={css`
+                color: var(--colors-gray800);
                 font-size: 0.875rem;
                 font-weight: 500;
                 line-height: 1.25rem;

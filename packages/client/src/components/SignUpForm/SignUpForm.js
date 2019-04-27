@@ -65,8 +65,8 @@ function SignUpForm () {
           `}
         >
           <p
-            css={theme => css`
-              color: ${theme.colors.gray900};
+            css={css`
+              color: var(--colors-gray900);
               font-size: 1rem;
               line-height: 1.5rem;
             `}
@@ -83,8 +83,8 @@ function SignUpForm () {
             `}
           >
             <h3
-              css={theme => css`
-                color: ${theme.colors.gray900};
+              css={css`
+                color: var(--colors-gray900);
                 font-size: 1.25rem;
                 font-weight: 700;
                 line-height: 2rem;

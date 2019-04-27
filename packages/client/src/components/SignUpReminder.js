@@ -3,8 +3,8 @@ import { css } from '@emotion/core'
 
 import { PrimaryButton } from 'components/common'
 import { SetModalContext } from 'contexts/SetModal'
-import ModalTypes from 'constants/ModalTypes'
 import AriaLabels from 'constants/AriaLabels'
+import ModalTypes from 'constants/ModalTypes'
 
 export default function SignUpReminder () {
   const setActiveModalType = useContext(SetModalContext)
@@ -29,8 +29,8 @@ export default function SignUpReminder () {
         `}
       >
         <h3
-          css={theme => css`
-            color: ${theme.colors.gray900};
+          css={css`
+            color: var(--colors-gray900);
             font-size: 1.25rem;
             font-weight: 500;
             line-height: 2rem;

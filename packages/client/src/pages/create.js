@@ -8,7 +8,11 @@ import SignUpReminder from 'components/SignUpReminder'
 import { IconButton } from 'components/common'
 import { Back } from 'icons'
 import AriaLabels from 'constants/AriaLabels'
-import { headerHeightInRem, mobileHeaderHeightInRem } from 'constants/Styles'
+import {
+  headerHeightInRem,
+  mobileHeaderHeightInRem,
+  screens
+} from 'constants/Styles'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function CreatePage () {
@@ -28,15 +32,15 @@ export default function CreatePage () {
         title='Create'
       />
       <main
-        css={theme => css`
-          background-color: ${theme.colors.gray100};
+        css={css`
+          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
 
-          ${theme.screens.nonMobile} {
+          ${screens.nonMobile} {
             padding: 1rem 0;
           }
 
-          ${theme.screens.desktop} {
+          ${screens.desktop} {
             min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 2rem 0;
           }
@@ -44,10 +48,10 @@ export default function CreatePage () {
       >
         <div
           className='base'
-          css={theme => css`
+          css={css`
             max-width: 50rem;
 
-            ${theme.screens.mobile} {
+            ${screens.mobile} {
               padding: 0 0 1rem;
             }
           `}

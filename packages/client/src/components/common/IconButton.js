@@ -2,23 +2,23 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
+import { screens } from 'constants/Styles'
+
 // TODO focus state
 export default function IconButton ({ children, light, ...props }) {
   return (
     <button
-      css={theme =>
-        css`
-          color: ${light ? theme.colors.white900 : theme.colors.gray500};
-          height: 3rem;
-          width: 2.5rem;
-          z-index: 1;
-        `
-      }
+      css={css`
+        color: ${light ? 'var(--colors-white900)' : 'var(--colors-gray500)'};
+        height: 3rem;
+        width: 2.5rem;
+        z-index: 1;
+      `}
       type='button'
       {...props}
     >
       <div
-        css={theme => css`
+        css={css`
           align-items: center;
           border-radius: 50%;
           display: flex;
@@ -29,11 +29,11 @@ export default function IconButton ({ children, light, ...props }) {
           &:focus {
           }
 
-          ${theme.screens.desktop} {
+          ${screens.desktop} {
             &:hover {
               background-color: ${light
-                ? theme.colors.white100
-                : theme.colors.gray300};
+                ? 'var(--colors-white100)'
+                : 'var(--colors-gray300)'};
             }
           }
         `}

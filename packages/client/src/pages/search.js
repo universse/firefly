@@ -15,7 +15,8 @@ import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
 import {
   headerHeightInRem,
-  mobileNavigationHeightInRem
+  mobileNavigationHeightInRem,
+  screens
 } from 'constants/Styles'
 
 // TODO: loading state
@@ -32,11 +33,11 @@ export default function SearchPage ({ location }) {
     <>
       <SEO title='Search' />
       <main
-        css={theme => css`
+        css={css`
           min-height: calc(100vh - ${headerHeightInRem}rem);
           padding: 0 0 2rem;
 
-          ${theme.screens.nonDesktop} {
+          ${screens.nonDesktop} {
             min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
             padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
           }
@@ -60,18 +61,18 @@ export default function SearchPage ({ location }) {
         )}
         <div
           className='base'
-          css={theme => css`
-            color: ${theme.colors.gray500};
+          css={css`
+            color: var(--colors-gray500);
             position: relative;
 
-            ${theme.screens.desktop} {
+            ${screens.desktop} {
               max-width: 44rem;
               top: -2rem;
             }
           `}
         >
           <div
-            css={theme => css`
+            css={css`
               align-items: center;
               display: flex;
               height: 2.5rem;
@@ -79,7 +80,7 @@ export default function SearchPage ({ location }) {
               position: absolute;
               z-index: 2;
 
-              ${theme.screens.desktop} {
+              ${screens.desktop} {
                 height: 3rem;
               }
             `}

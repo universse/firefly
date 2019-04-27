@@ -1,9 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeContext } from '@emotion/core'
 
 export function Check ({ filled }) {
-  const theme = useContext(ThemeContext)
   const label = filled ? 'uncheck' : 'check'
 
   return (
@@ -17,12 +15,12 @@ export function Check ({ filled }) {
       <title>{label}</title>
       <path
         d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z'
-        fill={filled ? theme.colors.success : 'none'}
-        stroke={filled ? 'none' : theme.colors.gray400}
+        fill={filled ? 'var(--colors-success)' : 'none'}
+        stroke={filled ? 'none' : 'var(--colors-gray400)'}
       />
       <path
         d='M17.3334 9L10.0001 16.3333L6.66675 13'
-        stroke={filled ? '#fff' : theme.colors.gray400}
+        stroke={filled ? '#fff' : 'var(--colors-gray400)'}
       />
     </svg>
   )

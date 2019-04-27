@@ -1,3 +1,5 @@
+@import 'theme.scss';
+
 *,
 ::before,
 ::after {
@@ -137,8 +139,6 @@ button:hover {
   cursor: pointer;
 }
 
-$focus: 0 0 0 4px rgba(59, 175, 218, 0.7);
-
 input {
   border: none;
   margin: 0;
@@ -148,7 +148,7 @@ input {
 input[type="text"],
 input[type="email"] {
   &:focus {
-    box-shadow: $focus;
+    box-shadow: var(--focus);
   }
 }
 
@@ -203,7 +203,7 @@ iframe,
   }
 
   body.keyboard-in-use &:focus {
-    box-shadow: $focus;
+    box-shadow: var(--focus);
   }
 }
 
@@ -237,9 +237,6 @@ iframe,
   width: 1px;
 }
 
-$black100: rgba(0, 0, 0, 0.04);
-$black200: rgba(0, 0, 0, 0.08);
-
 @keyframes wave {
   0% { background-position: -468px 0; }
   100% {background-position: 468px 0; }
@@ -247,14 +244,14 @@ $black200: rgba(0, 0, 0, 0.08);
 
 .wave {
   animation: wave 0.5s linear infinite forwards;
-  background: linear-gradient(to right, $black100 8%, $black200 18%, $black100 33%);
+  background: linear-gradient(to right, var(--black100) 8%, var(--black200) 18%, var(--black100) 33%);
   background-size: 800px 104px;
 }
 
 @keyframes pulse {
-  0% { background-color: $black100; }
-  50% { background-color: $black200; }
-  100% { background-color: $black100; }
+  0% { background-color: var(--black100); }
+  50% { background-color: var(--black200); }
+  100% { background-color: var(--black100); }
 }
 
 .pulse {
@@ -269,7 +266,7 @@ $black200: rgba(0, 0, 0, 0.08);
 }
 
 #___gatsby {
-  @media screen and (min-width: 52.0625rem) {
+  @media #{$desktop} {
     padding-top: 4rem;
   }
 }
@@ -293,7 +290,7 @@ $black200: rgba(0, 0, 0, 0.08);
   position: relative;
   width: 100%;
 
-  @media screen and (min-width: 37.0625rem) {
+  @media #{$nonMobile} {
     border-radius: 8px;
     height: 24rem;
     width: 32rem;

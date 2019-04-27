@@ -5,8 +5,12 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
 import { MediaContext } from 'contexts/Media'
+import {
+  headerHeightInRem,
+  mobileBarsHeightInRem,
+  screens
+} from 'constants/Styles'
 import { hasSignedIn } from 'utils/localStorageUtils'
-import { headerHeightInRem, mobileBarsHeightInRem } from 'constants/Styles'
 
 export default function MePage (props) {
   const isDesktop = useContext(MediaContext)
@@ -17,16 +21,16 @@ export default function MePage (props) {
       <SEO title='Profile' />
       <MobileHeader shadow title='Profile' />
       <main
-        css={theme => css`
-          background-color: ${theme.colors.gray100};
+        css={css`
+          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
           padding: 0 0 1rem;
 
-          ${theme.screens.tablet} {
+          ${screens.tablet} {
             padding: 1rem 0;
           }
 
-          ${theme.screens.desktop} {
+          ${screens.desktop} {
             min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 2rem 0;
           }
@@ -34,10 +38,10 @@ export default function MePage (props) {
       >
         <div
           className='base'
-          css={theme => css`
+          css={css`
             max-width: 48rem;
 
-            ${theme.screens.mobile} {
+            ${screens.mobile} {
               padding: 0;
             }
           `}

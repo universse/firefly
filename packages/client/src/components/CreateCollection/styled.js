@@ -7,8 +7,10 @@ import { ChevronDown } from 'icons'
 export function OptionButton ({ isHighlighted, isSelected, ...props }) {
   return (
     <button
-      css={theme => css`
-        color: ${isSelected ? theme.colors.gray800 : theme.colors.gray700};
+      css={css`
+        color: ${isSelected
+          ? 'var(--colors-gray800)'
+          : 'var(--colors-gray700)'};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
         height: 2.5rem;
@@ -27,9 +29,9 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
 export function ToggleButton ({ children, ...props }) {
   return (
     <button
-      css={theme => css`
+      css={css`
         align-items: center;
-        color: ${theme.colors.gray800};
+        color: var(--colors-gray800);
         display: flex;
         font-size: 0.875rem;
         font-weight: 600;
@@ -42,12 +44,10 @@ export function ToggleButton ({ children, ...props }) {
     >
       {children}
       <div
-        css={theme =>
-          css`
-            color: ${theme.colors.gray500};
-            height: 1.5rem;
-          `
-        }
+        css={css`
+          color: var(--colors-gray500);
+          height: 1.5rem;
+        `}
       >
         <ChevronDown />
       </div>
@@ -58,8 +58,8 @@ export function ToggleButton ({ children, ...props }) {
 export function TogglerLabel (props) {
   return (
     <label
-      css={theme => css`
-        color: ${theme.colors.gray900};
+      css={css`
+        color: var(--colors-gray900);
         font-size: 1rem;
         line-height: 1.5rem;
       `}

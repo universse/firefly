@@ -8,6 +8,7 @@ import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
+import { screens } from 'constants/Styles'
 import { CollectionType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
@@ -67,15 +68,13 @@ function Collection ({
             `}
           >
             <div
-              css={theme =>
-                css`
-                  align-items: center;
-                  color: ${theme.colors.gray500};
-                  display: flex;
-                  height: 1.5rem;
-                  margin-right: 0.25rem;
-                `
-              }
+              css={css`
+                align-items: center;
+                color: var(--colors-gray500);
+                display: flex;
+                height: 1.5rem;
+                margin-right: 0.25rem;
+              `}
             >
               <Resources small />
             </div>
@@ -85,8 +84,8 @@ function Collection ({
               `}
             >
               <span
-                css={theme => css`
-                  color: ${theme.colors.gray800};
+                css={css`
+                  color: var(--colors-gray800);
                   font-size: 0.8125rem;
                   font-weight: 500;
                   line-height: 1.5rem;
@@ -94,8 +93,8 @@ function Collection ({
               >
                 {itemCount}
                 <span
-                  css={theme => css`
-                    ${theme.screens.mobile} {
+                  css={css`
+                    ${screens.mobile} {
                       display: none;
                     }
                   `}

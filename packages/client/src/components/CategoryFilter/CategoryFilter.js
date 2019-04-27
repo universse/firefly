@@ -6,6 +6,7 @@ import { ScrollButton } from './styled'
 import { Title } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import useSlider from 'hooks/useSlider'
+import { screens } from 'constants/Styles'
 
 function CategoryFilter () {
   const {
@@ -21,8 +22,8 @@ function CategoryFilter () {
 
   return (
     <div
-      css={theme => css`
-        ${theme.screens.desktop} {
+      css={css`
+        ${screens.desktop} {
           margin-bottom: 2rem;
         }
       `}

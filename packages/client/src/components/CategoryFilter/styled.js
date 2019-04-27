@@ -4,41 +4,42 @@ import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 import { ChevronLeft, ChevronRight } from 'icons'
+import { screens } from 'constants/Styles'
 
 export function Category ({ isActive, ...props }) {
   return (
     <Link
-      css={theme => css`
+      css={css`
         align-items: center;
-        color: ${isActive ? theme.colors.brand500 : theme.colors.gray900};
+        color: ${isActive ? 'var(--colors-brand500)' : 'var(--colors-gray900)'};
         display: inline-flex;
         font-size: 0.9375rem;
         font-weight: ${isActive ? 600 : 400};
         text-transform: capitalize;
 
         &:hover {
-          color: ${theme.colors.brand500};
+          color: var(--colors-brand500);
         }
 
-        ${theme.screens.nonDesktop} {
+        ${screens.nonDesktop} {
           border-bottom: 2px solid
-            ${isActive ? theme.colors.brand500 : 'transparent'};
+            ${isActive ? 'var(--colors-brand500)' : 'transparent'};
           height: 3rem;
           padding: 0 1rem;
 
           &:hover {
-            border-bottom: 2px solid ${theme.colors.brand500};
+            border-bottom: 2px solid var(--colors-brand500);
           }
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           border-left: 4px solid
-            ${isActive ? theme.colors.brand500 : 'transparent'};
+            ${isActive ? 'var(--colors-brand500)' : 'transparent'};
           height: 1.5rem;
           padding: 0 0 0 1rem;
 
           &:hover {
-            border-left: 4px solid ${theme.colors.brand500};
+            border-left: 4px solid var(--colors-brand500);
           }
         }
       `}
@@ -64,7 +65,7 @@ export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
 
   return (
     <div
-      css={theme => css`
+      css={css`
         align-items: center;
         display: ${isShown ? 'flex' : 'none'};
         ${align};
@@ -73,19 +74,17 @@ export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
       `}
     >
       <button
-        css={theme =>
-          css`
-            background-image: ${theme.gradients[side]};
-            color: ${theme.colors.gray500};
-            height: 3rem;
-            width: 2.5rem;
+        css={css`
+          background-image: ${`var(--gradient-${side})`};
+          color: var(--colors-gray500);
+          height: 3rem;
+          width: 2.5rem;
 
-            &:focus,
-            &:hover {
-              color: #000;
-            }
-          `
-        }
+          &:focus,
+          &:hover {
+            color: var(--colors-gray900);
+          }
+        `}
         onClick={handleClick}
         type='button'
       >

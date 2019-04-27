@@ -2,15 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
+import { screens } from 'constants/Styles'
+
 export function ClearFilterButton (props) {
   return (
     <button
-      css={theme => css`
-        color: ${theme.colors.gray700};
+      css={css`
+        color: var(--colors-gray700);
         font-size: 0.875rem;
 
         &:hover {
-          color: ${theme.colors.gray900};
+          color: var(--colors-gray900);
           text-decoration: underline;
         }
       `}
@@ -23,18 +25,18 @@ export function ClearFilterButton (props) {
 export function Count ({ isActive, ...props }) {
   return (
     <span
-      css={theme => css`
-        color: ${theme.colors.gray900};
+      css={css`
+        color: var(--colors-gray900);
         font-size: 0.875rem;
         line-height: 1.25rem;
 
-        ${theme.screens.nonDesktop} {
+        ${screens.nonDesktop} {
           color: inherit;
           font-size: inherit;
           margin-left: 0.75rem;
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           font-weight: ${isActive ? 600 : 400};
         }
       `}
@@ -51,12 +53,12 @@ export function MobileTag ({ isActive, ...props }) {
   return (
     // eslint-disable-next-line
     <a
-      css={theme => css`
+      css={css`
         background-color: ${isActive
-          ? theme.colors.gray900
-          : theme.colors.gray300};
+          ? 'var(--colors-gray900)'
+          : 'var(--colors-gray300)'};
         border-radius: 1rem;
-        color: ${isActive ? theme.colors.white900 : theme.colors.gray900};
+        color: ${isActive ? 'var(--colors-white900)' : 'var(--colors-gray900)'};
         display: block;
         font-size: 0.875rem;
         font-weight: 500;
@@ -76,15 +78,17 @@ export function Tag ({ isActive, ...props }) {
   return (
     // eslint-disable-next-line
     <a
-      css={theme => css`
-        color: ${theme.colors.gray900};
+      css={css`
+        color: var(--colors-gray900);
         display: block;
         font-size: 0.9375rem;
         font-weight: ${isActive ? 600 : 400};
         line-height: 1.25rem;
 
         &:hover {
-          color: ${isActive ? theme.colors.gray900 : theme.colors.brand500};
+          color: ${isActive
+            ? 'var(--colors-gray900)'
+            : 'var(--colors-brand500)'};
         }
       `}
       {...props}

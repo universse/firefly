@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThemeProvider } from 'emotion-theming'
 
 import IndexLayout from './IndexLayout'
 import Header from 'components/Header'
@@ -13,12 +12,15 @@ import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
 import SetSnackbar from 'contexts/SetSnackbar'
 import UserData from 'contexts/UserData'
-import Theme from 'constants/Theme'
 import {
   getNormalizedPathname,
   shouldHaveMobileNavigation
 } from 'utils/pathnameUtils'
 import { isIndexPage } from '../../gatsby/utils'
+
+import './global.scss'
+import 'fonts/Inter/index.css'
+import 'fonts/PlayfairDisplay/index.css'
 
 export default function Layout ({
   pageContext: { category },
@@ -30,38 +32,36 @@ export default function Layout ({
   const normalizedPathname = getNormalizedPathname(pathname)
 
   if (normalizedPathname === '/welcome') {
-    return <ThemeProvider theme={Theme}>{children}</ThemeProvider>
+    return children
   }
 
   return (
-    <ThemeProvider theme={Theme}>
-      <AllCollections>
-        <Authentication>
-          <Modal>
-            {normalizedPathname !== '/search' && (
-              <Header normalizedPathname={normalizedPathname} />
-            )}
-            <LatestActivity>
-              <SetSnackbar location={location}>
-                <UserData canUndo={normalizedPathname === '/my-library'}>
-                  {isIndexPage(pathname) ? (
-                    <IndexLayout category={category} location={location}>
-                      {children}
-                    </IndexLayout>
-                  ) : (
-                    <Media>{children}</Media>
-                  )}
-                </UserData>
-              </SetSnackbar>
-            </LatestActivity>
-            <SignUpForm />
-          </Modal>
-        </Authentication>
-        {shouldHaveMobileNavigation(pathname) && (
-          <MobileNavigation normalizedPathname={normalizedPathname} />
-        )}
-      </AllCollections>
-    </ThemeProvider>
+    <AllCollections>
+      <Authentication>
+        <Modal>
+          {normalizedPathname !== '/search' && (
+            <Header normalizedPathname={normalizedPathname} />
+          )}
+          <LatestActivity>
+            <SetSnackbar location={location}>
+              <UserData canUndo={normalizedPathname === '/my-library'}>
+                {isIndexPage(pathname) ? (
+                  <IndexLayout category={category} location={location}>
+                    {children}
+                  </IndexLayout>
+                ) : (
+                  <Media>{children}</Media>
+                )}
+              </UserData>
+            </SetSnackbar>
+          </LatestActivity>
+          <SignUpForm />
+        </Modal>
+      </Authentication>
+      {shouldHaveMobileNavigation(pathname) && (
+        <MobileNavigation normalizedPathname={normalizedPathname} />
+      )}
+    </AllCollections>
   )
 }
 

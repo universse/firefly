@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { ThemeContext } from '@emotion/core'
 
 export function Logo () {
   const data = useStaticQuery(graphql`
@@ -12,7 +11,6 @@ export function Logo () {
       }
     }
   `)
-  const theme = useContext(ThemeContext)
 
   return (
     <svg
@@ -29,7 +27,7 @@ export function Logo () {
         cx='18'
         cy='18'
         r='15'
-        stroke={theme.colors.brand500}
+        stroke='var(--colors-brand500)'
         strokeWidth='6'
       />
     </svg>

@@ -8,11 +8,11 @@ import { mobileNavigationHeightInRem } from 'constants/Styles'
 export function GhostButton (props) {
   return (
     <button
-      css={theme => css`
+      css={css`
         align-items: center;
-        border: 2px solid ${theme.colors.brand500};
+        border: 2px solid var(--colors-brand500);
         border-radius: 1rem;
-        color: ${theme.colors.brand500};
+        color: var(--colors-brand500);
         display: flex;
         font-size: 0.9375rem;
         font-weight: 700;
@@ -20,7 +20,7 @@ export function GhostButton (props) {
         padding: 0 1rem;
 
         &:hover {
-          background-color: ${theme.colors.brand500};
+          background-color: var(--colors-brand500);
           color: #fff;
         }
       `}
@@ -33,9 +33,9 @@ export function GhostButton (props) {
 export function MobileNavLink ({ isActive, label, Icon, ...props }) {
   return (
     <Link
-      css={theme => css`
+      css={css`
         align-items: center;
-        color: ${isActive ? theme.colors.brand500 : theme.colors.gray500};
+        color: ${isActive ? 'var(--colors-brand500)' : 'var(--colors-gray500)'};
         display: flex;
         flex-direction: column;
         height: ${mobileNavigationHeightInRem}rem;
@@ -72,18 +72,18 @@ MobileNavLink.propTypes = {
 export function NavLink ({ isActive, ...props }) {
   return (
     <Link
-      css={theme => css`
+      css={css`
         align-items: center;
         border-bottom: 2px solid
-          ${isActive ? theme.colors.brand500 : 'transparent'};
-        color: ${theme.colors.gray900};
+          ${isActive ? 'var(--colors-brand500)' : 'transparent'};
+        color: var(--colors-gray900);
         display: flex;
         font-size: 0.9375rem;
         font-weight: 500;
         height: 2rem;
 
         &:hover {
-          border-bottom: 2px solid ${theme.colors.brand500};
+          border-bottom: 2px solid var(--colors-brand500);
         }
       `}
       {...props}

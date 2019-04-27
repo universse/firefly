@@ -20,8 +20,8 @@ function Landing () {
     >
       <hgroup>
         <h1
-          css={theme => css`
-            color: ${theme.colors.gray800};
+          css={css`
+            color: var(--colors-gray800);
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: 900;
@@ -31,8 +31,8 @@ function Landing () {
           Follow your curiosity.
         </h1>
         <h2
-          css={theme => css`
-            color: ${theme.colors.gray900};
+          css={css`
+            color: var(--colors-gray900);
             font-size: 1.25rem;
             line-height: 2rem;
           `}

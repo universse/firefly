@@ -11,8 +11,8 @@ function Onboard ({ message }) {
     <>
       <hgroup>
         <h1
-          css={theme => css`
-            color: ${theme.colors.gray800};
+          css={css`
+            color: var(--colors-gray800);
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 900;
@@ -22,8 +22,8 @@ function Onboard ({ message }) {
           {message}
         </h1>
         <h2
-          css={theme => css`
-            color: ${theme.colors.gray900};
+          css={css`
+            color: var(--colors-gray900);
             font-size: 1.125rem;
             line-height: 2rem;
           `}

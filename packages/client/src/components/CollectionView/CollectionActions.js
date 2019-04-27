@@ -20,9 +20,9 @@ export default function CollectionActions ({
 
   return (
     <div
-      css={theme => css`
+      css={css`
         align-items: center;
-        border-top: 1px solid ${theme.colors.gray400};
+        border-top: 1px solid var(--colors-gray400);
         display: flex;
         height: 4rem;
         justify-content: space-between;
@@ -45,8 +45,8 @@ export default function CollectionActions ({
           `}
         >
           <span
-            css={theme => css`
-              color: ${theme.colors.gray800};
+            css={css`
+              color: var(--colors-gray800);
               font-size: 0.875rem;
               font-weight: 500;
               line-height: 1.25rem;

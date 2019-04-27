@@ -9,11 +9,11 @@ const spin = keyframes`
 export default function Spinner () {
   return (
     <div
-      css={theme => css`
+      css={css`
         animation: ${spin} 0.6s linear infinite;
-        border: 0.25rem solid ${theme.colors.gray300};
+        border: 0.25rem solid var(--colors-gray300);
         border-radius: 50%;
-        border-top-color: ${theme.colors.brand500};
+        border-top-color: var(--colors-brand500);
         height: 2rem;
         width: 2rem;
       `}

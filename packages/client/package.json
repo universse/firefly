@@ -13,7 +13,6 @@
     "common": "*",
     "downshift": "^3.2.10",
     "emotion": "^10.0.9",
-    "emotion-theming": "^10.0.10",
     "firebase-admin": "^7.3.0",
     "fromfrom": "^1.2.0",
     "gatsby": "^2.3.31",

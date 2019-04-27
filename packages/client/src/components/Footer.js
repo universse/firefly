@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/core'
+import { screens } from 'constants/Styles'
 
 function Footer () {
   const data = useStaticQuery(graphql`
@@ -15,27 +16,27 @@ function Footer () {
 
   return (
     <footer
-      css={theme => css`
-        background-color: ${theme.colors.gray100};
+      css={css`
+        background-color: var(--colors-gray100);
 
-        ${theme.screens.nonDesktop} {
+        ${screens.nonDesktop} {
           display: none;
         }
       `}
     >
       <div
         className='base'
-        css={theme => css`
+        css={css`
           align-items: center;
-          border-top: 1px solid ${theme.colors.gray300};
+          border-top: 1px solid var(--colors-gray300);
           display: flex;
           height: 3rem;
           justify-content: center;
         `}
       >
         <p
-          css={theme => css`
-            color: ${theme.colors.gray800};
+          css={css`
+            color: var(--colors-gray800);
             font-size: 0.8125rem;
             font-weight: 500;
           `}
@@ -43,12 +44,10 @@ function Footer () {
           Made with{' '}
           <span
             aria-label='Love'
-            css={theme =>
-              css`
-                color: ${theme.colors.brand500};
-                font-size: 1rem;
-              `
-            }
+            css={css`
+              color: var(--colors-brand500);
+              font-size: 1rem;
+            `}
             role='img'
           >
             ❤

@@ -7,8 +7,8 @@ import { ChevronDown } from 'icons'
 export function Label (props) {
   return (
     <label
-      css={theme => css`
-        color: ${theme.colors.gray900};
+      css={css`
+        color: var(--colors-gray900);
         font-size: 0.875rem;
         font-weight: 500;
         text-transform: capitalize;
@@ -21,11 +21,13 @@ export function Label (props) {
 export function OptionButton ({ isHighlighted, isSelected, ...props }) {
   return (
     <button
-      css={theme => css`
+      css={css`
         background-color: ${isHighlighted
-          ? theme.colors.gray300
+          ? 'var(--colors-gray300)'
           : 'transparent'};
-        color: ${isSelected ? theme.colors.gray900 : theme.colors.gray800};
+        color: ${isSelected
+          ? 'var(--colors-gray900)'
+          : 'var(--colors-gray800)'};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
         height: 2.5rem;
@@ -61,10 +63,10 @@ export function SortOption (props) {
 export function ToggleButton ({ children, ...props }) {
   return (
     <button
-      css={theme => css`
+      css={css`
         align-items: center;
         border-left: 4px solid transparent;
-        color: ${theme.colors.gray800};
+        color: var(--colors-gray800);
         display: flex;
         font-size: 0.875rem;
         font-weight: 600;
@@ -77,12 +79,10 @@ export function ToggleButton ({ children, ...props }) {
     >
       {children}
       <div
-        css={theme =>
-          css`
-            color: ${theme.colors.gray500};
-            height: 1.5rem;
-          `
-        }
+        css={css`
+          color: var(--colors-gray500);
+          height: 1.5rem;
+        `}
       >
         <ChevronDown />
       </div>
@@ -97,8 +97,8 @@ ToggleButton.propTypes = {
 export function TogglerLabel (props) {
   return (
     <label
-      css={theme => css`
-        color: ${theme.colors.gray900};
+      css={css`
+        color: var(--colors-gray900);
         font-size: 0.875rem;
         line-height: 1.5rem;
       `}

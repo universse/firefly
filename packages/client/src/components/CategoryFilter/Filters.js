@@ -6,6 +6,7 @@ import { Categories } from 'common'
 
 import { Category } from './styled'
 import { RefType } from 'constants/Types'
+import { screens } from 'constants/Styles'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
@@ -15,10 +16,10 @@ function Filters ({ handleScroll, pathname, slider }) {
   return (
     <nav>
       <div
-        css={theme => css`
+        css={css`
           position: relative;
 
-          ${theme.screens.nonDesktop} {
+          ${screens.nonDesktop} {
             height: 3rem;
             overflow: hidden;
           }
@@ -26,8 +27,8 @@ function Filters ({ handleScroll, pathname, slider }) {
       >
         <ul
           ref={slider}
-          css={theme => css`
-            ${theme.screens.nonDesktop} {
+          css={css`
+            ${screens.nonDesktop} {
               display: flex;
               overflow-x: auto;
             }
@@ -35,10 +36,10 @@ function Filters ({ handleScroll, pathname, slider }) {
           onScroll={handleScroll}
         >
           <li
-            css={theme => css`
+            css={css`
               flex: 1 0 auto;
 
-              ${theme.screens.desktop} {
+              ${screens.desktop} {
                 margin: 0.125rem 0;
               }
             `}
@@ -55,10 +56,10 @@ function Filters ({ handleScroll, pathname, slider }) {
           {Categories.map(category => (
             <li
               key={category}
-              css={theme => css`
+              css={css`
                 flex: 1 0 auto;
 
-                ${theme.screens.desktop} {
+                ${screens.desktop} {
                   margin: 0.125rem 0;
                 }
               `}

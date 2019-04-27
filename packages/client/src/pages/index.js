@@ -5,6 +5,7 @@ import { css } from '@emotion/core'
 
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
+import MobileFilters from 'components/MobileFilters'
 import SortByDifficulty from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
 import { AllCollectionsContext } from 'contexts/AllCollections'
@@ -14,7 +15,7 @@ import { Sidebar } from 'components/common'
 import useFilteredCollections from 'hooks/useFilteredCollections'
 import useSortedCollections from 'hooks/useSortedCollections'
 import { CollectionsType } from 'constants/Types'
-import MobileFilters from 'components/MobileFilters'
+import { screens } from 'constants/Styles'
 
 export default function IndexPage ({ data }) {
   const isDesktop = useContext(MediaContext)
@@ -49,11 +50,11 @@ export default function IndexPage ({ data }) {
         />
       )}
       <div
-        css={theme => css`
+        css={css`
           height: 100%;
           width: 100%;
 
-          ${theme.screens.desktop} {
+          ${screens.desktop} {
             width: 70%;
           }
         `}

@@ -5,7 +5,8 @@ import { css } from '@emotion/core'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
-  mobileNavigationHeightInRem
+  mobileNavigationHeightInRem,
+  screens
 } from 'constants/Styles'
 
 import OutboundLink from './OutboundLink'
@@ -37,8 +38,8 @@ ActionBar.propTypes = {
 export const Category = memo(function (props) {
   return (
     <Link
-      css={theme => css`
-        color: ${theme.colors.brand500};
+      css={css`
+        color: var(--colors-brand500);
         font-size: 0.875rem;
         font-weight: 500;
         text-transform: capitalize;
@@ -56,12 +57,12 @@ export const Category = memo(function (props) {
 export function ClearSearchWrapper (props) {
   return (
     <div
-      css={theme => css`
+      css={css`
         position: absolute;
         right: 0.25rem;
         top: -0.25rem;
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           right: 0.5rem;
           top: 0;
         }
@@ -74,8 +75,8 @@ export function ClearSearchWrapper (props) {
 export const Difficulty = memo(function (props) {
   return (
     <span
-      css={theme => css`
-        color: ${theme.colors.gray800};
+      css={css`
+        color: var(--colors-gray800);
         font-size: 0.875rem;
         font-weight: 500;
         text-transform: capitalize;
@@ -90,21 +91,21 @@ export { Dropdown, ExposedDropdown } from './Dropdown'
 export function FAB (props) {
   return (
     <button
-      css={theme => css`
-        background-color: ${theme.colors.brand500};
+      css={css`
+        background-color: var(--colors-brand500);
         border-radius: 1.5rem;
         bottom: ${mobileNavigationHeightInRem + 1}rem;
-        color: ${theme.colors.white900};
+        color: var(--colors-white900);
         height: 3rem;
         position: fixed;
         right: 1rem;
         width: 3rem;
 
         &:hover {
-          background-color: ${theme.colors.brand900};
+          background-color: var(--colors-brand900);
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           display: none;
         }
       `}
@@ -122,12 +123,12 @@ FAB.propTypes = {
 export function FABDesktop (props) {
   return (
     <OutboundLink
-      css={theme => css`
+      css={css`
         align-items: center;
-        background-color: ${theme.colors.brand500};
+        background-color: var(--colors-brand500);
         border-radius: 1.75rem;
         bottom: 2.5rem;
-        color: ${theme.colors.white900};
+        color: var(--colors-white900);
         display: flex;
         height: 3.5rem;
         justify-content: center;
@@ -136,10 +137,10 @@ export function FABDesktop (props) {
         width: 3.5rem;
 
         &:hover {
-          background-color: ${theme.colors.brand900};
+          background-color: var(--colors-brand900);
         }
 
-        ${theme.screens.nonDesktop} {
+        ${screens.nonDesktop} {
           display: none;
         }
       `}
@@ -156,21 +157,21 @@ export function Input (props) {
   return (
     <input
       autoComplete='off'
-      css={theme => css`
-        background-color: ${theme.colors.gray300};
+      css={css`
+        background-color: var(--colors-gray300);
         border-radius: 1.25rem;
-        color: ${theme.colors.gray900};
+        color: var(--colors-gray900);
         font-size: 0.9375rem;
         height: 2.5rem;
         padding-left: 3.25rem;
         width: 100%;
 
         ::placeholder {
-          color: ${theme.colors.gray700};
+          color: var(--colors-gray700);
           opacity: 1;
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           border-radius: 1.5rem;
           font-size: 1.125rem;
           height: 3rem;
@@ -187,8 +188,8 @@ export { OutboundLink }
 export function PrimaryButton ({ large, width, ...props }) {
   return (
     <button
-      css={theme => css`
-        background-color: ${theme.colors.brand500};
+      css={css`
+        background-color: var(--colors-brand500);
         border-radius: ${large ? 1.5 : 1.25}rem;
         color: #fff;
         font-size: ${large ? 1 : 0.9375}rem;
@@ -199,7 +200,7 @@ export function PrimaryButton ({ large, width, ...props }) {
         ${width && `width: ${width};`}
 
         &:hover {
-          background-color: ${theme.colors.brand900};
+          background-color: var(--colors-brand900);
         }
       `}
       type='button'
@@ -220,24 +221,20 @@ PrimaryButton.propTypes = {
 export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
   return (
     <div
-      css={theme =>
-        css`
-          background-color: ${theme.colors.gray300};
-          border-radius: 0.25rem;
-          width: ${width || '100%'};
-        `
-      }
+      css={css`
+        background-color: var(--colors-gray300);
+        border-radius: 0.25rem;
+        width: ${width || '100%'};
+      `}
     >
       <div
-        css={theme =>
-          css`
-            background-color: ${theme.colors.brand500};
-            border-radius: 0.25rem;
-            height: 0.5rem;
-            transition: width 0.75s ease;
-            width: ${percentage}%;
-          `
-        }
+        css={css`
+          background-color: var(--colors-brand500);
+          border-radius: 0.25rem;
+          height: 0.5rem;
+          transition: width 0.75s ease;
+          width: ${percentage}%;
+        `}
       />
     </div>
   )
@@ -251,19 +248,19 @@ ProgressBar.propTypes = {
 export function Result ({ as: Tag, isHighlighted, ...props }) {
   return (
     <Tag
-      css={theme => css`
-        color: ${theme.colors.gray900};
+      css={css`
+        color: var(--colors-gray900);
         display: flex;
         font-size: 1rem;
         line-height: 2.5rem;
         padding-left: 1rem;
 
         &:hover {
-          color: ${theme.colors.brand500};
+          color: var(--colors-brand500);
           text-decoration: underline;
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           font-size: 1.125rem;
           line-height: 3rem;
         }
@@ -286,12 +283,12 @@ Result.propTypes = {
 export function Sidebar ({ isScrollingDown, ...props }) {
   return (
     <div
-      css={theme => css`
+      css={css`
         position: sticky;
 
-        ${theme.screens.nonDesktop} {
-          background-color: ${theme.colors.white900};
-          box-shadow: ${theme.shadows[1]};
+        ${screens.nonDesktop} {
+          background-color: var(--colors-white900);
+          box-shadow: var(--shadows-02);
           top: ${mobileHeaderHeightInRem}rem;
           transform: translateY(
             ${isScrollingDown ? `-${mobileHeaderHeightInRem}rem` : 0}
@@ -301,7 +298,7 @@ export function Sidebar ({ isScrollingDown, ...props }) {
           z-index: 100;
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           align-self: flex-start;
           margin-top: 2.25rem;
           top: ${headerHeightInRem}rem;
@@ -326,10 +323,10 @@ export { default as Spinner } from './Spinner'
 export function Tag ({ small, ...props }) {
   return (
     <Link
-      css={theme => css`
-        background-color: ${theme.colors.gray300};
+      css={css`
+        background-color: var(--colors-gray300);
         border-radius: ${small ? 0.625 : 0.75}rem;
-        color: ${theme.colors.gray900};
+        color: var(--colors-gray900);
         display: block;
         font-size: 0.8125rem;
         font-weight: 500;
@@ -337,7 +334,7 @@ export function Tag ({ small, ...props }) {
         padding: 0 0.75rem;
 
         &:hover {
-          background-color: ${theme.colors.gray400};
+          background-color: var(--colors-gray400);
         }
       `}
       {...props}
@@ -356,16 +353,14 @@ Tag.propTypes = {
 export function Title (props) {
   return (
     <span
-      css={theme =>
-        css`
-          color: ${theme.colors.gray500};
-          display: block;
-          font-size: 0.875rem;
-          font-weight: 600;
-          line-height: 1.5rem;
-          padding-left: calc(1rem + 4px);
-        `
-      }
+      css={css`
+        color: var(--colors-gray500);
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+        padding-left: calc(1rem + 4px);
+      `}
       {...props}
     />
   )

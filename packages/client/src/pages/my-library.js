@@ -15,7 +15,8 @@ import ModalTypes from 'constants/ModalTypes'
 import {
   headerHeightInRem,
   mobileBarsHeightInRem,
-  mobileNavigationHeightInRem
+  mobileNavigationHeightInRem,
+  screens
 } from 'constants/Styles'
 import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
@@ -63,16 +64,16 @@ export default function MyLibraryPage () {
       <SEO title='My Library' />
       <MobileHeader shadow title='My Library' />
       <main
-        css={theme => css`
-          background-color: ${theme.colors.gray100};
+        css={css`
+          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
-          ${theme.screens.tablet} {
+          ${screens.tablet} {
             padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
           }
 
-          ${theme.screens.desktop} {
+          ${screens.desktop} {
             min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 2rem 0;
           }
@@ -80,10 +81,10 @@ export default function MyLibraryPage () {
       >
         <div
           className='base'
-          css={theme => css`
+          css={css`
             max-width: 48rem;
 
-            ${theme.screens.mobile} {
+            ${screens.mobile} {
               padding: 0;
             }
           `}
@@ -95,8 +96,8 @@ export default function MyLibraryPage () {
               `}
             >
               <h1
-                css={theme => css`
-                  color: ${theme.colors.gray800};
+                css={css`
+                  color: var(--colors-gray800);
                   font-size: 1.25rem;
                   line-height: 2rem;
                 `}
@@ -106,16 +107,16 @@ export default function MyLibraryPage () {
             </div>
           )}
           <ul
-            css={theme => css`
+            css={css`
               background-color: #fff;
 
               li:last-child div {
                 border: none;
               }
 
-              ${theme.screens.nonMobile} {
+              ${screens.nonMobile} {
                 border-radius: 8px;
-                box-shadow: ${theme.shadows[0]};
+                box-shadow: var(--shadows-01);
               }
             `}
           >

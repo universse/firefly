@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { mobileNavigationHeightInRem } from 'constants/Styles'
+import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
 
 export function ActionButton ({ onActionClick, onClick, ...props }) {
   return (
     <button
-      css={theme => css`
+      css={css`
         border-radius: 4px;
-        color: ${theme.colors.brand300};
+        color: var(--colors-brand300);
         font-size: 1rem;
         font-weight: 500;
         height: 2.25rem;
@@ -17,7 +17,7 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
         text-transform: uppercase;
 
         &:hover {
-          background-color: ${theme.colors.white100};
+          background-color: var(--colors-white100);
         }
       `}
       onClick={e => {
@@ -38,8 +38,8 @@ ActionButton.propTypes = {
 export function Message (props) {
   return (
     <span
-      css={theme => css`
-        color: ${theme.colors.white900};
+      css={css`
+        color: var(--colors-white900);
         font-size: 1rem;
         line-height: 1.5rem;
       `}
@@ -51,18 +51,18 @@ export function Message (props) {
 export function Surface (props) {
   return (
     <div
-      css={theme => css`
+      css={css`
         align-items: center;
-        background-color: ${theme.colors.gray600};
+        background-color: var(--colors-gray600);
         border-radius: 4px;
-        box-shadow: ${theme.shadows[2]};
+        box-shadow: var(--shadows-03);
         display: flex;
         justify-content: space-between;
         max-width: 40rem;
         min-width: 22.5rem;
         padding: 0 0.5rem 0 1rem;
 
-        ${theme.screens.mobile} {
+        ${screens.mobile} {
           flex-direction: column;
           margin: 0 1rem;
           min-width: auto;
@@ -78,7 +78,7 @@ export function Wrapper ({ isOpen, ...props }) {
   return (
     <div
       aria-hidden={!isOpen}
-      css={theme => css`
+      css={css`
         bottom: ${mobileNavigationHeightInRem}rem;
         display: flex;
         justify-content: center;
@@ -93,7 +93,7 @@ export function Wrapper ({ isOpen, ...props }) {
         visibility: ${isOpen ? 'visible' : 'hidden'};
         z-index: 900;
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           bottom: 1rem;
         }
       `}

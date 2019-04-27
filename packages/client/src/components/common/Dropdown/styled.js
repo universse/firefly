@@ -18,12 +18,12 @@ export function OptionButton ({ as: Tag, isHighlighted, ...props }) {
 
   return (
     <Tag
-      css={theme => css`
+      css={css`
         align-items: center;
         background-color: ${isHighlighted
-          ? theme.colors.gray300
+          ? 'var(--colors-gray300)'
           : 'transparent'};
-        color: ${theme.colors.gray800};
+        color: var(--colors-gray800);
         display: flex;
         font-size: 0.875rem;
         font-weight: 400;
@@ -47,10 +47,10 @@ export function OptionList ({ innerRef, ...props }) {
   return (
     <div
       ref={innerRef}
-      css={theme => css`
+      css={css`
         background-color: #fff;
         border-radius: 8px;
-        box-shadow: ${theme.shadows[1]};
+        box-shadow: var(--shadows-02);
         margin-top: 0.25rem;
         overflow: auto;
         position: absolute;

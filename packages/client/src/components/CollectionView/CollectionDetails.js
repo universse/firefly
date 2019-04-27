@@ -7,23 +7,24 @@ import Tags from 'components/Collections/Tags'
 import { CollectionTitle } from './styled'
 import { Category, Difficulty } from 'components/common'
 import { Level } from 'icons'
+import { screens } from 'constants/Styles'
 import { TagsType } from 'constants/Types'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 function CollectionDetails ({ category, level, name, tags }) {
   return (
     <div
-      css={theme => css`
+      css={css`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         padding: 1rem;
 
-        ${theme.screens.tablet} {
+        ${screens.tablet} {
           padding: 1.5rem 2rem;
         }
 
-        ${theme.screens.desktop} {
+        ${screens.desktop} {
           padding: 2rem 4rem;
         }
       `}

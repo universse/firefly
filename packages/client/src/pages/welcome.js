@@ -72,8 +72,8 @@ export default function WelcomePage () {
         </div>
       )}
       <span
-        css={theme => css`
-          color: ${theme.colors.gray900};
+        css={css`
+          color: var(--colors-gray900);
           font-size: 1rem;
           font-weight: 500;
           line-height: 2rem;
@@ -84,8 +84,8 @@ export default function WelcomePage () {
       </span>
       {hasError && (
         <span
-          css={theme => css`
-            color: ${theme.colors.gray900};
+          css={css`
+            color: var(--colors-gray900);
             font-size: 1rem;
             font-weight: 500;
             line-height: 2rem;
@@ -94,8 +94,8 @@ export default function WelcomePage () {
         >
           Go to{' '}
           <Link
-            css={theme => css`
-              color: ${theme.colors.brand500};
+            css={css`
+              color: var(--colors-brand500);
             `}
             to='/'
           >

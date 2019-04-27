@@ -14,7 +14,8 @@ import AriaLabels from 'constants/AriaLabels'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
-  mobileProgressBarHeight
+  mobileProgressBarHeight,
+  screens
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
@@ -81,16 +82,16 @@ export default function CollectionTemplate ({
             title='Collection'
           />
           <main
-            css={theme => css`
-              background-color: ${theme.colors.gray100};
+            css={css`
+              background-color: var(--colors-gray100);
               min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
               padding: 0 0 ${mobileProgressBarHeight + 1}rem;
 
-              ${theme.screens.nonMobile} {
+              ${screens.nonMobile} {
                 padding: 1rem 0 ${mobileProgressBarHeight + 1}rem;
               }
 
-              ${theme.screens.desktop} {
+              ${screens.desktop} {
                 min-height: calc(100vh - ${headerHeightInRem}rem);
                 padding: 2rem 0;
               }
@@ -98,10 +99,10 @@ export default function CollectionTemplate ({
           >
             <div
               className='base'
-              css={theme => css`
+              css={css`
                 max-width: 50rem;
 
-                ${theme.screens.mobile} {
+                ${screens.mobile} {
                   padding: 0;
                 }
               `}

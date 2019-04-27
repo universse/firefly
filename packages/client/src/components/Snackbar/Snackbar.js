@@ -5,6 +5,7 @@ import { css } from '@emotion/core'
 import { IconButton } from 'components/common'
 import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'icons'
+import { screens } from 'constants/Styles'
 
 function Snackbar ({
   dismissSnackbar,
@@ -25,10 +26,10 @@ function Snackbar ({
       >
         <div
           aria-live='polite'
-          css={theme => css`
+          css={css`
             margin-right: 1rem;
 
-            ${theme.screens.mobile} {
+            ${screens.mobile} {
               margin-right: 0;
               padding-top: 0.5rem;
             }
@@ -38,11 +39,11 @@ function Snackbar ({
           <Message>{message}</Message>
         </div>
         <div
-          css={theme => css`
+          css={css`
             align-items: center;
             display: flex;
 
-            ${theme.screens.mobile} {
+            ${screens.mobile} {
               align-self: flex-end;
               margin-right: -0.5rem;
             }
