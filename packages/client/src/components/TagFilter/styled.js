@@ -25,7 +25,8 @@ export function Count ({ isActive, ...props }) {
     <span
       css={theme => css`
         color: ${theme.colors.gray900};
-        font-size: 1rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
 
         ${theme.screens.nonDesktop} {
           color: inherit;
@@ -34,7 +35,7 @@ export function Count ({ isActive, ...props }) {
         }
 
         ${theme.screens.desktop} {
-          font-weight: ${isActive ? 700 : 400};
+          font-weight: ${isActive ? 600 : 400};
         }
       `}
       {...props}
@@ -58,7 +59,7 @@ export function MobileTag ({ isActive, ...props }) {
         color: ${isActive ? theme.colors.white900 : theme.colors.gray900};
         display: block;
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 2rem;
         padding: 0 0.75rem;
       `}
@@ -78,9 +79,9 @@ export function Tag ({ isActive, ...props }) {
       css={theme => css`
         color: ${theme.colors.gray900};
         display: block;
-        font-size: 1rem;
-        font-weight: ${isActive ? 700 : 400};
-        height: 1.25rem;
+        font-size: 0.9375rem;
+        font-weight: ${isActive ? 600 : 400};
+        line-height: 1.25rem;
 
         &:hover {
           color: ${isActive ? theme.colors.gray900 : theme.colors.brand500};

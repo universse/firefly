@@ -12,8 +12,8 @@ export function Category ({ isActive, ...props }) {
         align-items: center;
         color: ${isActive ? theme.colors.brand500 : theme.colors.gray900};
         display: inline-flex;
-        font-size: 1rem;
-        font-weight: ${isActive ? 700 : 400};
+        font-size: 0.9375rem;
+        font-weight: ${isActive ? 600 : 400};
         text-transform: capitalize;
 
         &:hover {

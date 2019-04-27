@@ -8,9 +8,9 @@
     "graphql-tag": "^2.10.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "aws-sdk": "^2.443.0",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "aws-sdk": "^2.444.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-macros": "^2.5.1",
     "jest": "^24.7.1",

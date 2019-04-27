@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import { ThemeContext, css } from '@emotion/core'
+import { css } from '@emotion/core'
 
 import { mobileNavigationHeightInRem } from 'constants/Styles'
 
@@ -53,7 +53,7 @@ export function MobileNavLink ({ isActive, label, Icon, ...props }) {
       <span
         css={css`
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: 500;
           text-transform: uppercase;
         `}
       >
@@ -69,19 +69,17 @@ MobileNavLink.propTypes = {
   label: PropTypes.string.isRequired
 }
 
-export function NavLink (props) {
-  const theme = useContext(ThemeContext)
-
+export function NavLink ({ isActive, ...props }) {
   return (
     <Link
-      activeStyle={{ borderBottom: `2px solid ${theme.colors.brand500}` }}
       css={theme => css`
         align-items: center;
-        border-bottom: 2px solid transparent;
+        border-bottom: 2px solid
+          ${isActive ? theme.colors.brand500 : 'transparent'};
         color: ${theme.colors.gray900};
         display: flex;
         font-size: 0.9375rem;
-        font-weight: 600;
+        font-weight: 500;
         height: 2rem;
 
         &:hover {
@@ -91,4 +89,8 @@ export function NavLink (props) {
       {...props}
     />
   )
+}
+
+NavLink.propTypes = {
+  isActive: PropTypes.bool.isRequired
 }

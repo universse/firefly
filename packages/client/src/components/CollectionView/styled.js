@@ -11,12 +11,12 @@ export function CollectionTitle (props) {
       css={theme => css`
         color: ${theme.colors.gray800};
         font-size: 1.25rem;
-        font-weight: 700;
-        line-height: 2rem;
+        font-weight: 600;
+        line-height: 2.25rem;
 
         ${theme.screens.desktop} {
           font-size: 1.5rem;
-          line-height: 2.5rem;
+          line-height: 2.75rem;
         }
       `}
       {...props}
@@ -51,7 +51,7 @@ export function LinkTitle ({ href, onClick, title }) {
           css`
             color: ${theme.colors.gray900};
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.5rem;
 
             ${theme.screens.tablet} {

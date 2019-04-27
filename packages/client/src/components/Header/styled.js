@@ -109,7 +109,7 @@ export function Result ({ as: Tag, isHighlighted, ...props }) {
         color: ${theme.colors.gray900};
         display: flex;
         font-size: 0.9375rem;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 2.5rem;
         padding: 0 0 0 1rem;
         width: 100%;
@@ -159,7 +159,7 @@ export function Root ({ innerRef, ...props }) {
       css={css`
         display: block;
         position: relative;
-        width: 28rem;
+        width: 27rem;
       `}
       {...props}
     />

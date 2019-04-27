@@ -11,4 +11,4 @@ export const getParamFromPathname = pathname =>
     .pop()
 
 export const shouldHaveMobileNavigation = pathname =>
-  !pathname.startsWith('/collection') || !pathname.startsWith('/create')
+  !(pathname.startsWith('/collection') || pathname.startsWith('/create'))

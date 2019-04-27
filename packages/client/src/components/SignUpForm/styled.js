@@ -7,7 +7,7 @@ export function ErrorMessage (props) {
       css={theme => css`
         color: ${theme.colors.brand500};
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
       `}
       {...props}
     />

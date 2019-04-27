@@ -38,7 +38,9 @@ export default function Layout ({
       <AllCollections>
         <Authentication>
           <Modal>
-            {normalizedPathname !== '/search' && <Header />}
+            {normalizedPathname !== '/search' && (
+              <Header normalizedPathname={normalizedPathname} />
+            )}
             <LatestActivity>
               <SetSnackbar location={location}>
                 <UserData canUndo={normalizedPathname === '/my-library'}>

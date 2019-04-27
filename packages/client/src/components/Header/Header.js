@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -15,7 +16,7 @@ import {
   Root
 } from './styled'
 
-function Header () {
+function Header ({ normalizedPathname }) {
   return (
     <HeaderTag>
       <HeaderWrapper>
@@ -49,10 +50,14 @@ function Header () {
             Root={Root}
           />
         </div>
-        <Navigation />
+        <Navigation normalizedPathname={normalizedPathname} />
       </HeaderWrapper>
     </HeaderTag>
   )
 }
 
 export default memo(Header)
+
+Header.propTypes = {
+  normalizedPathname: PropTypes.string.isRequired
+}

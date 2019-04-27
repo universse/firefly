@@ -117,7 +117,7 @@ function LearningItem ({ id, url, title, type, collectionId, isChecked }) {
                 color: ${theme.colors.gray500};
                 display: block;
                 font-size: 0.875rem;
-                font-weight: 600;
+                font-weight: 500;
                 line-height: 1.5rem;
               `}
             >

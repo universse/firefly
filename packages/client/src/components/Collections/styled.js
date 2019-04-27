@@ -25,7 +25,7 @@ export function CollectionTitle ({ id, name }) {
         css={theme => css`
           color: ${theme.colors.gray900};
           font-size: 1.125rem;
-          font-weight: 600;
+          font-weight: 500;
           line-height: 1.75rem;
         `}
       >

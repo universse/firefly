@@ -11,7 +11,7 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
         border-radius: 4px;
         color: ${theme.colors.brand300};
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: 500;
         height: 2.25rem;
         padding: 0 0.5rem;
         text-transform: uppercase;

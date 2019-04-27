@@ -37,7 +37,7 @@ function Footer () {
           css={theme => css`
             color: ${theme.colors.gray800};
             font-size: 0.8125rem;
-            font-weight: 600;
+            font-weight: 500;
           `}
         >
           Made with{' '}

@@ -40,7 +40,7 @@ export const Category = memo(function (props) {
       css={theme => css`
         color: ${theme.colors.brand500};
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
         text-transform: capitalize;
         z-index: 1;
 
@@ -77,7 +77,7 @@ export const Difficulty = memo(function (props) {
       css={theme => css`
         color: ${theme.colors.gray800};
         font-size: 0.875rem;
-        font-weight: 600;
+        font-weight: 500;
         text-transform: capitalize;
       `}
       {...props}
@@ -192,7 +192,7 @@ export function PrimaryButton ({ large, width, ...props }) {
         border-radius: ${large ? 1.5 : 1.25}rem;
         color: #fff;
         font-size: ${large ? 1 : 0.9375}rem;
-        font-weight: ${large ? 700 : 600};
+        font-weight: ${large ? 600 : 500};
         height: ${large ? 3 : 2.5}rem;
         ${large && 'letter-spacing: 1px;'}
         ${!width && `padding: 0 ${large ? 3.5 : 3}rem;`}
@@ -335,7 +335,7 @@ export function Tag ({ small, ...props }) {
         color: ${theme.colors.gray900};
         display: block;
         font-size: 0.8125rem;
-        font-weight: 600;
+        font-weight: 500;
         line-height: ${small ? 1.25 : 1.5}rem;
         padding: 0 0.75rem;
 
@@ -364,7 +364,7 @@ export function Title (props) {
           color: ${theme.colors.gray500};
           display: block;
           font-size: 0.875rem;
-          font-weight: 700;
+          font-weight: 600;
           line-height: 1.5rem;
           padding-left: calc(1rem + 4px);
         `

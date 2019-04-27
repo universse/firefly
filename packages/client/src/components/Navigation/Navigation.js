@@ -1,4 +1,5 @@
 import React, { memo, useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import Avatar from './Avatar'
@@ -9,7 +10,7 @@ import ModalTypes from 'constants/ModalTypes'
 import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
-function Navigation () {
+function Navigation ({ normalizedPathname }) {
   const setActiveModalType = useContext(SetModalContext)
 
   return (
@@ -25,7 +26,12 @@ function Navigation () {
             margin-left: 1.5rem;
           `}
         >
-          <NavLink to='/my-library'>My Library</NavLink>
+          <NavLink
+            isActive={normalizedPathname === '/my-library'}
+            to='/my-library'
+          >
+            My Library
+          </NavLink>
         </li>
         <li
           css={css`
@@ -52,3 +58,7 @@ function Navigation () {
 }
 
 export default memo(Navigation)
+
+Navigation.propTypes = {
+  normalizedPathname: PropTypes.string.isRequired
+}

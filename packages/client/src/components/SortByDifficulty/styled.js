@@ -9,7 +9,7 @@ export function Label (props) {
     <label
       css={theme => css`
         color: ${theme.colors.gray900};
-        font-size: 1rem;
+        font-size: 0.875rem;
         text-transform: capitalize;
       `}
       {...props}
@@ -98,7 +98,7 @@ export function TogglerLabel (props) {
     <label
       css={theme => css`
         color: ${theme.colors.gray900};
-        font-size: 1rem;
+        font-size: 0.875rem;
         line-height: 1.5rem;
       `}
       {...props}

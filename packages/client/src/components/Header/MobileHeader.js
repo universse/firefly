@@ -29,7 +29,7 @@ function MobileHeader ({ actions, isScrollingDown, navIcon, shadow, title }) {
               css={theme => css`
                 color: ${theme.colors.gray800};
                 font-size: 1.25rem;
-                font-weight: 600;
+                font-weight: 500;
                 line-height: 1.5rem;
               `}
             >

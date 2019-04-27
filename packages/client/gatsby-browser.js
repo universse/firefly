@@ -1,6 +1,7 @@
 import { isIndexPage, scrollToHero } from './gatsby/utils'
 import './src/layouts/global.scss'
-import 'typeface-playfair-display'
+import './src/fonts/Inter/index.css'
+import './src/fonts/PlayfairDisplay/index.css'
 
 export const onClientEntry = () => {
   process.env.NODE_ENV === 'development' && console.clear()

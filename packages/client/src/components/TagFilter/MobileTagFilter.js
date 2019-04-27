@@ -23,7 +23,7 @@ export default function MobileTagFilter ({ aggregatedTags, tags }) {
           css={theme => css`
             color: ${theme.colors.gray800};
             font-size: 0.875rem;
-            font-weight: 700;
+            font-weight: 600;
             line-height: 1.25rem;
             text-transform: uppercase;
           `}

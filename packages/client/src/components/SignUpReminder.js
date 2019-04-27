@@ -32,7 +32,7 @@ export default function SignUpReminder () {
           css={theme => css`
             color: ${theme.colors.gray900};
             font-size: 1.25rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 2rem;
             text-align: center;
           `}

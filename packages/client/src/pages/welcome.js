@@ -75,7 +75,7 @@ export default function WelcomePage () {
         css={theme => css`
           color: ${theme.colors.gray900};
           font-size: 1rem;
-          font-weight: 600;
+          font-weight: 500;
           line-height: 2rem;
           text-align: center;
         `}
@@ -87,7 +87,7 @@ export default function WelcomePage () {
           css={theme => css`
             color: ${theme.colors.gray900};
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 2rem;
             text-align: center;
           `}

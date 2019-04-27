@@ -128,7 +128,7 @@ export default function CollectionView ({
               css={theme => css`
                 color: ${theme.colors.gray800};
                 font-size: 0.875rem;
-                font-weight: 600;
+                font-weight: 500;
                 line-height: 1.25rem;
               `}
             >
