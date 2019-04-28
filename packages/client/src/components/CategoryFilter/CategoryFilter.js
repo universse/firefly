@@ -1,4 +1,5 @@
-import React, { useContext, memo } from 'react'
+import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
@@ -8,7 +9,7 @@ import { Title } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import { screens } from 'constants/Styles'
 
-function CategoryFilter () {
+export default function CategoryFilter ({ location }) {
   const {
     isMaxScroll,
     isMinScroll,
@@ -37,7 +38,7 @@ function CategoryFilter () {
           <Title>CATEGORIES</Title>
         </div>
       )}
-      <Filters handleScroll={onScroll} slider={slider} />
+      <Filters handleScroll={onScroll} location={location} slider={slider} />
       {!isDesktop && (
         <div>
           <ScrollButton
@@ -56,4 +57,6 @@ function CategoryFilter () {
   )
 }
 
-export default memo(CategoryFilter)
+CategoryFilter.propTypes = {
+  location: PropTypes.object
+}

@@ -47,7 +47,7 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
     "react-modal": "^3.8.1",
-    "react-redux": "^7.0.2",
+    "react-redux": "^7.0.3",
     "react-virtualized": "^9.21.0",
     "react-window": "^1.8.1",
     "redux": "^4.0.1",

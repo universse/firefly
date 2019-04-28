@@ -54,6 +54,8 @@ export function Category (props) {
   )
 }
 
+export const buttonWidthInRem = 2.5
+
 export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
   const align =
     side === 'left'
@@ -80,7 +82,7 @@ export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
           background-image: ${`var(--gradient-${side})`};
           color: var(--colors-gray500);
           height: 3rem;
-          width: 2.5rem;
+          width: ${buttonWidthInRem}rem;
 
           &:focus,
           &:hover {

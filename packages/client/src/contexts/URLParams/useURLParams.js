@@ -1,11 +1,11 @@
-import { useEffect, useReducer, useMemo, useRef } from 'react'
+import { useEffect, useReducer, useMemo } from 'react'
 import qs from 'qs'
 
 import { constructHref } from './utils'
+import useIsFirstMount from 'hooks/useIsFirstMount'
 
 function init (search) {
   const values = qs.parse(search, { ignoreQueryPrefix: true })
-
   return {
     sort: values.sort || '',
     tags: values.tags ? values.tags.split(',') : [],
@@ -20,15 +20,13 @@ function reducer (state, payload) {
 export default function useURLParams (location) {
   const [query, queryDispatch] = useReducer(reducer, location.search, init)
 
-  const firstMount = useRef(true)
+  const isFirstMount = useIsFirstMount()
 
   useEffect(() => {
-    if (firstMount.current) {
-      firstMount.current = false
-      return
+    if (!isFirstMount) {
+      queryDispatch(init(location.search))
     }
-    queryDispatch(init(location.search))
-  }, [location])
+  }, [isFirstMount, location])
 
   useEffect(() => {
     const { sort, tags, action } = query

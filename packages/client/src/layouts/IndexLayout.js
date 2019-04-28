@@ -91,7 +91,7 @@ export default function IndexLayout ({ category, children, location }) {
               <>
                 {!isDesktop && (
                   <Sidebar isScrollingDown={isScrollingDown}>
-                    <CategoryFilter />
+                    <CategoryFilter location={location} />
                   </Sidebar>
                 )}
                 {children}
