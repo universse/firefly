@@ -50,7 +50,7 @@ export default function TagFilter ({ aggregatedTags }) {
                 href={href}
                 isActive={isActive}
                 onClick={e => {
-                  if (e.ctrlKey || e.metaKey || e.shiftKey) {
+                  if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) {
                     return
                   }
                   e.preventDefault()

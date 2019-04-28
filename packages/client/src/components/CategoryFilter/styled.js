@@ -6,15 +6,22 @@ import { css } from '@emotion/core'
 import { ChevronLeft, ChevronRight } from 'icons'
 import { screens } from 'constants/Styles'
 
-export function Category ({ isActive, ...props }) {
+export const activeStyle = {
+  borderColor: 'var(--colors-brand500)',
+  color: 'var(--colors-brand500)',
+  fontWeight: 600
+}
+
+export function Category (props) {
   return (
     <Link
+      activeStyle={activeStyle}
       css={css`
         align-items: center;
-        color: ${isActive ? 'var(--colors-brand500)' : 'var(--colors-gray900)'};
+        color: var(--colors-gray900);
         display: inline-flex;
         font-size: 0.9375rem;
-        font-weight: ${isActive ? 600 : 400};
+        font-weight: 400;
         text-transform: capitalize;
 
         &:hover {
@@ -22,8 +29,7 @@ export function Category ({ isActive, ...props }) {
         }
 
         ${screens.nonDesktop} {
-          border-bottom: 2px solid
-            ${isActive ? 'var(--colors-brand500)' : 'transparent'};
+          border-bottom: 2px solid transparent;
           height: 3rem;
           padding: 0 1rem;
 
@@ -33,8 +39,7 @@ export function Category ({ isActive, ...props }) {
         }
 
         ${screens.desktop} {
-          border-left: 4px solid
-            ${isActive ? 'var(--colors-brand500)' : 'transparent'};
+          border-left: 4px solid transparent;
           height: 1.5rem;
           padding: 0 0 0 1rem;
 
@@ -43,13 +48,10 @@ export function Category ({ isActive, ...props }) {
           }
         }
       `}
+      partiallyActive
       {...props}
     />
   )
-}
-
-Category.propTypes = {
-  isActive: PropTypes.bool.isRequired
 }
 
 export const ScrollButton = memo(function ({ handleClick, isShown, side }) {

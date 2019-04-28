@@ -1,18 +1,14 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Location } from '@reach/router'
 import { Categories } from 'common'
 
-import { Category } from './styled'
+import { activeStyle, Category } from './styled'
 import { RefType } from 'constants/Types'
 import { screens } from 'constants/Styles'
-import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function Filters ({ handleScroll, pathname, slider }) {
-  const normalizedPathname = getNormalizedPathname(pathname)
-
+export function Filters ({ handleScroll, slider }) {
   return (
     <nav>
       <div
@@ -45,8 +41,10 @@ function Filters ({ handleScroll, pathname, slider }) {
             `}
           >
             <Category
-              isActive={
-                pathname === '/' || normalizedPathname === '/category/all'
+              getProps={({ location: { pathname }, isPartiallyCurrent }) =>
+                isPartiallyCurrent || pathname === '/'
+                  ? { style: activeStyle }
+                  : null
               }
               to='/category/all'
             >
@@ -64,12 +62,7 @@ function Filters ({ handleScroll, pathname, slider }) {
                 }
               `}
             >
-              <Category
-                isActive={normalizedPathname === createCategoryPath(category)}
-                to={createCategoryPath(category)}
-              >
-                {category}
-              </Category>
+              <Category to={createCategoryPath(category)}>{category}</Category>
             </li>
           ))}
         </ul>
@@ -78,16 +71,9 @@ function Filters ({ handleScroll, pathname, slider }) {
   )
 }
 
-export default props => {
-  return (
-    <Location>
-      {({ location }) => <Filters pathname={location.pathname} {...props} />}
-    </Location>
-  )
-}
+export default memo(Filters)
 
 Filters.propTypes = {
   handleScroll: PropTypes.func.isRequired,
-  pathname: PropTypes.string.isRequired,
   slider: RefType
 }

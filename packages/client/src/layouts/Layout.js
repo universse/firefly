@@ -39,9 +39,7 @@ export default function Layout ({
     <AllCollections>
       <Authentication>
         <Modal>
-          {normalizedPathname !== '/search' && (
-            <Header normalizedPathname={normalizedPathname} />
-          )}
+          {normalizedPathname !== '/search' && <Header />}
           <LatestActivity>
             <SetSnackbar location={location}>
               <UserData canUndo={normalizedPathname === '/my-library'}>
@@ -58,9 +56,7 @@ export default function Layout ({
           <SignUpForm />
         </Modal>
       </Authentication>
-      {shouldHaveMobileNavigation(pathname) && (
-        <MobileNavigation normalizedPathname={normalizedPathname} />
-      )}
+      {shouldHaveMobileNavigation(pathname) && <MobileNavigation />}
     </AllCollections>
   )
 }

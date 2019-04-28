@@ -39,16 +39,10 @@ export default function IndexPage ({ data }) {
       {isDesktop && (
         <Sidebar>
           <CategoryFilter />
-          <TagFilter aggregatedTags={aggregatedTags} tags={tags} />
+          <TagFilter aggregatedTags={aggregatedTags} />
         </Sidebar>
       )}
-      {!isDesktop && (
-        <MobileFilters
-          aggregatedTags={aggregatedTags}
-          sort={sort}
-          tags={tags}
-        />
-      )}
+      {!isDesktop && <MobileFilters aggregatedTags={aggregatedTags} />}
       <div
         css={css`
           height: 100%;

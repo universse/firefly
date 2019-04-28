@@ -30,17 +30,19 @@ export function GhostButton (props) {
   )
 }
 
-export function MobileNavLink ({ isActive, label, Icon, ...props }) {
+export function MobileNavLink ({ label, Icon, ...props }) {
   return (
     <Link
+      activeStyle={{ color: 'var(--colors-brand500)' }}
       css={css`
         align-items: center;
-        color: ${isActive ? 'var(--colors-brand500)' : 'var(--colors-gray500)'};
+        color: var(--colors-gray500);
         display: flex;
         flex-direction: column;
         height: ${mobileNavigationHeightInRem}rem;
         padding: 0.5rem 0 0.5rem;
       `}
+      partiallyActive
       {...props}
     >
       <div
@@ -65,17 +67,16 @@ export function MobileNavLink ({ isActive, label, Icon, ...props }) {
 
 MobileNavLink.propTypes = {
   Icon: PropTypes.elementType.isRequired,
-  isActive: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired
 }
 
-export function NavLink ({ isActive, ...props }) {
+export function NavLink (props) {
   return (
     <Link
+      activeStyle={{ borderColor: 'var(--colors-brand500)' }}
       css={css`
         align-items: center;
-        border-bottom: 2px solid
-          ${isActive ? 'var(--colors-brand500)' : 'transparent'};
+        border-bottom: 2px solid transparent;
         color: var(--colors-gray900);
         display: flex;
         font-size: 0.9375rem;
@@ -86,11 +87,8 @@ export function NavLink ({ isActive, ...props }) {
           border-bottom: 2px solid var(--colors-brand500);
         }
       `}
+      partiallyActive
       {...props}
     />
   )
-}
-
-NavLink.propTypes = {
-  isActive: PropTypes.bool.isRequired
 }

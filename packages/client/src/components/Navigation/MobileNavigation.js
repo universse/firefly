@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { MobileNavLink } from './styled'
@@ -7,7 +6,7 @@ import { Home, Search, Library, User } from 'icons'
 import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
 import { isIndexPage } from '../../../gatsby/utils'
 
-export default function MobileNavigation ({ normalizedPathname }) {
+export default function MobileNavigation () {
   return (
     <nav
       css={css`
@@ -38,8 +37,8 @@ export default function MobileNavigation ({ normalizedPathname }) {
         >
           <MobileNavLink
             Icon={Home}
-            isActive={isIndexPage(normalizedPathname)}
             label='Home'
+            partiallyActive={isIndexPage()}
             to='/'
           />
         </li>
@@ -48,42 +47,23 @@ export default function MobileNavigation ({ normalizedPathname }) {
             flex: 1;
           `}
         >
-          <MobileNavLink
-            Icon={Search}
-            isActive={normalizedPathname === '/search'}
-            label='Search'
-            to='/search'
-          />
+          <MobileNavLink Icon={Search} label='Search' to='/search' />
         </li>
         <li
           css={css`
             flex: 1;
           `}
         >
-          <MobileNavLink
-            Icon={Library}
-            isActive={normalizedPathname === '/my-library'}
-            label='My Library'
-            to='/my-library'
-          />
+          <MobileNavLink Icon={Library} label='My Library' to='/my-library' />
         </li>
         {/* <li
           css={css`
             flex: 1;
           `}
         >
-          <MobileNavLink
-            Icon={User}
-            isActive={normalizedPathname === '/me'}
-            label='Profile'
-            to='/me'
-          />
+          <MobileNavLink Icon={User} label='Profile' to='/me' />
         </li> */}
       </ul>
     </nav>
   )
-}
-
-MobileNavigation.propTypes = {
-  normalizedPathname: PropTypes.string.isRequired
 }
