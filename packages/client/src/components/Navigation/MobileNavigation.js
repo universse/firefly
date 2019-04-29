@@ -38,6 +38,9 @@ export default function MobileNavigation () {
           <MobileNavLink
             Icon={Home}
             label='Home'
+            onClick={e => {
+              isIndexPage() && e.preventDefault()
+            }}
             partiallyActive={isIndexPage()}
             to='/'
           />
