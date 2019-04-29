@@ -18,6 +18,7 @@ import {
   mobileNavigationHeightInRem,
   screens
 } from 'constants/Styles'
+import goBack from 'utils/goBack'
 
 // TODO: loading state
 export default function SearchPage ({ location }) {
@@ -51,10 +52,7 @@ export default function SearchPage ({ location }) {
               top: 2rem;
             `}
           >
-            <IconButton
-              aria-label={AriaLabels.GO_BACK}
-              onClick={() => window.history.back()}
-            >
+            <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
               <Back />
             </IconButton>
           </div>

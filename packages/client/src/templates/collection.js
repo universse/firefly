@@ -19,6 +19,7 @@ import {
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
+import goBack from 'utils/goBack'
 
 export default function CollectionTemplate ({
   data: { collections },
@@ -71,10 +72,7 @@ export default function CollectionTemplate ({
               </>
             }
             navIcon={
-              <IconButton
-                aria-label={AriaLabels.GO_BACK}
-                onClick={() => window.history.back()}
-              >
+              <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
                 <Back />
               </IconButton>
             }

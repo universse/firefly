@@ -9,20 +9,20 @@ module.exports = ({ page, actions }) => {
 
     createPage({
       ...page,
-      context: { category: 'all' }
+      context: { category: 'all', isIndexPage: true }
     })
 
     createPage({
       ...page,
       path: createCategoryPath('all'),
-      context: { category: 'all' }
+      context: { category: 'all', isIndexPage: true }
     })
 
     Categories.forEach(category =>
       createPage({
         ...page,
         path: createCategoryPath(category),
-        context: { category }
+        context: { category, isIndexPage: true }
       })
     )
   }

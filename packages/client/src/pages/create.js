@@ -13,6 +13,7 @@ import {
   mobileHeaderHeightInRem,
   screens
 } from 'constants/Styles'
+import goBack from 'utils/goBack'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function CreatePage () {
@@ -21,10 +22,7 @@ export default function CreatePage () {
       <SEO title='Create Collection' />
       <MobileHeader
         navIcon={
-          <IconButton
-            aria-label={AriaLabels.GO_BACK}
-            onClick={() => window.history.back()}
-          >
+          <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
             <Back />
           </IconButton>
         }

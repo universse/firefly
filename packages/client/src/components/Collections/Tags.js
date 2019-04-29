@@ -6,8 +6,6 @@ import { TagsType } from 'constants/Types'
 import { logClickTag } from 'utils/amplitudeUtils'
 
 export default function Tags ({ tags }) {
-  const pathname = window.location.pathname
-
   return (
     <ul
       css={css`
@@ -26,7 +24,7 @@ export default function Tags ({ tags }) {
             onClick={() => {
               logClickTag({ tag })
             }}
-            small={!pathname.startsWith('/collection')}
+            small={!window.location.pathname.startsWith('/collection')}
             to={`/?tags=${tag.toLowerCase()}`}
           >
             {tag}

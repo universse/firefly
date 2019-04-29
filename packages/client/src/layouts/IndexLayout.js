@@ -37,13 +37,11 @@ export default function IndexLayout ({ category, children, location }) {
     [setActiveModalType]
   )
 
-  const title = category === 'all' ? '' : toTitleCase(category)
-
   const isScrollingDown = useIsScrollingDown()
 
   return (
     <URLParams location={location}>
-      <SEO title={title} />
+      <SEO title={category === 'all' ? '' : toTitleCase(category)} />
       <MobileHeader
         actions={actions}
         isScrollingDown={isScrollingDown}

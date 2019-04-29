@@ -16,24 +16,21 @@ import {
   getNormalizedPathname,
   shouldHaveMobileNavigation
 } from 'utils/pathnameUtils'
-import { isIndexPage } from '../../gatsby/utils'
 
 import './layout.scss'
 import 'fonts/Inter/index.css'
 import 'fonts/PlayfairDisplay/index.css'
 
 export default function Layout ({
-  pageContext: { category },
+  pageContext: { category, isIndexPage },
   children,
   location
 }) {
-  const { pathname } = location
+  const normalizedPathname = getNormalizedPathname(location.pathname)
 
-  const normalizedPathname = getNormalizedPathname(pathname)
+  if (normalizedPathname === '/offline-plugin-app-shell-fallback') return null
 
-  if (normalizedPathname === '/welcome') {
-    return children
-  }
+  if (normalizedPathname === '/welcome') return children
 
   return (
     <AllCollections>
@@ -43,7 +40,7 @@ export default function Layout ({
           <LatestActivity>
             <SetSnackbar location={location}>
               <UserData canUndo={normalizedPathname === '/my-library'}>
-                {isIndexPage(pathname) ? (
+                {isIndexPage ? (
                   <IndexLayout category={category} location={location}>
                     {children}
                   </IndexLayout>
@@ -56,7 +53,9 @@ export default function Layout ({
           <SignUpForm />
         </Modal>
       </Authentication>
-      {shouldHaveMobileNavigation(pathname) && <MobileNavigation />}
+      {shouldHaveMobileNavigation(location.pathname) && (
+        <MobileNavigation isIndexPage={isIndexPage || false} />
+      )}
     </AllCollections>
   )
 }

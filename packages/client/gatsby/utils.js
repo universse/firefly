@@ -7,14 +7,7 @@ module.exports = {
 
   createCategoryPath: category => `/category/${getSlug(category)}`,
 
-  isIndexPage: pathname => {
-    try {
-      pathname = pathname || window.location.pathname
-      return pathname.includes('/category/') || pathname === '/'
-    } catch {
-      return false
-    }
-  },
+  isIndexPage: pathname => pathname.startsWith('/category') || pathname === '/',
 
   scrollToHero: (smooth = true) =>
     window.scrollTo({

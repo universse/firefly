@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'icons'
 import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
-import { isIndexPage } from '../../../gatsby/utils'
 
-export default function MobileNavigation () {
+function MobileNavigation ({ isIndexPage }) {
   return (
     <nav
       css={css`
@@ -38,10 +38,8 @@ export default function MobileNavigation () {
           <MobileNavLink
             Icon={Home}
             label='Home'
-            onClick={e => {
-              isIndexPage() && e.preventDefault()
-            }}
-            partiallyActive={isIndexPage()}
+            onClick={e => isIndexPage && e.preventDefault()}
+            partiallyActive={isIndexPage}
             to='/'
           />
         </li>
@@ -69,4 +67,10 @@ export default function MobileNavigation () {
       </ul>
     </nav>
   )
+}
+
+export default memo(MobileNavigation)
+
+MobileNavigation.propTypes = {
+  isIndexPage: PropTypes.bool.isRequired
 }

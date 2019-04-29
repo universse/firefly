@@ -12,6 +12,12 @@ export const onClientEntry = () => {
   )
 }
 
+export const onRouteUpdate = ({ prevLocation }) => {
+  prevLocation
+    ? window.localStorage.setItem('visited', true)
+    : window.localStorage.removeItem('visited')
+}
+
 export const shouldUpdateScroll = ({
   routerProps: {
     location: { pathname }

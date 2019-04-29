@@ -20,6 +20,7 @@ import {
   screens
 } from 'constants/Styles'
 import { createActionLabel } from 'utils/ariaLabelUtils'
+import goBack from 'utils/goBack'
 import parseCollectionData from 'utils/parseCollectionData'
 import { getParamFromPathname } from 'utils/pathnameUtils'
 import { createCollectionPath } from '../../gatsby/utils'
@@ -104,10 +105,7 @@ export default function CollectionPage ({ location }) {
               )
             }
             navIcon={
-              <IconButton
-                aria-label={AriaLabels.GO_BACK}
-                onClick={() => window.history.back()}
-              >
+              <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
                 <Back />
               </IconButton>
             }
