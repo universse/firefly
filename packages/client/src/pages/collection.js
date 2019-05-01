@@ -8,7 +8,6 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { IconButton } from 'components/common'
 import { AllCollectionsContext } from 'contexts/AllCollections'
-import { FirebaseContext } from 'contexts/Firebase'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Back, Heart, Save } from 'icons'
@@ -20,6 +19,7 @@ import {
   screens
 } from 'constants/Styles'
 import { createActionLabel } from 'utils/ariaLabelUtils'
+import firebaseWorker from 'utils/firebaseWorker'
 import goBack from 'utils/goBack'
 import parseCollectionData from 'utils/parseCollectionData'
 import { getParamFromPathname } from 'utils/pathnameUtils'
@@ -34,8 +34,6 @@ export default function CollectionPage ({ location }) {
   const { check, love, save } = userData || {}
   const isSaved = save && !!save[id]
   const isLoved = love && !!love[id]
-
-  const firebase = useContext(FirebaseContext)
 
   const [collection, setCollection] = useState(
     () => location.state && location.state.collection
@@ -54,7 +52,7 @@ export default function CollectionPage ({ location }) {
       return
     }
 
-    firebase
+    firebaseWorker
       .fetchCollection(id)
       .then(({ collection, error }) =>
         error
@@ -63,7 +61,7 @@ export default function CollectionPage ({ location }) {
       )
       .catch(() => setHasError(true))
       .finally(() => setIsLoading(false))
-  }, [collection, firebase, id, normalizedCollections])
+  }, [collection, id, normalizedCollections])
 
   return (
     <>

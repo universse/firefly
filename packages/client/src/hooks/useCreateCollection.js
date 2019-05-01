@@ -2,7 +2,7 @@ import { useState, useReducer, useContext, useCallback } from 'react'
 import { navigate } from 'gatsby'
 import produce from 'immer'
 
-import { FirebaseContext } from 'contexts/Firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 
 const initialValue = {
   name: '',
@@ -34,19 +34,18 @@ function reducer (state, { type, payload }) {
 
 export default function useCreateCollection () {
   const [collection, dispatch] = useReducer(reducer, initialValue)
-  const firebase = useContext(FirebaseContext)
   const [hasError, setHasError] = useState(false)
 
   const handleSubmit = useCallback(e => {
     e.preventDefault()
-    firebase.createCollection(collection).then(payload =>
+    firebaseWorker.createCollection(collection).then(payload =>
       payload.error
         ? setHasError(true)
         : navigate(`/collection/${payload.collection.id}`, {
             state: { collection: payload.collection }
           })
     )
-  }, [collection, firebase])
+  }, [collection])
 
   return {
     collection,

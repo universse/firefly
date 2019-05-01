@@ -2,7 +2,6 @@ import { useReducer, useContext } from 'react'
 import produce from 'immer'
 
 import { AuthenticationContext } from '../Authentication'
-import { FirebaseContext } from '../Firebase'
 import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
 import useSaveUserData from './useSaveUserData'
@@ -55,9 +54,8 @@ function reducer (_, { type, payload }) {
 export default function useUserData (canUndo) {
   const [userData, dispatch] = useReducer(reducer)
   const user = useContext(AuthenticationContext)
-  const firebase = useContext(FirebaseContext)
 
-  useFetchUserData(dispatch, firebase, user)
+  useFetchUserData(dispatch, user)
 
   const [change, trackChange] = useTrackToggleStateChange()
 
@@ -69,9 +67,9 @@ export default function useUserData (canUndo) {
       }
   )
 
-  useSaveUserData(change, firebase, user)
+  useSaveUserData(change, user)
 
-  useSyncOfflineData(firebase, user)
+  useSyncOfflineData(user)
 
   const onActionClick = useActionClickHandler(
     canUndo,

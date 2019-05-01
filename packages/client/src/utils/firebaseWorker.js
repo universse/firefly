@@ -2,12 +2,12 @@ import workerize from 'workerize'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
-const worker =
+const firebaseWorker =
   typeof window === 'object' &&
   workerize(`
-importScripts('https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js')
-importScripts('https://www.gstatic.com/firebasejs/5.10.1/firebase-firestore.js')
+importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-auth.js')
+importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js')
 
 firebase.initializeApp(${process.env.GATSBY_FIREBASE_USERS})
 const auth = firebase.auth()
@@ -243,6 +243,49 @@ export async function action ({ id, action }) {
     }
   }
 }
+
+importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js')
+
+const id = firestore.collection('collections').doc().id
+const date = \`\${new Date().getDate()}-\${new Date().getMonth() + 1}\`
+
+export async function uploadScreenRecordings (events) {
+  try {
+    firebase
+      .storage()
+      .ref()
+      .child('SRs')
+      .child(date)
+      .child(auth.currentUser ? auth.currentUser.uid : id)
+      .child(Date.now() + '.json')
+      .putString(JSON.stringify(events))
+  } catch {
+    throw new Error()
+  }
+}
 `)
 
-export default worker
+if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
+  let events = []
+  let processing = []
+
+  import('rrweb').then(({ record }) =>
+    record({
+      emit (event) {
+        events.push(event)
+      }
+    })
+  )
+
+  setInterval(() => {
+    if (events.length) {
+      processing = [...events]
+      events = []
+      firebaseWorker
+        .uploadScreenRecordings(processing)
+        .catch(() => (events = [...processing, ...events]))
+    }
+  }, 12000)
+}
+
+export default firebaseWorker

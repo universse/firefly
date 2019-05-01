@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import localforage from 'localforage'
 
 import LocalStorage from 'constants/LocalStorage'
+import firebaseWorker from 'utils/firebaseWorker'
 
-export default function useFetchUserData (dispatch, firebase, user) {
+export default function useFetchUserData (dispatch, user) {
   useEffect(() => {
     Promise.all([
       localforage.getItem(LocalStorage.OFFLINE_QUEUE),
@@ -38,10 +39,10 @@ export default function useFetchUserData (dispatch, firebase, user) {
 
   useEffect(() => {
     user &&
-      firebase
+      firebaseWorker
         .fetchUserData()
         .then(userData =>
           dispatch({ type: 'load-database', payload: userData })
         )
-  }, [dispatch, firebase, user])
+  }, [dispatch, user])
 }

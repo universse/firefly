@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import localforage from 'localforage'
 
-import { FirebaseContext } from 'contexts/Firebase'
 import { Spinner } from 'components/common'
 import LocalStorage from 'constants/LocalStorage'
+import firebaseWorker from 'utils/firebaseWorker'
 import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
 
 export default function WelcomePage () {
@@ -13,17 +13,17 @@ export default function WelcomePage () {
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
 
-  const firebase = useContext(FirebaseContext)
-
   useEffect(() => {
-    firebase
+    firebaseWorker
       .isSignInWithEmailLink(window.location.href)
       .then(
         () =>
           window.localStorage.getItem(LocalStorage.EMAIL_SIGN_IN) ||
           window.prompt('Please enter your email for confirmation.')
       )
-      .then(email => firebase.signInWithEmailLink(email, window.location.href))
+      .then(email =>
+        firebaseWorker.signInWithEmailLink(email, window.location.href)
+      )
       .then(isNewUser => {
         window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
         window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
@@ -46,7 +46,7 @@ export default function WelcomePage () {
         setMessage('Something went wrong. Please try again later!')
         setIsLoading(false)
       })
-  }, [firebase])
+  }, [])
 
   return (
     <div

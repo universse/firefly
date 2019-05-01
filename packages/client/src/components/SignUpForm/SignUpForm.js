@@ -6,10 +6,10 @@ import { ErrorMessage, Input } from './styled'
 import Modal from 'components/Modal'
 import { IconButton, PrimaryButton } from 'components/common'
 import { Cross } from 'icons'
-import { FirebaseContext } from 'contexts/Firebase'
 import { SetModalContext } from 'contexts/SetModal'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
+import firebaseWorker from 'utils/firebaseWorker'
 
 function SignUpForm () {
   const data = useStaticQuery(graphql`
@@ -22,7 +22,6 @@ function SignUpForm () {
     }
   `)
 
-  const firebase = useContext(FirebaseContext)
   const setActiveModalType = useContext(SetModalContext)
 
   const [email, setEmail] = useState('')
@@ -35,7 +34,7 @@ function SignUpForm () {
 
     setIsloading(true)
 
-    firebase
+    firebaseWorker
       .sendSignInLinkToEmail(email)
       .then(() => {
         setIsSubmitted(true)

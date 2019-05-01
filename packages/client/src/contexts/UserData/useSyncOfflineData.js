@@ -3,8 +3,9 @@ import localforage from 'localforage'
 
 import useInterval from 'hooks/useInterval'
 import LocalStorage from 'constants/LocalStorage'
+import firebaseWorker from 'utils/firebaseWorker'
 
-export default function useSyncOfflineData (firebase, user) {
+export default function useSyncOfflineData (user) {
   const [shouldSync, setShouldSync] = useState()
 
   const startSyncing = useCallback(() => setShouldSync(!!user), [user])
@@ -37,7 +38,7 @@ export default function useSyncOfflineData (firebase, user) {
             save: {}
           })
         ]).then(() =>
-          firebase
+          firebaseWorker
             .uploadOfflineData(changes)
             .catch(() =>
               localforage
@@ -55,7 +56,7 @@ export default function useSyncOfflineData (firebase, user) {
         )
       }
     })
-  }, [firebase, startSyncing, stopSyncing])
+  }, [startSyncing, stopSyncing])
 
   useInterval(syncOfflineQueue, shouldSync ? 10000 : null)
 }

@@ -1,14 +1,12 @@
-import React, { useMemo, useContext } from 'react'
+import React, { useMemo } from 'react'
 import localforage from 'localforage'
 
 import { Dropdown, IconButton } from 'components/common'
 import { User } from 'icons'
-import { FirebaseContext } from 'contexts/Firebase'
 import LocalStorage from 'constants/LocalStorage'
+import firebaseWorker from 'utils/firebaseWorker'
 
 export default function Avatar () {
-  const firebase = useContext(FirebaseContext)
-
   const items = useMemo(
     () => [
       {
@@ -16,7 +14,7 @@ export default function Avatar () {
         as: 'button',
         children: 'Sign Out',
         onClick: () =>
-          firebase.signOut().then(() => {
+          firebaseWorker.signOut().then(() => {
             if (window.amplitude) {
               window.amplitude.getInstance().setUserId(null)
               window.amplitude.getInstance().regenerateDeviceId()
@@ -27,7 +25,7 @@ export default function Avatar () {
           })
       }
     ],
-    [firebase]
+    []
   )
 
   return (

@@ -1,15 +1,14 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { FirebaseContext } from 'contexts/Firebase'
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 import LocalStorage from 'constants/LocalStorage'
+import firebaseWorker from 'utils/firebaseWorker'
 
 export const AuthenticationContext = createContext()
 
 export default function Authentication ({ children }) {
   const [user, setUser] = useState(null)
-  const firebase = useContext(FirebaseContext)
 
   useEffect(() => {
     const handleAuth = e => {
@@ -25,12 +24,12 @@ export default function Authentication ({ children }) {
       }
     }
 
-    firebase.addEventListener('message', handleAuth)
+    firebaseWorker.addEventListener('message', handleAuth)
 
     return () => {
-      firebase.removeEventListener('message', handleAuth)
+      firebaseWorker.removeEventListener('message', handleAuth)
     }
-  }, [firebase])
+  }, [])
 
   return (
     <AuthenticationContext.Provider value={user}>
