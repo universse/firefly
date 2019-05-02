@@ -144,7 +144,7 @@ export default function CollectionView ({
 
 CollectionView.propTypes = {
   check: PropTypes.objectOf(PropTypes.bool).isRequired,
+  collection: CollectionViewType.isRequired,
   isLoved: PropTypes.bool.isRequired,
-  isSaved: PropTypes.bool.isRequired,
-  collection: CollectionViewType
+  isSaved: PropTypes.bool.isRequired
 }

@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "babel-loader": "^8.0.5",
-    "netlify-lambda": "^1.4.5"
+    "netlify-lambda": "^1.4.7"
   },
   "scripts": {
     "build": "netlify-lambda build src",

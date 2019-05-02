@@ -34,4 +34,4 @@ export const CollectionViewType = PropTypes.exact({
   name: PropTypes.string.isRequired,
   tags: TagsType,
   urls: UrlsType
-}).isRequired
+})

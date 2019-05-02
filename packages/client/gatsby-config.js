@@ -37,10 +37,6 @@ module.exports = {
     'gatsby-plugin-layout',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',
-    {
-      resolve: 'gatsby-plugin-create-client-paths',
-      options: { prefixes: ['/collection/*'] }
-    },
     'gatsby-plugin-remove-trailing-slashes',
     {
       resolve: 'gatsby-source-filesystem',

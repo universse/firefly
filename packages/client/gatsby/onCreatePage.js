@@ -1,12 +1,8 @@
 const { createCategoryPath } = require('./utils')
 const { Categories } = require('common')
 
-module.exports = ({ page, actions }) => {
-  const { createPage, deletePage } = actions
-
+module.exports = ({ page, actions: { createPage, deletePage } }) => {
   if (page.path === '/') {
-    deletePage(page)
-
     createPage({
       ...page,
       context: { category: 'all', isIndexPage: true }

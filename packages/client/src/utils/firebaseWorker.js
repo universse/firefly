@@ -133,7 +133,7 @@ export async function createCollection (collection) {
 
 export async function fetchCollection (id) {
   if (cache[id]) {
-    return { collection: cache[id] }
+    return cache[id]
   }
 
   const docRef = firestore.collection('collections').doc(id)
@@ -152,12 +152,11 @@ export async function fetchCollection (id) {
 
       cache[id] = collection
 
-      return { collection }
-    } else {
-      return { error: true }
+      return collection
     }
+    throw new Error()
   } catch {
-    return { error: true }
+    throw new Error()
   }
 }
 
@@ -246,19 +245,24 @@ export async function action ({ id, action }) {
 
 importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js')
 
-const id = firestore.collection('collections').doc().id
 const date = \`\${new Date().getDate()}-\${new Date().getMonth() + 1}\`
+const id = firestore.collection('collections').doc().id
+const session = Date.now() + ''
+let index = 0
 
 export async function uploadScreenRecordings (events) {
   try {
-    firebase
+    await firebase
       .storage()
       .ref()
       .child('SRs')
       .child(date)
       .child(auth.currentUser ? auth.currentUser.uid : id)
-      .child(Date.now() + '.json')
+      .child(session)
+      .child(index + '.json')
       .putString(JSON.stringify(events))
+
+    index++
   } catch {
     throw new Error()
   }
@@ -283,7 +287,7 @@ if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
       events = []
       firebaseWorker
         .uploadScreenRecordings(processing)
-        .catch(() => (events = [...processing, ...events]))
+        .catch(() => (events = processing.concat(events)))
     }
   }, 12000)
 }
