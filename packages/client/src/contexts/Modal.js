@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
-import { globalHistory } from '@reach/router/lib/history'
 
 import { SetModalContext } from './SetModal'
 
@@ -13,10 +12,11 @@ export default function Modal ({ children }) {
   const [activeModalType, setActiveModalType] = useState()
 
   useEffect(() => {
-    const unlisten = globalHistory.listen(_ => setActiveModalType())
+    const closeModal = () => setActiveModalType()
+    window.addEventListener('popstate', closeModal)
 
     return () => {
-      unlisten()
+      window.removeEventListener('popstate', closeModal)
     }
   }, [])
 

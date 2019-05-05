@@ -4,10 +4,8 @@ export default function useIsFirstMount () {
   const isFirstMount = useRef(true)
 
   useEffect(() => {
-    if (isFirstMount.current) {
-      isFirstMount.current = false
-    }
+    isFirstMount.current && (isFirstMount.current = false)
   }, [])
 
-  return isFirstMount.current
+  return isFirstMount
 }

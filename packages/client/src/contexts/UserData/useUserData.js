@@ -52,7 +52,7 @@ function reducer (_, { type, payload }) {
 }
 
 export default function useUserData (canUndo) {
-  const [userData, dispatch] = useReducer(reducer)
+  const [userData, dispatch] = useReducer(reducer, null)
   const user = useContext(AuthenticationContext)
 
   useFetchUserData(dispatch, user)

@@ -5,20 +5,17 @@ export default function useFilteredCollections (collections, tags) {
     const tagCounts = {}
 
     return {
-      filteredCollections: collections.filter(collection => {
-        if (
-          tags.every(filter =>
-            collection.node.tags.some(tag => tag.toLowerCase() === filter)
-          )
-        ) {
-          collection.node.tags.forEach(tag => {
-            const lowered = tag.toLowerCase()
-            tagCounts[lowered] = tagCounts[lowered] ? ++tagCounts[lowered] : 1
-          })
-          return true
-        }
-        return false
-      }),
+      filteredCollections: collections.filter(collection =>
+        tags.every(filter =>
+          collection.node.tags.some(tag => tag.toLowerCase() === filter)
+        )
+          ? collection.node.tags.forEach(tag => {
+              const lowered = tag.toLowerCase()
+              tagCounts[lowered] = tagCounts[lowered] ? ++tagCounts[lowered] : 1
+            }) || true
+          : false
+      ),
+
       aggregatedTags: Object.entries(tagCounts).sort(
         ([tag1, count1], [tag2, count2]) =>
           tags.indexOf(tag2) - tags.indexOf(tag1) || count2 - count1

@@ -17,7 +17,7 @@ import {
   shouldHaveMobileNavigation
 } from 'utils/pathnameUtils'
 
-import './layout.scss'
+import './scss/index.scss'
 import 'fonts/Inter/index.css'
 import 'fonts/PlayfairDisplay/index.css'
 

@@ -5,7 +5,7 @@
   "dependencies": {
     "common": "*",
     "cors": "^2.8.5",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "firebase-admin": "^7.3.0",
     "firebase-functions": "^2.3.0"

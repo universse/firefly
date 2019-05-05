@@ -14,26 +14,20 @@ export default function animate (
   const from = element[prop]
   let cancelled = false
 
-  const cancel = () => {
-    cancelled = true
-  }
+  const cancel = () => (cancelled = true)
 
   const step = timestamp => {
-    if (cancelled) {
-      cb(new Error('Animation cancelled'))
-      return
-    }
+    if (cancelled) return
 
-    if (start === null) {
-      start = timestamp
-    }
+    start === null && (start = timestamp)
+
     const time = Math.min(1, (timestamp - start) / duration)
 
     element[prop] = ease(time) * (to - from) + from
 
     if (time >= 1) {
       requestAnimationFrame(() => {
-        cb(null)
+        cb()
       })
       return
     }
@@ -42,7 +36,6 @@ export default function animate (
   }
 
   if (from === to) {
-    cb(new Error('Element already at target position'))
     return cancel
   }
 

@@ -17,16 +17,14 @@ function reducer (state, payload) {
   return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 
-export default function useURLParams (location) {
-  const [query, queryDispatch] = useReducer(reducer, location.search, init)
+export default function useURLParams ({ pathname, search }) {
+  const [query, queryDispatch] = useReducer(reducer, search, init)
 
   const isFirstMount = useIsFirstMount()
 
   useEffect(() => {
-    if (!isFirstMount) {
-      queryDispatch(init(location.search))
-    }
-  }, [isFirstMount, location])
+    !isFirstMount.current && queryDispatch(init(search))
+  }, [isFirstMount, pathname, search])
 
   useEffect(() => {
     const { sort, tags, action } = query

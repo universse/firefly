@@ -27,7 +27,7 @@ export default function Filters ({ handleScroll, location, slider }) {
   useEffect(() => {
     if (isDesktop) return
 
-    if (isFirstMount) {
+    if (isFirstMount.current) {
       const { left, right } = slider.current.getBoundingClientRect()
       sliderPos.current = {
         left,

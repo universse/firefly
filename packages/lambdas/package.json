@@ -10,10 +10,10 @@
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
-    "aws-sdk": "^2.447.0",
+    "aws-sdk": "^2.449.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-macros": "^2.5.1",
-    "jest": "^24.7.1",
+    "jest": "^24.8.0",
     "preval.macro": "^3.0.0",
     "serverless-dynamodb-local": "^0.2.37",
     "serverless-offline": "^4.9.4",

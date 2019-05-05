@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { css } from '@emotion/core'
 
 import { Collection } from 'components/Collections'
@@ -29,35 +29,31 @@ export default function MyLibraryPage () {
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
 
-  const [initialSavedCount, setInitialSavedCount] = useState(
-    () => userData && Object.keys(userData.save).length
-  )
+  const initialSavedCount = useRef()
 
   useEffect(() => {
-    if (isNaN(initialSavedCount) && userData) {
-      setInitialSavedCount(Object.keys(userData.save).length)
+    if (isNaN(initialSavedCount.current) && userData) {
+      initialSavedCount.current = Object.keys(userData.save).length
     }
-  }, [initialSavedCount, userData])
+  }, [userData])
 
   useEffect(() => {
-    if (isNaN(initialSavedCount)) return
+    if (hasSignedIn() || user) return
 
-    if (!hasSignedIn() && !user) {
-      initialSavedCount &&
-        openSnackbar({
-          buttonProps: {
-            'aria-label': AriaLabels.SIGNIN_REGISTER,
-            children: 'Sign In',
-            onClick: () => {
-              setActiveModalType(ModalTypes.SIGN_UP_FORM)
-              logSignUpIntent()
-            }
-          },
-          message: 'Sign in to sync your saved collections across devices.',
-          timeout: 5000
-        })
-    }
-  }, [setActiveModalType, openSnackbar, initialSavedCount, user])
+    initialSavedCount.current &&
+      openSnackbar({
+        buttonProps: {
+          'aria-label': AriaLabels.SIGNIN_REGISTER,
+          children: 'Sign In',
+          onClick: () => {
+            setActiveModalType(ModalTypes.SIGN_UP_FORM)
+            logSignUpIntent()
+          }
+        },
+        message: 'Sign in to sync your saved collections across devices.',
+        timeout: 5000
+      })
+  }, [openSnackbar, setActiveModalType, user])
 
   return (
     <>
@@ -89,7 +85,7 @@ export default function MyLibraryPage () {
             }
           `}
         >
-          {isDesktop && !!initialSavedCount && (
+          {isDesktop && !!initialSavedCount.current && (
             <div
               css={css`
                 margin: 0 0 1.5rem 2rem;
