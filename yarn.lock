@@ -11961,6 +11961,13 @@ metascraper-description@^5.1.0:
   dependencies:
     "@metascraper/helpers" "^5.1.0"
 
+metascraper-image@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/metascraper-image/-/metascraper-image-5.1.0.tgz#403d0e0a32794b22ae98ff4322babf1cf83d1b73"
+  integrity sha512-g4ivaRuy4a8A2rYOv3cTxTPbgJ2GP7JIFKuS6ZwdCtEeaHM83DwubYu7z5PwStoR781qUnZBDBsmtn05oNCC9A==
+  dependencies:
+    "@metascraper/helpers" "^5.1.0"
+
 metascraper-title@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/metascraper-title/-/metascraper-title-5.1.0.tgz#4de4356f60f3d3f78841ec7edb6534e1d50b7c0a"

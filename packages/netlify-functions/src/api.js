@@ -4,7 +4,8 @@ const compression = require('compression')
 
 const metascraper = require('metascraper')([
   require('metascraper-title')(),
-  require('metascraper-description')()
+  require('metascraper-description')(),
+  require('metascraper-image')()
 ])
 const got = require('got')
 
@@ -21,9 +22,9 @@ router.post('/', async (req, res) => {
 
   try {
     const { body: html, url: link } = await got(url)
-    const { title, description } = await metascraper({ html, url: link })
+    const { title, description, image } = await metascraper({ html, url: link })
 
-    res.status(200).json({ title, description })
+    res.status(200).json({ title, description, image })
   } catch {
     res.status(400).json({ error: true })
   }

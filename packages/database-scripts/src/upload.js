@@ -1,10 +1,9 @@
 const admin = require('firebase-admin')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
-const { Categories, ItemTypes } = require('common')
 
 require('./config')
-const { writeBatchesToDB } = require('./utils')
+const { parseCollection, parseUrl, writeBatchesToDB } = require('./utils')
 
 const processed = require('../data/processed.json')
 
@@ -26,53 +25,56 @@ const firestore = admin.firestore()
 
 const batches = []
 
-processed.collections.forEach(({ name, category, level, tags, urls }, i) => {
-  const batchNo = Math.floor(i / 15)
+processed.collections.forEach(
+  ({ id, name, category, level, tags, urls }, i) => {
+    const batchNo = Math.floor(i / 15)
 
-  if (!batches[batchNo]) {
-    batches[batchNo] = firestore.batch()
-  }
+    !batches[batchNo] && (batches[batchNo] = firestore.batch())
 
-  const batch = batches[batchNo]
+    const batch = batches[batchNo]
 
-  const collectionDoc = firestore.collection('collections').doc()
-  const collectionId = collectionDoc.id
+    const collectionDoc = firestore.collection('collections').doc()
+    const collectionId = collectionDoc.id
 
-  const us = []
-  urls.forEach(({ url, title, description, type }, i) => {
-    const urlDoc = firestore.collection('urls').doc()
-    const id = urlDoc.id
+    const urlIds = []
 
-    batch.set(urlDoc, {
-      u: url,
-      ti: title,
-      d: description,
-      ty: ItemTypes.indexOf(type),
-      c: collectionId
+    urls.forEach((url, i) => {
+      const urlDoc = firestore.collection('urls').doc()
+      const id = urlDoc.id
+
+      batch.set(
+        urlDoc,
+        parseUrl({
+          ...url,
+          collectionId
+        })
+      )
+
+      urlIds[i] = id
+
+      final.urls[id] = {
+        id,
+        ...url,
+        collectionId
+      }
     })
 
-    us[i] = id
+    const collection = {
+      name,
+      category,
+      level,
+      tags,
+      urlIds
+    }
 
-    final.urls[id] = { id, url, title, description, type, collectionId }
-  })
+    batch.set(collectionDoc, parseCollection(collection))
 
-  batch.set(collectionDoc, {
-    n: name,
-    c: Categories.indexOf(category),
-    l: level,
-    us,
-    t: tags
-  })
-
-  final.collections[collectionId] = {
-    id: collectionId,
-    name,
-    category,
-    level,
-    tags,
-    urlIds: us
+    final.collections[collectionId] = {
+      id: collectionId,
+      ...collection
+    }
   }
-})
+)
 ;(() => {
   writeBatchesToDB(batches)
 
