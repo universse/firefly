@@ -56,8 +56,8 @@ export async function fetchSignInMethodsForEmail (email) {
     ) {
     
     }
-  } catch (e) {
-
+  } catch {
+    throw new Error()
   }
 }
 
@@ -125,9 +125,9 @@ export async function createCollection (collection) {
   try {
     await batch.commit()
     collection.id = collectionDoc.id.toLowerCase()
-    return { collection }
+    return collection
   } catch {
-    return { error: true }
+    throw new Error()
   }
 }
 

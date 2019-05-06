@@ -5,7 +5,6 @@ import { Categories } from 'common'
 
 import { activeStyle, Category, buttonWidthInRem } from './styled'
 import { MediaContext } from 'contexts/Media'
-import useIsFirstMount from 'hooks/useIsFirstMount'
 import { RefType } from 'constants/Types'
 import { baseFontSize, screens } from 'constants/Styles'
 import animate from 'utils/animate'
@@ -21,20 +20,8 @@ const CategoryPaths = [
 export default function Filters ({ handleScroll, location, slider }) {
   const isDesktop = useContext(MediaContext)
 
-  const isFirstMount = useIsFirstMount()
-  const sliderPos = useRef()
-
   useEffect(() => {
     if (isDesktop) return
-
-    if (isFirstMount.current) {
-      const { left, right } = slider.current.getBoundingClientRect()
-      sliderPos.current = {
-        left,
-        right
-      }
-      return
-    }
 
     const activeIndex =
       location.pathname === '/'
@@ -42,30 +29,28 @@ export default function Filters ({ handleScroll, location, slider }) {
         : CategoryPaths.indexOf(getNormalizedPathname(location.pathname))
 
     const element = slider.current.children[activeIndex]
+
+    const {
+      left: sliderLeft,
+      right: sliderRight
+    } = slider.current.getBoundingClientRect()
+
     const { left, right } = element.getBoundingClientRect()
 
-    if (left < buttonWidthInPx) {
+    left < buttonWidthInPx &&
       animate(
         'scrollLeft',
         slider.current,
-        slider.current.scrollLeft +
-          left -
-          sliderPos.current.left -
-          buttonWidthInPx
+        slider.current.scrollLeft + left - sliderLeft - buttonWidthInPx
       )
-      return
-    }
-    if (right > window.innerWidth - buttonWidthInPx) {
+
+    right > window.innerWidth - buttonWidthInPx &&
       animate(
         'scrollLeft',
         slider.current,
-        slider.current.scrollLeft +
-          right -
-          sliderPos.current.right +
-          buttonWidthInPx
+        slider.current.scrollLeft + right - sliderRight + buttonWidthInPx
       )
-    }
-  }, [isDesktop, isFirstMount, location, slider])
+  }, [isDesktop, location, slider])
 
   return (
     <nav>
