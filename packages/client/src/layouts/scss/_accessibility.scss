@@ -23,6 +23,7 @@ iframe,
   }
 }
 
+.skip-nav,
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -33,4 +34,21 @@ iframe,
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.skip-nav:hover {
+  text-decoration: underline;
+}
+
+.skip-nav:focus {
+  background-color: #fff;
+  clip: auto;
+  color: var(--colors-brand500);
+  height: auto;
+  left: 0.5rem;
+  padding: 0.5rem;
+  position: fixed;
+  top: 0.5rem;
+  width: auto;
+  z-index: 300;
 }

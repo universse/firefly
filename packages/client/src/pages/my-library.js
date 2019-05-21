@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { css } from '@emotion/core'
 
 import { Collection } from 'components/Collections'
@@ -29,18 +29,18 @@ export default function MyLibraryPage () {
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
 
-  const initialSavedCount = useRef()
+  const [initialSavedCount, setInitialSavedCount] = useState()
 
   useEffect(() => {
-    if (isNaN(initialSavedCount.current) && userData) {
-      initialSavedCount.current = Object.keys(userData.save).length
+    if (isNaN(initialSavedCount) && userData) {
+      setInitialSavedCount(Object.keys(userData.save).length)
     }
-  }, [userData])
+  }, [initialSavedCount, userData])
 
   useEffect(() => {
     if (hasSignedIn() || user) return
 
-    initialSavedCount.current &&
+    initialSavedCount &&
       openSnackbar({
         buttonProps: {
           'aria-label': AriaLabels.SIGNIN_REGISTER,
@@ -53,7 +53,7 @@ export default function MyLibraryPage () {
         message: 'Sign in to sync your saved collections across devices.',
         timeout: 5000
       })
-  }, [openSnackbar, setActiveModalType, user])
+  }, [initialSavedCount, openSnackbar, setActiveModalType, user])
 
   return (
     <>
@@ -74,6 +74,7 @@ export default function MyLibraryPage () {
             padding: 2rem 0;
           }
         `}
+        id='main'
       >
         <div
           className='base'
@@ -85,7 +86,7 @@ export default function MyLibraryPage () {
             }
           `}
         >
-          {isDesktop && !!initialSavedCount.current && (
+          {isDesktop && !!initialSavedCount && (
             <div
               css={css`
                 margin: 0 0 1.5rem 2rem;

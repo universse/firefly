@@ -1,18 +1,33 @@
 @keyframes wave {
-  0% { background-position: -468px 0; }
-  100% {background-position: 468px 0; }
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
 }
 
 .wave {
   animation: wave 0.5s linear infinite forwards;
-  background: linear-gradient(to right, var(--black100) 8%, var(--black200) 18%, var(--black100) 33%);
+  background: linear-gradient(
+    to right,
+    var(--black100) 8%,
+    var(--black200) 18%,
+    var(--black100) 33%
+  );
   background-size: 800px 104px;
 }
 
 @keyframes pulse {
-  0% { background-color: var(--black100); }
-  50% { background-color: var(--black200); }
-  100% { background-color: var(--black100); }
+  0% {
+    background-color: var(--black100);
+  }
+  50% {
+    background-color: var(--black200);
+  }
+  100% {
+    background-color: var(--black100);
+  }
 }
 
 .pulse {

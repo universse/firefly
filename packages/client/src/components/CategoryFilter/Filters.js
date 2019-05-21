@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from 'react'
+import React, { useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
@@ -23,19 +23,17 @@ export default function Filters ({ handleScroll, location, slider }) {
   useEffect(() => {
     if (isDesktop) return
 
-    const activeIndex =
-      location.pathname === '/'
-        ? 0
-        : CategoryPaths.indexOf(getNormalizedPathname(location.pathname))
-
-    const element = slider.current.children[activeIndex]
-
     const {
       left: sliderLeft,
       right: sliderRight
     } = slider.current.getBoundingClientRect()
 
-    const { left, right } = element.getBoundingClientRect()
+    const i =
+      location.pathname === '/'
+        ? 0
+        : CategoryPaths.indexOf(getNormalizedPathname(location.pathname))
+
+    const { left, right } = slider.current.children[i].getBoundingClientRect()
 
     left < buttonWidthInPx &&
       animate(

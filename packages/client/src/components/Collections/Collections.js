@@ -38,21 +38,22 @@ export default function Collections ({ collections }) {
   )
 
   return (
-    <>
-      <WindowScroller onScroll={handleScroll}>{() => <div />}</WindowScroller>
-      <List
-        ref={listRef}
-        css={listStyle}
-        height={window.innerHeight}
-        innerElementType='ul'
-        itemCount={collections.length}
-        itemData={collections}
-        itemKey={itemKey}
-        itemSize={collectionHeightInRem * baseFontSize}
-      >
-        {Item}
-      </List>
-    </>
+    <WindowScroller onScroll={handleScroll}>
+      {({ height }) => (
+        <List
+          ref={listRef}
+          css={listStyle}
+          height={height}
+          innerElementType='ul'
+          itemCount={collections.length}
+          itemData={collections}
+          itemKey={itemKey}
+          itemSize={collectionHeightInRem * baseFontSize}
+        >
+          {Item}
+        </List>
+      )}
+    </WindowScroller>
   )
 }
 

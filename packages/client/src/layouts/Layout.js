@@ -5,6 +5,7 @@ import IndexLayout from './IndexLayout'
 import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import SignUpForm from 'components/SignUpForm'
+import { SkipNav } from 'components/common'
 import AllCollections from 'contexts/AllCollections'
 import Authentication from 'contexts/Authentication'
 import LatestActivity from 'contexts/LatestActivity'
@@ -36,6 +37,7 @@ export default function Layout ({
     <AllCollections>
       <Authentication>
         <Modal>
+          <SkipNav />
           {normalizedPathname !== '/search' && <Header />}
           <LatestActivity>
             <SetSnackbar location={location}>

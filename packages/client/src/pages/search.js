@@ -43,6 +43,7 @@ export default function SearchPage ({ location }) {
             padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
           }
         `}
+        id='main'
       >
         {isDesktop && (
           <div

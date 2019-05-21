@@ -129,6 +129,7 @@ export default function CollectionTemplate ({
                 padding: 2rem 0;
               }
             `}
+            id='main'
           >
             <div
               className='base'

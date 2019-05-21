@@ -1,6 +1,7 @@
 :root {
   --black100: rgba(0, 0, 0, 0.04);
   --black200: rgba(0, 0, 0, 0.08);
+  --colors-accent500: #fff;
   --colors-brand100: #fce9ed;
   --colors-brand300: #f67090;
   --colors-brand500: #e4234f;
@@ -18,8 +19,16 @@
   --colors-gray900: rgba(0, 0, 0, 0.87);
   --colors-success: #13ae36;
   --focus: 0 0 0 4px rgba(59, 175, 218, 0.7);
-  --gradient-left: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 30%);
-  --gradient-right: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 30%);
+  --gradient-left: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 30%
+  );
+  --gradient-right: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 30%
+  );
   --shadows-01: 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadows-02: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadows-03: 0 4px 8px rgba(0, 0, 0, 0.5);

@@ -318,6 +318,14 @@ Sidebar.propTypes = {
   isScrollingDown: PropTypes.bool
 }
 
+export function SkipNav () {
+  return (
+    <a className='skip-nav' href='#main'>
+      Skip to Main Content
+    </a>
+  )
+}
+
 export { default as Spinner } from './Spinner'
 
 export function Tag ({ small, ...props }) {

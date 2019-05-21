@@ -13,7 +13,6 @@ function init (search) {
 }
 
 function reducer (state, payload) {
-  console.log(payload)
   return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 

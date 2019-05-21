@@ -68,6 +68,7 @@ export default function IndexLayout ({ category, children, location }) {
             padding: 2rem 0;
           }
         `}
+        id='main'
       >
         <div
           className='base'

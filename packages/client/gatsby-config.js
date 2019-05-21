@@ -34,6 +34,7 @@ module.exports = {
         implementation: require('sass')
       }
     },
+    // 'gatsby-plugin-subfont',
     'gatsby-plugin-layout',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',

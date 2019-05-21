@@ -1,5 +1,5 @@
 @font-face {
-  font-display: fallback;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-display: fallback;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -19,7 +19,7 @@
 }
 
 @font-face {
-  font-display: fallback;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
@@ -29,7 +29,7 @@
 }
 
 @font-face {
-  font-display: fallback;
+  font-display: swap;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
