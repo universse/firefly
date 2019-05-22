@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useLayoutEffect } from 'react'
 import { css } from '@emotion/core'
 
 import { Collection } from 'components/Collections'
@@ -6,7 +6,7 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { AuthenticationContext } from 'contexts/Authentication'
 import { MediaContext } from 'contexts/Media'
-import { AllCollectionsContext } from 'contexts/AllCollections'
+import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
@@ -22,25 +22,25 @@ import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function MyLibraryPage () {
-  const { normalizedCollections } = useContext(AllCollectionsContext)
+  const normalizedCollections = useContext(NormalizedCollectionsContext)
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
 
-  const [initialSavedCount, setInitialSavedCount] = useState()
+  const [hasSaved, setHasSaved] = useState()
 
-  useEffect(() => {
-    if (isNaN(initialSavedCount) && userData) {
-      setInitialSavedCount(Object.keys(userData.save).length)
+  useLayoutEffect(() => {
+    if (typeof hasSaved !== 'boolean' && userData) {
+      setHasSaved(!!Object.keys(userData.save).length)
     }
-  }, [initialSavedCount, userData])
+  }, [hasSaved, userData])
 
   useEffect(() => {
     if (hasSignedIn() || user) return
 
-    initialSavedCount &&
+    hasSaved &&
       openSnackbar({
         buttonProps: {
           'aria-label': AriaLabels.SIGNIN_REGISTER,
@@ -53,7 +53,7 @@ export default function MyLibraryPage () {
         message: 'Sign in to sync your saved collections across devices.',
         timeout: 5000
       })
-  }, [initialSavedCount, openSnackbar, setActiveModalType, user])
+  }, [hasSaved, openSnackbar, setActiveModalType, user])
 
   return (
     <>
@@ -86,7 +86,7 @@ export default function MyLibraryPage () {
             }
           `}
         >
-          {isDesktop && !!initialSavedCount && (
+          {isDesktop && hasSaved && (
             <div
               css={css`
                 margin: 0 0 1.5rem 2rem;

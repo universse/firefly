@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import firebaseWorker from 'utils/firebaseWorker'
+import firebaseWorker from 'utils/firebase'
 import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
 
 export default function useSaveUserData (change, user) {

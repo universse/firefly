@@ -1,33 +1,30 @@
-import workerize from 'workerize'
+import firebase from 'firebase/app'
+
+import 'firebase/auth'
+import 'firebase/firestore'
+import 'firebase/storage'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
-const firebaseWorker =
-  typeof window === 'object' &&
-  workerize(`
-importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-auth.js')
-importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-firestore.js')
-
-firebase.initializeApp(${process.env.GATSBY_FIREBASE_USERS})
+firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
 const actionCodeSettings = {
-  url: '${window.location.origin}/welcome',
+  url: `http://localhost:3000/welcome`,
   handleCodeInApp: true
 }
 
 const stopAuthListener = auth.onAuthStateChanged(user => {
   stopAuthListener()
-      
+
   user
-    ? user
-      .getIdToken()
-      .then(idToken => self.postMessage({
-        type: '${FirebaseWorkerEvents.AUTH_STATE_CHANGED}',
-        payload: { idToken, uid: user.uid }
-      }))
-    : self.postMessage({
-        type: '${FirebaseWorkerEvents.AUTH_STATE_CHANGED}',
+    ? user.getIdToken().then(idToken =>
+        postMessage({
+          type: FirebaseWorkerEvents.AUTH_STATE_CHANGED,
+          payload: { idToken, uid: user.uid }
+        })
+      )
+    : postMessage({
+        type: FirebaseWorkerEvents.AUTH_STATE_CHANGED,
         payload: null
       })
 })
@@ -47,14 +44,12 @@ export async function fetchSignInMethodsForEmail (email) {
         firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
       )
     ) {
-    
     }
     if (
       signInMethods.includes(
         firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
       )
     ) {
-    
     }
   } catch {
     throw new Error()
@@ -104,7 +99,12 @@ export async function createCollection (collection) {
     n: name,
     c: category,
     l: level,
-    us: urls.map(({ title, type, url, description}) => ({ ti: title, ty: type, u: url, d: description })),
+    us: urls.map(({ title, type, url, description }) => ({
+      ti: title,
+      ty: type,
+      u: url,
+      d: description
+    })),
     t: tags,
     s: ['']
   }
@@ -121,7 +121,7 @@ export async function createCollection (collection) {
   })
 
   batch.set(collectionDoc, newCollection)
-  
+
   try {
     await batch.commit()
     collection.id = collectionDoc.id.toLowerCase()
@@ -137,18 +137,20 @@ export async function fetchCollection (id) {
   }
 
   const docRef = firestore.collection('collections').doc(id)
-  
+
   try {
     const doc = await docRef.get()
     if (doc.exists) {
       const collection = doc.data()
       const urlIds = collection.us
-      
-      await Promise.all(urlIds.map(async (id, i) => {
-        const urlRef = firestore.collection('urls').doc(id)
-        const doc = await urlRef.get()
-        collection.us[i] = { id, ...doc.data() }
-      }))
+
+      await Promise.all(
+        urlIds.map(async (id, i) => {
+          const urlRef = firestore.collection('urls').doc(id)
+          const doc = await urlRef.get()
+          collection.us[i] = { id, ...doc.data() }
+        })
+      )
 
       cache[id] = collection
 
@@ -243,9 +245,7 @@ export async function action ({ id, action }) {
   }
 }
 
-importScripts('https://www.gstatic.com/firebasejs/5.11.0/firebase-storage.js')
-
-const date = \`\${new Date().getDate()}-\${new Date().getMonth() + 1}\`
+const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
 const id = firestore.collection('collections').doc().id
 const session = Date.now() + ''
 let index = 0
@@ -267,29 +267,3 @@ export async function uploadScreenRecordings (events) {
     throw new Error()
   }
 }
-`)
-
-if (process.env.NODE_ENV === 'production' && typeof window === 'object') {
-  let events = []
-  let processing = []
-
-  import('rrweb').then(({ record }) =>
-    record({
-      emit (event) {
-        events.push(event)
-      }
-    })
-  )
-
-  setInterval(() => {
-    if (events.length) {
-      processing = [...events]
-      events = []
-      firebaseWorker
-        .uploadScreenRecordings(processing)
-        .catch(() => (events = processing.concat(events)))
-    }
-  }, 12000)
-}
-
-export default firebaseWorker

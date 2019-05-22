@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 import LocalStorage from 'constants/LocalStorage'
-import firebaseWorker from 'utils/firebaseWorker'
+import firebaseWorker from 'utils/firebase'
 
 export const AuthenticationContext = createContext()
 

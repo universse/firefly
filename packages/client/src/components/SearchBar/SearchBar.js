@@ -36,7 +36,7 @@ function SearchBar ({
   return (
     <Downshift
       inputValue={searchInput}
-      itemToString={item => (item ? item.node.name : '')}
+      itemToString={item => (item ? item.name : '')}
       onSelect={handleSelect}
       {...controlledProps}
     >
@@ -85,10 +85,10 @@ function SearchBar ({
               <>
                 {results.slice(0, resultCount).map((item, index) => (
                   <Result
-                    key={item.node.id}
+                    key={item.id}
                     to={createCollectionPath({
-                      id: item.node.id,
-                      name: item.node.name
+                      id: item.id,
+                      name: item.name
                     })}
                     {...getItemProps({
                       item,
@@ -103,14 +103,14 @@ function SearchBar ({
                       selectItem(item)
                     }}
                   >
-                    {item.node.name}
+                    {item.name}
                   </Result>
                 ))}
                 {totalResultCount > 0 && totalResultCount > resultCount && (
                   <Result
                     as='button'
                     {...getItemProps({
-                      item: { node: { id: 'search' } },
+                      item: { id: 'search' },
                       index: resultCount,
                       isHighlighted: highlightedIndex === resultCount
                     })}

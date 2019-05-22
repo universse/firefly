@@ -8,13 +8,14 @@
   "dependencies": {
     "@emotion/core": "^10.0.10",
     "amplitude-js": "^5.2.2",
-    "apollo-boost": "^0.3.0",
+    "apollo-boost": "^0.4.0",
     "common": "*",
     "downshift": "^3.2.10",
     "emotion": "^10.0.9",
-    "firebase-admin": "^7.3.0",
+    "firebase": "^6.0.2",
+    "firebase-admin": "^7.4.0",
     "fromfrom": "^1.2.0",
-    "gatsby": "^2.6.0",
+    "gatsby": "^2.6.2",
     "gatsby-image": "^2.1.0",
     "gatsby-plugin-accessibilityjs": "^1.0.3",
     "gatsby-plugin-emotion": "^4.0.6",
@@ -41,7 +42,7 @@
     "match-sorter": "^3.0.0",
     "qs": "^6.7.0",
     "react": "^16.8.6",
-    "react-apollo": "^2.5.5",
+    "react-apollo": "^2.5.6",
     "react-beautiful-dnd": "^11.0.3",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
@@ -51,8 +52,7 @@
     "react-window": "^1.8.1",
     "redux": "^4.0.1",
     "rrweb": "^0.7.13",
-    "speakingurl": "^14.0.1",
-    "workerize": "^0.1.7"
+    "speakingurl": "^14.0.1"
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
@@ -68,7 +68,8 @@
     "react-test-renderer": "^16.8.6",
     "react-testing-library": "^7.0.1",
     "sass": "^1.20.1",
-    "webpack-bundle-analyzer": "^3.3.2"
+    "webpack-bundle-analyzer": "^3.3.2",
+    "workerize-loader": "^1.0.4"
   },
   "scripts": {
     "build": "yarn clean && gatsby build",

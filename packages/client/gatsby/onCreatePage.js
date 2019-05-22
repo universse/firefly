@@ -5,13 +5,13 @@ module.exports = ({ page, actions: { createPage, deletePage } }) => {
   if (page.path === '/') {
     createPage({
       ...page,
-      context: { category: 'all', isIndexPage: true }
+      context: { isIndexPage: true }
     })
 
     createPage({
       ...page,
       path: createCategoryPath('all'),
-      context: { category: 'all', isIndexPage: true }
+      context: { isIndexPage: true }
     })
 
     Categories.forEach(category =>

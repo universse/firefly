@@ -8,7 +8,6 @@ import Collections from 'components/Collections'
 import MobileFilters from 'components/MobileFilters'
 import SortByDifficulty from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
-import { AllCollectionsContext } from 'contexts/AllCollections'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import { Sidebar } from 'components/common'
@@ -23,12 +22,8 @@ export default function IndexPage ({ data }) {
     query: { sort, tags }
   } = useContext(URLParamsContext)
 
-  const { allCollections } = useContext(AllCollectionsContext)
-
   const { aggregatedTags, filteredCollections } = useFilteredCollections(
-    data.allCollections.edges.length
-      ? data.allCollections.edges
-      : allCollections,
+    data.allCollections.edges,
     tags
   )
 

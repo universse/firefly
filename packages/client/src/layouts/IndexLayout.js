@@ -41,7 +41,7 @@ export default function IndexLayout ({ category, children, location }) {
 
   return (
     <URLParams location={location}>
-      <SEO title={category === 'all' ? '' : toTitleCase(category)} />
+      <SEO title={category ? toTitleCase(category) : ''} />
       <MobileHeader
         actions={actions}
         isScrollingDown={isScrollingDown}
@@ -111,7 +111,7 @@ export default function IndexLayout ({ category, children, location }) {
 }
 
 IndexLayout.propTypes = {
-  category: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
+  category: PropTypes.string
 }

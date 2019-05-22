@@ -1,5 +1,4 @@
 import React, { memo, useContext, useEffect } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/core'
 
 import Landing from './Landing'
@@ -7,19 +6,12 @@ import LatestActivity from './LatestActivity'
 import Loading from './Loading'
 import Onboard from './Onboard'
 import { LatestActivityContext } from 'contexts/LatestActivity'
+import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
 function Hero () {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  const title = useSiteTitle()
 
   const { isLoading, latestActivity } = useContext(LatestActivityContext)
 
@@ -54,7 +46,7 @@ function Hero () {
       `}
     >
       {isNewUser() ? (
-        <Onboard message={`Welcome to $${data.site.siteMetadata.title}!`} />
+        <Onboard message={`Welcome to $${title}!`} />
       ) : isLoading ? (
         <Loading />
       ) : latestActivity ? (

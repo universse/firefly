@@ -6,11 +6,11 @@ import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import SignUpForm from 'components/SignUpForm'
 import { SkipNav } from 'components/common'
-import AllCollections from 'contexts/AllCollections'
 import Authentication from 'contexts/Authentication'
 import LatestActivity from 'contexts/LatestActivity'
 import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
+import NormalizedCollections from 'contexts/NormalizedCollections'
 import SetSnackbar from 'contexts/SetSnackbar'
 import UserData from 'contexts/UserData'
 import {
@@ -34,7 +34,7 @@ export default function Layout ({
   if (normalizedPathname === '/welcome') return children
 
   return (
-    <AllCollections>
+    <NormalizedCollections>
       <Authentication>
         <Modal>
           <SkipNav />
@@ -58,7 +58,7 @@ export default function Layout ({
       {shouldHaveMobileNavigation(location.pathname) && (
         <MobileNavigation isIndexPage={isIndexPage || false} />
       )}
-    </AllCollections>
+    </NormalizedCollections>
   )
 }
 

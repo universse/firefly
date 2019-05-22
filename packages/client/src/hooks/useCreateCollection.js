@@ -2,7 +2,7 @@ import { useState, useReducer, useContext, useCallback } from 'react'
 import { navigate } from 'gatsby'
 import produce from 'immer'
 
-import firebaseWorker from 'utils/firebaseWorker'
+import firebaseWorker from 'utils/firebase'
 
 const initialValue = {
   name: '',

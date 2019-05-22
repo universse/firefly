@@ -1,16 +1,9 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+
+import useSiteTitle from 'hooks/useSiteTitle'
 
 export function Logo () {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  const title = useSiteTitle()
 
   return (
     <svg
@@ -22,7 +15,7 @@ export function Logo () {
       width='36'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <title>{data.site.siteMetadata.title}</title>
+      <title>{title}</title>
       <circle
         cx='18'
         cy='18'

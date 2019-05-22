@@ -1,18 +1,11 @@
 import React, { memo } from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
 import { css } from '@emotion/core'
 import { screens } from 'constants/Styles'
 
+import useSiteTitle from 'hooks/useSiteTitle'
+
 function Footer () {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  const title = useSiteTitle()
 
   return (
     <footer
@@ -52,7 +45,7 @@ function Footer () {
           >
             ❤
           </span>
-          . ©️ {new Date().getFullYear()} {data.site.siteMetadata.title}.
+          . ©️ {new Date().getFullYear()} {title}.
         </p>
       </div>
     </footer>

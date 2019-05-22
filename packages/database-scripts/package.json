@@ -5,7 +5,7 @@
   "dependencies": {
     "common": "*",
     "dotenv": "^8.0.0",
-    "firebase-admin": "^7.3.0",
+    "firebase-admin": "^7.4.0",
     "got": "^9.6.0",
     "metascraper": "^5.3.0",
     "metascraper-description": "^5.3.0",

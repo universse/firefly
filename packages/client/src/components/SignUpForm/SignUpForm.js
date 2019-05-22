@@ -1,27 +1,18 @@
 import React, { memo, useState, useContext } from 'react'
 import { css } from '@emotion/core'
-import { graphql, useStaticQuery } from 'gatsby'
 
 import { ErrorMessage, Input } from './styled'
 import Modal from 'components/Modal'
 import { IconButton, PrimaryButton } from 'components/common'
 import { Cross } from 'icons'
 import { SetModalContext } from 'contexts/SetModal'
+import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
-import firebaseWorker from 'utils/firebaseWorker'
+import firebaseWorker from 'utils/firebase'
 
 function SignUpForm () {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
+  const title = useSiteTitle()
   const setActiveModalType = useContext(SetModalContext)
 
   const [email, setEmail] = useState('')
@@ -89,7 +80,7 @@ function SignUpForm () {
                 line-height: 2rem;
               `}
             >
-              Welcome to {data.site.siteMetadata.title}
+              Welcome to {title}
             </h3>
           </div>
           <form onSubmit={handleSubmit}>
