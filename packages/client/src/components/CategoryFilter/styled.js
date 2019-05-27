@@ -48,7 +48,6 @@ export function Category (props) {
           }
         }
       `}
-      partiallyActive
       {...props}
     />
   )

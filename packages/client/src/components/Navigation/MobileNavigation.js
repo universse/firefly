@@ -48,21 +48,31 @@ function MobileNavigation ({ isIndexPage }) {
             flex: 1;
           `}
         >
-          <MobileNavLink Icon={Search} label='Search' to='/search' />
+          <MobileNavLink
+            Icon={Search}
+            label='Search'
+            partiallyActive
+            to='/search'
+          />
         </li>
         <li
           css={css`
             flex: 1;
           `}
         >
-          <MobileNavLink Icon={Library} label='My Library' to='/my-library' />
+          <MobileNavLink
+            Icon={Library}
+            label='My Library'
+            partiallyActive
+            to='/my-library'
+          />
         </li>
         {/* <li
           css={css`
             flex: 1;
           `}
         >
-          <MobileNavLink Icon={User} label='Profile' to='/me' />
+          <MobileNavLink Icon={User} label='Profile' partiallyActive to='/me' />
         </li> */}
       </ul>
     </nav>

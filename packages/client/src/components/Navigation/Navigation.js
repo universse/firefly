@@ -25,7 +25,9 @@ function Navigation () {
             margin-left: 1.5rem;
           `}
         >
-          <NavLink to='/my-library'>My Library</NavLink>
+          <NavLink partiallyActive to='/my-library'>
+            My Library
+          </NavLink>
         </li>
         <li
           css={css`

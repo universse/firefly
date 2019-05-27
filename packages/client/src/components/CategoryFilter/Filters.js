@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
 
-import { activeStyle, Category, buttonWidthInRem } from './styled'
+import { Category, buttonWidthInRem } from './styled'
 import { MediaContext } from 'contexts/Media'
 import { RefType } from 'constants/Types'
 import { baseFontSize, screens } from 'constants/Styles'
@@ -13,7 +13,7 @@ import { createCategoryPath } from '../../../gatsby/utils'
 
 const buttonWidthInPx = baseFontSize * buttonWidthInRem
 const CategoryPaths = [
-  '/category/all',
+  '/',
   ...Categories.map(category => createCategoryPath(category))
 ]
 
@@ -28,10 +28,7 @@ export default function Filters ({ handleScroll, location, slider }) {
       right: sliderRight
     } = slider.current.getBoundingClientRect()
 
-    const i =
-      location.pathname === '/'
-        ? 0
-        : CategoryPaths.indexOf(getNormalizedPathname(location.pathname))
+    const i = CategoryPaths.indexOf(getNormalizedPathname(location.pathname))
 
     const { left, right } = slider.current.children[i].getBoundingClientRect()
 
@@ -81,16 +78,7 @@ export default function Filters ({ handleScroll, location, slider }) {
               }
             `}
           >
-            <Category
-              getProps={({ location: { pathname }, isPartiallyCurrent }) =>
-                isPartiallyCurrent || pathname === '/'
-                  ? { style: activeStyle }
-                  : null
-              }
-              to={CategoryPaths[0]}
-            >
-              all
-            </Category>
+            <Category to={CategoryPaths[0]}>all</Category>
           </li>
           {Categories.map((category, i) => (
             <li
@@ -103,7 +91,9 @@ export default function Filters ({ handleScroll, location, slider }) {
                 }
               `}
             >
-              <Category to={CategoryPaths[i + 1]}>{category}</Category>
+              <Category partiallyActive to={CategoryPaths[i + 1]}>
+                {category}
+              </Category>
             </li>
           ))}
         </ul>

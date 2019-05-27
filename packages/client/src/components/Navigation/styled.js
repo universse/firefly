@@ -42,7 +42,6 @@ export function MobileNavLink ({ label, Icon, ...props }) {
         height: ${mobileNavigationHeightInRem}rem;
         padding: 0.5rem 0 0.5rem;
       `}
-      partiallyActive
       {...props}
     >
       <div
@@ -87,7 +86,6 @@ export function NavLink (props) {
           border-bottom: 2px solid var(--colors-brand500);
         }
       `}
-      partiallyActive
       {...props}
     />
   )
