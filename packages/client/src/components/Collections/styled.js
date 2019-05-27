@@ -50,9 +50,11 @@ export function CollectionWrapper (props) {
         flex-direction: column;
         height: ${collectionHeightInRem}rem;
         justify-content: space-between;
-        padding: 0.5rem 1rem 0.25rem;
+        margin: 0 1rem;
+        padding: 0.5rem 0 0.25rem;
 
         ${screens.desktop} {
+          margin: 0;
           padding: 0.75rem 2rem 0.25rem;
         }
       `}

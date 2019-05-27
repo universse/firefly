@@ -1,7 +1,9 @@
+$accent500: #007bfe;
+
 :root {
   --black100: rgba(0, 0, 0, 0.04);
   --black200: rgba(0, 0, 0, 0.08);
-  --colors-accent500: #fff;
+  --colors-accent500: #{$accent500};
   --colors-brand100: #fce9ed;
   --colors-brand300: #f67090;
   --colors-brand500: #e4234f;
@@ -18,7 +20,7 @@
   --colors-gray800: rgba(0, 0, 0, 0.7);
   --colors-gray900: rgba(0, 0, 0, 0.87);
   --colors-success: #13ae36;
-  --focus: 0 0 0 4px rgba(59, 175, 218, 0.7);
+  --focus: 0 0 0 4px #{rgba($accent500, 0.6)};
   --gradient-left: linear-gradient(
     to left,
     rgba(255, 255, 255, 0) 0%,
