@@ -25,56 +25,47 @@ const firestore = admin.firestore()
 
 const batches = []
 
-processed.collections.forEach(
-  ({ id, name, category, level, tags, urls }, i) => {
-    const batchNo = Math.floor(i / 15)
+processed.collections.forEach(({ id, _EXCEL_KEY, ...collection }, i) => {
+  const batchNo = Math.floor(i / 15)
 
-    !batches[batchNo] && (batches[batchNo] = firestore.batch())
+  !batches[batchNo] && (batches[batchNo] = firestore.batch())
 
-    const batch = batches[batchNo]
+  const batch = batches[batchNo]
 
-    const collectionDoc = firestore.collection('collections').doc()
-    const collectionId = collectionDoc.id
+  const collectionDoc = firestore.collection('collections').doc()
+  const collectionId = collectionDoc.id
 
-    const urlIds = []
+  const urlIds = []
 
-    urls.forEach((url, i) => {
-      const urlDoc = firestore.collection('urls').doc()
-      const id = urlDoc.id
+  collection.urls.forEach((url, i) => {
+    const urlDoc = firestore.collection('urls').doc()
+    const id = urlDoc.id
 
-      batch.set(
-        urlDoc,
-        parseUrl({
-          ...url,
-          collectionId
-        })
-      )
-
-      urlIds[i] = id
-
-      final.urls[id] = {
-        id,
+    batch.set(
+      urlDoc,
+      parseUrl({
         ...url,
         collectionId
-      }
-    })
+      })
+    )
 
-    const collection = {
-      name,
-      category,
-      level,
-      tags,
-      urlIds
+    urlIds[i] = id
+
+    final.urls[id] = {
+      id,
+      ...url,
+      collectionId
     }
+  })
 
-    batch.set(collectionDoc, parseCollection(collection))
+  batch.set(collectionDoc, parseCollection(collection))
 
-    final.collections[collectionId] = {
-      id: collectionId,
-      ...collection
-    }
+  final.collections[collectionId] = {
+    id: collectionId,
+    _EXCEL_KEY,
+    ...collection
   }
-)
+})
 ;(() => {
   writeBatchesToDB(batches)
 

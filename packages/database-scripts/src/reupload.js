@@ -14,16 +14,18 @@ const firestore = admin.firestore()
 
 const collectionBatches = []
 
-Object.values(final.collections).forEach(({ id, ...collection }, i) => {
-  const batchNo = Math.floor(i / 15)
+Object.values(final.collections).forEach(
+  ({ id, _EXCEL_KEY, ...collection }, i) => {
+    const batchNo = Math.floor(i / 15)
 
-  !collectionBatches[batchNo] &&
-    (collectionBatches[batchNo] = firestore.batch())
+    !collectionBatches[batchNo] &&
+      (collectionBatches[batchNo] = firestore.batch())
 
-  const batch = collectionBatches[batchNo]
-  const collectionDoc = firestore.collection('collections').doc(id)
-  batch.set(collectionDoc, parseCollection(collection))
-})
+    const batch = collectionBatches[batchNo]
+    const collectionDoc = firestore.collection('collections').doc(id)
+    batch.set(collectionDoc, parseCollection(collection))
+  }
+)
 
 const urlBatches = []
 
