@@ -1,13 +1,13 @@
 import { useEffect, useReducer, useMemo, useRef } from 'react'
-import qs from 'qs'
 
 import { constructHref } from './utils'
 
 function init (search) {
-  const values = qs.parse(search, { ignoreQueryPrefix: true })
+  const params = new URLSearchParams(search)
+
   return {
-    sort: values.sort || '',
-    tags: values.tags ? values.tags.split(',') : [],
+    sort: params.get('sort') || '',
+    tags: params.get('tags') ? params.get('tags').split(',') : [],
     action: 'init'
   }
 }
