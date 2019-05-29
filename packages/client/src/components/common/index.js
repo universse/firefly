@@ -1,4 +1,4 @@
-import React, { Children, Fragment, memo } from 'react'
+import React, { Children, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
@@ -35,7 +35,7 @@ ActionBar.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-export const Category = memo(function (props) {
+export const Category = function (props) {
   return (
     <Link
       css={css`
@@ -52,7 +52,7 @@ export const Category = memo(function (props) {
       {...props}
     />
   )
-})
+}
 
 export function ClearSearchWrapper (props) {
   return (
@@ -72,7 +72,7 @@ export function ClearSearchWrapper (props) {
   )
 }
 
-export const Difficulty = memo(function (props) {
+export const Difficulty = function (props) {
   return (
     <span
       css={css`
@@ -84,7 +84,7 @@ export const Difficulty = memo(function (props) {
       {...props}
     />
   )
-})
+}
 
 export { Dropdown, ExposedDropdown } from './Dropdown'
 
@@ -218,7 +218,7 @@ PrimaryButton.propTypes = {
   width: PropTypes.string
 }
 
-export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
+export const ProgressBar = function ProgressBar ({ percentage, width }) {
   return (
     <div
       css={css`
@@ -238,7 +238,7 @@ export const ProgressBar = memo(function ProgressBar ({ percentage, width }) {
       />
     </div>
   )
-})
+}
 
 ProgressBar.propTypes = {
   percentage: PropTypes.number.isRequired,

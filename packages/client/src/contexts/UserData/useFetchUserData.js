@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import localforage from 'localforage'
 
 import LocalStorage from 'constants/LocalStorage'
-import firebaseWorker from 'utils/firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 
 export default function useFetchUserData (dispatch, user) {
   useEffect(() => {

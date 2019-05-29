@@ -3,7 +3,7 @@ import localforage from 'localforage'
 
 import useInterval from 'hooks/useInterval'
 import LocalStorage from 'constants/LocalStorage'
-import firebaseWorker from 'utils/firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 
 export default function useSyncOfflineData (user) {
   const [shouldSync, setShouldSync] = useState()

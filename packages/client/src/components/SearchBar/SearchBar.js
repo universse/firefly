@@ -69,7 +69,7 @@ function SearchBar ({
                 onChange: handleSearchInput
               })}
             />
-            {searchInput && (
+            {searchInput && !isLoading && (
               <ClearSearchWrapper>
                 <IconButton
                   aria-label='Clear Search Field'

@@ -1,11 +1,11 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import LearningItem from './LearningItem'
 import { UrlsType } from 'constants/Types'
 
-function LearningList ({ check, collectionId, urls }) {
+export default function LearningList ({ check, collectionId, urls }) {
   return (
     <ul
       css={css`
@@ -31,8 +31,6 @@ function LearningList ({ check, collectionId, urls }) {
     </ul>
   )
 }
-
-export default memo(LearningList)
 
 LearningList.propTypes = {
   check: PropTypes.objectOf(PropTypes.bool).isRequired,

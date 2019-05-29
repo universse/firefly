@@ -20,7 +20,7 @@ import {
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-import firebaseWorker from 'utils/firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 import goBack from 'utils/goBack'
 import parseCollectionData from 'utils/parseCollectionData'
 import { getParamFromPathname } from 'utils/pathnameUtils'

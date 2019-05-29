@@ -9,7 +9,7 @@ import { SetModalContext } from 'contexts/SetModal'
 import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
-import firebaseWorker from 'utils/firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 
 function SignUpForm () {
   const title = useSiteTitle()

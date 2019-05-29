@@ -5,7 +5,7 @@ import localforage from 'localforage'
 
 import { Spinner } from 'components/common'
 import LocalStorage from 'constants/LocalStorage'
-import firebaseWorker from 'utils/firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
 
 export default function WelcomePage () {

@@ -4,7 +4,7 @@ import localforage from 'localforage'
 import { Dropdown, IconButton } from 'components/common'
 import { User } from 'icons'
 import LocalStorage from 'constants/LocalStorage'
-import firebaseWorker from 'utils/firebase'
+import firebaseWorker from 'utils/firebaseWorker'
 
 export default function Avatar () {
   const items = useMemo(
