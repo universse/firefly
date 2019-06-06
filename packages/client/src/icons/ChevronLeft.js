@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function ChevronLeft ({ color }) {
+export function ChevronLeft ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='chevron left'
@@ -15,10 +15,6 @@ export function ChevronLeft ({ color }) {
       <path d='M15 18l-6-6 6-6' />
     </svg>
   )
-}
-
-ChevronLeft.defaultProps = {
-  color: 'currentColor'
 }
 
 ChevronLeft.propTypes = {

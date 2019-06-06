@@ -26,7 +26,7 @@ export default function Modal ({
         contentLabel={contentLabel}
         isOpen={isOpen}
         onRequestClose={() => {
-          setActiveModalType()
+          setActiveModalType(null)
           onCloseModal && onCloseModal()
         }}
         overlayClassName='Overlay'

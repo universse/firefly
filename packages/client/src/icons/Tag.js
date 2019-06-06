@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Tag ({ color, small }) {
+export function Tag ({ color = 'currentColor', small = true }) {
   return (
     <svg
       aria-label='tag'
@@ -16,11 +16,6 @@ export function Tag ({ color, small }) {
       <line x1='7' x2='7' y1='7' y2='7' />
     </svg>
   )
-}
-
-Tag.defaultProps = {
-  color: 'currentColor',
-  small: true
 }
 
 Tag.propTypes = {

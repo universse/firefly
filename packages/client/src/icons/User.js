@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function User ({ color }) {
+export function User ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='user'
@@ -16,10 +16,6 @@ export function User ({ color }) {
       <circle cx='12' cy='7' r='4' />
     </svg>
   )
-}
-
-User.defaultProps = {
-  color: 'currentColor'
 }
 
 User.propTypes = {

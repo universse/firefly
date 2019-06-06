@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Code ({ color, small }) {
+export function Code ({ color = 'currentColor', small = true }) {
   return (
     <svg
       aria-label='code'
@@ -15,11 +15,6 @@ export function Code ({ color, small }) {
       <path d='M16 18l6-6-6-6M8 6l-6 6 6 6' />
     </svg>
   )
-}
-
-Code.defaultProps = {
-  color: 'currentColor',
-  small: true
 }
 
 Code.propTypes = {

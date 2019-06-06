@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Podcast ({ color, small }) {
+export function Podcast ({ color = 'currentColor', small = true }) {
   return (
     <svg
       aria-label='podcast'
@@ -15,11 +15,6 @@ export function Podcast ({ color, small }) {
       <path d='M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07' />
     </svg>
   )
-}
-
-Podcast.defaultProps = {
-  color: 'currentColor',
-  small: true
 }
 
 Podcast.propTypes = {

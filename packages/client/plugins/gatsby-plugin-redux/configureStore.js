@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware, combineReducers } from 'redux'
 // import thunk from 'redux-thunk'
 
-import reducerRegistry from '../../src/reducer-registry'
+import reducerRegistry from '../../src/reducerRegistry'
 
 const combine = (reducers, preloadedState) => {
   const reducerNames = Object.keys(reducers)
@@ -17,6 +17,7 @@ const combine = (reducers, preloadedState) => {
 
 export default (preloadedState = {}) => {
   const reducer = combine(reducerRegistry.getReducers(), preloadedState)
+
   const store = createStore(
     reducer,
     preloadedState,
@@ -27,8 +28,10 @@ export default (preloadedState = {}) => {
         : f => f
     )
   )
+
   reducerRegistry.setChangeListener(reducers => {
     store.replaceReducer(combine(reducers))
   })
+
   return store
 }

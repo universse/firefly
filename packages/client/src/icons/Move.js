@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Move ({ color }) {
+export function Move ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='move'
@@ -15,10 +15,6 @@ export function Move ({ color }) {
       <path d='M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20' />
     </svg>
   )
-}
-
-Move.defaultProps = {
-  color: 'currentColor'
 }
 
 Move.propTypes = {

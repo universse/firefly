@@ -11,15 +11,15 @@ import { DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
 
 function SearchBar ({
-  controlledProps,
-  initialIsLoading,
-  initialSearchInput,
-  resultCount,
+  controlledProps = {},
+  initialIsLoading = false,
+  initialSearchInput = '',
+  resultCount = Infinity,
   ClearSearchWrapper,
   Input,
   Result,
-  ResultBox,
-  Root
+  ResultBox = DefaultResultBox,
+  Root = DefaultRoot
 }) {
   const {
     handleSelect,
@@ -136,15 +136,6 @@ function SearchBar ({
 }
 
 export default memo(SearchBar)
-
-SearchBar.defaultProps = {
-  controlledProps: {},
-  initialIsLoading: false,
-  initialSearchInput: '',
-  resultCount: Infinity,
-  ResultBox: DefaultResultBox,
-  Root: DefaultRoot
-}
 
 SearchBar.propTypes = {
   ClearSearchWrapper: PropTypes.elementType.isRequired,

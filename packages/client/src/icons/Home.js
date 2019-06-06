@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Home ({ color }) {
+export function Home ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='home'
@@ -16,10 +16,6 @@ export function Home ({ color }) {
       <path d='M9 22V12h6v10' />
     </svg>
   )
-}
-
-Home.defaultProps = {
-  color: 'currentColor'
 }
 
 Home.propTypes = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Library ({ color }) {
+export function Library ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='library'
@@ -20,10 +20,6 @@ export function Library ({ color }) {
       <line x1='3' x2='3' y1='18' y2='18' />
     </svg>
   )
-}
-
-Library.defaultProps = {
-  color: 'currentColor'
 }
 
 Library.propTypes = {

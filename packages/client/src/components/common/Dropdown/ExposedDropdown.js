@@ -24,6 +24,7 @@ function ExposedDropdown ({
       selectedItem={items.find(({ value }) => value === selectedItem)}
     >
       {({
+        closeMenu,
         getItemProps,
         getLabelProps,
         getMenuProps,
@@ -49,10 +50,16 @@ function ExposedDropdown ({
                 'aria-expanded': isOpen,
                 'data-toggle': 'dropdown',
                 id,
-                onKeyDown: e =>
-                  e.key === 'Tab' &&
-                  highlightedIndex !== null &&
-                  selectItem(items[highlightedIndex])
+                onKeyDown: e => {
+                  if (e.key === 'Tab') {
+                    highlightedIndex !== null &&
+                      selectItem(items[highlightedIndex])
+                  }
+                  if (e.key === 'Escape') {
+                    e.nativeEvent.preventDownshiftDefault = true
+                    closeMenu()
+                  }
+                }
               })}
             >
               {selectedItem.label}

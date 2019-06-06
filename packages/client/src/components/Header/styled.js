@@ -22,7 +22,11 @@ export function ClearSearchWrapper (props) {
   )
 }
 
-export function HeaderTag ({ isScrollingDown, mobile, ...props }) {
+export function HeaderTag ({
+  isScrollingDown = false,
+  mobile = false,
+  ...props
+}) {
   return (
     <header
       css={css`
@@ -47,17 +51,12 @@ export function HeaderTag ({ isScrollingDown, mobile, ...props }) {
   )
 }
 
-HeaderTag.defaultProps = {
-  isScrollingDown: false,
-  mobile: false
-}
-
 HeaderTag.propTypes = {
   isScrollingDown: PropTypes.bool,
   mobile: PropTypes.bool
 }
 
-export function HeaderWrapper ({ shadow, ...props }) {
+export function HeaderWrapper ({ shadow = false, ...props }) {
   return (
     <div
       className='base'
@@ -71,10 +70,6 @@ export function HeaderWrapper ({ shadow, ...props }) {
       {...props}
     />
   )
-}
-
-HeaderWrapper.defaultProps = {
-  shadow: false
 }
 
 HeaderWrapper.propTypes = {
@@ -105,7 +100,7 @@ export function Input (props) {
   )
 }
 
-export function Result ({ as: Tag, isHighlighted, ...props }) {
+export function Result ({ as: Tag = Link, isHighlighted = false, ...props }) {
   return (
     <Tag
       css={css`
@@ -121,11 +116,6 @@ export function Result ({ as: Tag, isHighlighted, ...props }) {
       {...props}
     />
   )
-}
-
-Result.defaultProps = {
-  isHighlighted: false,
-  as: Link
 }
 
 Result.propTypes = {

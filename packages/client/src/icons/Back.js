@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Back ({ color }) {
+export function Back ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='back'
@@ -15,10 +15,6 @@ export function Back ({ color }) {
       <path d='M19 12H5M12 19l-7-7 7-7' />
     </svg>
   )
-}
-
-Back.defaultProps = {
-  color: 'currentColor'
 }
 
 Back.propTypes = {

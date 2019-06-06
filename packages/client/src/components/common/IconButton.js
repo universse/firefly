@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 import { screens } from 'constants/Styles'
 
 // TODO focus state
-export default function IconButton ({ children, light, ...props }) {
+export default function IconButton ({ children, light = false, ...props }) {
   return (
     <button
       css={css`
@@ -42,10 +42,6 @@ export default function IconButton ({ children, light, ...props }) {
       </div>
     </button>
   )
-}
-
-IconButton.defaultProps = {
-  light: false
 }
 
 IconButton.propTypes = {

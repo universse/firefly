@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Check ({ filled }) {
+export function Check ({ filled = false }) {
   const label = filled ? 'uncheck' : 'check'
 
   return (
@@ -24,10 +24,6 @@ export function Check ({ filled }) {
       />
     </svg>
   )
-}
-
-Check.defaultProps = {
-  filled: false
 }
 
 Check.propTypes = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Cross ({ color, small }) {
+export function Cross ({ color = 'currentColor', small = false }) {
   return (
     <svg
       aria-label='cross'
@@ -15,11 +15,6 @@ export function Cross ({ color, small }) {
       <path d='M18 6L6 18M6 6l12 12' />
     </svg>
   )
-}
-
-Cross.defaultProps = {
-  color: 'currentColor',
-  small: false
 }
 
 Cross.propTypes = {

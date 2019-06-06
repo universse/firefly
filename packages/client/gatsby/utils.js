@@ -1,8 +1,8 @@
 function slugify (str) {
   return str
-    .split(' ')
-    .map(s => s.toLowerCase())
-    .join('-')
+    .replace(/\s+&\s+/g, '-')
+    .replace(/\s+/g, '-')
+    .toLowerCase()
 }
 
 // TODO get unique categories for automation, unique tags for search

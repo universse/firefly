@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Search ({ color }) {
+export function Search ({ color = 'currentColor' }) {
   return (
     <svg
       aria-label='search'
@@ -16,10 +16,6 @@ export function Search ({ color }) {
       <path d='M21 21l-4.35-4.35' />
     </svg>
   )
-}
-
-Search.defaultProps = {
-  color: 'currentColor'
 }
 
 Search.propTypes = {

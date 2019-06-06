@@ -1,18 +1,22 @@
 import React, { memo, useState, useContext } from 'react'
 import { css } from '@emotion/core'
+import ReactModal from 'react-modal'
 
 import { ErrorMessage, Input } from './styled'
-import Modal from 'components/Modal'
 import { IconButton, PrimaryButton } from 'components/common'
 import { Cross } from 'icons'
+import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
 import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
 import firebaseWorker from 'utils/firebaseWorker'
 
+ReactModal.setAppElement('#___gatsby')
+
 function SignUpForm () {
   const title = useSiteTitle()
+  const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
 
   const [email, setEmail] = useState('')
@@ -35,17 +39,23 @@ function SignUpForm () {
       .finally(() => setIsloading(false))
   }
 
+  const isOpen = activeModalType === ModalTypes.SIGN_UP_FORM
+
   return (
-    <Modal
-      className='SignUpModal'
+    <ReactModal
+      className='Modal SignUpModal'
+      closeTimeoutMS={280}
       contentLabel='Sign Up'
-      onCloseModal={() => {
+      isOpen={isOpen}
+      onRequestClose={() => {
+        setActiveModalType(null)
         setEmail('')
         setIsSubmitted(false)
         setIsloading(false)
         setHasError(false)
       }}
-      type={ModalTypes.SIGN_UP_FORM}
+      overlayClassName='Overlay'
+      shouldCloseOnOverlayClick
     >
       {isSubmitted ? (
         <div
@@ -130,7 +140,7 @@ function SignUpForm () {
         <IconButton
           aria-label='Close Modal'
           onClick={() => {
-            setActiveModalType()
+            setActiveModalType(null)
             setEmail('')
             setIsSubmitted(false)
             setIsloading(false)
@@ -140,7 +150,7 @@ function SignUpForm () {
           <Cross />
         </IconButton>
       </div>
-    </Modal>
+    </ReactModal>
   )
 }
 

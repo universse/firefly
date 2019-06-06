@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Save ({ color, filled }) {
+export function Save ({ color = 'currentColor', filled = false }) {
   const className = filled ? 'feather feather--filled' : 'feather'
   const label = filled ? 'unsave' : 'save'
 
@@ -18,11 +18,6 @@ export function Save ({ color, filled }) {
       <path d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z' />
     </svg>
   )
-}
-
-Save.defaultProps = {
-  color: 'currentColor',
-  filled: false
 }
 
 Save.propTypes = {

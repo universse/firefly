@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Url ({ color, small }) {
+export function Url ({ color = 'currentColor', small = true }) {
   return (
     <svg
       aria-label='url'
@@ -16,11 +16,6 @@ export function Url ({ color, small }) {
       <path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71' />
     </svg>
   )
-}
-
-Url.defaultProps = {
-  color: 'currentColor',
-  small: false
 }
 
 Url.propTypes = {

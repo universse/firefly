@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Video ({ color, small }) {
+export function Video ({ color = 'currentColor', small = true }) {
   return (
     <svg
       aria-label='video'
@@ -16,11 +16,6 @@ export function Video ({ color, small }) {
       <path d='M10 8l6 4-6 4V8z' />
     </svg>
   )
-}
-
-Video.defaultProps = {
-  color: 'currentColor',
-  small: true
 }
 
 Video.propTypes = {

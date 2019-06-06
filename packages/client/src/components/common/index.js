@@ -185,7 +185,7 @@ export function Input (props) {
 
 export { OutboundLink }
 
-export function PrimaryButton ({ large, width, ...props }) {
+export function PrimaryButton ({ large = false, width, ...props }) {
   return (
     <button
       css={css`
@@ -207,10 +207,6 @@ export function PrimaryButton ({ large, width, ...props }) {
       {...props}
     />
   )
-}
-
-PrimaryButton.defaultProps = {
-  large: false
 }
 
 PrimaryButton.propTypes = {
@@ -245,7 +241,7 @@ ProgressBar.propTypes = {
   width: PropTypes.string
 }
 
-export function Result ({ as: Tag, isHighlighted, ...props }) {
+export function Result ({ as: Tag = Link, isHighlighted = false, ...props }) {
   return (
     <Tag
       css={css`
@@ -270,17 +266,12 @@ export function Result ({ as: Tag, isHighlighted, ...props }) {
   )
 }
 
-Result.defaultProps = {
-  isHighlighted: false,
-  as: Link
-}
-
 Result.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
   isHighlighted: PropTypes.bool
 }
 
-export function Sidebar ({ isScrollingDown, ...props }) {
+export function Sidebar ({ isScrollingDown = false, ...props }) {
   return (
     <div
       css={css`
@@ -310,10 +301,6 @@ export function Sidebar ({ isScrollingDown, ...props }) {
   )
 }
 
-Sidebar.defaultProps = {
-  isScrollingDown: false
-}
-
 Sidebar.propTypes = {
   isScrollingDown: PropTypes.bool
 }
@@ -328,7 +315,7 @@ export function SkipNav () {
 
 export { default as Spinner } from './Spinner'
 
-export function Tag ({ small, ...props }) {
+export function Tag ({ small = false, ...props }) {
   return (
     <Link
       css={css`
@@ -348,10 +335,6 @@ export function Tag ({ small, ...props }) {
       {...props}
     />
   )
-}
-
-Tag.defaultProps = {
-  small: false
 }
 
 Tag.propTypes = {
