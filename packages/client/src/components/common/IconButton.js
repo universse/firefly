@@ -5,16 +5,21 @@ import { css } from '@emotion/core'
 import { screens } from 'constants/Styles'
 
 // TODO focus state
-export default function IconButton ({ children, light = false, ...props }) {
+export default function IconButton ({
+  as: Tag = 'button',
+  children,
+  light = false,
+  ...props
+}) {
   return (
-    <button
+    <Tag
       css={css`
         color: ${light ? 'var(--colors-white900)' : 'var(--colors-gray500)'};
         height: 3rem;
         width: 2.5rem;
         z-index: 1;
       `}
-      type='button'
+      {...Tag === 'button' && { type: 'button' }}
       {...props}
     >
       <div
@@ -40,14 +45,15 @@ export default function IconButton ({ children, light = false, ...props }) {
       >
         {children}
       </div>
-    </button>
+    </Tag>
   )
 }
 
 IconButton.propTypes = {
   'aria-label': PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  as: PropTypes.oneOf(['button', 'summary']),
   light: PropTypes.bool,
+  onClick: PropTypes.func,
   value: PropTypes.string
 }

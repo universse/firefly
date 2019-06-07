@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { NormalizedCollectionsPath } from 'common'
 
 export const NormalizedCollectionsContext = createContext()
 
@@ -7,7 +8,7 @@ export default function NormalizedCollections ({ children }) {
   const [normalizedCollections, setNormalizedCollections] = useState()
 
   useEffect(() => {
-    fetch('/data/mivEB3GnRswZyWZMNkaO.json')
+    fetch(NormalizedCollectionsPath)
       .then(res => res.json())
       .then(setNormalizedCollections)
   }, [])

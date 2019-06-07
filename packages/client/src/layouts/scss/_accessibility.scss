@@ -7,11 +7,12 @@ input[type="email"] {
 
 a[href],
 area[href],
+button:not([disabled]),
+summary,
+iframe,
 input:not([disabled]),
 select:not([disabled]),
 textarea:not([disabled]),
-button:not([disabled]),
-iframe,
 *[tabindex]:not([tabindex="0"]):not([tabindex^="-"]),
 *[contenteditable] {
   &:focus {

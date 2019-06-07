@@ -1,7 +1,6 @@
 import React, { useCallback, useContext } from 'react'
 import { css } from '@emotion/core'
 
-import { Label, SortOption } from './styled'
 import { URLParamsContext } from 'contexts/URLParams'
 import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
@@ -53,13 +52,28 @@ export default function MobileSortByDifficulty () {
               height: 2rem;
             `}
           >
-            <SortOption
+            <input
               checked={sort === value}
+              css={css`
+                margin-right: 1rem;
+              `}
               id={label}
+              name='sort'
               onChange={handleChange}
+              type='radio'
               value={value}
             />
-            <Label htmlFor={label}>{label}</Label>
+            <label
+              css={css`
+                color: var(--colors-gray900);
+                font-size: 0.875rem;
+                font-weight: 500;
+                text-transform: capitalize;
+              `}
+              htmlFor={label}
+            >
+              {label}
+            </label>
           </div>
         ))}
       </div>

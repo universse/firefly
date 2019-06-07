@@ -2,8 +2,12 @@ const fs = require('fs')
 const { resolve } = require('path')
 
 const { createCollectionPath } = require('./utils')
+const { NormalizedCollectionsFilename } = require('common')
 
-module.exports = async ({ graphql, actions: { createPage } }) => {
+module.exports = async ({
+  graphql,
+  actions: { createPage, createRedirect }
+}) => {
   const db = await graphql(
     `
       {
@@ -32,13 +36,11 @@ module.exports = async ({ graphql, actions: { createPage } }) => {
     }
   })
 
-  const searchData = []
   const normalizedCollections = {}
 
   db.data.allCollections.edges.forEach(({ node }) => {
     const { id, name } = node
 
-    searchData.push({ id, name })
     normalizedCollections[node.id.toLowerCase()] = node
 
     createPage({
@@ -51,16 +53,19 @@ module.exports = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
-  const dataDir = 'public/data/'
+  const dataDir = `public/data/`
+
   !fs.existsSync(dataDir) && fs.mkdirSync(dataDir)
 
   fs.writeFileSync(
-    `${dataDir}inSZHihe121BmAaTS48B.json`,
-    JSON.stringify(searchData)
-  )
-
-  fs.writeFileSync(
-    `${dataDir}mivEB3GnRswZyWZMNkaO.json`,
+    `${dataDir}${NormalizedCollectionsFilename}.json`,
     JSON.stringify(normalizedCollections)
   )
+
+  process.env.NODE_ENV === 'production' &&
+    createRedirect({
+      fromPath: '/api/d/*',
+      toPath: '/data/:splat.json',
+      statusCode: 200
+    })
 }

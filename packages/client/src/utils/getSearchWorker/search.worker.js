@@ -1,12 +1,13 @@
 import matchSorter from 'match-sorter'
+import { NormalizedCollectionsPath } from 'common'
 
 let searchData
 
 export async function search (input) {
   if (!searchData) {
-    searchData = await fetch('/data/inSZHihe121BmAaTS48B.json').then(res =>
-      res.json()
-    )
+    searchData = await fetch(NormalizedCollectionsPath)
+      .then(res => res.json())
+      .then(data => Object.values(data))
   }
 
   return matchSorter(searchData, input, {

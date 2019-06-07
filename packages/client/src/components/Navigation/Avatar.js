@@ -1,40 +1,62 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import localforage from 'localforage'
+import { Link } from 'gatsby'
 
-import { Dropdown, IconButton } from 'components/common'
+import { IconButton } from 'components/common'
 import { User } from 'icons'
 import LocalStorage from 'constants/LocalStorage'
+import useDropdownMenu from 'hooks/useDropdownMenu'
 import firebaseWorker from 'utils/firebaseWorker'
 
 export default function Avatar () {
-  const items = useMemo(
-    () => [
-      {
-        'aria-label': 'Sign Out',
-        as: 'button',
-        children: 'Sign Out',
-        onClick: () =>
-          firebaseWorker.signOut().then(() => {
-            if (window.amplitude) {
-              window.amplitude.getInstance().setUserId(null)
-              window.amplitude.getInstance().regenerateDeviceId()
-            }
-            localforage.clear()
-            window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
-            window.location.reload()
-          })
-      }
-    ],
-    []
-  )
+  const {
+    detailsProps,
+    summaryProps,
+    menuProps,
+    getMenuItemProps,
+    highlightedIndex
+  } = useDropdownMenu({ menuItemCount: 3 })
 
   return (
-    <Dropdown
-      Icon={User}
-      id='user-avatar'
-      items={items}
-      label='User Avatar'
-      ToggleButton={IconButton}
-    />
+    <details className='DropdownMenu' {...detailsProps}>
+      <IconButton aria-label='Open User Menu' as='summary' {...summaryProps}>
+        <User />
+      </IconButton>
+      <div className='Menu' {...menuProps}>
+        <button
+          aria-label='Sign out'
+          className={`${highlightedIndex === 0 ? 'highlighted' : ''}`}
+          onClick={() => {
+            firebaseWorker.signOut().then(() => {
+              if (window.amplitude) {
+                window.amplitude.getInstance().setUserId(-1)
+                window.amplitude.getInstance().regenerateDeviceId()
+              }
+              localforage.clear()
+              window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
+              window.location.reload()
+            })
+          }}
+          type='button'
+          {...getMenuItemProps(0)}
+        >
+          Sign Out
+        </button>
+        <a
+          className={`${highlightedIndex === 1 ? 'highlighted' : ''}`}
+          href='https://www.google.com'
+          {...getMenuItemProps(1)}
+        >
+          Sign Out
+        </a>
+        <Link
+          className={`${highlightedIndex === 2 ? 'highlighted' : ''}`}
+          to='/my-library'
+          {...getMenuItemProps(2)}
+        >
+          Library
+        </Link>
+      </div>
+    </details>
   )
 }

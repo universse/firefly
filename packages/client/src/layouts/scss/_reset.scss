@@ -139,6 +139,15 @@ button:hover {
   cursor: pointer;
 }
 
+summary {
+  cursor: pointer;
+  list-style: none;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
 input {
   border: none;
   margin: 0;

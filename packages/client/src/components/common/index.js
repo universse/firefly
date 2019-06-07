@@ -86,8 +86,6 @@ export const Difficulty = function (props) {
   )
 }
 
-export { Dropdown, ExposedDropdown } from './Dropdown'
-
 export function FAB (props) {
   return (
     <button
@@ -267,7 +265,7 @@ export function Result ({ as: Tag = Link, isHighlighted = false, ...props }) {
 }
 
 Result.propTypes = {
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  as: PropTypes.oneOf(['span', Link]),
   isHighlighted: PropTypes.bool
 }
 

@@ -6,6 +6,65 @@
 @import "icons";
 @import "modal";
 
+.DropdownMenu {
+  position: relative;
+
+  summary {
+    align-items: center;
+    display: flex;
+    position: relative;
+
+    span {
+      color: var(--colors-gray900);
+      font-weight: 400;
+      left: -3.5rem;
+      line-height: 1.5rem;
+      position: absolute;
+      text-transform: none;
+    }
+  }
+
+  div {
+    a,
+    button {
+      align-items: center;
+      color: var(--colors-gray800);
+      display: flex;
+      font-size: 0.875rem;
+      font-weight: 400;
+      height: 2.5rem;
+      padding-left: 1rem;
+      text-align: left;
+      width: 11.5rem;
+
+      &.highlighted {
+        background-color: var(--colors-gray300);
+      }
+
+      &.selected {
+        color: var(--colors-gray900);
+        font-weight: 600;
+      }
+
+      &.uppercase {
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.Menu {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: var(--shadows-02);
+  margin-top: 0.25rem;
+  overflow: auto;
+  position: absolute;
+  right: 0;
+  width: 11.5rem;
+  z-index: 2;
+}
+
 .base {
   margin: 0 auto;
   max-width: 64rem;

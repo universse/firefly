@@ -1,16 +1,10 @@
 import { useState, useCallback, useEffect } from 'react'
 import { navigate } from 'gatsby'
-// import preval from 'preval.macro'
 
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
 import getSearchWorker from 'utils/getSearchWorker'
 import { createCollectionPath } from '../../../gatsby/utils'
-
-// const dataJSON = preval`
-//   const dataPath = require('../../../.cache/data.json').dataPaths.index
-//   module.exports = \`static/d/\${dataPath}.json\`
-// `
 
 export default function useSearch (initialSearchInput, initialIsLoading) {
   const [searchInput, setSearchInput] = useState(initialSearchInput)
@@ -19,12 +13,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   const [isTyping, setIsTyping] = useState(false)
   const debouncedSearchInput = useDebouncedValue(searchInput, 350)
 
-  // pass normalizedData
-  // useEffect(() => {
-  //   getSearchWorker()
-  // }, [])
-
-  const handleSelect = useCallback(({ id, name }) => {
+  const handleSelect = ({ id, name }) => {
     if (name) {
       const to = createCollectionPath({ id, name })
       logClickSearchResult({ input: searchInput, to })
@@ -35,7 +24,7 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
         state: { searchInput, initialIsLoading: true }
       })
     }
-  }, [searchInput])
+  }
 
   const handleSearchInput = useCallback(e => {
     setIsTyping(true)
