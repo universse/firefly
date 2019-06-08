@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useMemo } from 'react'
+import { useState, useRef } from 'react'
 
 const scrollByX = 200
 
@@ -8,31 +8,26 @@ export default function useSlider () {
 
   const slider = useRef()
 
-  const onScroll = useCallback(() => {
+  const onScroll = () => {
     setIsMaxScroll(
       slider.current.scrollLeft >=
         slider.current.scrollWidth - slider.current.clientWidth
     )
     setIsMinScroll(slider.current.scrollLeft === 0)
-  }, [])
+  }
 
-  const onScrollLeftClick = useCallback(() => {
+  const onScrollLeftClick = () =>
     slider.current.scrollBy({ left: -scrollByX, behavior: 'smooth' })
-  }, [])
 
-  const onScrollRightClick = useCallback(() => {
+  const onScrollRightClick = () =>
     slider.current.scrollBy({ left: scrollByX, behavior: 'smooth' })
-  }, [])
 
-  return useMemo(
-    () => ({
-      isMaxScroll,
-      isMinScroll,
-      onScroll,
-      onScrollLeftClick,
-      onScrollRightClick,
-      slider
-    }),
-    [isMaxScroll, isMinScroll, onScroll, onScrollLeftClick, onScrollRightClick]
-  )
+  return {
+    isMaxScroll,
+    isMinScroll,
+    onScroll,
+    onScrollLeftClick,
+    onScrollRightClick,
+    slider
+  }
 }

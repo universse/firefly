@@ -1,55 +1,70 @@
-import React, { useMemo, useCallback } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
 
-import { Dropdown, IconButton, OutboundLink } from 'components/common'
+import { IconButton, OutboundLink } from 'components/common'
 import { Share } from 'icons'
-import { logClickAction } from 'utils/amplitudeUtils'
+import useDropdownMenu from 'hooks/useDropdownMenu'
+import { createFacebookShareURL, createTwitterShareURL } from './utils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import copyToClipboard from 'utils/copyToClipboard'
 
-export default function ShareDropdown ({ id, name }) {
-  const onCopyClick = useCallback(e => {
-    copyToClipboard(window.location.href)
-    e.currentTarget.focus()
-  }, [])
+export default function ShareDropdown ({ name }) {
+  const {
+    detailsProps,
+    summaryProps,
+    menuProps,
+    getMenuItemProps,
+    highlightedIndex
+  } = useDropdownMenu({ menuItemCount: 3 })
 
-  const items = useMemo(
-    () => [
-      {
-        'aria-label': '',
-        as: 'button',
-        children: '',
-        onClick: onCopyClick
-      },
-      {
-        as: OutboundLink,
-        href: '',
-        children: ''
-      },
-      { as: Link, children: '', to: '' }
-    ],
-    [onCopyClick]
-  )
-
-  const onToggleButtonClick = useCallback(
-    e => logClickAction({ id, action: e.currentTarget.textContent }),
-    [id]
-  )
+  const href = window.location.href
 
   return (
-    <Dropdown
-      Icon={Share}
-      id='share-menu'
-      items={items}
-      label={createActionLabel('share', name)}
-      onToggleButtonClick={onToggleButtonClick}
-      ToggleButton={IconButton}
-    />
+    <details className='DropdownMenu' {...detailsProps}>
+      <IconButton
+        aria-label={createActionLabel('share', name)}
+        as='summary'
+        {...summaryProps}
+      >
+        <Share />
+      </IconButton>
+      <div className='Menu' {...menuProps}>
+        <button
+          aria-label='Sign out'
+          className={`${highlightedIndex === 0 ? 'highlighted' : ''}`}
+          onClick={e => {
+            copyToClipboard(href)
+            e.currentTarget.focus()
+          }}
+          type='button'
+          {...getMenuItemProps(0)}
+        >
+          Copy
+        </button>
+        <OutboundLink
+          className={`${highlightedIndex === 1 ? 'highlighted' : ''}`}
+          href={createFacebookShareURL({
+            href,
+            text: name
+          })}
+          {...getMenuItemProps(1)}
+        >
+          Facebook
+        </OutboundLink>
+        <OutboundLink
+          className={`${highlightedIndex === 2 ? 'highlighted' : ''}`}
+          href={createTwitterShareURL({ href, text: name })}
+          rel='noopener noreferrer'
+          target='_blank'
+          {...getMenuItemProps(2)}
+        >
+          Twitter
+        </OutboundLink>
+      </div>
+    </details>
   )
 }
 
 ShareDropdown.propTypes = {
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
 }

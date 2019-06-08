@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { navigate } from 'gatsby'
 
 import useDebouncedValue from 'hooks/useDebouncedValue'
@@ -26,11 +26,11 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
     }
   }
 
-  const handleSearchInput = useCallback(e => {
+  const handleSearchInput = e => {
     setIsTyping(true)
     setSearchInput(e.target.value)
     logInputSearch(e.target.value)
-  }, [])
+  }
 
   useEffect(() => {
     if (debouncedSearchInput) {

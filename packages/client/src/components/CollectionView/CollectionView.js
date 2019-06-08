@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo } from 'react'
+import React, { useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
@@ -23,15 +23,9 @@ export default function CollectionView ({
   const isDesktop = useContext(MediaContext)
   const itemCount = urls.length
 
-  const completedCount = useMemo(
-    () =>
-      check &&
-      urls.reduce(
-        (total, current) => (check[current.id] ? total + 1 : total),
-        0
-      ),
-    [check, urls]
-  )
+  const completedCount =
+    check &&
+    urls.reduce((total, current) => (check[current.id] ? total + 1 : total), 0)
 
   const { setLatestActivity } = useContext(LatestActivityContext)
 

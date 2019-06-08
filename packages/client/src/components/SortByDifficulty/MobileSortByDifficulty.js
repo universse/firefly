@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { URLParamsContext } from 'contexts/URLParams'
@@ -10,11 +10,6 @@ export default function MobileSortByDifficulty () {
     query: { sort },
     queryDispatch
   } = useContext(URLParamsContext)
-
-  const handleChange = useCallback(e => {
-    queryDispatch({ sort: e.currentTarget.value })
-    logSortDifficulty({ sort: e.currentTarget.value })
-  }, [queryDispatch])
 
   return (
     <div
@@ -59,7 +54,10 @@ export default function MobileSortByDifficulty () {
               `}
               id={label}
               name='sort'
-              onChange={handleChange}
+              onChange={e => {
+                queryDispatch({ sort: e.currentTarget.value })
+                logSortDifficulty({ sort: e.currentTarget.value })
+              }}
               type='radio'
               value={value}
             />

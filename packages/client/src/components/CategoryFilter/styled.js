@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
@@ -55,7 +55,7 @@ export function Category (props) {
 
 export const buttonWidthInRem = 2.5
 
-export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
+export function ScrollButton ({ handleClick, isShown, side }) {
   const align =
     side === 'left'
       ? css`
@@ -95,7 +95,7 @@ export const ScrollButton = memo(function ({ handleClick, isShown, side }) {
       </button>
     </div>
   )
-})
+}
 
 ScrollButton.propTypes = {
   handleClick: PropTypes.func.isRequired,

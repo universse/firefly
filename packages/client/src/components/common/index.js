@@ -23,7 +23,11 @@ export function ActionBar ({ children }) {
         display: flex;
         justify-content: space-between;
         margin-right: -0.5rem;
-        width: ${2.5 * childrenCount}rem;
+        width: ${2.5 * childrenCount + 0.5 * (childrenCount - 1)}rem;
+
+        ${screens.desktop} {
+          width: ${2.5 * childrenCount}rem;
+        }
       `}
     >
       {children}

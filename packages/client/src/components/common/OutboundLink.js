@@ -1,7 +1,7 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-function OutboundLink ({ onClick, ...props }) {
+export default function OutboundLink ({ onClick, ...props }) {
   return (
     // eslint-disable-next-line
     <a
@@ -49,8 +49,6 @@ function OutboundLink ({ onClick, ...props }) {
     />
   )
 }
-
-export default memo(OutboundLink)
 
 OutboundLink.propTypes = {
   href: PropTypes.string.isRequired,

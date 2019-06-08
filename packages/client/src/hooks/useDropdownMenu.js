@@ -4,17 +4,20 @@ export default function useDropdownMenu ({ items, menuItemCount, onSelect }) {
   menuItemCount = menuItemCount || items.length
 
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
+
   const detailsRef = useRef()
-  const detailsProps = {
-    ref: detailsRef
-  }
+  const menuRef = useRef()
 
   const select = () => {
     if (highlightedIndex < 0) return
 
-    return onSelect
+    onSelect
       ? onSelect(items[highlightedIndex])
       : menuRef.current.children[highlightedIndex].click()
+  }
+
+  const detailsProps = {
+    ref: detailsRef
   }
 
   const summaryProps = {
@@ -63,16 +66,15 @@ export default function useDropdownMenu ({ items, menuItemCount, onSelect }) {
     }
   }
 
-  const menuRef = useRef()
   const menuProps = {
+    onMouseLeave: () => setHighlightedIndex(-1),
     ref: menuRef,
     role: 'menu'
   }
 
   function getMenuItemProps (index) {
     return {
-      onMouseLeave: () => setHighlightedIndex(-1),
-      onMouseMove: () => setHighlightedIndex(index),
+      onMouseEnter: () => setHighlightedIndex(index),
       role: 'menuitem',
       tabIndex: -1
     }

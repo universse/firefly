@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-// import ShareDropdown from 'components/ShareDropdown'
 import { ActionBar, IconButton, ProgressBar } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Heart, Save } from 'icons'
@@ -72,7 +71,6 @@ export default function CollectionActions ({
         >
           <Heart filled={isLoved} />
         </IconButton> */}
-        {/* <ShareDropdown name={name} /> */}
       </ActionBar>
     </div>
   )

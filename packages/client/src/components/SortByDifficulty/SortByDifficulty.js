@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useContext } from 'react'
 
 import { ToggleButton } from './styled'
 import { URLParamsContext } from 'contexts/URLParams'
@@ -12,10 +12,10 @@ export default function SortByDifficulty () {
     queryDispatch
   } = useContext(URLParamsContext)
 
-  const onSelect = useCallback(({ value }) => {
+  const onSelect = ({ value }) => {
     queryDispatch({ sort: value })
     logSortDifficulty({ sort: value })
-  }, [queryDispatch])
+  }
 
   const selectedIndex = SortOptions.findIndex(({ value }) => value === sort)
 

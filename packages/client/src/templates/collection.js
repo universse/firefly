@@ -6,8 +6,9 @@ import { css } from '@emotion/core'
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
+import ShareDropdown from 'components/ShareDropdown'
 import { FABDesktop, IconButton } from 'components/common'
-import { Back, Heart, Save, Suggest } from 'icons'
+import { Back, Heart, Save, Share, Suggest } from 'icons'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
@@ -19,6 +20,7 @@ import {
   screens
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
+import { logClickAction } from 'utils/amplitudeUtils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import firebaseWorker from 'utils/firebaseWorker'
 import goBack from 'utils/goBack'
@@ -86,23 +88,32 @@ export default function CollectionTemplate ({
                   >
                     <Save filled={isSaved} />
                   </IconButton>
-                  {/* v3 */}
-                  {/* <IconButton
-                  aria-label={createActionLabel(
-                    isLoved ? 'unlove' : 'love',
-                    name
+                  <IconButton
+                    aria-label={createActionLabel(
+                      isLoved ? 'unlove' : 'love',
+                      name
+                    )}
+                    onClick={onActionClick}
+                    value={id}
+                  >
+                    <Heart filled={isLoved} />
+                  </IconButton>
+                  {navigator.share ? (
+                    <IconButton
+                      aria-label='Share'
+                      onClick={e => {
+                        logClickAction({
+                          id,
+                          action: e.currentTarget.textContent
+                        })
+                        navigator.share({ title: name, url: location.href })
+                      }}
+                    >
+                      <Share />
+                    </IconButton>
+                  ) : (
+                    <ShareDropdown name={name} />
                   )}
-                  onClick={onActionClick}
-                  value={id}
-                >
-                  <Heart filled={isLoved} />
-                </IconButton> */}
-                  {/* <IconButton
-                  aria-label='Share'
-                  onClick={() => copyToClipboard(location.href)}
-                >
-                  <Share />
-                </IconButton> */}
                 </>
               )
             }

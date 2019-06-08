@@ -2,7 +2,7 @@ import React from 'react'
 import localforage from 'localforage'
 import { Link } from 'gatsby'
 
-import { IconButton } from 'components/common'
+import { IconButton, OutboundLink } from 'components/common'
 import { User } from 'icons'
 import LocalStorage from 'constants/LocalStorage'
 import useDropdownMenu from 'hooks/useDropdownMenu'
@@ -42,13 +42,13 @@ export default function Avatar () {
         >
           Sign Out
         </button>
-        <a
+        <OutboundLink
           className={`${highlightedIndex === 1 ? 'highlighted' : ''}`}
           href='https://www.google.com'
           {...getMenuItemProps(1)}
         >
           Sign Out
-        </a>
+        </OutboundLink>
         <Link
           className={`${highlightedIndex === 2 ? 'highlighted' : ''}`}
           to='/my-library'

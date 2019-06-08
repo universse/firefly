@@ -34,7 +34,7 @@ function Navigation () {
             margin-left: 1.5rem;
           `}
         >
-          {!hasSignedIn() ? (
+          {hasSignedIn() ? (
             <Avatar />
           ) : (
             <GhostButton
