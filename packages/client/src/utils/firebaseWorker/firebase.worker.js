@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 
 import 'firebase/auth'
 import 'firebase/firestore'
-import 'firebase/storage'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
@@ -30,7 +29,6 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
 })
 
 const firestore = firebase.firestore()
-const cache = {}
 
 export function createUserWithEmailAndPassword (email, password) {
   return auth.createUserWithEmailAndPassword(email, password)
@@ -131,6 +129,8 @@ export async function createCollection (collection) {
   }
 }
 
+const cache = {}
+
 export async function fetchCollection (id) {
   if (cache[id]) {
     return cache[id]
@@ -166,7 +166,11 @@ export async function fetchUserData () {
   const userData = { love: {}, save: {}, check: {} }
 
   try {
-    const docs = await firestore.collection(auth.currentUser.uid).get()
+    const docs = await firestore
+      .collection('users')
+      .doc(auth.currentUser.uid)
+      .collection('data')
+      .get()
     docs.forEach(doc => {
       userData[doc.id] = doc.data()
     })
@@ -178,8 +182,16 @@ export async function fetchUserData () {
 }
 
 export async function uploadOfflineData ({ check, save }) {
-  const checkRef = firestore.collection(auth.currentUser.uid).doc('check')
-  const saveRef = firestore.collection(auth.currentUser.uid).doc('save')
+  const checkRef = firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('data')
+    .doc('check')
+  const saveRef = firestore
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('data')
+    .doc('save')
   const batch = firestore.batch()
 
   const checkKeys = Object.keys(check)
@@ -207,7 +219,9 @@ export async function uploadOfflineData ({ check, save }) {
 
 export async function action ({ id, action }) {
   const docRef = firestore
-    .collection(auth.currentUser.uid)
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('data')
     .doc(action.replace('un', ''))
 
   const data = {
@@ -249,6 +263,8 @@ const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
 const id = firestore.collection('collections').doc().id
 const session = Date.now() + ''
 let index = 0
+
+import('firebase/storage')
 
 export async function uploadScreenRecordings (events) {
   try {
