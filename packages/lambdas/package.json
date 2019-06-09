@@ -16,7 +16,7 @@
     "jest": "^24.8.0",
     "preval.macro": "^3.0.0",
     "serverless-dynamodb-local": "^0.2.38",
-    "serverless-offline": "^5.3.1",
+    "serverless-offline": "^5.3.2",
     "serverless-webpack": "^5.3.1",
     "webpack": "^4.33.0",
     "webpack-node-externals": "^1.7.2"
