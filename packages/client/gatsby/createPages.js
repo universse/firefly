@@ -53,7 +53,7 @@ module.exports = async ({
     })
   })
 
-  const dataDir = `public/data/`
+  const dataDir = 'src/data/'
 
   !fs.existsSync(dataDir) && fs.mkdirSync(dataDir)
 
@@ -61,11 +61,4 @@ module.exports = async ({
     `${dataDir}${NormalizedCollectionsFilename}.json`,
     JSON.stringify(normalizedCollections)
   )
-
-  process.env.NODE_ENV === 'production' &&
-    createRedirect({
-      fromPath: '/api/d/*',
-      toPath: '/data/:splat.json',
-      statusCode: 200
-    })
 }

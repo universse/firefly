@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { NormalizedCollectionsPath } from 'common'
+import { NormalizedCollectionsFilename } from 'common'
 
 export const NormalizedCollectionsContext = createContext()
 
@@ -8,9 +8,9 @@ export default function NormalizedCollections ({ children }) {
   const [normalizedCollections, setNormalizedCollections] = useState()
 
   useEffect(() => {
-    fetch(NormalizedCollectionsPath)
-      .then(res => res.json())
-      .then(setNormalizedCollections)
+    import(`data/${NormalizedCollectionsFilename}.json`).then(
+      ({ default: data }) => setNormalizedCollections(data)
+    )
   }, [])
 
   return (
