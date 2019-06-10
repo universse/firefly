@@ -1,7 +1,6 @@
 import firebase from 'firebase/app'
 
 import 'firebase/auth'
-import 'firebase/firestore'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
@@ -28,31 +27,53 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
       })
 })
 
+// eslint-disable-next-line
+import 'firebase/firestore'
 const firestore = firebase.firestore()
 
-export function createUserWithEmailAndPassword (email, password) {
-  return auth.createUserWithEmailAndPassword(email, password)
-}
+export async function fetchUserData () {
+  const userData = { love: {}, save: {}, check: {} }
 
-export async function fetchSignInMethodsForEmail (email) {
   try {
-    const signInMethods = await auth.fetchSignInMethodsForEmail(email)
-    if (
-      signInMethods.includes(
-        firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
-      )
-    ) {
-    }
-    if (
-      signInMethods.includes(
-        firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
-      )
-    ) {
-    }
+    const docs = await firestore
+      .collection('users')
+      .doc(auth.currentUser.uid)
+      .collection('data')
+      .get()
+
+    docs.forEach(doc => {
+      userData[doc.id] = doc.data()
+    })
+
+    return userData
   } catch {
     throw new Error()
   }
 }
+
+// export function createUserWithEmailAndPassword (email, password) {
+//   return auth.createUserWithEmailAndPassword(email, password)
+// }
+
+// export async function fetchSignInMethodsForEmail (email) {
+//   try {
+//     const signInMethods = await auth.fetchSignInMethodsForEmail(email)
+//     if (
+//       signInMethods.includes(
+//         firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
+//       )
+//     ) {
+//     }
+//     if (
+//       signInMethods.includes(
+//         firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+//       )
+//     ) {
+//     }
+//   } catch {
+//     throw new Error()
+//   }
+// }
 
 export function isSignInWithEmailLink (href) {
   if (auth.isSignInWithEmailLink(href)) {
@@ -65,9 +86,9 @@ export function sendSignInLinkToEmail (email) {
   return auth.sendSignInLinkToEmail(email, actionCodeSettings)
 }
 
-export function signInWithEmailAndPassword (email, password) {
-  return auth.signInWithEmailAndPassword(email, password)
-}
+// export function signInWithEmailAndPassword (email, password) {
+//   return auth.signInWithEmailAndPassword(email, password)
+// }
 
 export async function signInWithEmailLink (email, href) {
   try {
@@ -82,13 +103,13 @@ export function signOut () {
   return auth.signOut()
 }
 
-export function sendPasswordResetEmail (email) {
-  return auth.sendPasswordResetEmail(email)
-}
+// export function sendPasswordResetEmail (email) {
+//   return auth.sendPasswordResetEmail(email)
+// }
 
-export function updatePassword (password) {
-  return auth.currentUser.updatePassword(password)
-}
+// export function updatePassword (password) {
+//   return auth.currentUser.updatePassword(password)
+// }
 
 export async function createCollection (collection) {
   const { name, category, level, urls, tags } = collection
@@ -157,25 +178,6 @@ export async function fetchCollection (id) {
       return collection
     }
     throw new Error()
-  } catch {
-    throw new Error()
-  }
-}
-
-export async function fetchUserData () {
-  const userData = { love: {}, save: {}, check: {} }
-
-  try {
-    const docs = await firestore
-      .collection('users')
-      .doc(auth.currentUser.uid)
-      .collection('data')
-      .get()
-    docs.forEach(doc => {
-      userData[doc.id] = doc.data()
-    })
-
-    return userData
   } catch {
     throw new Error()
   }
@@ -264,7 +266,8 @@ const id = firestore.collection('collections').doc().id
 const session = Date.now() + ''
 let index = 0
 
-import('firebase/storage')
+// eslint-disable-next-line
+import 'firebase/storage'
 
 export async function uploadScreenRecordings (events) {
   try {

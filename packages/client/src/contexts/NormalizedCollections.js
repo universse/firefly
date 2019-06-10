@@ -8,7 +8,7 @@ export default function NormalizedCollections ({ children }) {
   const [normalizedCollections, setNormalizedCollections] = useState()
 
   useEffect(() => {
-    import(`data/${NormalizedCollectionsFilename}.json`).then(
+    import(/* webpackMode: "eager" */ `data/${NormalizedCollectionsFilename}.json`).then(
       ({ default: data }) => setNormalizedCollections(data)
     )
   }, [])
