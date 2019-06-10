@@ -106,7 +106,7 @@ export default function CollectionTemplate ({
                           id,
                           action: e.currentTarget.textContent
                         })
-                        navigator.share({ title: name, url: location.href })
+                        navigator.share({ text: name, url: location.href })
                       }}
                     >
                       <Share />
