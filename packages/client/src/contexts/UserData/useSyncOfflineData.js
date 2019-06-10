@@ -58,5 +58,5 @@ export default function useSyncOfflineData (user) {
     })
   }, [startSyncing, stopSyncing])
 
-  useInterval(syncOfflineQueue, shouldSync ? 10000 : null)
+  useInterval(syncOfflineQueue, shouldSync ? 10000 : null, true)
 }
