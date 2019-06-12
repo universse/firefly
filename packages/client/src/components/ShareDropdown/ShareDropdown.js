@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { IconButton, OutboundLink } from 'components/common'
+import { OutboundLink } from 'components/common'
 import { Share } from 'icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import { createFacebookShareURL, createTwitterShareURL } from './utils'
@@ -21,13 +21,13 @@ export default function ShareDropdown ({ name }) {
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
-      <IconButton
+      <summary
         aria-label={createActionLabel('share', name)}
-        as='summary'
+        className='IconButton'
         {...summaryProps}
       >
         <Share />
-      </IconButton>
+      </summary>
       <div className='Menu' {...menuProps}>
         <button
           aria-label='Sign out'

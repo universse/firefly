@@ -6,7 +6,7 @@ import { DifficultyLevels } from 'common'
 import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
-import { ActionBar, Category, Difficulty, IconButton } from 'components/common'
+import { ActionBar, Category, Difficulty } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { screens } from 'constants/Styles'
 import { CollectionType } from 'constants/Types'
@@ -106,21 +106,25 @@ function Collection ({
             <Tags tags={tags} />
           </div>
           <ActionBar>
-            <IconButton
+            <button
               aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
+              className='IconButton'
               onClick={onActionClick}
+              type='button'
               value={id}
             >
               <Save filled={isSaved} />
-            </IconButton>
+            </button>
             {/* v3 */}
-            {/* <IconButton
+            <button
               aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
+              className='IconButton'
               onClick={onActionClick}
+              type='button'
               value={id}
             >
               <Heart filled={isLoved} />
-            </IconButton> */}
+            </button>
           </ActionBar>
         </div>
       </CollectionWrapper>

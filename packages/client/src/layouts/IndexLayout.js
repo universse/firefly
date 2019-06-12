@@ -9,7 +9,7 @@ import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
-import { FABDesktop, IconButton, Sidebar } from 'components/common'
+import { FABDesktop, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
@@ -27,12 +27,14 @@ export default function IndexLayout ({ category, children, location }) {
 
   const actions = useMemo(
     () => (
-      <IconButton
+      <button
         aria-label='Filter Collections by Tags'
+        className='IconButton'
         onClick={() => setActiveModalType(ModalTypes.MOBILE_FILTER)}
+        type='button'
       >
         <Filter />
-      </IconButton>
+      </button>
     ),
     [setActiveModalType]
   )

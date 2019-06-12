@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { IconButton } from 'components/common'
 import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'icons'
 import { screens } from 'constants/Styles'
@@ -55,13 +54,14 @@ function Snackbar ({
             </div>
           )}
           <div>
-            <IconButton
+            <button
               aria-label='Dismiss Message'
-              light
+              className='IconButton light'
               onClick={dismissSnackbar}
+              type='button'
             >
               <Cross />
-            </IconButton>
+            </button>
           </div>
         </div>
       </Surface>

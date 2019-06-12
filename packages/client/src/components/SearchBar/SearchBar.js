@@ -5,7 +5,6 @@ import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
 import useSearch from './useSearch'
-import { IconButton } from 'components/common'
 import { Cross } from 'icons'
 import { DefaultResultBox, DefaultRoot } from './styled'
 import { createCollectionPath } from '../../../gatsby/utils'
@@ -71,12 +70,14 @@ function SearchBar ({
             />
             {searchInput && !isLoading && (
               <ClearSearchWrapper>
-                <IconButton
+                <button
                   aria-label='Clear Search Field'
+                  className='IconButton'
                   onClick={() => setSearchInput('')}
+                  type='button'
                 >
                   <Cross small />
-                </IconButton>
+                </button>
               </ClearSearchWrapper>
             )}
           </div>

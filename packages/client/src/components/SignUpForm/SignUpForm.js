@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
 import { ErrorMessage, Input } from './styled'
-import { IconButton, PrimaryButton } from 'components/common'
+import { PrimaryButton } from 'components/common'
 import { Cross } from 'icons'
 import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
@@ -137,8 +137,9 @@ function SignUpForm () {
           top: 1.5rem;
         `}
       >
-        <IconButton
+        <button
           aria-label='Close Modal'
+          className='IconButton'
           onClick={() => {
             setActiveModalType(null)
             setEmail('')
@@ -146,9 +147,10 @@ function SignUpForm () {
             setIsloading(false)
             setHasError(false)
           }}
+          type='button'
         >
           <Cross />
-        </IconButton>
+        </button>
       </div>
     </ReactModal>
   )

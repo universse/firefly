@@ -5,7 +5,6 @@ import CreateCollection from 'components/CreateCollection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
-import { IconButton } from 'components/common'
 import { Back } from 'icons'
 import AriaLabels from 'constants/AriaLabels'
 import {
@@ -22,9 +21,14 @@ export default function CreatePage () {
       <SEO title='Create Collection' />
       <MobileHeader
         navIcon={
-          <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
+          <button
+            aria-label={AriaLabels.GO_BACK}
+            className='IconButton'
+            onClick={goBack}
+            type='button'
+          >
             <Back />
-          </IconButton>
+          </button>
         }
         shadow
         title='Create'

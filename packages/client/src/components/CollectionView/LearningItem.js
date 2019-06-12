@@ -2,7 +2,6 @@ import React, { memo, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { IconButton } from 'components/common'
 import { Check } from 'icons'
 import { LinkTitle } from './styled'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
@@ -72,16 +71,18 @@ function LearningItem ({ id, url, title, type, collectionId, isChecked }) {
             }
           `}
         >
-          <IconButton
+          <button
             aria-label={createActionLabel(
               isChecked ? 'check' : 'uncheck',
               title
             )}
+            className='IconButton'
             onClick={onActionClick}
+            type='button'
             value={id}
           >
             <Check filled={isChecked} />
-          </IconButton>
+          </button>
         </div>
         {/* TODO: author */}
         <div

@@ -153,8 +153,6 @@ export function FABDesktop (props) {
   )
 }
 
-export { default as IconButton } from './IconButton'
-
 export function Input (props) {
   return (
     <input

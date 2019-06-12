@@ -7,7 +7,7 @@ import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
-import { FABDesktop, IconButton } from 'components/common'
+import { FABDesktop } from 'components/common'
 import { Back, Heart, Save, Share, Suggest } from 'icons'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataContext } from 'contexts/UserData'
@@ -78,29 +78,34 @@ export default function CollectionTemplate ({
             actions={
               collection && (
                 <>
-                  <IconButton
+                  <button
                     aria-label={createActionLabel(
                       isSaved ? 'unsave' : 'save',
                       name
                     )}
+                    className='IconButton'
                     onClick={onActionClick}
+                    type='button'
                     value={id}
                   >
                     <Save filled={isSaved} />
-                  </IconButton>
-                  <IconButton
+                  </button>
+                  <button
                     aria-label={createActionLabel(
                       isLoved ? 'unlove' : 'love',
                       name
                     )}
+                    className='IconButton'
                     onClick={onActionClick}
+                    type='button'
                     value={id}
                   >
                     <Heart filled={isLoved} />
-                  </IconButton>
+                  </button>
                   {navigator.share ? (
-                    <IconButton
+                    <button
                       aria-label='Share'
+                      className='IconButton'
                       onClick={e => {
                         logClickAction({
                           id,
@@ -108,9 +113,10 @@ export default function CollectionTemplate ({
                         })
                         navigator.share({ text: name, url: location.href })
                       }}
+                      type='button'
                     >
                       <Share />
-                    </IconButton>
+                    </button>
                   ) : (
                     <ShareDropdown name={name} />
                   )}
@@ -118,9 +124,14 @@ export default function CollectionTemplate ({
               )
             }
             navIcon={
-              <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
+              <button
+                aria-label={AriaLabels.GO_BACK}
+                className='IconButton'
+                onClick={goBack}
+                type='button'
+              >
                 <Back />
-              </IconButton>
+              </button>
             }
             shadow
             title='Collection'

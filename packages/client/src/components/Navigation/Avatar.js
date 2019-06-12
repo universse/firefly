@@ -2,7 +2,7 @@ import React from 'react'
 import localforage from 'localforage'
 import { Link } from 'gatsby'
 
-import { IconButton, OutboundLink } from 'components/common'
+import { OutboundLink } from 'components/common'
 import { User } from 'icons'
 import LocalStorage from 'constants/LocalStorage'
 import useDropdownMenu from 'hooks/useDropdownMenu'
@@ -19,9 +19,13 @@ export default function Avatar () {
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
-      <IconButton aria-label='Open User Menu' as='summary' {...summaryProps}>
+      <summary
+        aria-label='Open User Menu'
+        className='IconButton'
+        {...summaryProps}
+      >
         <User />
-      </IconButton>
+      </summary>
       <div className='Menu' {...menuProps}>
         <button
           aria-label='Sign out'

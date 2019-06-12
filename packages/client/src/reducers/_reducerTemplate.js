@@ -1,5 +1,7 @@
 import reducerRegistry from '../reducerRegistry'
 
+const reducerName = 'NAME'
+
 function reducer (state = null, action) {
   switch (action.type) {
     default:
@@ -7,4 +9,4 @@ function reducer (state = null, action) {
   }
 }
 
-reducerRegistry.register('NAME', reducer)
+reducerRegistry.register(reducerName, reducer)

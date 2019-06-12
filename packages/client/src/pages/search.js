@@ -5,12 +5,7 @@ import { css } from '@emotion/core'
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
 import { Back, Search } from 'icons'
-import {
-  ClearSearchWrapper,
-  IconButton,
-  Input,
-  Result
-} from 'components/common'
+import { ClearSearchWrapper, Input, Result } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
 import {
@@ -53,9 +48,14 @@ export default function SearchPage ({ location }) {
               top: 2rem;
             `}
           >
-            <IconButton aria-label={AriaLabels.GO_BACK} onClick={goBack}>
+            <button
+              aria-label={AriaLabels.GO_BACK}
+              className='IconButton'
+              onClick={goBack}
+              type='button'
+            >
               <Back />
-            </IconButton>
+            </button>
           </div>
         )}
         <div

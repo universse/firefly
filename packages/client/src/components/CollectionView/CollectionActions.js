@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { ActionBar, IconButton, ProgressBar } from 'components/common'
+import { ActionBar, ProgressBar } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Heart, Save } from 'icons'
 import { createActionLabel } from 'utils/ariaLabelUtils'
@@ -56,21 +56,25 @@ export default function CollectionActions ({
         </div>
       </div>
       <ActionBar>
-        <IconButton
+        <button
           aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
+          className='IconButton'
           onClick={onActionClick}
+          type='button'
           value={id}
         >
           <Save filled={isSaved} />
-        </IconButton>
+        </button>
         {/* v3 */}
-        {/* <IconButton
+        {/* <button
           aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
+          className='IconButton'
           onClick={onActionClick}
+          type='button'
           value={id}
         >
           <Heart filled={isLoved} />
-        </IconButton> */}
+        </button> */}
       </ActionBar>
     </div>
   )

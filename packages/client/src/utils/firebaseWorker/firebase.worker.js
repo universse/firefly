@@ -1,13 +1,14 @@
 import firebase from 'firebase/app'
 
 import 'firebase/auth'
+import 'firebase/firestore'
 
 import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 
 firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
 const actionCodeSettings = {
-  url: `http://localhost:3000/welcome`,
+  url: `${process.env.GATSBY_ORIGIN}/welcome`,
   handleCodeInApp: true
 }
 
@@ -26,30 +27,6 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
         payload: null
       })
 })
-
-// eslint-disable-next-line
-import 'firebase/firestore'
-const firestore = firebase.firestore()
-
-export async function fetchUserData () {
-  const userData = { love: {}, save: {}, check: {} }
-
-  try {
-    const docs = await firestore
-      .collection('users')
-      .doc(auth.currentUser.uid)
-      .collection('data')
-      .get()
-
-    docs.forEach(doc => {
-      userData[doc.id] = doc.data()
-    })
-
-    return userData
-  } catch {
-    throw new Error()
-  }
-}
 
 // export function createUserWithEmailAndPassword (email, password) {
 //   return auth.createUserWithEmailAndPassword(email, password)
@@ -110,6 +87,8 @@ export function signOut () {
 // export function updatePassword (password) {
 //   return auth.currentUser.updatePassword(password)
 // }
+
+const firestore = firebase.firestore()
 
 export async function createCollection (collection) {
   const { name, category, level, urls, tags } = collection
@@ -178,6 +157,26 @@ export async function fetchCollection (id) {
       return collection
     }
     throw new Error()
+  } catch {
+    throw new Error()
+  }
+}
+
+export async function fetchUserData () {
+  const userData = { love: {}, save: {}, check: {} }
+
+  try {
+    const docs = await firestore
+      .collection('users')
+      .doc(auth.currentUser.uid)
+      .collection('data')
+      .get()
+
+    docs.forEach(doc => {
+      userData[doc.id] = doc.data()
+    })
+
+    return userData
   } catch {
     throw new Error()
   }
