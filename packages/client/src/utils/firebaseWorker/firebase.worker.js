@@ -90,44 +90,45 @@ export function signOut () {
 
 const firestore = firebase.firestore()
 
-export async function createCollection (collection) {
-  const { name, category, level, urls, tags } = collection
+// TODO no short form
+// export async function createCollection (collection) {
+//   const { name, category, level, urls, tags } = collection
 
-  const newCollection = {
-    n: name,
-    c: category,
-    l: level,
-    us: urls.map(({ title, type, url, description }) => ({
-      ti: title,
-      ty: type,
-      u: url,
-      d: description
-    })),
-    t: tags,
-    s: ['']
-  }
+//   const newCollection = {
+//     n: name,
+//     c: category,
+//     l: level,
+//     us: urls.map(({ title, type, url, description }) => ({
+//       ti: title,
+//       ty: type,
+//       u: url,
+//       d: description
+//     })),
+//     t: tags,
+//     s: ['']
+//   }
 
-  const batch = firestore.batch()
-  const collectionDoc = firestore.collection('collections').doc()
+//   const batch = firestore.batch()
+//   const collectionDoc = firestore.collection('collections').doc()
 
-  newCollection.us.forEach((url, i) => {
-    const urlDoc = firestore.collection('urls').doc()
-    const id = urlDoc.id
-    batch.set(urlDoc, url)
-    newCollection.us[i] = id
-    collection.urls[i].id = id
-  })
+//   newCollection.us.forEach((url, i) => {
+//     const urlDoc = firestore.collection('urls').doc()
+//     const id = urlDoc.id
+//     batch.set(urlDoc, url)
+//     newCollection.us[i] = id
+//     collection.urls[i].id = id
+//   })
 
-  batch.set(collectionDoc, newCollection)
+//   batch.set(collectionDoc, newCollection)
 
-  try {
-    await batch.commit()
-    collection.id = collectionDoc.id.toLowerCase()
-    return collection
-  } catch {
-    throw new Error()
-  }
-}
+//   try {
+//     await batch.commit()
+//     collection.id = collectionDoc.id.toLowerCase()
+//     return collection
+//   } catch {
+//     throw new Error()
+//   }
+// }
 
 const cache = {}
 

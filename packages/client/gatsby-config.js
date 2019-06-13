@@ -54,22 +54,22 @@ module.exports = {
           {
             type: 'urls',
             collection: 'urls',
-            map: ({ ti, ty, u, c }) => ({
-              title: ti,
-              url: u,
-              type: ItemTypes[ty]
+            map: ({ title, type, url, collectionId }) => ({
+              title: title,
+              url: url,
+              type: ItemTypes[type]
             })
           },
           {
             type: 'collections',
             collection: 'collections',
-            map: ({ c, l, n, s, t, us }) => ({
-              category: Categories[c],
-              level: l,
-              name: n,
-              itemCount: us.length,
-              tags: t,
-              urls___NODE: us.map(id => id)
+            map: ({ category, level, name, suggestions, tags, urls }) => ({
+              category: Categories[category],
+              level,
+              name,
+              tags,
+              itemCount: urls.length,
+              urls___NODE: urls.map(id => id)
             })
           }
         ]

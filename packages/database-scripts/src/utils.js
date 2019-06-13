@@ -1,23 +1,16 @@
 const { Categories, ItemTypes } = require('common')
 
-function parseCollection ({ name, category, level, tags, urlIds }) {
+function parseCollection ({ category, ...props }) {
   return {
-    n: name,
-    c: Categories.indexOf(category),
-    l: level,
-    us: urlIds,
-    t: tags
+    ...props,
+    category: Categories.indexOf(category)
   }
 }
 
-function parseUrl ({ url, title, description, image, type, collectionId }) {
+function parseUrl ({ type, ...props }) {
   return {
-    u: url,
-    ti: title,
-    d: description,
-    i: image,
-    ty: ItemTypes.indexOf(type),
-    c: collectionId
+    ...props,
+    type: ItemTypes.indexOf(type)
   }
 }
 
