@@ -20,7 +20,8 @@ $accent500: #007bfe;
   --colors-gray800: rgba(0, 0, 0, 0.7);
   --colors-gray900: rgba(0, 0, 0, 0.87);
   --colors-success: #13ae36;
-  --focus: 0 0 0 4px #{rgba($accent500, 0.6)};
+  --input-focused: 0 0 0 4px #{rgba($accent500, 0.6)};
+  --input-invalid: 0 0 0 4px rgba(218, 68, 83, 0.9);
   --gradient-left: linear-gradient(
     to left,
     rgba(255, 255, 255, 0) 0%,

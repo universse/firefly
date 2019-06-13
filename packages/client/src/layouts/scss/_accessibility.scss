@@ -1,7 +1,7 @@
 input[type="text"],
 input[type="email"] {
   &:focus {
-    box-shadow: var(--focus);
+    box-shadow: var(--input-focused);
   }
 }
 
@@ -20,7 +20,7 @@ textarea:not([disabled]),
   }
 
   body.keyboard-in-use &:focus {
-    box-shadow: var(--focus);
+    box-shadow: var(--input-focused);
   }
 }
 
