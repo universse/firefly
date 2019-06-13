@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { graphql, navigate } from 'gatsby'
+import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
-import { FABDesktop } from 'components/common'
+// import { FABDesktop } from 'components/common'
 import { Back, Heart, Save, Share, Suggest } from 'icons'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
+// import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import AriaLabels from 'constants/AriaLabels'
@@ -22,52 +22,54 @@ import {
 import { CollectionViewType } from 'constants/Types'
 import { logClickAction } from 'utils/amplitudeUtils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-import firebaseWorker from 'utils/firebaseWorker'
+// import firebaseWorker from 'utils/firebaseWorker'
 import goBack from 'utils/goBack'
-import parseCollectionData from 'utils/parseCollectionData'
-import { getParamFromPathname } from 'utils/pathnameUtils'
-import { createCollectionPath } from '../../gatsby/utils'
+// import parseCollectionData from 'utils/parseCollectionData'
+// import { getParamFromPathname } from 'utils/pathnameUtils'
+// import { createCollectionPath } from '../../gatsby/utils'
 
 export default function CollectionTemplate ({
   data: { collections },
   location
 }) {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const [collection, setCollection] = useState(
-    () => collections || (location.state && location.state.collection)
-  )
+  // const normalizedCollections = useContext(NormalizedCollectionsContext)
+  // const [collection, setCollection] = useState(
+  //   () => collections || (location.state && location.state.collection)
+  // )
 
-  const [isLoading, setIsLoading] = useState(!collection)
-  const [hasError, setHasError] = useState(false)
+  // const [isLoading, setIsLoading] = useState(!collection)
+  // const [hasError, setHasError] = useState(false)
 
   const userData = useContext(UserDataContext)
   const onActionClick = useContext(UserDataDispatchContext)
 
-  const { id, name } = collection || {
-    id: getParamFromPathname(location.pathname)
-  }
+  const { id, name } = collections
+
+  // const { id, name } = collection || {
+  //   id: getParamFromPathname(location.pathname)
+  // }
 
   const { check, love, save } = userData || {}
   const isSaved = save && !!save[id]
   const isLoved = love && !!love[id]
 
-  useEffect(() => {
-    if (!normalizedCollections || collection) {
-      return
-    }
+  // useEffect(() => {
+  //   if (!normalizedCollections || collection) {
+  //     return
+  //   }
 
-    if (normalizedCollections[id.toLowerCase()]) {
-      const { name } = normalizedCollections[id.toLowerCase()]
-      navigate(createCollectionPath({ id, name }), { replace: true })
-      return
-    }
+  //   if (normalizedCollections[id.toLowerCase()]) {
+  //     const { name } = normalizedCollections[id.toLowerCase()]
+  //     navigate(createCollectionPath({ id, name }), { replace: true })
+  //     return
+  //   }
 
-    firebaseWorker
-      .fetchCollection(id)
-      .then(collection => setCollection(parseCollectionData(collection)))
-      .catch(() => setHasError(true))
-      .finally(() => setIsLoading(false))
-  }, [collection, id, normalizedCollections])
+  //   firebaseWorker
+  //     .fetchCollection(id)
+  //     .then(collection => setCollection(parseCollectionData(collection)))
+  //     .catch(() => setHasError(true))
+  //     .finally(() => setIsLoading(false))
+  // }, [collection, id, normalizedCollections])
 
   return (
     <>
@@ -76,7 +78,7 @@ export default function CollectionTemplate ({
         <>
           <MobileHeader
             actions={
-              collection && (
+              collections && (
                 <>
                   <button
                     aria-label={createActionLabel(
@@ -163,16 +165,14 @@ export default function CollectionTemplate ({
                 }
               `}
             >
-              {collection && (
+              {collections && (
                 <CollectionView
                   check={check}
-                  collection={collection}
+                  collection={collections}
                   isLoved={isLoved}
                   isSaved={isSaved}
                 />
               )}
-              {hasError && 'error'}
-              {isLoading && 'loading'}
             </div>
             {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
