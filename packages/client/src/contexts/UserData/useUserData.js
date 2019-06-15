@@ -23,9 +23,13 @@ function reducer (_, { type, payload }) {
         )
 
       case 'load-database':
-        Object.keys(payload).forEach(
-          key => (draft[key] = { ...payload[key], ...draft[key] })
+        const { save, ...rest } = payload
+        Object.keys(rest).forEach(
+          key => (draft[key] = { ...rest[key], ...draft[key] })
         )
+        Object.keys(save).forEach(id => {
+          draft.save[id] = save[id]
+        })
         break
 
       case 'click':
