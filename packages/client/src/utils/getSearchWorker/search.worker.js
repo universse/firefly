@@ -11,6 +11,6 @@ export async function search (input) {
   }
 
   return matchSorter(searchData, input, {
-    keys: ['name']
+    keys: ['name', 'tags']
   })
 }

@@ -6,6 +6,17 @@ details.DropdownMenu {
     display: flex;
     position: relative;
 
+    &.Exposed {
+      border-left: 4px solid transparent;
+      color: var(--colors-gray800);
+      font-size: 0.875rem;
+      font-weight: 600;
+      justify-content: space-between;
+      padding-left: calc(1rem - 4px);
+      text-transform: uppercase;
+      width: 11.5rem;
+    }
+
     span {
       color: var(--colors-gray900);
       font-weight: 400;

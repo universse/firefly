@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react'
 import { navigate } from 'gatsby'
 
-import useDebouncedValue from 'hooks/useDebouncedValue'
+// import useDebouncedValue from 'hooks/useDebouncedValue'
 import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
 import getSearchWorker from 'utils/getSearchWorker'
-import { createCollectionPath } from '../../../gatsby/utils'
+import { createCollectionPath } from '../../gatsby/utils'
 
-export default function useSearch (initialSearchInput, initialIsLoading) {
+export default function useSearch (
+  initialSearchInput = '',
+  initialIsLoading = false
+) {
   const [searchInput, setSearchInput] = useState(initialSearchInput)
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(initialIsLoading)
   const [isTyping, setIsTyping] = useState(false)
-  const debouncedSearchInput = useDebouncedValue(searchInput, 350)
+  // const debouncedSearchInput = useDebouncedValue(searchInput, 100)
 
   const handleSelect = ({ id, name }) => {
     if (name) {
@@ -33,18 +36,19 @@ export default function useSearch (initialSearchInput, initialIsLoading) {
   }
 
   useEffect(() => {
-    if (debouncedSearchInput) {
+    if (searchInput) {
+      let isFresh = true
       setIsTyping(false)
       setIsLoading(true)
 
       getSearchWorker()
-        .search(debouncedSearchInput)
-        .then(setResults)
+        .search(searchInput)
+        .then(results => isFresh && setResults(results))
         .finally(() => setIsLoading(false))
-    } else {
-      setResults([])
+
+      return () => (isFresh = false)
     }
-  }, [debouncedSearchInput])
+  }, [searchInput])
 
   return {
     handleSelect,

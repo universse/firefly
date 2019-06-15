@@ -39,7 +39,7 @@ ActionBar.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-export const Category = function (props) {
+export function Category (props) {
   return (
     <Link
       css={css`
@@ -58,25 +58,7 @@ export const Category = function (props) {
   )
 }
 
-export function ClearSearchWrapper (props) {
-  return (
-    <div
-      css={css`
-        position: absolute;
-        right: 0.25rem;
-        top: -0.25rem;
-
-        ${screens.desktop} {
-          right: 0.5rem;
-          top: 0;
-        }
-      `}
-      {...props}
-    />
-  )
-}
-
-export const Difficulty = function (props) {
+export function Difficulty (props) {
   return (
     <span
       css={css`
@@ -153,36 +135,6 @@ export function FABDesktop (props) {
   )
 }
 
-export function Input (props) {
-  return (
-    <input
-      autoComplete='off'
-      css={css`
-        background-color: var(--colors-gray300);
-        border-radius: 1.25rem;
-        color: var(--colors-gray900);
-        font-size: 0.9375rem;
-        height: 2.5rem;
-        padding-left: 3.25rem;
-        width: 100%;
-
-        ::placeholder {
-          color: var(--colors-gray700);
-          opacity: 1;
-        }
-
-        ${screens.desktop} {
-          border-radius: 1.5rem;
-          font-size: 1.125rem;
-          height: 3rem;
-        }
-      `}
-      type='text'
-      {...props}
-    />
-  )
-}
-
 export { OutboundLink }
 
 export function PrimaryButton ({ large = false, width, ...props }) {
@@ -214,7 +166,7 @@ PrimaryButton.propTypes = {
   width: PropTypes.string
 }
 
-export const ProgressBar = function ProgressBar ({ percentage, width }) {
+export function ProgressBar ({ percentage, width }) {
   return (
     <div
       css={css`
@@ -239,36 +191,6 @@ export const ProgressBar = function ProgressBar ({ percentage, width }) {
 ProgressBar.propTypes = {
   percentage: PropTypes.number.isRequired,
   width: PropTypes.string
-}
-
-export function Result ({ as: Tag = Link, isHighlighted = false, ...props }) {
-  return (
-    <Tag
-      css={css`
-        color: var(--colors-gray900);
-        display: flex;
-        font-size: 1rem;
-        line-height: 2.5rem;
-        padding-left: 1rem;
-
-        &:hover {
-          color: var(--colors-brand500);
-          text-decoration: underline;
-        }
-
-        ${screens.desktop} {
-          font-size: 1.125rem;
-          line-height: 3rem;
-        }
-      `}
-      {...props}
-    />
-  )
-}
-
-Result.propTypes = {
-  as: PropTypes.oneOf(['span', Link]),
-  isHighlighted: PropTypes.bool
 }
 
 export function Sidebar ({ isScrollingDown = false, ...props }) {

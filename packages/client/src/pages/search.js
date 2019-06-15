@@ -2,10 +2,9 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
+import SearchBar from 'components/SearchBar'
 import { Back, Search } from 'icons'
-import { ClearSearchWrapper, Input, Result } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
 import {
@@ -87,12 +86,8 @@ export default function SearchPage ({ location }) {
             <Search />
           </div>
           <SearchBar
-            ClearSearchWrapper={ClearSearchWrapper}
-            controlledProps={{ isOpen: true }}
             initialIsLoading={initialIsLoading}
             initialSearchInput={initialSearchInput}
-            Input={Input}
-            Result={Result}
           />
         </div>
       </main>

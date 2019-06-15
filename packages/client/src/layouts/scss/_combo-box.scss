@@ -1,0 +1,100 @@
+div.ComboBox {
+  & > div {
+    position: relative;
+    z-index: 1;
+
+    input {
+      background-color: var(--colors-gray300);
+      border-radius: 1.25rem;
+      color: var(--colors-gray900);
+      font-size: 0.9375rem;
+      height: 2.5rem;
+      padding-left: 1rem;
+      width: 100%;
+
+      ::placeholder {
+        color: var(--colors-gray700);
+        opacity: 1;
+      }
+    }
+
+    div {
+      position: absolute;
+      right: 0.25rem;
+      top: -0.25rem;
+    }
+  }
+
+  ul {
+    &.Menu {
+      background-color: var(--colors-gray300);
+      border-bottom-left-radius: 1.25rem;
+      border-bottom-right-radius: 1.25rem;
+      overflow: auto;
+      padding: 1.25rem 0 0 0;
+      position: absolute;
+      top: 1.25rem;
+      width: 100%;
+    }
+
+    a,
+    button,
+    span {
+      color: var(--colors-gray900);
+      display: flex;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      line-height: 2.5rem;
+      padding: 0 0 0 1rem;
+      width: 100%;
+
+      &.highlighted {
+        background-color: #fff;
+      }
+    }
+  }
+
+  &.small {
+    position: relative;
+    width: 27rem;
+  }
+
+  &.large {
+    & > div {
+      input {
+        padding-left: 3.25rem;
+
+        @media #{$desktop} {
+          border-radius: 1.5rem;
+          font-size: 1.125rem;
+          height: 3rem;
+        }
+      }
+
+      div {
+        @media #{$desktop} {
+          right: 0.5rem;
+          top: 0;
+        }
+      }
+    }
+
+    ul {
+      a,
+      span {
+        font-size: 1rem;
+        font-weight: 400;
+        padding-left: 1rem;
+
+        &:hover {
+          color: var(--colors-brand500);
+        }
+
+        @media #{$desktop} {
+          font-size: 1.125rem;
+          line-height: 3rem;
+        }
+      }
+    }
+  }
+}

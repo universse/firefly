@@ -2,18 +2,10 @@ import React, { memo } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import SearchBar from 'components/SearchBar'
+import SearchBar from './SearchBar'
 import Navigation from 'components/Navigation'
 import { Logo } from 'icons'
-import {
-  ClearSearchWrapper,
-  HeaderTag,
-  HeaderWrapper,
-  Input,
-  Result,
-  ResultBox,
-  Root
-} from './styled'
+import { HeaderTag, HeaderWrapper } from './styled'
 
 function Header () {
   return (
@@ -40,14 +32,7 @@ function Header () {
               <Logo />
             </Link>
           </div>
-          <SearchBar
-            ClearSearchWrapper={ClearSearchWrapper}
-            Input={Input}
-            Result={Result}
-            ResultBox={ResultBox}
-            resultCount={10}
-            Root={Root}
-          />
+          <SearchBar maxResultCount={10} />
         </div>
         <Navigation />
       </HeaderWrapper>
