@@ -29,7 +29,7 @@ export default function Avatar () {
       <div className='Menu' {...menuProps}>
         <button
           aria-label='Sign out'
-          className={`${highlightedIndex === 0 ? 'highlighted' : ''}`}
+          {...highlightedIndex === 0 && { className: 'highlighted' }}
           onClick={() => {
             firebaseWorker.signOut().then(() => {
               if (window.amplitude) {
@@ -47,14 +47,14 @@ export default function Avatar () {
           Sign Out
         </button>
         <OutboundLink
-          className={`${highlightedIndex === 1 ? 'highlighted' : ''}`}
+          {...highlightedIndex === 1 && { className: 'highlighted' }}
           href='https://www.google.com'
           {...getMenuItemProps(1)}
         >
           Sign Out
         </OutboundLink>
         <Link
-          className={`${highlightedIndex === 2 ? 'highlighted' : ''}`}
+          {...highlightedIndex === 2 && { className: 'highlighted' }}
           to='/my-library'
           {...getMenuItemProps(2)}
         >

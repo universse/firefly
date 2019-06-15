@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
+import { css } from '@emotion/core'
 
-import { ToggleButton } from './styled'
 import { URLParamsContext } from 'contexts/URLParams'
+import { ChevronDown } from 'icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
@@ -33,10 +34,18 @@ export default function SortByDifficulty () {
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
-      <ToggleButton aria-label='Sort by' {...summaryProps}>
+      <summary aria-label='Sort by' className='Exposed' {...summaryProps}>
         <span>Sort By: </span>
         {SortOptions[selectedIndex].label}
-      </ToggleButton>
+        <div
+          css={css`
+            color: var(--colors-gray500);
+            height: 1.5rem;
+          `}
+        >
+          <ChevronDown />
+        </div>
+      </summary>
       <div className='Menu' {...menuProps}>
         {SortOptions.map((option, index) => {
           const classes = ['uppercase']
