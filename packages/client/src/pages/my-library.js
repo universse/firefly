@@ -113,7 +113,6 @@ export default function MyLibraryPage () {
 
               ${screens.nonMobile} {
                 border-radius: 8px;
-                box-shadow: var(--shadows-01);
               }
             `}
           >

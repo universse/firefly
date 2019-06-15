@@ -24,9 +24,9 @@ export function CollectionTitle ({ id, name }) {
     >
       <h3
         css={css`
-          color: var(--colors-gray900);
+          color: var(--colors-gray800);
           font-size: 1.125rem;
-          font-weight: 500;
+          font-weight: 600;
           line-height: 1.75rem;
         `}
       >
@@ -54,8 +54,8 @@ export function CollectionWrapper (props) {
         padding: 0.5rem 0 0.25rem;
 
         ${screens.desktop} {
-          margin: 0;
-          padding: 0.75rem 2rem 0.25rem;
+          margin: 0 2rem;
+          padding: 0.75rem 0 0.25rem;
         }
       `}
       {...props}

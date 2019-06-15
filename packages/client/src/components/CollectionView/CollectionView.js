@@ -47,7 +47,6 @@ export default function CollectionView ({
 
           ${screens.nonMobile} {
             border-radius: 8px;
-            box-shadow: var(--shadows-01);
             margin-bottom: 2rem;
           }
 
@@ -86,7 +85,6 @@ export default function CollectionView ({
 
           ${screens.nonMobile} {
             border-radius: 8px;
-            box-shadow: var(--shadows-01);
           }
         `}
       >

@@ -18,7 +18,6 @@ const listStyle = css`
 
   ${screens.desktop} {
     border-radius: 8px;
-    box-shadow: var(--shadows-01);
   }
 
   & > ul:not(:empty) {

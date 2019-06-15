@@ -33,7 +33,7 @@ export function Input (props) {
         }
 
         &:invalid {
-          box-shadow: 0 0 0 4px rgba(218, 68, 83, 0.9);
+          box-shadow: var(--input-invalid);
         }
       `}
       type='email'
