@@ -2,7 +2,8 @@ const XLSX = require('xlsx')
 const metascraper = require('metascraper')([
   require('metascraper-title')(),
   require('metascraper-description')(),
-  require('metascraper-image')()
+  require('metascraper-image')(),
+  require('metascraper-publisher')()
 ])
 const got = require('got')
 const { writeFileSync } = require('fs')
@@ -32,17 +33,23 @@ const processed = { collections: [] }
               if (targetUrl) {
                 const type = row[`url${i}type`]
                 const { body: html, url } = await got(targetUrl)
-                const { title, description, image } = await metascraper({
+                const {
+                  title,
+                  description,
+                  image,
+                  publisher
+                } = await metascraper({
                   html,
                   url
                 })
 
                 urls[i] = {
-                  url,
-                  title: toTitleCase(title),
                   description,
                   image,
-                  type
+                  publisher,
+                  title: toTitleCase(title),
+                  type,
+                  url
                 }
               }
             })
@@ -56,9 +63,9 @@ const processed = { collections: [] }
 
         processed.collections.push({
           _EXCEL_KEY: row.no,
-          name: toTitleCase(row.name),
           category: row.category,
           level: row.level,
+          name: toTitleCase(row.name),
           tags,
           urls
         })

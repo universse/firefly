@@ -11,7 +11,16 @@ import { UrlType } from 'constants/Types'
 import { logClickLearningResource } from 'utils/amplitudeUtils'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
-function LearningItem ({ id, url, title, type, collectionId, isChecked }) {
+function LearningItem ({
+  id,
+  collectionId,
+  image,
+  isChecked,
+  publisher,
+  title,
+  type,
+  url
+}) {
   const onActionClick = useContext(UserDataDispatchContext)
   const LinkIcon = LinkIcons[type.toUpperCase()]
 

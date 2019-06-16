@@ -44,8 +44,8 @@ processed.collections.forEach(({ id, _EXCEL_KEY, ...collection }, i) => {
     batch.set(
       urlDoc,
       parseUrl({
-        ...url,
-        collectionId
+        ...url
+        // collectionId
       })
     )
 
@@ -53,8 +53,8 @@ processed.collections.forEach(({ id, _EXCEL_KEY, ...collection }, i) => {
 
     final.urls[id] = {
       id,
-      ...url,
-      collectionId
+      ...url
+      // collectionId
     }
   })
 

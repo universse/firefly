@@ -12938,6 +12938,13 @@ metascraper-image@^5.4.3:
   dependencies:
     "@metascraper/helpers" "^5.4.3"
 
+metascraper-publisher@^5.4.3:
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/metascraper-publisher/-/metascraper-publisher-5.4.3.tgz#f440dd141ba99b8339152cc71ee5e075243bf92c"
+  integrity sha512-+PPnyLADY78bGcAHkyH1sqzgMtRG/loE6QkPsOrEccBuNjcmgo2Ebm9thsBCZV+4a9x1EKOIM8QYHHWSk7tZyw==
+  dependencies:
+    "@metascraper/helpers" "^5.4.3"
+
 metascraper-title@^5.4.3:
   version "5.4.3"
   resolved "https://registry.yarnpkg.com/metascraper-title/-/metascraper-title-5.4.3.tgz#c938f73ed1cad67c4d5d1f28d3ccf7097ffc3767"

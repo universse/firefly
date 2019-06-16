@@ -54,6 +54,7 @@ module.exports = {
           {
             type: 'urls',
             collection: 'urls',
+            // description, image, publisher, title, type, url
             map: ({ ti, ty, u, c }) => ({
               title: ti,
               url: u,
@@ -63,6 +64,7 @@ module.exports = {
           {
             type: 'collections',
             collection: 'collections',
+            // category, level, name, suggestions, tags, urls
             map: ({ c, l, n, suggestions, t, us }) => ({
               category: Categories[c],
               level: l,

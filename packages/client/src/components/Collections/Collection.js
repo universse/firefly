@@ -14,7 +14,7 @@ import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 function Collection ({
-  collection: { id, name, category, level, itemCount, tags },
+  collection: { id, category, itemCount, level, name, tags },
   isLoved,
   isSaved
 }) {

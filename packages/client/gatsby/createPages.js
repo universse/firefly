@@ -16,9 +16,9 @@ module.exports = async ({
             node {
               id
               category
+              itemCount
               level
               name
-              itemCount
               tags
             }
           }

@@ -10,6 +10,7 @@
     "metascraper": "^5.4.3",
     "metascraper-description": "^5.4.4",
     "metascraper-image": "^5.4.3",
+    "metascraper-publisher": "^5.4.3",
     "metascraper-title": "^5.4.3",
     "xlsx": "^0.14.3"
   },

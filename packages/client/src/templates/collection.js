@@ -197,16 +197,18 @@ export const query = graphql`
   query($id: String!) {
     collections(id: { eq: $id }) {
       id
-      name
       category
+      name
       level
+      tags
       urls {
         id
+        # image
+        # publisher
         title
         type
         url
       }
-      tags
     }
   }
 `

@@ -27,7 +27,7 @@ function SearchBar ({ maxResultCount = Infinity }) {
     getInputProps,
     menuProps,
     getMenuItemProps
-  } = useComboBox({ items: results, onSelect: handleSelect })
+  } = useComboBox({ onSelect: handleSelect })
 
   const totalResultCount = results.length
 
