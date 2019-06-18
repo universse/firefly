@@ -7,17 +7,16 @@ import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty } from 'components/common'
+import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { screens } from 'constants/Styles'
-import { CollectionType } from 'constants/Types'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-function Collection ({
-  collection: { id, category, itemCount, level, name, tags },
-  isLoved,
-  isSaved
-}) {
+function Collection ({ id, isLoved, isSaved }) {
+  const { category, itemCount, level, name, tags } = useContext(
+    NormalizedCollectionsContext
+  )[id]
   const onActionClick = useContext(UserDataDispatchContext)
 
   return (
@@ -70,7 +69,7 @@ function Collection ({
             <div
               css={css`
                 align-items: center;
-                color: var(--colors-gray500);
+                color: var(--colors-gray600);
                 display: flex;
                 height: 1.5rem;
                 margin-right: 0.25rem;
@@ -135,7 +134,7 @@ function Collection ({
 export default memo(Collection)
 
 Collection.propTypes = {
+  id: PropTypes.string.isRequired,
   isLoved: PropTypes.bool.isRequired,
-  isSaved: PropTypes.bool.isRequired,
-  collection: CollectionType
+  isSaved: PropTypes.bool.isRequired
 }

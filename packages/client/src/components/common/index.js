@@ -170,7 +170,7 @@ export function ProgressBar ({ percentage, width }) {
   return (
     <div
       css={css`
-        background-color: var(--colors-gray300);
+        background-color: var(--colors-gray200);
         border-radius: 0.25rem;
         width: ${width || '100%'};
       `}
@@ -213,8 +213,8 @@ export function Sidebar ({ isScrollingDown = false, ...props }) {
 
         ${screens.desktop} {
           align-self: flex-start;
-          margin-top: 2.25rem;
-          top: ${headerHeightInRem}rem;
+          margin-top: 5rem;
+          top: ${headerHeightInRem + 1}rem;
           width: 22.5%;
         }
       `}
@@ -237,21 +237,20 @@ export function SkipNav () {
 
 export { default as Spinner } from './Spinner'
 
-export function Tag ({ small = false, ...props }) {
+export function Tag (props) {
   return (
     <Link
       css={css`
-        background-color: var(--colors-gray300);
-        border-radius: ${small ? 0.625 : 0.75}rem;
-        color: var(--colors-gray900);
+        border-bottom: 1px dotted var(--colors-gray800);
+        color: var(--colors-gray800);
         display: block;
         font-size: 0.8125rem;
         font-weight: 500;
-        line-height: ${small ? 1.25 : 1.5}rem;
-        padding: 0 0.75rem;
+        line-height: 1.5rem;
 
         &:hover {
-          background-color: var(--colors-gray400);
+          border-bottom: 1px solid var(--colors-accent500);
+          color: var(--colors-accent500);
         }
       `}
       {...props}
@@ -259,15 +258,11 @@ export function Tag ({ small = false, ...props }) {
   )
 }
 
-Tag.propTypes = {
-  small: PropTypes.bool
-}
-
 export function Title (props) {
   return (
     <span
       css={css`
-        color: var(--colors-gray500);
+        color: var(--colors-gray600);
         display: block;
         font-size: 0.875rem;
         font-weight: 600;

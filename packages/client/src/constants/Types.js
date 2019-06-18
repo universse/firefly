@@ -3,18 +3,9 @@ import PropTypes from 'prop-types'
 export const RefType = PropTypes.shape({ current: PropTypes.object }).isRequired
 export const TagsType = PropTypes.arrayOf(PropTypes.string).isRequired
 
-export const CollectionType = PropTypes.exact({
-  id: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  itemCount: PropTypes.number.isRequired,
-  level: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  tags: TagsType
-}).isRequired
-
-export const CollectionsType = PropTypes.arrayOf(
+export const CollectionIdsType = PropTypes.arrayOf(
   PropTypes.exact({
-    node: CollectionType
+    id: PropTypes.string.isRequired
   }).isRequired
 )
 

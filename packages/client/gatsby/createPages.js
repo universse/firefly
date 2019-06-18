@@ -12,15 +12,13 @@ module.exports = async ({
     `
       {
         allCollections {
-          edges {
-            node {
-              id
-              category
-              itemCount
-              level
-              name
-              tags
-            }
+          nodes {
+            id
+            category
+            itemCount
+            level
+            name
+            tags
           }
         }
       }
@@ -38,10 +36,10 @@ module.exports = async ({
 
   const normalizedCollections = {}
 
-  db.data.allCollections.edges.forEach(({ node }) => {
-    const { id, name } = node
+  db.data.allCollections.nodes.forEach(({ id, ...node }) => {
+    const { name } = node
 
-    normalizedCollections[node.id.toLowerCase()] = node
+    normalizedCollections[id] = node
 
     createPage({
       path: createCollectionPath({ id, name }),

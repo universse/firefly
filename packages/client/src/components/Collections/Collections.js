@@ -6,13 +6,14 @@ import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 import Item from './Item'
 import { collectionHeightInRem } from './styled'
 import { baseFontSize, screens } from 'constants/Styles'
-import { CollectionsType } from 'constants/Types'
+import { CollectionIdsType } from 'constants/Types'
 
 function itemKey (index, data) {
-  return data[index].node.id
+  return data[index].id
 }
 
 const listStyle = css`
+  box-shadow: var(--shadows-03);
   height: 100% !important;
   width: 100%;
 
@@ -29,7 +30,7 @@ const listStyle = css`
   }
 `
 
-export default function Collections ({ collections }) {
+export default function Collections ({ collectionIds }) {
   const listRef = useRef()
   const handleScroll = useCallback(
     ({ scrollTop }) => listRef.current && listRef.current.scrollTo(scrollTop),
@@ -44,8 +45,8 @@ export default function Collections ({ collections }) {
           css={listStyle}
           height={height}
           innerElementType='ul'
-          itemCount={collections.length}
-          itemData={collections}
+          itemCount={collectionIds.length}
+          itemData={collectionIds}
           itemKey={itemKey}
           itemSize={collectionHeightInRem * baseFontSize}
         >
@@ -56,4 +57,4 @@ export default function Collections ({ collections }) {
   )
 }
 
-Collections.propTypes = { collections: CollectionsType.isRequired }
+Collections.propTypes = { collectionIds: CollectionIdsType.isRequired }

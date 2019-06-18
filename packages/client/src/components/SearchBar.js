@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import { Cross } from 'icons'
+import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useComboBox from 'hooks/useComboBox'
 import useSearch from 'hooks/useSearch'
 import AriaLabels from 'constants/AriaLabels'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
+  const normalizedCollections = useContext(NormalizedCollectionsContext)
+
   const {
     handleSelect,
     handleSearchInput,
@@ -64,11 +67,17 @@ export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
                 {...highlightedIndex === index && { className: 'highlighted' }}
                 to={createCollectionPath({
                   id: result.id,
-                  name: result.name
+                  name: normalizedCollections[result.id].name
                 })}
-                {...getMenuItemProps({ index, item: result })}
+                {...getMenuItemProps({
+                  index,
+                  item: {
+                    id: result.id,
+                    name: normalizedCollections[result.id].name
+                  }
+                })}
               >
-                {result.name}
+                {normalizedCollections[result.id].name}
               </Link>
             ))}
             {!isTyping && !isLoading && !totalResultCount && (
@@ -83,5 +92,5 @@ export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
 
 SearchBar.propTypes = {
   initialIsLoading: PropTypes.bool.isRequired,
-  initialSearchInput: PropTypes.bool.isRequired
+  initialSearchInput: PropTypes.string.isRequired
 }

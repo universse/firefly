@@ -43,7 +43,7 @@ export default function useSearch (
 
       getSearchWorker()
         .search(searchInput)
-        .then(results => isFresh && setResults(results))
+        .then(({ collectionIds }) => isFresh && setResults(collectionIds))
         .finally(() => setIsLoading(false))
 
       return () => (isFresh = false)

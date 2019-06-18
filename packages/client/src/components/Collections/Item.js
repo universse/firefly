@@ -3,19 +3,19 @@ import PropTypes from 'prop-types'
 
 import Collection from './Collection'
 import { UserDataContext } from 'contexts/UserData'
-import { CollectionsType } from 'constants/Types'
+import { CollectionIdsType } from 'constants/Types'
 
 export default function Item ({ data, index, style }) {
-  const collection = data[index].node
+  const id = data[index].id
   const userData = useContext(UserDataContext)
 
   return (
     userData && (
       <li style={style}>
         <Collection
-          collection={collection}
-          isLoved={!!userData.love[collection.id]}
-          isSaved={!!userData.save[collection.id]}
+          id={id}
+          isLoved={!!userData.love[id]}
+          isSaved={!!userData.save[id]}
         />
       </li>
     )
@@ -23,7 +23,7 @@ export default function Item ({ data, index, style }) {
 }
 
 Item.propTypes = {
-  data: CollectionsType.isRequired,
+  data: CollectionIdsType.isRequired,
   index: PropTypes.number.isRequired,
   style: PropTypes.object.isRequired
 }

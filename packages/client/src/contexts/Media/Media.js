@@ -6,20 +6,12 @@ import { media } from 'constants/Styles'
 
 export const MediaContext = createContext()
 
-function renderChildren (isDesktop, children) {
-  if (typeof isDesktop !== 'boolean') {
-    return null
-  }
-
-  return typeof children === 'object' ? children : children(isDesktop)
-}
-
 export default function Media ({ children }) {
   const isDesktop = useMedia(media.desktop)
 
   return (
     <MediaContext.Provider value={isDesktop}>
-      {renderChildren(isDesktop, children)}
+      {typeof isDesktop === 'boolean' && children}
     </MediaContext.Provider>
   )
 }

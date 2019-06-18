@@ -51,6 +51,8 @@ export default function IndexLayout ({ category, children, location }) {
       />
       <section
         css={css`
+          background-color: var(--colors-gray100);
+
           ${screens.nonDesktop} {
             order: -1;
           }
@@ -61,7 +63,6 @@ export default function IndexLayout ({ category, children, location }) {
       </section>
       <main
         css={css`
-          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
@@ -88,16 +89,10 @@ export default function IndexLayout ({ category, children, location }) {
           `}
         >
           <Media>
-            {isDesktop => (
-              <>
-                {!isDesktop && (
-                  <Sidebar isScrollingDown={isScrollingDown}>
-                    <CategoryFilter location={location} />
-                  </Sidebar>
-                )}
-                {children}
-              </>
-            )}
+            <Sidebar isScrollingDown={isScrollingDown}>
+              <CategoryFilter location={location} />
+            </Sidebar>
+            {children}
           </Media>
         </div>
         {/* <FABDesktop

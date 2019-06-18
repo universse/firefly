@@ -6,7 +6,6 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { AuthenticationContext } from 'contexts/Authentication'
 import { MediaContext } from 'contexts/Media'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
@@ -22,7 +21,6 @@ import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function MyLibraryPage () {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
@@ -61,7 +59,6 @@ export default function MyLibraryPage () {
       <MobileHeader shadow title='My Library' />
       <main
         css={css`
-          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
           padding: 0 0 ${mobileNavigationHeightInRem}rem;
 
@@ -106,6 +103,7 @@ export default function MyLibraryPage () {
           <ul
             css={css`
               background-color: #fff;
+              box-shadow: var(--shadows-03);
 
               li:last-child div {
                 border: none;
@@ -116,8 +114,7 @@ export default function MyLibraryPage () {
               }
             `}
           >
-            {normalizedCollections &&
-              userData &&
+            {userData &&
               Object.keys(userData.save).map(id => (
                 <li
                   key={id}
@@ -125,11 +122,7 @@ export default function MyLibraryPage () {
                     position: relative;
                   `}
                 >
-                  <Collection
-                    collection={normalizedCollections[id.toLowerCase()]}
-                    isLoved={!!userData.love[id]}
-                    isSaved
-                  />
+                  <Collection id={id} isLoved={!!userData.love[id]} isSaved />
                 </li>
               ))}
           </ul>
