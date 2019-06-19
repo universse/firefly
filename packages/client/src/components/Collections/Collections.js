@@ -21,12 +21,8 @@ const listStyle = css`
     border-radius: 8px;
   }
 
-  & > ul:not(:empty) {
-    background-color: #fff;
-
-    & > li:last-child div {
-      border: none;
-    }
+  ul li:last-child > div {
+    border: 1px solid transparent;
   }
 `
 
@@ -49,6 +45,7 @@ export default function Collections ({ collectionIds }) {
           itemData={collectionIds}
           itemKey={itemKey}
           itemSize={collectionHeightInRem * baseFontSize}
+          overscanCount={5}
         >
           {Item}
         </List>

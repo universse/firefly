@@ -35,7 +35,7 @@ export default function SortByDifficulty () {
   return (
     <details className='DropdownMenu' {...detailsProps}>
       <summary aria-label='Sort by' className='Exposed' {...summaryProps}>
-        <span>Sort By: </span>
+        <span>Sort by: </span>
         {SortOptions[selectedIndex].label}
         <div
           css={css`
@@ -46,7 +46,7 @@ export default function SortByDifficulty () {
           <ChevronDown />
         </div>
       </summary>
-      <div className='Menu' {...menuProps}>
+      <ul {...menuProps}>
         {SortOptions.map((option, index) => {
           const classes = ['uppercase']
           highlightedIndex === index && classes.push('highlighted')
@@ -64,7 +64,7 @@ export default function SortByDifficulty () {
             </button>
           )
         })}
-      </div>
+      </ul>
     </details>
   )
 }

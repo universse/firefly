@@ -213,7 +213,7 @@ export function Sidebar ({ isScrollingDown = false, ...props }) {
 
         ${screens.desktop} {
           align-self: flex-start;
-          margin-top: 5rem;
+          margin-top: 4.5rem;
           top: ${headerHeightInRem + 1}rem;
           width: 22.5%;
         }

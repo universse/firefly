@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Tag ({ color = 'currentColor', small = true }) {
+export function Tag ({ color = 'currentColor', medium = true }) {
   return (
     <svg
       aria-label='tag'
-      className={small ? 'feather feather--small' : 'feather'}
+      className={medium ? 'feather feather--medium' : 'feather'}
       role='img'
       stroke={color}
       viewBox='0 0 24 24'
@@ -20,5 +20,5 @@ export function Tag ({ color = 'currentColor', small = true }) {
 
 Tag.propTypes = {
   color: PropTypes.string,
-  small: PropTypes.bool
+  medium: PropTypes.bool
 }

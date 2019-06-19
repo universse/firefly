@@ -1,5 +1,4 @@
 import React from 'react'
-import localforage from 'localforage'
 import { Link } from 'gatsby'
 
 import { OutboundLink } from 'components/common'
@@ -7,6 +6,7 @@ import { User } from 'icons'
 import LocalStorage from 'constants/LocalStorage'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import firebaseWorker from 'utils/firebaseWorker'
+import offlineStorageWorker from 'utils/offlineStorageWorker'
 
 export default function Avatar () {
   const {
@@ -36,7 +36,7 @@ export default function Avatar () {
                 window.amplitude.getInstance().setUserId(-1)
                 window.amplitude.getInstance().regenerateDeviceId()
               }
-              localforage.clear()
+              offlineStorageWorker.clear()
               window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
               window.location.reload()
             })

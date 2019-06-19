@@ -1,4 +1,4 @@
-details.DropdownMenu {
+.DropdownMenu {
   position: relative;
 
   summary {
@@ -27,7 +27,7 @@ details.DropdownMenu {
     }
   }
 
-  div.Menu {
+  ul {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: var(--shadows-03);

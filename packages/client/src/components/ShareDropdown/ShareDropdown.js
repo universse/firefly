@@ -28,7 +28,7 @@ export default function ShareDropdown ({ name }) {
       >
         <Share />
       </summary>
-      <div className='Menu' {...menuProps}>
+      <ul {...menuProps}>
         <button
           aria-label='Sign out'
           className={`${highlightedIndex === 0 ? 'highlighted' : ''}`}
@@ -60,7 +60,7 @@ export default function ShareDropdown ({ name }) {
         >
           Twitter
         </OutboundLink>
-      </div>
+      </ul>
     </details>
   )
 }

@@ -8,7 +8,6 @@ import { logClickTagFilter } from 'utils/amplitudeUtils'
 
 export default function MobileTagFilter ({ aggregatedTags }) {
   const {
-    constructUrl,
     query: { tags },
     queryDispatch
   } = useContext(URLParamsContext)
@@ -43,7 +42,6 @@ export default function MobileTagFilter ({ aggregatedTags }) {
       </div>
       <ul>
         {aggregatedTags.map(([tag, count]) => {
-          const { href, updatedTags } = constructUrl(tag)
           const isActive = tags.includes(tag)
 
           return (
@@ -55,15 +53,7 @@ export default function MobileTagFilter ({ aggregatedTags }) {
                 margin-bottom: 0.75rem;
               `}
             >
-              <MobileTag
-                href={href}
-                isActive={isActive}
-                onClick={e => {
-                  e.preventDefault()
-                  queryDispatch({ tags: updatedTags })
-                  logClickTagFilter({ tag, updatedTags })
-                }}
-              >
+              <MobileTag isActive={isActive}>
                 {tag}
                 <Count isActive={isActive}>{count}</Count>
               </MobileTag>

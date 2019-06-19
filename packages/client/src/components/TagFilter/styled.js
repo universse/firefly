@@ -22,7 +22,7 @@ export function ClearFilterButton (props) {
   )
 }
 
-export function Count ({ isActive, ...props }) {
+export function Count ({ isSelected, ...props }) {
   return (
     <span
       css={css`
@@ -37,7 +37,7 @@ export function Count ({ isActive, ...props }) {
         }
 
         ${screens.desktop} {
-          font-weight: ${isActive ? 600 : 400};
+          font-weight: ${isSelected ? 600 : 400};
         }
       `}
       {...props}
@@ -46,7 +46,7 @@ export function Count ({ isActive, ...props }) {
 }
 
 Count.propTypes = {
-  isActive: PropTypes.bool.isRequired
+  isSelected: PropTypes.bool.isRequired
 }
 
 export function MobileTag ({ isActive, ...props }) {
@@ -70,31 +70,5 @@ export function MobileTag ({ isActive, ...props }) {
 }
 
 MobileTag.propTypes = {
-  isActive: PropTypes.bool.isRequired
-}
-
-export function Tag ({ isActive, ...props }) {
-  return (
-    // eslint-disable-next-line
-    <a
-      css={css`
-        color: var(--colors-gray900);
-        display: block;
-        font-size: 0.9375rem;
-        font-weight: ${isActive ? 600 : 400};
-        line-height: 1.25rem;
-
-        &:hover {
-          color: ${isActive
-            ? 'var(--colors-gray900)'
-            : 'var(--colors-brand500)'};
-        }
-      `}
-      {...props}
-    />
-  )
-}
-
-Tag.propTypes = {
   isActive: PropTypes.bool.isRequired
 }

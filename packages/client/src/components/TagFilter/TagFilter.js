@@ -3,69 +3,70 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { URLParamsContext } from 'contexts/URLParams'
-import { Title } from 'components/common'
-import { ClearFilterButton, Count, Tag } from './styled'
+import { Tag } from 'icons'
+// import { ClearFilterButton, Count, Tag } from './styled'
+import useListBox from 'hooks/useListBox'
+import AriaLabels from 'constants/AriaLabels'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
+//       onClick={() => queryDispatch({ tags: [] })}
 export default function TagFilter ({ aggregatedTags }) {
   const {
-    constructUrl,
     query: { tags },
     queryDispatch
   } = useContext(URLParamsContext)
 
+  const onSelect = ({ tag }) => {
+    queryDispatch({ tag })
+    // logClickTagFilter({ sort: value })
+  }
+
+  const {
+    detailsProps,
+    highlightedIndex,
+    summaryProps,
+    getMenuProps,
+    getMenuItemProps
+  } = useListBox({ onSelect })
+
   return (
-    <div>
-      <div
-        css={css`
-          align-items: center;
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 0.75rem;
-        `}
-      >
-        <Title>TAGS</Title>
-        <ClearFilterButton
-          aria-label='Reset Filters'
-          onClick={() => queryDispatch({ tags: [] })}
+    <details className='ListBox' {...detailsProps}>
+      <summary aria-label={AriaLabels.FILTER_BY_TAGS} {...summaryProps}>
+        Filter by Tags
+        <div
+          css={css`
+            color: var(--colors-gray600);
+            margin-left: 0.5rem;
+          `}
         >
-          clear
-        </ClearFilterButton>
-      </div>
-      <ul>
-        {aggregatedTags.map(([tag, count]) => {
-          const { href, updatedTags } = constructUrl(tag)
-          const isActive = tags.includes(tag)
+          <Tag />
+        </div>
+      </summary>
+      <ul {...getMenuProps({ 'aria-orientation': 'horizontal' })}>
+        {aggregatedTags.map(([tag, count], index) => {
+          const isSelected = tags.includes(tag)
+
+          const classes = []
+          isSelected && classes.push('selected')
+          highlightedIndex === index && classes.push('highlighted')
 
           return (
-            <li
+            <button
               key={tag}
-              css={css`
-                display: flex;
-                justify-content: space-between;
-                margin: 0.375rem 0 0.375rem calc(1rem + 4px);
-              `}
+              {...classes.length && { className: classes.join(' ') }}
+              {...getMenuItemProps({
+                index,
+                item: { tag, id: tag.replace(/\s/g, '-') },
+                ariaSelected: isSelected
+              })}
             >
-              <Tag
-                href={href}
-                isActive={isActive}
-                onClick={e => {
-                  if (e.ctrlKey || e.metaKey || e.shiftKey || e.button) {
-                    return
-                  }
-                  e.preventDefault()
-                  queryDispatch({ tags: updatedTags })
-                  logClickTagFilter({ tag, updatedTags })
-                }}
-              >
-                {tag}
-              </Tag>
-              <Count isActive={isActive}>{count}</Count>
-            </li>
+              {tag}
+              <span>{count}</span>
+            </button>
           )
         })}
       </ul>
-    </div>
+    </details>
   )
 }
 

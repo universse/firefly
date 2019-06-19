@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 
 // import useDebouncedValue from 'hooks/useDebouncedValue'
 import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
-import getSearchWorker from 'utils/getSearchWorker'
+import searchWorker from 'utils/searchWorker'
 import { createCollectionPath } from '../../gatsby/utils'
 
 export default function useSearch (
@@ -41,7 +41,7 @@ export default function useSearch (
       setIsTyping(false)
       setIsLoading(true)
 
-      getSearchWorker()
+      searchWorker
         .search(searchInput)
         .then(({ collectionIds }) => isFresh && setResults(collectionIds))
         .finally(() => setIsLoading(false))

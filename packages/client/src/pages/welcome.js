@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
-import localforage from 'localforage'
 
 import { Spinner } from 'components/common'
 import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
-import { saveChangeToOfflineQueue } from 'utils/userDataUtils'
+import offlineStorageWorker from 'utils/offlineStorageWorker'
 
 export default function WelcomePage () {
   const [message, setMessage] = useState('Signing in...')
@@ -29,17 +28,8 @@ export default function WelcomePage () {
         window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
         window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
 
-        return Promise.all([
-          localforage.getItem('check'),
-          localforage.getItem('save')
-        ])
+        return offlineStorageWorker.addToQueue()
       })
-      .then(([check, save]) =>
-        saveChangeToOfflineQueue({
-          check: check || {},
-          save: save || {}
-        })
-      )
       .then(() => window.location.assign('/'))
       .catch(() => {
         setHasError(true)

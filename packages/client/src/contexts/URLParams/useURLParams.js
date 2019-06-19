@@ -13,6 +13,16 @@ function init (search) {
 }
 
 function reducer (state, payload) {
+  if (payload.tag) {
+    const tag = payload.tag
+    const currentTags = state.tags
+
+    const tags = currentTags.includes(tag)
+      ? currentTags.filter(t => t !== tag)
+      : [tag, ...currentTags]
+
+    return { ...state, tags, action: undefined }
+  }
   return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 
@@ -34,24 +44,6 @@ export default function useURLParams ({ pathname, search }) {
 
   return useMemo(
     () => ({
-      constructUrl (tag, isTagFilter = true) {
-        const { sort, tags } = query
-
-        if (!isTagFilter) {
-          return {
-            href: constructHref(sort, [tag])
-          }
-        }
-
-        const updatedTags = tags.includes(tag)
-          ? tags.filter(t => t !== tag)
-          : [tag, ...tags]
-
-        return {
-          href: constructHref(sort, updatedTags),
-          updatedTags
-        }
-      },
       query,
       queryDispatch
     }),

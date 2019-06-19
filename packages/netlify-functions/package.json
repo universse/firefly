@@ -8,11 +8,11 @@
     "express": "^4.17.1",
     "firebase-admin": "^8.1.0",
     "got": "^9.6.0",
-    "metascraper": "^5.4.3",
-    "metascraper-description": "^5.4.4",
-    "metascraper-image": "^5.4.3",
-    "metascraper-publisher": "^5.4.3",
-    "metascraper-title": "^5.4.3",
+    "metascraper": "^5.4.5",
+    "metascraper-description": "^5.4.5",
+    "metascraper-image": "^5.4.5",
+    "metascraper-publisher": "^5.4.5",
+    "metascraper-title": "^5.4.5",
     "serverless-http": "^2.0.2"
   },
   "devDependencies": {

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Search ({ color = 'currentColor' }) {
+export function Search ({ color = 'currentColor', medium = true }) {
   return (
     <svg
       aria-label='search'
-      className='feather'
+      className={medium ? 'feather feather--medium' : 'feather'}
       role='img'
       stroke={color}
       viewBox='0 0 24 24'
@@ -19,5 +19,6 @@ export function Search ({ color = 'currentColor' }) {
 }
 
 Search.propTypes = {
-  color: PropTypes.string
+  color: PropTypes.string,
+  medium: PropTypes.bool
 }

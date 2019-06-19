@@ -15,7 +15,7 @@ select:not([disabled]),
 textarea:not([disabled]),
 *[tabindex]:not([tabindex="0"]):not([tabindex^="-"]),
 *[contenteditable] {
-  transition: box-shadow 0.1s;
+  transition: box-shadow 0.2s;
 
   &:focus {
     outline: none;
