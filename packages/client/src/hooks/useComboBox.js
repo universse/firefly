@@ -8,7 +8,8 @@ export default function useComboBox ({ onSelect }) {
   const items = useRef([])
 
   const activeDescendant =
-    items.current[highlightedIndex] && items.current[highlightedIndex].id
+    (items.current[highlightedIndex] && items.current[highlightedIndex].id) ||
+    ''
 
   items.current = []
 
@@ -25,6 +26,7 @@ export default function useComboBox ({ onSelect }) {
   }
 
   const select = () => {
+    if (highlightedIndex < 0) return
     onSelect(items.current[highlightedIndex])
     closeMenu()
   }
@@ -45,9 +47,7 @@ export default function useComboBox ({ onSelect }) {
   function getInputProps ({ onChange }) {
     return {
       id: inputId,
-      ...(activeDescendant && {
-        'aria-activedescendant': activeDescendant
-      }),
+      'aria-activedescendant': activeDescendant,
       'aria-autocomplete': 'list',
       'aria-controls': menuId,
       'aria-labelledby': labelId,
