@@ -6,16 +6,14 @@ import { css } from '@emotion/core'
 import { ChevronLeft, ChevronRight } from 'icons'
 import { screens } from 'constants/Styles'
 
-export const activeStyle = {
-  borderColor: 'var(--colors-brand500)',
-  color: 'var(--colors-brand500)',
-  fontWeight: 600
-}
-
 export function Category (props) {
   return (
     <Link
-      activeStyle={activeStyle}
+      activeStyle={{
+        borderColor: 'var(--colors-brand500)',
+        color: 'var(--colors-brand500)',
+        fontWeight: 600
+      }}
       css={css`
         align-items: center;
         color: var(--colors-gray900);
@@ -53,7 +51,7 @@ export function Category (props) {
   )
 }
 
-export const buttonWidthInRem = 2.5
+export const scrollButtonWidthInRem = 2.5
 
 export function ScrollButton ({ handleClick, isShown, side }) {
   const align =
@@ -81,7 +79,7 @@ export function ScrollButton ({ handleClick, isShown, side }) {
           background-image: ${`var(--gradient-${side})`};
           color: var(--colors-gray600);
           height: 3rem;
-          width: ${buttonWidthInRem}rem;
+          width: ${scrollButtonWidthInRem}rem;
 
           &:focus,
           &:hover {

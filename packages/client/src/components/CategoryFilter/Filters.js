@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
 
-import { Category, buttonWidthInRem } from './styled'
+import { Category, scrollButtonWidthInRem } from './styled'
 import { MediaContext } from 'contexts/Media'
 import { RefType } from 'constants/Types'
 import { baseFontSize, screens } from 'constants/Styles'
@@ -11,7 +11,7 @@ import animate from 'utils/animate'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
-const buttonWidthInPx = baseFontSize * buttonWidthInRem
+const scrollButtonWidthInPx = baseFontSize * scrollButtonWidthInRem
 const CategoryPaths = [
   '/',
   ...Categories.map(category => createCategoryPath(category))
@@ -32,18 +32,18 @@ export default function Filters ({ handleScroll, location, slider }) {
 
     const { left, right } = slider.current.children[i].getBoundingClientRect()
 
-    left < buttonWidthInPx &&
+    left < scrollButtonWidthInPx &&
       animate(
         'scrollLeft',
         slider.current,
-        slider.current.scrollLeft + left - sliderLeft - buttonWidthInPx
+        slider.current.scrollLeft + left - sliderLeft - scrollButtonWidthInPx
       )
 
-    right > window.innerWidth - buttonWidthInPx &&
+    right > window.innerWidth - scrollButtonWidthInPx &&
       animate(
         'scrollLeft',
         slider.current,
-        slider.current.scrollLeft + right - sliderRight + buttonWidthInPx
+        slider.current.scrollLeft + right - sliderRight + scrollButtonWidthInPx
       )
   }, [isDesktop, location, slider])
 
@@ -69,30 +69,19 @@ export default function Filters ({ handleScroll, location, slider }) {
           `}
           onScroll={handleScroll}
         >
-          <li
-            css={css`
-              flex: 1 0 auto;
-
-              ${screens.desktop} {
-                margin: 0.5rem 0;
-              }
-            `}
-          >
-            <Category to={CategoryPaths[0]}>all</Category>
-          </li>
-          {Categories.map((category, i) => (
+          {CategoryPaths.map((path, i) => (
             <li
-              key={category}
+              key={i}
               css={css`
                 flex: 1 0 auto;
 
                 ${screens.desktop} {
-                  margin: 0.5rem 0;
+                  margin-bottom: 0.5rem;
                 }
               `}
             >
-              <Category partiallyActive to={CategoryPaths[i + 1]}>
-                {category}
+              <Category partiallyActive={path !== '/'} to={CategoryPaths[i]}>
+                {Categories[i - 1] || 'all'}
               </Category>
             </li>
           ))}
