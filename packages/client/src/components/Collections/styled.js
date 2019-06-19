@@ -24,9 +24,9 @@ export function CollectionTitle ({ id, name }) {
     >
       <h3
         css={css`
-          color: var(--colors-gray800);
-          font-size: 1.125rem;
-          font-weight: 600;
+          color: var(--colors-gray900);
+          font-size: 1.25rem;
+          font-weight: 700;
           line-height: 1.75rem;
         `}
       >

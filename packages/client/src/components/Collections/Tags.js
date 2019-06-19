@@ -16,7 +16,7 @@ export default function Tags ({ tags }) {
         <li
           key={tag}
           css={css`
-            margin-right: 0.25rem;
+            margin-right: 0.75rem;
             z-index: 1;
           `}
         >
@@ -24,7 +24,6 @@ export default function Tags ({ tags }) {
             onClick={() => {
               logClickTag({ tag })
             }}
-            small={!window.location.pathname.startsWith('/collection')}
             to={`/?tags=${tag.toLowerCase()}`}
           >
             {tag}

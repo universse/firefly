@@ -10,13 +10,15 @@ $accent500: #007bfe;
   --colors-brand900: #c70e3a;
   --colors-danger: #da4453;
   --colors-white100: rgba(255, 255, 255, 0.15);
+  --colors-white300: rgba(255, 255, 255, 0.35);
   --colors-white900: rgba(255, 255, 255, 0.9);
-  --colors-gray100: #f9fafb;
-  --colors-gray300: #f1f1f1;
+  --colors-gray100: #f8fafb;
+  --colors-gray200: #f1f1f1;
+  --colors-gray300: rgba(0, 0, 0, 0.12);
   --colors-gray400: #cfcfcf;
-  --colors-gray500: #666;
-  --colors-gray600: #333;
-  --colors-gray700: rgba(0, 0, 0, 0.5);
+  --colors-gray600: #666;
+  --colors-gray700: #333;
+  --colors-gray500: rgba(0, 0, 0, 0.5);
   --colors-gray800: rgba(0, 0, 0, 0.7);
   --colors-gray900: rgba(0, 0, 0, 0.87);
   --colors-success: #13ae36;
@@ -32,9 +34,10 @@ $accent500: #007bfe;
     rgba(255, 255, 255, 0) 0%,
     rgb(255, 255, 255) 30%
   );
-  --shadows-01: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadows-02: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadows-03: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadows-01: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadows-02: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadows-03: 0 3px 6px rgba(0, 0, 0, 0.2);
+  --shadows-04: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 $desktop: "screen and (min-width: 52.0625rem)";

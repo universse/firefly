@@ -140,40 +140,24 @@ export default function CollectionTemplate ({
           />
           <main
             css={css`
-              background-color: var(--colors-gray100);
               min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
               padding: 0 0 ${mobileProgressBarHeight + 1}rem;
 
-              ${screens.nonMobile} {
-                padding: 1rem 0 ${mobileProgressBarHeight + 1}rem;
-              }
-
               ${screens.desktop} {
                 min-height: calc(100vh - ${headerHeightInRem}rem);
-                padding: 2rem 0;
               }
             `}
             id='main'
           >
-            <div
-              className='base'
-              css={css`
-                max-width: 50rem;
+            {collections && (
+              <CollectionView
+                check={check}
+                collection={collections}
+                isLoved={isLoved}
+                isSaved={isSaved}
+              />
+            )}
 
-                ${screens.mobile} {
-                  padding: 0;
-                }
-              `}
-            >
-              {collections && (
-                <CollectionView
-                  check={check}
-                  collection={collections}
-                  isLoved={isLoved}
-                  isSaved={isSaved}
-                />
-              )}
-            </div>
             {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >

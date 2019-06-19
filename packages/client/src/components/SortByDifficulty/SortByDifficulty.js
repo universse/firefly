@@ -39,7 +39,7 @@ export default function SortByDifficulty () {
         {SortOptions[selectedIndex].label}
         <div
           css={css`
-            color: var(--colors-gray500);
+            color: var(--colors-gray600);
             height: 1.5rem;
           `}
         >

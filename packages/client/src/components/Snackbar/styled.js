@@ -53,9 +53,9 @@ export function Surface (props) {
     <div
       css={css`
         align-items: center;
-        background-color: var(--colors-gray600);
+        background-color: var(--colors-gray700);
         border-radius: 4px;
-        box-shadow: var(--shadows-03);
+        box-shadow: var(--shadows-04);
         display: flex;
         justify-content: space-between;
         max-width: 40rem;

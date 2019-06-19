@@ -8,13 +8,13 @@ details.DropdownMenu {
 
     &.Exposed {
       border-left: 4px solid transparent;
-      color: var(--colors-gray800);
+      color: var(--colors-gray900);
       font-size: 0.875rem;
       font-weight: 600;
       justify-content: space-between;
       padding-left: calc(1rem - 4px);
       text-transform: uppercase;
-      width: 11.5rem;
+      width: 11rem;
     }
 
     span {
@@ -30,12 +30,12 @@ details.DropdownMenu {
   div.Menu {
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: var(--shadows-02);
+    box-shadow: var(--shadows-03);
     margin-top: 0.25rem;
     overflow: auto;
     position: absolute;
     right: 0;
-    width: 11.5rem;
+    width: 11rem;
     z-index: 2;
 
     a,
@@ -48,10 +48,10 @@ details.DropdownMenu {
       height: 2.5rem;
       padding-left: 1rem;
       text-align: left;
-      width: 11.5rem;
+      width: 11rem;
 
       &.highlighted {
-        background-color: var(--colors-gray300);
+        background-color: var(--colors-gray200);
       }
 
       &.selected {

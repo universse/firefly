@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import CollectionDetails from './CollectionDetails'
-import CollectionActions from './CollectionActions'
+// import CollectionActions from './CollectionActions'
 import LearningList from './LearningList'
 import { ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
-import { screens } from 'constants/Styles'
+import { mobileProgressBarHeight, screens } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 
 // TODO:
@@ -42,66 +42,76 @@ export default function CollectionView ({
     <>
       <div
         css={css`
-          background-color: #fff;
-          margin-bottom: 1rem;
-
-          ${screens.nonMobile} {
-            border-radius: 8px;
-            margin-bottom: 2rem;
-          }
-
-          ${screens.tablet} {
-            margin-bottom: 1rem;
-          }
+          background-color: var(--colors-gray100);
         `}
       >
-        <CollectionDetails
-          category={category}
-          id={id}
-          level={level}
-          name={name}
-          tags={tags}
-        />
-        {isDesktop && (
+        <div
+          className='base'
+          css={css`
+            max-width: 50rem;
+
+            ${screens.mobile} {
+              padding: 0;
+            }
+          `}
+        >
+          <CollectionDetails
+            category={category}
+            id={id}
+            level={level}
+            name={name}
+            tags={tags}
+          />
+        </div>
+      </div>
+      <div>
+        <div
+          className='base'
+          css={css`
+            max-width: 50rem;
+
+            ${screens.mobile} {
+              padding: 0;
+            }
+          `}
+        >
           <div
             css={css`
-              margin: 0 4rem;
+              background-color: #fff;
+
+              ${screens.nonMobile} {
+                border-radius: 8px;
+              }
             `}
           >
-            <CollectionActions
-              completedCount={completedCount}
-              id={id}
-              isLoved={isLoved}
-              isSaved={isSaved}
-              itemCount={itemCount}
-              name={name}
-            />
+            <LearningList check={check} collectionId={id} urls={urls} />
           </div>
-        )}
+        </div>
       </div>
       <div
         css={css`
           background-color: #fff;
-
-          ${screens.nonMobile} {
-            border-radius: 8px;
-          }
+          border-top: 1px solid var(--colors-gray200);
+          bottom: 0;
+          height: ${mobileProgressBarHeight}rem;
+          left: 0;
+          padding: 0.5rem 0;
+          position: fixed;
+          width: 100%;
+          z-index: 1;
         `}
       >
-        <LearningList check={check} collectionId={id} urls={urls} />
-      </div>
-      {!isDesktop && (
         <div
+          className='base'
           css={css`
             align-items: center;
-            background-color: var(--colors-white900);
-            bottom: 0;
             display: flex;
             justify-content: space-between;
-            left: 0;
-            padding: 0.5rem 1rem;
-            position: fixed;
-            width: 100%;
+            max-width: 50rem;
+
+            ${screens.desktop} {
+              padding: 0 5rem;
+            }
           `}
         >
           <div
@@ -115,6 +125,10 @@ export default function CollectionView ({
             css={css`
               text-align: right;
               width: 3.5rem;
+
+              ${screens.desktop} {
+                width: 6rem;
+              }
             `}
           >
             <span
@@ -126,10 +140,11 @@ export default function CollectionView ({
               `}
             >
               {completedCount} of {itemCount}
+              {isDesktop && ' items'}
             </span>
           </div>
         </div>
-      )}
+      </div>
     </>
   )
 }

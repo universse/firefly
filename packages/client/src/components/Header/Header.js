@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
@@ -7,7 +8,7 @@ import Navigation from 'components/Navigation'
 import { Logo } from 'icons'
 import { HeaderTag, HeaderWrapper } from './styled'
 
-function Header () {
+function Header ({ isIndexPage }) {
   return (
     <HeaderTag>
       <HeaderWrapper>
@@ -32,7 +33,7 @@ function Header () {
               <Logo />
             </Link>
           </div>
-          <SearchBar maxResultCount={10} />
+          {!isIndexPage && <SearchBar maxResultCount={10} />}
         </div>
         <Navigation />
       </HeaderWrapper>
@@ -41,3 +42,7 @@ function Header () {
 }
 
 export default memo(Header)
+
+Header.propTypes = {
+  isIndexPage: PropTypes.bool.isRequired
+}

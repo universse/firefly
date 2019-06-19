@@ -11,7 +11,7 @@ export default function Spinner () {
     <div
       css={css`
         animation: ${spin} 0.6s linear infinite;
-        border: 0.25rem solid var(--colors-gray300);
+        border: 0.25rem solid var(--colors-gray200);
         border-radius: 50%;
         border-top-color: var(--colors-brand500);
         height: 2rem;

@@ -47,74 +47,78 @@ export default function IndexPage ({ data }) {
         css={css`
           height: 100%;
           width: 100%;
-          position: relative;
 
           ${screens.desktop} {
-            width: 70%;
+            width: 72.5%;
           }
         `}
       >
         {isDesktop && (
-          <div>
+          <div
+            css={css`
+              align-items: center;
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 2rem;
+            `}
+          >
             <div
               css={css`
-                align-items: center;
-                color: var(--colors-gray600);
-                display: flex;
-                height: 3rem;
-                left: 1rem;
-                position: absolute;
-                z-index: 2;
+                flex: 1 0 auto;
+                margin-right: 5rem;
+                position: relative;
               `}
             >
-              <Search />
-            </div>
-            <input
-              aria-label={AriaLabels.SEARCH_BAR_LABEL}
-              autoComplete='off'
-              css={css`
-                border-radius: 1.5rem;
-                box-shadow: var(--shadows-02);
-                color: var(--colors-gray900);
-                font-size: 1rem;
-                height: 3rem;
-                padding-left: 3.25rem;
-                width: 100%;
-              `}
-              onChange={e => setSearchInput(e.target.value)}
-              placeholder={AriaLabels.SEARCH_BAR_LABEL}
-              type='text'
-              value={searchInput}
-            />
-            {searchInput && (
               <div
                 css={css`
+                  align-items: center;
+                  color: var(--colors-gray600);
+                  display: flex;
+                  height: 3rem;
+                  left: 1rem;
                   position: absolute;
-
-                  right: 0.5rem;
-                  top: 0;
+                  z-index: 2;
                 `}
               >
-                <button
-                  aria-label='Clear Search Field'
-                  className='IconButton'
-                  onClick={() => setSearchInput('')}
-                  type='button'
-                >
-                  <Cross small />
-                </button>
+                <Search />
               </div>
-            )}
-            <div
-              css={css`
-                align-items: center;
-                display: flex;
-                justify-content: flex-end;
-                margin: 2rem 0 1rem;
-              `}
-            >
-              <SortByDifficulty sort={sort} />
+              <input
+                aria-label={AriaLabels.SEARCH_BAR_LABEL}
+                autoComplete='off'
+                css={css`
+                  border-radius: 1.5rem;
+                  box-shadow: var(--shadows-02);
+                  color: var(--colors-gray900);
+                  font-size: 1rem;
+                  height: 3rem;
+                  padding-left: 3rem;
+                  width: 100%;
+                `}
+                onChange={e => setSearchInput(e.target.value)}
+                placeholder={AriaLabels.SEARCH_BAR_LABEL}
+                type='text'
+                value={searchInput}
+              />
+              {searchInput && (
+                <div
+                  css={css`
+                    position: absolute;
+                    right: 0.5rem;
+                    top: 0;
+                  `}
+                >
+                  <button
+                    aria-label='Clear Search Field'
+                    className='IconButton'
+                    onClick={() => setSearchInput('')}
+                    type='button'
+                  >
+                    <Cross small />
+                  </button>
+                </div>
+              )}
             </div>
+            <SortByDifficulty sort={sort} />
           </div>
         )}
         <Collections collectionIds={collectionIds} />

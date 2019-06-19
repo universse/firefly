@@ -18,14 +18,19 @@ function CollectionDetails ({ category, level, name, tags }) {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin-bottom: 1rem;
         padding: 1rem;
+
+        ${screens.nonMobile} {
+          margin-bottom: 2rem;
+        }
 
         ${screens.tablet} {
           padding: 1.5rem 2rem;
         }
 
         ${screens.desktop} {
-          padding: 2rem 4rem;
+          padding: 5rem 4rem;
         }
       `}
     >

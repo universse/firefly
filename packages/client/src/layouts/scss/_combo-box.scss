@@ -4,18 +4,13 @@ div.ComboBox {
     z-index: 1;
 
     input {
-      background-color: var(--colors-gray300);
+      background-color: var(--colors-gray200);
       border-radius: 1.25rem;
       color: var(--colors-gray900);
       font-size: 0.9375rem;
       height: 2.5rem;
       padding-left: 1rem;
       width: 100%;
-
-      ::placeholder {
-        color: var(--colors-gray700);
-        opacity: 1;
-      }
     }
 
     div {
@@ -27,7 +22,7 @@ div.ComboBox {
 
   ul {
     &.Menu {
-      background-color: var(--colors-gray300);
+      background-color: var(--colors-gray200);
       border-bottom-left-radius: 1.25rem;
       border-bottom-right-radius: 1.25rem;
       overflow: auto;
@@ -62,7 +57,7 @@ div.ComboBox {
   &.large {
     & > div {
       input {
-        padding-left: 3.25rem;
+        padding-left: 3rem;
 
         @media #{$desktop} {
           border-radius: 1.5rem;

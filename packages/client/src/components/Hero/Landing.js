@@ -11,7 +11,6 @@ function Landing () {
     <div
       className='base'
       css={css`
-        background-color: #fff;
         display: flex;
         flex-direction: column;
         height: 24rem;
@@ -21,9 +20,9 @@ function Landing () {
       <hgroup>
         <h1
           css={css`
-            color: var(--colors-gray800);
+            color: var(--colors-gray900);
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 900;
             line-height: 4rem;
           `}

@@ -17,6 +17,7 @@ export function HeaderTag ({
     <header
       css={css`
         background-color: var(--colors-white900);
+        border-bottom: 1px solid var(--colors-gray200);
         display: ${mobile ? 'none' : 'block'};
         height: ${headerHeightInRem}rem;
         position: ${mobile ? 'sticky' : 'fixed'};
@@ -25,6 +26,7 @@ export function HeaderTag ({
         z-index: 200;
 
         ${screens.nonDesktop} {
+          border: none;
           display: ${mobile ? 'block' : 'none'};
           height: ${mobileHeaderHeightInRem}rem;
           transform: translateY(${isScrollingDown ? '-100%' : 0});

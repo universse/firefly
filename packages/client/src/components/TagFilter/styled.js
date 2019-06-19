@@ -8,7 +8,7 @@ export function ClearFilterButton (props) {
   return (
     <button
       css={css`
-        color: var(--colors-gray700);
+        color: var(--colors-gray500);
         font-size: 0.875rem;
 
         &:hover {
@@ -54,9 +54,8 @@ export function MobileTag ({ isActive, ...props }) {
     // eslint-disable-next-line
     <a
       css={css`
-        background-color: ${isActive
-          ? 'var(--colors-gray900)'
-          : 'var(--colors-gray300)'};
+        background-color: ${isActive ? 'var(--colors-gray900)' : 'transparent'};
+        border: ${isActive ? 'none' : '1px solid var(--colors-gray300)'};
         border-radius: 1rem;
         color: ${isActive ? 'var(--colors-white900)' : 'var(--colors-gray900)'};
         display: block;

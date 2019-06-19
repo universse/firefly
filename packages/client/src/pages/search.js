@@ -60,7 +60,7 @@ export default function SearchPage ({ location }) {
         <div
           className='base'
           css={css`
-            color: var(--colors-gray500);
+            color: var(--colors-gray600);
             position: relative;
 
             ${screens.desktop} {

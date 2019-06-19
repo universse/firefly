@@ -74,7 +74,7 @@ export default function Filters ({ handleScroll, location, slider }) {
               flex: 1 0 auto;
 
               ${screens.desktop} {
-                margin: 0.125rem 0;
+                margin: 0.5rem 0;
               }
             `}
           >
@@ -87,7 +87,7 @@ export default function Filters ({ handleScroll, location, slider }) {
                 flex: 1 0 auto;
 
                 ${screens.desktop} {
-                  margin: 0.125rem 0;
+                  margin: 0.5rem 0;
                 }
               `}
             >

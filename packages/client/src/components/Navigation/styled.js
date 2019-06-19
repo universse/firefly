@@ -36,7 +36,7 @@ export function MobileNavLink ({ label, Icon, ...props }) {
       activeStyle={{ color: 'var(--colors-brand500)' }}
       css={css`
         align-items: center;
-        color: var(--colors-gray500);
+        color: var(--colors-gray600);
         display: flex;
         flex-direction: column;
         height: ${mobileNavigationHeightInRem}rem;

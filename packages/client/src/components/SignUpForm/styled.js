@@ -19,22 +19,13 @@ export function Input (props) {
     <input
       autoComplete='off'
       css={css`
-        background-color: var(--colors-gray300);
+        background-color: var(--colors-gray200);
         border-radius: 1.25rem;
         color: var(--colors-gray900);
         font-size: 0.9375rem;
         height: 2.5rem;
         padding-left: 1rem;
         width: 18rem;
-
-        ::placeholder {
-          color: var(--colors-gray700);
-          opacity: 1;
-        }
-
-        &:invalid {
-          box-shadow: var(--input-invalid);
-        }
       `}
       type='email'
       {...props}

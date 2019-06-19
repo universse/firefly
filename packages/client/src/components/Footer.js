@@ -21,7 +21,7 @@ function Footer () {
         className='base'
         css={css`
           align-items: center;
-          border-top: 1px solid var(--colors-gray300);
+          border-top: 1px solid var(--colors-gray200);
           display: flex;
           height: 3rem;
           justify-content: center;

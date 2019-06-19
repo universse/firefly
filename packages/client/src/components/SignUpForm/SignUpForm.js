@@ -14,6 +14,7 @@ import firebaseWorker from 'utils/firebaseWorker'
 
 ReactModal.setAppElement('#___gatsby')
 
+// TODO: validation https://verifier.meetchopra.com/
 function SignUpForm () {
   const title = useSiteTitle()
   const activeModalType = useContext(ModalContext)

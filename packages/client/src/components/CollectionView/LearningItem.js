@@ -25,7 +25,17 @@ function LearningItem ({
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
   return (
-    <>
+    <div
+      css={css`
+        border-radius: 8px;
+        position: relative;
+        transition: box-shadow 0.2s;
+
+        ${screens.desktop} {
+          margin: 0 2rem 2rem;
+        }
+      `}
+    >
       <div
         css={css`
           height: 100%;
@@ -45,7 +55,6 @@ function LearningItem ({
       </div>
       <div
         css={css`
-          border-bottom: 1px solid var(--colors-gray400);
           display: flex;
           flex-direction: column;
           height: 6rem;
@@ -60,7 +69,7 @@ function LearningItem ({
 
           ${screens.desktop} {
             height: 8rem;
-            margin: 0 4rem;
+            margin: 0 2rem;
             padding: 1rem 0;
           }
         `}
@@ -76,7 +85,7 @@ function LearningItem ({
             }
 
             ${screens.desktop} {
-              margin: -0.375rem 0 0 -0.375rem;
+              margin: -0.375rem 0 0 -0.5rem;
             }
           `}
         >
@@ -112,7 +121,7 @@ function LearningItem ({
           <div
             css={css`
               align-items: center;
-              color: var(--colors-gray500);
+              color: var(--colors-gray600);
               display: flex;
               height: 1.5rem;
               margin-right: 0.5rem;
@@ -123,7 +132,7 @@ function LearningItem ({
           <div>
             <span
               css={css`
-                color: var(--colors-gray500);
+                color: var(--colors-gray600);
                 display: block;
                 font-size: 0.875rem;
                 font-weight: 500;
@@ -135,7 +144,7 @@ function LearningItem ({
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

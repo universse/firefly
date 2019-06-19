@@ -10,7 +10,7 @@ export function OptionButton ({ isHighlighted, isSelected, ...props }) {
       css={css`
         color: ${isSelected
           ? 'var(--colors-gray800)'
-          : 'var(--colors-gray700)'};
+          : 'var(--colors-gray500)'};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
         height: 2.5rem;
@@ -45,7 +45,7 @@ export function ToggleButton ({ children, ...props }) {
       {children}
       <div
         css={css`
-          color: var(--colors-gray500);
+          color: var(--colors-gray600);
           height: 1.5rem;
         `}
       >

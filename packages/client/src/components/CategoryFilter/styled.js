@@ -79,7 +79,7 @@ export function ScrollButton ({ handleClick, isShown, side }) {
       <button
         css={css`
           background-image: ${`var(--gradient-${side})`};
-          color: var(--colors-gray500);
+          color: var(--colors-gray600);
           height: 3rem;
           width: ${buttonWidthInRem}rem;
 
