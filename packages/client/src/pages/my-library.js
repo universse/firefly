@@ -105,8 +105,8 @@ export default function MyLibraryPage () {
               background-color: #fff;
               box-shadow: var(--shadows-03);
 
-              li:last-child div {
-                border: none;
+              li:last-child > div {
+                border: 1px solid transparent;
               }
 
               ${screens.nonMobile} {
