@@ -8,7 +8,6 @@ import useSaveUserData from './useSaveUserData'
 import useSyncOfflineData from './useSyncOfflineData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
 import useOfflinePersistence from 'hooks/useOfflinePersistence'
-import { getActionKey } from 'utils/userDataUtils'
 
 function reducer (_, { type, payload }) {
   return produce(_, draft => {
@@ -34,7 +33,7 @@ function reducer (_, { type, payload }) {
 
       case 'click':
         const { action, id } = payload
-        const key = getActionKey(action)
+        const key = action.replace('un', '')
 
         if (draft[key][id]) {
           if (key === 'save') draft.prevSave = { ...draft[key] }

@@ -1,9 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
-import localforage from 'localforage'
 
 import useInterval from 'hooks/useInterval'
-import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
+import offlineStorageWorker from 'utils/offlineStorageWorker'
 
 export default function useSyncOfflineData (user) {
   const [shouldSync, setShouldSync] = useState()
@@ -24,35 +23,18 @@ export default function useSyncOfflineData (user) {
   }, [startSyncing, stopSyncing, user])
 
   const syncOfflineQueue = useCallback(() => {
-    localforage.getItem(LocalStorage.OFFLINE_QUEUE).then(changes => {
+    offlineStorageWorker.getQueue().then(changes => {
       if (
         Object.keys(changes.check).length ||
         Object.keys(changes.save).length
       ) {
         stopSyncing()
 
-        Promise.all([
-          localforage.setItem(LocalStorage.SYNCING, changes),
-          localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
-            check: {},
-            save: {}
-          })
-        ]).then(() =>
+        offlineStorageWorker.processQueue(changes).then(() =>
           firebaseWorker
             .uploadOfflineData(changes)
-            .catch(() =>
-              localforage
-                .getItem(LocalStorage.OFFLINE_QUEUE)
-                .then(newChanges => {
-                  localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
-                    check: { ...changes.check, ...newChanges.check },
-                    save: { ...changes.save, ...newChanges.save }
-                  })
-                })
-            )
-            .finally(() =>
-              localforage.removeItem(LocalStorage.SYNCING).then(startSyncing)
-            )
+            .catch(() => offlineStorageWorker.restoreQueue(changes))
+            .finally(() => offlineStorageWorker.clearQueue().then(startSyncing))
         )
       }
     })

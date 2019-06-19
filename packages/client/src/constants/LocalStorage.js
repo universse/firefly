@@ -2,7 +2,5 @@ export default {
   EMAIL_SIGN_IN: 'emailLinkSignIn',
   HAS_SIGNED_IN: 'hasSignedIn',
   IS_NEW_USER: 'isNewUser',
-  LATEST_ACTIVITY: 'latestActivity',
-  OFFLINE_QUEUE: 'offlineQueue',
-  SYNCING: 'syncing'
+  LATEST_ACTIVITY: 'latestActivity'
 }
