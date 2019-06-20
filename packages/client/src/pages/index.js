@@ -11,6 +11,7 @@ import { Cross, Search } from 'icons'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
+import useDebouncedValue from 'hooks/useDebouncedValue'
 import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
 import searchWorker from 'utils/searchWorker'
@@ -22,28 +23,27 @@ export default function IndexPage ({ data }) {
     queryDispatch
   } = useContext(URLParamsContext)
 
-  const [collectionIds, setCollectionIds] = useState([])
-  const [aggregatedTags, setAggregatedTags] = useState([])
+  const [{ aggregatedTags, collectionIds }, setState] = useState({
+    aggregatedTags: [],
+    collectionIds: []
+  })
+
+  const debouncedSearchInput = useDebouncedValue(searchInput, 250)
 
   useEffect(() => {
     let isFresh = true
 
     searchWorker
       .search(
-        searchInput,
+        debouncedSearchInput,
         sort,
         JSON.stringify(tags),
         JSON.stringify(data.allCollectionIds.nodes)
       )
-      .then(({ aggregatedTags, collectionIds }) => {
-        if (isFresh) {
-          setAggregatedTags(aggregatedTags)
-          setCollectionIds(collectionIds)
-        }
-      })
+      .then(state => isFresh && setState(state))
 
     return () => (isFresh = false)
-  }, [data, searchInput, sort, tags])
+  }, [data, debouncedSearchInput, sort, tags])
 
   return (
     <>
