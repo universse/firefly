@@ -22,7 +22,7 @@ const listStyle = css`
   }
 
   ul li:last-child > div {
-    border: 1px solid transparent;
+    border-bottom: 1px solid transparent;
   }
 `
 

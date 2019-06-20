@@ -10,7 +10,7 @@ function MobileNavigation ({ isIndexPage }) {
   return (
     <nav
       css={css`
-        background-color: #fff;
+        background-color: var(--colors-white900);
         border-top: 1px solid var(--colors-gray200);
         bottom: 0;
         height: ${mobileNavigationHeightInRem}rem;

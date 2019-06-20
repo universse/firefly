@@ -102,11 +102,10 @@ export default function MyLibraryPage () {
           )}
           <ul
             css={css`
-              background-color: #fff;
               box-shadow: var(--shadows-03);
 
               li:last-child > div {
-                border: 1px solid transparent;
+                border-bottom: 1px solid transparent;
               }
 
               ${screens.nonMobile} {
