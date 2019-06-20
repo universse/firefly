@@ -1,9 +1,10 @@
 const XLSX = require('xlsx')
 const metascraper = require('metascraper')([
-  require('metascraper-title')(),
+  // require('metascraper-author')(),
   require('metascraper-description')(),
   require('metascraper-image')(),
-  require('metascraper-publisher')()
+  require('metascraper-publisher')(),
+  require('metascraper-title')()
 ])
 const got = require('got')
 const { writeFileSync } = require('fs')

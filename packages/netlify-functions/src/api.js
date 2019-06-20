@@ -3,9 +3,11 @@ const serverless = require('serverless-http')
 const compression = require('compression')
 
 const metascraper = require('metascraper')([
-  require('metascraper-title')(),
+  require('metascraper-author')(),
   require('metascraper-description')(),
-  require('metascraper-image')()
+  require('metascraper-image')(),
+  require('metascraper-publisher')(),
+  require('metascraper-title')()
 ])
 const got = require('got')
 
