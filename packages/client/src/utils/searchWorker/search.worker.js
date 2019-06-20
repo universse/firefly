@@ -1,5 +1,6 @@
 import matchSorter, { rankings } from 'match-sorter'
 import searchData from 'data/mivEB3GnRswZyWZMNkaO.json'
+import memoizeOne from 'memoize-one'
 
 const allCollectionIds = Object.keys(searchData).map(id => ({ id }))
 
@@ -7,52 +8,68 @@ const options = {
   keys: [
     {
       // minRanking: rankings.CASE_SENSITIVE_EQUAL,
-      key: collection => searchData[collection.id].name
+      key: ({ id }) => searchData[id].name
     },
     {
       maxRanking: rankings.WORD_STARTS_WITH,
-      key: collection => searchData[collection.id].tags
+      key: ({ id }) => searchData[id].tags
     }
   ]
   // threshold: rankings.ACRONYM
 }
 
-export async function search (input, sort, tags, collectionIds) {
+const match = memoizeOne((collectionIds, input) =>
+  matchSorter(JSON.parse(collectionIds) || allCollectionIds, input, options)
+)
+
+const countTags = memoizeOne(matched => {
   const tagCounts = {}
 
-  const matchedIds = matchSorter(
-    collectionIds || allCollectionIds,
-    input.trim(),
-    options
-  )
-
-  if (!collectionIds) return { collectionIds: matchedIds }
-
-  const filteredIds = matchedIds.filter(collection => {
-    searchData[collection.id].tags.forEach(tag => {
+  matched.forEach(({ id }) =>
+    searchData[id].tags.forEach(tag => {
       const lowered = tag.toLowerCase()
       tagCounts[lowered] = tagCounts[lowered] ? ++tagCounts[lowered] : 1
     })
+  )
 
-    return (
-      tags.every(filter =>
-        searchData[collection.id].tags.some(tag => tag.toLowerCase() === filter)
+  return tagCounts
+})
+
+const filter = memoizeOne((matched, tagCounts, tags) => {
+  tagCounts = { ...tagCounts }
+
+  const filtered = matched.filter(
+    ({ id }) =>
+      JSON.parse(tags).every(filter =>
+        searchData[id].tags.some(tag => tag.toLowerCase() === filter)
       ) ||
-      searchData[collection.id].tags.forEach(tag => {
+      searchData[id].tags.forEach(tag => {
         const lowered = tag.toLowerCase()
         tagCounts[lowered] = --tagCounts[lowered]
       })
-    )
-  })
+  )
+
+  return { filtered, tagCounts }
+})
+
+const order = memoizeOne((filtered, sort) =>
+  sort
+    ? filtered.sort(({ id: id1 }, { id: id2 }) =>
+        sort === 'asc'
+          ? searchData[id1].level - searchData[id2].level
+          : searchData[id2].level - searchData[id1].level
+      )
+    : filtered
+)
+
+export async function search (input, sort, tags, collectionIds = null) {
+  const matched = match(collectionIds, input.trim())
+  if (!collectionIds) return { collectionIds: matched }
+  const { filtered, tagCounts } = filter(matched, countTags(matched), tags)
+  const ordered = order(filtered, sort)
 
   return {
-    collectionIds: sort
-      ? filteredIds.sort(({ id: id1 }, { id: id2 }) =>
-          sort === 'asc'
-            ? searchData[id1].level - searchData[id2].level
-            : searchData[id2].level - searchData[id1].level
-        )
-      : filteredIds,
+    collectionIds: ordered,
     aggregatedTags: Object.entries(tagCounts)
   }
 }

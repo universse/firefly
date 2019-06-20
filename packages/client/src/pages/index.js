@@ -29,7 +29,12 @@ export default function IndexPage ({ data }) {
     let isFresh = true
 
     searchWorker
-      .search(searchInput, sort, tags, data.allCollectionIds.nodes)
+      .search(
+        searchInput,
+        sort,
+        JSON.stringify(tags),
+        JSON.stringify(data.allCollectionIds.nodes)
+      )
       .then(({ aggregatedTags, collectionIds }) => {
         if (isFresh) {
           setAggregatedTags(aggregatedTags)
