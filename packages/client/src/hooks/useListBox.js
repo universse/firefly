@@ -86,7 +86,7 @@ export default function useListBox ({ onSelect }) {
       disabled,
       id: item.id,
       onClick: select,
-      onMouseEnter: () => !disabled && setHighlightedIndex(index),
+      onMouseEnter: () => setHighlightedIndex(index),
       onMouseLeave: () => setHighlightedIndex(-1),
       role: 'option',
       tabIndex: -1
