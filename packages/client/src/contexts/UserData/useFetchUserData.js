@@ -17,10 +17,8 @@ export default function useFetchUserData (dispatch, user) {
     user &&
       firebaseWorker
         .fetchUserData()
-        .then(
-          userData =>
-            console.log(userData) ||
-            dispatch({ type: 'load-database', payload: userData })
+        .then(userData =>
+          dispatch({ type: 'load-database', payload: userData })
         )
   }, [dispatch, user])
 }

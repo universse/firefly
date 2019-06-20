@@ -11,10 +11,15 @@ export default function useListBox ({ onSelect }) {
   items.current = []
 
   const detailsRef = useRef()
+  const menuRef = useRef()
 
   const select = () => {
-    if (!items.current[highlightedIndex]) return
-    onSelect(items.current[highlightedIndex])
+    if (
+      items.current[highlightedIndex] &&
+      !menuRef.current.children[highlightedIndex].disabled
+    ) {
+      onSelect(items.current[highlightedIndex])
+    }
   }
 
   const detailsProps = {
@@ -28,7 +33,7 @@ export default function useListBox ({ onSelect }) {
         case 'ArrowDown':
           e.preventDefault()
 
-          !detailsRef.current.hasAttribute('open') &&
+          !detailsRef.current.open &&
             detailsRef.current.setAttribute('open', '')
 
           setHighlightedIndex(highlightedIndex =>
@@ -68,19 +73,21 @@ export default function useListBox ({ onSelect }) {
     return {
       'aria-activedescendant': activeDescendant,
       'aria-multiselectable': 'true',
-      onMouseLeave: () => setHighlightedIndex(-1),
+      ref: menuRef,
       role: 'listbox',
       ...props
     }
   }
 
-  function getMenuItemProps ({ index, item, ariaSelected }) {
+  function getMenuItemProps ({ index, item, isSelected, disabled }) {
     items.current.push(item)
     return {
-      'aria-selected': ariaSelected,
+      'aria-selected': isSelected,
+      disabled,
       id: item.id,
       onClick: select,
-      onMouseEnter: () => setHighlightedIndex(index),
+      onMouseEnter: () => !disabled && setHighlightedIndex(index),
+      onMouseLeave: () => setHighlightedIndex(-1),
       role: 'option',
       tabIndex: -1
     }

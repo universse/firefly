@@ -32,7 +32,7 @@ export default function useDropdownMenu ({ items, menuItemCount, onSelect }) {
         case 'ArrowDown':
           e.preventDefault()
 
-          !detailsRef.current.hasAttribute('open') &&
+          !detailsRef.current.open &&
             detailsRef.current.setAttribute('open', '')
 
           setHighlightedIndex(highlightedIndex =>

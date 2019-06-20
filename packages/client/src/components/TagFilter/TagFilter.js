@@ -57,7 +57,8 @@ export default function TagFilter ({ aggregatedTags }) {
               {...getMenuItemProps({
                 index,
                 item: { tag, id: tag.replace(/\s/g, '-') },
-                ariaSelected: isSelected
+                disabled: count === 0,
+                isSelected
               })}
             >
               {tag}

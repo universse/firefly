@@ -18,19 +18,18 @@ import searchWorker from 'utils/searchWorker'
 export default function IndexPage ({ data }) {
   const isDesktop = useContext(MediaContext)
   const {
-    query: { sort, tags }
+    query: { searchInput, sort, tags },
+    queryDispatch
   } = useContext(URLParamsContext)
 
   const [collectionIds, setCollectionIds] = useState([])
   const [aggregatedTags, setAggregatedTags] = useState([])
 
-  const [searchInput, setSearchInput] = useState('')
-
   useEffect(() => {
     let isFresh = true
 
     searchWorker
-      .search(searchInput, data.allCollectionIds.nodes, sort, tags)
+      .search(searchInput, sort, tags, data.allCollectionIds.nodes)
       .then(({ aggregatedTags, collectionIds }) => {
         if (isFresh) {
           setAggregatedTags(aggregatedTags)
@@ -43,7 +42,7 @@ export default function IndexPage ({ data }) {
 
   return (
     <>
-      {!isDesktop && <MobileFilters aggregatedTags={aggregatedTags} />}
+      {/* {!isDesktop && <MobileFilters aggregatedTags={aggregatedTags} />} */}
       <div
         css={css`
           height: 100%;
@@ -96,7 +95,7 @@ export default function IndexPage ({ data }) {
                     padding-left: 3rem;
                     width: 100%;
                   `}
-                  onChange={e => setSearchInput(e.target.value)}
+                  onChange={e => queryDispatch({ searchInput: e.target.value })}
                   placeholder={AriaLabels.SEARCH_BAR_LABEL}
                   type='text'
                   value={searchInput}
@@ -112,7 +111,7 @@ export default function IndexPage ({ data }) {
                     <button
                       aria-label='Clear Search Field'
                       className='IconButton'
-                      onClick={() => setSearchInput('')}
+                      onClick={() => queryDispatch({ searchInput: '' })}
                       type='button'
                     >
                       <Cross small />

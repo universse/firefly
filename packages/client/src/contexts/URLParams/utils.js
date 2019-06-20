@@ -1,8 +1,9 @@
-export function constructHref (sort, tags) {
+export function constructHref (searchInput, sort, tags) {
   const params = []
 
-  sort && params.push(`sort=${sort}`)
-  tags.length && params.push(`tags=${[...tags].reverse().join(',')}`)
+  searchInput.trim() && params.push(`q=${searchInput.trim()}`)
+  sort && params.push(`s=${sort}`)
+  tags.length && params.push(`t=${[...tags].reverse().join(',')}`)
 
   const queryString = params.join('&')
 

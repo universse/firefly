@@ -6,8 +6,9 @@ function init (search) {
   const params = new URLSearchParams(search)
 
   return {
-    sort: params.get('sort') || '',
-    tags: params.get('tags') ? params.get('tags').split(',') : [],
+    searchInput: params.get('q') || '',
+    sort: params.get('s') || '',
+    tags: params.get('t') ? params.get('t').split(',') : [],
     action: 'init'
   }
 }
@@ -38,8 +39,9 @@ export default function useURLParams ({ pathname, search }) {
   }, [pathname, search])
 
   useEffect(() => {
-    const { sort, tags, action } = query
-    !action && window.history.pushState({}, '', constructHref(sort, tags))
+    const { searchInput, sort, tags, action } = query
+    !action &&
+      window.history.pushState({}, '', constructHref(searchInput, sort, tags))
   }, [query])
 
   return useMemo(

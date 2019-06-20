@@ -4,7 +4,7 @@
   summary {
     align-items: center;
     border-bottom: 1px dotted var(--colors-gray800);
-    color: var(--colors-gray800);
+    color: var(--colors-gray900);
     display: inline-flex;
     font-size: 0.875rem;
     font-weight: 500;
@@ -35,18 +35,14 @@
       margin: 0 0.5rem 0.5rem 0;
       padding: 0 0.75rem;
 
-      &.highlighted {
+      &:not([disabled]).highlighted {
         background-color: var(--colors-gray200);
       }
 
-      &.selected {
+      &:not([disabled]).selected {
         background-color: var(--colors-gray900);
         border: 1px solid transparent;
         color: var(--colors-white900);
-
-        &.highlighted {
-          opacity: 0.82;
-        }
       }
 
       span {

@@ -17,7 +17,7 @@ const options = {
   // threshold: rankings.ACRONYM
 }
 
-export async function search (input, collectionIds, sort, tags) {
+export async function search (input, sort, tags, collectionIds) {
   const tagCounts = {}
 
   const matchedIds = matchSorter(
@@ -28,16 +28,22 @@ export async function search (input, collectionIds, sort, tags) {
 
   if (!collectionIds) return { collectionIds: matchedIds }
 
-  const filteredIds = matchedIds.filter(collection =>
-    tags.every(filter =>
-      searchData[collection.id].tags.some(tag => tag.toLowerCase() === filter)
+  const filteredIds = matchedIds.filter(collection => {
+    searchData[collection.id].tags.forEach(tag => {
+      const lowered = tag.toLowerCase()
+      tagCounts[lowered] = tagCounts[lowered] ? ++tagCounts[lowered] : 1
+    })
+
+    return (
+      tags.every(filter =>
+        searchData[collection.id].tags.some(tag => tag.toLowerCase() === filter)
+      ) ||
+      searchData[collection.id].tags.forEach(tag => {
+        const lowered = tag.toLowerCase()
+        tagCounts[lowered] = --tagCounts[lowered]
+      })
     )
-      ? searchData[collection.id].tags.forEach(tag => {
-          const lowered = tag.toLowerCase()
-          tagCounts[lowered] = tagCounts[lowered] ? ++tagCounts[lowered] : 1
-        }) || true
-      : false
-  )
+  })
 
   return {
     collectionIds: sort
@@ -47,10 +53,6 @@ export async function search (input, collectionIds, sort, tags) {
             : searchData[id2].level - searchData[id1].level
         )
       : filteredIds,
-
-    aggregatedTags: Object.entries(tagCounts).sort(
-      ([tag1, count1], [tag2, count2]) =>
-        tags.indexOf(tag2) - tags.indexOf(tag1) || count2 - count1
-    )
+    aggregatedTags: Object.entries(tagCounts)
   }
 }
