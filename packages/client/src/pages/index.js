@@ -16,7 +16,7 @@ import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
 import searchWorker from 'utils/searchWorker'
 
-export default function IndexPage ({ data }) {
+export default function IndexPage ({ data, location }) {
   const isDesktop = useContext(MediaContext)
   const {
     query: { searchInput, sort, tags },
@@ -28,7 +28,14 @@ export default function IndexPage ({ data }) {
     collectionIds: []
   })
 
-  const debouncedSearchInput = useDebouncedValue(searchInput, 250)
+  const [debouncedSearchInput, setDebouncedSearchInput] = useDebouncedValue(
+    searchInput,
+    300
+  )
+
+  useEffect(() => {
+    setDebouncedSearchInput(new URLSearchParams(location.search).get('q') || '')
+  }, [location, setDebouncedSearchInput])
 
   useEffect(() => {
     let isFresh = true
@@ -138,7 +145,8 @@ export default function IndexPage ({ data }) {
 IndexPage.propTypes = {
   data: PropTypes.exact({
     allCollectionIds: PropTypes.exact({ nodes: CollectionIdsType })
-  }).isRequired
+  }).isRequired,
+  location: PropTypes.object.isRequired
 }
 
 export const collections = graphql`

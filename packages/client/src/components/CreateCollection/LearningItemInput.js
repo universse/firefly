@@ -21,7 +21,7 @@ export default function LearningItemInput ({ index }) {
   const [item, dispatch] = useReducer(reducer, initialValue)
   const [isLoading, setIsLoading] = useState(false)
   const [hasError, setHasError] = useState(false)
-  const debouncedUrl = useDebouncedValue(item.url, 100)
+  const [debouncedUrl] = useDebouncedValue(item.url, 100)
 
   const handleChange = useCallback(e => {
     dispatch({ payload: { url: e.target.value } })

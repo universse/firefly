@@ -16,5 +16,5 @@ export default function useDebouncedValue (value, ms, cb) {
     }
   }, [cb, ms, value])
 
-  return debouncedValue
+  return [debouncedValue, setDebouncedValue]
 }

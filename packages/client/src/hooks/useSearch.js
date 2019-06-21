@@ -14,7 +14,7 @@ export default function useSearch (
   const [results, setResults] = useState([])
   const [isLoading, setIsLoading] = useState(initialIsLoading)
   const [isTyping, setIsTyping] = useState(false)
-  // const debouncedSearchInput = useDebouncedValue(searchInput, 100)
+  // const [debouncedSearchInput] = useDebouncedValue(searchInput, 100)
 
   const handleSelect = ({ id, name }) => {
     if (name) {

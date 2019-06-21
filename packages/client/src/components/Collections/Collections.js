@@ -12,19 +12,26 @@ function itemKey (index, data) {
   return data[index].id
 }
 
-const listStyle = css`
-  box-shadow: var(--shadows-03);
-  height: 100% !important;
-  width: 100%;
+const listStyle =
+  typeof window === 'object' &&
+  css`
+    height: 100% !important;
+    min-height: ${window.innerHeight}px;
+    overflow: initial !important;
+    width: 100%;
 
-  ${screens.desktop} {
-    border-radius: 8px;
-  }
+    & > ul:not(:empty) {
+      box-shadow: var(--shadows-03);
 
-  ul li:last-child > div {
-    border-bottom: 1px solid transparent;
-  }
-`
+      li:last-child > div {
+        border-bottom: 1px solid transparent;
+      }
+
+      ${screens.desktop} {
+        border-radius: 8px;
+      }
+    }
+  `
 
 export default function Collections ({ collectionIds }) {
   const listRef = useRef()
@@ -45,7 +52,7 @@ export default function Collections ({ collectionIds }) {
           itemData={collectionIds}
           itemKey={itemKey}
           itemSize={collectionHeightInRem * baseFontSize}
-          overscanCount={5}
+          overscanCount={3}
         >
           {Item}
         </List>

@@ -1,6 +1,6 @@
 import matchSorter, { rankings } from 'match-sorter'
 import searchData from 'data/mivEB3GnRswZyWZMNkaO.json'
-import memoizeOne from 'memoize-one'
+import { defaultMemoize } from 'reselect'
 
 const allCollectionIds = Object.keys(searchData).map(id => ({ id }))
 
@@ -18,11 +18,11 @@ const options = {
   // threshold: rankings.ACRONYM
 }
 
-const match = memoizeOne((collectionIds, input) =>
+const match = defaultMemoize((collectionIds, input) =>
   matchSorter(JSON.parse(collectionIds) || allCollectionIds, input, options)
 )
 
-const countTags = memoizeOne(matched => {
+const countTags = defaultMemoize(matched => {
   const tagCounts = {}
 
   matched.forEach(({ id }) =>
@@ -35,7 +35,7 @@ const countTags = memoizeOne(matched => {
   return tagCounts
 })
 
-const filter = memoizeOne((matched, tagCounts, tags) => {
+const filter = defaultMemoize((matched, tagCounts, tags) => {
   tagCounts = { ...tagCounts }
 
   const filtered = matched.filter(
@@ -52,7 +52,7 @@ const filter = memoizeOne((matched, tagCounts, tags) => {
   return { filtered, tagCounts }
 })
 
-const order = memoizeOne((filtered, sort) =>
+const order = defaultMemoize((filtered, sort) =>
   sort
     ? filtered.sort(({ id: id1 }, { id: id2 }) =>
         sort === 'asc'
