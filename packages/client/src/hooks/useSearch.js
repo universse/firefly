@@ -4,7 +4,6 @@ import { navigate } from 'gatsby'
 // import useDebouncedValue from 'hooks/useDebouncedValue'
 import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
 import searchWorker from 'utils/searchWorker'
-import { createCollectionPath } from '../../gatsby/utils'
 
 export default function useSearch (
   initialSearchInput = '',
@@ -16,17 +15,9 @@ export default function useSearch (
   const [isTyping, setIsTyping] = useState(false)
   // const [debouncedSearchInput] = useDebouncedValue(searchInput, 100)
 
-  const handleSelect = ({ id, name }) => {
-    if (name) {
-      const to = createCollectionPath({ id, name })
-      logClickSearchResult({ input: searchInput, to })
-      navigate(to)
-      setSearchInput(name)
-    } else {
-      navigate('/search', {
-        state: { searchInput, initialIsLoading: true }
-      })
-    }
+  const handleSelect = ({ to }) => {
+    logClickSearchResult({ input: searchInput, to })
+    navigate(to)
   }
 
   const handleSearchInput = e => {

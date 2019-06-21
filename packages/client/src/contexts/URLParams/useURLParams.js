@@ -1,14 +1,15 @@
 import { useEffect, useReducer, useMemo, useRef } from 'react'
 
 import { constructHref } from './utils'
+import URLParamKeys from 'constants/URLParamKeys'
 
 function init (search) {
   const params = new URLSearchParams(search)
 
   return {
-    searchInput: params.get('q') || '',
-    sort: params.get('s') || '',
-    tags: params.get('t') ? params.get('t').split(',') : [],
+    searchInput: params.get(URLParamKeys.SEARCH_INPUT) || '',
+    sort: params.get(URLParamKeys.SORT) || '',
+    tags: params.get(URLParamKeys.TAGS) ? params.get('t').split(',') : [],
     action: 'init'
   }
 }

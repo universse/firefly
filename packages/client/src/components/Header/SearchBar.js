@@ -7,6 +7,7 @@ import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useComboBox from 'hooks/useComboBox'
 import useSearch from 'hooks/useSearch'
 import AriaLabels from 'constants/AriaLabels'
+import URLParamKeys from 'constants/URLParamKeys'
 import { createCollectionPath } from '../../../gatsby/utils'
 
 function SearchBar ({ maxResultCount = Infinity }) {
@@ -65,36 +66,36 @@ function SearchBar ({ maxResultCount = Infinity }) {
               <Link
                 key={result.id}
                 {...highlightedIndex === index && { className: 'highlighted' }}
-                to={createCollectionPath({
-                  id: result.id,
-                  name: normalizedCollections[result.id].name
-                })}
                 {...getMenuItemProps({
                   index,
                   item: {
                     id: result.id,
-                    name: normalizedCollections[result.id].name
+                    to: createCollectionPath({
+                      id: result.id,
+                      name: normalizedCollections[result.id].name
+                    })
                   }
                 })}
               >
                 {normalizedCollections[result.id].name}
               </Link>
             ))}
-            {/* {totalResultCount > 0 && totalResultCount > maxResultCount && (
-              <button
+            {totalResultCount > 0 && totalResultCount > maxResultCount && (
+              <Link
                 className={`${
                   highlightedIndex === maxResultCount ? 'highlighted' : ''
                 }`}
                 {...getMenuItemProps({
                   index: maxResultCount,
                   item: {
-                    id: 'search'
+                    id: 'search',
+                    to: `/?${URLParamKeys.SEARCH_INPUT}=${searchInput}`
                   }
                 })}
               >
                 See all results
-              </button>
-            )} */}
+              </Link>
+            )}
             {!isTyping && !isLoading && !totalResultCount && (
               <span>No result found :(</span>
             )}

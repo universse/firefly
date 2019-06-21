@@ -14,6 +14,7 @@ import AriaLabels from 'constants/AriaLabels'
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
+import URLParamKeys from 'constants/URLParamKeys'
 import searchWorker from 'utils/searchWorker'
 
 export default function IndexPage ({ data, location }) {
@@ -34,7 +35,9 @@ export default function IndexPage ({ data, location }) {
   )
 
   useEffect(() => {
-    setDebouncedSearchInput(new URLSearchParams(location.search).get('q') || '')
+    setDebouncedSearchInput(
+      new URLSearchParams(location.search).get(URLParamKeys.SEARCH_INPUT) || ''
+    )
   }, [location, setDebouncedSearchInput])
 
   useEffect(() => {

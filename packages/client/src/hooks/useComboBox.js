@@ -107,11 +107,11 @@ export default function useComboBox ({ onSelect }) {
     items.current.push(item)
     return {
       'aria-selected': index === highlightedIndex,
-      id: item.id,
       onClick: select,
       onMouseEnter: () => setHighlightedIndex(index),
       role: 'option',
-      tabIndex: -1
+      tabIndex: -1,
+      ...item
     }
   }
 

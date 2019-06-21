@@ -11,24 +11,22 @@ export default function Authentication ({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const handleAuth = e => {
-      if (e.data.type === FirebaseWorkerEvents.AUTH_STATE_CHANGED) {
-        setUser(e.data.payload)
+    firebaseWorker.addEventListener(
+      'message',
+      e => {
+        if (e.data.type === FirebaseWorkerEvents.AUTH_STATE_CHANGED) {
+          setUser(e.data.payload)
 
-        if (e.data.payload) {
-          window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+          if (e.data.payload) {
+            window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
 
-          window.amplitude &&
-            window.amplitude.getInstance().setUserId(e.data.payload.uid)
+            window.amplitude &&
+              window.amplitude.getInstance().setUserId(e.data.payload.uid)
+          }
         }
-      }
-    }
-
-    firebaseWorker.addEventListener('message', handleAuth)
-
-    return () => {
-      firebaseWorker.removeEventListener('message', handleAuth)
-    }
+      },
+      { once: true }
+    )
   }, [])
 
   return (

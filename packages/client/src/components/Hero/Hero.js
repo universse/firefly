@@ -17,14 +17,11 @@ function Hero () {
 
   useEffect(() => {
     if (isNewUser()) {
-      const removeIsNewUser = () =>
-        window.localStorage.removeItem(LocalStorage.IS_NEW_USER)
-
-      window.addEventListener('beforeunload', removeIsNewUser)
-
-      return () => {
-        window.removeEventListener('beforeunload', removeIsNewUser)
-      }
+      window.addEventListener(
+        'beforeunload',
+        () => window.localStorage.removeItem(LocalStorage.IS_NEW_USER),
+        { once: true }
+      )
     }
   }, [])
 

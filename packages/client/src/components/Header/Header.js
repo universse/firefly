@@ -33,7 +33,7 @@ function Header ({ isIndexPage }) {
               <Logo />
             </Link>
           </div>
-          {!isIndexPage && <SearchBar maxResultCount={10} />}
+          {!isIndexPage && <SearchBar maxResultCount={7} />}
         </div>
         <Navigation />
       </HeaderWrapper>

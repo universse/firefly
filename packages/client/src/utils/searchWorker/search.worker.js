@@ -1,8 +1,13 @@
 import matchSorter, { rankings } from 'match-sorter'
+
 import searchData from 'data/mivEB3GnRswZyWZMNkaO.json'
-import { defaultMemoize } from 'reselect'
+import memoize from '../memoize'
 
 const allCollectionIds = Object.keys(searchData).map(id => ({ id }))
+
+export function init () {
+  return searchData
+}
 
 const options = {
   keys: [
@@ -18,11 +23,11 @@ const options = {
   // threshold: rankings.ACRONYM
 }
 
-const match = defaultMemoize((collectionIds, input) =>
+const match = memoize((collectionIds, input) =>
   matchSorter(JSON.parse(collectionIds) || allCollectionIds, input, options)
 )
 
-const countTags = defaultMemoize(matched => {
+const countTags = memoize(matched => {
   const tagCounts = {}
 
   matched.forEach(({ id }) =>
@@ -35,7 +40,7 @@ const countTags = defaultMemoize(matched => {
   return tagCounts
 })
 
-const filter = defaultMemoize((matched, tagCounts, tags) => {
+const filter = memoize((matched, tagCounts, tags) => {
   tagCounts = { ...tagCounts }
 
   const filtered = matched.filter(
@@ -52,7 +57,7 @@ const filter = defaultMemoize((matched, tagCounts, tags) => {
   return { filtered, tagCounts }
 })
 
-const order = defaultMemoize((filtered, sort) =>
+const order = memoize((filtered, sort) =>
   sort
     ? filtered.sort(({ id: id1 }, { id: id2 }) =>
         sort === 'asc'
@@ -62,7 +67,7 @@ const order = defaultMemoize((filtered, sort) =>
     : filtered
 )
 
-export async function search (input, sort, tags, collectionIds = null) {
+export function search (input, sort, tags, collectionIds = null) {
   const matched = match(collectionIds, input.trim())
   if (!collectionIds) return { collectionIds: matched }
   const { filtered, tagCounts } = filter(matched, countTags(matched), tags)

@@ -85,6 +85,7 @@ export function Wrapper ({ isOpen, ...props }) {
         left: 0;
         margin: 0.5rem auto;
         opacity: ${isOpen ? 1 : 0};
+        pointer-events: none;
         position: fixed;
         right: 0;
         transform: scale(${isOpen ? 1 : 0.8});

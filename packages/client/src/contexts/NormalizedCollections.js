@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { NormalizedCollectionsFilename } from 'common'
+
+import searchWorker from 'utils/searchWorker'
 
 export const NormalizedCollectionsContext = createContext()
 
@@ -8,9 +9,7 @@ export default function NormalizedCollections ({ children }) {
   const [normalizedCollections, setNormalizedCollections] = useState()
 
   useEffect(() => {
-    import(/* webpackMode: "eager" */ `data/${NormalizedCollectionsFilename}.json`).then(
-      ({ default: data }) => setNormalizedCollections(data)
-    )
+    searchWorker.init().then(setNormalizedCollections)
   }, [])
 
   return (
