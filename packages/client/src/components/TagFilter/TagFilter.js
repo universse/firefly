@@ -46,14 +46,14 @@ export default function TagFilter ({ aggregatedTags }) {
         {aggregatedTags.map(([tag, count], index) => {
           const isSelected = tags.includes(tag)
 
-          const classes = []
-          isSelected && classes.push('selected')
-          highlightedIndex === index && classes.push('highlighted')
+          let className = ''
+          highlightedIndex === index && (className += ' highlighted')
+          isSelected && (className += ' selected')
 
           return (
             <button
               key={tag}
-              {...classes.length && { className: classes.join(' ') }}
+              {...className && { className }}
               {...getMenuItemProps({
                 index,
                 item: { tag, id: tag.replace(/\s/g, '-') },

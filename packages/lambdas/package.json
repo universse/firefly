@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "apollo-server-lambda": "^2.6.3",
+    "apollo-server-lambda": "^2.6.4",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
-    "aws-sdk": "^2.478.0",
+    "aws-sdk": "^2.479.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-macros": "^2.6.1",
     "jest": "^24.8.0",

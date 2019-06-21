@@ -48,15 +48,15 @@ export default function SortByDifficulty () {
       </summary>
       <ul {...menuProps}>
         {SortOptions.map((option, index) => {
-          const classes = ['uppercase']
-          highlightedIndex === index && classes.push('highlighted')
-          selectedIndex === index && classes.push('selected')
+          let className = 'uppercase'
+          highlightedIndex === index && (className += ' highlighted')
+          selectedIndex === index && (className += ' selected')
 
           return (
             <button
               key={option.value}
               aria-label={option.label}
-              className={classes.join(' ')}
+              className={className}
               onClick={() => onSelect(option)}
               {...getMenuItemProps(index)}
             >

@@ -61,6 +61,7 @@ export function Surface (props) {
         max-width: 40rem;
         min-width: 22.5rem;
         padding: 0 0.5rem 0 1rem;
+        pointer-events: auto;
 
         ${screens.mobile} {
           flex-direction: column;
