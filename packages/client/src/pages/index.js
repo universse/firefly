@@ -11,10 +11,10 @@ import { Cross, Search } from 'icons'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
-import useDebouncedValue from 'hooks/useDebouncedValue'
+// import useDebouncedValue from 'hooks/useDebouncedValue'
 import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
-import URLParamKeys from 'constants/URLParamKeys'
+// import URLParamKeys from 'constants/URLParamKeys'
 import searchWorker from 'utils/searchWorker'
 
 export default function IndexPage ({ data, location }) {
@@ -29,31 +29,33 @@ export default function IndexPage ({ data, location }) {
     collectionIds: []
   })
 
-  const [debouncedSearchInput, setDebouncedSearchInput] = useDebouncedValue(
-    searchInput,
-    300
-  )
+  // const [debouncedSearchInput, setDebouncedSearchInput] = useDebouncedValue(
+  //   searchInput,
+  //   300
+  // )
 
-  useEffect(() => {
-    setDebouncedSearchInput(
-      new URLSearchParams(location.search).get(URLParamKeys.SEARCH_INPUT) || ''
-    )
-  }, [location, setDebouncedSearchInput])
+  // useEffect(() => {
+  //   setDebouncedSearchInput(
+  //     new URLSearchParams(location.search).get(URLParamKeys.SEARCH_INPUT) || ''
+  //   )
+  // }, [location, setDebouncedSearchInput])
 
   useEffect(() => {
     let isFresh = true
 
     searchWorker
       .search(
-        debouncedSearchInput,
+        searchInput,
         sort,
         JSON.stringify(tags),
-        JSON.stringify(data.allCollectionIds.nodes)
+        data.allCollectionIds.nodes.length
+          ? JSON.stringify(data.allCollectionIds.nodes)
+          : null
       )
       .then(state => isFresh && setState(state))
 
     return () => (isFresh = false)
-  }, [data, debouncedSearchInput, sort, tags])
+  }, [data, searchInput, sort, tags])
 
   return (
     <>

@@ -5,7 +5,7 @@ module.exports = ({ page, actions: { createPage } }) => {
   if (page.path === '/') {
     createPage({
       ...page,
-      context: { isIndexPage: true }
+      context: { category: 'all', isIndexPage: true }
     })
 
     Categories.forEach(category =>

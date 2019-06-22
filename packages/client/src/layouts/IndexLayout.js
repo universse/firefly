@@ -43,7 +43,7 @@ export default function IndexLayout ({ category, children, location }) {
 
   return (
     <URLParams location={location}>
-      <SEO title={category ? toTitleCase(category) : ''} />
+      <SEO title={category === 'all' ? '' : toTitleCase(category)} />
       <MobileHeader
         actions={actions}
         isScrollingDown={isScrollingDown}
