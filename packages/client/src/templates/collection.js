@@ -141,7 +141,7 @@ export default function CollectionTemplate ({
           <main
             css={css`
               min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
-              padding: 0 0 ${mobileProgressBarHeight + 1}rem;
+              padding-bottom: ${mobileProgressBarHeight + 1}rem;
 
               ${screens.desktop} {
                 min-height: calc(100vh - ${headerHeightInRem}rem);
@@ -187,6 +187,7 @@ export const query = graphql`
       tags
       urls {
         id
+        # description
         # image
         # publisher
         title

@@ -257,19 +257,3 @@ export function Tag (props) {
     />
   )
 }
-
-export function Title (props) {
-  return (
-    <span
-      css={css`
-        color: var(--colors-gray600);
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        line-height: 1.5rem;
-        padding-left: calc(1rem + 4px);
-      `}
-      {...props}
-    />
-  )
-}
