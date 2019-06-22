@@ -11,14 +11,17 @@ export function init () {
 
 const options = {
   keys: [
-    {
-      // minRanking: rankings.CASE_SENSITIVE_EQUAL,
-      key: ({ id }) => searchData[id].name
-    },
-    {
-      maxRanking: rankings.WORD_STARTS_WITH,
-      key: ({ id }) => searchData[id].tags
-    }
+    // { key:
+    ({ id }) => searchData[id].name,
+    // minRanking: rankings.CASE_SENSITIVE_EQUAL,
+    // },
+    // { key: ({ id }) => searchData[id].tags,
+    // maxRanking: rankings.WORD_STARTS_WITH
+    // },
+    // { key:
+    ({ id }) => `${searchData[id].name} ${searchData[id].tags.join(' ')}`
+    // maxRanking: rankings.EQUAL
+    // }
   ]
   // threshold: rankings.ACRONYM
 }
