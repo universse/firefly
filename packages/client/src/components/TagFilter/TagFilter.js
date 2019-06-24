@@ -9,7 +9,6 @@ import useListBox from 'hooks/useListBox'
 import AriaLabels from 'constants/AriaLabels'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
 
-//       onClick={() => queryDispatch({ tags: [] })}
 export default function TagFilter ({ aggregatedTags }) {
   const {
     query: { tags },
@@ -17,8 +16,11 @@ export default function TagFilter ({ aggregatedTags }) {
   } = useContext(URLParamsContext)
 
   const onSelect = ({ tag }) => {
-    queryDispatch({ tag })
-    // logClickTagFilter({ sort: value })
+    const updatedTags = tags.includes(tag)
+      ? tags.filter(t => t !== tag)
+      : [tag, ...tags]
+    queryDispatch({ tags: updatedTags })
+    logClickTagFilter({ tag, updatedTags })
   }
 
   const {

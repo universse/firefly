@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import Collections from 'components/Collections'
-import MobileFilters from 'components/MobileFilters'
+// import MobileFilters from 'components/MobileFilters'
 import SortByDifficulty from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
 import { Cross, Search } from 'icons'
@@ -15,6 +15,7 @@ import AriaLabels from 'constants/AriaLabels'
 import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
 // import URLParamKeys from 'constants/URLParamKeys'
+import { logInputSearch } from 'utils/amplitudeUtils'
 import searchWorker from 'utils/searchWorker'
 
 export default function IndexPage ({ data, location }) {
@@ -66,7 +67,7 @@ export default function IndexPage ({ data, location }) {
           width: 100%;
 
           ${screens.desktop} {
-            width: 72.5%;
+            width: 70%;
           }
         `}
       >
@@ -112,7 +113,10 @@ export default function IndexPage ({ data, location }) {
                     padding-left: 3rem;
                     width: 100%;
                   `}
-                  onChange={e => queryDispatch({ searchInput: e.target.value })}
+                  onChange={e => {
+                    queryDispatch({ searchInput: e.target.value })
+                    logInputSearch(e.target.value, true)
+                  }}
                   placeholder={AriaLabels.SEARCH_BAR_LABEL}
                   type='text'
                   value={searchInput}

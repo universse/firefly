@@ -15,16 +15,6 @@ function init (search) {
 }
 
 function reducer (state, payload) {
-  if (payload.tag) {
-    const tag = payload.tag
-    const currentTags = state.tags
-
-    const tags = currentTags.includes(tag)
-      ? currentTags.filter(t => t !== tag)
-      : [tag, ...currentTags]
-
-    return { ...state, tags, action: undefined }
-  }
   return payload.action ? payload : { ...state, ...payload, action: undefined }
 }
 

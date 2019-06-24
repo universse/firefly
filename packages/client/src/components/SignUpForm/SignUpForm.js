@@ -11,6 +11,7 @@ import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
 import firebaseWorker from 'utils/firebaseWorker'
+import { logClickSignUp } from 'utils/amplitudeUtils'
 
 ReactModal.setAppElement('#___gatsby')
 
@@ -27,6 +28,8 @@ function SignUpForm () {
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    logClickSignUp(email)
 
     setIsloading(true)
 

@@ -2,6 +2,7 @@ const EventTypes = {
   CLICK_CTA: 'click CTA',
   CLICK_LEARNING_RESOURCE: 'click learning resource',
   CLICK_SEARCH_RESULT: 'click search result',
+  CLICK_SIGN_UP: 'click sign up',
   CLICK_TAG: 'click tag',
   CLICK_TAG_FILTER: 'click tag filter',
   INPUT_SEARCH: 'input search',
@@ -31,6 +32,10 @@ export const logClickSearchResult = ({ input, to }) =>
     .getInstance()
     .logEvent(EventTypes.CLICK_SEARCH_RESULT, { input, to })
 
+export const logClickSignUp = email =>
+  window.amplitude &&
+  window.amplitude.getInstance().logEvent(EventTypes.CLICK_SIGN_UP, { email })
+
 export const logClickTag = ({ tag }) =>
   window.amplitude &&
   window.amplitude.getInstance().logEvent(EventTypes.CLICK_TAG, { tag })
@@ -41,10 +46,11 @@ export const logClickTagFilter = ({ tag, updatedTags }) =>
     .getInstance()
     .logEvent(EventTypes.CLICK_TAG_FILTER, { tag, updatedTags })
 
-export const logInputSearch = input => {
+export const logInputSearch = (input, isIndexPage = false) =>
   window.amplitude &&
-    window.amplitude.getInstance().logEvent(EventTypes.INPUT_SEARCH, { input })
-}
+  window.amplitude
+    .getInstance()
+    .logEvent(EventTypes.INPUT_SEARCH, { input, isIndexPage })
 
 export const logSignUpIntent = () =>
   window.amplitude &&
