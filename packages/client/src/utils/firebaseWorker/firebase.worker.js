@@ -8,7 +8,7 @@ import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
 const actionCodeSettings = {
-  url: `${process.env.GATSBY_ORIGIN}/welcome`,
+  url: `${global.location.origin}/welcome`,
   handleCodeInApp: true
 }
 
