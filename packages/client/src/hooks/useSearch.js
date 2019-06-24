@@ -15,8 +15,9 @@ export default function useSearch (
   const [isTyping, setIsTyping] = useState(false)
   // const [debouncedSearchInput] = useDebouncedValue(searchInput, 100)
 
-  const handleSelect = ({ to }) => {
+  const handleSelect = ({ meta: { name }, to }) => {
     logClickSearchResult({ input: searchInput, to })
+    name && setSearchInput(name)
     navigate(to)
   }
 

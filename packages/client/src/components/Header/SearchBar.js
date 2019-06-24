@@ -73,7 +73,10 @@ function SearchBar ({ maxResultCount = Infinity }) {
                     to: createCollectionPath({
                       id: result.id,
                       name: normalizedCollections[result.id].name
-                    })
+                    }),
+                    meta: {
+                      name: normalizedCollections[result.id].name
+                    }
                   }
                 })}
               >

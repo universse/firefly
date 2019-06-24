@@ -105,13 +105,15 @@ export default function useComboBox ({ onSelect }) {
 
   function getMenuItemProps ({ index, item }) {
     items.current.push(item)
+    const { meta, ...props } = item
+
     return {
       'aria-selected': index === highlightedIndex,
       onClick: select,
       onMouseEnter: () => setHighlightedIndex(index),
       role: 'option',
       tabIndex: -1,
-      ...item
+      ...props
     }
   }
 
