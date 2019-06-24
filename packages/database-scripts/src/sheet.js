@@ -11,6 +11,8 @@ const { writeFileSync } = require('fs')
 const { resolve } = require('path')
 const { toTitleCase } = require('common')
 
+const { truncate } = require('./utils')
+
 const workbook = XLSX.readFile(resolve(__dirname, '../data/raw.xlsx'))
 const worksheet = workbook.Sheets['Sheet1']
 
@@ -45,7 +47,7 @@ const processed = { collections: [] }
                 })
 
                 urls[i] = {
-                  description,
+                  description: truncate(description),
                   image,
                   publisher,
                   title: toTitleCase(title),
