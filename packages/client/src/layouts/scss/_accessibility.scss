@@ -7,22 +7,37 @@ input[type="email"] {
 
 a[href],
 area[href],
-button:not([disabled]),
+button,
 summary,
 iframe,
-input:not([disabled]),
-select:not([disabled]),
-textarea:not([disabled]),
-*[tabindex]:not([tabindex="0"]):not([tabindex^="-"]),
-*[contenteditable] {
+input,
+select,
+textarea,
+[tabindex],
+[contenteditable] {
   transition: box-shadow 0.2s;
 
   &:focus {
     outline: none;
   }
 
-  body.keyboard-in-use &:focus {
+  .using-keyboard &:focus {
     box-shadow: var(--input-focused);
+  }
+}
+
+[disabled] {
+  opacity: 0.4;
+
+  .using-keyboard &:focus {
+    box-shadow: none;
+  }
+}
+
+[tabindex="0"],
+[tabindex^="-"] {
+  .using-keyboard &:focus {
+    box-shadow: none;
   }
 }
 
