@@ -5,7 +5,7 @@ export function ErrorMessage (props) {
   return (
     <span
       css={css`
-        color: var(--colors-brand500);
+        color: var(--brand500);
         font-size: 0.875rem;
         font-weight: 500;
       `}
@@ -19,9 +19,9 @@ export function Input (props) {
     <input
       autoComplete='off'
       css={css`
-        background-color: var(--colors-gray200);
+        background-color: var(--gray200);
         border-radius: 1.25rem;
-        color: var(--colors-gray900);
+        color: var(--black900);
         font-size: 0.9375rem;
         height: 2.5rem;
         padding-left: 1rem;

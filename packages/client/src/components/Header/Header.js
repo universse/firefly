@@ -5,7 +5,7 @@ import { css } from '@emotion/core'
 
 import SearchBar from './SearchBar'
 import Navigation from 'components/Navigation'
-import { Logo } from 'icons'
+import { Logo } from 'assets/icons'
 import { HeaderTag, HeaderWrapper } from './styled'
 
 function Header ({ isIndexPage }) {
@@ -20,7 +20,7 @@ function Header ({ isIndexPage }) {
         >
           <div
             css={css`
-              margin-right: 1.5rem;
+              margin-right: 2.75rem;
             `}
           >
             <Link

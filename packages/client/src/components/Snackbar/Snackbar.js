@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { ActionButton, Message, Surface, Wrapper } from './styled'
-import { Cross } from 'icons'
+import { Cross } from 'assets/icons'
 import { screens } from 'constants/Styles'
 
 function Snackbar ({

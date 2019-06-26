@@ -1,0 +1,15 @@
+::selection {
+  background-color: var(--accent500);
+  color: #fff;
+}
+
+input {
+  &::placeholder {
+    color: var(--black500);
+    opacity: 1;
+  }
+
+  &:invalid {
+    box-shadow: var(--input-invalid);
+  }
+}

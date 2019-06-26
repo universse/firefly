@@ -2,15 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { ChevronDown } from 'icons'
+import { ChevronDown } from 'assets/icons'
 
 export function OptionButton ({ isHighlighted, isSelected, ...props }) {
   return (
     <button
       css={css`
-        color: ${isSelected
-          ? 'var(--colors-gray800)'
-          : 'var(--colors-gray500)'};
+        color: ${isSelected ? 'var(--black800)' : 'var(--black500)'};
         font-size: 0.875rem;
         font-weight: ${isSelected ? 600 : 400};
         height: 2.5rem;
@@ -31,7 +29,7 @@ export function ToggleButton ({ children, ...props }) {
     <button
       css={css`
         align-items: center;
-        color: var(--colors-gray800);
+        color: var(--black800);
         display: flex;
         font-size: 0.875rem;
         font-weight: 600;
@@ -45,7 +43,7 @@ export function ToggleButton ({ children, ...props }) {
       {children}
       <div
         css={css`
-          color: var(--colors-gray600);
+          color: var(--gray600);
           height: 1.5rem;
         `}
       >
@@ -59,7 +57,7 @@ export function TogglerLabel (props) {
   return (
     <label
       css={css`
-        color: var(--colors-gray900);
+        color: var(--black900);
         font-size: 1rem;
         line-height: 1.5rem;
       `}

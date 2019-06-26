@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState, useLayoutEffect } from 'react'
 import { css } from '@emotion/core'
+import { Link } from 'gatsby'
 
 import { Collection } from 'components/Collections'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { AuthenticationContext } from 'contexts/Authentication'
 import { MediaContext } from 'contexts/Media'
+import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
+import { EmptyLibrary } from 'assets/illustrations'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import {
@@ -20,12 +23,14 @@ import {
 import { logSignUpIntent } from 'utils/amplitudeUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
+// TODO Suspense
 export default function MyLibraryPage () {
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
   const isDesktop = useContext(MediaContext)
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
+  const normalizedCollections = useContext(NormalizedCollectionsContext)
 
   const [hasSaved, setHasSaved] = useState()
 
@@ -91,7 +96,7 @@ export default function MyLibraryPage () {
             >
               <h1
                 css={css`
-                  color: var(--colors-gray800);
+                  color: var(--black800);
                   font-size: 1.25rem;
                   line-height: 2rem;
                 `}
@@ -100,21 +105,55 @@ export default function MyLibraryPage () {
               </h1>
             </div>
           )}
-          <ul
-            css={css`
-              box-shadow: var(--shadows-03);
+          {userData && !hasSaved && (
+            <div
+              css={css`
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+              `}
+            >
+              <EmptyLibrary />
+              <span
+                css={css`
+                  color: var(--black900);
+                  font-family: Spectral, serif;
+                  font-size: 1.5rem;
+                  font-weight: 800;
+                  line-height: 2rem;
+                  text-align: center;
+                `}
+              >
+                Your library is empty
+              </span>
+              <span
+                css={css`
+                  color: var(--black800);
+                  font-size: 1.125rem;
+                  font-weight: 400;
+                  line-height: 2rem;
+                  text-align: center;
+                `}
+              >
+                Save a collection and it will show up here.
+              </span>
+            </div>
+          )}
+          {normalizedCollections && hasSaved && (
+            <ul
+              css={css`
+                box-shadow: var(--shadows-03);
 
-              li:last-child > div {
-                border-bottom: 1px solid transparent;
-              }
+                li:last-child > div {
+                  border-bottom: 1px solid transparent;
+                }
 
-              ${screens.nonMobile} {
-                border-radius: 8px;
-              }
-            `}
-          >
-            {userData &&
-              Object.keys(userData.save).map(id => (
+                ${screens.nonMobile} {
+                  border-radius: 8px;
+                }
+              `}
+            >
+              {Object.keys(userData.save).map(id => (
                 <li
                   key={id}
                   css={css`
@@ -124,7 +163,8 @@ export default function MyLibraryPage () {
                   <Collection id={id} isLoved={!!userData.love[id]} isSaved />
                 </li>
               ))}
-          </ul>
+            </ul>
+          )}
         </div>
       </main>
     </>

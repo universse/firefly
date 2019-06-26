@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { MobileNavLink } from './styled'
-import { Home, Search, Library, User } from 'icons'
+import { Home, Search, Library, User } from 'assets/icons'
 import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
 
 function MobileNavigation ({ isIndexPage }) {
   return (
     <nav
       css={css`
-        background-color: var(--colors-white900);
-        border-top: 1px solid var(--colors-gray200);
+        background-color: var(--white900);
+        border-top: 1px solid var(--gray200);
         bottom: 0;
         height: ${mobileNavigationHeightInRem}rem;
         position: fixed;

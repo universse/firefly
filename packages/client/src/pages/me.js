@@ -14,7 +14,7 @@ import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function MePage (props) {
   const isDesktop = useContext(MediaContext)
-  // sign up modal
+
   // created collections
   return (
     <>
@@ -22,7 +22,6 @@ export default function MePage (props) {
       <MobileHeader shadow title='Profile' />
       <main
         css={css`
-          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
           padding: 0 0 1rem;
 

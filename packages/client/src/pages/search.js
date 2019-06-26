@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 
 import SEO from 'components/SEO'
 import SearchBar from 'components/SearchBar'
-import { Back, Search } from 'icons'
+import { Back, Search } from 'assets/icons'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
 import {
@@ -60,7 +60,7 @@ export default function SearchPage ({ location }) {
         <div
           className='base'
           css={css`
-            color: var(--colors-gray600);
+            color: var(--gray600);
             position: relative;
 
             ${screens.desktop} {

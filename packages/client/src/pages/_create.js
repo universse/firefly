@@ -5,7 +5,7 @@ import CreateCollection from 'components/CreateCollection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
-import { Back } from 'icons'
+import { Back } from 'assets/icons'
 import AriaLabels from 'constants/AriaLabels'
 import {
   headerHeightInRem,
@@ -35,7 +35,6 @@ export default function CreatePage () {
       />
       <main
         css={css`
-          background-color: var(--colors-gray100);
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
 
           ${screens.nonMobile} {

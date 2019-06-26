@@ -14,7 +14,7 @@ function parseUrl ({ type, ...props }) {
   }
 }
 
-function truncate (str, length = 80) {
+function truncate (str, length = 120) {
   if (str.length <= length) return str
   let final
   if (str.slice(0, length).endsWith(' ')) final = str.slice(0, length - 1)

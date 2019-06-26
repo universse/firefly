@@ -10,9 +10,9 @@ export function GhostButton (props) {
     <button
       css={css`
         align-items: center;
-        border: 2px solid var(--colors-brand500);
+        border: 2px solid var(--brand500);
         border-radius: 1rem;
-        color: var(--colors-brand500);
+        color: var(--brand500);
         display: flex;
         font-size: 0.9375rem;
         font-weight: 700;
@@ -20,7 +20,7 @@ export function GhostButton (props) {
         padding: 0 1rem;
 
         &:hover {
-          background-color: var(--colors-brand500);
+          background-color: var(--brand500);
           color: #fff;
         }
       `}
@@ -33,10 +33,10 @@ export function GhostButton (props) {
 export function MobileNavLink ({ label, Icon, ...props }) {
   return (
     <Link
-      activeStyle={{ color: 'var(--colors-brand500)' }}
+      activeStyle={{ color: 'var(--brand500)' }}
       css={css`
         align-items: center;
-        color: var(--colors-gray600);
+        color: var(--gray600);
         display: flex;
         flex-direction: column;
         height: ${mobileNavigationHeightInRem}rem;
@@ -72,18 +72,18 @@ MobileNavLink.propTypes = {
 export function NavLink (props) {
   return (
     <Link
-      activeStyle={{ borderColor: 'var(--colors-brand500)' }}
+      activeStyle={{ borderColor: 'var(--brand500)' }}
       css={css`
         align-items: center;
         border-bottom: 2px solid transparent;
-        color: var(--colors-gray900);
+        color: var(--black900);
         display: flex;
         font-size: 0.9375rem;
         font-weight: 500;
         height: 2rem;
 
         &:hover {
-          border-bottom: 2px solid var(--colors-brand500);
+          border-bottom: 2px solid var(--brand500);
         }
       `}
       {...props}

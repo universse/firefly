@@ -1,4 +1,4 @@
-import { Article, Book, Code, Course, Podcast, Url, Video } from '../icons'
+import { Article, Book, Code, Course, Podcast, Url, Video } from 'assets/icons'
 
 export default {
   ARTICLE: Article,

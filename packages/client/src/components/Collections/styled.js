@@ -24,7 +24,7 @@ export function CollectionTitle ({ id, name }) {
     >
       <h3
         css={css`
-          color: var(--colors-gray900);
+          color: var(--black900);
           font-size: 1.25rem;
           font-weight: 700;
           line-height: 1.75rem;
@@ -45,7 +45,7 @@ export function CollectionWrapper (props) {
   return (
     <div
       css={css`
-        border-bottom: 1px solid var(--colors-gray400);
+        border-bottom: 1px solid var(--gray400);
         display: flex;
         flex-direction: column;
         height: ${collectionHeightInRem}rem;

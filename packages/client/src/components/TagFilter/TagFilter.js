@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { URLParamsContext } from 'contexts/URLParams'
-import { Tag } from 'icons'
-// import { ClearFilterButton, Count, Tag } from './styled'
+import { Tag } from 'assets/icons'
 import useListBox from 'hooks/useListBox'
 import AriaLabels from 'constants/AriaLabels'
 import { logClickTagFilter } from 'utils/amplitudeUtils'
@@ -37,7 +36,7 @@ export default function TagFilter ({ aggregatedTags }) {
         Filter by Tags
         <div
           css={css`
-            color: var(--colors-gray600);
+            color: var(--gray600);
             margin-left: 0.5rem;
           `}
         >
@@ -69,6 +68,33 @@ export default function TagFilter ({ aggregatedTags }) {
           )
         })}
       </ul>
+      {!!tags.length && (
+        <div
+          css={css`
+            position: absolute;
+            right: 0;
+            top: 0;
+          `}
+        >
+          <button
+            aria-label='Clear All Filters'
+            css={css`
+              color: var(--brand500);
+              font-size: 0.875rem;
+              font-weight: 600;
+              line-height: 1.5rem;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            `}
+            onClick={() => queryDispatch({ tags: [] })}
+            type='button'
+          >
+            Clear All
+          </button>
+        </div>
+      )}
     </details>
   )
 }

@@ -43,7 +43,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/images`
+        path: `${__dirname}/src/assets/images`
       }
     },
     {
@@ -55,10 +55,11 @@ module.exports = {
             type: 'urls',
             collection: 'urls',
             // description, image, publisher, title, type, url
-            map: ({ ti, ty, u, c }) => ({
+            map: ({ c, d, ti, ty, u }) => ({
+              description: d,
               title: ti,
-              url: u,
-              type: ItemTypes[ty]
+              type: ItemTypes[ty],
+              url: u
             })
           },
           {
@@ -110,7 +111,7 @@ module.exports = {
         background_color: '#ffffff',
         theme_color: '#e4234f',
         display: 'standalone',
-        icon: 'src/images/icon.png'
+        icon: 'src/assets/images/icon.png'
       }
     },
     'gatsby-plugin-offline',

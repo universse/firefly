@@ -8,7 +8,7 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
-import { Back, Heart, Save, Share, Suggest } from 'icons'
+import { Back, Heart, Save, Share, Suggest } from 'assets/icons'
 // import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
@@ -138,7 +138,8 @@ export default function CollectionTemplate ({
             shadow
             title='Collection'
           />
-          <main
+          <div
+            className='base'
             css={css`
               min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
               padding-bottom: ${mobileProgressBarHeight + 1}rem;
@@ -147,23 +148,34 @@ export default function CollectionTemplate ({
                 min-height: calc(100vh - ${headerHeightInRem}rem);
               }
             `}
-            id='main'
           >
-            {collections && (
-              <CollectionView
-                check={check}
-                collection={collections}
-                isLoved={isLoved}
-                isSaved={isSaved}
-              />
-            )}
+            <div
+              css={css`
+                display: grid;
+                grid-gap: 3rem 2rem;
+                grid-template-areas:
+                  '. title title'
+                  'widget list sidebar';
+                grid-template-columns: 3rem 1fr 15rem;
+                margin-top: 2.5rem;
+              `}
+            >
+              {collections && (
+                <CollectionView
+                  check={check}
+                  collection={collections}
+                  isLoved={isLoved}
+                  isSaved={isSaved}
+                />
+              )}
 
-            {/* <FABDesktop
+              {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
               <Suggest />
             </FABDesktop> */}
-          </main>
+            </div>
+          </div>
         </>
       )}
     </>
@@ -187,7 +199,7 @@ export const query = graphql`
       tags
       urls {
         id
-        # description
+        description
         # image
         # publisher
         title

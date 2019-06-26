@@ -18,9 +18,7 @@ import {
   shouldHaveMobileNavigation
 } from 'utils/pathnameUtils'
 
-import './scss/index.scss'
-import 'fonts/Inter/index.css'
-import 'fonts/PlayfairDisplay/index.css'
+import 'scss/index.scss'
 
 export default function Layout ({
   pageContext: { category, isIndexPage },
@@ -68,6 +66,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
-    category: PropTypes.string
+    category: PropTypes.string,
+    isIndexPage: PropTypes.bool
   }).isRequired
 }

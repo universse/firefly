@@ -8,11 +8,11 @@ export function ClearFilterButton (props) {
   return (
     <button
       css={css`
-        color: var(--colors-gray500);
+        color: var(--black500);
         font-size: 0.875rem;
 
         &:hover {
-          color: var(--colors-gray900);
+          color: var(--black900);
           text-decoration: underline;
         }
       `}
@@ -26,7 +26,7 @@ export function Count ({ isSelected, ...props }) {
   return (
     <span
       css={css`
-        color: var(--colors-gray900);
+        color: var(--black900);
         font-size: 0.875rem;
         line-height: 1.25rem;
 
@@ -54,10 +54,10 @@ export function MobileTag ({ isActive, ...props }) {
     // eslint-disable-next-line
     <a
       css={css`
-        background-color: ${isActive ? 'var(--colors-gray900)' : 'transparent'};
-        border: ${isActive ? 'none' : '1px solid var(--colors-gray300)'};
+        background-color: ${isActive ? 'var(--black900)' : 'transparent'};
+        border: ${isActive ? 'none' : '1px solid var(--black300)'};
         border-radius: 1rem;
-        color: ${isActive ? 'var(--colors-white900)' : 'var(--colors-gray900)'};
+        color: ${isActive ? 'var(--white900)' : 'var(--black900)'};
         display: block;
         font-size: 0.875rem;
         font-weight: 500;

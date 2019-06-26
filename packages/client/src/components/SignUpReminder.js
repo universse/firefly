@@ -30,8 +30,8 @@ export default function SignUpReminder () {
       >
         <h3
           css={css`
-            color: var(--colors-gray900);
-            font-size: 1.25rem;
+            color: var(--black900);
+            font-size: 1.125rem;
             font-weight: 500;
             line-height: 2rem;
             text-align: center;

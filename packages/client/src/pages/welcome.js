@@ -63,7 +63,7 @@ export default function WelcomePage () {
       )}
       <span
         css={css`
-          color: var(--colors-gray900);
+          color: var(--black900);
           font-size: 1rem;
           font-weight: 500;
           line-height: 2rem;
@@ -75,7 +75,7 @@ export default function WelcomePage () {
       {hasError && (
         <span
           css={css`
-            color: var(--colors-gray900);
+            color: var(--black900);
             font-size: 1rem;
             font-weight: 500;
             line-height: 2rem;
@@ -85,7 +85,11 @@ export default function WelcomePage () {
           Go to{' '}
           <Link
             css={css`
-              color: var(--colors-brand500);
+              color: var(--brand500);
+
+              &:hover {
+                text-decoration: underline;
+              }
             `}
             to='/'
           >

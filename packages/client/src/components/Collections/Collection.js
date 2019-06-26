@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { DifficultyLevels } from 'common'
 
 import Tags from './Tags'
-import { Heart, Level, Resources, Save } from 'icons'
+import { Heart, Level, Resources, Save } from 'assets/icons'
 import { CollectionTitle, CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty } from 'components/common'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
@@ -69,7 +69,7 @@ function Collection ({ id, isLoved, isSaved }) {
             <div
               css={css`
                 align-items: center;
-                color: var(--colors-gray600);
+                color: var(--gray600);
                 display: flex;
                 height: 1.5rem;
                 margin-right: 0.25rem;
@@ -84,7 +84,7 @@ function Collection ({ id, isLoved, isSaved }) {
             >
               <span
                 css={css`
-                  color: var(--colors-gray800);
+                  color: var(--black800);
                   font-size: 0.8125rem;
                   font-weight: 500;
                   line-height: 1.5rem;
@@ -115,7 +115,7 @@ function Collection ({ id, isLoved, isSaved }) {
               <Save filled={isSaved} />
             </button>
             {/* v3 */}
-            <button
+            {/* <button
               aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
               className='IconButton'
               onClick={onActionClick}
@@ -123,7 +123,7 @@ function Collection ({ id, isLoved, isSaved }) {
               value={id}
             >
               <Heart filled={isLoved} />
-            </button>
+            </button> */}
           </ActionBar>
         </div>
       </CollectionWrapper>

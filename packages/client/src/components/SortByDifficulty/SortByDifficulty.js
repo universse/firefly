@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import { URLParamsContext } from 'contexts/URLParams'
-import { ChevronDown } from 'icons'
+import { ChevronDown } from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import SortOptions from 'constants/SortOptions'
 import { logSortDifficulty } from 'utils/amplitudeUtils'
@@ -39,7 +39,7 @@ export default function SortByDifficulty () {
         {SortOptions[selectedIndex].label}
         <div
           css={css`
-            color: var(--colors-gray600);
+            color: var(--gray600);
             height: 1.5rem;
           `}
         >

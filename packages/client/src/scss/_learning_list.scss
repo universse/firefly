@@ -1,0 +1,82 @@
+.LearningList {
+  align-self: start;
+  border-radius: 8px;
+  box-shadow: var(--shadows-02);
+  grid-area: list;
+  padding: 0 1rem;
+
+  li {
+    border-bottom: 1px solid var(--gray400);
+    height: 10rem;
+    padding: 1rem 0;
+    position: relative;
+  }
+
+  li:last-child {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+.LearningItem {
+  $height: 8rem;
+
+  display: flex;
+  height: $height;
+  justify-content: space-between;
+
+  img {
+    border-radius: 4px;
+    flex: 0 0 $height;
+    object-fit: cover;
+  }
+
+  h2 {
+    color: var(--black900);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+
+    @media #{$tablet} {
+      color: var(--black800);
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+
+    @media #{$desktop} {
+      color: var(--black900);
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+    }
+  }
+
+  .Link {
+    display: none;
+    margin-left: 0.375rem;
+  }
+
+  &:hover {
+    h2 {
+      text-decoration: underline;
+    }
+
+    .Link {
+      color: var(--black900);
+      display: block;
+    }
+  }
+
+  p {
+    color: var(--gray600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+  }
+
+  span {
+    color: var(--black500);
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+  }
+}

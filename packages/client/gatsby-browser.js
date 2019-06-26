@@ -4,11 +4,11 @@ export const onClientEntry = () => {
   process.env.NODE_ENV === 'development' && console.clear()
 
   window.addEventListener('keydown', () =>
-    document.body.classList.add('keyboard-in-use')
+    document.body.classList.add('using-keyboard')
   )
 
   window.addEventListener('mousedown', () =>
-    document.body.classList.remove('keyboard-in-use')
+    document.body.classList.remove('using-keyboard')
   )
 }
 

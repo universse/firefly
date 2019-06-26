@@ -33,7 +33,7 @@ function MobileHeader ({
           <div>
             <h2
               css={css`
-                color: var(--colors-gray800);
+                color: var(--black800);
                 font-size: 1.25rem;
                 font-weight: 500;
                 line-height: 1.5rem;

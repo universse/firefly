@@ -10,14 +10,14 @@ export function CollectionTitle (props) {
     // eslint-disable-next-line
     <h1
       css={css`
-        color: var(--colors-gray900);
+        color: var(--black900);
         font-size: 1.25rem;
         font-weight: 700;
         line-height: 2.25rem;
 
         ${screens.desktop} {
           font-size: 2rem;
-          line-height: 3rem;
+          line-height: 2.5rem;
         }
       `}
       {...props}
@@ -48,19 +48,19 @@ export function LinkTitle ({ href, onClick, title }) {
     >
       <h2
         css={css`
-          color: var(--colors-gray900);
+          color: var(--black900);
           font-size: 1rem;
           font-weight: 600;
           line-height: 1.5rem;
 
           ${screens.tablet} {
-            color: var(--colors-gray800);
+            color: var(--black800);
             font-size: 1.125rem;
             line-height: 1.5rem;
           }
 
           ${screens.desktop} {
-            color: var(--colors-gray800);
+            color: var(--black800);
             font-size: 1.25rem;
             line-height: 2rem;
           }

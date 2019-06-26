@@ -10,8 +10,6 @@ function Footer () {
   return (
     <footer
       css={css`
-        background-color: var(--colors-gray100);
-
         ${screens.nonDesktop} {
           display: none;
         }
@@ -21,7 +19,7 @@ function Footer () {
         className='base'
         css={css`
           align-items: center;
-          border-top: 1px solid var(--colors-gray200);
+          border-top: 1px solid var(--gray200);
           display: flex;
           height: 3rem;
           justify-content: center;
@@ -29,7 +27,7 @@ function Footer () {
       >
         <p
           css={css`
-            color: var(--colors-gray800);
+            color: var(--black800);
             font-size: 0.8125rem;
             font-weight: 500;
           `}
@@ -38,7 +36,7 @@ function Footer () {
           <span
             aria-label='Love'
             css={css`
-              color: var(--colors-brand500);
+              color: var(--brand500);
               font-size: 1rem;
             `}
             role='img'

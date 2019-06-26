@@ -26,7 +26,7 @@ export default function MobileSortByDifficulty () {
       >
         <h4
           css={css`
-            color: var(--colors-gray800);
+            color: var(--black800);
             font-size: 0.875rem;
             font-weight: 600;
             line-height: 1.25rem;
@@ -63,7 +63,7 @@ export default function MobileSortByDifficulty () {
             />
             <label
               css={css`
-                color: var(--colors-gray900);
+                color: var(--black900);
                 font-size: 0.875rem;
                 font-weight: 500;
                 text-transform: capitalize;

@@ -9,7 +9,7 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
     <button
       css={css`
         border-radius: 4px;
-        color: var(--colors-brand300);
+        color: var(--brand300);
         font-size: 1rem;
         font-weight: 500;
         height: 2.25rem;
@@ -17,7 +17,7 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
         text-transform: uppercase;
 
         &:hover {
-          background-color: var(--colors-white100);
+          background-color: var(--white100);
         }
       `}
       onClick={e => {
@@ -39,7 +39,7 @@ export function Message (props) {
   return (
     <span
       css={css`
-        color: var(--colors-white900);
+        color: var(--white900);
         font-size: 1rem;
         line-height: 1.5rem;
       `}
@@ -53,7 +53,7 @@ export function Surface (props) {
     <div
       css={css`
         align-items: center;
-        background-color: var(--colors-gray700);
+        background-color: var(--gray700);
         border-radius: 4px;
         box-shadow: var(--shadows-04);
         display: flex;

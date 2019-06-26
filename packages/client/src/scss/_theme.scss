@@ -1,0 +1,47 @@
+$accent500: #007bfe;
+
+:root {
+  --accent500: #{$accent500};
+  --black100: rgba(0, 0, 0, 0.04);
+  --black200: rgba(0, 0, 0, 0.08);
+  --black300: rgba(0, 0, 0, 0.12);
+  --black500: rgba(0, 0, 0, 0.5);
+  --black800: rgba(0, 0, 0, 0.7);
+  --black900: rgba(0, 0, 0, 0.87);
+  --brand100: #fce9ed;
+  --brand300: #f67090;
+  --brand500: #e4234f;
+  --brand900: #c70e3a;
+  --danger: #da4453;
+  --gray100: #fbfbfc;
+  --gray200: #f1f1f1;
+  --gray400: #cfcfcf;
+  --gray600: #666;
+  --gray700: #333;
+  --success: #13ae36;
+  --white100: rgba(255, 255, 255, 0.15);
+  --white300: rgba(255, 255, 255, 0.35);
+  --white900: rgba(255, 255, 255, 0.9);
+  --input-focused: 0 0 0 4px #{rgba($accent500, 0.6)};
+  --input-invalid: 0 0 0 4px rgba(218, 68, 83, 0.9);
+  --gradient-left: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 30%
+  );
+  --gradient-right: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(255, 255, 255) 30%
+  );
+  --shadows-01: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadows-02: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadows-03: 0 3px 6px rgba(0, 0, 0, 0.2);
+  --shadows-04: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+$desktop: "screen and (min-width: 52.0625rem)";
+$nonDesktop: "screen and (max-width: 52rem)";
+$mobile: "screen and (max-width: 37rem)";
+$nonMobile: "screen and (min-width: 37.0625rem)";
+$tablet: "screen and (min-width: 37.0625rem) and (max-width: 52rem)";

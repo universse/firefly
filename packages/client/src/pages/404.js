@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 
 import SEO from 'components/SEO'
-import { Ghost } from '../icons'
+import { Ghost } from 'assets/icons'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
@@ -16,7 +16,6 @@ export default function NotFoundPage () {
       <main
         css={css`
           align-items: center;
-          background-color: var(--colors-gray100);
           display: flex;
           justify-content: center;
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);

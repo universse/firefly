@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { OutboundLink } from 'components/common'
-import { User } from 'icons'
+import { User } from 'assets/icons'
 import LocalStorage from 'constants/LocalStorage'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import firebaseWorker from 'utils/firebaseWorker'
@@ -15,7 +15,7 @@ export default function Avatar () {
     menuProps,
     getMenuItemProps,
     highlightedIndex
-  } = useDropdownMenu({ menuItemCount: 3 })
+  } = useDropdownMenu({ menuItemCount: 1 })
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
@@ -46,7 +46,7 @@ export default function Avatar () {
         >
           Sign Out
         </button>
-        <OutboundLink
+        {/* <OutboundLink
           {...highlightedIndex === 1 && { className: 'highlighted' }}
           href='https://www.google.com'
           {...getMenuItemProps(1)}
@@ -59,7 +59,7 @@ export default function Avatar () {
           {...getMenuItemProps(2)}
         >
           Library
-        </Link>
+        </Link> */}
       </ul>
     </details>
   )

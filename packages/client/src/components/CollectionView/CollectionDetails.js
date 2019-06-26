@@ -6,7 +6,7 @@ import { DifficultyLevels } from 'common'
 import Tags from 'components/Collections/Tags'
 import { CollectionTitle } from './styled'
 import { Category, Difficulty } from 'components/common'
-import { Level } from 'icons'
+import { Level } from 'assets/icons'
 import { screens } from 'constants/Styles'
 import { TagsType } from 'constants/Types'
 import { createCategoryPath } from '../../../gatsby/utils'
@@ -54,9 +54,6 @@ function CollectionDetails ({ category, level, name, tags }) {
           </div>
           <Difficulty>{DifficultyLevels[Math.floor(level)]}</Difficulty>
         </div>
-      </div>
-      <div>
-        <CollectionTitle>{name}</CollectionTitle>
       </div>
       <div
         css={css`

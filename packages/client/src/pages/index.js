@@ -7,7 +7,7 @@ import Collections from 'components/Collections'
 // import MobileFilters from 'components/MobileFilters'
 import SortByDifficulty from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
-import { Cross, Search } from 'icons'
+import { Cross, Search } from 'assets/icons'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
@@ -91,7 +91,7 @@ export default function IndexPage ({ data, location }) {
                 <div
                   css={css`
                     align-items: center;
-                    color: var(--colors-gray600);
+                    color: var(--gray600);
                     display: flex;
                     height: 3rem;
                     left: 1rem;
@@ -107,7 +107,7 @@ export default function IndexPage ({ data, location }) {
                   css={css`
                     border-radius: 1.5rem;
                     box-shadow: var(--shadows-02);
-                    color: var(--colors-gray900);
+                    color: var(--black900);
                     font-size: 1rem;
                     height: 3rem;
                     padding-left: 3rem;

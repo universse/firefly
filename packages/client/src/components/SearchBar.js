@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-import { Cross } from 'icons'
+import { Cross } from 'assets/icons'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useComboBox from 'hooks/useComboBox'
 import useSearch from 'hooks/useSearch'

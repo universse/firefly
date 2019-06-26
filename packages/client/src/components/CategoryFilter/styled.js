@@ -3,27 +3,27 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { ChevronLeft, ChevronRight } from 'icons'
+import { ChevronLeft, ChevronRight } from 'assets/icons'
 import { screens } from 'constants/Styles'
 
 export function Category (props) {
   return (
     <Link
       activeStyle={{
-        borderColor: 'var(--colors-brand500)',
-        color: 'var(--colors-brand500)',
+        borderColor: 'var(--brand500)',
+        color: 'var(--brand500)',
         fontWeight: 600
       }}
       css={css`
         align-items: center;
-        color: var(--colors-gray900);
+        color: var(--black900);
         display: inline-flex;
         font-size: 0.9375rem;
         font-weight: 400;
         text-transform: capitalize;
 
         &:hover {
-          color: var(--colors-brand500);
+          color: var(--brand500);
         }
 
         ${screens.nonDesktop} {
@@ -32,7 +32,7 @@ export function Category (props) {
           padding: 0 1rem;
 
           &:hover {
-            border-bottom: 2px solid var(--colors-brand500);
+            border-bottom: 2px solid var(--brand500);
           }
         }
 
@@ -42,7 +42,7 @@ export function Category (props) {
           padding: 0 0 0 1rem;
 
           &:hover {
-            border-left: 4px solid var(--colors-brand500);
+            border-left: 4px solid var(--brand500);
           }
         }
       `}
@@ -77,13 +77,13 @@ export function ScrollButton ({ handleClick, isShown, side }) {
       <button
         css={css`
           background-image: ${`var(--gradient-${side})`};
-          color: var(--colors-gray600);
+          color: var(--gray600);
           height: 3rem;
           width: ${scrollButtonWidthInRem}rem;
 
           &:focus,
           &:hover {
-            color: var(--colors-gray900);
+            color: var(--black900);
           }
         `}
         onClick={handleClick}

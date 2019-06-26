@@ -13,7 +13,7 @@ import { FABDesktop, Sidebar } from 'components/common'
 import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
-import { Filter, Suggest } from 'icons'
+import { Filter, Suggest } from 'assets/icons'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
@@ -51,7 +51,7 @@ export default function IndexLayout ({ category, children, location }) {
       />
       <section
         css={css`
-          background-color: var(--colors-gray100);
+          background-color: var(--gray100);
 
           ${screens.nonDesktop} {
             order: -1;

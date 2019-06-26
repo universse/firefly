@@ -1,0 +1,18 @@
+.Collections {
+  height: 100% !important;
+  min-height: 48rem;
+  overflow: initial !important;
+  width: 100%;
+
+  & > ul:not(:empty) {
+    box-shadow: var(--shadows-02);
+
+    li:last-child > div {
+      border-bottom: 1px solid transparent;
+    }
+
+    @media #{$desktop} {
+      border-radius: 8px;
+    }
+  }
+}

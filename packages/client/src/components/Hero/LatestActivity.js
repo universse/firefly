@@ -28,7 +28,7 @@ export default function LatestActivity ({
       <div>
         <h2
           css={css`
-            color: var(--colors-gray900);
+            color: var(--black900);
             font-size: 1.125rem;
             line-height: 2rem;
 
@@ -56,7 +56,7 @@ export default function LatestActivity ({
       >
         <span
           css={css`
-            color: var(--colors-gray800);
+            color: var(--black800);
             font-size: 0.8125rem;
             font-weight: 600;
             line-height: 1.25rem;

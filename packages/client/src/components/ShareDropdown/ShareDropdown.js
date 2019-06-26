@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { OutboundLink } from 'components/common'
-import { Share } from 'icons'
+import { Share } from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import { createFacebookShareURL, createTwitterShareURL } from './utils'
 import { createActionLabel } from 'utils/ariaLabelUtils'

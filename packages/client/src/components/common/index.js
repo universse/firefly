@@ -43,7 +43,7 @@ export function Category (props) {
   return (
     <Link
       css={css`
-        color: var(--colors-brand500);
+        color: var(--brand500);
         font-size: 0.875rem;
         font-weight: 500;
         text-transform: capitalize;
@@ -62,7 +62,7 @@ export function Difficulty (props) {
   return (
     <span
       css={css`
-        color: var(--colors-gray800);
+        color: var(--black800);
         font-size: 0.875rem;
         font-weight: 500;
         text-transform: capitalize;
@@ -76,17 +76,17 @@ export function FAB (props) {
   return (
     <button
       css={css`
-        background-color: var(--colors-brand500);
+        background-color: var(--brand500);
         border-radius: 1.5rem;
         bottom: ${mobileNavigationHeightInRem + 1}rem;
-        color: var(--colors-white900);
+        color: var(--white900);
         height: 3rem;
         position: fixed;
         right: 1rem;
         width: 3rem;
 
         &:hover {
-          background-color: var(--colors-brand900);
+          background-color: var(--brand900);
         }
 
         ${screens.desktop} {
@@ -109,10 +109,10 @@ export function FABDesktop (props) {
     <OutboundLink
       css={css`
         align-items: center;
-        background-color: var(--colors-brand500);
+        background-color: var(--brand500);
         border-radius: 1.75rem;
         bottom: 2.5rem;
-        color: var(--colors-white900);
+        color: var(--white900);
         display: flex;
         height: 3.5rem;
         justify-content: center;
@@ -121,7 +121,7 @@ export function FABDesktop (props) {
         width: 3.5rem;
 
         &:hover {
-          background-color: var(--colors-brand900);
+          background-color: var(--brand900);
         }
 
         ${screens.nonDesktop} {
@@ -141,7 +141,7 @@ export function PrimaryButton ({ large = false, width, ...props }) {
   return (
     <button
       css={css`
-        background-color: var(--colors-brand500);
+        background-color: var(--brand500);
         border-radius: ${large ? 1.5 : 1.25}rem;
         color: #fff;
         font-size: ${large ? 1 : 0.9375}rem;
@@ -152,7 +152,7 @@ export function PrimaryButton ({ large = false, width, ...props }) {
         ${width && `width: ${width};`}
 
         &:hover {
-          background-color: var(--colors-brand900);
+          background-color: var(--brand900);
         }
       `}
       type='button'
@@ -170,14 +170,14 @@ export function ProgressBar ({ percentage, width }) {
   return (
     <div
       css={css`
-        background-color: var(--colors-gray200);
+        background-color: var(--gray200);
         border-radius: 0.25rem;
         width: ${width || '100%'};
       `}
     >
       <div
         css={css`
-          background-color: var(--colors-brand500);
+          background-color: var(--brand500);
           border-radius: 0.25rem;
           height: 0.5rem;
           transition: width 0.75s ease;
@@ -200,7 +200,7 @@ export function Sidebar ({ isScrollingDown = false, ...props }) {
         position: sticky;
 
         ${screens.nonDesktop} {
-          background-color: var(--colors-white900);
+          background-color: var(--white900);
           box-shadow: var(--shadows-02);
           top: ${mobileHeaderHeightInRem}rem;
           transform: translateY(
@@ -241,16 +241,16 @@ export function Tag (props) {
   return (
     <Link
       css={css`
-        border-bottom: 1px dotted var(--colors-gray800);
-        color: var(--colors-gray800);
+        border-bottom: 1px dotted var(--black800);
+        color: var(--black800);
         display: block;
         font-size: 0.8125rem;
         font-weight: 500;
         line-height: 1.5rem;
 
         &:hover {
-          border-bottom: 1px solid var(--colors-accent500);
-          color: var(--colors-accent500);
+          border-bottom: 1px solid var(--accent500);
+          color: var(--accent500);
         }
       `}
       {...props}

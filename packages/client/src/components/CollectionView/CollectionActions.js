@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 
 import { ActionBar, ProgressBar } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
-import { Heart, Save } from 'icons'
+import { Heart, Save } from 'assets/icons'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
 export default function CollectionActions ({
@@ -21,7 +21,7 @@ export default function CollectionActions ({
     <div
       css={css`
         align-items: center;
-        border-top: 1px solid var(--colors-gray400);
+        border-top: 1px solid var(--gray400);
         display: flex;
         height: 4rem;
         justify-content: space-between;
@@ -45,7 +45,7 @@ export default function CollectionActions ({
         >
           <span
             css={css`
-              color: var(--colors-gray800);
+              color: var(--black800);
               font-size: 0.875rem;
               font-weight: 500;
               line-height: 1.25rem;

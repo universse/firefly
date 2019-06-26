@@ -36,7 +36,7 @@ export default function CategoryFilter ({ location }) {
         >
           <span
             css={css`
-              color: var(--colors-gray600);
+              color: var(--gray600);
               display: block;
               font-size: 0.875rem;
               font-weight: 600;

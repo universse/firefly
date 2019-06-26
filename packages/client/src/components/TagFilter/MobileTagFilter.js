@@ -24,7 +24,7 @@ export default function MobileTagFilter ({ aggregatedTags }) {
       >
         <h4
           css={css`
-            color: var(--colors-gray800);
+            color: var(--black800);
             font-size: 0.875rem;
             font-weight: 600;
             line-height: 1.25rem;

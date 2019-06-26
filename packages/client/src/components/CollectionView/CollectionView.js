@@ -2,13 +2,15 @@ import React, { useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import CollectionDetails from './CollectionDetails'
+// import CollectionDetails from './CollectionDetails'
 // import CollectionActions from './CollectionActions'
-import LearningList from './LearningList'
-import { ProgressBar } from 'components/common'
+import LearningItem from './LearningItem'
+// import LearningList from './LearningList'
+import { CollectionTitle } from './styled'
+import { OutboundLink, ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
-import { mobileProgressBarHeight, screens } from 'constants/Styles'
+import { headerHeightInRem, screens } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 
 // TODO:
@@ -42,7 +44,64 @@ export default function CollectionView ({
     <>
       <div
         css={css`
-          background-color: var(--colors-gray100);
+          grid-area: title;
+        `}
+      >
+        <CollectionTitle>{name}</CollectionTitle>
+      </div>
+      <div
+        css={css`
+          grid-area: sidebar;
+        `}
+      >
+        <div
+          css={css`
+            border-radius: 4px;
+            box-shadow: var(--shadows-01);
+            height: 15rem;
+            position: sticky;
+            top: ${headerHeightInRem + 2}rem;
+          `}
+        />
+      </div>
+      <aside
+        css={css`
+          grid-area: widget;
+        `}
+      >
+        <ul
+          css={css`
+            border-radius: 4px;
+            box-shadow: var(--shadows-01);
+            height: 12rem;
+            position: sticky;
+            top: ${headerHeightInRem + 2}rem;
+          `}
+        >
+          <li>Test</li>
+        </ul>
+      </aside>
+      <main
+        css={css`
+          display: contents;
+        `}
+        id='main'
+      >
+        <ul className='LearningList'>
+          {urls.map(url => (
+            <li key={url.id}>
+              <LearningItem
+                collectionId={id}
+                isChecked={!!check[url.id]}
+                {...url}
+              />
+            </li>
+          ))}
+        </ul>
+      </main>
+      {/* <div
+        css={css`
+          background-color: var(--gray100);
         `}
       >
         <div
@@ -64,34 +123,10 @@ export default function CollectionView ({
           />
         </div>
       </div>
-      <div>
-        <div
-          className='base'
-          css={css`
-            max-width: 50rem;
-
-            ${screens.mobile} {
-              padding: 0;
-            }
-          `}
-        >
-          <div
-            css={css`
-              background-color: #fff;
-
-              ${screens.nonMobile} {
-                border-radius: 8px;
-              }
-            `}
-          >
-            <LearningList check={check} collectionId={id} urls={urls} />
-          </div>
-        </div>
-      </div>
       <div
         css={css`
           background-color: #fff;
-          border-top: 1px solid var(--colors-gray200);
+          border-top: 1px solid var(--gray200);
           bottom: 0;
           height: ${mobileProgressBarHeight}rem;
           left: 0;
@@ -133,7 +168,7 @@ export default function CollectionView ({
           >
             <span
               css={css`
-                color: var(--colors-gray800);
+                color: var(--black800);
                 font-size: 0.875rem;
                 font-weight: 500;
                 line-height: 1.25rem;
@@ -144,7 +179,7 @@ export default function CollectionView ({
             </span>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }

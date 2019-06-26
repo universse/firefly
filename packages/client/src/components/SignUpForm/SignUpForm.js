@@ -4,7 +4,7 @@ import ReactModal from 'react-modal'
 
 import { ErrorMessage, Input } from './styled'
 import { PrimaryButton } from 'components/common'
-import { Cross } from 'icons'
+import { Cross } from 'assets/icons'
 import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
 import useSiteTitle from 'hooks/useSiteTitle'
@@ -70,7 +70,7 @@ function SignUpForm () {
         >
           <p
             css={css`
-              color: var(--colors-gray900);
+              color: var(--black900);
               font-size: 1rem;
               line-height: 1.5rem;
             `}
@@ -88,7 +88,7 @@ function SignUpForm () {
           >
             <h3
               css={css`
-                color: var(--colors-gray900);
+                color: var(--black900);
                 font-size: 1.25rem;
                 font-weight: 700;
                 line-height: 2rem;
