@@ -4,15 +4,19 @@
 
 @import "base";
 
+@import "chip";
+
 @import "accessibility";
 @import "animations";
 @import "collections";
 @import "combo-box";
+@import "details";
 @import "dropdown-menu";
-@import "learning_list";
+@import "learning-list";
 @import "list-box";
 @import "icons";
 @import "modal";
+@import "share-widget";
 
 .base {
   margin: 0 auto;

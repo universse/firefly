@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 
 import { URLParamsContext } from 'contexts/URLParams'
 import { ClearFilterButton, Count, MobileTag } from './styled'
-import { logClickTagFilter } from 'utils/amplitudeUtils'
+import { logClickTagFilter } from 'utils/amplitude'
 
 export default function MobileTagFilter ({ aggregatedTags }) {
   const {

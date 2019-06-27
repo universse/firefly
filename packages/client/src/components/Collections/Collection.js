@@ -102,7 +102,7 @@ function Collection ({ id, isLoved, isSaved }) {
                 </span>
               </span>
             </div>
-            <Tags tags={tags} />
+            <Tags tagClassName='Tag' tags={tags} />
           </div>
           <ActionBar>
             <button

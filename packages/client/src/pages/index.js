@@ -15,7 +15,7 @@ import AriaLabels from 'constants/AriaLabels'
 import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
 // import URLParamKeys from 'constants/URLParamKeys'
-import { logInputSearch } from 'utils/amplitudeUtils'
+import { logInputSearch } from 'utils/amplitude'
 import searchWorker from 'utils/searchWorker'
 
 export default function IndexPage ({ data, location }) {
@@ -43,7 +43,7 @@ export default function IndexPage ({ data, location }) {
 
   useEffect(() => {
     let isFresh = true
-
+    // console.log(sort)
     searchWorker
       .search(
         searchInput,

@@ -8,7 +8,7 @@ import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import LinkIcons from 'constants/LinkIcons'
 import { UrlType } from 'constants/Types'
 import fallback from 'assets/images/fallback.png'
-import { logClickLearningResource } from 'utils/amplitudeUtils'
+import { logClickLearningResource } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
 function truncate (str, length = 120) {
@@ -73,7 +73,7 @@ function LearningItem ({
                 margin-bottom: 0.25rem;
               `}
             >
-              <h2>{title}</h2>
+              <h3>{title}</h3>
               <div className='Link'>
                 <ExternalLink />
               </div>

@@ -6,7 +6,7 @@ import { URLParamsContext } from 'contexts/URLParams'
 import { Tag } from 'assets/icons'
 import useListBox from 'hooks/useListBox'
 import AriaLabels from 'constants/AriaLabels'
-import { logClickTagFilter } from 'utils/amplitudeUtils'
+import { logClickTagFilter } from 'utils/amplitude'
 
 export default function TagFilter ({ aggregatedTags }) {
   const {
@@ -31,7 +31,7 @@ export default function TagFilter ({ aggregatedTags }) {
   } = useListBox({ onSelect })
 
   return (
-    <details className='ListBox' {...detailsProps}>
+    <details className='ListBox' open {...detailsProps}>
       <summary aria-label={AriaLabels.FILTER_BY_TAGS} {...summaryProps}>
         Filter by Tags
         <div
@@ -47,7 +47,7 @@ export default function TagFilter ({ aggregatedTags }) {
         {aggregatedTags.map(([tag, count], index) => {
           const isSelected = tags.includes(tag)
 
-          let className = ''
+          let className = 'Chip'
           highlightedIndex === index && (className += ' highlighted')
           isSelected && (className += ' selected')
 

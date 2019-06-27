@@ -1,19 +1,24 @@
 .IconButton {
+  $height: 3rem;
+  $width: 2.5rem;
+
   align-items: center;
   color: var(--gray600);
   display: flex;
-  height: 3rem;
+  height: $height;
   justify-content: center;
   position: relative;
-  width: 2.5rem;
+  width: $width;
   z-index: 1;
 
   &::before {
     border-radius: 50%;
     content: "";
-    height: 2.5rem;
+    height: $width;
+    left: 0;
     position: absolute;
-    width: 2.5rem;
+    top: ($height - $width) / 2;
+    width: $width;
     z-index: -1;
   }
 
@@ -43,6 +48,7 @@
 .feather {
   fill: none;
   height: 24px;
+  stroke: currentColor;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
@@ -61,4 +67,9 @@
 .feather--medium {
   height: 20px;
   width: 20px;
+}
+
+.feather--large {
+  height: 28px;
+  width: 28px;
 }

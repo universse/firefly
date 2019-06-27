@@ -20,7 +20,7 @@ import {
   screens
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
-import { logClickAction } from 'utils/amplitudeUtils'
+import { logClickAction } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 // import firebaseWorker from 'utils/firebaseWorker'
 import goBack from 'utils/goBack'
@@ -145,7 +145,10 @@ export default function CollectionTemplate ({
               padding-bottom: ${mobileProgressBarHeight + 1}rem;
 
               ${screens.desktop} {
+                max-width: 69rem;
                 min-height: calc(100vh - ${headerHeightInRem}rem);
+                position: relative;
+                right: 2.5rem;
               }
             `}
           >
@@ -156,7 +159,7 @@ export default function CollectionTemplate ({
                 grid-template-areas:
                   '. title title'
                   'widget list sidebar';
-                grid-template-columns: 3rem 1fr 15rem;
+                grid-template-columns: 3rem 40rem 20rem;
                 margin-top: 2.5rem;
               `}
             >

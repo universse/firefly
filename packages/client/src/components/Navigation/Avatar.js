@@ -28,7 +28,7 @@ export default function Avatar () {
       </summary>
       <ul {...menuProps}>
         <button
-          aria-label='Sign out'
+          aria-label='Sign Out'
           {...highlightedIndex === 0 && { className: 'highlighted' }}
           onClick={() => {
             firebaseWorker.signOut().then(() => {

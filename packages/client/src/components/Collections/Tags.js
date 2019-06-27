@@ -1,34 +1,34 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { Link } from 'gatsby'
 
-import { Tag } from 'components/common'
 import { TagsType } from 'constants/Types'
 import URLParamKeys from 'constants/URLParamKeys'
-import { logClickTag } from 'utils/amplitudeUtils'
+import { logClickTag } from 'utils/amplitude'
 
-export default function Tags ({ tags }) {
+export default function Tags ({ tagClassName, tags }) {
   return (
     <ul
       css={css`
-        display: flex;
+        z-index: 1;
+
+        li {
+          display: contents;
+        }
       `}
     >
       {tags.map(tag => (
-        <li
-          key={tag}
-          css={css`
-            margin-right: 0.75rem;
-            z-index: 1;
-          `}
-        >
-          <Tag
+        <li key={tag}>
+          <Link
+            className={tagClassName}
             onClick={() => {
               logClickTag({ tag })
             }}
             to={`/?${URLParamKeys.TAGS}=${tag.toLowerCase()}`}
           >
             {tag}
-          </Tag>
+          </Link>
         </li>
       ))}
     </ul>
@@ -36,5 +36,6 @@ export default function Tags ({ tags }) {
 }
 
 Tags.propTypes = {
+  tagClassName: PropTypes.string.isRequired,
   tags: TagsType
 }

@@ -21,7 +21,7 @@ export default function OutboundLink ({ onClick, ...props }) {
           redirect = false
         }
 
-        if (props.target && props.target.toLowerCase() !== `_self`) {
+        if (props.target && props.target.toLowerCase() !== '_self') {
           redirect = false
         }
 

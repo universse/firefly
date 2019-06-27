@@ -4,7 +4,7 @@ import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
-import { logClickAction, logSignUpIntent } from 'utils/amplitudeUtils'
+import { logClickAction, logSignUpIntent } from 'utils/amplitude'
 
 export default function useActionClickHandler (
   canUndo,

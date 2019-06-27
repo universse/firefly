@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 
-import { Spinner } from 'components/common'
 import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
 import offlineStorageWorker from 'utils/offlineStorageWorker'
@@ -58,7 +57,7 @@ export default function WelcomePage () {
             margin-bottom: 0.5rem;
           `}
         >
-          <Spinner />
+          <div className='Spinner' />
         </div>
       )}
       <span

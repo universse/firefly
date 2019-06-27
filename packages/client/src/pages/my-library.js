@@ -20,7 +20,7 @@ import {
   mobileNavigationHeightInRem,
   screens
 } from 'constants/Styles'
-import { logSignUpIntent } from 'utils/amplitudeUtils'
+import { logSignUpIntent } from 'utils/amplitude'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 // TODO Suspense

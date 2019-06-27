@@ -5,7 +5,7 @@ import { URLParamsContext } from 'contexts/URLParams'
 import { ChevronDown } from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import SortOptions from 'constants/SortOptions'
-import { logSortDifficulty } from 'utils/amplitudeUtils'
+import { logSortDifficulty } from 'utils/amplitude'
 
 export default function SortByDifficulty () {
   const {

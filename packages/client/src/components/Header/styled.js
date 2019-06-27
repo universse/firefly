@@ -17,7 +17,7 @@ export function HeaderTag ({
     <header
       css={css`
         background-color: var(--white900);
-        border-bottom: 1px solid var(--gray200);
+        border-bottom: 1px solid var(--black300);
         display: ${mobile ? 'none' : 'block'};
         height: ${headerHeightInRem}rem;
         position: ${mobile ? 'sticky' : 'fixed'};

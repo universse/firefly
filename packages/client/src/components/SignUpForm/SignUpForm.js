@@ -11,13 +11,13 @@ import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
 import firebaseWorker from 'utils/firebaseWorker'
-import { logClickSignUp } from 'utils/amplitudeUtils'
+import { logClickSignUp } from 'utils/amplitude'
 
 ReactModal.setAppElement('#___gatsby')
 
 // TODO: validation https://verifier.meetchopra.com/
 function SignUpForm () {
-  const title = useSiteTitle()
+  const siteTitle = useSiteTitle()
   const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
 
@@ -94,7 +94,7 @@ function SignUpForm () {
                 line-height: 2rem;
               `}
             >
-              Welcome to {title}
+              Welcome to {siteTitle}
             </h3>
           </div>
           <form onSubmit={handleSubmit}>

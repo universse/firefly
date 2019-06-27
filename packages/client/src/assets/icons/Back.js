@@ -1,13 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-export function Back ({ color = 'currentColor' }) {
+export function Back () {
   return (
     <svg
       aria-label='back'
       className='feather'
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -15,8 +13,4 @@ export function Back ({ color = 'currentColor' }) {
       <path d='M19 12H5M12 19l-7-7 7-7' />
     </svg>
   )
-}
-
-Back.propTypes = {
-  color: PropTypes.string
 }

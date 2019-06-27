@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { navigate } from 'gatsby'
 
 // import useDebouncedValue from 'hooks/useDebouncedValue'
-import { logClickSearchResult, logInputSearch } from 'utils/amplitudeUtils'
+import { logClickSearchResult, logInputSearch } from 'utils/amplitude'
 import searchWorker from 'utils/searchWorker'
 
 export default function useSearch (

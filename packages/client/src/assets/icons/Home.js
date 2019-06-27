@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Home ({ color = 'currentColor' }) {
+export function Home () {
   return (
     <svg
       aria-label='home'
       className='feather'
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -16,8 +15,4 @@ export function Home ({ color = 'currentColor' }) {
       <path d='M9 22V12h6v10' />
     </svg>
   )
-}
-
-Home.propTypes = {
-  color: PropTypes.string
 }

@@ -20,7 +20,7 @@ function Header ({ isIndexPage }) {
         >
           <div
             css={css`
-              margin-right: 2.75rem;
+              margin-right: 2.25rem;
             `}
           >
             <Link

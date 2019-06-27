@@ -5,7 +5,7 @@ import { screens } from 'constants/Styles'
 import useSiteTitle from 'hooks/useSiteTitle'
 
 function Footer () {
-  const title = useSiteTitle()
+  const siteTitle = useSiteTitle()
 
   return (
     <footer
@@ -19,7 +19,7 @@ function Footer () {
         className='base'
         css={css`
           align-items: center;
-          border-top: 1px solid var(--gray200);
+          border-top: 1px solid var(--black300);
           display: flex;
           height: 3rem;
           justify-content: center;
@@ -43,7 +43,7 @@ function Footer () {
           >
             ❤
           </span>
-          . ©️ {new Date().getFullYear()} {title}.
+          . ©️ {new Date().getFullYear()} {siteTitle}.
         </p>
       </div>
     </footer>

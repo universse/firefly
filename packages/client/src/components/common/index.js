@@ -166,13 +166,14 @@ PrimaryButton.propTypes = {
   width: PropTypes.string
 }
 
-export function ProgressBar ({ percentage, width }) {
+// TODO gradient
+export function ProgressBar ({ percentage }) {
   return (
     <div
       css={css`
         background-color: var(--gray200);
         border-radius: 0.25rem;
-        width: ${width || '100%'};
+        width: 100%;
       `}
     >
       <div
@@ -180,7 +181,7 @@ export function ProgressBar ({ percentage, width }) {
           background-color: var(--brand500);
           border-radius: 0.25rem;
           height: 0.5rem;
-          transition: width 0.75s ease;
+          transition: width 0.45s ease;
           width: ${percentage}%;
         `}
       />
@@ -189,8 +190,7 @@ export function ProgressBar ({ percentage, width }) {
 }
 
 ProgressBar.propTypes = {
-  percentage: PropTypes.number.isRequired,
-  width: PropTypes.string
+  percentage: PropTypes.number.isRequired
 }
 
 export function Sidebar ({ isScrollingDown = false, ...props }) {
@@ -225,35 +225,4 @@ export function Sidebar ({ isScrollingDown = false, ...props }) {
 
 Sidebar.propTypes = {
   isScrollingDown: PropTypes.bool
-}
-
-export function SkipNav () {
-  return (
-    <a className='skip-nav' href='#main'>
-      Skip to Main Content
-    </a>
-  )
-}
-
-export { default as Spinner } from './Spinner'
-
-export function Tag (props) {
-  return (
-    <Link
-      css={css`
-        border-bottom: 1px dotted var(--black800);
-        color: var(--black800);
-        display: block;
-        font-size: 0.8125rem;
-        font-weight: 500;
-        line-height: 1.5rem;
-
-        &:hover {
-          border-bottom: 1px solid var(--accent500);
-          color: var(--accent500);
-        }
-      `}
-      {...props}
-    />
-  )
 }

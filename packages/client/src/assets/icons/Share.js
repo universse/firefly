@@ -1,13 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-export function Share ({ color = 'currentColor' }) {
+export function Share () {
   return (
     <svg
       aria-label='share'
       className='feather'
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -19,8 +17,4 @@ export function Share ({ color = 'currentColor' }) {
       <line x1='15.41' x2='8.59' y1='6.51' y2='10.49' />
     </svg>
   )
-}
-
-Share.propTypes = {
-  color: PropTypes.string
 }

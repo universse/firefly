@@ -6,7 +6,7 @@ import { GhostButton, NavLink } from './styled'
 import { SetModalContext } from 'contexts/SetModal'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
-import { logSignUpIntent } from 'utils/amplitudeUtils'
+import { logSignUpIntent } from 'utils/amplitude'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 function Navigation () {

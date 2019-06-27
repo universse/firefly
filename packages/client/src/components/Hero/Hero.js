@@ -11,7 +11,7 @@ import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
 function Hero () {
-  const title = useSiteTitle()
+  const siteTitle = useSiteTitle()
 
   const { isLoading, latestActivity } = useContext(LatestActivityContext)
 
@@ -43,7 +43,7 @@ function Hero () {
       `}
     >
       {isNewUser() ? (
-        <Onboard message={`Welcome to $${title}!`} />
+        <Onboard message={`Welcome to $${siteTitle}!`} />
       ) : isLoading ? (
         <Loading />
       ) : latestActivity ? (

@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Book ({ color = 'currentColor', small = true }) {
+export function Book ({ small = true }) {
   return (
     <svg
       aria-label='book'
       className={small ? 'feather feather--small' : 'feather'}
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -19,6 +18,5 @@ export function Book ({ color = 'currentColor', small = true }) {
 }
 
 Book.propTypes = {
-  color: PropTypes.string,
   small: PropTypes.bool
 }

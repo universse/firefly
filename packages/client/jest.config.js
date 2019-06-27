@@ -13,8 +13,5 @@ module.exports = {
     __PATH_PREFIX__: ''
   },
   setupFiles: ['<rootDir>/loadershim.js'],
-  setupFilesAfterEnv: [
-    'react-testing-library/cleanup-after-each',
-    'jest-dom/extend-expect'
-  ]
+  setupFilesAfterEnv: ['<rootDir>/setup-test-env.js']
 }

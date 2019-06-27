@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 export default function useListBox ({ onSelect }) {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)

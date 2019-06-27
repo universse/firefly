@@ -1,0 +1,31 @@
+.Chip {
+  align-items: center;
+  border: 1px solid var(--black300);
+  border-radius: 1rem;
+  color: var(--black900);
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 500;
+  height: 2rem;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0 0.75rem;
+
+  &:hover {
+    background-color: var(--gray200);
+  }
+}
+
+.Tag {
+  border-bottom: 1px dotted var(--black800);
+  color: var(--black800);
+  display: inline-flex;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  margin-right: 0.75rem;
+
+  &:hover {
+    border-bottom: 1px solid var(--accent500);
+    color: var(--accent500);
+  }
+}

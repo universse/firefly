@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Library ({ color = 'currentColor' }) {
+export function Library () {
   return (
     <svg
       aria-label='library'
       className='feather'
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -20,8 +19,4 @@ export function Library ({ color = 'currentColor' }) {
       <line x1='3' x2='3' y1='18' y2='18' />
     </svg>
   )
-}
-
-Library.propTypes = {
-  color: PropTypes.string
 }

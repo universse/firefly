@@ -1,3 +1,10 @@
+// $animation-id-count: 0 !global;
+
+// @function animation-id() {
+//   $animation-id-count: $animation-id-count + 1;
+//   @return animation-id-#{$animation-id-count};
+// }
+
 @keyframes wave {
   0% {
     background-position: -468px 0;
@@ -32,4 +39,22 @@
 
 .pulse {
   animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.Spinner {
+  animation: spin 0.6s linear infinite;
+  border: 0.25rem solid var(--black300);
+  border-radius: 50%;
+  border-top-color: var(--brand500);
+  height: 2rem;
+  width: 2rem;
 }

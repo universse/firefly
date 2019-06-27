@@ -4,7 +4,7 @@ $accent500: #007bfe;
   --accent500: #{$accent500};
   --black100: rgba(0, 0, 0, 0.04);
   --black200: rgba(0, 0, 0, 0.08);
-  --black300: rgba(0, 0, 0, 0.12);
+  --black300: rgba(0, 0, 0, 0.12); // border
   --black500: rgba(0, 0, 0, 0.5);
   --black800: rgba(0, 0, 0, 0.7);
   --black900: rgba(0, 0, 0, 0.87);
@@ -13,7 +13,7 @@ $accent500: #007bfe;
   --brand500: #e4234f;
   --brand900: #c70e3a;
   --danger: #da4453;
-  --gray100: #fbfbfc;
+  --gray100: #f9fbfd;
   --gray200: #f1f1f1;
   --gray400: #cfcfcf;
   --gray600: #666;

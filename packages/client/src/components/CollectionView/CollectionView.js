@@ -2,12 +2,10 @@ import React, { useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-// import CollectionDetails from './CollectionDetails'
-// import CollectionActions from './CollectionActions'
+import Details from './Details'
 import LearningItem from './LearningItem'
-// import LearningList from './LearningList'
+import ShareWidget from './ShareWidget'
 import { CollectionTitle } from './styled'
-import { OutboundLink, ProgressBar } from 'components/common'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
 import { headerHeightInRem, screens } from 'constants/Styles'
@@ -15,14 +13,13 @@ import { CollectionViewType } from 'constants/Types'
 
 // TODO:
 // suggestion component
-
 export default function CollectionView ({
   check,
   collection: { id, category, level, name, tags, urls },
   isLoved,
   isSaved
 }) {
-  const isDesktop = useContext(MediaContext)
+  // const isDesktop = useContext(MediaContext)
   const itemCount = urls.length
 
   const completedCount =
@@ -51,35 +48,33 @@ export default function CollectionView ({
       </div>
       <div
         css={css`
+          align-self: start;
+          border: 1px solid var(--black300);
+          border-radius: 4px;
           grid-area: sidebar;
+          padding: 1rem;
+          position: sticky;
+          top: ${headerHeightInRem + 2}rem;
         `}
       >
-        <div
-          css={css`
-            border-radius: 4px;
-            box-shadow: var(--shadows-01);
-            height: 15rem;
-            position: sticky;
-            top: ${headerHeightInRem + 2}rem;
-          `}
+        <Details
+          category={category}
+          id={id}
+          level={level}
+          name={name}
+          percentage={(completedCount / itemCount) * 100}
+          tags={tags}
         />
       </div>
       <aside
         css={css`
+          align-self: start;
           grid-area: widget;
+          position: sticky;
+          top: ${headerHeightInRem + 2}rem;
         `}
       >
-        <ul
-          css={css`
-            border-radius: 4px;
-            box-shadow: var(--shadows-01);
-            height: 12rem;
-            position: sticky;
-            top: ${headerHeightInRem + 2}rem;
-          `}
-        >
-          <li>Test</li>
-        </ul>
+        <ShareWidget id={id} isLoved={isLoved} isSaved={isSaved} name={name} />
       </aside>
       <main
         css={css`

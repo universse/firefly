@@ -1,0 +1,31 @@
+.Details {
+  display: flex;
+  flex-direction: column;
+
+  h2,
+  span,
+  .Category {
+    color: var(--black900);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  h2 {
+    font-weight: 700;
+  }
+
+  span,
+  .Category {
+    display: inline-block;
+    text-transform: capitalize;
+  }
+
+  .Category {
+    border-bottom: 1px dotted var(--black800);
+
+    &:hover {
+      border-bottom: 1px solid var(--accent500);
+      color: var(--accent500);
+    }
+  }
+}

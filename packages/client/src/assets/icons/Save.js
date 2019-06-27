@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Save ({ color = 'currentColor', filled = false }) {
-  const className = filled ? 'feather feather--filled' : 'feather'
+export function Save ({ filled = false, medium = false }) {
   const label = filled ? 'unsave' : 'save'
+  let className = 'feather'
+  filled && (className += ' feather--filled')
+  medium && (className += ' feather--medium')
 
   return (
     <svg
       aria-label={label}
       className={className}
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -21,6 +22,6 @@ export function Save ({ color = 'currentColor', filled = false }) {
 }
 
 Save.propTypes = {
-  color: PropTypes.string,
-  filled: PropTypes.bool
+  filled: PropTypes.bool,
+  medium: PropTypes.bool
 }

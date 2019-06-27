@@ -3,7 +3,7 @@ import React from 'react'
 import useSiteTitle from 'hooks/useSiteTitle'
 
 export function Logo () {
-  const title = useSiteTitle()
+  const siteTitle = useSiteTitle()
 
   return (
     <svg
@@ -15,7 +15,7 @@ export function Logo () {
       width='36'
       xmlns='http://www.w3.org/2000/svg'
     >
-      <title>{title}</title>
+      <title>{siteTitle}</title>
       <circle cx='18' cy='18' r='15' stroke='var(--brand500)' strokeWidth='6' />
     </svg>
   )

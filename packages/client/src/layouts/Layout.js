@@ -5,7 +5,6 @@ import IndexLayout from './IndexLayout'
 import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import SignUpForm from 'components/SignUpForm'
-import { SkipNav } from 'components/common'
 import Authentication from 'contexts/Authentication'
 import LatestActivity from 'contexts/LatestActivity'
 import Media from 'contexts/Media'
@@ -35,7 +34,9 @@ export default function Layout ({
     <NormalizedCollections>
       <Authentication>
         <Modal>
-          <SkipNav />
+          <a className='skip-nav' href='#main'>
+            Skip to Main Content
+          </a>
           {normalizedPathname !== '/search' && (
             <Header isIndexPage={isIndexPage || false} />
           )}

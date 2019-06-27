@@ -1,16 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Heart ({ color = 'currentColor', filled = false }) {
-  const className = filled ? 'feather feather--filled' : 'feather'
+export function Heart ({ filled = false, large = false }) {
   const label = filled ? 'unlove' : 'love'
+  let className = 'feather'
+  filled && (className += ' feather--filled')
+  large && (className += ' feather--large')
 
   return (
     <svg
       aria-label={label}
       className={className}
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -21,6 +22,6 @@ export function Heart ({ color = 'currentColor', filled = false }) {
 }
 
 Heart.propTypes = {
-  color: PropTypes.string,
-  filled: PropTypes.bool
+  filled: PropTypes.bool,
+  large: PropTypes.bool
 }

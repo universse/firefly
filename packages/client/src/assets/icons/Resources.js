@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Resources ({ color = 'currentColor', small = true }) {
+export function Resources ({ small = true }) {
   return (
     <svg
       aria-label='resources'
       className={small ? 'feather feather--small' : 'feather'}
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -18,6 +17,5 @@ export function Resources ({ color = 'currentColor', small = true }) {
 }
 
 Resources.propTypes = {
-  color: PropTypes.string,
   small: PropTypes.bool
 }

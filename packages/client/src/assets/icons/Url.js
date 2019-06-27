@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Url ({ color = 'currentColor', small = true }) {
+export function Url ({ small = true }) {
   return (
     <svg
       aria-label='url'
       className={small ? 'feather feather--small' : 'feather'}
       role='img'
-      stroke={color}
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
     >
@@ -19,6 +18,5 @@ export function Url ({ color = 'currentColor', small = true }) {
 }
 
 Url.propTypes = {
-  color: PropTypes.string,
   small: PropTypes.bool
 }
