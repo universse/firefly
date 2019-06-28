@@ -8,7 +8,7 @@ import useSlider from './useSlider'
 import { MediaContext } from 'contexts/Media'
 import { screens } from 'constants/Styles'
 
-export default function CategoryFilter ({ location }) {
+export default function CategoryFilter ({ pathname }) {
   const {
     isMaxScroll,
     isMinScroll,
@@ -48,7 +48,7 @@ export default function CategoryFilter ({ location }) {
           </span>
         </div>
       )}
-      <Filters handleScroll={onScroll} location={location} slider={slider} />
+      <Filters handleScroll={onScroll} pathname={pathname} slider={slider} />
       {!isDesktop && (
         <div>
           <ScrollButton
@@ -68,5 +68,5 @@ export default function CategoryFilter ({ location }) {
 }
 
 CategoryFilter.propTypes = {
-  location: PropTypes.object
+  pathname: PropTypes.string.isRequired
 }

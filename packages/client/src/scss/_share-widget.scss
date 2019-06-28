@@ -41,10 +41,15 @@
 
   .Heart {
     color: var(--brand500);
+    transition: transform 0.25s ease;
 
     &:hover {
       // animation: pulsating 1.15s ease-in-out infinite;
       color: var(--brand500);
+    }
+
+    &:active {
+      transform: scale(calc(8 / 7));
     }
   }
 }

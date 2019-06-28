@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { css } from '@emotion/core'
 
 import Landing from './Landing'
@@ -10,7 +10,7 @@ import useSiteTitle from 'hooks/useSiteTitle'
 import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
-function Hero () {
+export default function Hero () {
   const siteTitle = useSiteTitle()
 
   const { isLoading, latestActivity } = useContext(LatestActivityContext)
@@ -54,5 +54,3 @@ function Hero () {
     </div>
   )
 }
-
-export default memo(Hero)

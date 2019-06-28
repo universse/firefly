@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
@@ -10,7 +10,7 @@ import AriaLabels from 'constants/AriaLabels'
 import URLParamKeys from 'constants/URLParamKeys'
 import { createCollectionPath } from '../../../gatsby/utils'
 
-function SearchBar ({ maxResultCount = Infinity }) {
+export default function SearchBar ({ maxResultCount = Infinity }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
 
   const {
@@ -108,8 +108,6 @@ function SearchBar ({ maxResultCount = Infinity }) {
     </div>
   )
 }
-
-export default memo(SearchBar)
 
 SearchBar.propTypes = {
   maxResultCount: PropTypes.number.isRequired

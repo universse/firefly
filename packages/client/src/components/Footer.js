@@ -1,10 +1,10 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 import { screens } from 'constants/Styles'
 
 import useSiteTitle from 'hooks/useSiteTitle'
 
-function Footer () {
+export default function Footer () {
   const siteTitle = useSiteTitle()
 
   return (
@@ -49,5 +49,3 @@ function Footer () {
     </footer>
   )
 }
-
-export default memo(Footer)

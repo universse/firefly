@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
@@ -6,7 +6,7 @@ import { MobileNavLink } from './styled'
 import { Home, Search, Library, User } from 'assets/icons'
 import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
 
-function MobileNavigation ({ isIndexPage }) {
+export default function MobileNavigation ({ isIndexPage }) {
   return (
     <nav
       css={css`
@@ -78,8 +78,6 @@ function MobileNavigation ({ isIndexPage }) {
     </nav>
   )
 }
-
-export default memo(MobileNavigation)
 
 MobileNavigation.propTypes = {
   isIndexPage: PropTypes.bool.isRequired

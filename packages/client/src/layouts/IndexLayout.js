@@ -90,7 +90,7 @@ export default function IndexLayout ({ category, children, location }) {
         >
           <Media>
             <Sidebar isScrollingDown={isScrollingDown}>
-              <CategoryFilter location={location} />
+              <CategoryFilter pathname={location.pathname} />
             </Sidebar>
             {children}
           </Media>

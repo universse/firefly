@@ -1,4 +1,4 @@
-import React, { useContext, memo } from 'react'
+import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import Avatar from './Avatar'
@@ -9,7 +9,7 @@ import ModalTypes from 'constants/ModalTypes'
 import { logSignUpIntent } from 'utils/amplitude'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
-function Navigation () {
+export default function Navigation () {
   const setActiveModalType = useContext(SetModalContext)
 
   return (
@@ -52,5 +52,3 @@ function Navigation () {
     </nav>
   )
 }
-
-export default memo(Navigation)

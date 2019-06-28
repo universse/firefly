@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories } from 'common'
@@ -17,7 +17,9 @@ const CategoryPaths = [
   ...Categories.map(category => createCategoryPath(category))
 ]
 
-export default function Filters ({ handleScroll, location, slider }) {
+export default memo(Filters)
+
+function Filters ({ handleScroll, pathname, slider }) {
   const isDesktop = useContext(MediaContext)
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function Filters ({ handleScroll, location, slider }) {
       right: sliderRight
     } = slider.current.getBoundingClientRect()
 
-    const i = CategoryPaths.indexOf(getNormalizedPathname(location.pathname))
+    const i = CategoryPaths.indexOf(getNormalizedPathname(pathname))
 
     const { left, right } = slider.current.children[i].getBoundingClientRect()
 
@@ -45,7 +47,7 @@ export default function Filters ({ handleScroll, location, slider }) {
         slider.current,
         slider.current.scrollLeft + right - sliderRight + scrollButtonWidthInPx
       )
-  }, [isDesktop, location, slider])
+  }, [isDesktop, pathname, slider])
 
   return (
     <nav>
@@ -93,6 +95,6 @@ export default function Filters ({ handleScroll, location, slider }) {
 
 Filters.propTypes = {
   handleScroll: PropTypes.func.isRequired,
-  location: PropTypes.object,
+  pathname: PropTypes.string,
   slider: RefType
 }

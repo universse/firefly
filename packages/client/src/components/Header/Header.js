@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
@@ -8,7 +8,7 @@ import Navigation from 'components/Navigation'
 import { Logo } from 'assets/icons'
 import { HeaderTag, HeaderWrapper } from './styled'
 
-function Header ({ isIndexPage }) {
+export default function Header ({ isIndexPage }) {
   return (
     <HeaderTag>
       <HeaderWrapper>
@@ -40,8 +40,6 @@ function Header ({ isIndexPage }) {
     </HeaderTag>
   )
 }
-
-export default memo(Header)
 
 Header.propTypes = {
   isIndexPage: PropTypes.bool.isRequired

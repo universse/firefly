@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useCallback, useState, useRef } from 'react'
 
 const scrollByX = 200
 
@@ -8,13 +8,13 @@ export default function useSlider () {
 
   const slider = useRef()
 
-  const onScroll = () => {
+  const onScroll = useCallback(() => {
     setIsMaxScroll(
       slider.current.scrollLeft >=
         slider.current.scrollWidth - slider.current.clientWidth
     )
     setIsMinScroll(slider.current.scrollLeft === 0)
-  }
+  }, [])
 
   const onScrollLeftClick = () =>
     slider.current.scrollBy({ left: -scrollByX, behavior: 'smooth' })

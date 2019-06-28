@@ -15,7 +15,7 @@ export default function ShareDropdown ({ name }) {
     menuProps,
     getMenuItemProps,
     highlightedIndex
-  } = useDropdownMenu({ menuItemCount: 4 })
+  } = useDropdownMenu({ menuItemCount: Platforms.length })
   const siteTitle = useSiteTitle()
   const href = window.location.href
 

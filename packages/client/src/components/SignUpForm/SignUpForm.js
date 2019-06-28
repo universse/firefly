@@ -1,4 +1,4 @@
-import React, { memo, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
@@ -16,7 +16,7 @@ import { logClickSignUp } from 'utils/amplitude'
 ReactModal.setAppElement('#___gatsby')
 
 // TODO: validation https://verifier.meetchopra.com/
-function SignUpForm () {
+export default function SignUpForm () {
   const siteTitle = useSiteTitle()
   const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
@@ -159,5 +159,3 @@ function SignUpForm () {
     </ReactModal>
   )
 }
-
-export default memo(SignUpForm)
