@@ -201,7 +201,7 @@ export function Sidebar ({ isScrollingDown = false, ...props }) {
 
         ${screens.nonDesktop} {
           background-color: var(--white900);
-          box-shadow: var(--shadows-02);
+          box-shadow: var(--shadows-01);
           top: ${mobileHeaderHeightInRem}rem;
           transform: translateY(
             ${isScrollingDown ? `-${mobileHeaderHeightInRem}rem` : 0}

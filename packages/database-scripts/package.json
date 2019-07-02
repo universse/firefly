@@ -7,7 +7,7 @@
     "dotenv": "^8.0.0",
     "firebase-admin": "^8.2.0",
     "got": "^9.6.0",
-    "metascraper": "^5.5.2",
+    "metascraper": "^5.5.3",
     "metascraper-author": "^5.5.0",
     "metascraper-description": "^5.5.0",
     "metascraper-image": "^5.5.0",

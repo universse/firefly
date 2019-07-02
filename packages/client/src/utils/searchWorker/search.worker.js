@@ -71,7 +71,7 @@ const order = memoize((filtered, sort) =>
 )
 
 export function search (input, sort, tags, collectionIds = false) {
-  const matched = match(collectionIds, input.trim())
+  const matched = match(collectionIds || null, input.trim())
   if (collectionIds === false) return { collectionIds: matched }
   const { filtered, tagCounts } = filter(matched, countTags(matched), tags)
   const ordered = order(filtered, sort)

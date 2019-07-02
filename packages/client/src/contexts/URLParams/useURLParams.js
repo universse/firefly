@@ -2,8 +2,23 @@ import { useEffect, useReducer, useMemo, useRef } from 'react'
 // import { globalHistory } from '@reach/router/lib/history'
 import { navigate } from 'gatsby'
 
-import { constructHref } from './utils'
 import URLParamKeys from 'constants/URLParamKeys'
+
+function constructHref (searchInput, sort, tags) {
+  const params = []
+
+  searchInput.trim() &&
+    params.push(`${URLParamKeys.SEARCH_INPUT}=${searchInput.trim()}`)
+
+  sort && params.push(`${URLParamKeys.SORT}=${sort}`)
+
+  tags.length &&
+    params.push(`${URLParamKeys.TAGS}=${[...tags].reverse().join(',')}`)
+
+  const queryString = params.join('&')
+
+  return `${window.location.pathname}${queryString ? `?${queryString}` : ''}`
+}
 
 function init (search) {
   const params = new URLSearchParams(search)
@@ -45,7 +60,6 @@ export default function useURLParams ({ pathname, search }) {
 
   // useEffect(() => {
   //   const unlisten = globalHistory.listen(({ location: { search } }) => {
-  //     console.log('global', search)
   //     queryDispatch(init(search))
   //   })
 

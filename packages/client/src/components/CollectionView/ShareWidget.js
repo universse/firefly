@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
@@ -7,13 +7,27 @@ import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Heart, Save } from 'assets/icons'
 import useSiteTitle from 'hooks/useSiteTitle'
 import { createActionLabel } from 'utils/ariaLabelUtils'
+import firebaseWorker from 'utils/firebaseWorker'
 import { getCopyUrlProps, getShareProps, Platforms } from 'utils/sharing'
+
+// TODO suspense
 
 export default function ShareWidget ({ id, isLoved, isSaved, name }) {
   const onActionClick = useContext(UserDataDispatchContext)
   const siteTitle = useSiteTitle()
 
-  const href = window.location.href
+  const [loveCount, setLoveCount] = useState()
+
+  // useEffect(() => {
+  //   setLoveCount(loveCount => (isLoved ? ++loveCount : --loveCount))
+  // }, [isLoved])
+
+  useEffect(() => {
+    firebaseWorker
+      .fetchLoveCount(id)
+      .then(setLoveCount)
+      .catch(() => setLoveCount(0))
+  }, [id])
 
   return (
     <ul className='ShareWidget'>
@@ -21,19 +35,26 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
         <button
           aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
           className='Heart'
-          onClick={onActionClick}
+          onClick={e => {
+            if (isNaN(loveCount)) return
+            onActionClick(e, () => {
+              setLoveCount(loveCount => (isLoved ? --loveCount : ++loveCount))
+            })
+          }}
           type='button'
           value={id}
         >
-          <Heart filled={isLoved} large />
+          {!isNaN(loveCount) && <Heart filled={isLoved} large />}
         </button>
         <span
           css={css`
             color: var(--brand500);
+            display: block;
             font-size: 0.875rem;
+            height: 1rem;
           `}
         >
-          64
+          {!isNaN(loveCount) && loveCount}
         </span>
       </li>
       <li>
@@ -49,12 +70,12 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
       {Platforms.map(platform => (
         <li key={platform}>
           <OutboundLink
-            {...getShareProps({ href, platform, siteTitle, text: name })}
+            {...getShareProps({ platform, siteTitle, text: name })}
           />
         </li>
       ))}
       {/* <li>
-        <button {...getCopyUrlProps({ href })} />>
+        <button {...getCopyUrlProps()} />
       </li> */}
     </ul>
   )

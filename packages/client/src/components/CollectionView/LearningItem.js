@@ -23,6 +23,12 @@ function truncate (str, length = 120) {
   return `${final}...`
 }
 
+function getVideoSrc (url) {
+  return `https://www.youtube-nocookie.com/embed/${new URL(
+    url
+  ).searchParams.get('v')}`
+}
+
 function LearningItem ({
   id,
   collectionId,
@@ -37,7 +43,45 @@ function LearningItem ({
   const onActionClick = useContext(UserDataDispatchContext)
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
-  return (
+  return type === 'video' ? (
+    <>
+      <div className='LearningVideo'>
+        <iframe
+          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          allowFullScreen
+          height='315'
+          src={getVideoSrc(url)}
+          title={title}
+          width='560'
+        />
+      </div>
+      <div
+        css={css`
+          margin-top: 1rem;
+          width: 95%;
+        `}
+      >
+        <h3>{title}</h3>
+      </div>
+      <div
+        css={css`
+          bottom: 0.5rem;
+          position: absolute;
+          right: -0.5rem;
+        `}
+      >
+        <button
+          aria-label={createActionLabel(isChecked ? 'check' : 'uncheck', title)}
+          className='IconButton'
+          onClick={onActionClick}
+          type='button'
+          value={id}
+        >
+          <Check filled={isChecked} />
+        </button>
+      </div>
+    </>
+  ) : (
     <>
       <OutboundLink
         aria-label={title}

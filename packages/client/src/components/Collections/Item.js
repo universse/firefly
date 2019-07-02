@@ -14,7 +14,7 @@ export default function Item ({ data, index, style }) {
       <li style={style}>
         <Collection
           id={id}
-          isLoved={!!userData.love[id]}
+          // isLoved={!!userData.love[id]}
           isSaved={!!userData.save[id]}
         />
       </li>

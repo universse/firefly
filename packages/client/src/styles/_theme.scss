@@ -16,7 +16,7 @@ $accent500: #007bfe;
   --gray100: #f9fbfd;
   --gray200: #f1f1f1;
   --gray400: #cfcfcf;
-  --gray600: #666;
+  --gray600: #666; // icon
   --gray700: #333;
   --success: #13ae36;
   --white100: rgba(255, 255, 255, 0.15);
@@ -34,7 +34,7 @@ $accent500: #007bfe;
     rgba(255, 255, 255, 0) 0%,
     rgb(255, 255, 255) 30%
   );
-  --shadows-01: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadows-01: 0 1px 3px -1px rgba(0, 0, 0, 0.1);
   --shadows-02: 0 2px 4px rgba(0, 0, 0, 0.15);
   --shadows-03: 0 3px 6px rgba(0, 0, 0, 0.2);
   --shadows-04: 0 4px 8px rgba(0, 0, 0, 0.5);

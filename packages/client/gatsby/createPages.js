@@ -4,10 +4,7 @@ const { resolve } = require('path')
 const { createCollectionPath } = require('./utils')
 const { NormalizedCollectionsFilename } = require('common')
 
-module.exports = async ({
-  graphql,
-  actions: { createPage, createRedirect }
-}) => {
+module.exports = async ({ graphql, actions: { createPage } }) => {
   const db = await graphql(
     `
       {

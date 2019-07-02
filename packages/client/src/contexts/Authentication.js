@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
 import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
 
@@ -11,22 +10,27 @@ export default function Authentication ({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    firebaseWorker.addEventListener(
-      'message',
-      e => {
-        if (e.data.type === FirebaseWorkerEvents.AUTH_STATE_CHANGED) {
-          setUser(e.data.payload)
+    function authenticate (timeout = 300) {
+      return firebaseWorker
+        .getUser()
+        .then(payload => {
+          setUser(payload)
 
-          if (e.data.payload) {
+          if (payload) {
             window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
 
             window.amplitude &&
-              window.amplitude.getInstance().setUserId(e.data.payload.uid)
+              window.amplitude.getInstance().setUserId(payload)
+          } else {
+            window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
           }
-        }
-      },
-      { once: true }
-    )
+        })
+        .catch(() => {
+          setTimeout(authenticate, timeout)
+        })
+    }
+
+    authenticate()
   }, [])
 
   return (

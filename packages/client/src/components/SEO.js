@@ -3,14 +3,13 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
-function SEO ({ description, lang = 'en', meta = [], slug = '', title }) {
+function SEO ({ description, lang = 'en', meta = [], title }) {
   const data = useStaticQuery(graphql`
     query {
       site {
         siteMetadata {
           title
           description
-          # siteUrl
         }
       }
     }
@@ -24,9 +23,8 @@ function SEO ({ description, lang = 'en', meta = [], slug = '', title }) {
         title
       }
     : {
-        title: `${siteMetadata.title} - Follow your curiosity`
+        title: `${siteMetadata.title} | Follow your curiosity`
       }
-  // const url = `${siteMetadata.siteUrl}${slug}`
 
   return (
     <Helmet
@@ -39,10 +37,6 @@ function SEO ({ description, lang = 'en', meta = [], slug = '', title }) {
           name: 'description',
           content: metaDescription
         },
-        // {
-        //   property: 'og:url',
-        //   content: url
-        // },
         {
           property: 'og:title',
           content: title || siteMetadata.title
@@ -59,10 +53,6 @@ function SEO ({ description, lang = 'en', meta = [], slug = '', title }) {
           name: 'twitter:card',
           content: 'summary'
         },
-        // {
-        //   name: 'twitter:creator',
-        //   content: siteMetadata.author
-        // },
         {
           name: 'twitter:title',
           content: title || siteMetadata.title
@@ -87,6 +77,5 @@ SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.array,
-  slug: PropTypes.string,
   title: PropTypes.string
 }

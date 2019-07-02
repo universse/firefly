@@ -16,58 +16,85 @@ try {
 }
 
 // production
-const firebaseKey = JSON.parse(process.env.FIREBASE_COLLECTIONS)
+const firebaseCollectionsKey = JSON.parse(process.env.FIREBASE_COLLECTIONS)
+const firebaseUsersKey = JSON.parse(process.env.FIREBASE_USERS)
 
-admin.initializeApp({
-  credential: admin.credential.cert(firebaseKey)
-})
-const firestore = admin.firestore()
+const collections = admin.initializeApp(
+  {
+    credential: admin.credential.cert(firebaseCollectionsKey)
+  },
+  'collections'
+)
 
-const batches = []
+const users = admin.initializeApp(
+  {
+    credential: admin.credential.cert(firebaseUsersKey)
+  },
+  'users'
+)
 
-processed.collections.forEach(({ id, _EXCEL_KEY, ...collection }, i) => {
-  const batchNo = Math.floor(i / 15)
+const collectionsDB = collections.firestore()
+const usersDB = users.firestore()
 
-  !batches[batchNo] && (batches[batchNo] = firestore.batch())
+const collectionBatches = []
+const userBatches = []
 
-  const batch = batches[batchNo]
+processed.collections.forEach(
+  ({ _EXCEL_KEY, loveCount, urls, ...collection }, i) => {
+    const batchNo = Math.floor(i / 15)
 
-  const collectionDoc = firestore.collection('collections').doc()
-  const collectionId = collectionDoc.id
+    !collectionBatches[batchNo] &&
+      (collectionBatches[batchNo] = collectionsDB.batch())
 
-  const urlIds = []
+    !userBatches[batchNo] && (userBatches[batchNo] = collectionsDB.batch())
 
-  collection.urls.forEach((url, i) => {
-    const urlDoc = firestore.collection('urls').doc()
-    const id = urlDoc.id
+    const collectionBatch = collectionBatches[batchNo]
+    const userBatch = userBatches[batchNo]
 
-    batch.set(
-      urlDoc,
-      parseUrl({
+    const collectionDoc = collectionsDB.collection('collections').doc()
+    const collectionId = collectionDoc.id
+
+    const lovesDoc = usersDB.collection('loves').doc(collectionId)
+    userBatch.set(lovesDoc, { count: 10 })
+
+    const urlIds = []
+    urls.forEach((url, i) => {
+      const urlDoc = collectionsDB.collection('urls').doc()
+      const id = urlDoc.id
+
+      collectionBatch.set(
+        urlDoc,
+        parseUrl({
+          ...url
+          // collectionId
+        })
+      )
+
+      urlIds[i] = id
+
+      final.urls[id] = {
+        // id,
         ...url
         // collectionId
-      })
+      }
+    })
+
+    collectionBatch.set(
+      collectionDoc,
+      parseCollection({ ...collection, urlIds })
     )
 
-    urlIds[i] = id
-
-    final.urls[id] = {
-      id,
-      ...url
-      // collectionId
+    final.collections[collectionId] = {
+      // id: collectionId,
+      _EXCEL_KEY,
+      ...collection,
+      urlIds
     }
-  })
-
-  batch.set(collectionDoc, parseCollection(collection))
-
-  final.collections[collectionId] = {
-    id: collectionId,
-    _EXCEL_KEY,
-    ...collection
   }
-})
-;(() => {
-  writeBatchesToDB(batches)
+)
+;(async () => {
+  await writeBatchesToDB(collectionBatches)
+  await writeBatchesToDB(userBatches)
 
   writeFileSync(
     resolve(__dirname, '../data/final.json'),

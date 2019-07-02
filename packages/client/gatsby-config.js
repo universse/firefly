@@ -11,7 +11,6 @@ module.exports = {
     title: 'Firefly',
     description:
       'Discover the best learning resources, curated by the community.'
-    // siteUrl: 'https://'
   },
 
   developMiddleware: app => {

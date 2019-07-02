@@ -26,7 +26,7 @@ function Landing () {
               font-family: Spectral, serif;
               font-size: 3rem;
               font-weight: 800;
-              line-height: 4rem;
+              line-height: 3.5rem;
             `}
           >
             Follow your curiosity.

@@ -7,13 +7,13 @@ import LearningItem from './LearningItem'
 import ShareWidget from './ShareWidget'
 import { CollectionTitle } from './styled'
 import { LatestActivityContext } from 'contexts/LatestActivity'
-import { MediaContext } from 'contexts/Media'
+// import { MediaContext } from 'contexts/Media'
 import { headerHeightInRem, screens } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 
 // TODO:
 // suggestion component
-export default function CollectionView ({
+export default function View ({
   check,
   collection: { id, category, level, name, tags, urls },
   isLoved,
@@ -179,7 +179,7 @@ export default function CollectionView ({
   )
 }
 
-CollectionView.propTypes = {
+View.propTypes = {
   check: PropTypes.objectOf(PropTypes.bool).isRequired,
   collection: CollectionViewType.isRequired,
   isLoved: PropTypes.bool.isRequired,

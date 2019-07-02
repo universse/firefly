@@ -94,7 +94,7 @@ export default function MyLibraryPage () {
                 margin: 0 0 1.5rem 2rem;
               `}
             >
-              <h1
+              <h2
                 css={css`
                   color: var(--black800);
                   font-size: 1.25rem;
@@ -102,7 +102,7 @@ export default function MyLibraryPage () {
                 `}
               >
                 My Saved Collections
-              </h1>
+              </h2>
             </div>
           )}
           {userData && !hasSaved && (
@@ -160,7 +160,11 @@ export default function MyLibraryPage () {
                     position: relative;
                   `}
                 >
-                  <Collection id={id} isLoved={!!userData.love[id]} isSaved />
+                  <Collection
+                    id={id}
+                    //  isLoved={!!userData.love[id]}
+                    isSaved
+                  />
                 </li>
               ))}
             </ul>

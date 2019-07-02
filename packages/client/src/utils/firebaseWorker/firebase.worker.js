@@ -3,8 +3,6 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
-import FirebaseWorkerEvents from 'constants/FirebaseWorkerEvents'
-
 firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
 const actionCodeSettings = {
@@ -12,21 +10,16 @@ const actionCodeSettings = {
   handleCodeInApp: true
 }
 
+let isReady = false
 const stopAuthListener = auth.onAuthStateChanged(user => {
   stopAuthListener()
-
-  user
-    ? user.getIdToken().then(idToken =>
-        postMessage({
-          type: FirebaseWorkerEvents.AUTH_STATE_CHANGED,
-          payload: { idToken, uid: user.uid }
-        })
-      )
-    : postMessage({
-        type: FirebaseWorkerEvents.AUTH_STATE_CHANGED,
-        payload: null
-      })
+  isReady = true
 })
+
+export async function getUser () {
+  if (isReady) return auth.currentUser && auth.currentUser.uid
+  throw new Error()
+}
 
 // export function createUserWithEmailAndPassword (email, password) {
 //   return auth.createUserWithEmailAndPassword(email, password)
@@ -163,6 +156,19 @@ export async function fetchCollection (id) {
   }
 }
 
+export async function fetchLoveCount (id) {
+  try {
+    const lovesDoc = await firestore
+      .collection('loves')
+      .doc(id)
+      .get()
+
+    return lovesDoc.data().count
+  } catch {
+    throw new Error()
+  }
+}
+
 export async function fetchUserData () {
   const userData = { love: {}, save: {}, check: {} }
 
@@ -237,6 +243,7 @@ export async function action ({ id, action }) {
     const batch = firestore.batch()
 
     batch.set(docRef, data, { merge: true })
+
     batch.set(
       lovesDocRef,
       {

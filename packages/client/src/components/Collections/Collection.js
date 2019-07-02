@@ -135,6 +135,6 @@ export default memo(Collection)
 
 Collection.propTypes = {
   id: PropTypes.string.isRequired,
-  isLoved: PropTypes.bool.isRequired,
+  // isLoved: PropTypes.bool.isRequired,
   isSaved: PropTypes.bool.isRequired
 }

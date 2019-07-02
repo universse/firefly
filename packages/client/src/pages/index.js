@@ -43,7 +43,7 @@ export default function IndexPage ({ data, location }) {
 
   useEffect(() => {
     let isFresh = true
-    // console.log(sort)
+
     searchWorker
       .search(
         searchInput,

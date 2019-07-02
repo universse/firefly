@@ -1,1 +1,1 @@
-export { default } from './CollectionView'
+export { default } from './View'

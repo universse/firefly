@@ -17,7 +17,7 @@ export function HeaderTag ({
     <header
       css={css`
         background-color: var(--white900);
-        border-bottom: 1px solid var(--black300);
+        box-shadow: var(--shadows-01);
         display: ${mobile ? 'none' : 'block'};
         height: ${headerHeightInRem}rem;
         position: ${mobile ? 'sticky' : 'fixed'};
@@ -26,7 +26,7 @@ export function HeaderTag ({
         z-index: 200;
 
         ${screens.nonDesktop} {
-          border: none;
+          box-shadow: none;
           display: ${mobile ? 'block' : 'none'};
           height: ${mobileHeaderHeightInRem}rem;
           transform: translateY(${isScrollingDown ? '-100%' : 0});
@@ -50,7 +50,7 @@ export function HeaderWrapper ({ shadow = false, ...props }) {
       className='base'
       css={css`
         align-items: center;
-        box-shadow: ${shadow ? 'var(--shadows-02)' : 'none'};
+        box-shadow: ${shadow ? 'var(--shadows-01)' : 'none'};
         display: flex;
         height: 100%;
         justify-content: space-between;

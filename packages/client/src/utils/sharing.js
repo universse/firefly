@@ -27,7 +27,7 @@ export function copyToClipboard (str, curr) {
   }
 }
 
-export function getCopyUrlProps ({ href, mobile = false }) {
+export function getCopyUrlProps ({ mobile = false }) {
   return {
     'aria-label': 'Get Shareable Link',
     children: (
@@ -45,7 +45,7 @@ export function getCopyUrlProps ({ href, mobile = false }) {
       </>
     ),
     onClick: e => {
-      copyToClipboard(href)
+      copyToClipboard(window.location.href)
       e.currentTarget.focus()
     },
     type: 'button'
@@ -56,13 +56,9 @@ const facebookAppId = '604132180019762'
 
 export const Platforms = ['Facebook', 'Twitter', 'E-mail']
 
-export function getShareProps ({
-  href,
-  mobile = false,
-  platform,
-  siteTitle,
-  text
-}) {
+export function getShareProps ({ mobile = false, platform, siteTitle, text }) {
+  const href = window.location.href
+
   const props = {
     'aria-label': `Share via ${platform}`,
     rel: 'noopener noreferrer',

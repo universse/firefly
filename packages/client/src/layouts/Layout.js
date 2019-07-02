@@ -17,8 +17,6 @@ import {
   shouldHaveMobileNavigation
 } from 'utils/pathnameUtils'
 
-import 'scss/index.scss'
-
 export default function Layout ({
   pageContext: { category, isIndexPage },
   children,

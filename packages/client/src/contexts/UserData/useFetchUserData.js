@@ -5,12 +5,19 @@ import offlineStorageWorker from 'utils/offlineStorageWorker'
 
 export default function useFetchUserData (dispatch, user) {
   useEffect(() => {
-    offlineStorageWorker.loadUserData().then(([check, save]) =>
-      dispatch({
-        type: 'load-local',
-        payload: { check: check || {}, save: save || {}, love: {} }
-      })
-    )
+    offlineStorageWorker
+      .loadUserData()
+      .then(([check, save]) =>
+        dispatch({
+          type: 'load-local',
+          payload: { check: check || {}, love: {}, save: save || {} }
+        })
+      )
+      .catch(() =>
+        dispatch({
+          type: 'load-local'
+        })
+      )
   }, [dispatch])
 
   useEffect(() => {

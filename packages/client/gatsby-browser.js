@@ -1,4 +1,5 @@
 import { isIndexPage, scrollToHero } from './gatsby/utils'
+import 'styles/index.scss'
 
 export const onClientEntry = () => {
   process.env.NODE_ENV === 'development' && console.clear()

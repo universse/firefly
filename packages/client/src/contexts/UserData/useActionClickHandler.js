@@ -15,60 +15,65 @@ export default function useActionClickHandler (
   const setActiveModalType = useContext(SetModalContext)
   const openSnackbar = useContext(SetSnackbarContext)
 
-  return useCallback(e => {
-    const id = e.currentTarget.value
-    const action = e.currentTarget.textContent
-    const payload = { id, action }
-    logClickAction(payload)
+  return useCallback(
+    (e, cb = () => {}) => {
+      const id = e.currentTarget.value
+      const action = e.currentTarget.textContent
+      const payload = { id, action }
+      logClickAction(payload)
 
-    if (!action.endsWith('love')) {
-      trackChange(payload)
-      dispatch({ type: 'click', payload })
-
-      return (
-        canUndo &&
-        action === 'unsave' &&
-        openSnackbar({
-          buttonProps: {
-            'aria-label': 'Undo Removing Collection',
-            children: 'Undo',
-            onClick: () => {
-              logClickAction({ id, action: 'undo unsave' })
-              trackChange(payload)
-              dispatch({
-                type: 'undo-unsave'
-              })
-            }
-          },
-          message: 'Collection removed from library.'
-        })
-      )
-    }
-
-    if (user) {
-      if (navigator.onLine) {
+      if (!action.endsWith('love')) {
         trackChange(payload)
-        dispatch({
-          type: 'click',
-          payload
-        })
+        dispatch({ type: 'click', payload })
+
+        return (
+          canUndo &&
+          action === 'unsave' &&
+          openSnackbar({
+            buttonProps: {
+              'aria-label': 'Undo Removing Collection',
+              children: 'Undo',
+              onClick: () => {
+                logClickAction({ id, action: 'undo unsave' })
+                trackChange(payload)
+                dispatch({
+                  type: 'undo-unsave'
+                })
+              }
+            },
+            message: 'Collection removed from library.'
+          })
+        )
+      }
+
+      if (user) {
+        if (navigator.onLine) {
+          trackChange(payload)
+          dispatch({
+            type: 'click',
+            payload
+          })
+          cb()
+        } else {
+          openSnackbar({
+            message: 'The Internet connection appears to be offline.'
+          })
+        }
       } else {
         openSnackbar({
-          message: 'The Internet connection appears to be offline.'
+          buttonProps: {
+            'aria-label': AriaLabels.SIGNIN_REGISTER,
+            children: 'Sign In',
+            onClick: () => {
+              setActiveModalType(ModalTypes.SIGN_UP_FORM)
+              logSignUpIntent()
+            }
+          },
+          message: 'Please sign in to continue.'
         })
       }
-    } else {
-      openSnackbar({
-        buttonProps: {
-          'aria-label': AriaLabels.SIGNIN_REGISTER,
-          children: 'Sign In',
-          onClick: () => {
-            setActiveModalType(ModalTypes.SIGN_UP_FORM)
-            logSignUpIntent()
-          }
-        },
-        message: 'Please sign in to continue.'
-      })
-    }
-  }, [canUndo, dispatch, openSnackbar, setActiveModalType, trackChange, user])
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [canUndo, user]
+  )
 }

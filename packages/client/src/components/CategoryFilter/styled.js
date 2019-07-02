@@ -81,7 +81,7 @@ export function ScrollButton ({ handleClick, isShown, side }) {
           height: 3rem;
           width: ${scrollButtonWidthInRem}rem;
 
-          &:focus,
+          &:active,
           &:hover {
             color: var(--black900);
           }

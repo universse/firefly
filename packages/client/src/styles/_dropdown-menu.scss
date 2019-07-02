@@ -1,4 +1,6 @@
 .DropdownMenu {
+  $width: 11rem;
+
   position: relative;
 
   summary {
@@ -14,7 +16,7 @@
       justify-content: space-between;
       padding-left: calc(1rem - 4px);
       text-transform: uppercase;
-      width: 11rem;
+      width: $width;
     }
 
     span {
@@ -34,9 +36,12 @@
     margin-top: 0.25rem;
     overflow: auto;
     position: absolute;
-    right: 0;
-    width: 11rem;
+    width: $width;
     z-index: 2;
+
+    &.Right {
+      right: 0;
+    }
 
     a,
     button {
@@ -48,7 +53,7 @@
       height: 2.5rem;
       padding-left: 1rem;
       text-align: left;
-      width: 11rem;
+      width: $width;
 
       &.highlighted {
         background-color: var(--gray200);

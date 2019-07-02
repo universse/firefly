@@ -17,7 +17,6 @@ export default function ShareDropdown ({ name }) {
     highlightedIndex
   } = useDropdownMenu({ menuItemCount: Platforms.length })
   const siteTitle = useSiteTitle()
-  const href = window.location.href
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
@@ -28,13 +27,12 @@ export default function ShareDropdown ({ name }) {
       >
         <Share />
       </summary>
-      <ul {...menuProps}>
+      <ul className='Right' {...menuProps}>
         {Platforms.map((platform, i) => (
           <OutboundLink
             key={platform}
             className={`${highlightedIndex === i ? 'highlighted' : ''}`}
             {...getShareProps({
-              href,
               mobile: true,
               platform,
               siteTitle,
@@ -47,7 +45,7 @@ export default function ShareDropdown ({ name }) {
           className={`${
             highlightedIndex === Platforms.length ? 'highlighted' : ''
           }`}
-          {...getCopyUrlProps({ href, mobile: true })}
+          {...getCopyUrlProps({ mobile: true })}
           {...getMenuItemProps(Platforms.length)}
         />
       </ul>

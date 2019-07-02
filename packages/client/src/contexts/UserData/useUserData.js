@@ -22,10 +22,12 @@ function reducer (_, { type, payload }) {
         )
 
       case 'load-database':
-        const { save, ...rest } = payload
-        Object.keys(rest).forEach(
-          key => (draft[key] = { ...rest[key], ...draft[key] })
-        )
+        const { check, love, save } = payload
+
+        draft.check = { ...check, ...draft.check }
+        draft.love = { ...love, ...draft.love }
+
+        // avoid changing order in my-library page
         Object.keys(save).forEach(id => {
           draft.save[id] = save[id]
         })
@@ -53,6 +55,8 @@ function reducer (_, { type, payload }) {
     }
   })
 }
+
+// TODO suspense
 
 export default function useUserData (canUndo) {
   const [userData, dispatch] = useReducer(reducer, null)

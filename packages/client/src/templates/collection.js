@@ -78,52 +78,50 @@ export default function CollectionTemplate ({
         <>
           <MobileHeader
             actions={
-              collections && (
-                <>
-                  <button
-                    aria-label={createActionLabel(
-                      isSaved ? 'unsave' : 'save',
-                      name
-                    )}
-                    className='IconButton'
-                    onClick={onActionClick}
-                    type='button'
-                    value={id}
-                  >
-                    <Save filled={isSaved} />
-                  </button>
-                  <button
-                    aria-label={createActionLabel(
-                      isLoved ? 'unlove' : 'love',
-                      name
-                    )}
-                    className='IconButton'
-                    onClick={onActionClick}
-                    type='button'
-                    value={id}
-                  >
-                    <Heart filled={isLoved} />
-                  </button>
-                  {navigator.share ? (
-                    <button
-                      aria-label='Share'
-                      className='IconButton'
-                      onClick={e => {
-                        logClickAction({
-                          id,
-                          action: e.currentTarget.textContent
-                        })
-                        navigator.share({ text: name, url: location.href })
-                      }}
-                      type='button'
-                    >
-                      <Share />
-                    </button>
-                  ) : (
-                    <ShareDropdown name={name} />
+              <>
+                <button
+                  aria-label={createActionLabel(
+                    isSaved ? 'unsave' : 'save',
+                    name
                   )}
-                </>
-              )
+                  className='IconButton'
+                  onClick={onActionClick}
+                  type='button'
+                  value={id}
+                >
+                  <Save filled={isSaved} />
+                </button>
+                <button
+                  aria-label={createActionLabel(
+                    isLoved ? 'unlove' : 'love',
+                    name
+                  )}
+                  className='IconButton Heart'
+                  onClick={onActionClick}
+                  type='button'
+                  value={id}
+                >
+                  <Heart filled={isLoved} />
+                </button>
+                {navigator.share ? (
+                  <button
+                    aria-label='Share'
+                    className='IconButton'
+                    onClick={e => {
+                      logClickAction({
+                        id,
+                        action: e.currentTarget.textContent
+                      })
+                      navigator.share({ text: name, url: location.href })
+                    }}
+                    type='button'
+                  >
+                    <Share />
+                  </button>
+                ) : (
+                  <ShareDropdown name={name} />
+                )}
+              </>
             }
             navIcon={
               <button
@@ -163,15 +161,12 @@ export default function CollectionTemplate ({
                 margin-top: 2.5rem;
               `}
             >
-              {collections && (
-                <CollectionView
-                  check={check}
-                  collection={collections}
-                  isLoved={isLoved}
-                  isSaved={isSaved}
-                />
-              )}
-
+              <CollectionView
+                check={check}
+                collection={collections}
+                isLoved={isLoved}
+                isSaved={isSaved}
+              />
               {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
