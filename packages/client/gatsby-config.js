@@ -56,7 +56,7 @@ module.exports = {
             map: ({ c, d, ti, ty, u }) => ({
               description:
                 d.length === truncate(d) ? d : `${d.slice(0, truncate(d))}...`,
-              truncatedAt: d.length === truncate(d, 88) ? 0 : truncate(d, 88),
+              truncatedAt: d.length === truncate(d, 60) ? 0 : truncate(d, 60),
               title: ti,
               type: ItemTypes[ty],
               url: u
