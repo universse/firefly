@@ -5,22 +5,42 @@ import { toTitleCase } from 'common'
 
 import useIsScrollingDown from './useIsScrollingDown'
 import CategoryFilter from 'components/CategoryFilter'
-import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
 import { FABDesktop, Sidebar } from 'components/common'
-import Media from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'assets/icons'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
-  mobileNavigationHeightInRem,
+  bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
 import ModalTypes from 'constants/ModalTypes'
+
+function TopBars (props) {
+  const isScrollingDown = useIsScrollingDown()
+
+  return (
+    <div
+      css={css`
+        ${screens.nonDesktop} {
+          position: sticky;
+          top: 0;
+          transform: translateY(
+            ${isScrollingDown ? `-${mobileHeaderHeightInRem}rem` : 0}
+          );
+          transition: transform 0.3s;
+          will-change: transform;
+          z-index: 200;
+        }
+      `}
+      {...props}
+    />
+  )
+}
 
 export default function IndexLayout ({ category, children, location }) {
   const setActiveModalType = useContext(SetModalContext)
@@ -44,34 +64,19 @@ export default function IndexLayout ({ category, children, location }) {
   return (
     <URLParams location={location}>
       <SEO title={category === 'all' ? '' : toTitleCase(category)} />
-      <MobileHeader
-        actions={actions}
-        isScrollingDown={isScrollingDown}
-        title='Collections'
-      />
-      <section
-        css={css`
-          background-color: var(--gray100);
-
-          ${screens.nonDesktop} {
-            order: -1;
-          }
-        `}
-        id='hero'
-      >
+      <section id='hero'>
         <Hero />
       </section>
-      <main
+      <div
         css={css`
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
-          padding: 0 0 ${mobileNavigationHeightInRem}rem;
+          padding: 0 0 ${bottomBarHeightInRem}rem;
 
           ${screens.desktop} {
             min-height: calc(100vh - ${headerHeightInRem}rem);
             padding: 2rem 0;
           }
         `}
-        id='main'
       >
         <div
           className='base'
@@ -88,21 +93,20 @@ export default function IndexLayout ({ category, children, location }) {
             }
           `}
         >
-          <Media>
-            <Sidebar isScrollingDown={isScrollingDown}>
+          <TopBars>
+            <MobileHeader actions={actions} title='Collections' />
+            <Sidebar>
               <CategoryFilter pathname={location.pathname} />
             </Sidebar>
-            {children}
-          </Media>
+          </TopBars>
+          {children}
         </div>
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}
         >
           <Suggest />
         </FABDesktop> */}
-      </main>
-      {/* v2 */}
-      {/* <Footer /> */}
+      </div>
     </URLParams>
   )
 }

@@ -56,7 +56,7 @@ const facebookAppId = '604132180019762'
 
 export const Platforms = ['Facebook', 'Twitter', 'E-mail']
 
-export function getShareProps ({ mobile = false, platform, siteTitle, text }) {
+export function getShareProps ({ mobile = false, platform, title, text }) {
   const href = window.location.href
 
   const props = {
@@ -82,7 +82,7 @@ export function getShareProps ({ mobile = false, platform, siteTitle, text }) {
           {mobileLabel}
         </>
       )
-      props.href = `https://www.facebook.com/dialog/share?app_id=${facebookAppId}&redirect_uri=${href}&href=${href}&quote=${text} - ${siteTitle}`
+      props.href = `https://www.facebook.com/dialog/share?app_id=${facebookAppId}&redirect_uri=${href}&href=${href}&quote=${text} - ${title}`
       break
 
     case 'E-mail':
@@ -92,7 +92,7 @@ export function getShareProps ({ mobile = false, platform, siteTitle, text }) {
           {mobileLabel}
         </>
       )
-      props.href = `mailto:?to= &subject=${text} - ${siteTitle}&body=Check out this learning collection at ${href}`
+      props.href = `mailto:?to= &subject=${text} - ${title}&body=Check out this learning collection at ${href}`
       break
 
     case 'Twitter':
@@ -102,7 +102,7 @@ export function getShareProps ({ mobile = false, platform, siteTitle, text }) {
           {mobileLabel}
         </>
       )
-      props.href = `https://twitter.com/intent/tweet?text=${text} - ${siteTitle}&url=${href}`
+      props.href = `https://twitter.com/intent/tweet?text=${text} - ${title}&url=${href}`
       break
 
     default:

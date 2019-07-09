@@ -1,6 +1,8 @@
 const admin = require('firebase-admin')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
+// const cluster = require('cluster')
+// const numCPUs = require('os').cpus().length
 
 require('./config')
 const { parseCollection, parseUrl, writeBatchesToDB } = require('./utils')

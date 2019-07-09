@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
+import { bottomBarHeightInRem, screens } from 'constants/Styles'
 
 export function ActionButton ({ onActionClick, onClick, ...props }) {
   return (
@@ -55,7 +55,7 @@ export function Surface (props) {
         align-items: center;
         background-color: var(--gray700);
         border-radius: 4px;
-        box-shadow: var(--shadows-04);
+        box-shadow: var(--shadow-04);
         display: flex;
         justify-content: space-between;
         max-width: 40rem;
@@ -80,7 +80,7 @@ export function Wrapper ({ isOpen, ...props }) {
     <div
       aria-hidden={!isOpen}
       css={css`
-        bottom: ${mobileNavigationHeightInRem}rem;
+        bottom: ${bottomBarHeightInRem}rem;
         display: flex;
         justify-content: center;
         left: 0;

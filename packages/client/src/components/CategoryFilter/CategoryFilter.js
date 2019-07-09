@@ -18,7 +18,7 @@ export default function CategoryFilter ({ pathname }) {
     slider
   } = useSlider()
 
-  const isDesktop = useContext(MediaContext)
+  const { isDesktop } = useContext(MediaContext)
 
   return (
     <div
@@ -28,28 +28,30 @@ export default function CategoryFilter ({ pathname }) {
         }
       `}
     >
-      {isDesktop && (
-        <div
+      <div
+        css={css`
+          margin-bottom: 0.75rem;
+
+          ${screens.nonDesktop} {
+            display: none;
+          }
+        `}
+      >
+        <span
           css={css`
-            margin-bottom: 0.75rem;
+            color: var(--gray600);
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            line-height: 1.5rem;
+            padding-left: calc(1rem + 4px);
           `}
         >
-          <span
-            css={css`
-              color: var(--gray600);
-              display: block;
-              font-size: 0.875rem;
-              font-weight: 600;
-              line-height: 1.5rem;
-              padding-left: calc(1rem + 4px);
-            `}
-          >
-            CATEGORIES
-          </span>
-        </div>
-      )}
+          CATEGORIES
+        </span>
+      </div>
       <Filters handleScroll={onScroll} pathname={pathname} slider={slider} />
-      {!isDesktop && (
+      {isDesktop === false && (
         <div>
           <ScrollButton
             handleClick={onScrollLeftClick}

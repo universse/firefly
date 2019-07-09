@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
-import { css } from '@emotion/core'
+import { Link } from 'gatsby'
 
 import Avatar from './Avatar'
-import { GhostButton, NavLink } from './styled'
 import { SetModalContext } from 'contexts/SetModal'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
@@ -13,39 +12,33 @@ export default function Navigation () {
   const setActiveModalType = useContext(SetModalContext)
 
   return (
-    <nav>
-      <ul
-        css={css`
-          align-items: center;
-          display: flex;
-        `}
-      >
-        <li
-          css={css`
-            margin-left: 1.5rem;
-          `}
-        >
-          <NavLink partiallyActive to='/my-library'>
+    <nav className='Navigation'>
+      <ul>
+        <li>
+          <Link
+            activeClassName='active'
+            className='NavLink'
+            partiallyActive
+            to='/my-library'
+          >
             My Library
-          </NavLink>
+          </Link>
         </li>
-        <li
-          css={css`
-            margin-left: 1.5rem;
-          `}
-        >
+        <li>
           {hasSignedIn() ? (
             <Avatar />
           ) : (
-            <GhostButton
+            <button
               aria-label={AriaLabels.SIGNIN_REGISTER}
+              className='GhostButton'
               onClick={() => {
                 setActiveModalType(ModalTypes.SIGN_UP_FORM)
                 logSignUpIntent()
               }}
+              type='button'
             >
               Sign In / Register
-            </GhostButton>
+            </button>
           )}
         </li>
       </ul>

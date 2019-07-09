@@ -13,7 +13,7 @@ import {
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function MePage (props) {
-  const isDesktop = useContext(MediaContext)
+  const { isDesktop } = useContext(MediaContext)
 
   // created collections
   return (

@@ -1,22 +1,19 @@
-// @keyframes pulsating {
-//   0% {
-//     transform: scale(1);
-//   }
-//   50% {
-//     transform: scale(calc(9 / 7));
-//   }
-//   100% {
-//     transform: scale(1);
-//   }
-// }
-
 .ShareWidget {
   $size: 2.25rem;
 
   align-items: center;
   display: flex;
-  flex-direction: column;
-  width: $size;
+
+  @media #{$desktop} {
+    flex-direction: column;
+    width: $size;
+  }
+
+  @media #{$nonDesktop} {
+    li {
+      margin-right: 0.5rem;
+    }
+  }
 
   li:first-child {
     align-items: center;
@@ -43,7 +40,6 @@
     transition: transform 0.2s ease;
 
     &:hover {
-      // animation: pulsating 1.15s ease-in-out infinite;
       color: var(--brand500);
     }
 

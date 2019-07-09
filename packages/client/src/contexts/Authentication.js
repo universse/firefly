@@ -10,7 +10,7 @@ export default function Authentication ({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    function authenticate (timeout = 300) {
+    ;(function authenticate (timeout = 200) {
       return firebaseWorker
         .getUser()
         .then(payload => {
@@ -28,9 +28,7 @@ export default function Authentication ({ children }) {
         .catch(() => {
           setTimeout(authenticate, timeout)
         })
-    }
-
-    authenticate()
+    })()
   }, [])
 
   return (

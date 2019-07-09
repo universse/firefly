@@ -11,9 +11,9 @@ export function CollectionTitle (props) {
     <h1
       css={css`
         color: var(--black900);
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        line-height: 2.25rem;
+        line-height: 2rem;
 
         ${screens.desktop} {
           font-size: 2rem;

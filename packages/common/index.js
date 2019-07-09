@@ -1,4 +1,5 @@
 const toTitleCase = require('./src/toTitleCase')
+const truncate = require('./src/truncate')
 
 module.exports = {
   Categories: [
@@ -15,5 +16,6 @@ module.exports = {
   ItemTypes: ['article', 'book', 'code', 'course', 'podcast', 'url', 'video'],
   NetlifyFunction: '/.netlify/functions/',
   NormalizedCollectionsFilename: 'mivEB3GnRswZyWZMNkaO',
-  toTitleCase
+  toTitleCase,
+  truncate
 }

@@ -1,40 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { css } from '@emotion/core'
 
-import { MobileNavLink } from './styled'
+import { MobileNavLink } from './MobileNavLink'
 import { Home, Search, Library, User } from 'assets/icons'
-import { mobileNavigationHeightInRem, screens } from 'constants/Styles'
 
 export default function MobileNavigation ({ isIndexPage }) {
   return (
-    <nav
-      css={css`
-        background-color: var(--white900);
-        border-top: 1px solid var(--black300);
-        bottom: 0;
-        height: ${mobileNavigationHeightInRem}rem;
-        position: fixed;
-        width: 100%;
-        z-index: 200;
-
-        ${screens.desktop} {
-          display: none;
-        }
-      `}
-    >
-      <ul
-        css={css`
-          align-items: center;
-          display: flex;
-          height: 100%;
-        `}
-      >
-        <li
-          css={css`
-            flex: 1;
-          `}
-        >
+    <nav className='MobileNavigation'>
+      <ul>
+        <li>
           <MobileNavLink
             Icon={Home}
             label='Home'
@@ -43,11 +17,7 @@ export default function MobileNavigation ({ isIndexPage }) {
             to='/'
           />
         </li>
-        <li
-          css={css`
-            flex: 1;
-          `}
-        >
+        <li>
           <MobileNavLink
             Icon={Search}
             label='Search'
@@ -55,11 +25,7 @@ export default function MobileNavigation ({ isIndexPage }) {
             to='/search'
           />
         </li>
-        <li
-          css={css`
-            flex: 1;
-          `}
-        >
+        <li>
           <MobileNavLink
             Icon={Library}
             label='My Library'
@@ -68,9 +34,6 @@ export default function MobileNavigation ({ isIndexPage }) {
           />
         </li>
         {/* <li
-          css={css`
-            flex: 1;
-          `}
         >
           <MobileNavLink Icon={User} label='Profile' partiallyActive to='/me' />
         </li> */}

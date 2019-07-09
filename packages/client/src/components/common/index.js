@@ -2,12 +2,7 @@ import React, { Children, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
-import {
-  headerHeightInRem,
-  mobileHeaderHeightInRem,
-  mobileNavigationHeightInRem,
-  screens
-} from 'constants/Styles'
+import { headerHeightInRem, screens } from 'constants/Styles'
 
 import OutboundLink from './OutboundLink'
 
@@ -72,68 +67,68 @@ export function Difficulty (props) {
   )
 }
 
-export function FAB (props) {
-  return (
-    <button
-      css={css`
-        background-color: var(--brand500);
-        border-radius: 1.5rem;
-        bottom: ${mobileNavigationHeightInRem + 1}rem;
-        color: var(--white900);
-        height: 3rem;
-        position: fixed;
-        right: 1rem;
-        width: 3rem;
+// export function FAB (props) {
+//   return (
+//     <button
+//       css={css`
+//         background-color: var(--brand500);
+//         border-radius: 1.5rem;
+//         bottom: ${bottomBarHeightInRem + 1}rem;
+//         color: var(--white900);
+//         height: 3rem;
+//         position: fixed;
+//         right: 1rem;
+//         width: 3rem;
 
-        &:hover {
-          background-color: var(--brand900);
-        }
+//         &:hover {
+//           background-color: var(--brand900);
+//         }
 
-        ${screens.desktop} {
-          display: none;
-        }
-      `}
-      type='button'
-      {...props}
-    />
-  )
-}
+//         ${screens.desktop} {
+//           display: none;
+//         }
+//       `}
+//       type='button'
+//       {...props}
+//     />
+//   )
+// }
 
-FAB.propTypes = {
-  'aria-label': PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
-}
+// FAB.propTypes = {
+//   'aria-label': PropTypes.string.isRequired,
+//   onClick: PropTypes.func.isRequired
+// }
 
-export function FABDesktop (props) {
-  return (
-    <OutboundLink
-      css={css`
-        align-items: center;
-        background-color: var(--brand500);
-        border-radius: 1.75rem;
-        bottom: 2.5rem;
-        color: var(--white900);
-        display: flex;
-        height: 3.5rem;
-        justify-content: center;
-        position: fixed;
-        right: 2.5rem;
-        width: 3.5rem;
+// export function FABDesktop (props) {
+//   return (
+//     <OutboundLink
+//       css={css`
+//         align-items: center;
+//         background-color: var(--brand500);
+//         border-radius: 1.75rem;
+//         bottom: 2.5rem;
+//         color: var(--white900);
+//         display: flex;
+//         height: 3.5rem;
+//         justify-content: center;
+//         position: fixed;
+//         right: 2.5rem;
+//         width: 3.5rem;
 
-        &:hover {
-          background-color: var(--brand900);
-        }
+//         &:hover {
+//           background-color: var(--brand900);
+//         }
 
-        ${screens.nonDesktop} {
-          display: none;
-        }
-      `}
-      rel='noopener noreferrer'
-      target='_blank'
-      {...props}
-    />
-  )
-}
+//         ${screens.nonDesktop} {
+//           display: none;
+//         }
+//       `}
+//       rel='noopener noreferrer'
+//       target='_blank'
+//       {...props}
+//     />
+//   )
+// }
 
 export { OutboundLink }
 
@@ -169,22 +164,8 @@ PrimaryButton.propTypes = {
 // TODO gradient
 export function ProgressBar ({ percentage }) {
   return (
-    <div
-      css={css`
-        background-color: var(--gray200);
-        border-radius: 0.25rem;
-        width: 100%;
-      `}
-    >
-      <div
-        css={css`
-          background-color: var(--brand500);
-          border-radius: 0.25rem;
-          height: 0.5rem;
-          transition: width 0.45s ease;
-          width: ${percentage}%;
-        `}
-      />
+    <div className='ProgressBar'>
+      <div style={{ width: `${percentage}%` }} />
     </div>
   )
 }
@@ -193,36 +174,24 @@ ProgressBar.propTypes = {
   percentage: PropTypes.number.isRequired
 }
 
-export function Sidebar ({ isScrollingDown = false, ...props }) {
+export function Sidebar (props) {
   return (
     <div
       css={css`
-        position: sticky;
-
         ${screens.nonDesktop} {
           background-color: var(--white900);
-          box-shadow: var(--shadows-01);
-          top: ${mobileHeaderHeightInRem}rem;
-          transform: translateY(
-            ${isScrollingDown ? `-${mobileHeaderHeightInRem}rem` : 0}
-          );
-          transition: transform 0.3s;
-          will-change: transform;
-          z-index: 100;
+          box-shadow: var(--shadow-01);
+          position: relative;
         }
 
         ${screens.desktop} {
           align-self: flex-start;
           margin-top: 4.5rem;
+          position: sticky;
           top: ${headerHeightInRem + 1}rem;
-          width: 22.5%;
         }
       `}
       {...props}
     />
   )
-}
-
-Sidebar.propTypes = {
-  isScrollingDown: PropTypes.bool
 }

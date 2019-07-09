@@ -1,0 +1,43 @@
+footer {
+  background-color: var(--gray100);
+  margin-top: 6rem;
+
+  @media #{$nonDesktop} {
+    display: none;
+  }
+
+  .base {
+    align-items: center;
+    display: flex;
+    height: 5rem;
+    justify-content: flex-end;
+
+    div {
+      margin-right: 1.5rem;
+    }
+  }
+
+  a {
+    border-bottom: 1px dotted var(--black800);
+    color: var(--black900);
+    font-size: 0.8125rem;
+    font-weight: 500;
+
+    &:hover {
+      border-color: var(--accent500);
+      color: var(--accent500);
+    }
+  }
+
+  p {
+    border-bottom: 1px dotted transparent;
+    color: var(--black900);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  span {
+    color: var(--brand500);
+    font-size: 1rem;
+  }
+}

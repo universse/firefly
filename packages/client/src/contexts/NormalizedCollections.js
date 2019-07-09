@@ -6,7 +6,7 @@ import searchWorker from 'utils/searchWorker'
 export const NormalizedCollectionsContext = createContext()
 
 export default function NormalizedCollections ({ children }) {
-  const [normalizedCollections, setNormalizedCollections] = useState()
+  const [normalizedCollections, setNormalizedCollections] = useState(null)
 
   useEffect(() => {
     searchWorker.init().then(setNormalizedCollections)

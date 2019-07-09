@@ -5,7 +5,7 @@ import { DifficultyLevels } from 'common'
 export function Level ({ level }) {
   return (
     <svg
-      aria-label='level'
+      aria-label={DifficultyLevels[level]}
       height='17'
       role='img'
       strokeLinejoin='round'

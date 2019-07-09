@@ -13,7 +13,7 @@ const got = require('got')
 
 const { NetlifyFunction } = require('common')
 
-const basePath = process.env.NETLIFY ? `${NetlifyFunction}api` : '/api'
+const basePath = process.env.DEPLOY_URL ? `${NetlifyFunction}api` : '/api'
 
 const app = express()
 const router = express.Router()

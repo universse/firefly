@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import IndexLayout from './IndexLayout'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import SignUpForm from 'components/SignUpForm'
@@ -12,10 +13,7 @@ import Modal from 'contexts/Modal'
 import NormalizedCollections from 'contexts/NormalizedCollections'
 import SetSnackbar from 'contexts/SetSnackbar'
 import UserData from 'contexts/UserData'
-import {
-  getNormalizedPathname,
-  shouldHaveMobileNavigation
-} from 'utils/pathnameUtils'
+import { getNormalizedPathname } from 'utils/pathnameUtils'
 
 export default function Layout ({
   pageContext: { category, isIndexPage },
@@ -29,35 +27,36 @@ export default function Layout ({
   if (normalizedPathname === '/welcome') return children
 
   return (
-    <NormalizedCollections>
-      <Authentication>
-        <Modal>
-          <a className='skip-nav' href='#main'>
-            Skip to Main Content
-          </a>
-          {normalizedPathname !== '/search' && (
-            <Header isIndexPage={isIndexPage || false} />
-          )}
-          <LatestActivity>
-            <SetSnackbar location={location}>
-              <UserData canUndo={normalizedPathname === '/my-library'}>
-                {isIndexPage ? (
-                  <IndexLayout category={category} location={location}>
-                    {children}
-                  </IndexLayout>
-                ) : (
-                  <Media>{children}</Media>
-                )}
-              </UserData>
-            </SetSnackbar>
-          </LatestActivity>
-          <SignUpForm />
-        </Modal>
-      </Authentication>
-      {shouldHaveMobileNavigation(location.pathname) && (
+    <Media>
+      <NormalizedCollections>
+        <Authentication>
+          <Modal>
+            <a className='skip-nav' href='#main'>
+              Skip to Main Content
+            </a>
+            {normalizedPathname !== '/search' && (
+              <Header isIndexPage={isIndexPage || false} />
+            )}
+            <LatestActivity>
+              <SetSnackbar location={location}>
+                <UserData canUndo={normalizedPathname === '/my-library'}>
+                  {isIndexPage ? (
+                    <IndexLayout category={category} location={location}>
+                      {children}
+                    </IndexLayout>
+                  ) : (
+                    children
+                  )}
+                </UserData>
+              </SetSnackbar>
+            </LatestActivity>
+            <SignUpForm />
+          </Modal>
+        </Authentication>
+        <Footer />
         <MobileNavigation isIndexPage={isIndexPage || false} />
-      )}
-    </NormalizedCollections>
+      </NormalizedCollections>
+    </Media>
   )
 }
 

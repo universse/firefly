@@ -6,12 +6,12 @@ import LatestActivity from './LatestActivity'
 import Loading from './Loading'
 import Onboard from './Onboard'
 import { LatestActivityContext } from 'contexts/LatestActivity'
-import useSiteTitle from 'hooks/useSiteTitle'
+import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
 export default function Hero () {
-  const siteTitle = useSiteTitle()
+  const { title } = useSiteMetadata()
 
   const { isLoading, latestActivity } = useContext(LatestActivityContext)
 
@@ -43,7 +43,7 @@ export default function Hero () {
       `}
     >
       {isNewUser() ? (
-        <Onboard message={`Welcome to $${siteTitle}!`} />
+        <Onboard message={`Welcome to $${title}!`} />
       ) : isLoading ? (
         <Loading />
       ) : latestActivity ? (

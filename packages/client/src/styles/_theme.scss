@@ -34,14 +34,17 @@ $accent500: #007bfe;
     rgba(255, 255, 255, 0) 0%,
     rgb(255, 255, 255) 30%
   );
-  --shadows-01: 0 1px 3px -1px rgba(0, 0, 0, 0.1);
-  --shadows-02: 0 2px 4px rgba(0, 0, 0, 0.15);
-  --shadows-03: 0 3px 6px rgba(0, 0, 0, 0.2);
-  --shadows-04: 0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadow-01: 0 1px 3px -1px rgba(0, 0, 0, 0.1);
+  --shadow-02: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadow-03: 0 3px 6px rgba(0, 0, 0, 0.2);
+  --shadow-04: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-$desktop: "screen and (min-width: 52.0625rem)";
-$nonDesktop: "screen and (max-width: 52rem)";
-$mobile: "screen and (max-width: 37rem)";
-$nonMobile: "screen and (min-width: 37.0625rem)";
-$tablet: "screen and (min-width: 37.0625rem) and (max-width: 52rem)";
+$mobileWidth: 37rem;
+$desktopWidth: 58rem;
+
+$desktop: "screen and (min-width: #{$desktopWidth})";
+$nonDesktop: "screen and (max-width: #{$desktopWidth})";
+$mobile: "screen and (max-width: #{$mobileWidth})";
+$nonMobile: "screen and (min-width: #{$mobileWidth})";
+$tablet: "screen and (min-width: #{$mobileWidth}) and (max-width: #{$desktopWidth})";

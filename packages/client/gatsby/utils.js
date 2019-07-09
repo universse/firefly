@@ -14,9 +14,9 @@ module.exports = {
 
   isIndexPage: pathname => pathname.startsWith('/category') || pathname === '/',
 
-  scrollToHero: (smooth = true) =>
+  scrollToHero: () =>
     window.scrollTo({
       top: document.getElementById('hero').offsetHeight,
-      behavior: smooth ? 'smooth' : 'auto'
+      behavior: 'smooth'
     })
 }

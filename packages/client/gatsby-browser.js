@@ -14,9 +14,7 @@ export const onClientEntry = () => {
 }
 
 export const onRouteUpdate = ({ prevLocation }) => {
-  prevLocation
-    ? window.localStorage.setItem('visited', true)
-    : window.localStorage.removeItem('visited')
+  window.hasVisited = !!prevLocation
 }
 
 export const shouldUpdateScroll = ({
@@ -31,8 +29,8 @@ export const shouldUpdateScroll = ({
     return false
   }
 
-  if (isIndexPage(pathname)) {
-    scrollToHero(isIndexPage(prevPathname))
+  if (isIndexPage(pathname) && isIndexPage(prevPathname)) {
+    scrollToHero()
     return false
   }
 

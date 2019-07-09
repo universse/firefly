@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState, useLayoutEffect } from 'react'
 import { css } from '@emotion/core'
-import { Link } from 'gatsby'
 
 import { Collection } from 'components/Collections'
 import { MobileHeader } from 'components/Header'
@@ -17,7 +16,7 @@ import ModalTypes from 'constants/ModalTypes'
 import {
   headerHeightInRem,
   mobileBarsHeightInRem,
-  mobileNavigationHeightInRem,
+  bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
 import { logSignUpIntent } from 'utils/amplitude'
@@ -27,7 +26,7 @@ import { hasSignedIn } from 'utils/localStorageUtils'
 export default function MyLibraryPage () {
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
-  const isDesktop = useContext(MediaContext)
+  const { isDesktop } = useContext(MediaContext)
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
   const normalizedCollections = useContext(NormalizedCollectionsContext)
@@ -65,10 +64,10 @@ export default function MyLibraryPage () {
       <main
         css={css`
           min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
-          padding: 0 0 ${mobileNavigationHeightInRem}rem;
+          padding: 0 0 ${bottomBarHeightInRem}rem;
 
           ${screens.tablet} {
-            padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
+            padding: 1rem 0 ${bottomBarHeightInRem + 1}rem;
           }
 
           ${screens.desktop} {
@@ -142,7 +141,9 @@ export default function MyLibraryPage () {
           {normalizedCollections && hasSaved && (
             <ul
               css={css`
-                box-shadow: var(--shadows-03);
+                li {
+                  position: relative;
+                }
 
                 li:last-child > div {
                   border-bottom: 1px solid transparent;
@@ -150,21 +151,13 @@ export default function MyLibraryPage () {
 
                 ${screens.nonMobile} {
                   border-radius: 8px;
+                  box-shadow: var(--shadow-02);
                 }
               `}
             >
               {Object.keys(userData.save).map(id => (
-                <li
-                  key={id}
-                  css={css`
-                    position: relative;
-                  `}
-                >
-                  <Collection
-                    id={id}
-                    //  isLoved={!!userData.love[id]}
-                    isSaved
-                  />
+                <li key={id}>
+                  <Collection id={id} isSaved />
                 </li>
               ))}
             </ul>

@@ -2,9 +2,7 @@ import matchSorter, { rankings } from 'match-sorter'
 
 import memoize from '../memoize'
 
-const searchData = JSON.parse(
-  '{"HhRsuZ6IPyylqS7B6U6w":{"category":"artificial intelligence","itemCount":1,"level":2.3,"name":"Convolutional Neural Network","tags":["image recognition","deep learning","neural network"]},"JcNubtmHfKgPFnbZAExY":{"category":"design","itemCount":1,"level":1,"name":"Design Fundamental","tags":["visual design","design principles"]},"Om6hJWi21OyDVbhTORSz":{"category":"web development","itemCount":1,"level":3,"name":"React Hooks","tags":["react","hooks","state management"]},"Pw2TFeJJKnYpFt06LiwY":{"category":"artificial intelligence","itemCount":1,"level":2.6,"name":"Image Recognition With Keras","tags":["keras","tensorflow","cnn"]},"fQw2oGPJenZYG3JckiJa":{"category":"artificial intelligence","itemCount":1,"level":3.5,"name":"Reinforcement Learning","tags":["machine learning","python","openai"]},"pGnSWxe9S0fWu3T7RiFh":{"category":"programming","itemCount":1,"level":2,"name":"Getting Started With GraphQL","tags":["GraphQL","backend"]},"pqT2mJij6rC84d2bqlmC":{"category":"artificial intelligence","itemCount":6,"level":0,"name":"Getting Started With Machine Learning","tags":["machine learning","data science"]},"ucGpgE7vKATTYfb4XmdI":{"category":"artificial intelligence","itemCount":1,"level":1.2,"name":"Data Science Fundamentals","tags":["machine learning","supervised learning","big data"]}}'
-)
+const searchData = JSON.parse('%searchData%')
 
 const allCollectionIds = Object.keys(searchData).map(id => ({ id }))
 

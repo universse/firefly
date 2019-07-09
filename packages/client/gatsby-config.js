@@ -1,6 +1,6 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const { Categories, ItemTypes, NetlifyFunction } = require('common')
+const { Categories, ItemTypes, NetlifyFunction, truncate } = require('common')
 
 require('dotenv').config({
   path: resolve(__dirname, '../../.env')
@@ -33,7 +33,6 @@ module.exports = {
         implementation: require('sass')
       }
     },
-    // 'gatsby-plugin-subfont',
     'gatsby-plugin-layout',
     // 'gatsby-plugin-redux',
     // 'gatsby-plugin-apollo-client',
@@ -55,7 +54,9 @@ module.exports = {
             collection: 'urls',
             // description, image, publisher, title, type, url
             map: ({ c, d, ti, ty, u }) => ({
-              description: d,
+              description:
+                d.length === truncate(d) ? d : `${d.slice(0, truncate(d))}...`,
+              truncatedAt: d.length === truncate(d, 100) ? 0 : truncate(d, 100),
               title: ti,
               type: ItemTypes[ty],
               url: u
@@ -113,7 +114,7 @@ module.exports = {
         icon: 'src/assets/images/icon.png'
       }
     },
-    'gatsby-plugin-offline',
+    ...(process.env.DEPLOY_URL ? ['gatsby-plugin-offline'] : []),
     // 'gatsby-plugin-sitemap',
     'gatsby-plugin-no-sourcemaps',
     'gatsby-plugin-netlify-cache',

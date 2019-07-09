@@ -4,24 +4,14 @@ import { css } from '@emotion/core'
 
 import { Check, ExternalLink } from 'assets/icons'
 import { OutboundLink } from 'components/common'
+import { MediaContext } from 'contexts/Media'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import LinkIcons from 'constants/LinkIcons'
+import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
 import fallback from 'assets/images/fallback.png'
 import { logClickLearningResource } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-
-function truncate (str, length = 120) {
-  if (str.length <= length) return str
-  let final
-  if (str.slice(0, length).endsWith(' ')) final = str.slice(0, length - 1)
-  if (str.slice(0, length + 1).endsWith(' ')) final = str.slice(0, length)
-  else {
-    const trimmed = str.slice(0, length)
-    final = trimmed.slice(0, trimmed.lastIndexOf(' '))
-  }
-  return `${final}...`
-}
 
 function getVideoSrc (url) {
   return `https://www.youtube-nocookie.com/embed/${new URL(
@@ -37,103 +27,93 @@ function LearningItem ({
   isChecked,
   publisher,
   title,
+  truncatedAt,
   type,
   url
 }) {
+  const { isDesktop, isMobile } = useContext(MediaContext)
   const onActionClick = useContext(UserDataDispatchContext)
   const LinkIcon = LinkIcons[type.toUpperCase()]
 
-  return type === 'video' ? (
+  return (
     <>
-      <div className='LearningVideo'>
-        <iframe
-          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-          allowFullScreen
-          height='315'
-          src={getVideoSrc(url)}
-          title={title}
-          width='560'
-        />
-      </div>
-      <div
-        css={css`
-          margin-top: 1rem;
-          width: 95%;
-        `}
-      >
-        <h3>{title}</h3>
-      </div>
-      <div
-        css={css`
-          bottom: 0.5rem;
-          position: absolute;
-          right: -0.5rem;
-        `}
-      >
-        <button
-          aria-label={createActionLabel(isChecked ? 'check' : 'uncheck', title)}
-          className='IconButton'
-          onClick={onActionClick}
-          type='button'
-          value={id}
+      {type === 'video' ? (
+        <>
+          <div className='LearningVideo'>
+            <iframe
+              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+              allowFullScreen
+              src={getVideoSrc(url)}
+              title={title}
+            />
+          </div>
+          <div
+            css={css`
+              margin-top: 0.75rem;
+              width: calc(100% - 24px);
+
+              ${screens.nonMobile} {
+                margin-top: 1rem;
+              }
+            `}
+          >
+            <h3>{title}</h3>
+          </div>
+        </>
+      ) : (
+        <OutboundLink
+          aria-label={title}
+          className='LearningItem'
+          href={url}
+          onClick={() => logClickLearningResource({ id, collectionId })}
+          rel='noopener noreferrer'
+          target='_blank'
         >
-          <Check filled={isChecked} />
-        </button>
-      </div>
-    </>
-  ) : (
-    <>
-      <OutboundLink
-        aria-label={title}
-        className='LearningItem'
-        href={url}
-        onClick={() => logClickLearningResource({ id, collectionId })}
-        rel='noopener noreferrer'
-        target='_blank'
-      >
-        <img
-          alt=''
-          onError={e => {
-            e.target.onerror = null
-            e.target.src = `${fallback}`
-          }}
-          src='https://res.cloudinary.com/aplu/image/upload/c_scale,q_40,w_500/v1557091665/Curated/uxvrlogo.jpg'
-        />
-        <div
-          css={css`
-            display: flex;
-            flex: 1;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 0.25rem 0 0.25rem 1rem;
-            position: relative;
-          `}
-        >
-          <div>
-            <div
-              css={css`
-                align-items: flex-end;
-                display: flex;
-                margin-bottom: 0.25rem;
-              `}
-            >
-              <h3>{title}</h3>
-              <div className='Link'>
-                <ExternalLink />
+          <img
+            alt=''
+            onError={e => {
+              e.target.onerror = null
+              e.target.src = `${fallback}`
+            }}
+            src='https://res.cloudinary.com/aplu/image/upload/c_scale,q_40,w_500/v1557091665/Curated/uxvrlogo.jpg'
+          />
+          <div className='Meta'>
+            <div>
+              <div
+                css={css`
+                  ${screens.nonMobile} {
+                    margin-bottom: 0.25rem;
+                  }
+                `}
+              >
+                <h3>
+                  {title}
+                  {isDesktop && (
+                    <div aria-hidden className='Link'>
+                      <ExternalLink />
+                    </div>
+                  )}
+                </h3>
+              </div>
+              <div
+                css={css`
+                  ${screens.mobile} {
+                    width: calc(100% - 20px);
+                  }
+                `}
+              >
+                <p>
+                  {isMobile && truncatedAt
+                    ? description.slice(0, truncatedAt) + '...'
+                    : description}
+                </p>
               </div>
             </div>
-            <p>{truncate(description)}</p>
+            <span>{new URL(url).hostname}</span>
           </div>
-          <span>{new URL(url).hostname}</span>
-        </div>
-      </OutboundLink>
-      <div
-        css={css`
-          bottom: 0.5rem;
-          position: absolute;
-          right: -0.5rem;
-        `}
-      >
+        </OutboundLink>
+      )}
+      <div className='CheckWrapper'>
         <button
           aria-label={createActionLabel(isChecked ? 'check' : 'uncheck', title)}
           className='IconButton'
@@ -141,7 +121,7 @@ function LearningItem ({
           type='button'
           value={id}
         >
-          <Check filled={isChecked} />
+          <Check filled={isChecked} medium={isMobile} />
         </button>
       </div>
     </>

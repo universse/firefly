@@ -1,24 +1,22 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
-import { MobileSortByDifficulty } from 'components/SortByDifficulty'
-import { MobileTagFilter } from 'components/TagFilter'
+import Details from './Details'
 import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
 import ModalTypes from 'constants/ModalTypes'
 
-export default function MobileFilters ({ aggregatedTags }) {
+export default function DetailsModal (props) {
   const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
 
-  const isOpen = activeModalType === ModalTypes.MOBILE_FILTER
+  const isOpen = activeModalType === ModalTypes.DETAILS_MODAL
 
   return (
     <ReactModal
       className='Modal SideModal'
       closeTimeoutMS={280}
-      contentLabel='Filter Collections by Tags'
+      contentLabel='Collection Details'
       isOpen={isOpen}
       onRequestClose={() => {
         setActiveModalType(null)
@@ -26,12 +24,7 @@ export default function MobileFilters ({ aggregatedTags }) {
       overlayClassName='Overlay'
       shouldCloseOnOverlayClick
     >
-      <MobileSortByDifficulty />
-      <MobileTagFilter aggregatedTags={aggregatedTags} />
+      <Details {...props} />
     </ReactModal>
   )
-}
-
-MobileFilters.propTypes = {
-  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired
 }

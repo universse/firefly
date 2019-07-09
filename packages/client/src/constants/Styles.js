@@ -4,19 +4,22 @@ export const headerHeightInRem = 4
 
 export const mobileHeaderHeightInRem = 3.5
 
-export const mobileNavigationHeightInRem = 3.5
+export const bottomBarHeightInRem = 3.5
 
 export const mobileBarsHeightInRem =
-  mobileHeaderHeightInRem + mobileNavigationHeightInRem
+  mobileHeaderHeightInRem + bottomBarHeightInRem
 
-export const mobileProgressBarHeight = 2.25
+export const mobileProgressBarHeightInRem = 2.25
+
+const mobileWidth = '37rem'
+const desktopWidth = '58rem'
 
 export const media = {
-  desktop: 'screen and (min-width: 52.0625rem)',
-  nonDesktop: 'screen and (max-width: 52rem)',
-  mobile: 'screen and (max-width: 37rem)',
-  nonMobile: 'screen and (min-width: 37.0625rem)',
-  tablet: 'screen and (min-width: 37.0625rem) and (max-width: 52rem)'
+  desktop: `screen and (min-width: ${desktopWidth})`,
+  nonDesktop: `screen and (max-width: ${desktopWidth})`,
+  mobile: `screen and (max-width: ${mobileWidth})`,
+  nonMobile: `screen and (min-width: ${mobileWidth})`,
+  tablet: `screen and (min-width: ${mobileWidth}) and (max-width: ${desktopWidth})`
 }
 
 export const screens = {

@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { OutboundLink } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { Heart, Save } from 'assets/icons'
-import useSiteTitle from 'hooks/useSiteTitle'
+import useSiteMetadata from 'hooks/useSiteMetadata'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import firebaseWorker from 'utils/firebaseWorker'
 import { getCopyUrlProps, getShareProps, Platforms } from 'utils/sharing'
@@ -14,13 +14,9 @@ import { getCopyUrlProps, getShareProps, Platforms } from 'utils/sharing'
 
 export default function ShareWidget ({ id, isLoved, isSaved, name }) {
   const onActionClick = useContext(UserDataDispatchContext)
-  const siteTitle = useSiteTitle()
+  const { title } = useSiteMetadata()
 
   const [loveCount, setLoveCount] = useState()
-
-  // useEffect(() => {
-  //   setLoveCount(loveCount => (isLoved ? ++loveCount : --loveCount))
-  // }, [isLoved])
 
   useEffect(() => {
     firebaseWorker
@@ -51,6 +47,7 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
             color: var(--brand500);
             display: block;
             font-size: 0.875rem;
+            font-variant-numeric: tabular-nums;
             height: 1rem;
           `}
         >
@@ -69,9 +66,7 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
       </li>
       {Platforms.map(platform => (
         <li key={platform}>
-          <OutboundLink
-            {...getShareProps({ platform, siteTitle, text: name })}
-          />
+          <OutboundLink {...getShareProps({ platform, title, text: name })} />
         </li>
       ))}
       {/* <li>

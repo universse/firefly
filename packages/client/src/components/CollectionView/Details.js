@@ -14,14 +14,30 @@ import { createCategoryPath } from '../../../gatsby/utils'
 export default function Details ({ category, level, name, percentage, tags }) {
   return (
     <div className='Details'>
+      {name && (
+        <div
+          css={css`
+            margin-bottom: 1.25rem;
+          `}
+        >
+          <div
+            css={css`
+              margin-bottom: 0.5rem;
+            `}
+          >
+            <h2>Title</h2>
+          </div>
+          <span>{name}</span>
+        </div>
+      )}
       <div
         css={css`
-          margin-bottom: 1rem;
+          margin-bottom: 1.25rem;
         `}
       >
         <div
           css={css`
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
           `}
         >
           <h2>Category</h2>
@@ -46,32 +62,44 @@ export default function Details ({ category, level, name, percentage, tags }) {
       </div>
       <div
         css={css`
-          margin-bottom: 1rem;
+          margin-bottom: 1.25rem;
         `}
       >
         <div
           css={css`
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.5rem;
           `}
         >
           <h2>Level</h2>
         </div>
-        <span>{DifficultyLevels[Math.floor(level)]}</span>
+        <div>
+          <div
+            css={css`
+              display: inline-block;
+              margin-right: 0.5rem;
+            `}
+          >
+            <Level level={Math.floor(level)} />
+          </div>
+          <span>{DifficultyLevels[Math.floor(level)]}</span>
+        </div>
       </div>
-      <div
-        css={css`
-          margin-bottom: 0.25rem;
-        `}
-      >
+      {!isNaN(percentage) && (
         <div
           css={css`
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
           `}
         >
-          <h2>Progress</h2>
+          <div
+            css={css`
+              margin-bottom: 0.75rem;
+            `}
+          >
+            <h2>Progress</h2>
+          </div>
+          <ProgressBar percentage={percentage} />
         </div>
-        <ProgressBar percentage={percentage} />
-      </div>
+      )}
     </div>
   )
 }
@@ -79,7 +107,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
 Details.propTypes = {
   category: PropTypes.string.isRequired,
   level: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  percentage: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  percentage: PropTypes.number,
   tags: TagsType
 }

@@ -1,49 +1,27 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { screens } from 'constants/Styles'
+import { Link } from 'gatsby'
 
-import useSiteTitle from 'hooks/useSiteTitle'
+import useSiteMetadata from 'hooks/useSiteMetadata'
 
 export default function Footer () {
-  const siteTitle = useSiteTitle()
+  const { title } = useSiteMetadata()
 
   return (
-    <footer
-      css={css`
-        ${screens.nonDesktop} {
-          display: none;
-        }
-      `}
-    >
-      <div
-        className='base'
-        css={css`
-          align-items: center;
-          border-top: 1px solid var(--black300);
-          display: flex;
-          height: 3rem;
-          justify-content: center;
-        `}
-      >
-        <p
-          css={css`
-            color: var(--black800);
-            font-size: 0.8125rem;
-            font-weight: 500;
-          `}
-        >
+    <footer>
+      <div className='base'>
+        <div>
+          <Link to='/terms'>Terms</Link>
+        </div>
+        <div>
+          <Link to='/privacy'>Privacy</Link>
+        </div>
+        <p>
           Made with{' '}
-          <span
-            aria-label='Love'
-            css={css`
-              color: var(--brand500);
-              font-size: 1rem;
-            `}
-            role='img'
-          >
+          <span aria-label='Love' role='img'>
             ❤
           </span>
-          . ©️ {new Date().getFullYear()} {siteTitle}.
+          . ©️ {new Date().getFullYear()} {title}.
         </p>
       </div>
     </footer>

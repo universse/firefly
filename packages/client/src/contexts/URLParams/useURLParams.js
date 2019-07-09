@@ -1,5 +1,4 @@
 import { useEffect, useReducer, useMemo, useRef } from 'react'
-// import { globalHistory } from '@reach/router/lib/history'
 import { navigate } from 'gatsby'
 
 import URLParamKeys from 'constants/URLParamKeys'
@@ -40,16 +39,6 @@ function reducer (state, payload) {
 export default function useURLParams ({ pathname, search }) {
   const [query, queryDispatch] = useReducer(reducer, search, init)
 
-  // useEffect(() => {
-  //   const resetQuery = () => queryDispatch(init(window.location.search))
-
-  //   window.addEventListener('popstate', resetQuery)
-
-  //   return () => {
-  //     window.removeEventListener('popstate', resetQuery)
-  //   }
-  // }, [])
-
   const isFirstMount = useRef(true)
 
   useEffect(() => {
@@ -58,22 +47,10 @@ export default function useURLParams ({ pathname, search }) {
       : queryDispatch(init(search))
   }, [pathname, search])
 
-  // useEffect(() => {
-  //   const unlisten = globalHistory.listen(({ location: { search } }) => {
-  //     queryDispatch(init(search))
-  //   })
-
-  //   return () => {
-  //     unlisten()
-  //   }
-  // }, [])
-
   useEffect(() => {
     const { searchInput, sort, tags, action } = query
 
     !action && navigate(constructHref(searchInput, sort, tags))
-    // !action &&
-    //   window.history.pushState({}, '', constructHref(searchInput, sort, tags))
   }, [query])
 
   return useMemo(

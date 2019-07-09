@@ -8,16 +8,12 @@ import {
   screens
 } from 'constants/Styles'
 
-export function HeaderTag ({
-  isScrollingDown = false,
-  mobile = false,
-  ...props
-}) {
+export function HeaderTag ({ mobile = false, shadow = false, ...props }) {
   return (
     <header
       css={css`
         background-color: var(--white900);
-        box-shadow: var(--shadows-01);
+        box-shadow: var(--shadow-01);
         display: ${mobile ? 'none' : 'block'};
         height: ${headerHeightInRem}rem;
         position: ${mobile ? 'sticky' : 'fixed'};
@@ -26,12 +22,9 @@ export function HeaderTag ({
         z-index: 200;
 
         ${screens.nonDesktop} {
-          box-shadow: none;
+          box-shadow: ${shadow ? 'var(--shadow-01)' : 'none'};
           display: ${mobile ? 'block' : 'none'};
           height: ${mobileHeaderHeightInRem}rem;
-          transform: translateY(${isScrollingDown ? '-100%' : 0});
-          transition: transform 0.3s;
-          will-change: transform;
         }
       `}
       {...props}
@@ -40,17 +33,16 @@ export function HeaderTag ({
 }
 
 HeaderTag.propTypes = {
-  isScrollingDown: PropTypes.bool,
-  mobile: PropTypes.bool
+  mobile: PropTypes.bool,
+  shadow: PropTypes.bool
 }
 
-export function HeaderWrapper ({ shadow = false, ...props }) {
+export function HeaderWrapper (props) {
   return (
     <div
       className='base'
       css={css`
         align-items: center;
-        box-shadow: ${shadow ? 'var(--shadows-01)' : 'none'};
         display: flex;
         height: 100%;
         justify-content: space-between;
@@ -58,8 +50,4 @@ export function HeaderWrapper ({ shadow = false, ...props }) {
       {...props}
     />
   )
-}
-
-HeaderWrapper.propTypes = {
-  shadow: PropTypes.bool
 }

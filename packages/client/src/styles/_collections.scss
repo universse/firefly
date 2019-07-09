@@ -1,18 +1,41 @@
 .Collections {
   height: 100% !important;
-  min-height: 100vh;
+  min-height: 40rem;
   overflow: initial !important;
   width: 100%;
 
   & > ul:not(:empty) {
-    box-shadow: var(--shadows-02);
-
     li:last-child > div {
       border-bottom: 1px solid transparent;
     }
 
-    @media #{$desktop} {
+    @media #{$nonMobile} {
       border-radius: 8px;
+      box-shadow: var(--shadow-02);
     }
+  }
+}
+
+.TitleWrapper {
+  height: 100%;
+  padding: 0.25rem;
+  position: absolute;
+  width: 100%;
+
+  a {
+    display: block;
+    height: 100%;
+    padding: 1.75rem 0.75rem 0;
+
+    @media #{$desktop} {
+      padding: 2rem 1.75rem 0;
+    }
+  }
+
+  h3 {
+    color: var(--black900);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.75rem;
   }
 }

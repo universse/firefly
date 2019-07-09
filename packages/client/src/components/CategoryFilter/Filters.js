@@ -17,10 +17,8 @@ const CategoryPaths = [
   ...Categories.map(category => createCategoryPath(category))
 ]
 
-export default memo(Filters)
-
 function Filters ({ handleScroll, pathname, slider }) {
-  const isDesktop = useContext(MediaContext)
+  const { isDesktop } = useContext(MediaContext)
 
   useEffect(() => {
     if (isDesktop) return
@@ -64,6 +62,14 @@ function Filters ({ handleScroll, pathname, slider }) {
         <ul
           ref={slider}
           css={css`
+            li {
+              flex: 1 0 auto;
+
+              ${screens.desktop} {
+                margin-bottom: 0.5rem;
+              }
+            }
+
             ${screens.nonDesktop} {
               display: flex;
               overflow-x: auto;
@@ -72,16 +78,7 @@ function Filters ({ handleScroll, pathname, slider }) {
           onScroll={handleScroll}
         >
           {CategoryPaths.map((path, i) => (
-            <li
-              key={i}
-              css={css`
-                flex: 1 0 auto;
-
-                ${screens.desktop} {
-                  margin-bottom: 0.5rem;
-                }
-              `}
-            >
+            <li key={i}>
               <Category partiallyActive={path !== '/'} to={CategoryPaths[i]}>
                 {Categories[i - 1] || 'all'}
               </Category>
@@ -92,6 +89,8 @@ function Filters ({ handleScroll, pathname, slider }) {
     </nav>
   )
 }
+
+export default memo(Filters)
 
 Filters.propTypes = {
   handleScroll: PropTypes.func.isRequired,

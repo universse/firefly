@@ -1,3 +1,5 @@
+$modal-transition-duration: 0.28s;
+
 .Modal {
   background-color: #fff;
   display: flex;
@@ -17,20 +19,72 @@
     height: 24rem;
     width: 32rem;
   }
+
+  h3 {
+    color: var(--black900);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+  }
+
+  input[type="email"] {
+    background-color: var(--gray200);
+    border-radius: 1.25rem;
+    color: var(--black900);
+    font-size: 0.9375rem;
+    height: 2.5rem;
+    padding-left: 1rem;
+    width: 18rem;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.75rem;
+  }
+
+  label {
+    color: var(--black900);
+    font-size: 0.8125rem;
+  }
+
+  a {
+    border-bottom: 1px dotted var(--black800);
+    color: var(--black900);
+    font-weight: 600;
+
+    &:hover {
+      border-color: var(--accent500);
+      color: var(--accent500);
+    }
+  }
+
+  p {
+    color: var(--black900);
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 
-.FilterModal {
+.SideModal {
+  $width: 20rem;
+
   bottom: 0;
-  max-width: 20rem;
+  max-width: $width;
   padding: 1.5rem;
   position: fixed;
   right: 0;
   top: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  transform: translateX($width);
+  transition: transform $modal-transition-duration ease-in-out;
   user-select: none;
   width: calc(100% - 3.5rem);
+
+  .ReactModal__Overlay--after-open & {
+    transform: translateX(0);
+  }
+
+  .ReactModal__Overlay--before-close & {
+    transform: translateX($width);
+  }
 }
 
 .Overlay {
@@ -44,7 +98,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  transition: opacity 0.28s;
+  transition: opacity $modal-transition-duration ease-in-out;
   z-index: 999;
 }
 

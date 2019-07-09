@@ -12,6 +12,7 @@ function toTitleCase (str) {
         index !== array.length - 1 &&
         array[index - 3] !== ':' &&
         array[index + 1] !== ':' &&
+        array[index - 2] !== '|' &&
         (array[index + 1] !== '-' ||
           (array[index - 1] === '-' && array[index + 1] === '-'))
       ) {

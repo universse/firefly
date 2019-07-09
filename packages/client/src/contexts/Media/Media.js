@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { createContext, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import useMedia from './useMedia'
@@ -8,12 +8,17 @@ export const MediaContext = createContext()
 
 export default function Media ({ children }) {
   const isDesktop = useMedia(media.desktop)
+  const isMobile = useMedia(media.mobile)
 
-  return (
-    <MediaContext.Provider value={isDesktop}>
-      {typeof isDesktop === 'boolean' && children}
-    </MediaContext.Provider>
+  const value = useMemo(
+    () => ({
+      isDesktop,
+      isMobile
+    }),
+    [isDesktop, isMobile]
   )
+
+  return <MediaContext.Provider value={value}>{children}</MediaContext.Provider>
 }
 
 Media.propTypes = {

@@ -9,7 +9,7 @@ import { MediaContext } from 'contexts/Media'
 import AriaLabels from 'constants/AriaLabels'
 import {
   headerHeightInRem,
-  mobileNavigationHeightInRem,
+  bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
 import goBack from 'utils/goBack'
@@ -22,7 +22,7 @@ export default function SearchPage ({ location }) {
     ? location.state.initialIsLoading
     : false
 
-  const isDesktop = useContext(MediaContext)
+  const { isDesktop } = useContext(MediaContext)
 
   return (
     <>
@@ -33,8 +33,8 @@ export default function SearchPage ({ location }) {
           padding: 0 0 2rem;
 
           ${screens.nonDesktop} {
-            min-height: calc(100vh - ${mobileNavigationHeightInRem}rem);
-            padding: 1rem 0 ${mobileNavigationHeightInRem + 1}rem;
+            min-height: calc(100vh - ${bottomBarHeightInRem}rem);
+            padding: 1rem 0 ${bottomBarHeightInRem + 1}rem;
           }
         `}
         id='main'

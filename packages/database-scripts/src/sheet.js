@@ -9,9 +9,7 @@ const metascraper = require('metascraper')([
 const got = require('got')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
-const { toTitleCase } = require('common')
-
-const { truncate } = require('./utils')
+const { toTitleCase, truncate } = require('common')
 
 const workbook = XLSX.readFile(resolve(__dirname, '../data/raw.xlsx'))
 const worksheet = workbook.Sheets['Sheet1']
@@ -47,7 +45,10 @@ const processed = { collections: [] }
                 })
 
                 urls[i] = {
-                  description: truncate(description),
+                  description:
+                    description.length === truncate(description)
+                      ? description
+                      : `${description.slice(0, truncate(description))}...`,
                   image,
                   publisher,
                   title: toTitleCase(title),

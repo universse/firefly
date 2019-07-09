@@ -3,22 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "apollo-server-lambda": "^2.7.0-alpha.3",
-    "graphql": "^14.4.1",
+    "apollo-server-lambda": "^2.6.7",
+    "graphql": "^14.4.2",
     "graphql-tag": "^2.10.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "aws-sdk": "^2.486.0",
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.2",
+    "aws-sdk": "^2.489.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-macros": "^2.6.1",
     "jest": "^24.8.0",
     "preval.macro": "^3.0.0",
     "serverless-dynamodb-local": "^0.2.38",
-    "serverless-offline": "^5.5.1",
+    "serverless-offline": "^5.7.2",
     "serverless-webpack": "^5.3.1",
-    "webpack": "^4.35.2",
+    "webpack": "^4.35.3",
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {

@@ -10,5 +10,5 @@ export const getParamFromPathname = pathname =>
     .split('/')
     .pop()
 
-export const shouldHaveMobileNavigation = pathname =>
-  !(pathname.startsWith('/collection') || pathname.startsWith('/create'))
+// export const shouldHaveMobileNavigation = pathname =>
+//   !(pathname.startsWith('/collection') || pathname.startsWith('/create'))

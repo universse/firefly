@@ -2,9 +2,19 @@ const fs = require('fs')
 const { resolve } = require('path')
 
 const { createCollectionPath } = require('./utils')
-const { NormalizedCollectionsFilename } = require('common')
+// const { NormalizedCollectionsFilename } = require('common')
 
-module.exports = async ({ graphql, actions: { createPage } }) => {
+module.exports = async ({
+  graphql,
+  actions: { createPage, createRedirect }
+}) => {
+  createRedirect({
+    fromPath: '/api/subscribe',
+    toPath:
+      'https://emailoctopus.com/api/1.5/lists/28c2f781-9e6b-11e9-9307-06b4694bee2a/contacts',
+    statusCode: 200
+  })
+
   const db = await graphql(
     `
       {
@@ -48,12 +58,21 @@ module.exports = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
-  const dataDir = 'src/data/'
+  // const dataDir = 'src/data/'
 
-  !fs.existsSync(dataDir) && fs.mkdirSync(dataDir)
+  // !fs.existsSync(dataDir) && fs.mkdirSync(dataDir)
+
+  // fs.writeFileSync(
+  //   `${dataDir}${NormalizedCollectionsFilename}.json`,
+  //   JSON.stringify(normalizedCollections)
+  // )
+
+  const searchWorker = fs.readFileSync('src/utils/searchWorker/_template.js', {
+    encoding: 'utf8'
+  })
 
   fs.writeFileSync(
-    `${dataDir}${NormalizedCollectionsFilename}.json`,
-    JSON.stringify(normalizedCollections)
+    'src/utils/searchWorker/search.worker.js',
+    searchWorker.replace('%searchData%', JSON.stringify(normalizedCollections))
   )
 }

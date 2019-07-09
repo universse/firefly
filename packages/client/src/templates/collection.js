@@ -3,26 +3,30 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
+import ShareWidget from 'components/CollectionView/ShareWidget'
 import CollectionView from 'components/CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
-import { Back, Heart, Save, Share, Suggest } from 'assets/icons'
+import { Back, Heart, Info, Save, Share, Suggest } from 'assets/icons'
 // import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
+import { MediaContext } from 'contexts/Media'
+import { SetModalContext } from 'contexts/SetModal'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import AriaLabels from 'constants/AriaLabels'
+import ModalTypes from 'constants/ModalTypes'
 import {
+  bottomBarHeightInRem,
   headerHeightInRem,
-  mobileHeaderHeightInRem,
-  mobileProgressBarHeight,
+  mobileBarsHeightInRem,
+  mobileProgressBarHeightInRem,
   screens
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
 import { logClickAction } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-// import firebaseWorker from 'utils/firebaseWorker'
 import goBack from 'utils/goBack'
 // import parseCollectionData from 'utils/parseCollectionData'
 // import { getParamFromPathname } from 'utils/pathnameUtils'
@@ -42,8 +46,11 @@ export default function CollectionTemplate ({
 
   const userData = useContext(UserDataContext)
   const onActionClick = useContext(UserDataDispatchContext)
+  const setActiveModalType = useContext(SetModalContext)
 
   const { id, name } = collections
+
+  const { isDesktop } = useContext(MediaContext)
 
   // const { id, name } = collection || {
   //   id: getParamFromPathname(location.pathname)
@@ -121,6 +128,14 @@ export default function CollectionTemplate ({
                 ) : (
                   <ShareDropdown name={name} />
                 )}
+                <button
+                  aria-label='View Collection Details'
+                  className='IconButton'
+                  onClick={() => setActiveModalType(ModalTypes.DETAILS_MODAL)}
+                  type='button'
+                >
+                  <Info />
+                </button>
               </>
             }
             navIcon={
@@ -139,34 +154,72 @@ export default function CollectionTemplate ({
           <div
             className='base'
             css={css`
-              min-height: calc(100vh - ${mobileHeaderHeightInRem + 2.25}rem);
-              padding-bottom: ${mobileProgressBarHeight + 1}rem;
+              min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
+
+              ${screens.mobile} {
+                padding: 0 0
+                  ${bottomBarHeightInRem + mobileProgressBarHeightInRem}rem;
+              }
+
+              ${screens.tablet} {
+                padding-bottom: ${bottomBarHeightInRem +
+                  mobileProgressBarHeightInRem}rem;
+              }
 
               ${screens.desktop} {
-                max-width: 69rem;
+                max-width: 64rem;
                 min-height: calc(100vh - ${headerHeightInRem}rem);
-                position: relative;
-                right: 2.5rem;
               }
             `}
           >
             <div
               css={css`
                 display: grid;
-                grid-gap: 3rem 2rem;
+                grid-gap: 1.5rem;
                 grid-template-areas:
-                  '. title title'
-                  'widget list sidebar';
-                grid-template-columns: 3rem 40rem 20rem;
-                margin-top: 2.5rem;
+                  'title'
+                  'list';
+                margin: 1.5rem 0;
+
+                ${screens.desktop} {
+                  grid-gap: 3rem 1.5rem;
+                  grid-template-areas:
+                    '. title title'
+                    'widget list sidebar';
+                  grid-template-columns: 2.5rem 1fr 19rem;
+                  margin: 2.5rem 0 0 0;
+                }
               `}
             >
               <CollectionView
                 check={check}
                 collection={collections}
-                isLoved={isLoved}
                 isSaved={isSaved}
               />
+              {isDesktop && (
+                <aside
+                  css={css`
+                    align-self: start;
+                    grid-area: widget;
+
+                    ${screens.mobile} {
+                      margin-left: 1rem;
+                    }
+
+                    ${screens.desktop} {
+                      position: sticky;
+                      top: ${headerHeightInRem + 1}rem;
+                    }
+                  `}
+                >
+                  <ShareWidget
+                    id={id}
+                    isLoved={isLoved}
+                    isSaved={isSaved}
+                    name={name}
+                  />
+                </aside>
+              )}
               {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
@@ -201,6 +254,7 @@ export const query = graphql`
         # image
         # publisher
         title
+        truncatedAt
         type
         url
       }

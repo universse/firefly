@@ -6,11 +6,13 @@ import offlineStorageWorker from 'utils/offlineStorageWorker'
 export default function useSaveUserData (change, user) {
   useEffect(() => {
     if (change && user) {
-      navigator.onLine
-        ? firebaseWorker
-            .action(change)
-            .catch(() => offlineStorageWorker.saveChangesToQueue(change))
-        : offlineStorageWorker.saveChangesToQueue(change)
+      firebaseWorker
+        .action(change)
+        .catch(
+          () =>
+            !change.action.endsWith('love') &&
+            offlineStorageWorker.saveChangesToQueue(change)
+        )
     }
   }, [change, user])
 }

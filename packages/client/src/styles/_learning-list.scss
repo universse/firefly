@@ -1,15 +1,21 @@
 .LearningList {
   align-self: start;
-  border-radius: 8px;
-  box-shadow: var(--shadows-02);
   grid-area: list;
   padding: 0 1rem;
 
+  @media #{$nonMobile} {
+    border-radius: 8px;
+    box-shadow: var(--shadow-02);
+  }
+
   li {
     border-bottom: 1px solid var(--black300);
-    // height: 10rem;
-    padding: 1.25rem 0;
+    padding: 1rem 0;
     position: relative;
+
+    @media #{$desktop} {
+      padding: 1.25rem 0;
+    }
   }
 
   li:last-child {
@@ -22,14 +28,7 @@
     font-weight: 700;
     line-height: 1.5rem;
 
-    @media #{$tablet} {
-      color: var(--black800);
-      font-size: 1.125rem;
-      line-height: 1.5rem;
-    }
-
-    @media #{$desktop} {
-      color: var(--black900);
+    @media #{$nonMobile} {
       font-size: 1.125rem;
       line-height: 1.5rem;
     }
@@ -38,15 +37,24 @@
 
 .LearningItem {
   $height: 8rem;
+  $mobileHeight: 6rem;
 
   display: flex;
-  height: $height;
+  height: $mobileHeight;
   justify-content: space-between;
+
+  @media #{$nonMobile} {
+    height: $height;
+  }
 
   img {
     border-radius: 4px;
-    flex: 0 0 $height;
+    flex: 0 0 $mobileHeight;
     object-fit: cover;
+
+    @media #{$nonMobile} {
+      flex: 0 0 $height;
+    }
   }
 
   .Link {
@@ -61,15 +69,19 @@
 
     .Link {
       color: var(--black900);
-      display: block;
+      display: inline-block;
     }
   }
 
   p {
-    color: var(--black800);
+    color: var(--black900);
     font-size: 0.875rem;
-    font-weight: 500;
     line-height: 1.25rem;
+
+    @media #{$nonMobile} {
+      color: var(--black800);
+      font-weight: 500;
+    }
   }
 
   span {
@@ -77,7 +89,24 @@
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
-    line-height: 1.5rem;
+    line-height: 1.25rem;
+
+    @media #{$mobile} {
+      display: none;
+    }
+  }
+}
+
+.Meta {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 0.5rem;
+  position: relative;
+
+  @media #{$nonMobile} {
+    padding-left: 1rem;
   }
 }
 
@@ -93,5 +122,19 @@
     position: absolute;
     top: 0;
     width: 100%;
+  }
+}
+
+.CheckWrapper {
+  bottom: 0.125rem;
+  position: absolute;
+  right: -0.5rem;
+
+  @media #{$tablet} {
+    bottom: 0.375rem;
+  }
+
+  @media #{$desktop} {
+    bottom: 0.625rem;
   }
 }

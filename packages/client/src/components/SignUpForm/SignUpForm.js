@@ -2,12 +2,11 @@ import React, { useState, useContext } from 'react'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
-import { ErrorMessage, Input } from './styled'
 import { PrimaryButton } from 'components/common'
 import { Cross } from 'assets/icons'
 import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
-import useSiteTitle from 'hooks/useSiteTitle'
+import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
 import firebaseWorker from 'utils/firebaseWorker'
@@ -15,18 +14,18 @@ import { logClickSignUp } from 'utils/amplitude'
 
 ReactModal.setAppElement('#___gatsby')
 
-// TODO: validation https://verifier.meetchopra.com/
 export default function SignUpForm () {
-  const siteTitle = useSiteTitle()
+  const { title } = useSiteMetadata()
   const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
 
   const [email, setEmail] = useState('')
+  const [isSubscribing, setIsSubscribing] = useState(true)
   const [isLoading, setIsloading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
     logClickSignUp(email)
@@ -37,6 +36,19 @@ export default function SignUpForm () {
       .sendSignInLinkToEmail(email)
       .then(() => {
         setIsSubmitted(true)
+
+        isSubscribing &&
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              api_key: process.env.GATSBY_OCTOPUS_KEY,
+              email_address: email
+            })
+          })
+
         window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
       })
       .catch(() => setHasError(true))
@@ -68,13 +80,7 @@ export default function SignUpForm () {
             width: 20rem;
           `}
         >
-          <p
-            css={css`
-              color: var(--black900);
-              font-size: 1rem;
-              line-height: 1.5rem;
-            `}
-          >
+          <p>
             Thank you for signing up. To confirm your email address, click on
             the link we've just sent to <strong>{email}</strong>.
           </p>
@@ -83,44 +89,62 @@ export default function SignUpForm () {
         <>
           <div
             css={css`
-              margin-bottom: 1rem;
+              margin-bottom: 2rem;
             `}
           >
-            <h3
-              css={css`
-                color: var(--black900);
-                font-size: 1.25rem;
-                font-weight: 700;
-                line-height: 2rem;
-              `}
-            >
-              Welcome to {siteTitle}
-            </h3>
+            <h3>Welcome to {title}</h3>
           </div>
           <form onSubmit={handleSubmit}>
-            <Input
+            <input
               aria-label='Your Email Address'
+              autoComplete='off'
               name='email'
               onChange={e => {
                 setEmail(e.target.value)
                 setHasError(false)
               }}
               placeholder='username@domain.com'
+              type='email'
               value={email}
             />
             {hasError && (
               <div
                 css={css`
                   margin-left: 1rem;
-                  margin-top: 0.125rem;
+                  margin-top: 0.25rem;
                 `}
               >
-                <ErrorMessage>Please enter a valid email address</ErrorMessage>
+                <span
+                  css={css`
+                    color: var(--brand500);
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                  `}
+                >
+                  Please enter a valid email address
+                </span>
               </div>
             )}
             <div
               css={css`
-                margin-top: 1rem;
+                margin-top: 0.75rem;
+              `}
+            >
+              <input
+                checked={isSubscribing}
+                id='subscribe'
+                name='sort'
+                onChange={() =>
+                  setIsSubscribing(isSubscribing => !isSubscribing)
+                }
+                type='checkbox'
+                value={isSubscribing}
+              />
+              <label htmlFor='subscribe'>Subscribe to</label>
+            </div>
+            <div
+              css={css`
+                margin: 1.25rem 0 0.75rem;
               `}
             >
               <PrimaryButton
@@ -130,6 +154,30 @@ export default function SignUpForm () {
               >
                 Sign In with Email Link
               </PrimaryButton>
+            </div>
+            <div
+              css={css`
+                width: 18rem;
+              `}
+            >
+              <span
+                css={css`
+                  color: var(--black900);
+                  font-size: 0.8125rem;
+                  line-height: 1.25rem;
+                `}
+              >
+                By registering for {/^[aeiou]/i.test(title) ? 'an' : 'a'}{' '}
+                {title} account, you agree to our{' '}
+                <a href='/terms' rel='noopener noreferrer' target='_blank'>
+                  Terms of Service
+                </a>{' '}
+                and{' '}
+                <a href='/privacy' rel='noopener noreferrer' target='_blank'>
+                  Privacy Policy
+                </a>
+                .
+              </span>
             </div>
           </form>
         </>

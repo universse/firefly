@@ -19,7 +19,7 @@ import { logInputSearch } from 'utils/amplitude'
 import searchWorker from 'utils/searchWorker'
 
 export default function IndexPage ({ data, location }) {
-  const isDesktop = useContext(MediaContext)
+  const { isDesktop } = useContext(MediaContext)
   const {
     query: { searchInput, sort, tags },
     queryDispatch
@@ -60,16 +60,21 @@ export default function IndexPage ({ data, location }) {
 
   return (
     <>
-      {/* {!isDesktop && <MobileFilters aggregatedTags={aggregatedTags} />} */}
-      <div
+      {/* {isDesktop === false && <MobileFilters aggregatedTags={aggregatedTags} />} */}
+      <main
         css={css`
           height: 100%;
           width: 100%;
+
+          ${screens.tablet} {
+            padding: 1rem;
+          }
 
           ${screens.desktop} {
             width: 70%;
           }
         `}
+        id='main'
       >
         {isDesktop && (
           <>
@@ -106,7 +111,7 @@ export default function IndexPage ({ data, location }) {
                   autoComplete='off'
                   css={css`
                     border-radius: 1.5rem;
-                    box-shadow: var(--shadows-02);
+                    box-shadow: var(--shadow-02);
                     color: var(--black900);
                     font-size: 1rem;
                     height: 3rem;
@@ -146,7 +151,7 @@ export default function IndexPage ({ data, location }) {
           </>
         )}
         <Collections collectionIds={collectionIds} />
-      </div>
+      </main>
     </>
   )
 }

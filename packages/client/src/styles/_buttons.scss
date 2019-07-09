@@ -1,0 +1,16 @@
+.GhostButton {
+  align-items: center;
+  border: 2px solid var(--brand500);
+  border-radius: 1rem;
+  color: var(--brand500);
+  display: flex;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  height: 2rem;
+  padding: 0 1rem;
+
+  &:hover {
+    background-color: var(--brand500);
+    color: #fff;
+  }
+}

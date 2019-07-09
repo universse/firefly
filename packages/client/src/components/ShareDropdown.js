@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { OutboundLink } from 'components/common'
 import { Share } from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
-import useSiteTitle from 'hooks/useSiteTitle'
+import useSiteMetadata from 'hooks/useSiteMetadata'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { getCopyUrlProps, getShareProps, Platforms } from 'utils/sharing'
 
@@ -16,7 +16,7 @@ export default function ShareDropdown ({ name }) {
     getMenuItemProps,
     highlightedIndex
   } = useDropdownMenu({ menuItemCount: Platforms.length })
-  const siteTitle = useSiteTitle()
+  const { title } = useSiteMetadata()
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
@@ -35,7 +35,7 @@ export default function ShareDropdown ({ name }) {
             {...getShareProps({
               mobile: true,
               platform,
-              siteTitle,
+              title,
               text: name
             })}
             {...getMenuItemProps(i)}

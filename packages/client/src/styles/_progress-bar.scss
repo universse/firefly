@@ -1,0 +1,12 @@
+.ProgressBar {
+  background-color: var(--gray200);
+  border-radius: 0.25rem;
+  width: 100%;
+
+  div {
+    background-color: var(--brand500);
+    border-radius: 0.25rem;
+    height: 0.5rem;
+    transition: width 0.45s ease;
+  }
+}

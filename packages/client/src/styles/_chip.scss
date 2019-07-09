@@ -25,7 +25,7 @@
   margin-right: 0.75rem;
 
   &:hover {
-    border-bottom: 1px solid var(--accent500);
+    border-color: var(--accent500);
     color: var(--accent500);
   }
 }
