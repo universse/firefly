@@ -104,7 +104,7 @@ export default function IndexPage ({ data, location }) {
                     z-index: 2;
                   `}
                 >
-                  <Search />
+                  <Search medium />
                 </div>
                 <input
                   aria-label={AriaLabels.SEARCH_BAR_LABEL}

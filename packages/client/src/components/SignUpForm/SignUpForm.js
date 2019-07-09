@@ -127,6 +127,8 @@ export default function SignUpForm () {
             )}
             <div
               css={css`
+                align-items: center;
+                display: flex;
                 margin-top: 0.75rem;
               `}
             >

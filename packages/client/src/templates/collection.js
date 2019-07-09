@@ -149,7 +149,6 @@ export default function CollectionTemplate ({
               </button>
             }
             shadow
-            title='Collection'
           />
           <div
             className='base'

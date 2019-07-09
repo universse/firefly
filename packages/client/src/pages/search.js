@@ -83,7 +83,7 @@ export default function SearchPage ({ location }) {
               }
             `}
           >
-            <Search />
+            <Search medium />
           </div>
           <SearchBar
             initialIsLoading={initialIsLoading}

@@ -146,7 +146,9 @@ export default function MyLibraryPage () {
                 }
 
                 li:last-child > div {
-                  border-bottom: 1px solid transparent;
+                  ${screens.nonMobile} {
+                    border-bottom: 1px solid transparent;
+                  }
                 }
 
                 ${screens.nonMobile} {

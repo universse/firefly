@@ -173,25 +173,3 @@ export function ProgressBar ({ percentage }) {
 ProgressBar.propTypes = {
   percentage: PropTypes.number.isRequired
 }
-
-export function Sidebar (props) {
-  return (
-    <div
-      css={css`
-        ${screens.nonDesktop} {
-          background-color: var(--white900);
-          box-shadow: var(--shadow-01);
-          position: relative;
-        }
-
-        ${screens.desktop} {
-          align-self: flex-start;
-          margin-top: 4.5rem;
-          position: sticky;
-          top: ${headerHeightInRem + 1}rem;
-        }
-      `}
-      {...props}
-    />
-  )
-}

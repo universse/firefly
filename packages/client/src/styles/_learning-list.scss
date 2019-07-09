@@ -19,7 +19,9 @@
   }
 
   li:last-child {
-    border-bottom: 1px solid transparent;
+    @media #{$nonMobile} {
+      border-bottom: 1px solid transparent;
+    }
   }
 
   h3 {

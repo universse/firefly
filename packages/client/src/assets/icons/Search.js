@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Search ({ medium = true }) {
+export function Search ({ medium = false }) {
   return (
     <svg
       aria-label='search'

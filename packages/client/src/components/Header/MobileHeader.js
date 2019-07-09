@@ -24,18 +24,20 @@ function MobileHeader ({ actions, navIcon, shadow = false, title }) {
               {navIcon}
             </div>
           )}
-          <div>
-            <h2
-              css={css`
-                color: var(--black800);
-                font-size: 1.25rem;
-                font-weight: 500;
-                line-height: 1.5rem;
-              `}
-            >
-              {title}
-            </h2>
-          </div>
+          {title && (
+            <div>
+              <h2
+                css={css`
+                  color: var(--black800);
+                  font-size: 1.25rem;
+                  font-weight: 500;
+                  line-height: 1.5rem;
+                `}
+              >
+                {title}
+              </h2>
+            </div>
+          )}
         </div>
         {actions && <ActionBar>{actions}</ActionBar>}
       </HeaderWrapper>
@@ -46,8 +48,8 @@ function MobileHeader ({ actions, navIcon, shadow = false, title }) {
 export default memo(MobileHeader)
 
 MobileHeader.propTypes = {
-  title: PropTypes.string.isRequired,
   actions: PropTypes.element,
   navIcon: PropTypes.element,
-  shadow: PropTypes.bool
+  shadow: PropTypes.bool,
+  title: PropTypes.string
 }

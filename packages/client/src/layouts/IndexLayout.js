@@ -8,7 +8,7 @@ import CategoryFilter from 'components/CategoryFilter'
 import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
-import { FABDesktop, Sidebar } from 'components/common'
+// import { FABDesktop } from 'components/common'
 import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
 import { Filter, Suggest } from 'assets/icons'
@@ -19,6 +19,28 @@ import {
   screens
 } from 'constants/Styles'
 import ModalTypes from 'constants/ModalTypes'
+
+function Sidebar (props) {
+  return (
+    <div
+      css={css`
+        ${screens.nonDesktop} {
+          background-color: var(--white900);
+          box-shadow: var(--shadow-01);
+          position: relative;
+        }
+
+        ${screens.desktop} {
+          align-self: flex-start;
+          margin-top: 4.5rem;
+          position: sticky;
+          top: ${headerHeightInRem + 1}rem;
+        }
+      `}
+      {...props}
+    />
+  )
+}
 
 function TopBars (props) {
   const isScrollingDown = useIsScrollingDown()
@@ -58,8 +80,6 @@ export default function IndexLayout ({ category, children, location }) {
     ),
     [setActiveModalType]
   )
-
-  const isScrollingDown = useIsScrollingDown()
 
   return (
     <URLParams location={location}>
