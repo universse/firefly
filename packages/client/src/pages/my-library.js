@@ -110,6 +110,14 @@ export default function MyLibraryPage () {
                 align-items: center;
                 display: flex;
                 flex-direction: column;
+                padding: 0 1rem;
+
+                ${screens.mobile} {
+                  svg {
+                    height: 320px;
+                    width: 320px;
+                  }
+                }
               `}
             >
               <EmptyLibrary />
