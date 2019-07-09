@@ -4,10 +4,10 @@ export function HeroImage () {
   return (
     <svg
       aria-label='hero image'
-      height='400'
+      height='384'
       role='img'
       viewBox='0 0 1200 1200'
-      width='400'
+      width='384'
       xmlns='http://www.w3.org/2000/svg'
     >
       <title>hero image</title>
