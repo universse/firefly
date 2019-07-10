@@ -1,5 +1,5 @@
 export default {
-  DETAILS_MODAL: 'detailsModal',
-  MOBILE_FILTER: 'mobileFilter',
+  DETAILS: 'details',
+  SEARCH: 'search',
   SIGN_UP_FORM: 'signUpForm'
 }

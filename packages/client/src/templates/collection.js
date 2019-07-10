@@ -131,7 +131,7 @@ export default function CollectionTemplate ({
                 <button
                   aria-label='View Collection Details'
                   className='IconButton'
-                  onClick={() => setActiveModalType(ModalTypes.DETAILS_MODAL)}
+                  onClick={() => setActiveModalType(ModalTypes.DETAILS)}
                   type='button'
                 >
                   <Info />

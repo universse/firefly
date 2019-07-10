@@ -10,7 +10,7 @@ export default function DetailsModal (props) {
   const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
 
-  const isOpen = activeModalType === ModalTypes.DETAILS_MODAL
+  const isOpen = activeModalType === ModalTypes.DETAILS
 
   return (
     <ReactModal
