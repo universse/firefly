@@ -1,5 +1,18 @@
 $modal-transition-duration: 0.28s;
 
+@mixin modal-transition($property, $initial-value, $final-value) {
+  #{$property}: $initial-value;
+  transition: #{$property} $modal-transition-duration ease-in-out;
+
+  .ReactModal__Overlay--after-open & {
+    #{$property}: $final-value;
+  }
+
+  .ReactModal__Overlay--before-close & {
+    #{$property}: $initial-value;
+  }
+}
+
 .Modal {
   background-color: #fff;
   display: flex;
@@ -13,6 +26,8 @@ $modal-transition-duration: 0.28s;
   justify-content: center;
   position: relative;
   width: 100%;
+
+  @include modal-transition(opacity, 0, 1);
 
   @media #{$nonMobile} {
     border-radius: 8px;
@@ -73,32 +88,23 @@ $modal-transition-duration: 0.28s;
   position: fixed;
   right: 0;
   top: 0;
-  transform: translateX($width);
-  transition: transform $modal-transition-duration ease-in-out;
   user-select: none;
   width: calc(100% - 3.5rem);
 
-  .ReactModal__Overlay--after-open & {
-    transform: translateX(0);
-  }
-
-  .ReactModal__Overlay--before-close & {
-    transform: translateX($width);
-  }
+  @include modal-transition(transform, translateX($width), translateX(0));
 }
 
 .Overlay {
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.32);
+  background-color: rgba(0, 0, 0, 0);
   bottom: 0;
   display: flex;
   justify-content: center;
   left: 0;
-  opacity: 0;
   position: fixed;
   right: 0;
   top: 0;
-  transition: opacity $modal-transition-duration ease-in-out;
+  transition: background-color $modal-transition-duration ease-in-out;
   z-index: 999;
 }
 
@@ -108,9 +114,9 @@ $modal-transition-duration: 0.28s;
 }
 
 .ReactModal__Overlay--after-open {
-  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.32);
 }
 
 .ReactModal__Overlay--before-close {
-  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
 }
