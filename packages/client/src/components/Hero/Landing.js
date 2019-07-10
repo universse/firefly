@@ -20,12 +20,17 @@ function Landing () {
 
         ${screens.nonDesktop} {
           flex-direction: column;
-          padding: 2rem 1rem 1rem;
+          padding: 2rem 0 1rem;
         }
       `}
     >
       <div
         css={css`
+          ${screens.nonDesktop} {
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+          }
+
           ${screens.tablet} {
             align-items: center;
             display: flex;
@@ -74,7 +79,24 @@ function Landing () {
           </PrimaryButton>
         </div>
       </div>
-      <HeroImage />
+      <div
+        css={css`
+          ${screens.mobile} {
+            height: 96%;
+            max-height: 360px;
+            max-width: 360px;
+            width: 96%;
+
+            svg {
+              display: block;
+              height: 100%;
+              width: 100%;
+            }
+          }
+        `}
+      >
+        <HeroImage />
+      </div>
     </div>
   )
 }
