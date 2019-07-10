@@ -22,7 +22,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
         >
           <div
             css={css`
-              margin-bottom: 0.5rem;
+              margin-bottom: 0.25rem;
             `}
           >
             <h2>Title</h2>
@@ -37,7 +37,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
       >
         <div
           css={css`
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
           `}
         >
           <h2>Category</h2>
@@ -48,7 +48,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
       </div>
       <div
         css={css`
-          margin-bottom: 0.5rem;
+          margin-bottom: 1rem;
         `}
       >
         <div

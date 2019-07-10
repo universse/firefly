@@ -6,19 +6,18 @@
   span,
   .Category {
     color: var(--black900);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     line-height: 1.25rem;
   }
 
   h2 {
-    font-weight: 700;
+    font-weight: 600;
   }
 
   span,
   .Category {
-    color: var(--black800);
     display: inline-block;
-    font-weight: 500;
+    font-weight: 400;
     text-transform: capitalize;
   }
 
