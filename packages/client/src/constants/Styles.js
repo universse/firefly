@@ -11,7 +11,7 @@ export const mobileBarsHeightInRem =
 
 export const mobileProgressBarHeightInRem = 2.25
 
-const mobileWidth = '37rem'
+const mobileWidth = '37.5rem'
 const desktopWidth = '58rem'
 
 export const media = {
