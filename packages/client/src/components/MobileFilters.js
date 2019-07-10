@@ -3,31 +3,25 @@ import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 
 import { MobileSortByDifficulty } from 'components/SortByDifficulty'
-import { MobileTagFilter } from 'components/TagFilter'
-import { ModalContext } from 'contexts/Modal'
-import { SetModalContext } from 'contexts/SetModal'
+import TagFilter from 'components/TagFilter'
+import { MediaContext } from 'contexts/Media'
+import useModal from 'hooks/useModal'
 import ModalTypes from 'constants/ModalTypes'
 
 export default function MobileFilters ({ aggregatedTags }) {
-  const activeModalType = useContext(ModalContext)
-  const setActiveModalType = useContext(SetModalContext)
+  const { modalProps } = useModal(ModalTypes.MOBILE_FILTER)
 
-  const isOpen = activeModalType === ModalTypes.MOBILE_FILTER
+  const { isMobile } = useContext(MediaContext)
 
   return (
     <ReactModal
-      className='Modal SideModal'
-      closeTimeoutMS={280}
-      contentLabel='Filter Collections by Tags'
-      isOpen={isOpen}
-      onRequestClose={() => {
-        setActiveModalType(null)
-      }}
+      className={isMobile ? 'BottomModal' : 'SideModal'}
+      contentLabel='Sort and Filter Collections'
       overlayClassName='Overlay'
-      shouldCloseOnOverlayClick
+      {...modalProps}
     >
       <MobileSortByDifficulty />
-      <MobileTagFilter aggregatedTags={aggregatedTags} />
+      <TagFilter aggregatedTags={aggregatedTags} />
     </ReactModal>
   )
 }

@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
 import { PrimaryButton } from 'components/common'
 import { Cross } from 'assets/icons'
-import { ModalContext } from 'contexts/Modal'
-import { SetModalContext } from 'contexts/SetModal'
+import useModal from 'hooks/useModal'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
@@ -16,14 +15,24 @@ ReactModal.setAppElement('#___gatsby')
 
 export default function SignUpForm () {
   const { title } = useSiteMetadata()
-  const activeModalType = useContext(ModalContext)
-  const setActiveModalType = useContext(SetModalContext)
+  const { modalProps, setActiveModalType } = useModal(ModalTypes.SIGN_UP_FORM)
 
   const [email, setEmail] = useState('')
   const [isSubscribing, setIsSubscribing] = useState(true)
   const [isLoading, setIsloading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
+
+  const { closeTimeoutMS, isOpen } = modalProps
+
+  useEffect(() => {
+    setTimeout(() => {
+      setEmail('')
+      setIsSubmitted(false)
+      setIsloading(false)
+      setHasError(false)
+    }, closeTimeoutMS)
+  }, [closeTimeoutMS, isOpen])
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -55,23 +64,12 @@ export default function SignUpForm () {
       .finally(() => setIsloading(false))
   }
 
-  const isOpen = activeModalType === ModalTypes.SIGN_UP_FORM
-
   return (
     <ReactModal
-      className='Modal SignUpModal'
-      closeTimeoutMS={280}
+      className='SignUpModal'
       contentLabel='Sign Up'
-      isOpen={isOpen}
-      onRequestClose={() => {
-        setActiveModalType(null)
-        setEmail('')
-        setIsSubmitted(false)
-        setIsloading(false)
-        setHasError(false)
-      }}
       overlayClassName='Overlay'
-      shouldCloseOnOverlayClick
+      {...modalProps}
     >
       {isSubmitted ? (
         <div
@@ -196,10 +194,6 @@ export default function SignUpForm () {
           className='IconButton'
           onClick={() => {
             setActiveModalType(null)
-            setEmail('')
-            setIsSubmitted(false)
-            setIsloading(false)
-            setHasError(false)
           }}
           type='button'
         >
