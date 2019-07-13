@@ -3,4 +3,4 @@
   functions = "packages/netlify-functions/lambda"
   publish = "packages/client/public"
 [build.environment]
-  YARN_VERSION = "1.16.0"
+  YARN_VERSION = "1.17.3"
