@@ -18,7 +18,7 @@ export default function SignUpForm () {
   const { modalProps, setActiveModalType } = useModal(ModalTypes.SIGN_UP_FORM)
 
   const [email, setEmail] = useState('')
-  const [isSubscribing, setIsSubscribing] = useState(true)
+  // const [isSubscribing, setIsSubscribing] = useState(true)
   const [isLoading, setIsloading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -46,17 +46,17 @@ export default function SignUpForm () {
       .then(() => {
         setIsSubmitted(true)
 
-        isSubscribing &&
-          fetch('/api/subscribe', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              api_key: process.env.GATSBY_OCTOPUS_KEY,
-              email_address: email
-            })
+        // isSubscribing &&
+        fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            api_key: process.env.GATSBY_OCTOPUS_KEY,
+            email_address: email
           })
+        })
 
         window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
       })
@@ -65,12 +65,7 @@ export default function SignUpForm () {
   }
 
   return (
-    <ReactModal
-      className='SignUpModal'
-      contentLabel='Sign Up'
-      overlayClassName='Overlay'
-      {...modalProps}
-    >
+    <ReactModal className='SignUpModal' contentLabel='Sign Up' {...modalProps}>
       {isSubmitted ? (
         <div
           css={css`
@@ -123,7 +118,7 @@ export default function SignUpForm () {
                 </span>
               </div>
             )}
-            <div
+            {/* <div
               css={css`
                 align-items: center;
                 display: flex;
@@ -141,10 +136,11 @@ export default function SignUpForm () {
                 value={isSubscribing}
               />
               <label htmlFor='subscribe'>Subscribe to</label>
-            </div>
+            </div> */}
+            {/* 1.25rem 0 0.75rem */}
             <div
               css={css`
-                margin: 1.25rem 0 0.75rem;
+                margin: 1rem 0 0.75rem;
               `}
             >
               <PrimaryButton

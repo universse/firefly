@@ -48,7 +48,7 @@ export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
         {searchInput && !isLoading && (
           <div>
             <button
-              aria-label='Clear Search Field'
+              aria-label={AriaLabels.CLEAR_SEARCH_INPUT}
               className='IconButton'
               onClick={() => setSearchInput('')}
               type='button'

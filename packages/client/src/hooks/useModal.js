@@ -16,6 +16,7 @@ export default function useModal (type) {
       onRequestClose () {
         setActiveModalType(null)
       },
+      overlayClassName: 'Overlay',
       shouldCloseOnOverlayClick: true
     },
     setActiveModalType

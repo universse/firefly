@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
+import SortOptions from './SortOptions'
 import { URLParamsContext } from 'contexts/URLParams'
 import { ChevronDown } from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
-import SortOptions from 'constants/SortOptions'
+import AriaLabels from 'constants/AriaLabels'
 import { logSortDifficulty } from 'utils/amplitude'
 
 export default function SortByDifficulty () {
@@ -34,8 +35,12 @@ export default function SortByDifficulty () {
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
-      <summary aria-label='Sort by' className='Exposed' {...summaryProps}>
-        <span>Sort by: </span>
+      <summary
+        aria-label={AriaLabels.SORT_BY}
+        className='Exposed'
+        {...summaryProps}
+      >
+        <span>Sort by:</span>
         {SortOptions[selectedIndex].label}
         <div
           css={css`

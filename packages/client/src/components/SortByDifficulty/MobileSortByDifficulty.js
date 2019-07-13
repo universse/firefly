@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
+import SortOptions from './SortOptions'
 import { URLParamsContext } from 'contexts/URLParams'
-import SortOptions from 'constants/SortOptions'
+import AriaLabels from 'constants/AriaLabels'
 import { logSortDifficulty } from 'utils/amplitude'
 
 export default function MobileSortByDifficulty () {
@@ -29,12 +30,11 @@ export default function MobileSortByDifficulty () {
             color: var(--black800);
             font-size: 0.875rem;
             font-weight: 600;
-            line-height: 1.25rem;
-            text-transform: uppercase;
+            line-height: 1.5rem;
           `}
           id='sort'
         >
-          Sort by Difficulty Level
+          {AriaLabels.SORT_BY}
         </h4>
       </div>
       <div>

@@ -12,7 +12,6 @@ export default function DetailsModal (props) {
     <ReactModal
       className='SideModal'
       contentLabel='Collection Details'
-      overlayClassName='Overlay'
       {...modalProps}
     >
       <Details {...props} />
