@@ -6,7 +6,9 @@
 
   & > ul:not(:empty) {
     li:last-child > div {
-      border-bottom: 1px solid transparent;
+      @media #{$desktop} {
+        border-bottom: 1px solid transparent;
+      }
     }
 
     @media #{$nonMobile} {
