@@ -1,5 +1,24 @@
 $modal-transition-duration: 0.28s;
 
+%modal {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+%full-screen {
+  height: 100%;
+  width: 100%;
+}
+
+%relative {
+  & > div {
+    height: 100%;
+    position: relative;
+  }
+}
+
 @mixin modal-transition($property, $initial-value, $final-value) {
   #{$property}: $initial-value;
   transition: #{$property} $modal-transition-duration ease-in-out;
@@ -13,21 +32,13 @@ $modal-transition-duration: 0.28s;
   }
 }
 
-.Modal {
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
-
 .SignUpModal {
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-
+  @extend %modal;
+  @extend %full-screen;
   @include modal-transition(opacity, 0, 1);
+
+  align-items: center;
+  justify-content: center;
 
   @media #{$nonMobile} {
     border-radius: 8px;
@@ -82,16 +93,29 @@ $modal-transition-duration: 0.28s;
 .SideModal {
   $width: 20rem;
 
+  @extend %modal;
+  @extend %relative;
+  @include modal-transition(transform, translateX($width), translateX(0));
+
   bottom: 0;
   max-width: $width;
-  padding: 1.5rem;
+  padding-bottom: 1.25rem;
   position: fixed;
   right: 0;
   top: 0;
-  user-select: none;
   width: calc(100% - 3.5rem);
+}
 
-  @include modal-transition(transform, translateX($width), translateX(0));
+.BottomModal {
+  @extend %modal;
+  @extend %relative;
+  @include modal-transition(transform, translateY(100%), translateY(0));
+
+  bottom: 0;
+  height: 80%;
+  padding-bottom: 1rem;
+  position: fixed;
+  width: 100%;
 }
 
 .Overlay {
