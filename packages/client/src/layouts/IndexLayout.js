@@ -1,39 +1,39 @@
-import React, { useContext, useMemo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { toTitleCase } from 'common'
 
-import useIsScrollingDown from './useIsScrollingDown'
+// import useIsScrollingDown from './useIsScrollingDown'
 import CategoryFilter from 'components/CategoryFilter'
-import { MobileHeader } from 'components/Header'
+// import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
 import SEO from 'components/SEO'
 // import { FABDesktop } from 'components/common'
-import { SetModalContext } from 'contexts/SetModal'
 import URLParams from 'contexts/URLParams'
-import { Filter, Suggest } from 'assets/icons'
+// import { Filter, Suggest } from 'assets/icons'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
   bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
-import ModalTypes from 'constants/ModalTypes'
 
 function Sidebar (props) {
   return (
     <div
       css={css`
+        position: sticky;
+        top: 0;
+
         ${screens.nonDesktop} {
           background-color: var(--white900);
           box-shadow: var(--shadow-01);
-          position: relative;
+          z-index: 200;
         }
 
         ${screens.desktop} {
           align-self: flex-start;
           margin-top: 4.5rem;
-          position: sticky;
           top: ${headerHeightInRem + 1}rem;
         }
       `}
@@ -42,45 +42,7 @@ function Sidebar (props) {
   )
 }
 
-function TopBars (props) {
-  const isScrollingDown = useIsScrollingDown()
-
-  return (
-    <div
-      css={css`
-        ${screens.nonDesktop} {
-          position: sticky;
-          top: 0;
-          transform: translateY(
-            ${isScrollingDown ? `-${mobileHeaderHeightInRem}rem` : 0}
-          );
-          transition: transform 0.3s;
-          will-change: transform;
-          z-index: 200;
-        }
-      `}
-      {...props}
-    />
-  )
-}
-
 export default function IndexLayout ({ category, children, location }) {
-  const setActiveModalType = useContext(SetModalContext)
-
-  const actions = useMemo(
-    () => (
-      <button
-        aria-label='Filter Collections by Tags'
-        className='IconButton'
-        onClick={() => setActiveModalType(ModalTypes.MOBILE_FILTER)}
-        type='button'
-      >
-        <Filter />
-      </button>
-    ),
-    [setActiveModalType]
-  )
-
   return (
     <URLParams location={location}>
       <SEO title={category === 'all' ? '' : toTitleCase(category)} />
@@ -113,13 +75,26 @@ export default function IndexLayout ({ category, children, location }) {
             }
           `}
         >
-          <TopBars>
-            <MobileHeader actions={actions} title='Collections' />
-            <Sidebar>
-              <CategoryFilter pathname={location.pathname} />
-            </Sidebar>
-          </TopBars>
-          {children}
+          <Sidebar>
+            <CategoryFilter pathname={location.pathname} />
+          </Sidebar>
+          <main
+            css={css`
+              height: 100%;
+              width: 100%;
+
+              ${screens.tablet} {
+                padding: 1rem;
+              }
+
+              ${screens.desktop} {
+                width: 70%;
+              }
+            `}
+            id='main'
+          >
+            {children}
+          </main>
         </div>
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}

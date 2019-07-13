@@ -4,14 +4,16 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
 import Collections from 'components/Collections'
-// import MobileFilters from 'components/MobileFilters'
+import MobileFilters from 'components/MobileFilters'
 import SortByDifficulty from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
 import { Cross, Search } from 'assets/icons'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
+import { SetModalContext } from 'contexts/SetModal'
 import AriaLabels from 'constants/AriaLabels'
 // import useDebouncedValue from 'hooks/useDebouncedValue'
+import ModalTypes from 'constants/ModalTypes'
 import { CollectionIdsType } from 'constants/Types'
 import { screens } from 'constants/Styles'
 // import URLParamKeys from 'constants/URLParamKeys'
@@ -20,6 +22,8 @@ import searchWorker from 'utils/searchWorker'
 
 export default function IndexPage ({ data, location }) {
   const { isDesktop } = useContext(MediaContext)
+  const setActiveModalType = useContext(SetModalContext)
+
   const {
     query: { searchInput, sort, tags },
     queryDispatch
@@ -60,98 +64,128 @@ export default function IndexPage ({ data, location }) {
 
   return (
     <>
-      {/* {isDesktop === false && <MobileFilters aggregatedTags={aggregatedTags} />} */}
-      <main
+      <div
         css={css`
-          height: 100%;
-          width: 100%;
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1.5rem;
 
-          ${screens.tablet} {
+          ${screens.mobile} {
+            margin-bottom: 0;
             padding: 1rem;
           }
-
-          ${screens.desktop} {
-            width: 70%;
-          }
         `}
-        id='main'
       >
-        {isDesktop && (
-          <>
+        <div
+          css={css`
+            flex: 1 0 auto;
+            margin-right: 1rem;
+            position: relative;
+
+            ${screens.desktop} {
+              margin-right: 5rem;
+            }
+          `}
+        >
+          <div
+            css={css`
+              align-items: center;
+              color: var(--gray600);
+              display: flex;
+              height: 2.5rem;
+              left: 1rem;
+              position: absolute;
+              z-index: 2;
+
+              ${screens.nonMobile} {
+                height: 3rem;
+              }
+            `}
+          >
+            <Search medium />
+          </div>
+          <input
+            aria-label={AriaLabels.SEARCH_BAR_LABEL}
+            autoComplete='off'
+            css={css`
+              border-radius: 1.25rem;
+              box-shadow: var(--shadow-02);
+              color: var(--black900);
+              font-size: 0.9375rem;
+              height: 2.5rem;
+              padding-left: 3rem;
+              width: 100%;
+
+              ${screens.nonMobile} {
+                border-radius: 1.5rem;
+                font-size: 1rem;
+                height: 3rem;
+              }
+            `}
+            onChange={e => {
+              queryDispatch({ searchInput: e.target.value })
+              logInputSearch(e.target.value, true)
+            }}
+            placeholder={AriaLabels.SEARCH_BAR_LABEL}
+            type='text'
+            value={searchInput}
+          />
+          {searchInput && (
             <div
               css={css`
-                align-items: center;
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 1.5rem;
+                position: absolute;
+                right: 0.25rem;
+                top: -0.25rem;
+
+                ${screens.nonMobile} {
+                  top: 0;
+                }
               `}
             >
-              <div
-                css={css`
-                  flex: 1 0 auto;
-                  margin-right: 5rem;
-                  position: relative;
-                `}
+              <button
+                aria-label={AriaLabels.CLEAR_SEARCH_INPUT}
+                className='IconButton'
+                onClick={() => queryDispatch({ searchInput: '' })}
+                type='button'
               >
-                <div
-                  css={css`
-                    align-items: center;
-                    color: var(--gray600);
-                    display: flex;
-                    height: 3rem;
-                    left: 1rem;
-                    position: absolute;
-                    z-index: 2;
-                  `}
-                >
-                  <Search medium />
-                </div>
-                <input
-                  aria-label={AriaLabels.SEARCH_BAR_LABEL}
-                  autoComplete='off'
-                  css={css`
-                    border-radius: 1.5rem;
-                    box-shadow: var(--shadow-02);
-                    color: var(--black900);
-                    font-size: 1rem;
-                    height: 3rem;
-                    padding-left: 3rem;
-                    width: 100%;
-                  `}
-                  onChange={e => {
-                    queryDispatch({ searchInput: e.target.value })
-                    logInputSearch(e.target.value, true)
-                  }}
-                  placeholder={AriaLabels.SEARCH_BAR_LABEL}
-                  type='text'
-                  value={searchInput}
-                />
-                {searchInput && (
-                  <div
-                    css={css`
-                      position: absolute;
-                      right: 0.5rem;
-                      top: 0;
-                    `}
-                  >
-                    <button
-                      aria-label='Clear Search Field'
-                      className='IconButton'
-                      onClick={() => queryDispatch({ searchInput: '' })}
-                      type='button'
-                    >
-                      <Cross small />
-                    </button>
-                  </div>
-                )}
-              </div>
-              <SortByDifficulty sort={sort} />
+                <Cross small />
+              </button>
             </div>
-            <TagFilter aggregatedTags={aggregatedTags} />
-          </>
+          )}
+        </div>
+        {isDesktop === false && (
+          <MobileFilters
+            aggregatedTags={aggregatedTags}
+            collectionCount={collectionIds.length}
+          />
         )}
-        <Collections collectionIds={collectionIds} />
-      </main>
+        {isDesktop && <SortByDifficulty sort={sort} />}
+        {isDesktop === false && (
+          <button
+            aria-label={AriaLabels.SORT_AND_FILTER_COLLECTIONS}
+            css={css`
+              color: var(--accent500);
+              font-size: 0.875rem;
+              font-weight: 600;
+            `}
+            onClick={() => setActiveModalType(ModalTypes.MOBILE_FILTER)}
+            type='button'
+          >
+            Filters
+          </button>
+        )}
+      </div>
+      {isDesktop && (
+        <div
+          css={css`
+            margin: 0 0 2rem 1rem;
+          `}
+        >
+          <TagFilter aggregatedTags={aggregatedTags} />
+        </div>
+      )}
+      <Collections collectionIds={collectionIds} />
     </>
   )
 }
