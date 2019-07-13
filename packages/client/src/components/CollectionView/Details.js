@@ -7,7 +7,6 @@ import { DifficultyLevels } from 'common'
 import Tags from 'components/Collections/Tags'
 import { ProgressBar } from 'components/common'
 import { Category, Level, Tag } from 'assets/icons'
-import { screens } from 'constants/Styles'
 import { TagsType } from 'constants/Types'
 import { createCategoryPath } from '../../../gatsby/utils'
 

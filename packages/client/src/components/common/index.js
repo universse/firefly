@@ -2,7 +2,7 @@ import React, { Children, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
-import { headerHeightInRem, screens } from 'constants/Styles'
+import { screens } from 'constants/Styles'
 
 import OutboundLink from './OutboundLink'
 
