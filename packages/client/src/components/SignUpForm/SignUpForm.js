@@ -135,7 +135,10 @@ export default function SignUpForm () {
                 type='checkbox'
                 value={isSubscribing}
               />
-              <label htmlFor='subscribe'>Subscribe to</label>
+              <label htmlFor='subscribe'>
+                Subscribe to our newsletters for content updates and upcoming
+                features.
+              </label>
             </div> */}
             {/* 1.25rem 0 0.75rem */}
             <div
