@@ -136,7 +136,7 @@ export default function SignUpForm () {
                 value={isSubscribing}
               />
               <label htmlFor='subscribe'>
-                Subscribe to our newsletters for content updates and upcoming
+                Subscribe to our newsletters for featured content and upcoming
                 features.
               </label>
             </div> */}
