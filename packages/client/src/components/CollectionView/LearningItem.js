@@ -57,7 +57,7 @@ function LearningItem ({
               }
             `}
           >
-            <h3>{title}</h3>
+            <h2>{title}</h2>
           </div>
         </>
       ) : (
@@ -86,14 +86,14 @@ function LearningItem ({
                   }
                 `}
               >
-                <h3>
+                <h2>
                   {title}
                   {isDesktop && (
                     <div aria-hidden className='Link'>
                       <ExternalLink />
                     </div>
                   )}
-                </h3>
+                </h2>
               </div>
               <div
                 css={css`

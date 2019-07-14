@@ -24,7 +24,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
               margin-bottom: 0.25rem;
             `}
           >
-            <h2>Title</h2>
+            <h3>Title</h3>
           </div>
           <span>{name}</span>
         </div>
@@ -39,7 +39,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
             margin-bottom: 0.25rem;
           `}
         >
-          <h2>Category</h2>
+          <h3>Category</h3>
         </div>
         <Link className='Category' to={createCategoryPath(category)}>
           {category}
@@ -55,7 +55,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
             margin-bottom: 0.5rem;
           `}
         >
-          <h2>Tags</h2>
+          <h3>Tags</h3>
         </div>
         <Tags tagClassName='Chip' tags={tags} />
       </div>
@@ -69,7 +69,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
             margin-bottom: 0.5rem;
           `}
         >
-          <h2>Level</h2>
+          <h3>Level</h3>
         </div>
         <div>
           <div
@@ -94,7 +94,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
               margin-bottom: 0.75rem;
             `}
           >
-            <h2>Progress</h2>
+            <h3>Progress</h3>
           </div>
           <ProgressBar percentage={percentage} />
         </div>
