@@ -13,14 +13,16 @@ import ModalTypes from 'constants/ModalTypes'
 import { screens } from 'constants/Styles'
 
 export default function MobileFilters ({ aggregatedTags, collectionCount }) {
-  const { modalProps, setActiveModalType } = useModal(ModalTypes.MOBILE_FILTER)
+  const modalProps = useModal(
+    ModalTypes.MOBILE_FILTER,
+    AriaLabels.SORT_AND_FILTER_COLLECTIONS
+  )
 
   const { isMobile } = useContext(MediaContext)
 
   return (
     <ReactModal
       className={isMobile ? 'BottomModal' : 'SideModal'}
-      contentLabel={AriaLabels.SORT_AND_FILTER_COLLECTIONS}
       {...!isMobile && { style: { content: { maxWidth: '30rem' } } }}
       {...modalProps}
     >
@@ -51,7 +53,7 @@ export default function MobileFilters ({ aggregatedTags, collectionCount }) {
         >
           <PrimaryButton
             aria-label={`View ${collectionCount} Collections`}
-            onClick={() => setActiveModalType(null)}
+            onClick={modalProps.onRequestClose}
             width='100%'
           >
             See {collectionCount} Collections

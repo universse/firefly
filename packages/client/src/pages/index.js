@@ -105,32 +105,34 @@ export default function IndexPage ({ data, location }) {
           >
             <Search medium />
           </div>
-          <input
-            aria-label={AriaLabels.SEARCH_BAR_LABEL}
-            autoComplete='off'
-            css={css`
-              border-radius: 1.25rem;
-              box-shadow: var(--shadow-02);
-              color: var(--black900);
-              font-size: 0.9375rem;
-              height: 2.5rem;
-              padding-left: 3rem;
-              width: 100%;
+          {typeof isDesktop === 'boolean' && (
+            <input
+              aria-label={AriaLabels.SEARCH_BAR_LABEL}
+              autoComplete='off'
+              css={css`
+                border-radius: 1.25rem;
+                box-shadow: var(--shadow-02);
+                color: var(--black900);
+                font-size: 0.9375rem;
+                height: 2.5rem;
+                padding-left: 3rem;
+                width: 100%;
 
-              ${screens.nonMobile} {
-                border-radius: 1.5rem;
-                font-size: 1rem;
-                height: 3rem;
-              }
-            `}
-            onChange={e => {
-              queryDispatch({ searchInput: e.target.value })
-              logInputSearch(e.target.value, true)
-            }}
-            placeholder={AriaLabels.SEARCH_BAR_LABEL}
-            type='text'
-            value={searchInput}
-          />
+                ${screens.nonMobile} {
+                  border-radius: 1.5rem;
+                  font-size: 1rem;
+                  height: 3rem;
+                }
+              `}
+              onChange={e => {
+                queryDispatch({ searchInput: e.target.value })
+                logInputSearch(e.target.value, true)
+              }}
+              placeholder={AriaLabels.SEARCH_BAR_LABEL}
+              type='text'
+              value={searchInput}
+            />
+          )}
           {searchInput && (
             <div
               css={css`

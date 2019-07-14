@@ -6,14 +6,10 @@ import useModal from 'hooks/useModal'
 import ModalTypes from 'constants/ModalTypes'
 
 export default function DetailsModal (props) {
-  const { modalProps } = useModal(ModalTypes.DETAILS)
+  const modalProps = useModal(ModalTypes.DETAILS, 'Collection Details')
 
   return (
-    <ReactModal
-      className='SideModal'
-      contentLabel='Collection Details'
-      {...modalProps}
-    >
+    <ReactModal className='SideModal' {...modalProps}>
       <Details {...props} />
     </ReactModal>
   )

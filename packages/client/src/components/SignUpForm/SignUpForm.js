@@ -15,7 +15,7 @@ ReactModal.setAppElement('#___gatsby')
 
 export default function SignUpForm () {
   const { title } = useSiteMetadata()
-  const { modalProps, setActiveModalType } = useModal(ModalTypes.SIGN_UP_FORM)
+  const modalProps = useModal(ModalTypes.SIGN_UP_FORM, 'Sign Up')
 
   const [email, setEmail] = useState('')
   // const [isSubscribing, setIsSubscribing] = useState(true)
@@ -23,7 +23,7 @@ export default function SignUpForm () {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const { closeTimeoutMS, isOpen } = modalProps
+  const { closeTimeoutMS, isOpen, onRequestClose } = modalProps
 
   useEffect(() => {
     setTimeout(() => {
@@ -65,7 +65,7 @@ export default function SignUpForm () {
   }
 
   return (
-    <ReactModal className='SignUpModal' contentLabel='Sign Up' {...modalProps}>
+    <ReactModal className='SignUpModal' {...modalProps}>
       {isSubmitted ? (
         <div
           css={css`
@@ -191,9 +191,7 @@ export default function SignUpForm () {
         <button
           aria-label='Close Modal'
           className='IconButton'
-          onClick={() => {
-            setActiveModalType(null)
-          }}
+          onClick={onRequestClose}
           type='button'
         >
           <Cross />

@@ -39,6 +39,7 @@ $modal-transition-duration: 0.28s;
 
   align-items: center;
   justify-content: center;
+  position: relative;
 
   @media #{$nonMobile} {
     border-radius: 8px;
