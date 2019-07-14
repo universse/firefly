@@ -16,11 +16,9 @@ import goBack from 'utils/goBack'
 
 // TODO: loading state
 export default function SearchPage ({ location }) {
-  const initialSearchInput = location.state ? location.state.searchInput : ''
+  const initialSearchInput = location.state.searchInput || ''
 
-  const initialIsLoading = location.state
-    ? location.state.initialIsLoading
-    : false
+  const initialIsLoading = location.state.initialIsLoading || false
 
   const { isDesktop } = useContext(MediaContext)
 

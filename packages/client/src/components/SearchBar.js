@@ -65,15 +65,17 @@ export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
               <Link
                 key={result.id}
                 {...highlightedIndex === index && { className: 'highlighted' }}
-                to={createCollectionPath({
-                  id: result.id,
-                  name: normalizedCollections[result.id].name
-                })}
                 {...getMenuItemProps({
                   index,
                   item: {
                     id: result.id,
-                    name: normalizedCollections[result.id].name
+                    to: createCollectionPath({
+                      id: result.id,
+                      name: normalizedCollections[result.id].name
+                    }),
+                    meta: {
+                      name: normalizedCollections[result.id].name
+                    }
                   }
                 })}
               >
