@@ -15,11 +15,7 @@ import {
 import goBack from 'utils/goBack'
 
 // TODO: loading state
-export default function SearchPage ({ location }) {
-  const initialSearchInput = location.state.searchInput || ''
-
-  const initialIsLoading = location.state.initialIsLoading || false
-
+export default function SearchPage () {
   const { isDesktop } = useContext(MediaContext)
 
   return (
@@ -83,10 +79,7 @@ export default function SearchPage ({ location }) {
           >
             <Search medium />
           </div>
-          <SearchBar
-            initialIsLoading={initialIsLoading}
-            initialSearchInput={initialSearchInput}
-          />
+          <SearchBar />
         </div>
       </main>
     </>

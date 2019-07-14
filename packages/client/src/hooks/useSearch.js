@@ -5,13 +5,10 @@ import { navigate } from 'gatsby'
 import { logClickSearchResult, logInputSearch } from 'utils/amplitude'
 import searchWorker from 'utils/searchWorker'
 
-export default function useSearch (
-  initialSearchInput = '',
-  initialIsLoading = false
-) {
-  const [searchInput, setSearchInput] = useState(initialSearchInput)
+export default function useSearch () {
+  const [searchInput, setSearchInput] = useState('')
   const [results, setResults] = useState([])
-  const [isLoading, setIsLoading] = useState(initialIsLoading)
+  const [isLoading, setIsLoading] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
   // const [debouncedSearchInput] = useDebouncedValue(searchInput, 100)
 

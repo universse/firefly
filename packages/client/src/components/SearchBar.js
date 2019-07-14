@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import { Cross } from 'assets/icons'
@@ -9,7 +8,7 @@ import useSearch from 'hooks/useSearch'
 import AriaLabels from 'constants/AriaLabels'
 import { createCollectionPath } from '../../gatsby/utils'
 
-export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
+export default function SearchBar () {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
 
   const {
@@ -20,7 +19,7 @@ export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
     results,
     searchInput,
     setSearchInput
-  } = useSearch(initialSearchInput, initialIsLoading)
+  } = useSearch()
 
   const {
     highlightedIndex,
@@ -90,9 +89,4 @@ export default function SearchBar ({ initialIsLoading, initialSearchInput }) {
       </ul>
     </div>
   )
-}
-
-SearchBar.propTypes = {
-  initialIsLoading: PropTypes.bool.isRequired,
-  initialSearchInput: PropTypes.string.isRequired
 }
