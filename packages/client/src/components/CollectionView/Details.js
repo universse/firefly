@@ -13,6 +13,7 @@ import { createCategoryPath } from '../../../gatsby/utils'
 export default function Details ({ category, level, name, percentage, tags }) {
   return (
     <div className='Details'>
+      <h3 className='visually-hidden'>Collection Details</h3>
       {name && (
         <div
           css={css`
@@ -24,7 +25,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
               margin-bottom: 0.25rem;
             `}
           >
-            <h3>Title</h3>
+            <h4>Title</h4>
           </div>
           <span>{name}</span>
         </div>
@@ -39,7 +40,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
             margin-bottom: 0.25rem;
           `}
         >
-          <h3>Category</h3>
+          <h4>Category</h4>
         </div>
         <Link className='Category' to={createCategoryPath(category)}>
           {category}
@@ -55,7 +56,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
             margin-bottom: 0.5rem;
           `}
         >
-          <h3>Tags</h3>
+          <h4>Tags</h4>
         </div>
         <Tags tagClassName='Chip' tags={tags} />
       </div>
@@ -69,7 +70,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
             margin-bottom: 0.5rem;
           `}
         >
-          <h3>Level</h3>
+          <h4>Level</h4>
         </div>
         <div>
           <div
@@ -94,7 +95,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
               margin-bottom: 0.75rem;
             `}
           >
-            <h3>Progress</h3>
+            <h4>Progress</h4>
           </div>
           <ProgressBar percentage={percentage} />
         </div>
