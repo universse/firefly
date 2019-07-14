@@ -8,6 +8,7 @@ export default function useDropdownMenu ({ items, menuItemCount, onSelect }) {
   const detailsRef = useRef()
   const menuRef = useRef()
 
+  // TODO may need pass in index as argument
   const select = () => {
     if (highlightedIndex < 0) return
 

@@ -13,12 +13,11 @@ export default function useListBox ({ onSelect }) {
   const detailsRef = useRef()
   const menuRef = useRef()
 
-  const select = () => {
-    if (
-      items.current[highlightedIndex] &&
-      !menuRef.current.children[highlightedIndex].disabled
-    ) {
-      onSelect(items.current[highlightedIndex])
+  const select = index => {
+    index !== highlightedIndex && setHighlightedIndex(index)
+
+    if (items.current[index] && !menuRef.current.children[index].disabled) {
+      onSelect(items.current[index])
     }
   }
 
@@ -85,7 +84,7 @@ export default function useListBox ({ onSelect }) {
       'aria-selected': isSelected,
       disabled,
       id: item.id,
-      onClick: select,
+      onClick: () => select(index),
       onMouseEnter: () => setHighlightedIndex(index),
       onMouseLeave: () => setHighlightedIndex(-1),
       role: 'option',

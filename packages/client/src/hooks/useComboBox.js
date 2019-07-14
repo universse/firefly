@@ -25,6 +25,7 @@ export default function useComboBox ({ onSelect }) {
     setIsOpen(false)
   }
 
+  // TODO may need pass in index as argument
   const select = () => {
     if (highlightedIndex < 0) return
     onSelect(items.current[highlightedIndex])
