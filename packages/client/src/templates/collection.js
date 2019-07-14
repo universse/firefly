@@ -82,152 +82,152 @@ export default function CollectionTemplate ({
     <>
       <SEO title={name || 'Collection'} />
       {userData && (
-        <>
-          <MobileHeader
-            actions={
-              <>
-                <button
-                  aria-label={createActionLabel(
-                    isSaved ? 'unsave' : 'save',
-                    name
-                  )}
-                  className='IconButton'
-                  onClick={onActionClick}
-                  type='button'
-                  value={id}
-                >
-                  <Save filled={isSaved} />
-                </button>
-                <button
-                  aria-label={createActionLabel(
-                    isLoved ? 'unlove' : 'love',
-                    name
-                  )}
-                  className='IconButton Heart'
-                  onClick={onActionClick}
-                  type='button'
-                  value={id}
-                >
-                  <Heart filled={isLoved} />
-                </button>
-                {navigator.share ? (
-                  <button
-                    aria-label='Share'
-                    className='IconButton'
-                    onClick={e => {
-                      logClickAction({
-                        id,
-                        action: e.currentTarget.textContent
-                      })
-                      navigator.share({ text: name, url: location.href })
-                    }}
-                    type='button'
-                  >
-                    <Share />
-                  </button>
-                ) : (
-                  <ShareDropdown name={name} />
-                )}
-                <button
-                  aria-label='View Collection Details'
-                  className='IconButton'
-                  onClick={() => setActiveModalType(ModalTypes.DETAILS)}
-                  type='button'
-                >
-                  <Info />
-                </button>
-              </>
-            }
-            navIcon={
+        <MobileHeader
+          actions={
+            <>
               <button
-                aria-label={AriaLabels.GO_BACK}
+                aria-label={createActionLabel(
+                  isSaved ? 'unsave' : 'save',
+                  name
+                )}
                 className='IconButton'
-                onClick={goBack}
+                onClick={onActionClick}
+                type='button'
+                value={id}
+              >
+                <Save filled={isSaved} />
+              </button>
+              <button
+                aria-label={createActionLabel(
+                  isLoved ? 'unlove' : 'love',
+                  name
+                )}
+                className='IconButton Heart'
+                onClick={onActionClick}
+                type='button'
+                value={id}
+              >
+                <Heart filled={isLoved} />
+              </button>
+              {navigator.share ? (
+                <button
+                  aria-label='Share'
+                  className='IconButton'
+                  onClick={e => {
+                    logClickAction({
+                      id,
+                      action: e.currentTarget.textContent
+                    })
+                    navigator.share({ text: name, url: location.href })
+                  }}
+                  type='button'
+                >
+                  <Share />
+                </button>
+              ) : (
+                <ShareDropdown name={name} />
+              )}
+              <button
+                aria-label='View Collection Details'
+                className='IconButton'
+                onClick={() => setActiveModalType(ModalTypes.DETAILS)}
                 type='button'
               >
-                <Back />
+                <Info />
               </button>
+            </>
+          }
+          navIcon={
+            <button
+              aria-label={AriaLabels.GO_BACK}
+              className='IconButton'
+              onClick={goBack}
+              type='button'
+            >
+              <Back />
+            </button>
+          }
+          shadow
+        />
+      )}
+      <div
+        className='base'
+        css={css`
+          min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
+
+          ${screens.mobile} {
+            padding: 0 0
+              ${bottomBarHeightInRem + mobileProgressBarHeightInRem}rem;
+          }
+
+          ${screens.tablet} {
+            padding-bottom: ${bottomBarHeightInRem +
+              mobileProgressBarHeightInRem}rem;
+          }
+
+          ${screens.desktop} {
+            max-width: 64rem;
+            min-height: calc(100vh - ${headerHeightInRem}rem);
+          }
+        `}
+      >
+        <div
+          css={css`
+            display: grid;
+            grid-gap: 1.5rem;
+            grid-template-areas:
+              'title'
+              'list';
+            margin: 1.5rem 0;
+
+            ${screens.desktop} {
+              grid-gap: 3rem 1.5rem;
+              grid-template-areas:
+                '. title title'
+                'widget list sidebar';
+              grid-template-columns: 2.5rem 1fr 19rem;
+              margin: 2.5rem 0 0 0;
             }
-            shadow
-          />
-          <div
-            className='base'
-            css={css`
-              min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
-
-              ${screens.mobile} {
-                padding: 0 0
-                  ${bottomBarHeightInRem + mobileProgressBarHeightInRem}rem;
-              }
-
-              ${screens.tablet} {
-                padding-bottom: ${bottomBarHeightInRem +
-                  mobileProgressBarHeightInRem}rem;
-              }
-
-              ${screens.desktop} {
-                max-width: 64rem;
-                min-height: calc(100vh - ${headerHeightInRem}rem);
-              }
-            `}
-          >
-            <div
+          `}
+        >
+          {userData && (
+            <CollectionView
+              check={check}
+              collection={collections}
+              isSaved={isSaved}
+            />
+          )}
+          {isDesktop && (
+            <aside
               css={css`
-                display: grid;
-                grid-gap: 1.5rem;
-                grid-template-areas:
-                  'title'
-                  'list';
-                margin: 1.5rem 0;
+                align-self: start;
+                grid-area: widget;
+
+                ${screens.mobile} {
+                  margin-left: 1rem;
+                }
 
                 ${screens.desktop} {
-                  grid-gap: 3rem 1.5rem;
-                  grid-template-areas:
-                    '. title title'
-                    'widget list sidebar';
-                  grid-template-columns: 2.5rem 1fr 19rem;
-                  margin: 2.5rem 0 0 0;
+                  position: sticky;
+                  top: ${headerHeightInRem + 1}rem;
                 }
               `}
             >
-              <CollectionView
-                check={check}
-                collection={collections}
+              <ShareWidget
+                id={id}
+                isLoved={isLoved}
                 isSaved={isSaved}
+                name={name}
               />
-              {isDesktop && (
-                <aside
-                  css={css`
-                    align-self: start;
-                    grid-area: widget;
-
-                    ${screens.mobile} {
-                      margin-left: 1rem;
-                    }
-
-                    ${screens.desktop} {
-                      position: sticky;
-                      top: ${headerHeightInRem + 1}rem;
-                    }
-                  `}
-                >
-                  <ShareWidget
-                    id={id}
-                    isLoved={isLoved}
-                    isSaved={isSaved}
-                    name={name}
-                  />
-                </aside>
-              )}
-              {/* <FABDesktop
+            </aside>
+          )}
+          {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
               <Suggest />
             </FABDesktop> */}
-            </div>
-          </div>
-        </>
-      )}
+        </div>
+      </div>
     </>
   )
 }
