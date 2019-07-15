@@ -1,7 +1,10 @@
 import { useRef, useEffect, useState } from 'react'
 
-export default function useIsScrollingDown () {
-  const [isScrollingDown, setIsScrollingDown] = useState(false)
+export default function useIsScrollingDown ({ id, property }) {
+  const [scrollState, setIsScrollingDown] = useState({
+    isPastBaseline: false,
+    isScrollingDown: false
+  })
 
   const prevScrollPos = useRef(0)
 
@@ -9,10 +12,15 @@ export default function useIsScrollingDown () {
     prevScrollPos.current = window.scrollY
 
     const handleScroll = () => {
-      setIsScrollingDown(
-        window.scrollY > document.getElementById('main').offsetTop &&
-          prevScrollPos.current < window.scrollY
-      )
+      const isPastBaseline =
+        window.scrollY > document.getElementById(id)[property]
+
+      setIsScrollingDown({
+        isPastBaseline,
+        isScrollingDown:
+          isPastBaseline && prevScrollPos.current < window.scrollY
+      })
+
       prevScrollPos.current = window.scrollY
     }
 
@@ -21,7 +29,7 @@ export default function useIsScrollingDown () {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [id, property])
 
-  return isScrollingDown
+  return scrollState
 }
