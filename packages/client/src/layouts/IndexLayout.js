@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { toTitleCase } from 'common'
 
-// import useIsScrollingDown from './useIsScrollingDown'
+// import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import CategoryFilter from 'components/CategoryFilter'
 // import { MobileHeader } from 'components/Header'
 import Hero from 'components/Hero'
