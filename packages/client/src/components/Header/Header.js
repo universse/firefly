@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import SearchBar from './SearchBar'
+import SearchComboBox from './SearchComboBox'
 import Navigation from 'components/Navigation'
 import { Logo } from 'assets/icons'
 import { HeaderTag, HeaderWrapper } from './styled'
@@ -33,7 +33,7 @@ export default function Header ({ isIndexPage }) {
               <Logo />
             </Link>
           </div>
-          {!isIndexPage && <SearchBar maxResultCount={7} />}
+          {!isIndexPage && <SearchComboBox maxResultCount={7} />}
         </div>
         <Navigation />
       </HeaderWrapper>
