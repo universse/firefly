@@ -1,18 +1,16 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import SEO from 'components/SEO'
 import SearchBar from 'components/SearchBar'
-import { Back, Search } from 'assets/icons'
+import { BackButton } from 'components/common'
+import { Search } from 'assets/icons'
 import { MediaContext } from 'contexts/Media'
-import AriaLabels from 'constants/AriaLabels'
 import {
   headerHeightInRem,
   bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
-import goBack from 'utils/goBack'
 
 // TODO: loading state
 export default function SearchPage () {
@@ -41,14 +39,7 @@ export default function SearchPage () {
               top: 2rem;
             `}
           >
-            <button
-              aria-label={AriaLabels.GO_BACK}
-              className='IconButton'
-              onClick={goBack}
-              type='button'
-            >
-              <Back />
-            </button>
+            <BackButton />
           </div>
         )}
         <div
@@ -84,8 +75,4 @@ export default function SearchPage () {
       </main>
     </>
   )
-}
-
-SearchPage.propTypes = {
-  location: PropTypes.object.isRequired
 }

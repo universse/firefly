@@ -9,13 +9,12 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
-import { Back, Heart, Info, Save, Share, Suggest } from 'assets/icons'
+import { Heart, Info, Save, Share, Suggest } from 'assets/icons'
 // import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
-import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import {
   bottomBarHeightInRem,
@@ -27,7 +26,7 @@ import {
 import { CollectionViewType } from 'constants/Types'
 import { logClickAction } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-import goBack from 'utils/goBack'
+import { BackButton } from 'components/common'
 // import parseCollectionData from 'utils/parseCollectionData'
 // import { getParamFromPathname } from 'utils/pathnameUtils'
 // import { createCollectionPath } from '../../gatsby/utils'
@@ -137,16 +136,7 @@ export default function CollectionTemplate ({
               </button>
             </>
           }
-          navIcon={
-            <button
-              aria-label={AriaLabels.GO_BACK}
-              className='IconButton'
-              onClick={goBack}
-              type='button'
-            >
-              <Back />
-            </button>
-          }
+          navIcon={<BackButton />}
           shadow
         />
       )}

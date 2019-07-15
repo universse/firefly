@@ -1,10 +1,12 @@
 import React, { Children, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { css } from '@emotion/core'
-import { screens } from 'constants/Styles'
 
 import OutboundLink from './OutboundLink'
+import { Back } from 'assets/icons'
+import AriaLabels from 'constants/AriaLabels'
+import { screens } from 'constants/Styles'
 
 export function ActionBar ({ children }) {
   const childrenCount =
@@ -32,6 +34,23 @@ export function ActionBar ({ children }) {
 
 ActionBar.propTypes = {
   children: PropTypes.node.isRequired
+}
+
+function goBack () {
+  window.hasVisited ? window.history.back() : navigate('/')
+}
+
+export function BackButton () {
+  return (
+    <button
+      aria-label={AriaLabels.GO_BACK}
+      className='IconButton'
+      onClick={goBack}
+      type='button'
+    >
+      <Back />
+    </button>
+  )
 }
 
 export function Category (props) {

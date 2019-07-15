@@ -5,34 +5,19 @@ import CreateCollection from 'components/CreateCollection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
-import { Back } from 'assets/icons'
-import AriaLabels from 'constants/AriaLabels'
+import { BackButton } from 'components/common'
 import {
   headerHeightInRem,
   mobileHeaderHeightInRem,
   screens
 } from 'constants/Styles'
-import goBack from 'utils/goBack'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function CreatePage () {
   return (
     <>
       <SEO title='Create Collection' />
-      <MobileHeader
-        navIcon={
-          <button
-            aria-label={AriaLabels.GO_BACK}
-            className='IconButton'
-            onClick={goBack}
-            type='button'
-          >
-            <Back />
-          </button>
-        }
-        shadow
-        title='Create'
-      />
+      <MobileHeader navIcon={<BackButton />} shadow title='Create' />
       <main
         css={css`
           min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
