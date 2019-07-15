@@ -56,8 +56,8 @@ export default function CollectionTemplate ({
   // }
 
   const { check, love, save } = userData || {}
-  const isSaved = !!save && !!save[id]
-  const isLoved = !!love && !!love[id]
+  const isSaved = save && !!save[id]
+  const isLoved = love && !!love[id]
 
   // useEffect(() => {
   //   if (!normalizedCollections || collection) {
@@ -181,36 +181,39 @@ export default function CollectionTemplate ({
           `}
         >
           {userData && (
-            <CollectionView
-              check={check}
-              collection={collections}
-              isSaved={isSaved}
-            />
-          )}
-          {isDesktop && (
-            <aside
-              css={css`
-                align-self: start;
-                grid-area: widget;
-
-                ${screens.mobile} {
-                  margin-left: 1rem;
-                }
-
-                ${screens.desktop} {
-                  position: sticky;
-                  top: ${headerHeightInRem + 1}rem;
-                }
-              `}
-            >
-              <ShareWidget
-                id={id}
-                isLoved={isLoved}
+            <>
+              <CollectionView
+                check={check}
+                collection={collections}
                 isSaved={isSaved}
-                name={name}
               />
-            </aside>
+              {isDesktop && (
+                <aside
+                  css={css`
+                    align-self: start;
+                    grid-area: widget;
+
+                    ${screens.mobile} {
+                      margin-left: 1rem;
+                    }
+
+                    ${screens.desktop} {
+                      position: sticky;
+                      top: ${headerHeightInRem + 1}rem;
+                    }
+                  `}
+                >
+                  <ShareWidget
+                    id={id}
+                    isLoved={isLoved}
+                    isSaved={isSaved}
+                    name={name}
+                  />
+                </aside>
+              )}
+            </>
           )}
+
           {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
