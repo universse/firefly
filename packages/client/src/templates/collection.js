@@ -56,8 +56,8 @@ export default function CollectionTemplate ({
   // }
 
   const { check, love, save } = userData || {}
-  const isSaved = save && !!save[id]
-  const isLoved = love && !!love[id]
+  const isSaved = !!save && !!save[id]
+  const isLoved = !!love && !!love[id]
 
   // useEffect(() => {
   //   if (!normalizedCollections || collection) {
