@@ -9,12 +9,12 @@ export default function Footer () {
   return (
     <footer>
       <div className='base'>
-        <div>
+        {/* <div>
           <Link to='/terms'>Terms</Link>
         </div>
         <div>
           <Link to='/privacy'>Privacy</Link>
-        </div>
+        </div> */}
         <p>
           Made with{' '}
           <span aria-label='Love' role='img'>

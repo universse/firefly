@@ -154,7 +154,7 @@ export default function SignUpForm () {
                 Sign In with Email Link
               </PrimaryButton>
             </div>
-            <div
+            {/* <div
               css={css`
                 width: 18rem;
               `}
@@ -177,7 +177,7 @@ export default function SignUpForm () {
                 </a>
                 .
               </span>
-            </div>
+            </div> */}
           </form>
         </>
       )}
