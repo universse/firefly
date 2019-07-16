@@ -8,6 +8,7 @@ import TagFilter from 'components/TagFilter'
 import { PrimaryButton } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import useModal from 'hooks/useModal'
+import useSwipe, { Directions } from 'hooks/useSwipe'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import { screens } from 'constants/Styles'
@@ -20,13 +21,18 @@ export default function MobileFilters ({ aggregatedTags, collectionCount }) {
 
   const { isMobile } = useContext(MediaContext)
 
+  const swipeHandlers = useSwipe(
+    !isMobile && Directions.RIGHT,
+    modalProps.onRequestClose
+  )
+
   return (
     <ReactModal
       className={isMobile ? 'BottomModal' : 'SideModal'}
       {...!isMobile && { style: { content: { maxWidth: '30rem' } } }}
       {...modalProps}
     >
-      <div>
+      <div {...swipeHandlers}>
         <div
           css={css`
             bottom: 4rem;

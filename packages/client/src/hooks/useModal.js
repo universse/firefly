@@ -14,7 +14,6 @@ export default function useModal (type, label) {
     contentLabel: label,
     isOpen,
     onRequestClose () {
-      console.log('a')
       setActiveModalType(null)
     },
     overlayClassName: 'Overlay',
