@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
@@ -12,7 +12,6 @@ import { Cross, Search } from 'assets/icons'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
-import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import AriaLabels from 'constants/AriaLabels'
 // import useDebouncedValue from 'hooks/useDebouncedValue'
 import ModalTypes from 'constants/ModalTypes'
@@ -100,13 +99,41 @@ function SearchBar () {
 }
 
 function TopBarWrapper (props) {
-  const { isPastBaseline, isScrollingDown } = useIsScrollingDown({
-    id: 'main',
-    property: 'offsetTop'
+  const [{ isPastBaseline, isScrollingDown }, setIsScrollingDown] = useState({
+    isPastBaseline: false,
+    isScrollingDown: false
   })
+
+  const prevScrollPos = useRef(0)
+  const wrapperRef = useRef()
+
+  useEffect(() => {
+    prevScrollPos.current = window.scrollY
+    const anchor = document.getElementById('main').offsetTop
+    const baseline = anchor - wrapperRef.current.offsetHeight
+
+    const handleScroll = e => {
+      const currentScrollY = window.scrollY
+
+      setIsScrollingDown({
+        isPastBaseline: currentScrollY > baseline,
+        isScrollingDown:
+          currentScrollY > anchor && currentScrollY > prevScrollPos.current
+      })
+
+      prevScrollPos.current = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   return (
     <div
+      ref={wrapperRef}
       css={css`
         background-color: var(--white900);
         ${isPastBaseline && 'box-shadow: var(--shadow-01);'}
