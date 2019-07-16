@@ -33,7 +33,7 @@ export default function TagFilter ({ aggregatedTags }) {
   return (
     <details className='ListBox' open {...detailsProps}>
       <summary aria-label={AriaLabels.FILTER_BY_TAGS} {...summaryProps}>
-        Filter by Tags
+        {AriaLabels.FILTER_BY_TAGS}
         <div
           css={css`
             color: var(--gray600);
@@ -43,7 +43,12 @@ export default function TagFilter ({ aggregatedTags }) {
           <Tag />
         </div>
       </summary>
-      <ul {...getMenuProps({ 'aria-orientation': 'horizontal' })}>
+      <ul
+        {...getMenuProps({
+          'aria-label': AriaLabels.FILTER_BY_TAGS,
+          'aria-orientation': 'horizontal'
+        })}
+      >
         {aggregatedTags.map(([tag, count], index) => {
           const isSelected = tags.includes(tag)
 
