@@ -21,13 +21,7 @@ export default function CategoryFilter ({ pathname }) {
   const { isDesktop } = useContext(MediaContext)
 
   return (
-    <div
-      css={css`
-        ${screens.desktop} {
-          margin-bottom: 2rem;
-        }
-      `}
-    >
+    <>
       <div
         css={css`
           margin-bottom: 0.75rem;
@@ -65,7 +59,7 @@ export default function CategoryFilter ({ pathname }) {
           />
         </div>
       )}
-    </div>
+    </>
   )
 }
 

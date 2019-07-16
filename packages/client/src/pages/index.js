@@ -210,7 +210,7 @@ export default function IndexPage ({ data, location }) {
               >
                 <SearchBar {...searchBarProps} />
               </div>
-              {isDesktop && <SortByDifficulty sort={sort} />}
+              <SortByDifficulty sort={sort} />
             </div>
             <div
               css={css`

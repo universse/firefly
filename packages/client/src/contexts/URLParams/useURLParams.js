@@ -21,13 +21,12 @@ function constructHref (searchInput, sort, tags) {
 
 function init (search) {
   const params = new URLSearchParams(search)
+  const tags = params.get(URLParamKeys.TAGS)
 
   return {
     searchInput: params.get(URLParamKeys.SEARCH_INPUT) || '',
     sort: params.get(URLParamKeys.SORT) || '',
-    tags: params.get(URLParamKeys.TAGS)
-      ? params.get(URLParamKeys.TAGS).split(',')
-      : [],
+    tags: tags ? tags.split(',') : [],
     action: 'init'
   }
 }
