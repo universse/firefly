@@ -34,15 +34,15 @@ function Filters ({ handleScroll, pathname, slider }) {
 
     left < scrollButtonWidthInPx &&
       animate(
-        'scrollLeft',
         slider.current,
+        'scrollLeft',
         slider.current.scrollLeft + left - sliderLeft - scrollButtonWidthInPx
       )
 
     right > window.innerWidth - scrollButtonWidthInPx &&
       animate(
-        'scrollLeft',
         slider.current,
+        'scrollLeft',
         slider.current.scrollLeft + right - sliderRight + scrollButtonWidthInPx
       )
   }, [isDesktop, pathname, slider])

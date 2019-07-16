@@ -1,15 +1,13 @@
 export default function animate (
-  prop,
   element,
+  prop,
   to,
-  options = {
-    ease: time => (1 + Math.sin(Math.PI * time - Math.PI / 2)) / 2,
-    duration: 300
-  },
+  {
+    ease = time => (1 + Math.sin(Math.PI * time - Math.PI / 2)) / 2,
+    duration = 300
+  } = {},
   cb = () => {}
 ) {
-  const { ease, duration } = options
-
   let start = null
   const from = element[prop]
   let cancelled = false
