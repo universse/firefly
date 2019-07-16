@@ -12,6 +12,7 @@ import Media from 'contexts/Media'
 import Modal from 'contexts/Modal'
 import NormalizedCollections from 'contexts/NormalizedCollections'
 import SetSnackbar from 'contexts/SetSnackbar'
+import URLParams from 'contexts/URLParams'
 import UserData from 'contexts/UserData'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 
@@ -41,9 +42,11 @@ export default function Layout ({
               <SetSnackbar location={location}>
                 <UserData canUndo={normalizedPathname === '/my-library'}>
                   {isIndexPage ? (
-                    <IndexLayout category={category} location={location}>
-                      {children}
-                    </IndexLayout>
+                    <URLParams location={location}>
+                      <IndexLayout category={category} location={location}>
+                        {children}
+                      </IndexLayout>
+                    </URLParams>
                   ) : (
                     children
                   )}
