@@ -28,6 +28,13 @@
     top: -0.25rem;
   }
 
+  &.flat {
+    input {
+      background-color: var(--gray200);
+      box-shadow: none;
+    }
+  }
+
   &.large {
     @media #{$nonMobile} {
       #search-icon {

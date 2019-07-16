@@ -37,6 +37,7 @@ export default function SearchComboBox ({ maxResultCount = Infinity }) {
   return (
     <div className='ComboBox small' {...rootProps}>
       <SearchBar
+        flat
         handleClearClick={() => setSearchInput('')}
         isLoading={isLoading}
         labelProps={labelProps}

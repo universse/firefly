@@ -5,6 +5,7 @@ import { Cross, Search } from 'assets/icons'
 import AriaLabels from 'constants/AriaLabels'
 
 export default function SearchBar ({
+  flat = false,
   handleClearClick,
   isLoading = false,
   labelProps,
@@ -12,8 +13,12 @@ export default function SearchBar ({
   value,
   ...props
 }) {
+  let className = 'SearchBar'
+  flat && (className += ' flat')
+  large && (className += ' large')
+
   return (
-    <div className={large ? 'SearchBar large' : 'SearchBar'}>
+    <div className={className}>
       {labelProps && (
         <label className='visually-hidden' {...labelProps}>
           {AriaLabels.SEARCH_BAR_LABEL}
@@ -50,6 +55,7 @@ SearchBar.propTypes = {
   handleClearClick: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  flat: PropTypes.bool,
   isLoading: PropTypes.bool,
   labelProps: PropTypes.object,
   large: PropTypes.bool
