@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useMemo, useRef } from 'react'
+import { useEffect, useReducer, useMemo } from 'react'
 import { navigate } from 'gatsby'
 
 import URLParamKeys from 'constants/URLParamKeys'
@@ -39,13 +39,18 @@ function reducer (state, payload) {
 export default function useURLParams ({ pathname, search }) {
   const [query, queryDispatch] = useReducer(reducer, search, init)
 
-  const isFirstMount = useRef(true)
+  useEffect(() => {
+    queryDispatch(init(''))
+  }, [pathname])
 
   useEffect(() => {
-    isFirstMount.current
-      ? (isFirstMount.current = false)
-      : queryDispatch(init(search))
-  }, [pathname, search])
+    const resetQuery = () => queryDispatch(init(window.location.search))
+    window.addEventListener('popstate', resetQuery)
+
+    return () => {
+      window.removeEventListener('popstate', resetQuery)
+    }
+  }, [])
 
   useEffect(() => {
     const { searchInput, sort, tags, action } = query
