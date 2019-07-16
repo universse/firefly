@@ -1,15 +1,13 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import SearchBar from 'components/SearchBar'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useComboBox from 'hooks/useComboBox'
 import useSearch from 'hooks/useSearch'
-import URLParamKeys from 'constants/URLParamKeys'
-import { createCollectionPath } from '../../../gatsby/utils'
+import { createCollectionPath } from '../../gatsby/utils'
 
-export default function SearchComboBox ({ maxResultCount = Infinity }) {
+export default function SearchComboBox () {
   const normalizedCollections = useContext(NormalizedCollectionsContext)
 
   const {
@@ -35,18 +33,19 @@ export default function SearchComboBox ({ maxResultCount = Infinity }) {
   const totalResultCount = results.length
 
   return (
-    <div className='ComboBox small' {...rootProps}>
+    <div className='ComboBox large' {...rootProps}>
       <SearchBar
         handleClearClick={() => setSearchInput('')}
         isLoading={isLoading}
         labelProps={labelProps}
+        large
         value={searchInput}
         {...getInputProps({ onChange: handleSearchInput })}
       />
-      <ul className='Menu' {...menuProps}>
+      <ul {...menuProps}>
         {isOpen && searchInput && (
           <>
-            {results.slice(0, maxResultCount).map((result, index) => (
+            {results.map((result, index) => (
               <Link
                 key={result.id}
                 {...highlightedIndex === index && { className: 'highlighted' }}
@@ -67,22 +66,6 @@ export default function SearchComboBox ({ maxResultCount = Infinity }) {
                 {normalizedCollections[result.id].name}
               </Link>
             ))}
-            {totalResultCount > 0 && totalResultCount > maxResultCount && (
-              <Link
-                className={`${
-                  highlightedIndex === maxResultCount ? 'highlighted' : ''
-                }`}
-                {...getMenuItemProps({
-                  index: maxResultCount,
-                  item: {
-                    id: 'search',
-                    to: `/?${URLParamKeys.SEARCH_INPUT}=${searchInput}`
-                  }
-                })}
-              >
-                See all results
-              </Link>
-            )}
             {!isTyping && !isLoading && !totalResultCount && (
               <span>No result found :(</span>
             )}
@@ -91,8 +74,4 @@ export default function SearchComboBox ({ maxResultCount = Infinity }) {
       </ul>
     </div>
   )
-}
-
-SearchComboBox.propTypes = {
-  maxResultCount: PropTypes.number.isRequired
 }

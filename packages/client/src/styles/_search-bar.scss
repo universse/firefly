@@ -1,0 +1,49 @@
+.SearchBar {
+  position: relative;
+  z-index: 1;
+
+  #search-icon {
+    align-items: center;
+    color: var(--gray600);
+    display: flex;
+    height: 2.5rem;
+    left: 1rem;
+    position: absolute;
+    z-index: 2;
+  }
+
+  input {
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-02);
+    color: var(--black900);
+    font-size: 0.9375rem;
+    height: 2.5rem;
+    padding-left: 3rem;
+    width: 100%;
+  }
+
+  #clear {
+    position: absolute;
+    right: 0.25rem;
+    top: -0.25rem;
+  }
+
+  &.large {
+    @media #{$nonMobile} {
+      #search-icon {
+        height: 3rem;
+      }
+
+      input {
+        border-radius: 1.5rem;
+        font-size: 1rem;
+        height: 3rem;
+      }
+
+      #clear {
+        right: 0.5rem;
+        top: 0;
+      }
+    }
+  }
+}

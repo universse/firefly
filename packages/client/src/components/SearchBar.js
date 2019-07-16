@@ -1,92 +1,56 @@
-import React, { useContext } from 'react'
-import { Link } from 'gatsby'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import { Cross } from 'assets/icons'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
-import useComboBox from 'hooks/useComboBox'
-import useSearch from 'hooks/useSearch'
+import { Cross, Search } from 'assets/icons'
 import AriaLabels from 'constants/AriaLabels'
-import { createCollectionPath } from '../../gatsby/utils'
 
-export default function SearchBar () {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
-
-  const {
-    handleSelect,
-    handleSearchInput,
-    isLoading,
-    isTyping,
-    results,
-    searchInput,
-    setSearchInput
-  } = useSearch()
-
-  const {
-    highlightedIndex,
-    isOpen,
-    rootProps,
-    labelProps,
-    getInputProps,
-    menuProps,
-    getMenuItemProps
-  } = useComboBox({ onSelect: handleSelect })
-
-  const totalResultCount = results.length
-
+export default function SearchBar ({
+  handleClearClick,
+  isLoading = false,
+  labelProps,
+  large = false,
+  value,
+  ...props
+}) {
   return (
-    <div className='ComboBox large' {...rootProps}>
-      <div>
+    <div className={large ? 'SearchBar large' : 'SearchBar'}>
+      {labelProps && (
         <label className='visually-hidden' {...labelProps}>
           {AriaLabels.SEARCH_BAR_LABEL}
         </label>
-        <input
-          placeholder={AriaLabels.SEARCH_BAR_LABEL}
-          value={searchInput}
-          {...getInputProps({ onChange: handleSearchInput })}
-        />
-        {searchInput && !isLoading && (
-          <div>
-            <button
-              aria-label={AriaLabels.CLEAR_SEARCH_INPUT}
-              className='IconButton'
-              onClick={() => setSearchInput('')}
-              type='button'
-            >
-              <Cross small />
-            </button>
-          </div>
-        )}
+      )}
+      <div id='search-icon'>
+        <Search medium />
       </div>
-      <ul {...menuProps}>
-        {isOpen && searchInput && (
-          <>
-            {results.map((result, index) => (
-              <Link
-                key={result.id}
-                {...highlightedIndex === index && { className: 'highlighted' }}
-                {...getMenuItemProps({
-                  index,
-                  item: {
-                    id: result.id,
-                    to: createCollectionPath({
-                      id: result.id,
-                      name: normalizedCollections[result.id].name
-                    }),
-                    meta: {
-                      name: normalizedCollections[result.id].name
-                    }
-                  }
-                })}
-              >
-                {normalizedCollections[result.id].name}
-              </Link>
-            ))}
-            {!isTyping && !isLoading && !totalResultCount && (
-              <span>No result found :(</span>
-            )}
-          </>
-        )}
-      </ul>
+      <input
+        aria-label={AriaLabels.SEARCH_BAR_LABEL}
+        autoComplete='off'
+        placeholder={AriaLabels.SEARCH_BAR_LABEL}
+        type='text'
+        value={value}
+        {...props}
+      />
+      {value && !isLoading && (
+        <div id='clear'>
+          <button
+            aria-label={AriaLabels.CLEAR_SEARCH_INPUT}
+            className='IconButton'
+            onClick={handleClearClick}
+            type='button'
+          >
+            <Cross small />
+          </button>
+        </div>
+      )}
     </div>
   )
+}
+
+SearchBar.propTypes = {
+  handleClearClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool,
+  labelProps: PropTypes.object,
+  large: PropTypes.bool
 }

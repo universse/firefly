@@ -52,7 +52,6 @@ export default function useComboBox ({ onSelect }) {
       'aria-autocomplete': 'list',
       'aria-controls': menuId,
       'aria-labelledby': labelId,
-      autoComplete: 'off',
       onBlur: () => {
         highlightedIndex === -1 && closeMenu()
       },
@@ -92,8 +91,7 @@ export default function useComboBox ({ onSelect }) {
             closeMenu()
             break
         }
-      },
-      type: 'text'
+      }
     }
   }
 

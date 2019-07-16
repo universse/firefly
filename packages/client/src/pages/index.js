@@ -6,9 +6,9 @@ import { css } from '@emotion/core'
 import CategoryFilter from 'components/CategoryFilter'
 import Collections from 'components/Collections'
 import MobileFilters from 'components/MobileFilters'
+import SearchBar from 'components/SearchBar'
 import SortByDifficulty from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
-import { Cross, Search } from 'assets/icons'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
@@ -20,83 +20,6 @@ import { headerHeightInRem, screens } from 'constants/Styles'
 // import URLParamKeys from 'constants/URLParamKeys'
 import { logInputSearch } from 'utils/amplitude'
 import searchWorker from 'utils/searchWorker'
-
-function SearchBar () {
-  const {
-    query: { searchInput },
-    queryDispatch
-  } = useContext(URLParamsContext)
-
-  return (
-    <>
-      <div
-        css={css`
-          align-items: center;
-          color: var(--gray600);
-          display: flex;
-          height: 2.5rem;
-          left: 1rem;
-          position: absolute;
-          z-index: 2;
-
-          ${screens.nonMobile} {
-            height: 3rem;
-          }
-        `}
-      >
-        <Search medium />
-      </div>
-      <input
-        aria-label={AriaLabels.SEARCH_BAR_LABEL}
-        autoComplete='off'
-        css={css`
-          border-radius: 1.25rem;
-          box-shadow: var(--shadow-02);
-          color: var(--black900);
-          font-size: 0.9375rem;
-          height: 2.5rem;
-          padding-left: 3rem;
-          width: 100%;
-
-          ${screens.nonMobile} {
-            border-radius: 1.5rem;
-            font-size: 1rem;
-            height: 3rem;
-          }
-        `}
-        onChange={e => {
-          queryDispatch({ searchInput: e.target.value })
-          logInputSearch(e.target.value, true)
-        }}
-        placeholder={AriaLabels.SEARCH_BAR_LABEL}
-        type='text'
-        value={searchInput}
-      />
-      {searchInput && (
-        <div
-          css={css`
-            position: absolute;
-            right: 0.25rem;
-            top: -0.25rem;
-
-            ${screens.nonMobile} {
-              top: 0;
-            }
-          `}
-        >
-          <button
-            aria-label={AriaLabels.CLEAR_SEARCH_INPUT}
-            className='IconButton'
-            onClick={() => queryDispatch({ searchInput: '' })}
-            type='button'
-          >
-            <Cross small />
-          </button>
-        </div>
-      )}
-    </>
-  )
-}
 
 function TopBarWrapper (props) {
   const [{ isPastBaseline, isScrollingDown }, setIsScrollingDown] = useState({
@@ -148,7 +71,7 @@ function TopBarWrapper (props) {
   )
 }
 
-function TopBar ({ pathname }) {
+function TopBar ({ children, pathname }) {
   const setActiveModalType = useContext(SetModalContext)
 
   return (
@@ -169,7 +92,7 @@ function TopBar ({ pathname }) {
             position: relative;
           `}
         >
-          <SearchBar />
+          {children}
         </div>
         <button
           aria-label={AriaLabels.SORT_AND_FILTER_COLLECTIONS}
@@ -189,6 +112,7 @@ function TopBar ({ pathname }) {
 }
 
 TopBar.propTypes = {
+  children: PropTypes.node.isRequired,
   pathname: PropTypes.string.isRequired
 }
 
@@ -196,8 +120,24 @@ export default function IndexPage ({ data, location }) {
   const { isDesktop } = useContext(MediaContext)
 
   const {
-    query: { searchInput, sort, tags }
+    query: { searchInput, sort, tags },
+    queryDispatch
   } = useContext(URLParamsContext)
+
+  // const handleChange = useCallback(e => {
+  //   queryDispatch({ searchInput: e.target.value })
+  //   logInputSearch(e.target.value, true)
+  // }, [queryDispatch])
+
+  const searchBarProps = {
+    handleClearClick: () => queryDispatch({ searchInput: '' }),
+    large: true,
+    onChange: e => {
+      queryDispatch({ searchInput: e.target.value })
+      logInputSearch(e.target.value, true)
+    },
+    value: searchInput
+  }
 
   const [{ aggregatedTags, collectionIds }, setState] = useState({
     aggregatedTags: [],
@@ -268,7 +208,7 @@ export default function IndexPage ({ data, location }) {
                   position: relative;
                 `}
               >
-                <SearchBar />
+                <SearchBar {...searchBarProps} />
               </div>
               {isDesktop && <SortByDifficulty sort={sort} />}
             </div>
@@ -286,7 +226,9 @@ export default function IndexPage ({ data, location }) {
       {isDesktop === false && (
         <>
           <TopBarWrapper>
-            <TopBar pathname={location.pathname} />
+            <TopBar pathname={location.pathname}>
+              <SearchBar {...searchBarProps} />
+            </TopBar>
           </TopBarWrapper>
           <MobileFilters
             aggregatedTags={aggregatedTags}

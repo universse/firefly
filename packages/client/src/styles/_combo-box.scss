@@ -1,25 +1,4 @@
 .ComboBox {
-  & > div {
-    position: relative;
-    z-index: 1;
-
-    input {
-      background-color: var(--gray200);
-      border-radius: 1.25rem;
-      color: var(--black900);
-      font-size: 0.9375rem;
-      height: 2.5rem;
-      padding-left: 1rem;
-      width: 100%;
-    }
-
-    div {
-      position: absolute;
-      right: 0.25rem;
-      top: -0.25rem;
-    }
-  }
-
   ul {
     &.Menu {
       background-color: var(--gray200);
@@ -55,25 +34,6 @@
   }
 
   &.large {
-    & > div {
-      input {
-        padding-left: 3rem;
-
-        @media #{$desktop} {
-          border-radius: 1.5rem;
-          font-size: 1.125rem;
-          height: 3rem;
-        }
-      }
-
-      div {
-        @media #{$desktop} {
-          right: 0.5rem;
-          top: 0;
-        }
-      }
-    }
-
     ul {
       a,
       span {

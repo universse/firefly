@@ -2,9 +2,8 @@ import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 
 import SEO from 'components/SEO'
-import SearchBar from 'components/SearchBar'
+import SearchComboBox from 'components/SearchComboBox'
 import { BackButton } from 'components/common'
-import { Search } from 'assets/icons'
 import { MediaContext } from 'contexts/Media'
 import {
   headerHeightInRem,
@@ -45,7 +44,6 @@ export default function SearchPage () {
         <div
           className='base'
           css={css`
-            color: var(--gray600);
             position: relative;
 
             ${screens.desktop} {
@@ -54,23 +52,7 @@ export default function SearchPage () {
             }
           `}
         >
-          <div
-            css={css`
-              align-items: center;
-              display: flex;
-              height: 2.5rem;
-              left: 2rem;
-              position: absolute;
-              z-index: 2;
-
-              ${screens.desktop} {
-                height: 3rem;
-              }
-            `}
-          >
-            <Search medium />
-          </div>
-          <SearchBar />
+          <SearchComboBox />
         </div>
       </main>
     </>
