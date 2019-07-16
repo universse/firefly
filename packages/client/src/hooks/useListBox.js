@@ -13,11 +13,12 @@ export default function useListBox ({ onSelect }) {
   const detailsRef = useRef()
   const menuRef = useRef()
 
-  const select = index => {
-    index !== highlightedIndex && setHighlightedIndex(index)
-
-    if (items.current[index] && !menuRef.current.children[index].disabled) {
-      onSelect(items.current[index])
+  const select = () => {
+    if (
+      items.current[highlightedIndex] &&
+      !menuRef.current.children[highlightedIndex].disabled
+    ) {
+      onSelect(items.current[highlightedIndex])
     }
   }
 
@@ -80,13 +81,17 @@ export default function useListBox ({ onSelect }) {
 
   function getMenuItemProps ({ index, item, isSelected, disabled }) {
     items.current.push(item)
+
+    const highlight = () => setHighlightedIndex(index)
+
     return {
       'aria-selected': isSelected,
       disabled,
       id: item.id,
-      onClick: () => select(index),
-      onMouseEnter: () => setHighlightedIndex(index),
+      onClick: select,
+      onMouseEnter: highlight,
       onMouseLeave: () => setHighlightedIndex(-1),
+      onTouchStart: highlight,
       role: 'option',
       tabIndex: -1
     }
