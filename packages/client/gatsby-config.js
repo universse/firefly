@@ -52,27 +52,38 @@ module.exports = {
           {
             type: 'urls',
             collection: 'urls',
-            // description, image, publisher, title, type, url
-            map: ({ c, d, ti, ty, u }) => ({
+            map: ({
+              collectionId,
+              description,
+              image,
+              publisher,
+              title,
+              type,
+              url
+            }) => ({
               description:
-                d.length === truncate(d) ? d : `${d.slice(0, truncate(d))}...`,
-              truncatedAt: d.length === truncate(d, 60) ? 0 : truncate(d, 60),
-              title: ti,
-              type: ItemTypes[ty],
-              url: u
+                description.length === truncate(description)
+                  ? description
+                  : `${description.slice(0, truncate(description))}...`,
+              truncatedAt:
+                description.length === truncate(description, 60)
+                  ? 0
+                  : truncate(description, 60),
+              title,
+              type: ItemTypes[type],
+              url
             })
           },
           {
             type: 'collections',
             collection: 'collections',
-            // category, level, name, suggestions, tags, urls
-            map: ({ c, l, n, suggestions, t, us }) => ({
-              category: Categories[c],
-              level: l,
-              name: n,
-              tags: t,
-              itemCount: us.length,
-              urls___NODE: us.map(id => id)
+            map: ({ category, level, name, suggestions, tags, urlIds }) => ({
+              category: Categories[category],
+              level,
+              name,
+              tags,
+              itemCount: urlIds.length,
+              urls___NODE: urlIds.map(id => id)
             })
           }
         ]
