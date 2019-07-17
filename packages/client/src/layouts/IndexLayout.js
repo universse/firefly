@@ -64,7 +64,7 @@ function TopBarWrapper (props) {
         position: sticky;
         top: 0;
         transform: translateY(${isScrollingDown ? '-100%' : 0});
-        transition: transform 0.45s;
+        transition: transform 0.6s;
         z-index: 200;
       `}
       {...props}

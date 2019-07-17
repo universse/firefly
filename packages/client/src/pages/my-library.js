@@ -26,7 +26,7 @@ import { hasSignedIn } from 'utils/localStorageUtils'
 export default function MyLibraryPage () {
   const userData = useContext(UserDataContext)
   const user = useContext(AuthenticationContext)
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop, isMobile } = useContext(MediaContext)
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
   const normalizedCollections = useContext(NormalizedCollectionsContext)
@@ -142,7 +142,9 @@ export default function MyLibraryPage () {
                   text-align: center;
                 `}
               >
-                Save a collection and it will show up here.
+                Save a collection and it will
+                {isMobile ? <br /> : ' '}
+                show up here.
               </span>
             </div>
           )}
