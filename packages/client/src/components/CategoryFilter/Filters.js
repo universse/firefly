@@ -56,27 +56,26 @@ function Filters ({ handleScroll, pathname, slider }) {
           ${screens.nonDesktop} {
             height: 3rem;
             overflow: hidden;
+
+            ul {
+              display: flex;
+              height: 3.5rem;
+              overflow-x: auto;
+            }
+
+            li {
+              flex: 1 0 auto;
+            }
+          }
+
+          ${screens.desktop} {
+            li {
+              margin-bottom: 0.5rem;
+            }
           }
         `}
       >
-        <ul
-          ref={slider}
-          css={css`
-            li {
-              flex: 1 0 auto;
-
-              ${screens.desktop} {
-                margin-bottom: 0.5rem;
-              }
-            }
-
-            ${screens.nonDesktop} {
-              display: flex;
-              overflow-x: auto;
-            }
-          `}
-          onScroll={handleScroll}
-        >
+        <ul ref={slider} onScroll={handleScroll}>
           {CategoryPaths.map((path, i) => (
             <li key={i}>
               <Category partiallyActive={path !== '/'} to={CategoryPaths[i]}>
