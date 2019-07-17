@@ -5,6 +5,7 @@ import searchWorker from 'utils/searchWorker'
 
 export const NormalizedCollectionsContext = createContext()
 
+// TODO suspense
 export default function NormalizedCollections ({ children }) {
   const [normalizedCollections, setNormalizedCollections] = useState(null)
 

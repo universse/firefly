@@ -10,6 +10,7 @@ import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 
+// TODO Suspense
 export default function Hero () {
   const { title } = useSiteMetadata()
 
