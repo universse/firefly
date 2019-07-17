@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import { css } from '@emotion/core'
 
-import { MobileSortByDifficulty } from 'components/SortByDifficulty'
-import TagFilter from 'components/TagFilter'
 import { PrimaryButton } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import useModal from 'hooks/useModal'
@@ -13,7 +11,7 @@ import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import { screens } from 'constants/Styles'
 
-export default function MobileFilters ({ aggregatedTags, collectionCount }) {
+export default function MobileFilters ({ children, collectionCount }) {
   const modalProps = useModal(
     ModalTypes.MOBILE_FILTER,
     AriaLabels.SORT_AND_FILTER_COLLECTIONS
@@ -46,8 +44,7 @@ export default function MobileFilters ({ aggregatedTags, collectionCount }) {
             }
           `}
         >
-          <MobileSortByDifficulty />
-          <TagFilter aggregatedTags={aggregatedTags} />
+          {children}
         </div>
         <div
           css={css`
@@ -71,6 +68,6 @@ export default function MobileFilters ({ aggregatedTags, collectionCount }) {
 }
 
 MobileFilters.propTypes = {
-  aggregatedTags: PropTypes.arrayOf(PropTypes.array).isRequired,
+  children: PropTypes.node.isRequired,
   collectionCount: PropTypes.number.isRequired
 }

@@ -43,12 +43,12 @@ function TopBarWrapper (props) {
   )
 }
 
-function TopBar ({ children, pathname }) {
+function TopBar ({ categoryFilter, searchBar }) {
   const setActiveModalType = useContext(SetModalContext)
 
   return (
     <>
-      <CategoryFilter pathname={pathname} />
+      {categoryFilter}
       <div
         css={css`
           align-items: center;
@@ -64,7 +64,7 @@ function TopBar ({ children, pathname }) {
             position: relative;
           `}
         >
-          {children}
+          {searchBar}
         </div>
         <button
           aria-label={AriaLabels.SORT_AND_FILTER_COLLECTIONS}
@@ -84,11 +84,11 @@ function TopBar ({ children, pathname }) {
 }
 
 TopBar.propTypes = {
-  children: PropTypes.node.isRequired,
-  pathname: PropTypes.string.isRequired
+  categoryFilter: PropTypes.node.isRequired,
+  searchBar: PropTypes.node.isRequired
 }
 
-export default function IndexLayout ({ category, children, location }) {
+export default function IndexLayout ({ category, children, pathname }) {
   const { isDesktop } = useContext(MediaContext)
 
   const {
@@ -146,7 +146,7 @@ export default function IndexLayout ({ category, children, location }) {
                   top: ${headerHeightInRem + 1}rem;
                 `}
               >
-                <CategoryFilter pathname={location.pathname} />
+                <CategoryFilter pathname={pathname} />
               </div>
               <main
                 css={css`
@@ -181,9 +181,10 @@ export default function IndexLayout ({ category, children, location }) {
           {isDesktop === false && (
             <>
               <TopBarWrapper>
-                <TopBar pathname={location.pathname}>
-                  <SearchBar {...searchBarProps} />
-                </TopBar>
+                <TopBar
+                  categoryFilter={<CategoryFilter pathname={pathname} />}
+                  searchBar={<SearchBar {...searchBarProps} />}
+                />
               </TopBarWrapper>
               <main
                 css={css`
@@ -212,6 +213,6 @@ export default function IndexLayout ({ category, children, location }) {
 
 IndexLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired,
+  pathname: PropTypes.string.isRequired,
   category: PropTypes.string
 }

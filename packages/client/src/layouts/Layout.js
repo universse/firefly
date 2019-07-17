@@ -43,7 +43,10 @@ export default function Layout ({
                 <UserData canUndo={normalizedPathname === '/my-library'}>
                   {isIndexPage ? (
                     <URLParams location={location}>
-                      <IndexLayout category={category} location={location}>
+                      <IndexLayout
+                        category={category}
+                        pathname={location.pathname}
+                      >
                         {children}
                       </IndexLayout>
                     </URLParams>

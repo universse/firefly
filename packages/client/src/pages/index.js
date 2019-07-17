@@ -5,6 +5,7 @@ import { css } from '@emotion/core'
 
 import Collections from 'components/Collections'
 import MobileFilters from 'components/MobileFilters'
+import { MobileSortByDifficulty } from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
 import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
@@ -70,10 +71,10 @@ export default function IndexPage ({ data, location }) {
         </div>
       )}
       {isDesktop === false && (
-        <MobileFilters
-          aggregatedTags={aggregatedTags}
-          collectionCount={collectionIds.length}
-        />
+        <MobileFilters collectionCount={collectionIds.length}>
+          <MobileSortByDifficulty />
+          <TagFilter aggregatedTags={aggregatedTags} />
+        </MobileFilters>
       )}
       <Collections collectionIds={collectionIds} />
     </>
