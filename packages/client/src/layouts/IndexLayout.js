@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { toTitleCase } from 'common'
@@ -13,6 +13,7 @@ import SortByDifficulty from 'components/SortByDifficulty'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import { URLParamsContext } from 'contexts/URLParams'
+import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import {
@@ -23,48 +24,18 @@ import {
 import { logInputSearch } from 'utils/amplitude'
 
 function TopBarWrapper (props) {
-  const [{ isPastBaseline, isScrollingDown }, setIsScrollingDown] = useState({
-    isPastBaseline: false,
-    isScrollingDown: false
-  })
-
-  const prevScrollPos = useRef(0)
-  const wrapperRef = useRef()
-
-  useEffect(() => {
-    prevScrollPos.current = window.scrollY
-    const anchor = document.getElementById('main').offsetTop
-    const baseline = anchor - wrapperRef.current.offsetHeight
-
-    const handleScroll = e => {
-      const currentScrollY = window.scrollY
-
-      setIsScrollingDown({
-        isPastBaseline: currentScrollY > baseline,
-        isScrollingDown:
-          currentScrollY > anchor && currentScrollY > prevScrollPos.current
-      })
-
-      prevScrollPos.current = currentScrollY
-    }
-
-    window.addEventListener('scroll', handleScroll)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
+  const { isPastBaseline, isScrollingDown, ref } = useIsScrollingDown()
 
   return (
     <div
-      ref={wrapperRef}
+      ref={ref}
       css={css`
         background-color: var(--white900);
         ${isPastBaseline && 'box-shadow: var(--shadow-01);'}
         position: sticky;
         top: 0;
         transform: translateY(${isScrollingDown ? '-100%' : 0});
-        transition: transform 0.6s;
+        transition: box-shadow 0.2s, transform 0.6s;
         z-index: 200;
       `}
       {...props}

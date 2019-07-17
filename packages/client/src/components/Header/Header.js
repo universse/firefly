@@ -4,9 +4,9 @@ import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
 import SearchComboBox from './SearchComboBox'
+import { HeaderTag, HeaderWrapper } from './styled'
 import Navigation from 'components/Navigation'
 import { Logo } from 'assets/icons'
-import { HeaderTag, HeaderWrapper } from './styled'
 
 export default function Header ({ isIndexPage }) {
   return (

@@ -59,7 +59,7 @@ function Filters ({ handleScroll, pathname, slider }) {
 
             ul {
               display: flex;
-              height: 3.5rem;
+              height: 4.5rem;
               overflow-x: auto;
             }
 
