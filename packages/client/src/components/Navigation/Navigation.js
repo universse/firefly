@@ -15,12 +15,7 @@ export default function Navigation () {
     <nav className='Navigation'>
       <ul>
         <li>
-          <Link
-            activeClassName='active'
-            className='NavLink'
-            partiallyActive
-            to='/my-library'
-          >
+          <Link activeClassName='active' partiallyActive to='/my-library'>
             My Library
           </Link>
         </li>
