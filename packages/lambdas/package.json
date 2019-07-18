@@ -8,15 +8,15 @@
     "graphql-tag": "^2.10.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
-    "aws-sdk": "^2.490.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "aws-sdk": "^2.494.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-macros": "^2.6.1",
     "jest": "^24.8.0",
     "preval.macro": "^3.0.0",
     "serverless-dynamodb-local": "^0.2.38",
-    "serverless-offline": "^5.7.2",
+    "serverless-offline": "^5.8.0",
     "serverless-webpack": "^5.3.1",
     "webpack": "^4.36.1",
     "webpack-node-externals": "^1.7.2"
