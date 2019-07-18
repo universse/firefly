@@ -134,12 +134,15 @@ $modal-transition-duration: 0.28s;
 }
 
 .ReactModal__Body--open {
-  overflow: hidden;
   touch-action: none;
+
+  @media #{$nonDesktop} {
+    overflow: hidden;
+  }
 }
 
 .ReactModal__Overlay--after-open {
-  background-color: rgba(0, 0, 0, 0.32);
+  background-color: var(--black500);
 }
 
 .ReactModal__Overlay--before-close {
