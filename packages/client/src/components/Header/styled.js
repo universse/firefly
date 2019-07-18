@@ -20,7 +20,7 @@ export function HeaderTag ({ mobile = false, shadow = false, ...props }) {
         display: ${mobile ? 'none' : 'block'};
         height: ${headerHeightInRem}rem;
         ${isPastBaseline && 'box-shadow: var(--shadow-01);'}
-        position: ${mobile ? 'sticky' : 'fixed'};
+        position: sticky;
         top: 0;
         transition: box-shadow 0.2s;
         width: 100%;
