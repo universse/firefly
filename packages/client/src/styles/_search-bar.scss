@@ -13,8 +13,9 @@
   }
 
   input {
+    background-color: var(--gray200);
     border-radius: 1.25rem;
-    box-shadow: var(--shadow-02);
+    box-shadow: none;
     color: var(--black900);
     font-size: 0.9375rem;
     height: 2.5rem;
@@ -26,13 +27,6 @@
     position: absolute;
     right: 0.25rem;
     top: -0.25rem;
-  }
-
-  &.flat {
-    input {
-      background-color: var(--gray200);
-      box-shadow: none;
-    }
   }
 
   &.large {
