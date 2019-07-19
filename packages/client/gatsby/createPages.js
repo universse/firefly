@@ -2,7 +2,6 @@ const fs = require('fs')
 const { resolve } = require('path')
 
 const { createCollectionPath } = require('./utils')
-// const { NormalizedCollectionsFilename } = require('common')
 
 module.exports = async ({
   graphql,
@@ -57,15 +56,6 @@ module.exports = async ({
       }
     })
   })
-
-  // const dataDir = 'src/data/'
-
-  // !fs.existsSync(dataDir) && fs.mkdirSync(dataDir)
-
-  // fs.writeFileSync(
-  //   `${dataDir}${NormalizedCollectionsFilename}.json`,
-  //   JSON.stringify(normalizedCollections)
-  // )
 
   const searchWorker = fs.readFileSync('src/utils/searchWorker/_template.js', {
     encoding: 'utf8'

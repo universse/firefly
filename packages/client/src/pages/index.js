@@ -14,7 +14,7 @@ import { CollectionIdsType } from 'constants/Types'
 // import URLParamKeys from 'constants/URLParamKeys'
 import searchWorker from 'utils/searchWorker'
 
-export default function IndexPage ({ data, location }) {
+export default function IndexPage ({ data }) {
   const { isDesktop } = useContext(MediaContext)
 
   const {
@@ -84,8 +84,7 @@ export default function IndexPage ({ data, location }) {
 IndexPage.propTypes = {
   data: PropTypes.exact({
     allCollectionIds: PropTypes.exact({ nodes: CollectionIdsType })
-  }).isRequired,
-  location: PropTypes.object.isRequired
+  }).isRequired
 }
 
 export const collections = graphql`

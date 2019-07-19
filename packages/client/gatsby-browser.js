@@ -14,18 +14,21 @@ export const onClientEntry = () => {
 }
 
 export const onRouteUpdate = ({ prevLocation }) => {
-  window.hasVisited = !!prevLocation
+  window.___hasVisited = !!prevLocation
 }
 
 export const shouldUpdateScroll = ({
   routerProps: {
-    location: { pathname }
+    location: { pathname, search }
   },
   prevRouterProps: {
-    location: { pathname: prevPathname }
+    location: { pathname: prevPathname, search: prevSearch }
   }
 }) => {
   if (pathname === prevPathname) {
+    if (search !== prevSearch) {
+      !window.___isDesktop && scrollToHero()
+    }
     return false
   }
 

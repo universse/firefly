@@ -1,13 +1,12 @@
 import React, { useEffect, useContext, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Categories } from 'common'
+import { Categories, animate } from 'common'
 
 import { Category, scrollButtonWidthInRem } from './styled'
 import { MediaContext } from 'contexts/Media'
 import { RefType } from 'constants/Types'
 import { baseFontSize, screens } from 'constants/Styles'
-import animate from 'utils/animate'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
@@ -33,18 +32,23 @@ function Filters ({ handleScroll, pathname, slider }) {
     const { left, right } = slider.current.children[i].getBoundingClientRect()
 
     left < scrollButtonWidthInPx &&
-      animate(
-        slider.current,
-        'scrollLeft',
-        slider.current.scrollLeft + left - sliderLeft - scrollButtonWidthInPx
-      )
+      animate({
+        element: slider.current,
+        prop: 'scrollLeft',
+        to:
+          slider.current.scrollLeft + left - sliderLeft - scrollButtonWidthInPx
+      })
 
     right > window.innerWidth - scrollButtonWidthInPx &&
-      animate(
-        slider.current,
-        'scrollLeft',
-        slider.current.scrollLeft + right - sliderRight + scrollButtonWidthInPx
-      )
+      animate({
+        element: slider.current,
+        prop: 'scrollLeft',
+        to:
+          slider.current.scrollLeft +
+          right -
+          sliderRight +
+          scrollButtonWidthInPx
+      })
   }, [isDesktop, pathname, slider])
 
   return (

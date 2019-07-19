@@ -37,7 +37,7 @@ ActionBar.propTypes = {
 }
 
 function goBack () {
-  window.hasVisited ? window.history.back() : navigate('/')
+  window.___hasVisited ? window.history.back() : navigate('/')
 }
 
 export function BackButton () {
