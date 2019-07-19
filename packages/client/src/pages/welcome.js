@@ -38,19 +38,7 @@ export default function WelcomePage () {
   }, [])
 
   return (
-    <div
-      css={css`
-        align-items: center;
-        bottom: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        left: 0;
-        position: fixed;
-        right: 0;
-        top: 0;
-      `}
-    >
+    <div className='fullscreen'>
       {isLoading && (
         <div
           css={css`

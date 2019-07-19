@@ -181,6 +181,11 @@ export default function SignUpForm () {
           </form>
         </>
       )}
+      {isLoading && (
+        <div className='fullscreen' style={{ borderRadius: 8 }}>
+          <div className='Spinner' />
+        </div>
+      )}
       <div
         css={css`
           position: absolute;

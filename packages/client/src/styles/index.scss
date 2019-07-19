@@ -30,6 +30,19 @@
   width: 100%;
 }
 
+.fullscreen {
+  align-items: center;
+  background-color: var(--white900);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 #hero {
   background-color: var(--gray100);
 }
