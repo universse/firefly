@@ -123,38 +123,41 @@ const firestore = firebase.firestore()
 //   }
 // }
 
-const cache = {}
+// const cache = {}
 
-export async function fetchCollection (id) {
-  if (cache[id]) {
-    return cache[id]
-  }
+// export async function fetchCollection (id) {
+//   if (cache[id]) {
+//     return cache[id]
+//   }
 
-  const docRef = firestore.collection('collections').doc(id)
+//   const collectionRef = firestore.collection('collections').doc(id)
 
-  try {
-    const doc = await docRef.get()
-    if (doc.exists) {
-      const collection = doc.data()
-      const urlIds = collection.us
+//   try {
+//     const collectionDoc = await collectionRef.get()
+//     if (collectionDoc.exists) {
+//       const collection = collectionDoc.data()
 
-      await Promise.all(
-        urlIds.map(async (id, i) => {
-          const urlRef = firestore.collection('urls').doc(id)
-          const doc = await urlRef.get()
-          collection.us[i] = { id, ...doc.data() }
-        })
-      )
+//       const urlsRef = await firestore
+//         .collection('urls')
+//         .where('collectionId', '==', id).get().then(snapshot => snapshot.forEach((doc, i) => ))
 
-      cache[id] = collection
+//       await Promise.all(
+//         urlIds.map(async (id, i) => {
+//           const urlRef = firestore.collection('urls').doc(id)
+//           const doc = await urlRef.get()
+//           collection.us[i] = { id, ...doc.data() }
+//         })
+//       )
 
-      return collection
-    }
-    throw new Error()
-  } catch {
-    throw new Error()
-  }
-}
+//       cache[id] = collection
+
+//       return collection
+//     }
+//     throw new Error()
+//   } catch {
+//     throw new Error()
+//   }
+// }
 
 export async function fetchLoveCount (id) {
   try {
