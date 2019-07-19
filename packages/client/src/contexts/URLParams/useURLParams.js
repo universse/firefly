@@ -19,31 +19,31 @@ function constructHref (searchInput, sort, tags) {
   return `${window.location.pathname}${queryString ? `?${queryString}` : ''}`
 }
 
-function init (search) {
+function initialize (search) {
   const params = new URLSearchParams(search)
   const tags = params.get(URLParamKeys.TAGS)
 
   return {
+    init: true,
     searchInput: params.get(URLParamKeys.SEARCH_INPUT) || '',
     sort: params.get(URLParamKeys.SORT) || '',
-    tags: tags ? tags.split(',') : [],
-    action: 'init'
+    tags: tags ? tags.split(',') : []
   }
 }
 
 function reducer (state, payload) {
-  return payload.action ? payload : { ...state, ...payload, action: undefined }
+  return payload.init ? payload : { ...state, ...payload, init: false }
 }
 
-export default function useURLParams ({ pathname, search }) {
-  const [query, queryDispatch] = useReducer(reducer, search, init)
+export default function useURLParams ({ pathname, search, state }) {
+  const [query, queryDispatch] = useReducer(reducer, search, initialize)
 
   useEffect(() => {
-    queryDispatch(init(''))
-  }, [pathname])
+    if (!state || !state.programmatic) queryDispatch(initialize(search))
+  }, [pathname, search, state])
 
   useEffect(() => {
-    const resetQuery = () => queryDispatch(init(window.location.search))
+    const resetQuery = () => queryDispatch(initialize(window.location.search))
     window.addEventListener('popstate', resetQuery)
 
     return () => {
@@ -52,9 +52,12 @@ export default function useURLParams ({ pathname, search }) {
   }, [])
 
   useEffect(() => {
-    const { searchInput, sort, tags, action } = query
+    const { init, searchInput, sort, tags } = query
 
-    !action && navigate(constructHref(searchInput, sort, tags))
+    !init &&
+      navigate(constructHref(searchInput, sort, tags), {
+        state: { programmatic: true }
+      })
   }, [query])
 
   return useMemo(
