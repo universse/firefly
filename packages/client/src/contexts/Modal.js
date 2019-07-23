@@ -16,7 +16,9 @@ export default function Modal ({ children }) {
 
     const lockWheel = e => e.preventDefault()
     const lockButtonScroll = e => {
-      !['INPUT', 'TEXTAREA'].includes(e.target.tagName) && e.preventDefault()
+      if (e.keyCode > 31 && e.keyCode < 41) {
+        !['INPUT', 'TEXTAREA'].includes(e.target.tagName) && e.preventDefault()
+      }
     }
 
     window.addEventListener('keydown', lockButtonScroll)

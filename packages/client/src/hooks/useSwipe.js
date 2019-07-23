@@ -28,7 +28,6 @@ export default function useSwipe (direction, cb) {
           if (deltaXY.current.x < HORIZONTAL_THRESHOLD) cb()
           break
         case Directions.RIGHT:
-          console.log(deltaXY.current.x)
           if (deltaXY.current.x > HORIZONTAL_THRESHOLD) cb()
           break
         case Directions.UP:

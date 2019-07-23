@@ -19,6 +19,10 @@ export function ActionButton ({ onActionClick, onClick, ...props }) {
         &:hover {
           background-color: var(--white100);
         }
+
+        &:active {
+          background-color: var(--white300);
+        }
       `}
       onClick={e => {
         onActionClick()
