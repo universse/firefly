@@ -26,7 +26,6 @@ import { CollectionViewType } from 'constants/Types'
 import { logClickAction } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { BackButton } from 'components/common'
-// import parseCollectionData from 'utils/parseCollectionData'
 // import { getParamFromPathname } from 'utils/pathnameUtils'
 // import { createCollectionPath } from '../../gatsby/utils'
 
