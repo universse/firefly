@@ -52,7 +52,7 @@ export default function SearchPage () {
             }
           `}
         >
-          <SearchComboBox />
+          <SearchComboBox large />
         </div>
       </main>
     </>

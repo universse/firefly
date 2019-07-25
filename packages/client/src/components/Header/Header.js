@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import SearchComboBox from './SearchComboBox'
 import { HeaderTag, HeaderWrapper } from './styled'
 import Navigation from 'components/Navigation'
+import SearchComboBox from 'components/SearchComboBox'
 import { Logo } from 'assets/icons'
 
 export default function Header ({ isIndexPage }) {

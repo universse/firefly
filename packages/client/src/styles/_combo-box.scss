@@ -1,16 +1,5 @@
 .ComboBox {
   ul {
-    &.Menu {
-      background-color: var(--gray200);
-      border-bottom-left-radius: 1.25rem;
-      border-bottom-right-radius: 1.25rem;
-      overflow: auto;
-      padding-top: 1.25rem;
-      position: absolute;
-      top: 1.25rem;
-      width: 100%;
-    }
-
     a,
     button,
     span {
@@ -31,6 +20,17 @@
   &.small {
     position: relative;
     width: 27rem;
+
+    ul {
+      background-color: var(--gray200);
+      border-bottom-left-radius: 1.25rem;
+      border-bottom-right-radius: 1.25rem;
+      overflow: auto;
+      padding-top: 1.25rem;
+      position: absolute;
+      top: 1.25rem;
+      width: 100%;
+    }
   }
 
   &.large {
