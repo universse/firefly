@@ -1,5 +1,6 @@
+input[type="email"],
 input[type="text"],
-input[type="email"] {
+input[type="url"] {
   &:focus {
     box-shadow: var(--input-focused);
   }
