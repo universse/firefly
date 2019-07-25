@@ -1,11 +1,12 @@
 $accent500: #006dfc;
+$danger: #da4453;
 
 :root {
   --accent500: #{$accent500};
   --black100: rgba(0, 0, 0, 0.04);
   --black200: rgba(0, 0, 0, 0.08);
   --black300: rgba(0, 0, 0, 0.12); // border
-  --black400: rgba(0, 0, 0, 0.32); // border
+  --black400: rgba(0, 0, 0, 0.32);
   --black500: rgba(0, 0, 0, 0.5);
   --black600: rgba(0, 0, 0, 0.6);
   --black800: rgba(0, 0, 0, 0.7);
@@ -14,7 +15,7 @@ $accent500: #006dfc;
   --brand300: #f67090;
   --brand500: #e4234f;
   --brand900: #c70e3a;
-  --danger: #da4453;
+  --danger: #{$danger};
   --gray100: #fafbfc;
   --gray200: #f0f3f6;
   --gray400: #cdd0d3;
@@ -25,7 +26,7 @@ $accent500: #006dfc;
   --white300: rgba(255, 255, 255, 0.35);
   --white900: rgba(255, 255, 255, 0.9);
   --input-focused: 0 0 0 4px #{rgba($accent500, 0.6)};
-  --input-invalid: 0 0 0 4px rgba(218, 68, 83, 0.9);
+  --input-invalid: 0 0 0 4px #{rgba($danger, 0.8)};
   --gradient-left: linear-gradient(
     to left,
     rgba(255, 255, 255, 0) 0%,
