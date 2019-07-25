@@ -26,16 +26,16 @@ export default function useSearch () {
 
   useEffect(() => {
     if (searchInput) {
-      let isFresh = true
+      let isPending = true
       setIsTyping(false)
       setIsLoading(true)
 
       searchWorker
         .search(searchInput)
-        .then(({ collectionIds }) => isFresh && setResults(collectionIds))
+        .then(({ collectionIds }) => isPending && setResults(collectionIds))
         .finally(() => setIsLoading(false))
 
-      return () => (isFresh = false)
+      return () => (isPending = false)
     }
   }, [searchInput])
 

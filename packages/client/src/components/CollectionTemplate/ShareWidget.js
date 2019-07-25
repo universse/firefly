@@ -19,14 +19,14 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
   const [loveCount, setLoveCount] = useState()
 
   useEffect(() => {
-    let isFresh = true
+    let isPending = true
 
     firebaseWorker
       .fetchLoveCount(id)
-      .then(loveCount => isFresh && setLoveCount(loveCount))
-      .catch(() => isFresh && setLoveCount(0))
+      .then(loveCount => isPending && setLoveCount(loveCount))
+      .catch(() => isPending && setLoveCount(0))
 
-    return () => (isFresh = false)
+    return () => (isPending = false)
   }, [id])
 
   return (

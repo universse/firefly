@@ -42,7 +42,7 @@ export default function CategoryTemplate ({ data }) {
   // }, [location, setDebouncedSearchInput])
 
   useEffect(() => {
-    let isFresh = true
+    let isPending = true
 
     searchWorker
       .search(
@@ -53,9 +53,9 @@ export default function CategoryTemplate ({ data }) {
           ? JSON.stringify(data.allCollectionIds.nodes)
           : null
       )
-      .then(state => isFresh && setState(state))
+      .then(state => isPending && setState(state))
 
-    return () => (isFresh = false)
+    return () => (isPending = false)
   }, [data, searchInput, sort, tags])
 
   return (
