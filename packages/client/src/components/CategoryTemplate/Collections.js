@@ -3,8 +3,7 @@ import { FixedSizeList as List } from 'react-window'
 import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
 
 import Item from './Item'
-import { collectionHeightInRem } from 'components/Collection'
-import { baseFontSize } from 'constants/Styles'
+import { baseFontSize, collectionHeightInRem } from 'constants/Styles'
 import { CollectionIdsType } from 'constants/Types'
 
 function itemKey (index, data) {

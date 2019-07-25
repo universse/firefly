@@ -1,1 +1,1 @@
-export { default, collectionHeightInRem } from './Collection'
+export { default } from './Collection'

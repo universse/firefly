@@ -1,15 +1,12 @@
 export const baseFontSize = 16
+export const collectionHeightInRem = 9
+export const mobileProgressBarHeightInRem = 2.25
 
 export const headerHeightInRem = 4
-
 export const mobileHeaderHeightInRem = 3.5
-
 export const bottomBarHeightInRem = 3.5
-
 export const mobileBarsHeightInRem =
   mobileHeaderHeightInRem + bottomBarHeightInRem
-
-export const mobileProgressBarHeightInRem = 2.25
 
 const mobileWidth = '37.5rem'
 const desktopWidth = '58rem'
