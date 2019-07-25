@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, useLayoutEffect } from 'react'
 import { css } from '@emotion/core'
 
-import { Collection } from 'components/Collections'
+import Collection from 'components/Collection'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { AuthenticationContext } from 'contexts/Authentication'

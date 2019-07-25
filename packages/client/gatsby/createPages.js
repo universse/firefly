@@ -1,7 +1,8 @@
 const fs = require('fs')
 const { resolve } = require('path')
+const { Categories } = require('common')
 
-const { createCollectionPath } = require('./utils')
+const { createCategoryPath, createCollectionPath } = require('./utils')
 
 module.exports = async ({
   graphql,
@@ -13,6 +14,20 @@ module.exports = async ({
       'https://emailoctopus.com/api/1.5/lists/28c2f781-9e6b-11e9-9307-06b4694bee2a/contacts',
     statusCode: 200
   })
+
+  createPage({
+    path: '/',
+    component: resolve('./src/templates/category.js'),
+    context: { category: 'all', isIndexPage: true }
+  })
+
+  Categories.forEach(category =>
+    createPage({
+      path: createCategoryPath(category),
+      component: resolve('./src/templates/category.js'),
+      context: { category, isIndexPage: true }
+    })
+  )
 
   const db = await graphql(
     `

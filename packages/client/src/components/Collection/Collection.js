@@ -6,13 +6,36 @@ import { Link } from 'gatsby'
 
 import Tags from './Tags'
 import { Heart, Level, Resources, Save } from 'assets/icons'
-import { CollectionWrapper } from './styled'
 import { ActionBar, Category, Difficulty } from 'components/common'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { screens } from 'constants/Styles'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath, createCollectionPath } from '../../../gatsby/utils'
+
+export const collectionHeightInRem = 9
+
+function CollectionWrapper (props) {
+  return (
+    <div
+      css={css`
+        border-bottom: 1px solid var(--black300);
+        display: flex;
+        flex-direction: column;
+        height: ${collectionHeightInRem}rem;
+        justify-content: space-between;
+        margin: 0 1rem;
+        padding: 0.5rem 0 0.25rem;
+
+        ${screens.desktop} {
+          margin: 0 2rem;
+          padding: 0.75rem 0 0.25rem;
+        }
+      `}
+      {...props}
+    />
+  )
+}
 
 function Collection ({ id, isSaved }) {
   const normalizedCollections = useContext(NormalizedCollectionsContext)

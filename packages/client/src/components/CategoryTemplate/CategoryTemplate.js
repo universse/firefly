@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 
-import Collections from 'components/Collections'
+import Collections from './Collections'
 import MobileFilters from 'components/MobileFilters'
 import { MobileSortByDifficulty } from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
@@ -14,7 +13,7 @@ import { CollectionIdsType } from 'constants/Types'
 // import URLParamKeys from 'constants/URLParamKeys'
 import searchWorker from 'utils/searchWorker'
 
-export default function IndexPage ({ data }) {
+export default function CategoryTemplate ({ data }) {
   const { isDesktop } = useContext(MediaContext)
 
   const {
@@ -81,24 +80,8 @@ export default function IndexPage ({ data }) {
   )
 }
 
-IndexPage.propTypes = {
+CategoryTemplate.propTypes = {
   data: PropTypes.exact({
     allCollectionIds: PropTypes.exact({ nodes: CollectionIdsType })
   }).isRequired
 }
-
-export const collections = graphql`
-  fragment collections on collectionsConnection {
-    nodes {
-      id
-    }
-  }
-`
-
-export const query = graphql`
-  query($category: String) {
-    allCollectionIds: allCollections(filter: { category: { eq: $category } }) {
-      ...collections
-    }
-  }
-`

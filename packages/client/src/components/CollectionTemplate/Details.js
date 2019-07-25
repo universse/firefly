@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import { DifficultyLevels } from 'common'
 
-import Tags from 'components/Collections/Tags'
+import Tags from 'components/Collection/Tags'
 import { ProgressBar } from 'components/common'
 import { Category, Level, Tag } from 'assets/icons'
 import { TagsType } from 'constants/Types'

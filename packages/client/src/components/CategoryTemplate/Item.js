@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-import Collection from './Collection'
+import Collection from 'components/Collection'
 import { UserDataContext } from 'contexts/UserData'
 import { CollectionIdsType } from 'constants/Types'
 
