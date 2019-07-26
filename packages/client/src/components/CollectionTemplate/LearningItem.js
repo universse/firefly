@@ -13,14 +13,27 @@ import fallback from 'assets/images/fallback.png'
 import { logClickLearningResource } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
-const youtubeUrls = ['youtube.com', 'youtu.be']
+const videoHosts = ['vimeo.com', 'youtube.com', 'youtu.be']
 
-function getVideoSrc (url) {
+function getVideoProps (url) {
   const videoId = url.includes('youtube.com')
     ? new URL(url).searchParams.get('v')
     : new URL(url).pathname.slice(1)
 
-  return `https://www.youtube-nocookie.com/embed/${videoId}`
+  const isVimeo = url.includes('vimeo.com')
+
+  const baseUrl = isVimeo
+    ? 'https://player.vimeo.com/video/'
+    : 'https://www.youtube-nocookie.com/embed/'
+
+  const allow = isVimeo
+    ? 'autoplay; fullscreen'
+    : 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+
+  return {
+    allow,
+    src: `${baseUrl}${videoId}`
+  }
 }
 
 function LearningItem ({
@@ -39,22 +52,17 @@ function LearningItem ({
   const onActionClick = useContext(UserDataDispatchContext)
   // const LinkIcon = LinkIcons[type.toUpperCase()]
 
-  const isYoutubeVideo = youtubeUrls.reduce(
-    (bool, curr) => url.includes(curr) || bool,
+  const isVideo = videoHosts.reduce(
+    (bool, host) => url.includes(host) || bool,
     false
   )
 
   return (
     <>
-      {isYoutubeVideo ? (
+      {isVideo ? (
         <>
           <div className='LearningVideo'>
-            <iframe
-              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-              allowFullScreen
-              src={getVideoSrc(url)}
-              title={title}
-            />
+            <iframe allowFullScreen title={title} {...getVideoProps(url)} />
           </div>
           <div
             css={css`
