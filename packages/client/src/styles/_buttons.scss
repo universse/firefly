@@ -9,8 +9,18 @@
   height: 2rem;
   padding: 0 1rem;
 
-  &:hover {
+  &:not([disabled]):hover {
     background-color: var(--brand500);
     color: #fff;
+  }
+}
+
+.TextButton {
+  color: var(--accent500);
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  @media #{$desktop} {
+    font-size: 0.9375rem;
   }
 }

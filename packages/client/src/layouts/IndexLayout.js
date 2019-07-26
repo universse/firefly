@@ -68,11 +68,7 @@ function TopBar ({ categoryFilter, searchBar }) {
         </div>
         <button
           aria-label={AriaLabels.SORT_AND_FILTER_COLLECTIONS}
-          css={css`
-            color: var(--accent500);
-            font-size: 0.875rem;
-            font-weight: 600;
-          `}
+          className='TextButton'
           onClick={() => setActiveModalType(ModalTypes.MOBILE_FILTER)}
           type='button'
         >
