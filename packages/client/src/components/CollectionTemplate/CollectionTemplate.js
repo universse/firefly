@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import ShareWidget from './ShareWidget'
-import View from './View'
+import CollectionView from './CollectionView'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
@@ -180,7 +180,11 @@ export default function CollectionTemplate ({
         >
           {userData && (
             <>
-              <View check={check} collection={collections} isSaved={isSaved} />
+              <CollectionView
+                check={check}
+                collection={collections}
+                isSaved={isSaved}
+              />
               {isDesktop && (
                 <aside
                   css={css`

@@ -18,7 +18,7 @@ import { CollectionViewType } from 'constants/Types'
 
 // TODO:
 // suggestion component
-export default function View ({
+export default function CollectionView ({
   check,
   collection: { id, category, level, name, tags, urls },
   isSaved
@@ -48,7 +48,6 @@ export default function View ({
       {isDesktop === false && (
         <DetailsModal
           category={category}
-          id={id}
           level={level}
           name={name}
           tags={tags}
@@ -79,7 +78,6 @@ export default function View ({
         >
           <Details
             category={category}
-            id={id}
             level={level}
             percentage={percentage}
             tags={tags}
@@ -150,7 +148,7 @@ export default function View ({
   )
 }
 
-View.propTypes = {
+CollectionView.propTypes = {
   check: PropTypes.objectOf(PropTypes.bool).isRequired,
   collection: CollectionViewType.isRequired,
   isSaved: PropTypes.bool.isRequired
