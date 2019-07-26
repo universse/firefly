@@ -6,17 +6,21 @@ import { Check, ExternalLink } from 'assets/icons'
 import { OutboundLink } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
-import LinkIcons from 'constants/LinkIcons'
+// import LinkIcons from 'constants/LinkIcons'
 import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
 import fallback from 'assets/images/fallback.png'
 import { logClickLearningResource } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 
+const youtubeUrls = ['youtube.com', 'youtu.be']
+
 function getVideoSrc (url) {
-  return `https://www.youtube-nocookie.com/embed/${new URL(
-    url
-  ).searchParams.get('v')}`
+  const videoId = url.includes('youtube.com')
+    ? new URL(url).searchParams.get('v')
+    : new URL(url).pathname.slice(1)
+
+  return `https://www.youtube-nocookie.com/embed/${videoId}`
 }
 
 function LearningItem ({
@@ -33,11 +37,16 @@ function LearningItem ({
 }) {
   const { isDesktop, isMobile } = useContext(MediaContext)
   const onActionClick = useContext(UserDataDispatchContext)
-  const LinkIcon = LinkIcons[type.toUpperCase()]
+  // const LinkIcon = LinkIcons[type.toUpperCase()]
+
+  const isYoutubeVideo = youtubeUrls.reduce(
+    (bool, curr) => url.includes(curr) || bool,
+    false
+  )
 
   return (
     <>
-      {type === 'video' ? (
+      {isYoutubeVideo ? (
         <>
           <div className='LearningVideo'>
             <iframe
@@ -65,7 +74,9 @@ function LearningItem ({
           aria-label={title}
           className='LearningItem'
           href={url}
-          onClick={() => logClickLearningResource({ id, collectionId })}
+          onClick={() =>
+            collectionId && logClickLearningResource({ id, collectionId })
+          }
           rel='noopener noreferrer'
           target='_blank'
         >
@@ -113,17 +124,22 @@ function LearningItem ({
           </div>
         </OutboundLink>
       )}
-      <div className='CheckWrapper'>
-        <button
-          aria-label={createActionLabel(isChecked ? 'check' : 'uncheck', title)}
-          className='IconButton'
-          onClick={onActionClick}
-          type='button'
-          value={id}
-        >
-          <Check filled={isChecked} medium={isMobile} />
-        </button>
-      </div>
+      {typeof isChecked === 'boolean' && (
+        <div className='CheckWrapper'>
+          <button
+            aria-label={createActionLabel(
+              isChecked ? 'check' : 'uncheck',
+              title
+            )}
+            className='IconButton'
+            onClick={onActionClick}
+            type='button'
+            value={id}
+          >
+            <Check filled={isChecked} medium={isMobile} />
+          </button>
+        </div>
+      )}
     </>
   )
 }
@@ -132,6 +148,6 @@ export default memo(LearningItem)
 
 LearningItem.propTypes = {
   ...UrlType,
-  collectionId: PropTypes.string.isRequired,
-  isChecked: PropTypes.bool.isRequired
+  collectionId: PropTypes.string,
+  isChecked: PropTypes.bool
 }
