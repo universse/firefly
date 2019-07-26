@@ -30,11 +30,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
           <span>{name}</span>
         </div>
       )}
-      <div
-        css={css`
-          margin-bottom: 1.25rem;
-        `}
-      >
+      <div>
         <div
           css={css`
             margin-bottom: 0.25rem;
@@ -48,7 +44,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
       </div>
       <div
         css={css`
-          margin-bottom: 1rem;
+          margin-top: 1.25rem;
         `}
       >
         <div
@@ -62,7 +58,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
       </div>
       <div
         css={css`
-          margin-bottom: 1.25rem;
+          margin-top: 1rem;
         `}
       >
         <div
@@ -87,7 +83,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
       {!isNaN(percentage) && (
         <div
           css={css`
-            margin-bottom: 0.5rem;
+            margin: 1.25rem 0 0.5rem;
           `}
         >
           <div
