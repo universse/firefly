@@ -25,8 +25,10 @@ export default function SearchBar ({
       <input
         aria-label={AriaLabels.SEARCH_BAR_LABEL}
         autoComplete='off'
+        className={large ? 'TextInput large' : 'TextInput'}
+        name='search'
         placeholder={AriaLabels.SEARCH_BAR_LABEL}
-        type='text'
+        type='search'
         value={value}
         {...props}
       />

@@ -13,11 +13,6 @@
   }
 
   input {
-    background-color: var(--gray200);
-    border-radius: 1.25rem;
-    box-shadow: none;
-    font-size: 0.9375rem;
-    height: 2.5rem;
     padding-left: 3rem;
     width: 100%;
   }
@@ -31,12 +26,6 @@
   &.large {
     @media #{$nonMobile} {
       #search-icon {
-        height: 3rem;
-      }
-
-      input {
-        border-radius: 1.5rem;
-        font-size: 1rem;
         height: 3rem;
       }
 

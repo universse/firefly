@@ -91,6 +91,7 @@ export default function SignUpForm () {
             <input
               aria-label='Your Email Address'
               autoComplete='off'
+              className='TextInput'
               name='email'
               onChange={e => {
                 setEmail(e.target.value)

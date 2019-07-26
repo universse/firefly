@@ -22,6 +22,7 @@
 @import "search-bar";
 @import "share-widget";
 @import "terms_privacy";
+@import "text-input";
 
 .base {
   margin: 0 auto;
@@ -32,7 +33,7 @@
 
 .fullscreen {
   align-items: center;
-  background-color: var(--white900);
+  background-color: var(--white800);
   bottom: 0;
   display: flex;
   flex-direction: column;

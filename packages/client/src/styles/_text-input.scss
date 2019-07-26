@@ -1,0 +1,25 @@
+.TextInput {
+  background-color: var(--gray200);
+  border-radius: 1.25rem;
+  color: var(--black900);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  height: 2.5rem;
+
+  &::placeholder {
+    color: var(--black600);
+    opacity: 1;
+  }
+
+  &:invalid {
+    box-shadow: var(--input-invalid);
+  }
+
+  &.large {
+    @media #{$nonMobile} {
+      border-radius: 1.5rem;
+      font-size: 1rem;
+      height: 3rem;
+    }
+  }
+}

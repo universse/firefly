@@ -1,18 +1,4 @@
 ::selection {
   background-color: var(--accent500);
-  color: #fff;
-}
-
-input {
-  color: var(--black900);
-  font-weight: 500;
-
-  &::placeholder {
-    color: var(--black600);
-    opacity: 1;
-  }
-
-  &:invalid {
-    box-shadow: var(--input-invalid);
-  }
+  color: var(--white900);
 }
