@@ -18,7 +18,7 @@ export const query = graphql`
         # image
         # publisher
         title
-        truncatedAt
+        cutOff
         type
         url
       }

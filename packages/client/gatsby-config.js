@@ -65,7 +65,9 @@ module.exports = {
                 description.length === truncate(description)
                   ? description
                   : `${description.slice(0, truncate(description))}...`,
-              truncatedAt:
+              // image,
+              // publisher,
+              cutOff:
                 description.length === truncate(description, 60)
                   ? 0
                   : truncate(description, 60),

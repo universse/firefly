@@ -27,7 +27,7 @@ function LearningItem ({
   isChecked,
   publisher,
   title,
-  truncatedAt,
+  cutOff,
   type,
   url
 }) {
@@ -103,8 +103,8 @@ function LearningItem ({
                 `}
               >
                 <p>
-                  {isMobile && truncatedAt
-                    ? description.slice(0, truncatedAt) + '...'
+                  {isMobile && cutOff
+                    ? description.slice(0, cutOff) + '...'
                     : description}
                 </p>
               </div>

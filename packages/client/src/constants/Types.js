@@ -16,7 +16,7 @@ export const UrlType = PropTypes.exact({
   // image: PropTypes.string.isRequired,
   // publisher: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  truncatedAt: PropTypes.number.isRequired,
+  cutOff: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 }).isRequired
