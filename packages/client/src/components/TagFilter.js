@@ -83,20 +83,14 @@ export default function TagFilter ({ aggregatedTags }) {
         >
           <button
             aria-label='Clear All Filters'
-            css={css`
-              color: var(--brand500);
-              font-size: 0.875rem;
-              font-weight: 600;
-              line-height: 1.5rem;
-
-              &:hover {
-                text-decoration: underline;
-              }
-            `}
+            className='TextButton'
             onClick={() => queryDispatch({ tags: [] })}
+            style={{
+              color: 'var(--brand500)'
+            }}
             type='button'
           >
-            Clear All
+            clear all
           </button>
         </div>
       )}

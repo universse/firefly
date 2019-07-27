@@ -19,6 +19,12 @@
   color: var(--accent500);
   font-size: 0.875rem;
   font-weight: 600;
+  line-height: 1.5rem;
+  text-transform: capitalize;
+
+  &:not([disabled]):hover {
+    text-decoration: underline;
+  }
 
   @media #{$desktop} {
     font-size: 0.9375rem;
