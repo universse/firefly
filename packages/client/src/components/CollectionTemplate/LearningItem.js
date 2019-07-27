@@ -74,7 +74,7 @@ function LearningItem ({
               }
             `}
           >
-            <h2>{title}</h2>
+            <h2 className='Title'>{title}</h2>
           </div>
         </>
       ) : (
@@ -94,7 +94,10 @@ function LearningItem ({
               e.target.onerror = null
               e.target.src = `${fallback}`
             }}
-            src='https://res.cloudinary.com/aplu/image/upload/c_scale,q_40,w_500/v1557091665/Curated/uxvrlogo.jpg'
+            src={
+              image ||
+              'https://res.cloudinary.com/aplu/image/upload/c_scale,q_40,w_500/v1557091665/Curated/uxvrlogo.jpg'
+            }
           />
           <div className='Meta'>
             <div>
@@ -105,7 +108,7 @@ function LearningItem ({
                   }
                 `}
               >
-                <h2>
+                <h2 className='Title'>
                   {title}
                   {isDesktop && (
                     <div aria-hidden className='Link'>
