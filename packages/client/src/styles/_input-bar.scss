@@ -1,8 +1,17 @@
-.SearchBar {
+.TextInput {
+  background-color: var(--gray200);
+  border-radius: 1.25rem;
+  color: var(--black900);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  height: 2.5rem;
+}
+
+.InputBar {
   position: relative;
   z-index: 1;
 
-  #search-icon {
+  .Icon {
     align-items: center;
     color: var(--gray600);
     display: flex;
@@ -12,12 +21,12 @@
     z-index: 2;
   }
 
-  input {
+  .TextInput {
     padding-left: 3rem;
     width: 100%;
   }
 
-  #clear {
+  .Clear {
     position: absolute;
     right: 0.25rem;
     top: -0.25rem;
@@ -25,11 +34,17 @@
 
   &.large {
     @media #{$nonMobile} {
-      #search-icon {
+      .Icon {
         height: 3rem;
       }
 
-      #clear {
+      .TextInput {
+        border-radius: 1.5rem;
+        font-size: 1rem;
+        height: 3rem;
+      }
+
+      .Clear {
         right: 0.5rem;
         top: 0;
       }

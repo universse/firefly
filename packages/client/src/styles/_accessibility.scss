@@ -1,7 +1,15 @@
 input[type="email"],
-input[type="search"],
 input[type="text"],
 input[type="url"] {
+  &::placeholder {
+    color: var(--black600);
+    opacity: 1;
+  }
+
+  &:invalid {
+    box-shadow: var(--input-invalid);
+  }
+
   &:focus {
     box-shadow: var(--input-focused);
   }

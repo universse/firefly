@@ -13,27 +13,27 @@ export default function SearchBar ({
   ...props
 }) {
   return (
-    <div className={large ? 'SearchBar large' : 'SearchBar'}>
+    <div className={large ? 'InputBar large' : 'InputBar'}>
       {labelProps && (
         <label className='visually-hidden' {...labelProps}>
           {AriaLabels.SEARCH_BAR_LABEL}
         </label>
       )}
-      <div id='search-icon'>
+      <div className='Icon'>
         <Search medium />
       </div>
       <input
         aria-label={AriaLabels.SEARCH_BAR_LABEL}
         autoComplete='off'
-        className={large ? 'TextInput large' : 'TextInput'}
+        className='TextInput'
         name='search'
         placeholder={AriaLabels.SEARCH_BAR_LABEL}
-        type='search'
+        type='text'
         value={value}
         {...props}
       />
       {value && !isLoading && (
-        <div id='clear'>
+        <div className='Clear'>
           <button
             aria-label={AriaLabels.CLEAR_SEARCH_INPUT}
             className='IconButton'

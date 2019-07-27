@@ -14,15 +14,14 @@
 @import "details";
 @import "dropdown-menu";
 @import "footer";
+@import "input-bar";
 @import "learning-list";
 @import "list-box";
 @import "icons";
 @import "modal";
 @import "navigation";
-@import "search-bar";
 @import "share-widget";
 @import "terms_privacy";
-@import "text-input";
 
 .base {
   margin: 0 auto;
@@ -42,6 +41,7 @@
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 10;
 }
 
 #hero {
