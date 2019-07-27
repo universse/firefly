@@ -1,6 +1,6 @@
 const animate = require('./src/animate')
 const toTitleCase = require('./src/toTitleCase')
-const truncate = require('./src/truncate')
+const { truncate, getTruncatedString } = require('./src/truncate')
 
 module.exports = {
   Categories: [
@@ -18,5 +18,6 @@ module.exports = {
   NetlifyFunction: '/.netlify/functions/',
   animate,
   toTitleCase,
-  truncate
+  truncate,
+  getTruncatedString
 }

@@ -1,5 +1,5 @@
 function truncate (str, length = 120) {
-  if (str.length <= length) return str.length
+  if (str.length <= length) return 0
   let final
   if (str.slice(0, length).endsWith(' ')) final = str.slice(0, length - 1)
   if (str.slice(0, length + 1).endsWith(' ')) final = str.slice(0, length)
@@ -10,4 +10,10 @@ function truncate (str, length = 120) {
   return final.length
 }
 
-module.exports = truncate
+function getTruncatedString (str, length = 120) {
+  if (typeof str !== 'string') return ''
+  const cutOff = truncate(str, length)
+  return cutOff ? `${str.slice(0, cutOff)}...` : str
+}
+
+module.exports = { truncate, getTruncatedString }

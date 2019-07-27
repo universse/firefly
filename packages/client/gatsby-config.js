@@ -1,6 +1,12 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const { Categories, ItemTypes, NetlifyFunction, truncate } = require('common')
+const {
+  Categories,
+  ItemTypes,
+  NetlifyFunction,
+  truncate,
+  getTruncatedString
+} = require('common')
 
 require('dotenv').config({
   path: resolve(__dirname, '../../.env')
@@ -61,16 +67,11 @@ module.exports = {
               type,
               url
             }) => ({
-              description:
-                description.length === truncate(description)
-                  ? description
-                  : `${description.slice(0, truncate(description))}...`,
+              // description
+              description: getTruncatedString(description),
               // image,
               // publisher,
-              cutOff:
-                description.length === truncate(description, 60)
-                  ? 0
-                  : truncate(description, 60),
+              cutOff: truncate(description, 60),
               title,
               type: ItemTypes[type],
               url
