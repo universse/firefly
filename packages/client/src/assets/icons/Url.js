@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export function Url ({ small = true }) {
+export function Url ({ medium = false }) {
   return (
     <svg
       aria-label='url'
-      className={small ? 'feather feather--small' : 'feather'}
+      className={medium ? 'feather feather--medium' : 'feather'}
       role='img'
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
@@ -18,5 +18,5 @@ export function Url ({ small = true }) {
 }
 
 Url.propTypes = {
-  small: PropTypes.bool
+  medium: PropTypes.bool
 }

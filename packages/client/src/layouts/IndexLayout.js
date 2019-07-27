@@ -163,7 +163,6 @@ export default function IndexLayout ({ category, children, pathname }) {
                     css={css`
                       flex: 1 0 auto;
                       margin-right: 5rem;
-                      position: relative;
                     `}
                   >
                     <SearchBar {...searchBarProps} />
