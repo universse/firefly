@@ -13,6 +13,7 @@
     "metascraper-image": "^5.6.3",
     "metascraper-publisher": "^5.6.3",
     "metascraper-title": "^5.6.3",
+    "pg-promise": "^9.0.0",
     "xlsx": "^0.14.4"
   },
   "devDependencies": {},
