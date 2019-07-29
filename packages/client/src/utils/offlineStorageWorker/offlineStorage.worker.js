@@ -1,7 +1,6 @@
 import localforage from 'localforage'
 
 const StorageKeys = {
-  LATEST_ACTIVITY: 'latestActivity',
   OFFLINE_QUEUE: 'offlineQueue',
   SYNCING: 'syncing'
 }
@@ -23,6 +22,10 @@ Promise.all([
         save: {}
       })
 )
+
+export async function getItem (key) {
+  return localforage.getItem(key)
+}
 
 export async function clear () {
   localforage.clear()
@@ -52,10 +55,6 @@ export async function addToQueue () {
   )
 }
 
-export async function getQueue () {
-  return localforage.getItem(StorageKeys.OFFLINE_QUEUE)
-}
-
 export async function processQueue (changes) {
   return Promise.all([
     localforage.setItem(StorageKeys.SYNCING, changes),
@@ -77,10 +76,6 @@ export async function restoreQueue (changes) {
       save: { ...changes.save, ...newChanges.save }
     })
   })
-}
-
-export function getLatestActivity () {
-  return localforage.getItem(StorageKeys.LATEST_ACTIVITY)
 }
 
 export async function loadUserData () {

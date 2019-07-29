@@ -17,7 +17,7 @@ import UserData from 'contexts/UserData'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
 
 export default function Layout ({
-  pageContext: { category, isIndexPage },
+  pageContext: { category, isIndexPage, noSearch },
   children,
   location
 }) {
@@ -36,7 +36,7 @@ export default function Layout ({
               Skip to Main Content
             </a>
             {normalizedPathname !== '/search' && (
-              <Header isIndexPage={isIndexPage || false} />
+              <Header noSearch={isIndexPage || noSearch} />
             )}
             <LatestActivity>
               <SetSnackbar location={location}>
@@ -71,6 +71,7 @@ Layout.propTypes = {
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
     category: PropTypes.string,
-    isIndexPage: PropTypes.bool
+    isIndexPage: PropTypes.bool,
+    noSearch: PropTypes.bool
   }).isRequired
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 
 import useInterval from 'hooks/useInterval'
+import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
 import offlineStorageWorker from 'utils/offlineStorageWorker'
 
@@ -23,7 +24,7 @@ export default function useSyncOfflineData (user) {
   }, [startSyncing, stopSyncing, user])
 
   const syncOfflineQueue = useCallback(() => {
-    offlineStorageWorker.getQueue().then(changes => {
+    offlineStorageWorker.getItem(LocalStorage.OFFLINE_QUEUE).then(changes => {
       if (
         Object.keys(changes.check).length ||
         Object.keys(changes.save).length

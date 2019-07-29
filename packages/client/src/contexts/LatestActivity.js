@@ -13,7 +13,7 @@ export default function LatestActivity ({ children }) {
 
   useEffect(() => {
     offlineStorageWorker
-      .getLatestActivity()
+      .getItem(LocalStorage.LATEST_ACTIVITY)
       .then(setLatestActivity)
       .catch(() => setLatestActivity(false))
       .finally(() => setIsLoading(false))

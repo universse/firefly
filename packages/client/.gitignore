@@ -59,6 +59,7 @@ typings/
 .cache/
 public
 src/data
+src/utils/searchWorker/search.worker.js
 
 # Mac files
 .DS_Store

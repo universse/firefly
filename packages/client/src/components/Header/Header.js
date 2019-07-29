@@ -8,7 +8,7 @@ import Navigation from 'components/Navigation'
 import SearchComboBox from 'components/SearchComboBox'
 import { Logo } from 'assets/icons'
 
-export default function Header ({ isIndexPage }) {
+export default function Header ({ noSearch }) {
   return (
     <HeaderTag>
       <HeaderWrapper>
@@ -33,7 +33,7 @@ export default function Header ({ isIndexPage }) {
               <Logo />
             </Link>
           </div>
-          {!isIndexPage && <SearchComboBox maxResultCount={7} />}
+          {!noSearch && <SearchComboBox maxResultCount={7} />}
         </div>
         <Navigation />
       </HeaderWrapper>
@@ -42,5 +42,5 @@ export default function Header ({ isIndexPage }) {
 }
 
 Header.propTypes = {
-  isIndexPage: PropTypes.bool.isRequired
+  noSearch: PropTypes.bool.isRequired
 }

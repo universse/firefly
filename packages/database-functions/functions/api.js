@@ -26,7 +26,7 @@ const authenticate = async (req, res, next) => {
     req.user = decodedIdToken
     next()
     return
-  } catch (e) {
+  } catch {
     res.status(403).send('Unauthorized')
   }
 }
