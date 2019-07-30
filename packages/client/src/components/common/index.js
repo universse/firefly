@@ -1,4 +1,4 @@
-import React, { Children, Fragment } from 'react'
+import React, { Children, Fragment, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { Link, navigate } from 'gatsby'
 import { css } from '@emotion/core'
@@ -191,4 +191,61 @@ export function ProgressBar ({ percentage }) {
 
 ProgressBar.propTypes = {
   percentage: PropTypes.number.isRequired
+}
+
+function getPosition (e) {
+  if ('touches' in e) {
+    const { pageX, pageY } = e.touches[0]
+    return { x: pageX, y: pageY }
+  }
+}
+
+const HORIZONTAL_THRESHOLD = 30
+const VERTICAL_THRESHOLD = 300
+
+export function Swippable ({ cb, direction, ...props }) {
+  const initialXY = useRef()
+  const deltaXY = useRef()
+
+  return (
+    <div
+      {...props}
+      onTouchEnd={() => {
+        const { x, y } = deltaXY.current
+
+        switch (direction) {
+          case 'left':
+            if (x < HORIZONTAL_THRESHOLD) cb()
+            break
+          case 'right':
+            if (x > HORIZONTAL_THRESHOLD) cb()
+            break
+          case 'up':
+            if (y < VERTICAL_THRESHOLD) cb()
+            break
+          case 'down':
+            if (y > VERTICAL_THRESHOLD) cb()
+            break
+          default:
+            throw new Error('Unknown direction.')
+        }
+      }}
+      onTouchMove={e => {
+        const { x, y } = getPosition(e)
+        deltaXY.current = {
+          x: x - initialXY.current.x,
+          y: y - initialXY.current.y
+        }
+      }}
+      onTouchStart={e => {
+        deltaXY.current = { x: 0, y: 0 }
+        initialXY.current = getPosition(e)
+      }}
+    />
+  )
+}
+
+Swippable.propTypes = {
+  cb: PropTypes.func.isRequired,
+  direction: PropTypes.oneOf(['left', 'right', 'up', 'down']).isRequired
 }

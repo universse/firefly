@@ -2,20 +2,18 @@ import React from 'react'
 import ReactModal from 'react-modal'
 
 import Details from './Details'
+import { Swippable } from 'components/common'
 import useModal from 'hooks/useModal'
-import useSwipe, { Directions } from 'hooks/useSwipe'
 import ModalTypes from 'constants/ModalTypes'
 
 export default function DetailsModal (props) {
   const modalProps = useModal(ModalTypes.DETAILS, 'Collection Details')
 
-  const swipeHandlers = useSwipe(Directions.RIGHT, modalProps.onRequestClose)
-
   return (
     <ReactModal className='SideModal' {...modalProps}>
-      <div {...swipeHandlers}>
+      <Swippable cb={modalProps.onRequestClose} direction='right'>
         <Details {...props} />
-      </div>
+      </Swippable>
     </ReactModal>
   )
 }

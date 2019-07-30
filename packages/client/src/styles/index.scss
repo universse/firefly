@@ -11,6 +11,7 @@
 @import "animations";
 @import "collections";
 @import "combo-box";
+@import "drag-n-drop";
 @import "details";
 @import "dropdown-menu";
 @import "footer";
@@ -22,6 +23,7 @@
 @import "navigation";
 @import "share-widget";
 @import "terms_privacy";
+@import "utilities";
 
 .base {
   margin: 0 auto;
@@ -44,6 +46,6 @@
   z-index: 10;
 }
 
-#hero {
+#Hero {
   background-color: var(--gray100);
 }

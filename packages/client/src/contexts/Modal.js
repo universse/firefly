@@ -22,7 +22,7 @@ export default function Modal ({ children }) {
     }
 
     window.addEventListener('keydown', lockButtonScroll)
-    window.addEventListener('wheel', lockWheel)
+    window.addEventListener('wheel', lockWheel, { passive: false })
 
     return () => {
       window.removeEventListener('keydown', lockButtonScroll)

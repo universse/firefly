@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import { css } from '@emotion/core'
 
-import { PrimaryButton } from 'components/common'
+import { PrimaryButton, Swippable } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import useModal from 'hooks/useModal'
-import useSwipe, { Directions } from 'hooks/useSwipe'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import { screens } from 'constants/Styles'
@@ -19,18 +18,16 @@ export default function MobileFilters ({ children, collectionCount }) {
 
   const { isMobile } = useContext(MediaContext)
 
-  const swipeHandlers = useSwipe(
-    !isMobile && Directions.RIGHT,
-    modalProps.onRequestClose
-  )
-
   return (
     <ReactModal
       className={isMobile ? 'BottomModal' : 'SideModal'}
       {...!isMobile && { style: { content: { maxWidth: '30rem' } } }}
       {...modalProps}
     >
-      <div {...swipeHandlers}>
+      <Swippable
+        cb={modalProps.onRequestClose}
+        direction={isMobile ? 'down' : 'right'}
+      >
         <div
           css={css`
             bottom: 4rem;
@@ -62,7 +59,7 @@ export default function MobileFilters ({ children, collectionCount }) {
             See {collectionCount} Collections
           </PrimaryButton>
         </div>
-      </div>
+      </Swippable>
     </ReactModal>
   )
 }

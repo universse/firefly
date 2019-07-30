@@ -1,12 +1,12 @@
 .Details {
-  border: 1px solid var(--black300);
-  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.25rem 1rem;
 
-  @media #{$nonDesktop} {
-    padding: 1.25rem 1rem;
+  @media #{$desktop} {
+    border: 1px solid var(--black300);
+    border-radius: 4px;
+    padding: 1rem;
   }
 
   h4,
