@@ -21,6 +21,6 @@ module.exports = {
     animate({
       func: current => window.scrollTo(0, current),
       from: window.scrollY,
-      to: document.getElementById('hero').offsetHeight
+      to: document.getElementById('Hero').offsetHeight
     })
 }

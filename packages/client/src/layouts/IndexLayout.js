@@ -105,7 +105,7 @@ export default function IndexLayout ({ category, children, pathname }) {
   return (
     <>
       <SEO title={category === 'all' ? '' : toTitleCase(category)} />
-      <section id='hero'>
+      <section id='Hero'>
         <Hero />
       </section>
       <div

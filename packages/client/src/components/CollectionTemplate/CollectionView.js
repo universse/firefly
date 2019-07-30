@@ -68,10 +68,7 @@ export default function CollectionView ({
         <div
           css={css`
             align-self: start;
-            border: 1px solid var(--black300);
-            border-radius: 4px;
             grid-area: sidebar;
-            padding: 1rem;
             position: sticky;
             top: ${headerHeightInRem + 1}rem;
           `}

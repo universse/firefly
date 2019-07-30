@@ -41,7 +41,7 @@ export default function useActionClickHandler (
                 })
               }
             },
-            message: 'Collection removed from library.'
+            message: 'Removed collection from library.'
           })
         )
       }

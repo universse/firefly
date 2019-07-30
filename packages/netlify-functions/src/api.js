@@ -9,7 +9,7 @@ const metascraper = require('metascraper')([
   require('metascraper-title')()
 ])
 const got = require('got')
-const { NetlifyFunction, getTruncatedString } = require('common')
+const { NetlifyFunction, getTruncatedString, toTitleCase } = require('common')
 
 const basePath = process.env.DEPLOY_URL ? `${NetlifyFunction}api` : '/api'
 
@@ -24,8 +24,9 @@ router.post('/', async (req, res) => {
     const { body: html, url } = await got(href)
     const metadata = await metascraper({ html, url })
 
-    const { description } = metadata
+    const { description, title } = metadata
 
+    metadata.title = toTitleCase(title)
     metadata.description = getTruncatedString(description)
 
     res.status(200).json(metadata)

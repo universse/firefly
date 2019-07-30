@@ -36,7 +36,7 @@ export default function Layout ({
               Skip to Main Content
             </a>
             {normalizedPathname !== '/search' && (
-              <Header noSearch={isIndexPage || noSearch} />
+              <Header noSearch={!!isIndexPage || !!noSearch} />
             )}
             <LatestActivity>
               <SetSnackbar location={location}>
