@@ -1,68 +1,194 @@
-import React from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import { css } from '@emotion/core'
+import { navigate } from 'gatsby'
+import produce from 'immer'
+import { DndProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
+import DraggableItem from './DraggableItem'
+import DragLayer from './DragLayer'
 import LearningItemInput from './LearningItemInput'
-import { ExposedDropdown, IconButton } from 'components/common'
-import { OptionButton, ToggleButton, TogglerLabel } from './styled'
-import useCreateChangeHandlers from 'hooks/useCreateChangeHandlers'
-import useCreateCollection from 'hooks/useCreateCollection'
+import Details from 'components/CollectionTemplate/Details'
+import useOfflinePersistence from 'hooks/useOfflinePersistence'
+import LocalStorage from 'constants/LocalStorage'
 import DropdownOptions from 'constants/DropdownOptions'
+import { headerHeightInRem, screens } from 'constants/Styles'
+import firebaseWorker from 'utils/firebaseWorker'
+
+const initialValue = {
+  name: '',
+  category: 0,
+  level: 0,
+  // type, url, description, image, title, publisher
+  urls: [],
+  tags: [],
+  removed: null
+}
+
+function reducer (state, { type, payload }) {
+  return produce(state, draft => {
+    switch (type) {
+      case 'retrieve':
+        return payload
+
+      case 'set':
+        return { ...state, ...payload }
+
+      case 'add-tag':
+        draft.tags.push(payload.tag)
+        break
+
+      case 'remove-tag':
+        draft.tags.splice(draft.tags.findIndex(tag => tag === payload.tag))
+        break
+
+      case 'set-url':
+        const { index, ...url } = payload
+        const urls = draft.urls
+
+        if (index) {
+          urls.unshift(url)
+        } else {
+          const index = urls.findIndex(({ id }) => id === payload.id)
+          urls[index] = { ...urls[index], ...url }
+        }
+        break
+
+      case 'drop-url':
+        const { dragIndex, dropIndex } = payload
+        if (dragIndex === dropIndex) break
+
+        const dragUrl = draft.urls.splice(dragIndex, 1)[0]
+        draft.urls.splice(dropIndex, 0, dragUrl)
+        break
+
+      case 'remove-url':
+        draft.removed = draft.urls.splice(payload.index, 1)[0]
+        break
+
+      case 'undo-remove':
+        draft.urls.splice(payload.index, 0, draft.removed)
+        break
+
+      default:
+        throw new Error('Unknown action type.')
+    }
+  })
+}
 
 export default function CreateCollection () {
-  const { collection, dispatch, handleSubmit, hasError } = useCreateCollection()
+  const [collection, dispatch] = useReducer(reducer, initialValue)
+  const [hasError, setHasError] = useState(false)
+  // const [collectionId, setCollectionId] = useState(null)
 
-  const {
-    handleCategoryChange,
-    handleLearningItemChange,
-    handleLevelChange,
-    handleNameChange
-  } = useCreateChangeHandlers(dispatch)
+  // useEffect(() => {
+  //   firebaseWorker.generateId('collections').then(setCollectionId)
+  // }, [])
 
-  // const handleUrlInput = e => {
-  //   const url = e.target.value
-  //   // fetch title
-  //   fetch('')
-  // }
+  // useOfflinePersistence(
+  //   collectionId && {
+  //     [LocalStorage.DRAFT]: collection
+  //   }
+  // )
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    firebaseWorker.createCollection(collection).then(payload =>
+      payload.error
+        ? setHasError(true)
+        : navigate(`/collection/${payload.collection.id}`, {
+            state: { collection: payload.collection }
+          })
+    )
+  }
+
+  const { category, level, name, tags } = collection
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        aria-label='Collection Title'
-        autoComplete='off'
-        name='title'
-        onChange={handleNameChange}
-        placeholder='A Super Catchy Title'
-        type='text'
-        value={collection.name}
-      />
-      <ExposedDropdown
-        handleChange={handleCategoryChange}
-        id=''
-        items={DropdownOptions.CATEGORY_OPTIONS}
-        label=''
-        OptionButton={OptionButton}
-        selectedItem={collection.category}
-        ToggleButton={ToggleButton}
-        TogglerLabel={TogglerLabel}
-      />
-      <ExposedDropdown
-        handleChange={handleLevelChange}
-        id=''
-        items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
-        label=''
-        OptionButton={OptionButton}
-        selectedItem={collection.level}
-        ToggleButton={ToggleButton}
-        TogglerLabel={TogglerLabel}
-      />
-      <LearningItemInput />
+    <>
+      <div
+        css={css`
+          grid-area: title;
+
+          ${screens.mobile} {
+            margin: 0 1rem;
+          }
+        `}
+      >
+        <input
+          aria-label='Collection Title'
+          autoComplete='off'
+          css={css`
+            color: var(--black900);
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 2rem;
+            width: 100%;
+
+            ${screens.desktop} {
+              font-size: 2rem;
+              line-height: 2.5rem;
+            }
+          `}
+          name='title'
+          onChange={e =>
+            dispatch({
+              type: 'set',
+              payload: { name: e.target.value }
+            })
+          }
+          placeholder='A Super Catchy Title'
+          type='text'
+          value={name}
+        />
+      </div>
+      <div
+        css={css`
+          align-self: start;
+          grid-area: sidebar;
+          position: sticky;
+          top: ${headerHeightInRem + 1}rem;
+        `}
+      >
+        <Details category={'test'} level={level} tags={tags} />
+      </div>
       {/* tag popular tags for different category */}
       {/* url */}
-      {collection.urls.map(({ url, type, title, description }, i) => (
-        <li key={url}>
-          <LearningItemInput index={i} />
-        </li>
-      ))}
-    </form>
+      <div
+        css={css`
+          grid-area: list;
+        `}
+      >
+        <div
+          css={css`
+            position: relative;
+          `}
+        >
+          <div
+            css={css`
+              border: 1px solid var(--black300);
+              border-radius: 4px;
+              margin-bottom: 2rem;
+              padding: 1.5rem 1rem;
+            `}
+          >
+            <LearningItemInput dispatch={dispatch} index={-1} />
+          </div>
+        </div>
+        <DndProvider backend={HTML5Backend}>
+          <ul className='LearningList'>
+            {collection.urls.map((url, i) => (
+              <DraggableItem
+                key={url.id}
+                dispatch={dispatch}
+                index={i}
+                {...url}
+              />
+            ))}
+          </ul>
+          <DragLayer />
+        </DndProvider>
+      </div>
+    </>
   )
 }

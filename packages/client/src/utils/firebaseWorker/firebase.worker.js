@@ -83,19 +83,28 @@ export function signOut () {
 
 const firestore = firebase.firestore()
 
+const COLLECTIONS = 'collections'
+const URLS = 'urls'
+
+export function generateId (collection) {
+  // if (collection !== COLLECTIONS || collection !== URLS) throw new Error()
+  return firestore.collection(collection).doc().id
+}
+
 export async function createCollection (collectionData) {
   const { urls, ...collection } = collectionData
   collection.urlIds = []
 
   const batch = firestore.batch()
-  const collectionDoc = firestore.collection('collections').doc()
+  const collectionDoc = firestore.collection(COLLECTIONS).doc()
   const collectionId = collectionDoc.id
 
   urls.forEach((url, i) => {
-    const urlDoc = firestore.collection('urls').doc()
+    const id = url.id
+    const urlDoc = firestore.collection(URLS).doc(id)
     url.collectionId = collectionId
     batch.set(urlDoc, url)
-    collection.urlIds[i] = urlDoc.id
+    collection.urlIds[i] = id
   })
 
   batch.set(collectionDoc, collection)
@@ -116,7 +125,7 @@ export async function createCollection (collectionData) {
 //     return cache[id]
 //   }
 
-//   const collectionRef = firestore.collection('collections').doc(id)
+//   const collectionRef = firestore.collection(COLLECTIONS).doc(id)
 
 //   try {
 //     const collectionDoc = await collectionRef.get()
@@ -124,12 +133,12 @@ export async function createCollection (collectionData) {
 //       const collection = collectionDoc.data()
 
 //       const urlsRef = await firestore
-//         .collection('urls')
+//         .collection(URLS)
 //         .where('collectionId', '==', id).get().then(snapshot => snapshot.forEach((doc, i) => ))
 
 //       await Promise.all(
 //         urlIds.map(async (id, i) => {
-//           const urlRef = firestore.collection('urls').doc(id)
+//           const urlRef = firestore.collection(URLS).doc(id)
 //           const doc = await urlRef.get()
 //           collection.us[i] = { id, ...doc.data() }
 //         })
@@ -258,7 +267,7 @@ export async function action ({ id, action }) {
 }
 
 const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
-const id = firestore.collection('collections').doc().id
+const id = firestore.collection(COLLECTIONS).doc().id
 const session = Date.now() + ''
 let index = 0
 
