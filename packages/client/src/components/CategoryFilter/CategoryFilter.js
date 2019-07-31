@@ -33,7 +33,7 @@ export default function CategoryFilter ({ pathname }) {
       >
         <span
           css={css`
-            color: var(--gray600);
+            color: var(--black600);
             display: block;
             font-size: 0.875rem;
             font-weight: 600;
@@ -46,15 +46,24 @@ export default function CategoryFilter ({ pathname }) {
       </div>
       <Filters handleScroll={onScroll} pathname={pathname} slider={slider} />
       {isDesktop === false && (
-        <div>
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            width: 100%;
+          `}
+        >
           <ScrollButton
             handleClick={onScrollLeftClick}
-            isShown={!isMinScroll}
+            isVisible={!isMinScroll}
             side='left'
           />
           <ScrollButton
             handleClick={onScrollRightClick}
-            isShown={!isMaxScroll}
+            isVisible={!isMaxScroll}
             side='right'
           />
         </div>

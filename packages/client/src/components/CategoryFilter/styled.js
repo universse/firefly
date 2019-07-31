@@ -53,50 +53,32 @@ export function Category (props) {
 
 export const scrollButtonWidthInRem = 2.5
 
-export function ScrollButton ({ handleClick, isShown, side }) {
-  const align =
-    side === 'left'
-      ? css`
-          left: 0;
-        `
-      : css`
-          justify-content: flex-end;
-          right: 0;
-        `
-
+export function ScrollButton ({ handleClick, isVisible, side }) {
   return (
-    <div
+    <button
       css={css`
-        align-items: center;
-        display: ${isShown ? 'flex' : 'none'};
-        ${align};
-        position: absolute;
-        top: 0;
-      `}
-    >
-      <button
-        css={css`
-          background-image: ${`var(--gradient-${side})`};
-          color: var(--gray600);
-          height: 3rem;
-          width: ${scrollButtonWidthInRem}rem;
+        background-image: ${`var(--gradient-${side})`};
+        color: var(--gray600);
+        height: 3rem;
+        pointer-events: auto;
+        visibility: ${isVisible ? 'visible' : 'hidden'};
+        width: ${scrollButtonWidthInRem}rem;
 
-          &:active,
-          &:hover {
-            color: var(--black900);
-          }
-        `}
-        onClick={handleClick}
-        type='button'
-      >
-        {side === 'left' ? <ChevronLeft /> : <ChevronRight />}
-      </button>
-    </div>
+        &:active,
+        &:hover {
+          color: var(--black900);
+        }
+      `}
+      onClick={handleClick}
+      type='button'
+    >
+      {side === 'left' ? <ChevronLeft /> : <ChevronRight />}
+    </button>
   )
 }
 
 ScrollButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isShown: PropTypes.bool.isRequired,
-  side: PropTypes.oneOf(['left', 'right'])
+  isVisible: PropTypes.bool.isRequired,
+  side: PropTypes.oneOf(['left', 'right']).isRequired
 }
