@@ -1,10 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
-import { css } from '@emotion/core'
 
-import { ActionButton, Message, Surface, Wrapper } from './styled'
 import { Cross } from 'assets/icons'
-import { screens } from 'constants/Styles'
 
 function Snackbar ({
   dismissSnackbar,
@@ -14,8 +11,11 @@ function Snackbar ({
   message
 }) {
   return (
-    <Wrapper isOpen={isOpen}>
-      <Surface
+    <div
+      aria-hidden={!isOpen}
+      className={isOpen ? 'Snackbar active' : 'Snackbar'}
+    >
+      <div
         onMouseEnter={() =>
           setSnackbar(snackbar => ({ ...snackbar, timeout: null }))
         }
@@ -23,34 +23,21 @@ function Snackbar ({
           setSnackbar(snackbar => ({ ...snackbar, timeout: 2000 }))
         }
       >
-        <div
-          aria-live='polite'
-          css={css`
-            margin-right: 1rem;
-
-            ${screens.mobile} {
-              margin-right: 0;
-              padding-top: 0.5rem;
-            }
-          `}
-          role='status'
-        >
-          <Message>{message}</Message>
+        <div aria-live='polite' role='status'>
+          <span>{message}</span>
         </div>
-        <div
-          css={css`
-            align-items: center;
-            display: flex;
-
-            ${screens.mobile} {
-              align-self: flex-end;
-              margin-right: -0.5rem;
-            }
-          `}
-        >
+        <div>
           {buttonProps && (
             <div>
-              <ActionButton onActionClick={dismissSnackbar} {...buttonProps} />
+              <button
+                {...buttonProps}
+                className='ActionButton'
+                onClick={e => {
+                  dismissSnackbar()
+                  buttonProps.onClick(e)
+                }}
+                type='button'
+              />
             </div>
           )}
           <div>
@@ -64,8 +51,8 @@ function Snackbar ({
             </button>
           </div>
         </div>
-      </Surface>
-    </Wrapper>
+      </div>
+    </div>
   )
 }
 

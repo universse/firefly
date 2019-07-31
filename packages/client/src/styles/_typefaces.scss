@@ -1,0 +1,71 @@
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/Inter/Inter-Regular.woff2") format("woff2"),
+    url("fonts/Inter/Inter-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  src: url("fonts/Inter/Inter-Medium.woff2") format("woff2"),
+    url("fonts/Inter/Inter-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  src: url("fonts/Inter/Inter-SemiBold.woff2") format("woff2"),
+    url("fonts/Inter/Inter-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("fonts/Inter/Inter-Bold.woff2") format("woff2"),
+    url("fonts/Inter/Inter-Bold.woff") format("woff");
+}
+
+// @font-face {
+//   font-display: swap;
+//   font-family: "Playfair Display";
+//   font-style: normal;
+//   font-weight: 900;
+//   src: url("fonts/PlayfairDisplay/PlayfairDisplay-Black.woff2") format("woff2"),
+//     url("fonts/PlayfairDisplay/PlayfairDisplay-Black.woff") format("woff");
+//   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+//     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+//     U+FEFF, U+FFFD;
+// }
+
+@font-face {
+  font-display: swap;
+  font-family: "Spectral";
+  font-style: normal;
+  font-weight: 800;
+  src: url("fonts/Spectral/Spectral-ExtraBold.woff2") format("woff2"),
+    url("fonts/Spectral/Spectral-ExtraBold.woff") format("woff");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+// @font-face {
+//   font-display: swap;
+//   font-family: "PT Serif";
+//   font-style: normal;
+//   font-weight: 700;
+//   src: url("fonts/PTSerif/PTSerif-Bold.woff2") format("woff2"),
+//     url("fonts/PTSerif/PTSerif-Bold.woff") format("woff");
+//   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+//     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+//     U+FEFF, U+FFFD;
+// }
