@@ -11,7 +11,7 @@ const metascraper = require('metascraper')([
 const got = require('got')
 const { NetlifyFunction, getTruncatedString, toTitleCase } = require('common')
 
-const basePath = process.env.DEPLOY_URL ? `${NetlifyFunction}api` : '/api'
+const basePath = process.env.NETLIFY ? `${NetlifyFunction}api` : '/api'
 
 const app = express()
 const router = express.Router()
