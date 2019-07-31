@@ -201,7 +201,7 @@ function LearningItemInput ({
 export default memo(LearningItemInput)
 
 LearningItemInput.propTypes = {
-  ...UrlType,
+  // ...UrlType,
   dispatch: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isEditing: PropTypes.bool,

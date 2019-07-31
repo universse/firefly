@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import CreateCollection from 'components/CreateCollection'
@@ -13,9 +14,12 @@ import {
   mobileProgressBarHeightInRem,
   screens
 } from 'constants/Styles'
+import { getParamFromPathname } from 'utils/pathnameUtils'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
-export default function CreatePage () {
+export default function CuratePage ({ location: { pathname } }) {
+  const id = getParamFromPathname(pathname)
+
   return (
     <>
       <SEO title='Curate a Learning Collection' />
@@ -60,10 +64,14 @@ export default function CreatePage () {
             }
           `}
         >
-          <CreateCollection />
+          <CreateCollection id={id} />
           {/* {hasSignedIn() ? <CreateCollection /> : <SignUpReminder />} */}
         </div>
       </div>
     </>
   )
+}
+
+CuratePage.propTypes = {
+  location: PropTypes.object.isRequired
 }

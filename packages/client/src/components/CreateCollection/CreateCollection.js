@@ -14,21 +14,12 @@ import LocalStorage from 'constants/LocalStorage'
 import DropdownOptions from 'constants/DropdownOptions'
 import { headerHeightInRem, screens } from 'constants/Styles'
 import firebaseWorker from 'utils/firebaseWorker'
-
-const initialValue = {
-  name: '',
-  category: 0,
-  level: 0,
-  // type, url, description, image, title, publisher
-  urls: [],
-  tags: [],
-  removed: null
-}
+import offlineStorageWorker from 'utils/offlineStorageWorker'
 
 function reducer (state, { type, payload }) {
   return produce(state, draft => {
     switch (type) {
-      case 'retrieve':
+      case 'load':
         return payload
 
       case 'set':
@@ -39,7 +30,7 @@ function reducer (state, { type, payload }) {
         break
 
       case 'remove-tag':
-        draft.tags.splice(draft.tags.findIndex(tag => tag === payload.tag))
+        draft.tags.splice(draft.tags.findIndex(tag => tag === payload.tag), 1)
         break
 
       case 'set-url':
@@ -76,30 +67,46 @@ function reducer (state, { type, payload }) {
   })
 }
 
-export default function CreateCollection () {
-  const [collection, dispatch] = useReducer(reducer, initialValue)
+const initialValue = {
+  name: '',
+  category: 0,
+  level: 0,
+  // type, url, description, image, title, publisher
+  urls: [],
+  tags: [],
+  removed: null
+}
+
+export default function CreateCollection ({ id }) {
+  const [collection, dispatch] = useReducer(reducer, { id, ...initialValue })
   const [hasError, setHasError] = useState(false)
-  // const [collectionId, setCollectionId] = useState(null)
 
-  // useEffect(() => {
-  //   firebaseWorker.generateId('collections').then(setCollectionId)
-  // }, [])
+  useEffect(() => {
+    id
+      ? offlineStorageWorker
+          .getItem(LocalStorage.DRAFTS)
+          .then(drafts => dispatch({ type: 'load', payload: drafts[id] }))
+      : firebaseWorker
+          .generateId('collections')
+          .then(id => dispatch({ type: 'set', payload: { id } }))
+  }, [id])
 
-  // useOfflinePersistence(
-  //   collectionId && {
-  //     [LocalStorage.DRAFT]: collection
-  //   }
-  // )
+  useOfflinePersistence(
+    collection.id && {
+      [LocalStorage.DRAFTS]: { [collection.id]: collection }
+    }
+  )
 
   const handleSubmit = e => {
     e.preventDefault()
-    firebaseWorker.createCollection(collection).then(payload =>
-      payload.error
-        ? setHasError(true)
-        : navigate(`/collection/${payload.collection.id}`, {
-            state: { collection: payload.collection }
-          })
-    )
+    firebaseWorker
+      .createCollection(collection)
+      .then(collection =>
+        navigate(`/collection/${collection.id}`, {
+          state: { collection }
+        })
+      )
+      .catch(() => setHasError(true))
   }
 
   const { category, level, name, tags } = collection

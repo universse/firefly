@@ -95,9 +95,9 @@ export async function createCollection (collectionData) {
   const { urls, ...collection } = collectionData
   collection.urlIds = []
 
+  const collectionId = collection.id
   const batch = firestore.batch()
-  const collectionDoc = firestore.collection(COLLECTIONS).doc()
-  const collectionId = collectionDoc.id
+  const collectionDoc = firestore.collection(COLLECTIONS).doc(collectionId)
 
   urls.forEach((url, i) => {
     const id = url.id
@@ -112,7 +112,7 @@ export async function createCollection (collectionData) {
   try {
     await batch.commit()
     // collection.id = collectionDoc.id.toLowerCase()
-    return collectionId
+    return collectionData
   } catch {
     throw new Error()
   }

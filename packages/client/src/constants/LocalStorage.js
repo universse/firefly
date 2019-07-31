@@ -1,5 +1,5 @@
 export default {
-  DRAFT: 'draft',
+  DRAFTS: 'drafts',
   EMAIL_SIGN_IN: 'emailLinkSignIn',
   HAS_SIGNED_IN: 'hasSignedIn',
   IS_NEW_USER: 'isNewUser',

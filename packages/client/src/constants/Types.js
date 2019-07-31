@@ -10,7 +10,7 @@ export const CollectionIdsType = PropTypes.arrayOf(
 )
 
 // TODO add image + publisher
-export const UrlType = PropTypes.exact({
+export const UrlType = {
   id: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   // image: PropTypes.string.isRequired,
@@ -19,15 +19,15 @@ export const UrlType = PropTypes.exact({
   cutOff: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
-}).isRequired
+}
 
 // export const UrlsType = PropTypes.arrayOf(UrlType).isRequired
 
-export const CollectionViewType = PropTypes.exact({
+export const CollectionViewType = {
   id: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   level: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   tags: TagsType,
   urls: PropTypes.arrayOf(UrlType).isRequired
-})
+}

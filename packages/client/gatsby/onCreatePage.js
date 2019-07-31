@@ -3,6 +3,7 @@ module.exports = async ({ page, actions: { createPage, deletePage } }) => {
     deletePage(page)
     createPage({
       ...page,
+      matchPath: '/curate/*',
       context: { noSearch: true }
     })
   }
