@@ -136,7 +136,7 @@ function LearningItem ({
         </OutboundLink>
       )}
       {typeof isChecked === 'boolean' && (
-        <div className='CheckWrapper'>
+        <div className='ItemToolbar'>
           <button
             aria-label={createActionLabel(
               isChecked ? 'check' : 'uncheck',
