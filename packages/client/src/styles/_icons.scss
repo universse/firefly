@@ -31,17 +31,17 @@
       background-color: var(--gray200);
     }
 
-    &:active::before {
-      background-color: var(--gray400);
-    }
-
     &.light:hover::before {
       background-color: var(--white100);
     }
+  }
 
-    &.light:active::before {
-      background-color: var(--white300);
-    }
+  &:active::before {
+    background-color: var(--gray400);
+  }
+
+  &.light:active::before {
+    background-color: var(--white300);
   }
 }
 

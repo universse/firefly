@@ -9,7 +9,7 @@ import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
 import SortByDifficulty from 'components/SortByDifficulty'
 // import { FABDesktop } from 'components/common'
-// import { Suggest } from 'assets/icons'
+// import Icon from 'assets/icons'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import { URLParamsContext } from 'contexts/URLParams'
@@ -199,7 +199,7 @@ export default function IndexLayout ({ category, children, pathname }) {
         {/* <FABDesktop
           href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${category}`}
         >
-          <Suggest />
+          <Icon icon='suggest' />
         </FABDesktop> */}
       </div>
     </>

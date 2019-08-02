@@ -4,7 +4,7 @@ import { Link, navigate } from 'gatsby'
 import { css } from '@emotion/core'
 
 import OutboundLink from './OutboundLink'
-import { Back } from 'assets/icons'
+import Icon from 'assets/icons'
 import AriaLabels from 'constants/AriaLabels'
 import { screens } from 'constants/Styles'
 
@@ -48,7 +48,7 @@ export function BackButton () {
       onClick={goBack}
       type='button'
     >
-      <Back />
+      <Icon icon='back' />
     </button>
   )
 }
@@ -151,35 +151,6 @@ export function Difficulty (props) {
 
 export { OutboundLink }
 
-export function PrimaryButton ({ large = false, width, ...props }) {
-  return (
-    <button
-      css={css`
-        background-color: var(--brand500);
-        border-radius: ${large ? 1.5 : 1.25}rem;
-        color: #fff;
-        font-size: ${large ? 1 : 0.9375}rem;
-        font-weight: ${large ? 600 : 500};
-        height: ${large ? 3 : 2.5}rem;
-        ${large && 'letter-spacing: 1px;'}
-        ${!width && `padding: 0 ${large ? 3.5 : 3}rem;`}
-        ${width && `width: ${width};`}
-
-        &:hover {
-          background-color: var(--brand900);
-        }
-      `}
-      type='button'
-      {...props}
-    />
-  )
-}
-
-PrimaryButton.propTypes = {
-  large: PropTypes.bool,
-  width: PropTypes.string
-}
-
 // TODO gradient
 export function ProgressBar ({ percentage }) {
   return (
@@ -210,31 +181,27 @@ export function Swippable ({ cb, direction, ...props }) {
   return (
     <div
       {...props}
-      onTouchEnd={() => {
-        const { x, y } = deltaXY.current
+      onTouchMove={e => {
+        const { x: initialX, y: initialY } = initialXY.current
+        const { x: currentX, y: currentY } = getPosition(e)
+        const deltaX = currentX - initialX
+        const deltaY = currentY - initialY
 
         switch (direction) {
           case 'left':
-            if (x < HORIZONTAL_THRESHOLD) cb()
+            if (deltaX < HORIZONTAL_THRESHOLD) cb()
             break
           case 'right':
-            if (x > HORIZONTAL_THRESHOLD) cb()
+            if (deltaX > HORIZONTAL_THRESHOLD) cb()
             break
           case 'up':
-            if (y < VERTICAL_THRESHOLD) cb()
+            if (deltaY < VERTICAL_THRESHOLD) cb()
             break
           case 'down':
-            if (y > VERTICAL_THRESHOLD) cb()
+            if (deltaY > VERTICAL_THRESHOLD) cb()
             break
           default:
             throw new Error('Unknown direction.')
-        }
-      }}
-      onTouchMove={e => {
-        const { x, y } = getPosition(e)
-        deltaXY.current = {
-          x: x - initialXY.current.x,
-          y: y - initialXY.current.y
         }
       }}
       onTouchStart={e => {

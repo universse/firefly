@@ -112,7 +112,7 @@ export async function createCollection (collectionData) {
   try {
     await batch.commit()
     // collection.id = collectionDoc.id.toLowerCase()
-    return collectionData
+    return true
   } catch {
     throw new Error()
   }

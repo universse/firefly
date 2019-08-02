@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
 
-import { PrimaryButton, ProgressBar } from 'components/common'
+import { ProgressBar } from 'components/common'
 import { screens } from 'constants/Styles'
 import { createCollectionPath } from '../../../gatsby/utils'
 
@@ -70,12 +70,14 @@ export default function LatestActivity ({
           margin-top: 2.5rem;
         `}
       >
-        <PrimaryButton
+        <button
           aria-label={ariaLabel}
+          className='PrimaryButton'
           onClick={() => navigate(createCollectionPath({ id, name }))}
+          type='button'
         >
           {label}
-        </PrimaryButton>
+        </button>
       </div>
     </>
   )

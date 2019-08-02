@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 
 import { OutboundLink } from 'components/common'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
-import { Heart, Save } from 'assets/icons'
+import Icon from 'assets/icons'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import firebaseWorker from 'utils/firebaseWorker'
@@ -44,7 +44,14 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
           type='button'
           value={id}
         >
-          {!isNaN(loveCount) && <Heart filled={isLoved} large />}
+          {!isNaN(loveCount) && (
+            <Icon
+              filled={isLoved}
+              icon='heart'
+              label={isLoved ? 'unlove' : 'love'}
+              size='large'
+            />
+          )}
         </button>
         <span
           css={css`
@@ -65,7 +72,12 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
           type='button'
           value={id}
         >
-          <Save filled={isSaved} medium />
+          <Icon
+            filled={isSaved}
+            icon='save'
+            label={isSaved ? 'unsave' : 'save'}
+            size='medium'
+          />
         </button>
       </li>
       {Platforms.map(platform => (

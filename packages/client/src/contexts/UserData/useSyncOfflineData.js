@@ -35,7 +35,11 @@ export default function useSyncOfflineData (user) {
           firebaseWorker
             .uploadOfflineData(changes)
             .catch(() => offlineStorageWorker.restoreQueue(changes))
-            .finally(() => offlineStorageWorker.clearQueue().then(startSyncing))
+            .finally(() =>
+              offlineStorageWorker
+                .removeItem(LocalStorage.SYNCING)
+                .then(startSyncing)
+            )
         )
       }
     })

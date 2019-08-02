@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Cross, Search } from 'assets/icons'
+import Icon from 'assets/icons'
 import AriaLabels from 'constants/AriaLabels'
 
 export default function SearchBar ({
@@ -20,7 +20,7 @@ export default function SearchBar ({
         </label>
       )}
       <div className='Icon'>
-        <Search medium />
+        <Icon icon='search' size='medium' />
       </div>
       <input
         aria-label={AriaLabels.SEARCH_BAR_LABEL}
@@ -40,7 +40,7 @@ export default function SearchBar ({
             onClick={handleClearClick}
             type='button'
           >
-            <Cross small />
+            <Icon icon='cross' size='small' />
           </button>
         </div>
       )}

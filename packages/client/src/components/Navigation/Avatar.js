@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 
 import { OutboundLink } from 'components/common'
-import { User } from 'assets/icons'
+import Icon from 'assets/icons'
 import LocalStorage from 'constants/LocalStorage'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import firebaseWorker from 'utils/firebaseWorker'
@@ -24,7 +24,7 @@ export default function Avatar () {
         className='IconButton'
         {...summaryProps}
       >
-        <User />
+        <Icon icon='user' />
       </summary>
       <ul className='Right' {...menuProps}>
         <button

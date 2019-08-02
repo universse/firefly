@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import { PrimaryButton } from 'components/common'
 import AriaLabels from 'constants/AriaLabels'
 import { scrollToHero } from '../../../gatsby/utils'
 
@@ -36,9 +35,14 @@ function Onboard ({ message }) {
           margin-top: 1.5rem;
         `}
       >
-        <PrimaryButton aria-label={AriaLabels.EXPLORE} onClick={scrollToHero}>
+        <button
+          aria-label={AriaLabels.EXPLORE}
+          className='PrimaryButton'
+          onClick={scrollToHero}
+          type='button'
+        >
           Explore
-        </PrimaryButton>
+        </button>
       </div>
     </>
   )

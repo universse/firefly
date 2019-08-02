@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { MobileNavLink } from './MobileNavLink'
-import { Home, Search, Library, User } from 'assets/icons'
 
 export default function MobileNavigation ({ isIndexPage }) {
   return (
@@ -10,7 +9,7 @@ export default function MobileNavigation ({ isIndexPage }) {
       <ul>
         <li>
           <MobileNavLink
-            Icon={Home}
+            icon='home'
             label='Home'
             onClick={e => isIndexPage && e.preventDefault()}
             partiallyActive={isIndexPage}
@@ -19,7 +18,7 @@ export default function MobileNavigation ({ isIndexPage }) {
         </li>
         <li>
           <MobileNavLink
-            Icon={Search}
+            icon='search'
             label='Search'
             partiallyActive
             to='/search'
@@ -27,7 +26,7 @@ export default function MobileNavigation ({ isIndexPage }) {
         </li>
         <li>
           <MobileNavLink
-            Icon={Library}
+            icon='library'
             label='My Library'
             partiallyActive
             to='/my-library'
@@ -35,7 +34,7 @@ export default function MobileNavigation ({ isIndexPage }) {
         </li>
         {/* <li
         >
-          <MobileNavLink Icon={User} label='Profile' partiallyActive to='/me' />
+          <MobileNavLink icon='user' label='Profile' partiallyActive to='/me' />
         </li> */}
       </ul>
     </nav>

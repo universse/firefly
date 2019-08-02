@@ -2,7 +2,6 @@ import React, { memo } from 'react'
 import { css } from '@emotion/core'
 
 import { HeroImage } from 'assets/illustrations'
-import { PrimaryButton } from 'components/common'
 import AriaLabels from 'constants/AriaLabels'
 import { screens } from 'constants/Styles'
 import { logClickCTA } from 'utils/amplitude'
@@ -67,16 +66,17 @@ function Landing () {
             }
           `}
         >
-          <PrimaryButton
+          <button
             aria-label={AriaLabels.EXPLORE}
-            large
+            className='PrimaryButton large'
             onClick={() => {
               scrollToHero()
               logClickCTA()
             }}
+            type='button'
           >
             EXPLORE
-          </PrimaryButton>
+          </button>
         </div>
       </div>
       <div

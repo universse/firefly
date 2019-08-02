@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import { Cross } from 'assets/icons'
+import Icon from 'assets/icons'
 
 function Snackbar ({
   dismissSnackbar,
@@ -47,7 +47,7 @@ function Snackbar ({
               onClick={dismissSnackbar}
               type='button'
             >
-              <Cross />
+              <Icon icon='cross' />
             </button>
           </div>
         </div>

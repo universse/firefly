@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
-import { Copy, Facebook, Mail, Twitter } from 'assets/icons'
+import Icon from 'assets/icons'
 
 export function copyToClipboard (str, curr) {
   const el = document.createElement('textarea')
@@ -32,7 +32,7 @@ export function getCopyUrlProps ({ mobile = false }) {
     'aria-label': 'Get Shareable Link',
     children: (
       <>
-        <Copy />
+        <Icon icon='copy' size='medium' />
         {mobile && (
           <div
             css={css`
@@ -54,16 +54,11 @@ export function getCopyUrlProps ({ mobile = false }) {
 
 const facebookAppId = '604132180019762'
 
-export const Platforms = ['Facebook', 'Twitter', 'E-mail']
+export const Platforms = ['Facebook', 'Twitter', 'Mail']
 
 export function getShareProps ({ mobile = false, platform, title, text }) {
   const href = window.location.href
 
-  const props = {
-    'aria-label': `Share via ${platform}`,
-    rel: 'noopener noreferrer',
-    target: '_blank'
-  }
   const mobileLabel = mobile && (
     <div
       css={css`
@@ -74,34 +69,28 @@ export function getShareProps ({ mobile = false, platform, title, text }) {
     </div>
   )
 
+  const props = {
+    'aria-label': `Share via ${platform}`,
+    children: (
+      <>
+        <Icon icon={platform.toLowerCase()} size='medium' />
+        {mobileLabel}
+      </>
+    ),
+    rel: 'noopener noreferrer',
+    target: '_blank'
+  }
+
   switch (platform) {
     case 'Facebook':
-      props.children = (
-        <>
-          <Facebook />
-          {mobileLabel}
-        </>
-      )
       props.href = `https://www.facebook.com/dialog/share?app_id=${facebookAppId}&redirect_uri=${href}&href=${href}&quote=${text} - ${title}`
       break
 
-    case 'E-mail':
-      props.children = (
-        <>
-          <Mail />
-          {mobileLabel}
-        </>
-      )
+    case 'Mail':
       props.href = `mailto:?to= &subject=${text} - ${title}&body=Check out this learning collection at ${href}`
       break
 
     case 'Twitter':
-      props.children = (
-        <>
-          <Twitter />
-          {mobileLabel}
-        </>
-      )
       props.href = `https://twitter.com/intent/tweet?text=${text} - ${title}&url=${href}`
       break
 

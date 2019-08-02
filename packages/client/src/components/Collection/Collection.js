@@ -5,7 +5,7 @@ import { DifficultyLevels } from 'common'
 import { Link } from 'gatsby'
 
 import Tags from './Tags'
-import { Heart, Level, Resources, Save } from 'assets/icons'
+import Icon, { Level } from 'assets/icons'
 import { ActionBar, Category, Difficulty } from 'components/common'
 import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
@@ -72,7 +72,7 @@ function Collection ({ id, isSaved }) {
                   margin-right: 0.25rem;
                 `}
               >
-                <Resources small />
+                <Icon icon='resources' size='small' />
               </div>
               <div
                 css={css`
@@ -111,7 +111,11 @@ function Collection ({ id, isSaved }) {
                 type='button'
                 value={id}
               >
-                <Save filled={isSaved} />
+                <Icon
+                  filled={isSaved}
+                  icon='save'
+                  label={isSaved ? 'unsave' : 'save'}
+                />
               </button>
               {/* v3 */}
               {/* <button
@@ -121,7 +125,11 @@ function Collection ({ id, isSaved }) {
               type='button'
               value={id}
             >
-              <Heart filled={isLoved} />
+              <Icon
+                filled={isLoved}
+                icon='heart'
+                label={isLoved ? 'unlove' : 'love'}
+              />
             </button> */}
             </ActionBar>
           </div>

@@ -2,7 +2,6 @@ const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
 const {
   Categories,
-  ItemTypes,
   NetlifyFunction,
   truncate,
   getTruncatedString
@@ -73,7 +72,7 @@ module.exports = {
               // publisher,
               cutOff: truncate(description, 60),
               title,
-              type: ItemTypes[type],
+              type,
               url
             })
           },

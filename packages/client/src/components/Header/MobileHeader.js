@@ -1,11 +1,16 @@
-import React, { memo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { ActionBar } from 'components/common'
 import { HeaderTag, HeaderWrapper } from './styled'
 
-function MobileHeader ({ actions, navIcon, shadow = false, title }) {
+export default function MobileHeader ({
+  actions,
+  navIcon,
+  shadow = false,
+  title
+}) {
   return (
     <HeaderTag mobile shadow={shadow}>
       <HeaderWrapper>
@@ -44,8 +49,6 @@ function MobileHeader ({ actions, navIcon, shadow = false, title }) {
     </HeaderTag>
   )
 }
-
-export default memo(MobileHeader)
 
 MobileHeader.propTypes = {
   actions: PropTypes.element,

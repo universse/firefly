@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 
-import { ChevronLeft, ChevronRight } from 'assets/icons'
+import Icon from 'assets/icons'
 import { screens } from 'constants/Styles'
 
 export function Category (props) {
@@ -22,18 +22,10 @@ export function Category (props) {
         font-weight: 400;
         text-transform: capitalize;
 
-        &:hover {
-          color: var(--brand500);
-        }
-
         ${screens.nonDesktop} {
           border-bottom: 2px solid transparent;
           height: 3rem;
           padding: 0 1rem;
-
-          &:hover {
-            border-bottom: 2px solid var(--brand500);
-          }
         }
 
         ${screens.desktop} {
@@ -43,6 +35,7 @@ export function Category (props) {
 
           &:hover {
             border-left: 4px solid var(--brand500);
+            color: var(--brand500);
           }
         }
       `}
@@ -72,7 +65,7 @@ export function ScrollButton ({ handleClick, isVisible, side }) {
       onClick={handleClick}
       type='button'
     >
-      {side === 'left' ? <ChevronLeft /> : <ChevronRight />}
+      <Icon icon={`chevron-${side}`} />
     </button>
   )
 }

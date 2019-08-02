@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
-import { PrimaryButton } from 'components/common'
-import { Cross } from 'assets/icons'
+import Icon from 'assets/icons'
 import useModal from 'hooks/useModal'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
@@ -35,9 +34,8 @@ export default function SignUpForm () {
   }, [closeTimeoutMS, isOpen])
 
   const handleSubmit = async e => {
-    if (!email) return
-
     e.preventDefault()
+    if (!email) return
 
     logClickSignUp(email)
 
@@ -90,38 +88,43 @@ export default function SignUpForm () {
             <h3>Welcome to {title}</h3>
           </div>
           <form onSubmit={handleSubmit}>
-            <input
-              aria-label='Your Email Address'
-              autoComplete='off'
-              className='TextInput'
-              name='email'
-              onChange={e => {
-                setEmail(e.target.value)
-                setHasError(false)
-              }}
-              placeholder='username@domain.com'
-              type='email'
-              value={email}
-            />
-            {hasError && (
-              <div
-                css={css`
-                  margin-left: 1rem;
-                  margin-top: 0.25rem;
-                `}
-              >
-                <span
+            <div
+              css={css`
+                width: 18rem;
+              `}
+            >
+              <input
+                aria-label='Your Email Address'
+                autoComplete='off'
+                className='TextInput'
+                name='email'
+                onChange={e => {
+                  setEmail(e.target.value)
+                  setHasError(false)
+                }}
+                placeholder='username@domain.com'
+                type='email'
+                value={email}
+              />
+              {hasError && (
+                <div
                   css={css`
-                    color: var(--brand500);
-                    font-size: 0.875rem;
-                    font-weight: 500;
+                    margin-left: 1rem;
+                    margin-top: 0.25rem;
                   `}
                 >
-                  Please enter a valid email address
-                </span>
-              </div>
-            )}
-            {/* <div
+                  <span
+                    css={css`
+                      color: var(--brand500);
+                      font-size: 0.875rem;
+                      font-weight: 500;
+                    `}
+                  >
+                    Please enter a valid email address
+                  </span>
+                </div>
+              )}
+              {/* <div
               css={css`
                 align-items: center;
                 display: flex;
@@ -143,44 +146,42 @@ export default function SignUpForm () {
                 features.
               </label>
             </div> */}
-            {/* 1.25rem 0 0.75rem */}
-            <div
-              css={css`
-                margin: 1rem 0 0.75rem;
-              `}
-            >
-              <PrimaryButton
-                aria-label='Sign In with Email Link'
-                type='submit'
-                width='18rem'
-              >
-                Sign In with Email Link
-              </PrimaryButton>
-            </div>
-            {/* <div
-              css={css`
-                width: 18rem;
-              `}
-            >
-              <span
+              {/* 1.25rem 0 0.75rem */}
+              <div
                 css={css`
-                  color: var(--black900);
-                  font-size: 0.8125rem;
-                  line-height: 1.25rem;
+                  margin: 1rem 0 0.75rem;
                 `}
               >
-                By registering for {/^[aeiou]/i.test(title) ? 'an' : 'a'}{' '}
-                {title} account, you agree to our{' '}
-                <a href='/terms' rel='noopener noreferrer' target='_blank'>
-                  Terms of Service
-                </a>{' '}
-                and{' '}
-                <a href='/privacy' rel='noopener noreferrer' target='_blank'>
-                  Privacy Policy
-                </a>
-                .
-              </span>
-            </div> */}
+                <button
+                  aria-label='Sign In with Email Link'
+                  className='PrimaryButton'
+                  style={{ padding: 0, width: '100%' }}
+                  type='submit'
+                >
+                  Sign In with Email Link
+                </button>
+              </div>
+              {/* <div>
+                <span
+                  css={css`
+                    color: var(--black900);
+                    font-size: 0.8125rem;
+                    line-height: 1.25rem;
+                  `}
+                >
+                  By registering for {/^[aeiou]/i.test(title) ? 'an' : 'a'}{' '}
+                  {title} account, you agree to our{' '}
+                  <a href='/terms' rel='noopener noreferrer' target='_blank'>
+                    Terms of Service
+                  </a>{' '}
+                  and{' '}
+                  <a href='/privacy' rel='noopener noreferrer' target='_blank'>
+                    Privacy Policy
+                  </a>
+                  .
+                </span>
+              </div> */}
+            </div>
           </form>
         </>
       )}
@@ -202,7 +203,7 @@ export default function SignUpForm () {
           onClick={onRequestClose}
           type='button'
         >
-          <Cross />
+          <Icon icon='cross' />
         </button>
       </div>
     </ReactModal>

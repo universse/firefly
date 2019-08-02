@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import LearningItem from 'components/CollectionTemplate/LearningItem'
-import { Remove, Edit, Url } from 'assets/icons'
+import Icon from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import Netlify from 'constants/Netlify'
@@ -114,7 +114,7 @@ function LearningItemInput ({
           >
             <div className='InputBar large'>
               <div className='Icon'>
-                <Url medium />
+                <Icon icon='url' size='medium' />
               </div>
               <input
                 aria-label='Learning Item URL'
@@ -122,6 +122,7 @@ function LearningItemInput ({
                 className='TextInput'
                 name={`url-${item.id}`}
                 onChange={e => setState({ urlInput: e.target.value })}
+                onDragStart={e => e.stopPropagation()}
                 placeholder='https://www.awesome-resource.com'
                 type='url'
                 value={urlInput}
@@ -158,7 +159,7 @@ function LearningItemInput ({
             onClick={() => setIsEditing(isEditing => !isEditing)}
             type='button'
           >
-            <Edit medium />
+            <Icon icon='edit' size='medium' />
           </button>
           <button
             aria-label='Remove URL'
@@ -182,7 +183,7 @@ function LearningItemInput ({
             }}
             type='button'
           >
-            <Remove medium />
+            <Icon icon='remove' size='medium' />
           </button>
         </div>
       )}

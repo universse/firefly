@@ -2,11 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-export function MobileNavLink ({ label, Icon, ...props }) {
+import Icon from 'assets/icons'
+
+export function MobileNavLink ({ label, icon, ...props }) {
   return (
     <Link activeClassName='active' {...props}>
       <div>
-        <Icon />
+        <Icon icon={icon} />
       </div>
       <span>{label}</span>
     </Link>
@@ -14,6 +16,6 @@ export function MobileNavLink ({ label, Icon, ...props }) {
 }
 
 MobileNavLink.propTypes = {
-  Icon: PropTypes.elementType.isRequired,
+  icon: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired
 }

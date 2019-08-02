@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import { URLParamsContext } from 'contexts/URLParams'
-import { Tag } from 'assets/icons'
+import Icon from 'assets/icons'
 import useListBox from 'hooks/useListBox'
 import AriaLabels from 'constants/AriaLabels'
 import { logClickTagFilter } from 'utils/amplitude'
@@ -40,7 +40,7 @@ export default function TagFilter ({ aggregatedTags }) {
             margin-left: 0.5rem;
           `}
         >
-          <Tag />
+          <Icon icon='tag' size='medium' />
         </div>
       </summary>
       <ul

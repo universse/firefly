@@ -2,20 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { OutboundLink } from 'components/common'
-import { Share } from 'assets/icons'
+import Icon from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { getCopyUrlProps, getShareProps, Platforms } from 'utils/sharing'
 
-export default function ShareDropdown ({ name }) {
+export default function ShareDropdown ({ name, left = false, top = false }) {
   const {
     detailsProps,
     summaryProps,
     menuProps,
     getMenuItemProps,
     highlightedIndex
-  } = useDropdownMenu({ menuItemCount: Platforms.length })
+  } = useDropdownMenu({
+    menuItemCount: Platforms.length,
+    left,
+    top
+  })
   const { title } = useSiteMetadata()
 
   return (
@@ -25,9 +29,9 @@ export default function ShareDropdown ({ name }) {
         className='IconButton'
         {...summaryProps}
       >
-        <Share />
+        <Icon icon='share' />
       </summary>
-      <ul className='Right' {...menuProps}>
+      <ul {...menuProps}>
         {Platforms.map((platform, i) => (
           <OutboundLink
             key={platform}
@@ -54,5 +58,7 @@ export default function ShareDropdown ({ name }) {
 }
 
 ShareDropdown.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  left: PropTypes.bool,
+  top: PropTypes.bool
 }

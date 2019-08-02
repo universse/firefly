@@ -7,14 +7,17 @@ import DetailsModal from './DetailsModal'
 import LearningItem from './LearningItem'
 import { CollectionTitle } from './styled'
 import { ProgressBar } from 'components/common'
+import { Check } from 'assets/icons'
 import { LatestActivityContext } from 'contexts/LatestActivity'
 import { MediaContext } from 'contexts/Media'
+import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import {
   bottomBarHeightInRem,
   headerHeightInRem,
   screens
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
+import { createActionLabel } from 'utils/ariaLabelUtils'
 
 // TODO:
 // suggestion component
@@ -23,7 +26,9 @@ export default function CollectionView ({
   collection: { id, category, level, name, tags, urls },
   isSaved
 }) {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop, isMobile } = useContext(MediaContext)
+  const onActionClick = useContext(UserDataDispatchContext)
+
   const itemCount = urls.length
 
   const completedCount =
@@ -88,15 +93,30 @@ export default function CollectionView ({
         id='main'
       >
         <ul className='LearningList'>
-          {urls.map(url => (
-            <li key={url.id}>
-              <LearningItem
-                collectionId={id}
-                isChecked={!!check[url.id]}
-                {...url}
-              />
-            </li>
-          ))}
+          {urls.map(url => {
+            const urlId = url.id
+            const isChecked = !!check[urlId]
+
+            return (
+              <li key={urlId}>
+                <LearningItem collectionId={id} {...url} />
+                <div className='ItemToolbar'>
+                  <button
+                    aria-label={createActionLabel(
+                      isChecked ? 'check' : 'uncheck',
+                      url.title
+                    )}
+                    className='IconButton'
+                    onClick={onActionClick}
+                    type='button'
+                    value={urlId}
+                  >
+                    <Check filled={isChecked} medium={isMobile} />
+                  </button>
+                </div>
+              </li>
+            )
+          })}
         </ul>
       </main>
       {isDesktop === false && (

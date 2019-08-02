@@ -21,13 +21,14 @@ export const UrlType = {
   url: PropTypes.string.isRequired
 }
 
-// export const UrlsType = PropTypes.arrayOf(UrlType).isRequired
+export const UrlsType = PropTypes.arrayOf(PropTypes.exact(UrlType).isRequired)
+  .isRequired
 
-export const CollectionViewType = {
+export const CollectionViewType = PropTypes.exact({
   id: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   level: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   tags: TagsType,
-  urls: PropTypes.arrayOf(UrlType).isRequired
-}
+  urls: UrlsType
+})

@@ -8,7 +8,7 @@ import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
-import { Heart, Info, Save, Share, Suggest } from 'assets/icons'
+import Icon from 'assets/icons'
 // import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
@@ -92,7 +92,11 @@ export default function CollectionTemplate ({
                 type='button'
                 value={id}
               >
-                <Save filled={isSaved} />
+                <Icon
+                  filled={isSaved}
+                  icon='save'
+                  label={isSaved ? 'unsave' : 'save'}
+                />
               </button>
               <button
                 aria-label={createActionLabel(
@@ -104,7 +108,11 @@ export default function CollectionTemplate ({
                 type='button'
                 value={id}
               >
-                <Heart filled={isLoved} />
+                <Icon
+                  filled={isLoved}
+                  icon='heart'
+                  label={isLoved ? 'unlove' : 'love'}
+                />
               </button>
               {navigator.share ? (
                 <button
@@ -119,10 +127,10 @@ export default function CollectionTemplate ({
                   }}
                   type='button'
                 >
-                  <Share />
+                  <Icon icon='share' />
                 </button>
               ) : (
-                <ShareDropdown name={name} />
+                <ShareDropdown left name={name} />
               )}
               <button
                 aria-label='View Collection Details'
@@ -130,7 +138,7 @@ export default function CollectionTemplate ({
                 onClick={() => setActiveModalType(ModalTypes.DETAILS)}
                 type='button'
               >
-                <Info />
+                <Icon icon='info' />
               </button>
             </>
           }
@@ -215,7 +223,7 @@ export default function CollectionTemplate ({
           {/* <FABDesktop
               href={`https://docs.google.com/forms/d/e/1FAIpQLSfPo7KFY11Wp0E3IxO6-TxYY6ATHB4Ai-Io-KWRzcPCsqWyDQ/viewform?usp=pp_url&entry.1943859076=${id}`}
             >
-              <Suggest />
+              <Icon icon='suggest' />
             </FABDesktop> */}
         </div>
       </div>

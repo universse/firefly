@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import { css } from '@emotion/core'
 
-import { PrimaryButton, Swippable } from 'components/common'
+import { Swippable } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import useModal from 'hooks/useModal'
 import AriaLabels from 'constants/AriaLabels'
@@ -51,13 +51,15 @@ export default function MobileFilters ({ children, collectionCount }) {
             width: 100%;
           `}
         >
-          <PrimaryButton
+          <button
             aria-label={`View ${collectionCount} Collections`}
+            className='PrimaryButton'
             onClick={modalProps.onRequestClose}
-            width='100%'
+            style={{ padding: 0, width: '100%' }}
+            type='button'
           >
             See {collectionCount} Collections
-          </PrimaryButton>
+          </button>
         </div>
       </Swippable>
     </ReactModal>

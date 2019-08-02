@@ -33,15 +33,10 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: var(--shadow-02);
-    margin-top: 0.25rem;
     overflow: auto;
     position: absolute;
     width: $width;
     z-index: 2;
-
-    &.Right {
-      right: 0;
-    }
 
     a,
     button {

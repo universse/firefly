@@ -1,12 +1,27 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-export default function useDropdownMenu ({ items, menuItemCount, onSelect }) {
+export default function useDropdownMenu ({
+  items,
+  menuItemCount,
+  onSelect,
+  left = false,
+  top = false
+} = {}) {
   menuItemCount = menuItemCount || items.length
 
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
 
   const detailsRef = useRef()
   const menuRef = useRef()
+
+  const [style, setStyle] = useState({})
+
+  useEffect(() => {
+    setStyle({
+      [top ? 'bottom' : 'top']: detailsRef.current.offsetHeight + 4,
+      [left ? 'right' : 'left']: 0
+    })
+  }, [left, top])
 
   // TODO may need pass in index as argument
   const select = () => {
@@ -70,7 +85,8 @@ export default function useDropdownMenu ({ items, menuItemCount, onSelect }) {
   const menuProps = {
     onMouseLeave: () => setHighlightedIndex(-1),
     ref: menuRef,
-    role: 'menu'
+    role: 'menu',
+    style
   }
 
   function getMenuItemProps (index) {

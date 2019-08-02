@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 
 import SortOptions from './SortOptions'
 import { URLParamsContext } from 'contexts/URLParams'
-import { ChevronDown } from 'assets/icons'
+import Icon from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import AriaLabels from 'constants/AriaLabels'
 import { logSortDifficulty } from 'utils/amplitude'
@@ -48,7 +48,7 @@ export default function SortByDifficulty () {
             height: 1.5rem;
           `}
         >
-          <ChevronDown />
+          <Icon icon='chevron-down' />
         </div>
       </summary>
       <ul {...menuProps}>
