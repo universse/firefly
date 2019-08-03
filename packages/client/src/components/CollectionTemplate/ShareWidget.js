@@ -34,7 +34,7 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
       <li>
         <button
           aria-label={createActionLabel(isLoved ? 'unlove' : 'love', name)}
-          className='Heart'
+          className='IconButton-2 Heart'
           onClick={e => {
             if (isNaN(loveCount)) return
             onActionClick(e, () => {
@@ -68,6 +68,7 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
       <li>
         <button
           aria-label={createActionLabel(isSaved ? 'unsave' : 'save', name)}
+          className='IconButton-2'
           onClick={onActionClick}
           type='button'
           value={id}
@@ -82,7 +83,10 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
       </li>
       {Platforms.map(platform => (
         <li key={platform}>
-          <OutboundLink {...getShareProps({ platform, title, text: name })} />
+          <OutboundLink
+            className='IconButton-2'
+            {...getShareProps({ platform, title, text: name })}
+          />
         </li>
       ))}
       {/* <li>

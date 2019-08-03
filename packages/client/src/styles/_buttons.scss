@@ -9,7 +9,7 @@
   height: 2rem;
   padding: 0 1rem;
 
-  &:not([disabled]):hover {
+  &:hover {
     background-color: var(--brand500);
     color: #fff;
   }
@@ -26,6 +26,14 @@
 
   &:hover {
     background-color: var(--brand900);
+  }
+
+  &.accent {
+    background-color: var(--accent500);
+
+    &:hover {
+      background-color: var(--accent900);
+    }
   }
 
   &.large {
@@ -45,7 +53,7 @@
   line-height: 1.5rem;
   text-transform: capitalize;
 
-  &:not([disabled]):hover {
+  &:hover {
     text-decoration: underline;
   }
 

@@ -1,31 +1,31 @@
-export const onClientEntry = () => {
-  let prevLocation = window.location.pathname + window.location.search
-  let prevScrollPos = window.scrollY
-  let timeout
+// export const onClientEntry = () => {
+//   let prevLocation = window.location.pathname + window.location.search
+//   let prevScrollPos = window.scrollY
+//   let timeout
 
-  window.addEventListener('scroll', () => {
-    clearTimeout(timeout)
+//   window.addEventListener('scroll', () => {
+//     clearTimeout(timeout)
 
-    timeout = setTimeout(() => {
-      const location = window.location.pathname + window.location.search
-      const scrollPos = window.scrollY
+//     timeout = setTimeout(() => {
+//       const location = window.location.pathname + window.location.search
+//       const scrollPos = window.scrollY
 
-      location === prevLocation &&
-        window.amplitude &&
-        window.amplitude.getInstance().logEvent('scroll', {
-          change: scrollPos - prevScrollPos,
-          location,
-          percentage: Math.round(
-            (scrollPos * 100) /
-              (document.body.clientHeight - window.innerHeight)
-          )
-        })
+//       location === prevLocation &&
+//         window.amplitude &&
+//         window.amplitude.getInstance().logEvent('scroll', {
+//           change: scrollPos - prevScrollPos,
+//           location,
+//           percentage: Math.round(
+//             (scrollPos * 100) /
+//               (document.body.clientHeight - window.innerHeight)
+//           )
+//         })
 
-      prevLocation = location
-      prevScrollPos = scrollPos
-    }, 400)
-  })
-}
+//       prevLocation = location
+//       prevScrollPos = scrollPos
+//     }, 400)
+//   })
+// }
 
 const logViewPage = ({ location, prevLocation }) => {
   const properties = {

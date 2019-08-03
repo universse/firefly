@@ -5,6 +5,7 @@ const EventTypes = {
   CLICK_SIGN_UP: 'click sign up',
   CLICK_TAG: 'click tag',
   CLICK_TAG_FILTER: 'click tag filter',
+  ERROR: 'error',
   INPUT_SEARCH: 'input search',
   SIGN_UP_INTENT: 'show signup intent',
   SORT_DIFFICULTY: 'sort by difficulty'
@@ -45,6 +46,12 @@ export const logClickTagFilter = ({ tag, updatedTags }) =>
   window.amplitude
     .getInstance()
     .logEvent(EventTypes.CLICK_TAG_FILTER, { tag, updatedTags })
+
+export const logError = ({ error, componentStack }) =>
+  window.amplitude &&
+  window.amplitude
+    .getInstance()
+    .logEvent(EventTypes.ERROR, { error, componentStack })
 
 export const logInputSearch = (input, isIndexPage = false) =>
   window.amplitude &&

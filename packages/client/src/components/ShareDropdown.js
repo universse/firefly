@@ -31,7 +31,7 @@ export default function ShareDropdown ({ name, left = false, top = false }) {
       >
         <Icon icon='share' />
       </summary>
-      <ul {...menuProps}>
+      <div {...menuProps}>
         {Platforms.map((platform, i) => (
           <OutboundLink
             key={platform}
@@ -52,7 +52,7 @@ export default function ShareDropdown ({ name, left = false, top = false }) {
           {...getCopyUrlProps({ mobile: true })}
           {...getMenuItemProps(Platforms.length)}
         />
-      </ul>
+      </div>
     </details>
   )
 }

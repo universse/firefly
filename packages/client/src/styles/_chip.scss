@@ -10,7 +10,7 @@
   margin: 0 0.5rem 0.5rem 0;
   padding: 0 0.75rem;
 
-  &:not([disabled]):hover {
+  &:hover {
     background-color: var(--gray200);
   }
 }

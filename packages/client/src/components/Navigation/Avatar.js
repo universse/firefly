@@ -26,7 +26,7 @@ export default function Avatar () {
       >
         <Icon icon='user' />
       </summary>
-      <ul className='Right' {...menuProps}>
+      <div className='Right' {...menuProps}>
         <button
           aria-label='Sign Out'
           {...highlightedIndex === 0 && { className: 'highlighted' }}
@@ -60,7 +60,7 @@ export default function Avatar () {
         >
           Library
         </Link> */}
-      </ul>
+      </div>
     </details>
   )
 }

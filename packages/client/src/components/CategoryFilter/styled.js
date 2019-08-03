@@ -49,6 +49,7 @@ export const scrollButtonWidthInRem = 2.5
 export function ScrollButton ({ handleClick, isVisible, side }) {
   return (
     <button
+      aria-label={`Scroll ${side}`}
       css={css`
         background-image: ${`var(--gradient-${side})`};
         color: var(--gray600);

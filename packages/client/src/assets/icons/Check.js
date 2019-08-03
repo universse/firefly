@@ -7,7 +7,7 @@ export function Check ({ filled = false, medium = false }) {
   return (
     <svg
       aria-label={label}
-      className={medium ? 'feather feather--medium' : 'feather'}
+      className={medium ? 'feather medium' : 'feather'}
       role='img'
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'

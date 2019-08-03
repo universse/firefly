@@ -11,15 +11,6 @@ import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
 import firebaseWorker from 'utils/firebaseWorker'
 
-function init ({ isNew, item }) {
-  return {
-    hasError: false,
-    isLoading: false,
-    preview: !isNew && item,
-    urlInput: item.url || ''
-  }
-}
-
 function reducer (state, payload) {
   return { ...state, ...payload }
 }
@@ -35,8 +26,12 @@ function LearningItemInput ({
   const isLocal = useRef(!isNew)
   const [{ hasError, isLoading, urlInput, preview }, setState] = useReducer(
     reducer,
-    { isNew, item },
-    init
+    {
+      hasError: false,
+      isLoading: false,
+      preview: !isNew && item,
+      urlInput: item.url || ''
+    }
   )
 
   const [debouncedUrlInput] = useDebouncedValue(urlInput, 100)

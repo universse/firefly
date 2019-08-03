@@ -51,7 +51,7 @@ export default function SortByDifficulty () {
           <Icon icon='chevron-down' />
         </div>
       </summary>
-      <ul {...menuProps}>
+      <div {...menuProps}>
         {SortOptions.map((option, index) => {
           let className = 'uppercase'
           highlightedIndex === index && (className += ' highlighted')
@@ -69,7 +69,7 @@ export default function SortByDifficulty () {
             </button>
           )
         })}
-      </ul>
+      </div>
     </details>
   )
 }

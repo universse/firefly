@@ -53,23 +53,23 @@
   stroke-linejoin: round;
   stroke-width: 2;
   width: 24px;
-}
 
-.feather--filled {
-  fill: currentColor;
-}
+  &.filled {
+    fill: currentColor;
+  }
 
-.feather--small {
-  height: 16px;
-  width: 16px;
-}
+  &.small {
+    height: 16px;
+    width: 16px;
+  }
 
-.feather--medium {
-  height: 20px;
-  width: 20px;
-}
+  &.medium {
+    height: 20px;
+    width: 20px;
+  }
 
-.feather--large {
-  height: 28px;
-  width: 28px;
+  &.large {
+    height: 28px;
+    width: 28px;
+  }
 }
