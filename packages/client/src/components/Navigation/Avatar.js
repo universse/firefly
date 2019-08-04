@@ -13,7 +13,7 @@ export default function Avatar () {
     detailsProps,
     summaryProps,
     menuProps,
-    getMenuItemProps,
+    getItemProps,
     highlightedIndex
   } = useDropdownMenu({ menuItemCount: 1 })
 
@@ -42,21 +42,21 @@ export default function Avatar () {
             })
           }}
           type='button'
-          {...getMenuItemProps(0)}
+          {...getItemProps(0)}
         >
           Sign Out
         </button>
         {/* <OutboundLink
           {...highlightedIndex === 1 && { className: 'highlighted' }}
           href='https://www.google.com'
-          {...getMenuItemProps(1)}
+          {...getItemProps(1)}
         >
           Sign Out
         </OutboundLink>
         <Link
           {...highlightedIndex === 2 && { className: 'highlighted' }}
           to='/my-library'
-          {...getMenuItemProps(2)}
+          {...getItemProps(2)}
         >
           Library
         </Link> */}

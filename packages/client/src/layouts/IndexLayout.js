@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { toTitleCase } from 'common'
 
 import CategoryFilter from 'components/CategoryFilter'
+import Footer from 'components/Footer'
 import Hero from 'components/Hero'
 import SearchBar from 'components/SearchBar'
 import SEO from 'components/SEO'
@@ -202,6 +203,7 @@ export default function IndexLayout ({ category, children, pathname }) {
           <Icon icon='suggest' />
         </FABDesktop> */}
       </div>
+      <Footer />
     </>
   )
 }

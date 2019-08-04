@@ -17,7 +17,7 @@ export const UrlType = {
   // publisher: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   cutOff: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired
 }
 

@@ -37,31 +37,31 @@
     position: absolute;
     width: $width;
     z-index: 2;
-  }
 
-  a,
-  button {
-    align-items: center;
-    color: var(--black800);
-    display: flex;
-    font-size: 0.875rem;
-    font-weight: 400;
-    height: 2.5rem;
-    padding-left: 1rem;
-    text-align: left;
-    width: $width;
+    a,
+    button {
+      align-items: center;
+      color: var(--black800);
+      display: flex;
+      font-size: 0.875rem;
+      font-weight: 400;
+      height: 2.5rem;
+      padding-left: 1rem;
+      text-align: left;
+      width: $width;
 
-    &.highlighted {
-      background-color: var(--gray200);
-    }
+      &.highlighted {
+        background-color: var(--gray200);
+      }
 
-    &.selected {
-      color: var(--black900);
-      font-weight: 600;
-    }
+      &.selected {
+        color: var(--black900);
+        font-weight: 600;
+      }
 
-    &.uppercase {
-      text-transform: uppercase;
+      &.uppercase {
+        text-transform: uppercase;
+      }
     }
   }
 }

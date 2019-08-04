@@ -79,7 +79,7 @@ export default function useListBox ({ onSelect }) {
     }
   }
 
-  function getMenuItemProps ({ index, item, isSelected, disabled }) {
+  function getItemProps ({ index, item, isSelected, disabled }) {
     items.current.push(item)
 
     const highlight = () => setHighlightedIndex(index)
@@ -102,6 +102,6 @@ export default function useListBox ({ onSelect }) {
     highlightedIndex,
     summaryProps,
     getMenuProps,
-    getMenuItemProps
+    getItemProps
   }
 }

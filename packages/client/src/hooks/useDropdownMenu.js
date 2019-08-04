@@ -89,7 +89,7 @@ export default function useDropdownMenu ({
     style
   }
 
-  function getMenuItemProps (index) {
+  function getItemProps (index) {
     return {
       onMouseEnter: () => setHighlightedIndex(index),
       role: 'menuitem',
@@ -102,6 +102,6 @@ export default function useDropdownMenu ({
     highlightedIndex,
     summaryProps,
     menuProps,
-    getMenuItemProps
+    getItemProps
   }
 }

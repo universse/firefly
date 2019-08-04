@@ -1,5 +1,5 @@
 .ComboBox {
-  ul {
+  [role="listbox"] {
     a,
     button,
     span {
@@ -21,7 +21,7 @@
     position: relative;
     width: 27rem;
 
-    ul {
+    [role="listbox"] {
       background-color: var(--gray200);
       border-bottom-left-radius: 1.25rem;
       border-bottom-right-radius: 1.25rem;
@@ -34,7 +34,7 @@
   }
 
   &.large {
-    ul {
+    [role="listbox"] {
       a,
       span {
         font-size: 1rem;

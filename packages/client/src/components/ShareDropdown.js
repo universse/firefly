@@ -13,7 +13,7 @@ export default function ShareDropdown ({ name, left = false, top = false }) {
     detailsProps,
     summaryProps,
     menuProps,
-    getMenuItemProps,
+    getItemProps,
     highlightedIndex
   } = useDropdownMenu({
     menuItemCount: Platforms.length,
@@ -42,7 +42,7 @@ export default function ShareDropdown ({ name, left = false, top = false }) {
               title,
               text: name
             })}
-            {...getMenuItemProps(i)}
+            {...getItemProps(i)}
           />
         ))}
         <button
@@ -50,7 +50,7 @@ export default function ShareDropdown ({ name, left = false, top = false }) {
             highlightedIndex === Platforms.length ? 'highlighted' : ''
           }`}
           {...getCopyUrlProps({ mobile: true })}
-          {...getMenuItemProps(Platforms.length)}
+          {...getItemProps(Platforms.length)}
         />
       </div>
     </details>

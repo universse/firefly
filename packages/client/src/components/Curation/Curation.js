@@ -9,6 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import DraggableItem from './DraggableItem'
 import DragLayer from './DragLayer'
 import LearningItemInput from './LearningItemInput'
+import TagInput from './TagInput'
 import Details from 'components/CollectionTemplate/Details'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
@@ -40,7 +41,7 @@ function reducer (state, { type, payload }) {
         break
 
       case 'remove-tag':
-        draft.tags.splice(draft.tags.findIndex(tag => tag === payload.tag), 1)
+        draft.tags.splice(payload.index, 1)
         break
 
       case 'set-url':

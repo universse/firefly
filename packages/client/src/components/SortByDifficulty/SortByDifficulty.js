@@ -25,7 +25,7 @@ export default function SortByDifficulty () {
     detailsProps,
     summaryProps,
     menuProps,
-    getMenuItemProps,
+    getItemProps,
     highlightedIndex
   } = useDropdownMenu({
     items: SortOptions,
@@ -63,7 +63,7 @@ export default function SortByDifficulty () {
               aria-label={option.label}
               className={className}
               onClick={() => onSelect(option)}
-              {...getMenuItemProps(index)}
+              {...getItemProps(index)}
             >
               {option.label}
             </button>

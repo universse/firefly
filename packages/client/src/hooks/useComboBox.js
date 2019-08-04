@@ -102,7 +102,7 @@ export default function useComboBox ({ onSelect }) {
     role: 'listbox'
   }
 
-  function getMenuItemProps ({ index, item }) {
+  function getItemProps ({ index, item }) {
     items.current.push(item)
     const { meta, ...props } = item
 
@@ -123,6 +123,6 @@ export default function useComboBox ({ onSelect }) {
     labelProps,
     getInputProps,
     menuProps,
-    getMenuItemProps
+    getItemProps
   }
 }

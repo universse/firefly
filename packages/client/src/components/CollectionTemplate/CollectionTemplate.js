@@ -5,6 +5,7 @@ import { css } from '@emotion/core'
 import ShareWidget from './ShareWidget'
 import CollectionView from './CollectionView'
 import { MobileHeader } from 'components/Header'
+import Footer from 'components/Footer'
 import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
@@ -227,6 +228,7 @@ export default function CollectionTemplate ({
             </FABDesktop> */}
         </div>
       </div>
+      <Footer />
     </>
   )
 }

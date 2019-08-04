@@ -32,7 +32,7 @@ export default function SearchComboBox ({
     labelProps,
     getInputProps,
     menuProps,
-    getMenuItemProps
+    getItemProps
   } = useComboBox({ onSelect: handleSelect })
 
   const totalResultCount = results.length
@@ -47,14 +47,14 @@ export default function SearchComboBox ({
         value={searchInput}
         {...getInputProps({ onChange: handleSearchInput })}
       />
-      <ul {...menuProps}>
+      <div {...menuProps}>
         {isOpen && searchInput && (
           <>
             {results.slice(0, maxResultCount).map((result, index) => (
               <Link
                 key={result.id}
                 {...highlightedIndex === index && { className: 'highlighted' }}
-                {...getMenuItemProps({
+                {...getItemProps({
                   index,
                   item: {
                     id: result.id,
@@ -76,7 +76,7 @@ export default function SearchComboBox ({
                 className={`${
                   highlightedIndex === maxResultCount ? 'highlighted' : ''
                 }`}
-                {...getMenuItemProps({
+                {...getItemProps({
                   index: maxResultCount,
                   item: {
                     id: 'search',
@@ -92,7 +92,7 @@ export default function SearchComboBox ({
             )}
           </>
         )}
-      </ul>
+      </div>
     </div>
   )
 }

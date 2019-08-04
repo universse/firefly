@@ -27,7 +27,7 @@ export default function TagFilter ({ aggregatedTags }) {
     highlightedIndex,
     summaryProps,
     getMenuProps,
-    getMenuItemProps
+    getItemProps
   } = useListBox({ onSelect })
 
   return (
@@ -43,7 +43,7 @@ export default function TagFilter ({ aggregatedTags }) {
           <Icon icon='tag' size='medium' />
         </div>
       </summary>
-      <ul
+      <div
         {...getMenuProps({
           'aria-label': AriaLabels.FILTER_BY_TAGS,
           'aria-orientation': 'horizontal'
@@ -60,7 +60,7 @@ export default function TagFilter ({ aggregatedTags }) {
             <button
               key={tag}
               {...className && { className }}
-              {...getMenuItemProps({
+              {...getItemProps({
                 index,
                 item: { tag, id: tag.replace(/\s/g, '-') },
                 disabled: count === 0,
@@ -72,7 +72,7 @@ export default function TagFilter ({ aggregatedTags }) {
             </button>
           )
         })}
-      </ul>
+      </div>
       {!!tags.length && (
         <div
           css={css`

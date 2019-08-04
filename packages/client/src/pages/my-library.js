@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useLayoutEffect } from 'react'
 import { css } from '@emotion/core'
 
 import Collection from 'components/Collection'
+import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import { AuthenticationContext } from 'contexts/Authentication'
@@ -176,6 +177,7 @@ export default function MyLibraryPage () {
           )}
         </div>
       </main>
+      <Footer />
     </>
   )
 }

@@ -44,6 +44,10 @@ const countTags = memoize(matched => {
   return tagCounts
 })
 
+export function getUniqueTags () {
+  return Object.keys(countTags(allCollectionIds))
+}
+
 const filter = memoize((matched, tagCounts, tags) => {
   tagCounts = { ...tagCounts }
 

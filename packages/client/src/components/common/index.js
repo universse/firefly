@@ -18,6 +18,7 @@ export function ActionBar ({ children }) {
     <div
       css={css`
         display: flex;
+        flex: 0 0 auto;
         justify-content: space-between;
         margin-right: -0.5rem;
         width: ${2.5 * childrenCount + 0.5 * (childrenCount - 1)}rem;

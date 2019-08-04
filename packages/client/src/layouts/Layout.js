@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import IndexLayout from './IndexLayout'
-import Footer from 'components/Footer'
 import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import SignUpForm from 'components/SignUpForm'
@@ -59,7 +58,6 @@ export default function Layout ({
             <SignUpForm />
           </Modal>
         </Authentication>
-        <Footer />
         <MobileNavigation isIndexPage={isIndexPage || false} />
       </NormalizedCollections>
     </Media>

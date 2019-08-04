@@ -152,7 +152,7 @@ const icons = {
 
 export default function Icon ({ filled = false, icon, size, label }) {
   let className = 'feather'
-  filled && (className += ' feather--filled')
+  filled && (className += ' filled')
   size && (className += ` ${size}`)
 
   return (
