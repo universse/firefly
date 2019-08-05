@@ -18,14 +18,14 @@ module.exports = async ({
   createPage({
     path: '/',
     component: resolve('./src/templates/category.js'),
-    context: { category: 'all', isIndexPage: true }
+    context: { category: -1, isIndexPage: true }
   })
 
-  Categories.forEach(category =>
+  Categories.forEach((_, i) =>
     createPage({
-      path: createCategoryPath(category),
+      path: createCategoryPath(i),
       component: resolve('./src/templates/category.js'),
-      context: { category, isIndexPage: true }
+      context: { category: i, isIndexPage: true }
     })
   )
 

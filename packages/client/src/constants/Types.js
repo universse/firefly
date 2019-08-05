@@ -17,7 +17,7 @@ export const UrlType = {
   // publisher: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   cutOff: PropTypes.number.isRequired,
-  type: PropTypes.number.isRequired,
+  // type: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired
 }
 
@@ -26,7 +26,7 @@ export const UrlsType = PropTypes.arrayOf(PropTypes.exact(UrlType).isRequired)
 
 export const CollectionViewType = PropTypes.exact({
   id: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.number.isRequired,
   level: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   tags: TagsType,

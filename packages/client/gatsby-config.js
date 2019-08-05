@@ -80,7 +80,7 @@ module.exports = {
             type: 'collections',
             collection: 'collections',
             map: ({ category, level, name, suggestions, tags, urlIds }) => ({
-              category: Categories[category],
+              category,
               level,
               name,
               tags,

@@ -13,7 +13,11 @@ import { CollectionIdsType } from 'constants/Types'
 // import URLParamKeys from 'constants/URLParamKeys'
 import searchWorker from 'utils/searchWorker'
 
-export default function CategoryTemplate ({ data }) {
+export default function CategoryTemplate ({
+  data: {
+    allCollectionIds: { nodes }
+  }
+}) {
   const { isDesktop } = useContext(MediaContext)
 
   const {
@@ -49,14 +53,12 @@ export default function CategoryTemplate ({ data }) {
         searchInput,
         sort,
         JSON.stringify(tags),
-        data.allCollectionIds.nodes.length
-          ? JSON.stringify(data.allCollectionIds.nodes)
-          : null
+        nodes.length ? JSON.stringify(nodes) : null
       )
       .then(state => isPending && setState(state))
 
     return () => (isPending = false)
-  }, [data, searchInput, sort, tags])
+  }, [nodes, searchInput, sort, tags])
 
   return (
     <>

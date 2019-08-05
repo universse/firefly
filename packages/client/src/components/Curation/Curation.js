@@ -6,16 +6,14 @@ import { navigate } from 'gatsby'
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
+import DetailsInput from './DetailsInput'
 import DraggableItem from './DraggableItem'
 import DragLayer from './DragLayer'
 import LearningItemInput from './LearningItemInput'
-import TagInput from './TagInput'
-import Details from 'components/CollectionTemplate/Details'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
 import { MediaContext } from 'contexts/Media'
 import useOfflinePersistence from 'hooks/useOfflinePersistence'
-import DropdownOptions from 'constants/DropdownOptions'
 import LocalStorage from 'constants/LocalStorage'
 import {
   bottomBarHeightInRem,
@@ -34,14 +32,20 @@ function reducer (state, { type, payload }) {
         return payload
 
       case 'set':
-        return { ...state, ...payload }
+        const [key, value] = Object.entries(payload)[0]
+        draft[key] = value
+        break
 
       case 'add-tag':
         draft.tags.push(payload.tag)
         break
 
       case 'remove-tag':
-        draft.tags.splice(payload.index, 1)
+        draft.removed = draft.tags.splice(payload.index, 1)[0]
+        break
+
+      case 'undo-remove-tag':
+        draft.tags.splice(payload.index, 0, draft.removed)
         break
 
       case 'set-url':
@@ -86,6 +90,8 @@ function discard (id) {
   return offlineStorageWorker.removeItem(getDraftKey(id))
 }
 
+function invite () {}
+
 function publish (collection) {
   const { id } = collection
 
@@ -93,11 +99,13 @@ function publish (collection) {
     .createCollection(collection)
     .then(() => discard(id))
     .then(() =>
-      navigate(`/collection/${id}`, {
+      navigate(`/new-collection/${id}`, {
         state: { collection }
       })
     )
 }
+
+// TODO Suspense
 
 export default function Curation ({ id }) {
   const { isDesktop } = useContext(MediaContext)
@@ -120,12 +128,13 @@ export default function Curation ({ id }) {
       ? offlineStorageWorker
           .getItem(getDraftKey(id))
           .then(drafts => dispatch({ type: 'load', payload: drafts[id] }))
-      : firebaseWorker
-          .generateId('collections')
-          .then(id => dispatch({ type: 'set', payload: { id } }))
+      : firebaseWorker.generateId('collections').then(id => {
+          dispatch({ type: 'set', payload: { id } })
+          window.history.pushState({}, '', id)
+        })
   }, [id])
 
-  const shouldPersist = collection.name || collection.urls.length
+  const shouldPersist = name || urls.length || tags.length
 
   useOfflinePersistence(
     shouldPersist && {
@@ -133,7 +142,7 @@ export default function Curation ({ id }) {
     }
   )
 
-  const isPublishable = collection.name && collection.urls.length
+  const isPublishable = name && urls.length && tags.length
 
   return (
     <>
@@ -221,7 +230,12 @@ export default function Curation ({ id }) {
               top: ${headerHeightInRem + 1}rem;
             `}
           >
-            <Details category={'test'} level={level} tags={tags} />
+            <DetailsInput
+              category={category}
+              dispatch={dispatch}
+              level={level}
+              tags={tags}
+            />
           </div>
           {/* tag popular tags for different category */}
           {/* url */}
@@ -317,7 +331,7 @@ export default function Curation ({ id }) {
             <button
               aria-label='Invite Collaborators'
               className='IconButton'
-              onClick={() => {}}
+              onClick={() => invite()}
               type='button'
             >
               <Icon icon='user-plus' />

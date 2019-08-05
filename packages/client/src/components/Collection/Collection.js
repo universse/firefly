@@ -1,7 +1,7 @@
 import React, { memo, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { DifficultyLevels } from 'common'
+import { Categories, DifficultyLevels } from 'common'
 import { Link } from 'gatsby'
 
 import Tags from './Tags'
@@ -37,7 +37,9 @@ function Collection ({ id, isSaved }) {
               justify-content: space-between;
             `}
           >
-            <Category to={createCategoryPath(category)}>{category}</Category>
+            <Category to={createCategoryPath(category)}>
+              {Categories[category]}
+            </Category>
             <div>
               <div
                 css={css`

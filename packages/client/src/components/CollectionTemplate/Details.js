@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
-import { DifficultyLevels } from 'common'
+import { Categories, DifficultyLevels } from 'common'
 
 import Tags from 'components/Collection/Tags'
 import { ProgressBar } from 'components/common'
@@ -39,7 +39,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
           <h4>Category</h4>
         </div>
         <Link className='Category' to={createCategoryPath(category)}>
-          {category}
+          {Categories[category]}
         </Link>
       </div>
       <div
@@ -101,7 +101,7 @@ export default function Details ({ category, level, name, percentage, tags }) {
 }
 
 Details.propTypes = {
-  category: PropTypes.string.isRequired,
+  category: PropTypes.number.isRequired,
   level: PropTypes.number.isRequired,
   name: PropTypes.string,
   percentage: PropTypes.number,

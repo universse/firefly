@@ -11,10 +11,7 @@ import { getNormalizedPathname } from 'utils/pathnameUtils'
 import { createCategoryPath } from '../../../gatsby/utils'
 
 const scrollButtonWidthInPx = baseFontSize * scrollButtonWidthInRem
-const CategoryPaths = [
-  '/',
-  ...Categories.map(category => createCategoryPath(category))
-]
+const CategoryPaths = ['/', ...Categories.map((_, i) => createCategoryPath(i))]
 
 function Filters ({ handleScroll, pathname, slider }) {
   const { isDesktop } = useContext(MediaContext)

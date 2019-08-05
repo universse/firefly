@@ -57,11 +57,14 @@ export default function useComboBox ({ onSelect }) {
       },
       onChange: e => {
         setIsOpen(!!e.target.value)
+        setHighlightedIndex(-1)
         onChange && onChange(e)
       },
       onClick: openMenu,
       onFocus: openMenu,
       onKeyDown: e => {
+        if (!isOpen) return
+
         switch (e.key) {
           case 'ArrowDown':
             e.preventDefault()

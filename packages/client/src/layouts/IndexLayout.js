@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { toTitleCase } from 'common'
+import { Categories, toTitleCase } from 'common'
 
 import CategoryFilter from 'components/CategoryFilter'
 import Footer from 'components/Footer'
@@ -105,7 +105,7 @@ export default function IndexLayout ({ category, children, pathname }) {
 
   return (
     <>
-      <SEO title={category === 'all' ? '' : toTitleCase(category)} />
+      <SEO title={category === -1 ? '' : toTitleCase(Categories[category])} />
       <section id='Hero'>
         <Hero />
       </section>
@@ -209,7 +209,7 @@ export default function IndexLayout ({ category, children, pathname }) {
 }
 
 IndexLayout.propTypes = {
+  category: PropTypes.number.isRequired,
   children: PropTypes.node.isRequired,
-  pathname: PropTypes.string.isRequired,
-  category: PropTypes.string
+  pathname: PropTypes.string.isRequired
 }

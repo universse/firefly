@@ -68,7 +68,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.object.isRequired,
   pageContext: PropTypes.shape({
-    category: PropTypes.string,
+    category: PropTypes.number,
     isIndexPage: PropTypes.bool,
     noSearch: PropTypes.bool
   }).isRequired

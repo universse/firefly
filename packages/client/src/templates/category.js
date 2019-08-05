@@ -13,7 +13,7 @@ export const collections = graphql`
 `
 
 export const query = graphql`
-  query($category: String) {
+  query($category: Int) {
     allCollectionIds: allCollections(filter: { category: { eq: $category } }) {
       ...collections
     }

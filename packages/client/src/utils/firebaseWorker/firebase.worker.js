@@ -111,48 +111,50 @@ export async function createCollection (collectionData) {
 
   try {
     await batch.commit()
-    // collection.id = collectionDoc.id.toLowerCase()
-    return true
   } catch {
     throw new Error()
   }
 }
 
-// const cache = {}
+const cache = {}
 
-// export async function fetchCollection (id) {
-//   if (cache[id]) {
-//     return cache[id]
-//   }
+export async function fetchCollection (id) {
+  if (cache[id]) {
+    return cache[id]
+  }
 
-//   const collectionRef = firestore.collection(COLLECTIONS).doc(id)
+  const collectionRef = firestore.collection(COLLECTIONS).doc(id)
 
-//   try {
-//     const collectionDoc = await collectionRef.get()
-//     if (collectionDoc.exists) {
-//       const collection = collectionDoc.data()
+  try {
+    const collectionDoc = await collectionRef.get()
+    if (!collectionDoc.exists) throw new Error()
 
-//       const urlsRef = await firestore
-//         .collection(URLS)
-//         .where('collectionId', '==', id).get().then(snapshot => snapshot.forEach((doc, i) => ))
+    const collection = collectionDoc.data()
 
-//       await Promise.all(
-//         urlIds.map(async (id, i) => {
-//           const urlRef = firestore.collection(URLS).doc(id)
-//           const doc = await urlRef.get()
-//           collection.us[i] = { id, ...doc.data() }
-//         })
-//       )
+    const urlsObj = {}
+    await firestore
+      .collection(URLS)
+      .where('collectionId', '==', id)
+      .get()
+      .then(snapshot =>
+        snapshot.forEach((doc, i) => {
+          urlsObj[doc.id] = doc.data()
+        })
+      )
 
-//       cache[id] = collection
+    collection.urls = []
+    collection.urlIds.forEach((id, i) => {
+      collection.urls[i] = { id, ...urlsObj[id] }
+    })
 
-//       return collection
-//     }
-//     throw new Error()
-//   } catch {
-//     throw new Error()
-//   }
-// }
+    delete collection.urlIds
+    cache[id] = collection
+
+    return collection
+  } catch {
+    throw new Error()
+  }
+}
 
 export async function fetchLoveCount (id) {
   try {
@@ -266,28 +268,28 @@ export async function action ({ id, action }) {
   }
 }
 
-const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
-const id = firestore.collection(COLLECTIONS).doc().id
-const session = Date.now() + ''
-let index = 0
+// const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
+// const id = firestore.collection(COLLECTIONS).doc().id
+// const session = Date.now() + ''
+// let index = 0
 
 // eslint-disable-next-line
-import 'firebase/storage'
+// import 'firebase/storage'
 
-export async function uploadScreenRecordings (events) {
-  try {
-    await firebase
-      .storage()
-      .ref()
-      .child('SRs')
-      .child(date)
-      .child(auth.currentUser ? auth.currentUser.uid : id)
-      .child(session)
-      .child(index + '.json')
-      .putString(JSON.stringify(events))
+// export async function uploadScreenRecordings (events) {
+//   try {
+//     await firebase
+//       .storage()
+//       .ref()
+//       .child('SRs')
+//       .child(date)
+//       .child(auth.currentUser ? auth.currentUser.uid : id)
+//       .child(session)
+//       .child(index + '.json')
+//       .putString(JSON.stringify(events))
 
-    index++
-  } catch {
-    throw new Error()
-  }
-}
+//     index++
+//   } catch {
+//     throw new Error()
+//   }
+// }

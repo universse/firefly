@@ -9,8 +9,11 @@
   height: 2rem;
   margin: 0 0.5rem 0.5rem 0;
   padding: 0 0.75rem;
+}
 
-  &:hover {
+button,
+a {
+  &.Chip:hover {
     background-color: var(--gray200);
   }
 }

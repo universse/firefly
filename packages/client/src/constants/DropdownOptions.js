@@ -1,12 +1,12 @@
-import { Categories, DifficultyLevels } from 'common'
+import { Categories, DifficultyLevels, toTitleCase } from 'common'
 
 export default {
   CATEGORY_OPTIONS: Categories.map((category, i) => ({
-    label: category,
+    label: toTitleCase(category),
     value: i
   })),
   DIFFICULTY_LEVEL_OPTIONS: DifficultyLevels.map((level, i) => ({
-    label: level,
+    label: toTitleCase(level),
     value: i
   }))
 }

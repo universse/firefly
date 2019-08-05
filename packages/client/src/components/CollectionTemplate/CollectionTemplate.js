@@ -10,7 +10,6 @@ import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
 import Icon from 'assets/icons'
-// import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import { UserDataContext } from 'contexts/UserData'
@@ -27,21 +26,11 @@ import { CollectionViewType } from 'constants/Types'
 import { logClickAction } from 'utils/amplitude'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { BackButton } from 'components/common'
-// import { getParamFromPathname } from 'utils/pathnameUtils'
-// import { createCollectionPath } from '../../gatsby/utils'
 
 export default function CollectionTemplate ({
   data: { collections },
   location
 }) {
-  // const normalizedCollections = useContext(NormalizedCollectionsContext)
-  // const [collection, setCollection] = useState(
-  //   () => collections || (location.state && location.state.collection)
-  // )
-
-  // const [isLoading, setIsLoading] = useState(!collection)
-  // const [hasError, setHasError] = useState(false)
-
   const userData = useContext(UserDataContext)
   const onActionClick = useContext(UserDataDispatchContext)
   const setActiveModalType = useContext(SetModalContext)
@@ -50,31 +39,9 @@ export default function CollectionTemplate ({
 
   const { isDesktop } = useContext(MediaContext)
 
-  // const { id, name } = collection || {
-  //   id: getParamFromPathname(location.pathname)
-  // }
-
   const { check, love, save } = userData || {}
   const isSaved = save && !!save[id]
   const isLoved = love && !!love[id]
-
-  // useEffect(() => {
-  //   if (!normalizedCollections || collection) {
-  //     return
-  //   }
-
-  //   if (normalizedCollections[id.toLowerCase()]) {
-  //     const { name } = normalizedCollections[id.toLowerCase()]
-  //     navigate(createCollectionPath({ id, name }), { replace: true })
-  //     return
-  //   }
-
-  //   firebaseWorker
-  //     .fetchCollection(id)
-  //     .then(collection => setCollection(parseCollectionData(collection)))
-  //     .catch(() => setHasError(true))
-  //     .finally(() => setIsLoading(false))
-  // }, [collection, id, normalizedCollections])
 
   return (
     <>

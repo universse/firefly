@@ -14,17 +14,18 @@
   .Category {
     color: var(--black900);
     font-size: 0.9375rem;
-    line-height: 1.25rem;
   }
 
   h4 {
     font-weight: 600;
+    line-height: 1.25rem;
   }
 
   span,
   .Category {
     display: inline-block;
     font-weight: 400;
+    line-height: 1.5rem;
     text-transform: capitalize;
   }
 
@@ -34,6 +35,74 @@
     &:hover {
       border-color: var(--accent500);
       color: var(--accent500);
+    }
+  }
+
+  input,
+  summary {
+    font-size: 0.9375rem;
+    height: 1.5rem;
+  }
+
+  input {
+    padding-left: 1.5rem;
+    width: 100%;
+  }
+
+  details,
+  [role="combobox"] {
+    position: relative;
+  }
+
+  summary {
+    align-items: center;
+    color: var(--black900);
+    display: flex;
+    position: relative;
+    text-transform: capitalize;
+    width: 100%;
+  }
+
+  [role="listbox"],
+  [role="menu"] {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: var(--shadow-02);
+    overflow: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  [role="menuitem"],
+  [role="option"] {
+    align-items: center;
+    color: var(--black800);
+    display: flex;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    height: 2.5rem;
+    padding-left: 1rem;
+    width: 100%;
+
+    &.highlighted {
+      background-color: var(--gray200);
+    }
+
+    &.selected {
+      color: var(--black900);
+      font-weight: 600;
+    }
+  }
+
+  .Chip {
+    button {
+      color: var(--gray600);
+      padding-left: 0.75rem;
+
+      &:hover {
+        color: var(--black900);
+      }
     }
   }
 }

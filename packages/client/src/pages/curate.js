@@ -12,8 +12,8 @@ import { hasSignedIn } from 'utils/localStorageUtils'
 import { getParamFromPathname } from 'utils/pathnameUtils'
 
 export default function CuratePage ({
-  pageContext: { matchPath },
-  location: { pathname }
+  location: { pathname },
+  pageContext: { matchPath }
 }) {
   const id = getParamFromPathname(pathname, matchPath)
 

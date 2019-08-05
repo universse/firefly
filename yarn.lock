@@ -5429,10 +5429,10 @@ ccount@^1.0.0:
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-1.0.4.tgz#9cf2de494ca84060a2a8d2854edd6dfb0445f386"
   integrity sha512-fpZ81yYfzentuieinmGnphk0pLkOTMm6MZdVqwd77ROvhko6iujLNGrHH5E7utq3ygWklwfmwuG+A7P+NpqT6w==
 
-cfb@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/cfb/-/cfb-1.1.2.tgz#5dfff9813eb37757597272dae3da3b37b3edcc44"
-  integrity sha512-FAEjGHtrAF027TFkhDmTDNbRf97C33jBXRa9ODeabZRqYDglsq/F5uRpJfV5BitCH4yiyplHNBKx2xOhQb12PA==
+cfb@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/cfb/-/cfb-1.1.3.tgz#05de6816259c8e8bc32713aba905608ee385df66"
+  integrity sha512-joXBW0nMuwV9no7UTMiyVJnQL6XIU3ThXVjFUDHgl9MpILPOomyfaGqC290VELZ48bbQKZXnQ81UT5HouTxHsw==
   dependencies:
     adler-32 "~1.2.0"
     commander "^2.16.0"
@@ -8897,10 +8897,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-cli@^2.7.26:
-  version "2.7.26"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.7.26.tgz#e1194d92aa57ee739c1818fce63d502dde6dff09"
-  integrity sha512-QqCppRfFTeJM1ce4lf/WEZHXdcKAATq1WqgwjLpDfUzeZI9XZSzSh74v1+wGZh8TA+J5hzkieTdQV7eP5YRjYQ==
+gatsby-cli@^2.7.27:
+  version "2.7.27"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.7.27.tgz#be9180dd9312c3beb36ad929794bc40e104c2329"
+  integrity sha512-Er1ymd/itUxVBzS1d9u/d+QUKWFLmQlbF6H2i5usAUdyQmvxbyBwxP8uOIsvPONX47D77VE9zMmHI1Fdm1/RoQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
@@ -9224,10 +9224,10 @@ gatsby-transformer-sharp@^2.2.5:
     semver "^5.6.0"
     sharp "^0.22.1"
 
-gatsby@2.13.50:
-  version "2.13.50"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.13.50.tgz#6556a6739fa4d9662d69e72e30a5bea180945158"
-  integrity sha512-30e9L6QcsOiQ04/gjH74IM6rsOEgXJGcKCNDEXTxTqiUpVIELZHy3+8lJLhDlGNxunL4GYI9vqq7k8NleKTAlA==
+gatsby@2.13.51:
+  version "2.13.51"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.13.51.tgz#eff389308798db896038326b551208dc425356c8"
+  integrity sha512-Ax8eG9WTpcRifxQSEkjWLtHB+lCWgWAlhRWu9JYVFOKRRx70xYztOSf7roE9pTDGbpVvPiAoyz7AgpXBZAo1Qg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -9285,7 +9285,7 @@ gatsby@2.13.50:
     flat "^4.0.0"
     fs-exists-cached "1.0.0"
     fs-extra "^5.0.0"
-    gatsby-cli "^2.7.26"
+    gatsby-cli "^2.7.27"
     gatsby-core-utils "^1.0.3"
     gatsby-graphiql-explorer "^0.2.3"
     gatsby-link "^2.2.4"
@@ -16799,19 +16799,19 @@ rmdir@^1.2.0:
   dependencies:
     node.flow "1.2.3"
 
-rrweb-snapshot@^0.7.12:
-  version "0.7.12"
-  resolved "https://registry.yarnpkg.com/rrweb-snapshot/-/rrweb-snapshot-0.7.12.tgz#c0f65c1d2213290f885874f25d42444c2a06770c"
-  integrity sha512-+Bai8uN5ln9jN9EpmKR4CbBPKpWPER+YEPIXyZh8ECoPLJgn94LNZvA9pF5DKGlLoGxT1pdjKfV1dLpr+ioUqg==
+rrweb-snapshot@^0.7.13:
+  version "0.7.13"
+  resolved "https://registry.yarnpkg.com/rrweb-snapshot/-/rrweb-snapshot-0.7.13.tgz#4c51b972a604b9de3bdd4122ecfed42b98b8bd08"
+  integrity sha512-KF4NMslO31YNXyAEhbmkvxnTXrdElcSYmvirkiESIMXXv/0T3viPgjlzEzHObeombD+sivUtyaOs2v3ZPbtLzA==
 
-rrweb@^0.7.18:
-  version "0.7.18"
-  resolved "https://registry.yarnpkg.com/rrweb/-/rrweb-0.7.18.tgz#696b86a20d9f8e58729b27f27ab4f0f839b80a6e"
-  integrity sha512-kH1Cit+1jvbriC8WRuphgDhsYuKO+mexbmZUFEBj6LvOXct6+1cW9pyRyGkfwx9OBvuzosTbrQd3QVGGUZnBnQ==
+rrweb@^0.7.19:
+  version "0.7.19"
+  resolved "https://registry.yarnpkg.com/rrweb/-/rrweb-0.7.19.tgz#e4b32e6e3ba23a6c666f152bb1c419d235da3fb3"
+  integrity sha512-cDlFvt0adz5++qDpOO2mC/1R8b8YhM26xDsKd4k+N11fndJLdugl7rChsXcGHIGrM9+pv4olBhCV+CtLXw/zNQ==
   dependencies:
     "@types/smoothscroll-polyfill" "^0.3.0"
     mitt "^1.1.3"
-    rrweb-snapshot "^0.7.12"
+    rrweb-snapshot "^0.7.13"
     smoothscroll-polyfill "^0.4.3"
 
 rsvp@^4.8.4:
@@ -19936,13 +19936,13 @@ xhr@^2.0.1:
     parse-headers "^2.0.0"
     xtend "^4.0.0"
 
-xlsx@^0.14.4:
-  version "0.14.4"
-  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.14.4.tgz#7c2ccfce81d56282df55d0cea76722ef83986c02"
-  integrity sha512-AYVNzZKmU9pxDf4d6dSOy52EivzRnJ5lo0Jyxqk7Pz5G+8dMCUsO1PdFlGj6C6MQZ8xBRPinmIpTHYzI2DyfXg==
+xlsx@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.15.0.tgz#7e5633bbeb3995373b8b9960deb6fbda912ab602"
+  integrity sha512-H2m6K+YdjQWhpquA0eU3Ft0Nahu9CDRKRIvHqFILNeweEvC7M5KR167pYZ46ohuaZT7gcnWW4rz8nstjzrJ3+w==
   dependencies:
     adler-32 "~1.2.0"
-    cfb "^1.1.2"
+    cfb "^1.1.3"
     codepage "~1.14.0"
     commander "~2.17.1"
     crc-32 "~1.2.0"

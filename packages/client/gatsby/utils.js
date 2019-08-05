@@ -1,4 +1,4 @@
-const { animate } = require('common')
+const { Categories, animate } = require('common')
 
 function slugify (str) {
   return str
@@ -13,7 +13,7 @@ module.exports = {
   createCollectionPath: ({ id, name }) =>
     `/collection/${slugify(name)}-${id.toLowerCase()}`,
 
-  createCategoryPath: category => `/category/${slugify(category)}`,
+  createCategoryPath: category => `/category/${slugify(Categories[category])}`,
 
   isIndexPage: pathname => pathname.startsWith('/category') || pathname === '/',
 
