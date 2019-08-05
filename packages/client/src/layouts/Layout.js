@@ -20,7 +20,8 @@ export default function Layout ({
   children,
   location
 }) {
-  const normalizedPathname = getNormalizedPathname(location.pathname)
+  const { pathname } = location
+  const normalizedPathname = getNormalizedPathname(pathname)
 
   if (normalizedPathname === '/offline-plugin-app-shell-fallback') return null
 
@@ -30,7 +31,7 @@ export default function Layout ({
     <Media>
       <NormalizedCollections>
         <Authentication>
-          <Modal>
+          <Modal pathname={pathname}>
             <a className='skip-nav' href='#main'>
               Skip to Main Content
             </a>
@@ -38,14 +39,11 @@ export default function Layout ({
               <Header noSearch={!!isIndexPage || !!noSearch} />
             )}
             <LatestActivity>
-              <SetSnackbar location={location}>
+              <SetSnackbar pathname={pathname}>
                 <UserData canUndo={normalizedPathname === '/my-library'}>
                   {isIndexPage ? (
                     <URLParams location={location}>
-                      <IndexLayout
-                        category={category}
-                        pathname={location.pathname}
-                      >
+                      <IndexLayout category={category} pathname={pathname}>
                         {children}
                       </IndexLayout>
                     </URLParams>

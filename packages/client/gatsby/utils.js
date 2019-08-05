@@ -8,7 +8,7 @@ function slugify (str) {
     .replace(/-+$/, '')
 }
 
-// TODO get unique categories for automation, unique tags for search
+// TODO fetch categories from database for automation
 module.exports = {
   createCollectionPath: ({ id, name }) =>
     `/collection/${slugify(name)}-${id.toLowerCase()}`,

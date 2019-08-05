@@ -11,7 +11,7 @@ import Snackbar from 'components/Snackbar'
 
 export const SetSnackbarContext = createContext()
 
-export default function SetSnackbar ({ children, location }) {
+export default function SetSnackbar ({ children, pathname }) {
   const [snackbar, setSnackbar] = useState({ isOpen: false })
 
   const openSnackbar = useCallback(
@@ -29,7 +29,7 @@ export default function SetSnackbar ({ children, location }) {
 
   useLayoutEffect(() => {
     dismissSnackbar()
-  }, [dismissSnackbar, location])
+  }, [dismissSnackbar, pathname])
 
   useEffect(() => {
     if (snackbar.isOpen && snackbar.timeout) {
@@ -55,5 +55,5 @@ export default function SetSnackbar ({ children, location }) {
 
 SetSnackbar.propTypes = {
   children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired
+  pathname: PropTypes.string.isRequired
 }

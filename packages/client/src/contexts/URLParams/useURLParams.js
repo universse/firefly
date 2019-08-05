@@ -1,8 +1,6 @@
-import { useEffect, useReducer, useMemo, useContext } from 'react'
+import { useEffect, useReducer, useMemo } from 'react'
 import { navigate } from 'gatsby'
 
-import { ModalContext } from 'contexts/Modal'
-import ModalTypes from 'constants/ModalTypes'
 import URLParamKeys from 'constants/URLParamKeys'
 
 function constructHref (searchInput, sort, tags) {
@@ -33,43 +31,25 @@ function initialize (search) {
   }
 }
 
-let listener = null
-
 function reducer (state, payload) {
   return payload.init ? payload : { ...state, ...payload, init: false }
 }
 
 export default function useURLParams ({ pathname, search, state }) {
   const [query, queryDispatch] = useReducer(reducer, search, initialize)
-  const activeModalType = useContext(ModalContext)
 
   useEffect(() => {
     if (!state || !state.programmatic) queryDispatch(initialize(search))
   }, [pathname, search, state])
 
   useEffect(() => {
-    if (activeModalType === ModalTypes.MOBILE_FILTER) {
-      window.removeEventListener('popstate', listener)
+    const resetQuery = () => queryDispatch(initialize(window.location.search))
+    window.addEventListener('popstate', resetQuery)
 
-      listener = () => {
-        queryDispatch({
-          ...initialize(search),
-          init: false
-        })
-        listener = null
-      }
-
-      window.addEventListener('popstate', listener, { once: true })
-    } else {
-      if (listener) return
-
-      listener = () => {
-        queryDispatch(initialize(window.location.search))
-        listener = null
-      }
-      window.addEventListener('popstate', listener, { once: true })
+    return () => {
+      window.removeEventListener('popstate', resetQuery)
     }
-  }, [activeModalType, search])
+  }, [])
 
   useEffect(() => {
     const { init, searchInput, sort, tags } = query

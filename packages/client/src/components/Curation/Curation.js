@@ -106,7 +106,6 @@ function publish (collection) {
 }
 
 // TODO Suspense
-
 export default function Curation ({ id }) {
   const { isDesktop } = useContext(MediaContext)
 

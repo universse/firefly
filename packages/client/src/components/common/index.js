@@ -152,7 +152,6 @@ export function Difficulty (props) {
 
 export { OutboundLink }
 
-// TODO gradient
 export function ProgressBar ({ percentage }) {
   return (
     <div className='ProgressBar'>

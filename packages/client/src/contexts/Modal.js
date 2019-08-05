@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from './SetModal'
+import { MediaContext } from 'contexts/Media'
+import ModalTypes from 'constants/ModalTypes'
 
 export const ModalContext = createContext()
 
-export default function Modal ({ children }) {
+export default function Modal ({ children, pathname }) {
   const [activeModalType, setActiveModalType] = useState()
 
   const { isDesktop } = useContext(MediaContext)
@@ -31,13 +32,20 @@ export default function Modal ({ children }) {
   }, [activeModalType, isDesktop])
 
   useEffect(() => {
-    const closeModal = () => setActiveModalType(null)
+    const closeModal = () =>
+      setActiveModalType(activeModalType =>
+        activeModalType === ModalTypes.MOBILE_FILTER ? activeModalType : null
+      )
     window.addEventListener('popstate', closeModal)
 
     return () => {
       window.removeEventListener('popstate', closeModal)
     }
   }, [])
+
+  useEffect(() => {
+    setActiveModalType(null)
+  }, [pathname])
 
   return (
     <ModalContext.Provider value={activeModalType}>
@@ -49,5 +57,6 @@ export default function Modal ({ children }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  pathname: PropTypes.string.isRequired
 }
