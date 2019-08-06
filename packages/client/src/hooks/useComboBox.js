@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 import useId from './useId'
 
@@ -6,6 +6,8 @@ export default function useComboBox ({ onSelect }) {
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   const [isOpen, setIsOpen] = useState(false)
   const items = useRef([])
+  const menuRef = useRef()
+  const shouldScroll = useRef(false)
 
   const activeDescendant =
     (items.current[highlightedIndex] && items.current[highlightedIndex].id) ||
@@ -64,6 +66,7 @@ export default function useComboBox ({ onSelect }) {
       onFocus: openMenu,
       onKeyDown: e => {
         if (!isOpen) return
+        shouldScroll.current = true
 
         switch (e.key) {
           case 'ArrowDown':
@@ -102,8 +105,19 @@ export default function useComboBox ({ onSelect }) {
     'aria-labelledby': labelId,
     id: menuId,
     onMouseLeave: () => setHighlightedIndex(-1),
+    ref: menuRef,
     role: 'listbox'
   }
+
+  useEffect(() => {
+    if (highlightedIndex > -1 && shouldScroll.current) {
+      menuRef.current.children[highlightedIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest'
+      })
+    }
+  }, [highlightedIndex])
 
   function getItemProps ({ index, item }) {
     items.current.push(item)
@@ -112,7 +126,10 @@ export default function useComboBox ({ onSelect }) {
     return {
       'aria-selected': index === highlightedIndex,
       onClick: select,
-      onMouseEnter: () => setHighlightedIndex(index),
+      onMouseMove: () => {
+        shouldScroll.current = false
+        setHighlightedIndex(index)
+      },
       role: 'option',
       tabIndex: -1,
       ...props
