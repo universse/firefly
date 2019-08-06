@@ -113,7 +113,7 @@ export default function DetailsInput ({ category, level, tags, dispatch }) {
 }
 
 DetailsInput.propTypes = {
-  category: PropTypes.string.isRequired,
+  category: PropTypes.number.isRequired,
   dispatch: PropTypes.func.isRequired,
   level: PropTypes.number.isRequired,
   tags: TagsType
