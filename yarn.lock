@@ -4383,7 +4383,22 @@ autoprefixer@^9.5.1, autoprefixer@^9.6.0:
     postcss "^7.0.17"
     postcss-value-parser "^4.0.0"
 
-aws-sdk@^2.503.0, aws-sdk@^2.7.0:
+aws-sdk@^2.504.0:
+  version "2.504.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.504.0.tgz#d7111b3f5117548935d68c717d72bbf57a9362f9"
+  integrity sha512-azOX54oovJv0zWzO23fBgIprwsvx8KUuMR+cAUAOx23D8LJ5S+sl3UYS9Q1X4qF/blBTa4+ZNawZDV0N1HiQmw==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.7.0:
   version "2.503.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.503.0.tgz#983b8c03aa919060a81127cb9d94fbb1667f4cf2"
   integrity sha512-DPwRxhPYCGNvKL9rUhpAoOVpMRyISbVMlXykLQknYo7wyOI+jYcyA7t8H7IFPAqj4ZG+R+Au9tO/KT4im+2gbg==
@@ -7086,10 +7101,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-dnd-core@^9.3.2:
-  version "9.3.2"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-9.3.2.tgz#d30f4a53fc296d6fedee05ed690db97974c7decc"
-  integrity sha512-cc6aAFmLDYdXguC+YbKB+SCsXlNd+LS/+T22M4OpmehWI3wBqXBik3o+myjr19ie3K11S3ATTiwir7b0s3TAhw==
+dnd-core@^9.3.4:
+  version "9.3.4"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-9.3.4.tgz#56b5fdc165aa7d102506d3d5a08ec1fa789e0775"
+  integrity sha512-sDzBiGXgpj9bQhs8gtPWFIKMg4WY8ywI9RI81rRAUWI4oNj/Sm/ztjS67UjCvMa+fWoQ2WNIV3U9oDqeBN0+2g==
   dependencies:
     "@types/asap" "^2.0.0"
     "@types/invariant" "^2.2.30"
@@ -15965,35 +15980,35 @@ react-dev-utils@^4.2.3:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dnd-html5-backend@^9.3.2:
-  version "9.3.2"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-9.3.2.tgz#4833043aec91e69dd968ac136deebf7535f5eb9d"
-  integrity sha512-EsQLA3fikHxkkvs6COnEdo3McJg2Q82z6EQxo7s3yqez4LAutrcp7pf5/eyW1nFDcdN3JNx2p+TrkjVjEd5exw==
+react-dnd-html5-backend@^9.3.4:
+  version "9.3.4"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-9.3.4.tgz#5d1f5ac608206d7b294b7407b9e1a336589eedd7"
+  integrity sha512-s+Xu0j7fHV9bLMSaOCuX76baQKcZfycAx0EzDmkxcFXPBiiFlI8l6rzwURdSJCjNcvLYXd8MLb4VkSNSq5ISZQ==
   dependencies:
-    dnd-core "^9.3.2"
+    dnd-core "^9.3.4"
 
 react-dnd-mouse-backend@^1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/react-dnd-mouse-backend/-/react-dnd-mouse-backend-1.0.0-rc.2.tgz#bc114d2e91ee6d079adc6920c22167a9780185af"
   integrity sha512-mmbyXvg6YGKxdi7gx+ICFD0pFEMMiG1x7FBSu8ZYXBCqxVPkm8pkhrHfzd8AY89YmcWoUeqL3/DSU0u9lkwbsQ==
 
-react-dnd-touch-backend@^9.3.3:
-  version "9.3.3"
-  resolved "https://registry.yarnpkg.com/react-dnd-touch-backend/-/react-dnd-touch-backend-9.3.3.tgz#c7a07b27fd5352bd7b10e2986f1e36394864f3c9"
-  integrity sha512-CG3IsvcQFQgGam3gXAaDkxjjYsCwCXsQ5EqxRwu0O0mvtrRKmH5Dx657bFgndMGQo8D89Whf7xSf7pO5FzQ+8A==
+react-dnd-touch-backend@^9.3.4:
+  version "9.3.4"
+  resolved "https://registry.yarnpkg.com/react-dnd-touch-backend/-/react-dnd-touch-backend-9.3.4.tgz#6a93d06967a400dad2154b49e273f93aeee1cdfe"
+  integrity sha512-AREEmbttYY2c8y8lPYilzQksskArkbP0eCSrmilyxmUqQ1pzTRaYFl/5e0t3YKNBjgR47l44KFAHl37pTs81Pw==
   dependencies:
     "@types/invariant" "^2.2.30"
-    dnd-core "^9.3.2"
+    dnd-core "^9.3.4"
     invariant "^2.2.4"
 
-react-dnd@^9.3.2:
-  version "9.3.2"
-  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-9.3.2.tgz#e06c0f566201fbd4617db6d023fcb45629874bbc"
-  integrity sha512-3xwrd+z25CplNmO1j6BmvFlL72fK0IjW0WqCV7NCYLvKCjomZLhf3ZPAfCyCOSP9riTglnh53OV47M3ydo25ZA==
+react-dnd@^9.3.4:
+  version "9.3.4"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-9.3.4.tgz#ebab4b5b430b72f3580c058a29298054e1f9d2b8"
+  integrity sha512-UUtyoHFRrryMxVMEGYa3EdZIdibnys/ax7ZRs6CKpETHlnJQOFhHE3rpI+ManvKS0o3MFc1DZ+aoudAFtrOvFA==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.1"
     "@types/shallowequal" "^1.1.1"
-    dnd-core "^9.3.2"
+    dnd-core "^9.3.4"
     hoist-non-react-statics "^3.3.0"
     shallowequal "^1.1.0"
 
@@ -16114,10 +16129,10 @@ react-test-renderer@0.0.0-375616788:
     react-is "0.0.0-375616788"
     scheduler "0.0.0-375616788"
 
-react-use-gesture@^5.2.3:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-5.2.3.tgz#3505b45f1076963040ed6204a81ee5f252d55b36"
-  integrity sha512-aXpit9o3EhmlM/erBu9wzWNrx7Wbms/ha38I/XSF+ybUdZ9idhWjy4LODGfj+wqMNNdmphLfYLPO+WfApYXAiA==
+react-use-gesture@^5.2.4:
+  version "5.2.4"
+  resolved "https://registry.yarnpkg.com/react-use-gesture/-/react-use-gesture-5.2.4.tgz#c84ebe0d79703fd90cb26a220812c2f430d3e40d"
+  integrity sha512-oay95IPKBTAIqsZWwPAXJVVlDCpXdg4y2kEKz8oGLSqewpmXsXC4vKlAZq/ZDwZa4djzWlK1pnSIJY2iylx4QQ==
 
 react-virtualized@^9.21.1:
   version "9.21.1"
@@ -17103,10 +17118,10 @@ serverless-http@^2.0.2:
   optionalDependencies:
     "@types/aws-lambda" "^8.10.19"
 
-serverless-offline@^5.8.0:
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-5.8.0.tgz#63733d45c79a80eb0c168e0b5a5e9c23bc5a5747"
-  integrity sha512-RgBeiHbcreDnkjVmHp3LpMag8weXgjeE8gxEAy8+BKm6w9NH80Fw+/8LQwLuuHdXFAqG/HoZ70t5L20eA5j3NQ==
+serverless-offline@^5.9.0:
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-5.9.0.tgz#eff42e4bfcb7ea6e174d0ad5903dabf2ee098e90"
+  integrity sha512-0pyzYNqVfMtdLJHaTO3/nZOPgwlSI53HlTnHWbl/4jk1iGAx0cT/z76uBSG3MwUMkhStqTqgc5RM/5rxX1c8Tw==
   dependencies:
     "@hapi/boom" "^7.4.2"
     "@hapi/h2o2" "^8.3.0"
