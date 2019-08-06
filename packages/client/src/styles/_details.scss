@@ -66,16 +66,26 @@
   [role="listbox"],
   [role="menu"] {
     background-color: #fff;
+    z-index: 2;
+  }
+
+  [role="menu"] {
     border-radius: 8px;
     box-shadow: var(--shadow-02);
     overflow: auto;
     position: absolute;
     width: 100%;
-    z-index: 2;
   }
 
-  [role="menuitem"],
-  [role="option"] {
+  [role="listbox"] {
+    max-height: 300px;
+    overflow-y: auto;
+    position: relative;
+    width: calc(100% + 1.5rem);
+  }
+
+  [role="option"],
+  [role="menuitem"] {
     align-items: center;
     color: var(--black800);
     display: flex;

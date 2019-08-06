@@ -66,18 +66,29 @@ export default function TagInput ({ dispatch, tags }) {
           {...getInputProps({ onChange: e => setInput(e.target.value) })}
         />
       </div>
-      <div style={{ marginTop: 8, maxHeight: 300 }} {...menuProps}>
-        {isOpen &&
-          input &&
-          matched.map((tag, index) => (
-            <button
-              key={tag}
-              {...highlightedIndex === index && { className: 'highlighted' }}
-              {...getItemProps({ index, item: { tag } })}
-            >
-              {tag}
-            </button>
-          ))}
+      <div
+        css={css`
+          border-radius: 8px;
+          box-shadow: var(--shadow-02);
+          margin-top: 8px;
+          overflow: hidden;
+          position: absolute;
+          width: 100%;
+        `}
+      >
+        <div {...menuProps}>
+          {isOpen &&
+            input &&
+            matched.map((tag, index) => (
+              <button
+                key={tag}
+                {...highlightedIndex === index && { className: 'highlighted' }}
+                {...getItemProps({ index, item: { tag } })}
+              >
+                {tag}
+              </button>
+            ))}
+        </div>
       </div>
     </div>
   )
