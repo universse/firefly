@@ -5,7 +5,7 @@ import SEO from 'components/SEO'
 import { Ghost } from 'assets/icons'
 import {
   headerHeightInRem,
-  mobileHeaderHeightInRem,
+  bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
 
@@ -18,7 +18,7 @@ export default function NotFoundPage () {
           align-items: center;
           display: flex;
           justify-content: center;
-          min-height: calc(100vh - ${mobileHeaderHeightInRem}rem);
+          min-height: calc(100vh - ${bottomBarHeightInRem}rem);
           padding: 2rem 0;
 
           ${screens.desktop} {

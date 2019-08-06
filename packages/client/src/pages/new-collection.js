@@ -13,10 +13,11 @@ export default function NewCollectionPage ({
   pageContext: { matchPath }
 }) {
   const { pathname, state } = location
+
   const id = getParamFromPathname(pathname, matchPath)
   const normalizedCollections = useContext(NormalizedCollectionsContext)
-  const [collection, setCollection] = useState(state && state.collection)
 
+  const [collection, setCollection] = useState(state && state.collection)
   const [isLoading, setIsLoading] = useState(!collection)
   const [hasError, setHasError] = useState(false)
 
@@ -38,13 +39,15 @@ export default function NewCollectionPage ({
       .finally(() => setIsLoading(false))
   }, [collection, id, normalizedCollections])
 
-  return collection ? (
-    <CollectionTemplate
-      data={{ collections: collection }}
-      location={location}
-    />
-  ) : (
-    <></>
+  return (
+    <>
+      {collection && (
+        <CollectionTemplate
+          data={{ collections: collection }}
+          location={location}
+        />
+      )}
+    </>
   )
 }
 
