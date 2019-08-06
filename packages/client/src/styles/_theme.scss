@@ -1,13 +1,10 @@
-$accent500: #006dfc;
-$danger: #da4453;
-
 :root {
   --accent500: #{$accent500};
   --accent900: #005dd6;
   --black100: rgba(0, 0, 0, 0.04);
   --black200: rgba(0, 0, 0, 0.08);
   --black300: rgba(0, 0, 0, 0.12); // border
-  --black400: rgba(0, 0, 0, 0.32);
+  // --black400: rgba(0, 0, 0, 0.32);
   --black500: rgba(0, 0, 0, 0.5);
   --black600: rgba(0, 0, 0, 0.6);
   --black800: rgba(0, 0, 0, 0.7);
@@ -44,12 +41,3 @@ $danger: #da4453;
   // --shadow-03: 0 3px 6px rgba(0, 0, 0, 0.2);
   --shadow-04: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
-
-$mobileWidth: 37.5rem;
-$desktopWidth: 58rem;
-
-$desktop: "screen and (min-width: #{$desktopWidth})";
-$nonDesktop: "screen and (max-width: #{$desktopWidth})";
-$mobile: "screen and (max-width: #{$mobileWidth})";
-$nonMobile: "screen and (min-width: #{$mobileWidth})";
-$tablet: "screen and (min-width: #{$mobileWidth}) and (max-width: #{$desktopWidth})";

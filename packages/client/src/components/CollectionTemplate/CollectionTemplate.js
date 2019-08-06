@@ -71,7 +71,7 @@ export default function CollectionTemplate ({
                   isLoved ? 'unlove' : 'love',
                   name
                 )}
-                className='IconButton Heart'
+                className='IconButton'
                 onClick={onActionClick}
                 type='button'
                 value={id}

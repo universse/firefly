@@ -1,1 +1,13 @@
 $bottom-bar-height: 3.5rem;
+
+$accent500: #006dfc;
+$danger: #da4453;
+
+$mobileWidth: 37.5rem;
+$desktopWidth: 58rem;
+
+$desktop: "screen and (min-width: #{$desktopWidth})";
+$nonDesktop: "screen and (max-width: #{$desktopWidth})";
+$mobile: "screen and (max-width: #{$mobileWidth})";
+$nonMobile: "screen and (min-width: #{$mobileWidth})";
+$tablet: "screen and (min-width: #{$mobileWidth}) and (max-width: #{$desktopWidth})";

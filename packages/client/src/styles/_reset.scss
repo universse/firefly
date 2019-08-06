@@ -17,67 +17,67 @@ h5,
 h6,
 p,
 button,
-blockquote,
-pre,
+// blockquote,
+// pre,
 a,
-abbr,
-acronym,
-address,
-cite,
-code,
-del,
-dfn,
-dialog,
-em,
+// abbr,
+// acronym,
+// address,
+// cite,
+// code,
+// del,
+// dfn,
+// dialog,
+// em,
 img,
-ins,
-q,
-s,
-samp,
-strike,
+// ins,
+// q,
+// s,
+// samp,
+// strike,
 strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
+// sub,
+// sup,
+// tt,
+// var,
+// b,
+// u,
+// i,
+// center,
+// dl,
+// dt,
+// dd,
 ol,
 ul,
 li,
-fieldset,
+// fieldset,
 form,
 label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
+// legend,
+// table,
+// caption,
+// tbody,
+// tfoot,
+// thead,
+// tr,
+// th,
+// td,
+// article,
 aside,
-canvas,
+// canvas,
 details,
-figure,
-figcaption,
+// figure,
+// figcaption,
 footer,
 header,
 hgroup,
 nav,
-output,
-ruby,
+// output,
+// ruby,
 section,
 summary,
-time,
-mark,
+// time,
+// mark,
 audio,
 video {
   border: 0;
@@ -89,11 +89,11 @@ video {
   vertical-align: baseline;
 }
 
-article,
+// article,
 aside,
 details,
-figcaption,
-figure,
+// figcaption,
+// figure,
 footer,
 header,
 hgroup,
@@ -169,38 +169,38 @@ input {
   padding: 0;
 }
 
-abbr[title] {
-  border-bottom: none;
-  text-decoration: underline;
-  text-decoration: underline dotted;
-}
+// abbr[title] {
+//   border-bottom: none;
+//   text-decoration: underline;
+//   text-decoration: underline dotted;
+// }
 
 ol,
 ul {
   list-style: none;
 }
 
-blockquote,
-q {
-  quotes: none;
-}
+// blockquote,
+// q {
+//   quotes: none;
+// }
 
-blockquote::before,
-blockquote::after,
-q::before,
-q::after {
-  content: "";
-  content: none;
-}
+// blockquote::before,
+// blockquote::after,
+// q::before,
+// q::after {
+//   content: "";
+//   content: none;
+// }
 
 strong {
   font-weight: 700;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
+// table {
+//   border-collapse: collapse;
+//   border-spacing: 0;
+// }
 
 a {
   text-decoration: none;

@@ -8,7 +8,13 @@
 		"stylelint-order"
 	],
   "processors": [
-    "stylelint-processor-styled-components"
+    [
+      "stylelint-processor-styled-components", {
+        "ignoreFiles": [
+          "**/*.scss",
+        ]
+      }
+    ]
   ],
   "rules": {
 		"order/order": [
