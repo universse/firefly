@@ -268,6 +268,41 @@ export async function action ({ id, action }) {
   }
 }
 
+let database
+
+export async function initializeRealtimeDatabase () {
+  !database &&
+    import('firebase/database').then(() => (database = firebase.database()))
+}
+
+export async function saveDraft (collection) {
+  try {
+    database.ref(`drafts/${collection.id}`).set({
+      owner: auth.currentUser.uid
+    })
+  } catch {
+    throw new Error()
+  }
+}
+
+export async function fetchDraft (id) {
+  try {
+    // const snapshot = await database.ref(`drafts/${id}`).once('value')
+    // return snapshot.val()
+  } catch {
+    throw new Error()
+  }
+}
+
+export async function discardDraft (id) {
+  try {
+    // const snapshot = await database.ref(`drafts/${id}`).once('value')
+    // return snapshot.val()
+  } catch {
+    throw new Error()
+  }
+}
+
 // const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
 // const id = firestore.collection(COLLECTIONS).doc().id
 // const session = Date.now() + ''

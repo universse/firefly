@@ -12,10 +12,26 @@ import Snackbar from 'components/Snackbar'
 export const SetSnackbarContext = createContext()
 
 export default function SetSnackbar ({ children, pathname }) {
-  const [snackbar, setSnackbar] = useState({ isOpen: false })
+  const [
+    {
+      buttonProps,
+      isOpen,
+      message,
+      onDismiss,
+      shouldPersistOnNavigate,
+      timeout
+    },
+    setSnackbar
+  ] = useState({ isOpen: false })
 
   const openSnackbar = useCallback(
-    snackbar => setSnackbar({ timeout: 4000, isOpen: true, ...snackbar }),
+    snackbar =>
+      setSnackbar({
+        timeout: 4000,
+        isOpen: true,
+        shouldPersistOnNavigate: false,
+        ...snackbar
+      }),
     []
   )
 
@@ -28,26 +44,32 @@ export default function SetSnackbar ({ children, pathname }) {
   )
 
   useLayoutEffect(() => {
-    dismissSnackbar()
-  }, [dismissSnackbar, pathname])
+    !shouldPersistOnNavigate && dismissSnackbar()
+  }, [dismissSnackbar, pathname, shouldPersistOnNavigate])
 
   useEffect(() => {
-    if (snackbar.isOpen && snackbar.timeout) {
-      const timeout = setTimeout(dismissSnackbar, snackbar.timeout)
+    if (isOpen && timeout) {
+      const timeoutId = setTimeout(dismissSnackbar, timeout)
 
       return () => {
-        clearTimeout(timeout)
+        clearTimeout(timeoutId)
       }
     }
-  }, [dismissSnackbar, snackbar])
+  }, [dismissSnackbar, isOpen, timeout])
+
+  useEffect(() => {
+    !isOpen && onDismiss && onDismiss()
+  }, [isOpen, onDismiss])
 
   return (
     <SetSnackbarContext.Provider value={openSnackbar}>
       {children}
       <Snackbar
+        buttonProps={buttonProps}
         dismissSnackbar={dismissSnackbar}
+        isOpen={isOpen}
+        message={message}
         setSnackbar={setSnackbar}
-        {...snackbar}
       />
     </SetSnackbarContext.Provider>
   )

@@ -29,7 +29,7 @@ export default class ErrorBoundary extends Component {
 }
 
 ErrorBoundary.defaultProps = {
-  fallback: <h1>Some shit went wrong</h1>,
+  fallback: <></>,
   onError: (error, componentStack) => logError({ error, componentStack })
 }
 

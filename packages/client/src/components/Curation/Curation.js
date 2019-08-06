@@ -13,8 +13,7 @@ import LearningItemInput from './LearningItemInput'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
 import { MediaContext } from 'contexts/Media'
-import useOfflinePersistence from 'hooks/useOfflinePersistence'
-import LocalStorage from 'constants/LocalStorage'
+import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import {
   bottomBarHeightInRem,
   headerHeightInRem,
@@ -23,7 +22,6 @@ import {
   screens
 } from 'constants/Styles'
 import firebaseWorker from 'utils/firebaseWorker'
-import offlineStorageWorker from 'utils/offlineStorageWorker'
 
 function reducer (state, { type, payload }) {
   return produce(state, draft => {
@@ -74,6 +72,7 @@ function reducer (state, { type, payload }) {
 
       case 'undo-remove':
         draft.urls.splice(payload.index, 0, draft.removed)
+        delete draft.removed
         break
 
       default:
@@ -82,13 +81,7 @@ function reducer (state, { type, payload }) {
   })
 }
 
-function getDraftKey (id) {
-  return `${LocalStorage.DRAFT}_${id}`
-}
-
-function discard (id) {
-  return offlineStorageWorker.removeItem(getDraftKey(id))
-}
+const { discardDraft, generateId, initializeRealtimeDatabase } = firebaseWorker
 
 function invite () {}
 
@@ -97,7 +90,7 @@ function publish (collection) {
 
   return firebaseWorker
     .createCollection(collection)
-    .then(() => discard(id))
+    .then(() => discardDraft(id))
     .then(() =>
       navigate(`/new-collection/${id}`, {
         state: { collection }
@@ -105,9 +98,9 @@ function publish (collection) {
     )
 }
 
-// TODO Suspense
-export default function Curation ({ id }) {
+export default function Curation ({ id, draft }) {
   const { isDesktop } = useContext(MediaContext)
+  const openSnackbar = useContext(SetSnackbarContext)
 
   const [{ removed, ...collection }, dispatch] = useReducer(reducer, {
     id,
@@ -115,31 +108,27 @@ export default function Curation ({ id }) {
     category: 0,
     level: 0,
     urls: [],
-    tags: []
+    tags: [],
+    ...draft
   })
   const { name, category, level, urls, tags } = collection
-
   const [hasError, setHasError] = useState(false)
 
-  // TODO fetch draft from firebase
   useEffect(() => {
-    id
-      ? offlineStorageWorker
-          .getItem(getDraftKey(id))
-          .then(drafts => dispatch({ type: 'load', payload: drafts[id] }))
-      : firebaseWorker.generateId('collections').then(id => {
-          dispatch({ type: 'set', payload: { id } })
-          window.history.pushState({}, '', id)
-        })
+    !id &&
+      generateId('collections').then(id => {
+        dispatch({ type: 'set', payload: { id } })
+        window.history.replaceState({}, '', id)
+      })
   }, [id])
 
-  const shouldPersist = name || urls.length || tags.length
+  const shouldSave = name || urls.length || tags.length
 
-  useOfflinePersistence(
-    shouldPersist && {
-      [getDraftKey(collection.id)]: collection
-    }
-  )
+  useEffect(() => {
+    shouldSave && initializeRealtimeDatabase()
+  }, [shouldSave])
+
+  useEffect(() => {}, [shouldSave])
 
   const isPublishable = name && urls.length && tags.length
 
@@ -216,7 +205,7 @@ export default function Curation ({ id }) {
                   payload: { name: e.target.value }
                 })
               }
-              placeholder='A Super Catchy Title'
+              placeholder='Collection title...'
               type='text'
               value={name}
             />
@@ -236,8 +225,6 @@ export default function Curation ({ id }) {
               tags={tags}
             />
           </div>
-          {/* tag popular tags for different category */}
-          {/* url */}
           <div
             css={css`
               grid-area: list;
@@ -339,7 +326,24 @@ export default function Curation ({ id }) {
           <button
             aria-label='Discard Draft'
             className='IconButton'
-            onClick={() => discard(collection.id)}
+            onClick={() => {
+              openSnackbar({
+                buttonProps: {
+                  'aria-label': 'Undo Discarding Draft',
+                  children: 'Undo',
+                  onClick: () => {
+                    navigate(`/curate/${collection.id}`, {
+                      state: { draft: collection }
+                    })
+                  }
+                },
+                onDismiss: () => shouldSave && discardDraft(id),
+                shouldPersistOnNavigate: true,
+                message: `Discarded draft.`
+              })
+
+              navigate('/me')
+            }}
             type='button'
           >
             <Icon icon='remove' />
@@ -351,5 +355,6 @@ export default function Curation ({ id }) {
 }
 
 Curation.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  draft: PropTypes.object
 }
