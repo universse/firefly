@@ -6,7 +6,6 @@
     "common": "*",
     "compression": "^1.7.4",
     "express": "^4.17.1",
-    "firebase-admin": "^8.3.0",
     "got": "^9.6.0",
     "metascraper": "^5.6.5",
     "metascraper-author": "^5.6.5",
