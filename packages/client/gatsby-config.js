@@ -1,11 +1,6 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const {
-  Categories,
-  NetlifyFunction,
-  truncate,
-  getTruncatedString
-} = require('common')
+const { NetlifyFunction, truncate, getTruncatedString } = require('common')
 
 require('dotenv').config({
   path: resolve(__dirname, '../../.env')

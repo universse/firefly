@@ -1,6 +1,6 @@
 import React from 'react'
 import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider } from '@apollo/react-hooks'
 import ky from 'ky-universal'
 
 const client = new ApolloClient({
