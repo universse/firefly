@@ -3,7 +3,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "packages/database-functions/functions"
+    "packages/firebase-functions/functions"
   ],
   "husky": {
     "hooks": {
