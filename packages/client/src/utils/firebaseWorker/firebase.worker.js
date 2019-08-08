@@ -5,10 +5,6 @@ import 'firebase/firestore'
 
 firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
-const actionCodeSettings = {
-  url: `${global.location.origin}/welcome`,
-  handleCodeInApp: true
-}
 
 let isReady = false
 const stopAuthListener = auth.onAuthStateChanged(user => {
@@ -52,8 +48,26 @@ export function isSignInWithEmailLink (href) {
   throw new Error()
 }
 
-export function sendSignInLinkToEmail (email) {
-  return auth.sendSignInLinkToEmail(email, actionCodeSettings)
+export async function invite (emails, pathname, isInvite = false) {
+  try {
+    const response = await fetch(
+      'https://us-central1-firefly-users-db-dev.cloudfunctions.net/invite',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          emails,
+          isInvite,
+          url: `${global.location.origin}/welcome?redirect_to=${pathname}`
+        })
+      }
+    )
+    return await response.json()
+  } catch {
+    throw new Error()
+  }
 }
 
 // export function signInWithEmailAndPassword (email, password) {

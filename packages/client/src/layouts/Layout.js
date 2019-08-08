@@ -25,8 +25,6 @@ export default function Layout ({
 
   if (normalizedPathname === '/offline-plugin-app-shell-fallback') return null
 
-  if (normalizedPathname === '/welcome') return children
-
   return (
     <Media>
       <NormalizedCollections>

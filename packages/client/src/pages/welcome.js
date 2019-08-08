@@ -6,7 +6,7 @@ import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
 import offlineStorageWorker from 'utils/offlineStorageWorker'
 
-export default function WelcomePage () {
+export default function WelcomePage ({ location: { search } }) {
   const [message, setMessage] = useState('Signing in...')
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
@@ -29,13 +29,15 @@ export default function WelcomePage () {
 
         return offlineStorageWorker.addToQueue()
       })
-      .then(() => window.location.assign('/'))
+      .then(() =>
+        window.location.assign(new URLSearchParams(search).get('redirect_to'))
+      )
       .catch(() => {
         setHasError(true)
         setMessage('Something went wrong. Please try again later!')
         setIsLoading(false)
       })
-  }, [])
+  }, [search])
 
   return (
     <div className='fullscreen'>

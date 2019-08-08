@@ -10,13 +10,15 @@ import ModalTypes from 'constants/ModalTypes'
 import firebaseWorker from 'utils/firebaseWorker'
 import { logClickSignUp } from 'utils/amplitude'
 
-ReactModal.setAppElement('#___gatsby')
+const { invite } = firebaseWorker
 
-export default function SignUpForm () {
-  const { title } = useSiteMetadata()
-  const modalProps = useModal(ModalTypes.SIGN_UP_FORM, 'Sign Up')
+// multi emails input
+export default function InviteModal () {
+  const modalProps = useModal(ModalTypes.INVITE, 'Invite Collaborators')
 
+  const [emails, setEmails] = useState([])
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   // const [isSubscribing, setIsSubscribing] = useState(true)
   const [isLoading, setIsloading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -35,31 +37,12 @@ export default function SignUpForm () {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    if (!email) return
-
-    logClickSignUp(email)
+    // if (!emails.length) return
 
     setIsloading(true)
 
-    firebaseWorker
-      .invite([email], window.location.pathname)
-      .then(() => {
-        setIsSubmitted(true)
-
-        // isSubscribing &&
-        fetch('/api/subscribe', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            api_key: process.env.GATSBY_OCTOPUS_KEY,
-            email_address: email
-          })
-        })
-
-        window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
-      })
+    invite(['shjneeulrjch@gmail.com'], window.location.href, true)
+      .then(() => setIsSubmitted(true))
       .catch(() => setHasError(true))
       .finally(() => setIsloading(false))
   }
@@ -85,7 +68,7 @@ export default function SignUpForm () {
               margin-bottom: 2rem;
             `}
           >
-            <h3>Welcome to {title}</h3>
+            <h3>Invite Collaborators</h3>
           </div>
           <form onSubmit={handleSubmit}>
             <div
@@ -124,29 +107,6 @@ export default function SignUpForm () {
                   </span>
                 </div>
               )}
-              {/* <div
-              css={css`
-                align-items: center;
-                display: flex;
-                margin-top: 0.75rem;
-              `}
-            >
-              <input
-                checked={isSubscribing}
-                id='subscribe'
-                name='sort'
-                onChange={() =>
-                  setIsSubscribing(isSubscribing => !isSubscribing)
-                }
-                type='checkbox'
-                value={isSubscribing}
-              />
-              <label htmlFor='subscribe'>
-                Subscribe to our newsletters for featured content and upcoming
-                features.
-              </label>
-            </div> */}
-              {/* 1.25rem 0 0.75rem */}
               <div
                 css={css`
                   margin: 1rem 0 0.75rem;
@@ -158,29 +118,9 @@ export default function SignUpForm () {
                   style={{ padding: 0, width: '100%' }}
                   type='submit'
                 >
-                  Sign In with Email Link
+                  Invite
                 </button>
               </div>
-              {/* <div>
-                <span
-                  css={css`
-                    color: var(--black900);
-                    font-size: 0.8125rem;
-                    line-height: 1.25rem;
-                  `}
-                >
-                  By registering for {/^[aeiou]/i.test(title) ? 'an' : 'a'}{' '}
-                  {title} account, you agree to our{' '}
-                  <a href='/terms' rel='noopener noreferrer' target='_blank'>
-                    Terms of Service
-                  </a>{' '}
-                  and{' '}
-                  <a href='/privacy' rel='noopener noreferrer' target='_blank'>
-                    Privacy Policy
-                  </a>
-                  .
-                </span>
-              </div> */}
             </div>
           </form>
         </>
