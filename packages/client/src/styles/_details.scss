@@ -4,7 +4,6 @@
   padding: 1.25rem 1rem;
 
   @media #{$desktop} {
-    border: 1px solid var(--black300);
     border-radius: 4px;
     padding: 1rem;
   }
@@ -108,7 +107,7 @@
   .Chip {
     button {
       color: var(--gray600);
-      padding-left: 0.75rem;
+      margin-left: 0.75rem;
 
       &:hover {
         color: var(--black900);

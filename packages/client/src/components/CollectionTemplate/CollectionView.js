@@ -76,6 +76,10 @@ export default function CollectionView ({
             grid-area: sidebar;
             position: sticky;
             top: ${headerHeightInRem + 1}rem;
+
+            .Details {
+              border: 1px solid var(--black300);
+            }
           `}
         >
           <Details

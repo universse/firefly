@@ -1,27 +1,19 @@
-import React, { useReducer, useState, useContext, useEffect } from 'react'
+import React, { useReducer, useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import produce from 'immer'
-import { navigate } from 'gatsby'
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
+import BottomActionBar from './BottomActionBar'
 import DetailsInput from './DetailsInput'
 import DraggableItem from './DraggableItem'
 import DragLayer from './DragLayer'
 import LearningItemInput from './LearningItemInput'
-import ShareDropdown from 'components/ShareDropdown'
-import Icon from 'assets/icons'
-import { MediaContext } from 'contexts/Media'
-import { SetSnackbarContext } from 'contexts/SetSnackbar'
-import {
-  bottomBarHeightInRem,
-  headerHeightInRem,
-  mobileBarsHeightInRem,
-  mobileProgressBarHeightInRem,
-  screens
-} from 'constants/Styles'
+import { headerHeightInRem, screens } from 'constants/Styles'
 import firebaseWorker from 'utils/firebaseWorker'
+
+const { generateId, saveDraft } = firebaseWorker
 
 function reducer (state, { type, payload }) {
   return produce(state, draft => {
@@ -51,10 +43,10 @@ function reducer (state, { type, payload }) {
         const urls = draft.urls
 
         if (index) {
-          urls.unshift(url)
+          urls.push(url)
         } else {
           const index = urls.findIndex(({ id }) => id === payload.id)
-          urls[index] = { ...urls[index], ...url }
+          urls[index] = url
         }
         break
 
@@ -81,27 +73,7 @@ function reducer (state, { type, payload }) {
   })
 }
 
-const { discardDraft, generateId, initializeRealtimeDatabase } = firebaseWorker
-
-function invite () {}
-
-function publish (collection) {
-  const { id } = collection
-
-  return firebaseWorker
-    .createCollection(collection)
-    .then(() => discardDraft(id))
-    .then(() =>
-      navigate(`/new-collection/${id}`, {
-        state: { collection }
-      })
-    )
-}
-
-export default function Curation ({ id, draft }) {
-  const { isDesktop } = useContext(MediaContext)
-  const openSnackbar = useContext(SetSnackbarContext)
-
+export default function Curation ({ id, draft, initialIsAuthorized }) {
   const [{ removed, ...collection }, dispatch] = useReducer(reducer, {
     id,
     name: '',
@@ -112,249 +84,160 @@ export default function Curation ({ id, draft }) {
     ...draft
   })
   const { name, category, level, urls, tags } = collection
-  const [hasError, setHasError] = useState(false)
+  const [isAuthorized, setIsAuthorized] = useState(initialIsAuthorized)
 
   useEffect(() => {
     !id &&
       generateId('collections').then(id => {
         dispatch({ type: 'set', payload: { id } })
-        window.history.replaceState({}, '', id)
+        window.history.pushState({}, '', id)
       })
   }, [id])
 
-  const shouldSave = name || urls.length || tags.length
+  const initialCollection = useRef()
 
   useEffect(() => {
-    shouldSave && initializeRealtimeDatabase()
-  }, [shouldSave])
+    !initialCollection.current && (initialCollection.current = collection)
+  }, [collection])
 
-  useEffect(() => {}, [shouldSave])
+  useEffect(() => {
+    if (isAuthorized) return
+    if (id !== collection.id) return
 
-  const isPublishable = name && urls.length && tags.length
+    initialCollection.current !== collection &&
+      generateId('collections').then(id => {
+        dispatch({ type: 'set', payload: { id } })
+        window.history.pushState({}, '', id)
+        setIsAuthorized(true)
+      })
+  }, [collection, id, isAuthorized])
+
+  useEffect(() => {
+    isAuthorized && collection.id && saveDraft(collection)
+  }, [collection, isAuthorized])
 
   return (
     <>
       <div
-        className='base'
         css={css`
-          min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
-
-          ${screens.mobile} {
-            padding: 0 0
-              ${bottomBarHeightInRem + mobileProgressBarHeightInRem}rem;
-          }
-
-          ${screens.tablet} {
-            padding-bottom: ${bottomBarHeightInRem +
-              mobileProgressBarHeightInRem}rem;
-          }
+          display: grid;
+          grid-gap: 1.5rem;
+          grid-template-areas:
+            'title'
+            'list';
+          margin: 1.5rem 0;
 
           ${screens.desktop} {
-            max-width: 64rem;
-            min-height: calc(100vh - ${headerHeightInRem}rem);
+            grid-gap: 3rem 1.5rem;
+            grid-template-areas:
+              '. title title'
+              'widget list sidebar';
+            grid-template-columns: 2.5rem 1fr 19rem;
+            margin: 2.5rem 0 0 0;
           }
         `}
       >
         <div
           css={css`
-            display: grid;
-            grid-gap: 1.5rem;
-            grid-template-areas:
-              'title'
-              'list';
-            margin: 1.5rem 0;
+            grid-area: title;
 
-            ${screens.desktop} {
-              grid-gap: 3rem 1.5rem;
-              grid-template-areas:
-                '. title title'
-                'widget list sidebar';
-              grid-template-columns: 2.5rem 1fr 19rem;
-              margin: 2.5rem 0 0 0;
+            ${screens.mobile} {
+              margin: 0 1rem;
             }
           `}
         >
-          <div
+          <input
+            aria-label='Collection Title'
+            autoComplete='off'
             css={css`
-              grid-area: title;
+              color: var(--black900);
+              font-size: 1.5rem;
+              font-weight: 700;
+              line-height: 2rem;
+              width: 100%;
 
-              ${screens.mobile} {
-                margin: 0 1rem;
+              ${screens.desktop} {
+                font-size: 2rem;
+                line-height: 2.5rem;
               }
             `}
-          >
-            <input
-              aria-label='Collection Title'
-              autoComplete='off'
-              css={css`
-                color: var(--black900);
-                font-size: 1.5rem;
-                font-weight: 700;
-                line-height: 2rem;
-                width: 100%;
-
-                ${screens.desktop} {
-                  font-size: 2rem;
-                  line-height: 2.5rem;
-                }
-              `}
-              name='title'
-              onChange={e =>
-                dispatch({
-                  type: 'set',
-                  payload: { name: e.target.value }
-                })
-              }
-              placeholder='Collection title...'
-              type='text'
-              value={name}
-            />
-          </div>
-          <div
-            css={css`
-              align-self: start;
-              grid-area: sidebar;
-              position: sticky;
-              top: ${headerHeightInRem + 1}rem;
-            `}
-          >
-            <DetailsInput
-              category={category}
-              dispatch={dispatch}
-              level={level}
-              tags={tags}
-            />
-          </div>
-          <div
-            css={css`
-              grid-area: list;
-            `}
-          >
-            <div
-              css={css`
-                position: relative;
-              `}
-            >
-              <div
-                css={css`
-                  border: 1px solid var(--black300);
-                  border-radius: 4px;
-                  margin-bottom: 2rem;
-                  padding: 1.5rem 1rem;
-                `}
-              >
-                <LearningItemInput dispatch={dispatch} index={-1} />
-              </div>
-            </div>
-            <DndProvider backend={HTML5Backend}>
-              <ul className='LearningList'>
-                {urls.map((url, i) => (
-                  <DraggableItem
-                    key={url.id}
-                    dispatch={dispatch}
-                    index={i}
-                    {...url}
-                  />
-                ))}
-              </ul>
-              <DragLayer />
-            </DndProvider>
-          </div>
+            name='title'
+            onChange={e =>
+              dispatch({
+                type: 'set',
+                payload: { name: e.target.value }
+              })
+            }
+            placeholder='Collection title...'
+            type='text'
+            value={name}
+          />
         </div>
-      </div>
-      <div
-        css={css`
-          background-color: var(--white900);
-          border-top: 1px solid var(--black300);
-          bottom: 0;
-          position: fixed;
-          width: 100%;
-          z-index: 200;
-        `}
-      >
         <div
-          className='base'
           css={css`
-            align-items: center;
-            display: flex;
-            height: 4rem;
-            justify-content: space-between;
-            padding-left: 5rem;
+            align-self: start;
+            grid-area: sidebar;
+            position: sticky;
+            top: ${headerHeightInRem + 1}rem;
+
+            .Details {
+              border: 2px dashed var(--black300);
+            }
           `}
         >
+          <DetailsInput
+            category={category}
+            dispatch={dispatch}
+            level={level}
+            tags={tags}
+          />
+        </div>
+        <div
+          css={css`
+            grid-area: list;
+          `}
+        >
+          <DndProvider backend={HTML5Backend}>
+            <ul className='LearningList'>
+              {urls.map((url, i) => (
+                <DraggableItem
+                  key={url.id}
+                  dispatch={dispatch}
+                  index={i}
+                  {...url}
+                />
+              ))}
+            </ul>
+            <DragLayer />
+          </DndProvider>
           <div
             css={css`
-              align-items: center;
-              display: flex;
+              position: relative;
             `}
           >
             <div
               css={css`
-                margin-right: 1.25rem;
+                border: 2px dashed var(--black300);
+                border-radius: 4px;
+                margin: ${urls.length ? 1.5 : 0}rem 0 6rem;
+                padding: 1.25rem 1rem;
               `}
             >
-              <button
-                aria-label='Publish'
-                className='PrimaryButton accent'
-                disabled={!isPublishable}
-                onClick={() =>
-                  publish(collection).catch(() => setHasError(true))
-                }
-                type='button'
-              >
-                Publish
-              </button>
+              <LearningItemInput dispatch={dispatch} index={-1} />
             </div>
-            {isDesktop && (
-              <div
-                css={css`
-                  margin-right: 0.5rem;
-                `}
-              >
-                <ShareDropdown name={collection.name} top />
-              </div>
-            )}
-            <button
-              aria-label='Invite Collaborators'
-              className='IconButton'
-              onClick={() => invite()}
-              type='button'
-            >
-              <Icon icon='user-plus' />
-            </button>
           </div>
-          <button
-            aria-label='Discard Draft'
-            className='IconButton'
-            onClick={() => {
-              openSnackbar({
-                buttonProps: {
-                  'aria-label': 'Undo Discarding Draft',
-                  children: 'Undo',
-                  onClick: () => {
-                    navigate(`/curate/${collection.id}`, {
-                      state: { draft: collection }
-                    })
-                  }
-                },
-                onDismiss: () => shouldSave && discardDraft(id),
-                shouldPersistOnNavigate: true,
-                message: `Discarded draft.`
-              })
-
-              navigate('/me')
-            }}
-            type='button'
-          >
-            <Icon icon='remove' />
-          </button>
         </div>
       </div>
+      <BottomActionBar
+        canPublish={!!(name && urls.length && tags.length)}
+        collection={collection}
+      />
     </>
   )
 }
 
 Curation.propTypes = {
-  id: PropTypes.string.isRequired,
-  draft: PropTypes.object
+  draft: PropTypes.object.isRequired,
+  initialIsAuthorized: PropTypes.bool.isRequired,
+  id: PropTypes.string
 }

@@ -271,14 +271,31 @@ export async function action ({ id, action }) {
 let database
 
 export async function initializeRealtimeDatabase () {
-  !database &&
-    import('firebase/database').then(() => (database = firebase.database()))
+  if (!database) {
+    return import('firebase/database').then(
+      () => (database = firebase.database())
+    )
+  }
+}
+
+function getRecentDrafts (uid) {
+  return `users/${uid}/recentDrafts`
 }
 
 export async function saveDraft (collection) {
+  await initializeRealtimeDatabase()
   try {
-    database.ref(`drafts/${collection.id}`).set({
-      owner: auth.currentUser.uid
+    const { id, name } = collection
+
+    await database.ref().update({
+      [`drafts/${id}`]: {
+        authorized: { [auth.currentUser.uid]: true },
+        collection
+      },
+      [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: {
+        name,
+        order: Date.now()
+      }
     })
   } catch {
     throw new Error()
@@ -286,18 +303,39 @@ export async function saveDraft (collection) {
 }
 
 export async function fetchDraft (id) {
+  await initializeRealtimeDatabase()
+
   try {
-    // const snapshot = await database.ref(`drafts/${id}`).once('value')
-    // return snapshot.val()
+    const draftSnapshot = await database.ref(`drafts/${id}`).once('value')
+    const draft = draftSnapshot.val()
+
+    if (draft) {
+      return {
+        draft: draft.collection,
+        isAuthorized: auth.currentUser
+          ? !!draft.authorized[auth.currentUser.uid]
+          : false
+      }
+    }
+
+    const recentDraftsSnapshot = await database
+      .ref(`${getRecentDrafts(auth.currentUser.uid)}`)
+      .orderByChild('order')
+      .once('value')
+
+    return { recentDrafts: recentDraftsSnapshot.val() }
   } catch {
     throw new Error()
   }
 }
 
 export async function discardDraft (id) {
+  await initializeRealtimeDatabase()
   try {
-    // const snapshot = await database.ref(`drafts/${id}`).once('value')
-    // return snapshot.val()
+    await database.ref().update({
+      [`drafts/${id}`]: null,
+      [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: null
+    })
   } catch {
     throw new Error()
   }

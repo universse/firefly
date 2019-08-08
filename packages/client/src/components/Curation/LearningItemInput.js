@@ -107,7 +107,7 @@ function LearningItemInput ({
               margin-bottom: ${preview ? '1.5rem' : 0};
             `}
           >
-            <div className='InputBar large'>
+            <div className='InputBar'>
               <div className='Icon'>
                 <Icon icon='url' size='medium' />
               </div>
