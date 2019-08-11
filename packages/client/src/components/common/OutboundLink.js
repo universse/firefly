@@ -25,23 +25,9 @@ export default function OutboundLink ({ onClick, ...props }) {
           redirect = false
         }
 
-        if (window.amplitude) {
-          window.amplitude.getInstance().logEvent(
-            'click outbound link',
-            {
-              href: props.href
-            },
-            () => {
-              if (redirect) {
-                document.location = props.href
-              }
-            }
-          )
-        } else {
-          if (redirect) {
-            document.location = props.href
-          }
-        }
+        window.___log('click outbound link', { href: props.href })
+
+        redirect && (document.location = props.href)
 
         return false
       }}

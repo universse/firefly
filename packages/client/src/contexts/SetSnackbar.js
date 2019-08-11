@@ -12,7 +12,10 @@ import Snackbar from 'components/Snackbar'
 export const SetSnackbarContext = createContext()
 
 export default function SetSnackbar ({ children, pathname }) {
-  const [snackbar, setSnackbar] = useState({ isOpen: false })
+  const [snackbar, setSnackbar] = useState({
+    isOpen: false,
+    shouldPersistOnNavigate: false
+  })
 
   const {
     buttonProps,

@@ -21,6 +21,12 @@ const icons = {
   'chevron-right': <path d='M9 18l6-6-6-6' />,
   code: <path d='M16 18l6-6-6-6M8 6l-6 6 6 6' />,
   copy: (
+    <>
+      <rect height='13' rx='2' ry='2' width='13' x='9' y='9' />
+      <path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' />
+    </>
+  ),
+  'copy-url': (
     <path d='M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3M8 12h8' />
   ),
   course: (

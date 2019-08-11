@@ -1,13 +1,40 @@
-.GhostButton {
-  align-items: center;
-  border: 2px solid var(--brand500);
-  border-radius: 1rem;
-  color: var(--brand500);
-  display: flex;
+%button {
+  border-radius: 1.25rem;
   font-size: 0.9375rem;
-  font-weight: 700;
-  height: 2rem;
-  padding: 0 1rem;
+  font-weight: 500;
+  height: 2.5rem;
+  padding: 0 3rem;
+
+  &.small {
+    border-radius: 1rem;
+    font-weight: 700;
+    height: 2rem;
+    padding: 0 1rem;
+  }
+
+  &.large {
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 3rem;
+    padding: 0 3.5rem;
+  }
+}
+
+.GhostButton {
+  @extend %button;
+
+  border: 2px solid var(--brand500);
+  color: var(--brand500);
+
+  &.accent {
+    border-color: var(--accent500);
+    color: var(--accent500);
+
+    &:hover {
+      background-color: var(--accent500);
+    }
+  }
 
   &:hover {
     background-color: var(--brand500);
@@ -16,13 +43,11 @@
 }
 
 .PrimaryButton {
+  @extend %button;
+
   background-color: var(--brand500);
   border-radius: 1.25rem;
   color: #fff;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  height: 2.5rem;
-  padding: 0 3rem;
 
   &:hover {
     background-color: var(--brand900);
@@ -37,12 +62,7 @@
   }
 
   &.large {
-    border-radius: 1.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    height: 3rem;
     letter-spacing: 1px;
-    padding: 0 3.5rem;
   }
 }
 

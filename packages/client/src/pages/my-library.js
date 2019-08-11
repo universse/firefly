@@ -20,7 +20,7 @@ import {
   bottomBarHeightInRem,
   screens
 } from 'constants/Styles'
-import { logSignUpIntent } from 'utils/amplitude'
+import { logSignUpIntent } from 'utils/analytics'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 // TODO Suspense

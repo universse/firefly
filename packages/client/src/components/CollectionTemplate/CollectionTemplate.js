@@ -23,7 +23,7 @@ import {
   screens
 } from 'constants/Styles'
 import { CollectionViewType } from 'constants/Types'
-import { logClickAction } from 'utils/amplitude'
+import { logClickAction } from 'utils/analytics'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { BackButton } from 'components/common'
 

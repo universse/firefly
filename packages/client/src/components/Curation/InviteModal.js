@@ -7,17 +7,18 @@ import useModal from 'hooks/useModal'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
+import { logClickSignUp } from 'utils/analytics'
 import firebaseWorker from 'utils/firebaseWorker'
-import { logClickSignUp } from 'utils/amplitude'
+import { getPath } from 'utils/pathnameUtils'
 
 const { invite } = firebaseWorker
 
 // multi emails input
-export default function InviteModal () {
+export default function InviteModal ({ authorizedEmails, invitee }) {
   const modalProps = useModal(ModalTypes.INVITE, 'Invite Collaborators')
 
-  const [emails, setEmails] = useState([])
-  const [email, setEmail] = useState('')
+  const [emails, setEmails] = useState(authorizedEmails)
+  const [email, setEmail] = useState(invitee || '')
   const [name, setName] = useState('')
   // const [isSubscribing, setIsSubscribing] = useState(true)
   const [isLoading, setIsloading] = useState(false)
@@ -26,14 +27,14 @@ export default function InviteModal () {
 
   const { closeTimeoutMS, isOpen, onRequestClose } = modalProps
 
-  useEffect(() => {
-    setTimeout(() => {
-      setEmail('')
-      setIsSubmitted(false)
-      setIsloading(false)
-      setHasError(false)
-    }, closeTimeoutMS)
-  }, [closeTimeoutMS, isOpen])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setEmail('')
+  //     setIsSubmitted(false)
+  //     setIsloading(false)
+  //     setHasError(false)
+  //   }, closeTimeoutMS)
+  // }, [closeTimeoutMS, isOpen])
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -41,7 +42,7 @@ export default function InviteModal () {
 
     setIsloading(true)
 
-    invite(['shjneeulrjch@gmail.com'], window.location.href, true)
+    invite(['shjneeulrjch@gmail.com'], getPath(), true)
       .then(() => setIsSubmitted(true))
       .catch(() => setHasError(true))
       .finally(() => setIsloading(false))

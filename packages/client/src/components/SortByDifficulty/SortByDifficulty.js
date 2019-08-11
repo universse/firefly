@@ -6,7 +6,7 @@ import { URLParamsContext } from 'contexts/URLParams'
 import Icon from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 import AriaLabels from 'constants/AriaLabels'
-import { logSortDifficulty } from 'utils/amplitude'
+import { logSortDifficulty } from 'utils/analytics'
 
 export default function SortByDifficulty () {
   const {

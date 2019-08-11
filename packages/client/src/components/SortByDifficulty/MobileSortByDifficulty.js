@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import SortOptions from './SortOptions'
 import { URLParamsContext } from 'contexts/URLParams'
 import AriaLabels from 'constants/AriaLabels'
-import { logSortDifficulty } from 'utils/amplitude'
+import { logSortDifficulty } from 'utils/analytics'
 
 export default function MobileSortByDifficulty () {
   const {

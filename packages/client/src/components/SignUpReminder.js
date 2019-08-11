@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { SetModalContext } from 'contexts/SetModal'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
+import { logSignUpIntent } from 'utils/analytics'
 
 export default function SignUpReminder () {
   const setActiveModalType = useContext(SetModalContext)
@@ -24,14 +25,17 @@ export default function SignUpReminder () {
             text-align: center;
           `}
         >
-          Please Sign In or Register to Continue
+          {AriaLabels.SIGNIN_CONTINUE}
         </h3>
       </div>
       <div>
         <button
           aria-label={AriaLabels.SIGNIN_REGISTER}
           className='PrimaryButton'
-          onClick={() => setActiveModalType(ModalTypes.SIGN_UP_FORM)}
+          onClick={() => {
+            setActiveModalType(ModalTypes.SIGN_UP_FORM)
+            logSignUpIntent()
+          }}
           type='button'
         >
           Sign In / Register

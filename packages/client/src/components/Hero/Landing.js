@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { HeroImage } from 'assets/illustrations'
 import AriaLabels from 'constants/AriaLabels'
 import { screens } from 'constants/Styles'
-import { logClickCTA } from 'utils/amplitude'
+import { logClickCTA } from 'utils/analytics'
 import { scrollToHero } from '../../../gatsby/utils'
 
 function Landing () {

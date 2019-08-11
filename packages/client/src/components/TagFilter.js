@@ -6,7 +6,7 @@ import { URLParamsContext } from 'contexts/URLParams'
 import Icon from 'assets/icons'
 import useListBox from 'hooks/useListBox'
 import AriaLabels from 'constants/AriaLabels'
-import { logClickTagFilter } from 'utils/amplitude'
+import { logClickTagFilter } from 'utils/analytics'
 
 export default function TagFilter ({ aggregatedTags }) {
   const {

@@ -32,7 +32,7 @@ export function getCopyUrlProps ({ mobile = false }) {
     'aria-label': 'Get Shareable Link',
     children: (
       <>
-        <Icon icon='copy' size='medium' />
+        <Icon icon='copy-url' size='medium' />
         {mobile && (
           <div
             css={css`

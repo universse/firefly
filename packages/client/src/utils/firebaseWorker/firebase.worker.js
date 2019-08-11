@@ -48,22 +48,20 @@ export function isSignInWithEmailLink (href) {
   throw new Error()
 }
 
-export async function invite (emails, pathname, isInvite = false) {
+export async function invite (emails, redirect, isInvite = false) {
   try {
-    const response = await fetch(
-      'https://us-central1-firefly-users-db-dev.cloudfunctions.net/invite',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          emails,
-          isInvite,
-          url: `${global.location.origin}/welcome?redirect_to=${pathname}`
-        })
-      }
-    )
+    const response = await fetch('/api/invite', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        emails,
+        isInvite,
+        redirect: redirect,
+        url: `${global.location.origin}/welcome`
+      })
+    })
     return await response.json()
   } catch {
     throw new Error()
@@ -297,18 +295,18 @@ function getRecentDrafts (uid) {
 }
 
 export async function saveDraft (collection) {
-  await initializeRealtimeDatabase()
+  // await initializeRealtimeDatabase()
   try {
     const { id, name } = collection
 
     await database.ref().update({
       [`drafts/${id}`]: {
-        authorized: { [auth.currentUser.uid]: true },
+        authorized: { [auth.currentUser.uid]: auth.currentUser.email },
         collection
       },
       [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: {
         name,
-        order: Date.now()
+        modified: Date.now()
       }
     })
   } catch {
@@ -324,32 +322,59 @@ export async function fetchDraft (id) {
     const draft = draftSnapshot.val()
 
     if (draft) {
+      const authorized = draft.authorized
+
       return {
         draft: draft.collection,
         isAuthorized: auth.currentUser
           ? !!draft.authorized[auth.currentUser.uid]
-          : false
+          : false,
+        authorizedEmails: Object.values(authorized)
       }
     }
 
     const recentDraftsSnapshot = await database
       .ref(`${getRecentDrafts(auth.currentUser.uid)}`)
-      .orderByChild('order')
+      .orderByChild('modified')
       .once('value')
 
-    return { recentDrafts: recentDraftsSnapshot.val() }
+    return {
+      recentDrafts: Object.entries(recentDraftsSnapshot.val()).sort(
+        ([id1, { modified: modified1 }], [id2, { modified: modified2 }]) =>
+          modified2 - modified1
+      )
+    }
   } catch {
     throw new Error()
   }
 }
 
 export async function discardDraft (id) {
-  await initializeRealtimeDatabase()
+  // await initializeRealtimeDatabase()
   try {
     await database.ref().update({
       [`drafts/${id}`]: null,
       [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: null
     })
+  } catch {
+    throw new Error()
+  }
+}
+
+export async function requestAccess (authorizedEmails, href) {
+  try {
+    const response = await fetch('/api/requestAccess', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        authorizedEmails,
+        email: auth.currentUser.email,
+        href
+      })
+    })
+    return await response.json()
   } catch {
     throw new Error()
   }

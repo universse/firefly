@@ -15,7 +15,7 @@ export default function Avatar () {
     menuProps,
     getItemProps,
     highlightedIndex
-  } = useDropdownMenu({ menuItemCount: 1, left: true })
+  } = useDropdownMenu({ menuItemCount: 2, left: true })
 
   return (
     <details className='DropdownMenu' {...detailsProps}>
@@ -34,29 +34,26 @@ export default function Avatar () {
         >
           Profile
         </Link> */}
-        {/* <Link
-          {...highlightedIndex === 1 && { className: 'highlighted' }}
+        <Link
+          {...highlightedIndex === 0 && { className: 'highlighted' }}
           to='/curate'
-          {...getItemProps(1)}
+          {...getItemProps(0)}
         >
           Curate
-        </Link> */}
+        </Link>
         <button
           aria-label='Sign Out'
-          {...highlightedIndex === 0 && { className: 'highlighted' }}
+          {...highlightedIndex === 1 && { className: 'highlighted' }}
           onClick={() => {
             firebaseWorker.signOut().then(() => {
-              if (window.amplitude) {
-                window.amplitude.getInstance().setUserId(-1)
-                window.amplitude.getInstance().regenerateDeviceId()
-              }
+              window.___log('sign out')
               offlineStorageWorker.clear()
               window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
               window.location.reload()
             })
           }}
           type='button'
-          {...getItemProps(0)}
+          {...getItemProps(1)}
         >
           Sign Out
         </button>

@@ -1,10 +1,8 @@
 import { useCallback, useContext } from 'react'
 
-import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
-import AriaLabels from 'constants/AriaLabels'
-import ModalTypes from 'constants/ModalTypes'
-import { logClickAction, logSignUpIntent } from 'utils/amplitude'
+import useSignUpSnackbar from 'hooks/useSignUpSnackbar'
+import { logClickAction } from 'utils/analytics'
 
 export default function useActionClickHandler (
   canUndo,
@@ -12,8 +10,8 @@ export default function useActionClickHandler (
   trackChange,
   user
 ) {
-  const setActiveModalType = useContext(SetModalContext)
   const openSnackbar = useContext(SetSnackbarContext)
+  const signUpSnackbar = useSignUpSnackbar()
 
   return useCallback(
     (e, cb = () => {}) => {
@@ -60,17 +58,7 @@ export default function useActionClickHandler (
           })
         }
       } else {
-        openSnackbar({
-          buttonProps: {
-            'aria-label': AriaLabels.SIGNIN_REGISTER,
-            children: 'Sign In',
-            onClick: () => {
-              setActiveModalType(ModalTypes.SIGN_UP_FORM)
-              logSignUpIntent()
-            }
-          },
-          message: 'Please sign in to continue.'
-        })
+        signUpSnackbar()
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

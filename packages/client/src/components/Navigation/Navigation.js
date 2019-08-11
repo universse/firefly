@@ -5,7 +5,7 @@ import Avatar from './Avatar'
 import { SetModalContext } from 'contexts/SetModal'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
-import { logSignUpIntent } from 'utils/amplitude'
+import { logSignUpIntent } from 'utils/analytics'
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function Navigation () {
@@ -25,7 +25,7 @@ export default function Navigation () {
           ) : (
             <button
               aria-label={AriaLabels.SIGNIN_REGISTER}
-              className='GhostButton'
+              className='GhostButton small'
               onClick={() => {
                 setActiveModalType(ModalTypes.SIGN_UP_FORM)
                 logSignUpIntent()

@@ -1,11 +1,11 @@
-const functions = require('firebase-functions')
 const cors = require('cors')({
   origin: true
 })
 const admin = require('firebase-admin')
-const nodemailer = require('nodemailer')
 
-admin.initializeApp()
+const { transporter } = require('./constants')
+
+const domain = '*'
 
 function getHTMLTemplate (isInvite, link) {
   return isInvite
@@ -15,31 +15,12 @@ function getHTMLTemplate (isInvite, link) {
 
 function invite (req, res) {
   return cors(req, res, async () => {
-    const { emails, isInvite, url } = req.body
-
-    // const transporter = nodemailer.createTransport({
-    //   host: 'smtp.mailtrap.io',
-    //   port: 2525,
-    //   auth: {
-    //     user: 'ae54daca8d2e17',
-    //     pass: 'd09bc1ca151f7e'
-    //   }
-    // })
-
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      port: 465,
-      secure: true,
-      auth: {
-        user: functions.config().gmail.user,
-        pass: functions.config().gmail.pass
-      }
-    })
+    const { emails, isInvite, redirect, url } = req.body
 
     await Promise.all(
       emails.map(async email => {
         const link = await admin.auth().generateSignInWithEmailLink(email, {
-          url,
+          url: `${url}?redirect_to=${encodeURIComponent(redirect)}`,
           handleCodeInApp: true
         })
 
@@ -52,7 +33,7 @@ function invite (req, res) {
       })
     )
 
-    res.set('Access-Control-Allow-Origin', '*')
+    res.set('Access-Control-Allow-Origin', domain)
     res.status(200).json({ success: true })
   })
 }

@@ -9,7 +9,7 @@ import { MediaContext } from 'contexts/Media'
 import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
 import fallback from 'assets/images/fallback.png'
-import { logClickLearningResource } from 'utils/amplitude'
+import { logClickLearningResource } from 'utils/analytics'
 
 const videoHosts = ['vimeo.com', 'youtube.com', 'youtu.be']
 

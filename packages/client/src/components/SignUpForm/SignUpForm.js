@@ -7,8 +7,9 @@ import useModal from 'hooks/useModal'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
+import { logClickSignUp } from 'utils/analytics'
 import firebaseWorker from 'utils/firebaseWorker'
-import { logClickSignUp } from 'utils/amplitude'
+import { getPath } from 'utils/pathnameUtils'
 
 ReactModal.setAppElement('#___gatsby')
 
@@ -42,7 +43,7 @@ export default function SignUpForm () {
     setIsloading(true)
 
     firebaseWorker
-      .invite([email], window.location.pathname)
+      .invite([email], getPath())
       .then(() => {
         setIsSubmitted(true)
 

@@ -1,17 +1,20 @@
-import React, { useReducer, useState, useRef, useEffect } from 'react'
+import React, { useState, useReducer, useContext, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import produce from 'immer'
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
-import BottomActionBar from './BottomActionBar'
+import AuthorizedActions from './AuthorizedActions'
+import UnauthorizedActions from './UnauthorizedActions'
 import DetailsInput from './DetailsInput'
 import DraggableItem from './DraggableItem'
 import DragLayer from './DragLayer'
 import LearningItemInput from './LearningItemInput'
+import { MediaContext } from 'contexts/Media'
 import { headerHeightInRem, screens } from 'constants/Styles'
 import firebaseWorker from 'utils/firebaseWorker'
+import { navigate } from '@reach/router'
 
 const { generateId, saveDraft } = firebaseWorker
 
@@ -73,7 +76,19 @@ function reducer (state, { type, payload }) {
   })
 }
 
-export default function Curation ({ id, draft, initialIsAuthorized }) {
+export default function Curation ({
+  id,
+  draft,
+  isAuthorized,
+  initialAuthorizedEmails,
+  invitee
+}) {
+  const { isDesktop } = useContext(MediaContext)
+
+  const [authorizedEmails, setAuthorizedEmails] = useState(
+    initialAuthorizedEmails
+  )
+
   const [{ removed, ...collection }, dispatch] = useReducer(reducer, {
     id,
     name: '',
@@ -84,37 +99,21 @@ export default function Curation ({ id, draft, initialIsAuthorized }) {
     ...draft
   })
   const { name, category, level, urls, tags } = collection
-  const [isAuthorized, setIsAuthorized] = useState(initialIsAuthorized)
 
   useEffect(() => {
-    !id &&
-      generateId('collections').then(id => {
-        dispatch({ type: 'set', payload: { id } })
-        window.history.pushState({}, '', id)
-      })
+    id
+      ? dispatch({ type: 'set', payload: { id } })
+      : generateId('collections').then(id => {
+          dispatch({ type: 'set', payload: { id } })
+          navigate(`/curate/${id}`)
+        })
   }, [id])
 
-  const initialCollection = useRef()
+  const canSave = isAuthorized && (name || urls.length || tags.length)
 
   useEffect(() => {
-    !initialCollection.current && (initialCollection.current = collection)
-  }, [collection])
-
-  useEffect(() => {
-    if (isAuthorized) return
-    if (id !== collection.id) return
-
-    initialCollection.current !== collection &&
-      generateId('collections').then(id => {
-        dispatch({ type: 'set', payload: { id } })
-        window.history.pushState({}, '', id)
-        setIsAuthorized(true)
-      })
-  }, [collection, id, isAuthorized])
-
-  useEffect(() => {
-    isAuthorized && collection.id && saveDraft(collection)
-  }, [collection, isAuthorized])
+    canSave && saveDraft(collection)
+  }, [canSave, collection])
 
   return (
     <>
@@ -228,16 +227,42 @@ export default function Curation ({ id, draft, initialIsAuthorized }) {
           </div>
         </div>
       </div>
-      <BottomActionBar
-        canPublish={!!(name && urls.length && tags.length)}
-        collection={collection}
-      />
+      {isDesktop ? (
+        <div className='bottom'>
+          <div
+            className='base'
+            css={css`
+              align-items: center;
+              display: flex;
+              height: 4rem;
+              justify-content: space-between;
+              padding-left: 5rem;
+            `}
+          >
+            {isAuthorized ? (
+              <AuthorizedActions
+                authorizedEmails={authorizedEmails}
+                canPublish={!!(name && urls.length && tags.length)}
+                collection={collection}
+                invitee={invitee}
+              />
+            ) : (
+              <UnauthorizedActions
+                authorizedEmails={authorizedEmails}
+                collection={collection}
+              />
+            )}
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   )
 }
 
 Curation.propTypes = {
   draft: PropTypes.object.isRequired,
-  initialIsAuthorized: PropTypes.bool.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
   id: PropTypes.string
 }

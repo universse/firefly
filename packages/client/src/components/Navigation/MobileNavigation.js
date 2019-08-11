@@ -5,7 +5,7 @@ import { MobileNavLink } from './MobileNavLink'
 
 export default function MobileNavigation ({ isIndexPage }) {
   return (
-    <nav className='MobileNavigation'>
+    <nav className='MobileNavigation bottom'>
       <ul>
         <li>
           <MobileNavLink

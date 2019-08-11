@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { logError } from 'utils/amplitude'
+import { logError } from 'utils/analytics'
 
 export default class ErrorBoundary extends Component {
   constructor (props) {

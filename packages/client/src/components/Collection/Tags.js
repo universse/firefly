@@ -5,7 +5,7 @@ import { Link } from 'gatsby'
 
 import { TagsType } from 'constants/Types'
 import URLParamKeys from 'constants/URLParamKeys'
-import { logClickTag } from 'utils/amplitude'
+import { logClickTag } from 'utils/analytics'
 
 export default function Tags ({ tagClassName, tags }) {
   return (

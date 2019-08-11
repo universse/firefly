@@ -1,14 +1,6 @@
 .MobileNavigation {
   $height: 3.5rem;
 
-  background-color: var(--white900);
-  border-top: 1px solid var(--black300);
-  bottom: 0;
-  height: $height;
-  position: fixed;
-  width: 100%;
-  z-index: 200;
-
   @media #{$desktop} {
     display: none;
   }
@@ -16,7 +8,7 @@
   ul {
     align-items: center;
     display: flex;
-    height: 100%;
+    height: $height;
   }
 
   li {
@@ -55,23 +47,23 @@
 
   li {
     margin-left: 1.5rem;
-  }
 
-  a {
-    align-items: center;
-    border-bottom: 2px solid transparent;
-    color: var(--black900);
-    display: flex;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    height: 2rem;
+    & > a {
+      align-items: center;
+      border-bottom: 2px solid transparent;
+      color: var(--black900);
+      display: flex;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      height: 2rem;
 
-    &:hover {
-      border-bottom: 2px solid var(--brand500);
-    }
+      &:hover {
+        border-bottom: 2px solid var(--brand500);
+      }
 
-    &.active {
-      border-color: var(--brand500);
+      &.active {
+        border-color: var(--brand500);
+      }
     }
   }
 }

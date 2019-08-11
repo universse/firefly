@@ -22,7 +22,7 @@ import {
   headerHeightInRem,
   screens
 } from 'constants/Styles'
-import { logInputSearch } from 'utils/amplitude'
+import { logInputSearch } from 'utils/analytics'
 
 function TopBarWrapper (props) {
   const { isPastBaseline, isScrollingDown, ref } = useIsScrollingDown()

@@ -30,7 +30,9 @@ export default function WelcomePage ({ location: { search } }) {
         return offlineStorageWorker.addToQueue()
       })
       .then(() =>
-        window.location.assign(new URLSearchParams(search).get('redirect_to'))
+        window.location.assign(
+          decodeURIComponent(new URLSearchParams(search).get('redirect_to'))
+        )
       )
       .catch(() => {
         setHasError(true)

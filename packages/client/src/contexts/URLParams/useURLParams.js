@@ -39,7 +39,8 @@ export default function useURLParams ({ pathname, search, state }) {
   const [query, queryDispatch] = useReducer(reducer, search, initialize)
 
   useEffect(() => {
-    if (!state || !state.programmatic) queryDispatch(initialize(search))
+    if (state && state.programmatic) return
+    queryDispatch(initialize(search))
   }, [pathname, search, state])
 
   useEffect(() => {

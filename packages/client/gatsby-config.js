@@ -23,6 +23,17 @@ module.exports = {
         }
       })
     )
+
+    app.use(
+      '/api',
+      proxy({
+        target: 'https://us-central1-firefly-users-db-dev.cloudfunctions.net',
+        changeOrigin: true,
+        pathRewrite: {
+          '/api': ''
+        }
+      })
+    )
   },
 
   plugins: [
@@ -109,7 +120,7 @@ module.exports = {
         onError: error => console.log(error)
       }
     },
-    'gatsby-plugin-amplitude',
+    'gatsby-plugin-analytics',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
