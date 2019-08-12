@@ -25,6 +25,18 @@ module.exports = {
     )
 
     app.use(
+      '/api/subscribe',
+      proxy({
+        target:
+          'https://emailoctopus.com/api/1.5/lists/28c2f781-9e6b-11e9-9307-06b4694bee2a/contacts',
+        changeOrigin: true,
+        pathRewrite: {
+          '/api/subscribe': ''
+        }
+      })
+    )
+
+    app.use(
       '/api',
       proxy({
         target: 'https://us-central1-firefly-users-db-dev.cloudfunctions.net',

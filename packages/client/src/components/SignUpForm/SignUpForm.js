@@ -48,16 +48,16 @@ export default function SignUpForm () {
         setIsSubmitted(true)
 
         // isSubscribing &&
-        fetch('/api/subscribe', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            api_key: process.env.GATSBY_OCTOPUS_KEY,
-            email_address: email
-          })
-        })
+        //   fetch('/api/subscribe', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //       api_key: process.env.GATSBY_OCTOPUS_KEY,
+        //       email_address: email
+        //     })
+        //   })
 
         window.localStorage.setItem(LocalStorage.EMAIL_SIGN_IN, email)
       })

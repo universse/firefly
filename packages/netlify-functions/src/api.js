@@ -16,7 +16,7 @@ const {
   toTitleCase
 } = require('common')
 
-const basePath = process.env.NETLIFY ? `${NetlifyFunction}api` : '/api'
+const basePath = process.env.ORIGIN ? `${NetlifyFunction}api` : '/api'
 
 const app = express()
 const router = express.Router()

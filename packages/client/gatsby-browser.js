@@ -2,7 +2,7 @@ import { isIndexPage, scrollToHero } from './gatsby/utils'
 import 'styles/index.scss'
 
 export const onClientEntry = () => {
-  // process.env.NODE_ENV === 'development' && console.clear()
+  process.env.NODE_ENV === 'development' && console.clear()
 
   window.addEventListener('keydown', () =>
     document.body.classList.add('using-keyboard')

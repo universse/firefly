@@ -1,7 +1,6 @@
 import firebase from 'firebase/app'
 
 import 'firebase/auth'
-import 'firebase/firestore'
 
 firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
@@ -16,6 +15,9 @@ export async function getUser () {
   if (isReady) return auth.currentUser && auth.currentUser.uid
   throw new Error()
 }
+
+// eslint-disable-next-line
+import 'firebase/firestore'
 
 // export function createUserWithEmailAndPassword (email, password) {
 //   return auth.createUserWithEmailAndPassword(email, password)
@@ -45,10 +47,10 @@ export function isSignInWithEmailLink (href) {
   if (auth.isSignInWithEmailLink(href)) {
     return true
   }
-  throw new Error()
+  throw new Error(isReady ? '' : 'Skip')
 }
 
-export async function invite (emails, redirect, isInvite = false) {
+export async function invite (emails, redirect, draftId = '') {
   try {
     const response = await fetch('/api/invite', {
       method: 'POST',
@@ -56,9 +58,9 @@ export async function invite (emails, redirect, isInvite = false) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        draftId,
         emails,
-        isInvite,
-        redirect: redirect,
+        redirect,
         url: `${global.location.origin}/welcome`
       })
     })
@@ -75,6 +77,18 @@ export async function invite (emails, redirect, isInvite = false) {
 export async function signInWithEmailLink (email, href) {
   try {
     const result = await auth.signInWithEmailLink(email, href)
+
+    await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        api_key: process.env.GATSBY_OCTOPUS_KEY,
+        email_address: email
+      })
+    })
+
     return result.additionalUserInfo.isNewUser
   } catch {
     throw new Error()
@@ -300,10 +314,9 @@ export async function saveDraft (collection) {
     const { id, name } = collection
 
     await database.ref().update({
-      [`drafts/${id}`]: {
-        authorized: { [auth.currentUser.uid]: auth.currentUser.email },
-        collection
-      },
+      [`drafts/${id}/authorized/${auth.currentUser.uid}`]: auth.currentUser
+        .email,
+      [`drafts/${id}/collection`]: collection,
       [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: {
         name,
         modified: Date.now()
@@ -335,7 +348,6 @@ export async function fetchDraft (id) {
 
     const recentDraftsSnapshot = await database
       .ref(`${getRecentDrafts(auth.currentUser.uid)}`)
-      .orderByChild('modified')
       .once('value')
 
     return {

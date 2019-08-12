@@ -104,12 +104,18 @@ export default function AuthorizedActions ({
       >
         <Icon icon='remove' />
       </button>
-      <InviteModal authorizedEmails={authorizedEmails} invitee={invitee} />
+      <InviteModal
+        authorizedEmails={authorizedEmails}
+        id={collection.id}
+        invitee={invitee}
+      />
     </>
   )
 }
 
 AuthorizedActions.propTypes = {
+  authorizedEmails: PropTypes.arrayOf(PropTypes.string).isRequired,
   canPublish: PropTypes.bool.isRequired,
-  collection: PropTypes.object.isRequired
+  collection: PropTypes.object.isRequired,
+  invitee: PropTypes.string
 }

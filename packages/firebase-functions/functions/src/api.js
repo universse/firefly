@@ -1,11 +1,10 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 const express = require('express')
-const cors = require('cors')({
-  origin: true
-})
+// const cors = require('cors')({
+//   origin: true
+// })
 
-admin.initializeApp()
 const firestore = admin.firestore()
 
 const app = express()
@@ -31,7 +30,10 @@ const authenticate = async (req, res, next) => {
   }
 }
 
-app.use(cors)
+app.use((req, res) => {
+  // set origin
+})
+
 app.use('/create', authenticate)
 
 app.get('/retrieve', async (req, res) => {

@@ -15,6 +15,12 @@ module.exports = async ({
     statusCode: 200
   })
 
+  createRedirect({
+    fromPath: '/api/*',
+    toPath: `${process.env.FIREBASE_FUNCTIONS}/:splat`,
+    statusCode: 200
+  })
+
   createPage({
     path: '/',
     component: resolve('./src/templates/category.js'),

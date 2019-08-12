@@ -21,5 +21,6 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports = {
+  origin: '*',
   transporter
 }

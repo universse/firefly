@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
@@ -14,7 +15,7 @@ import { getPath } from 'utils/pathnameUtils'
 const { invite } = firebaseWorker
 
 // multi emails input
-export default function InviteModal ({ authorizedEmails, invitee }) {
+export default function InviteModal ({ id, authorizedEmails, invitee }) {
   const modalProps = useModal(ModalTypes.INVITE, 'Invite Collaborators')
 
   const [emails, setEmails] = useState(authorizedEmails)
@@ -42,7 +43,7 @@ export default function InviteModal ({ authorizedEmails, invitee }) {
 
     setIsloading(true)
 
-    invite(['shjneeulrjch@gmail.com'], getPath(), true)
+    invite(['shjneeulrjch@gmail.com'], getPath(), id)
       .then(() => setIsSubmitted(true))
       .catch(() => setHasError(true))
       .finally(() => setIsloading(false))
@@ -149,4 +150,10 @@ export default function InviteModal ({ authorizedEmails, invitee }) {
       </div>
     </ReactModal>
   )
+}
+
+InviteModal.propTypes = {
+  authorizedEmails: PropTypes.arrayOf(PropTypes.string).isRequired,
+  id: PropTypes.string.isRequired,
+  invitee: PropTypes.string
 }
