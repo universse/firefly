@@ -11,13 +11,16 @@
     "firebase-functions": "^3.2.0",
     "nodemailer": "^6.3.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "firebase-tools": "^7.2.2"
+  },
   "scripts": {
     "serve": "firebase serve --only functions",
     "shell": "firebase functions:shell",
     "start": "yarn shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "deploy": "firebase deploy",
+    "logs": "firebase functions:log",
+    "setup": "firebase functions:config:get > .runtimeconfig.json"
   },
   "workspaces": {
     "nohoist": [

@@ -78,7 +78,7 @@ export async function signInWithEmailLink (email, href) {
   try {
     const result = await auth.signInWithEmailLink(email, href)
 
-    await fetch('/api/subscribe', {
+    fetch('/api/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -64,6 +64,7 @@
     "lint:styled": "stylelint packages/client/src/**/*.js",
     "start": "run-p start:**",
     "start:client": "yarn workspace client start",
+    "start:firebase": "yarn workspace firebase-functions serve",
     "start:netlify-functions": "yarn workspace netlify-functions start"
   }
 }

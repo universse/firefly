@@ -6,48 +6,47 @@ require('dotenv').config({
   path: resolve(__dirname, '../../.env')
 })
 
+const developMiddleware = app => {
+  app.use(
+    NetlifyFunction,
+    proxy({
+      target: 'http://localhost:9000',
+      pathRewrite: {
+        [NetlifyFunction]: ''
+      }
+    })
+  )
+
+  app.use(
+    '/api/subscribe',
+    proxy({
+      target:
+        'https://emailoctopus.com/api/1.5/lists/28c2f781-9e6b-11e9-9307-06b4694bee2a/contacts',
+      changeOrigin: true,
+      pathRewrite: {
+        '/api/subscribe': ''
+      }
+    })
+  )
+
+  app.use(
+    '/api',
+    proxy({
+      target: 'http://localhost:5000/firefly-users-db-dev/us-central1',
+      pathRewrite: {
+        '/api': ''
+      }
+    })
+  )
+}
+
 module.exports = {
   siteMetadata: {
     title: 'Firefly',
     description:
       'Discover the best learning resources, curated by the community.'
   },
-
-  developMiddleware: app => {
-    app.use(
-      NetlifyFunction,
-      proxy({
-        target: 'http://localhost:9000',
-        pathRewrite: {
-          [NetlifyFunction]: ''
-        }
-      })
-    )
-
-    app.use(
-      '/api/subscribe',
-      proxy({
-        target:
-          'https://emailoctopus.com/api/1.5/lists/28c2f781-9e6b-11e9-9307-06b4694bee2a/contacts',
-        changeOrigin: true,
-        pathRewrite: {
-          '/api/subscribe': ''
-        }
-      })
-    )
-
-    app.use(
-      '/api',
-      proxy({
-        target: 'https://us-central1-firefly-users-db-dev.cloudfunctions.net',
-        changeOrigin: true,
-        pathRewrite: {
-          '/api': ''
-        }
-      })
-    )
-  },
-
+  developMiddleware,
   plugins: [
     'gatsby-plugin-react-helmet',
     {

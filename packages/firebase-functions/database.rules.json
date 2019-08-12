@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "drafts": {
+      "$draft_id": {
+        ".read": "true",
+        ".write": "!data.exists() && auth !== null || data.child('authorized/' + auth.uid).exists()"
+      }
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth.uid === $uid",
+        ".write": "auth.uid === $uid"
+      }
+    }
+  }
+}
