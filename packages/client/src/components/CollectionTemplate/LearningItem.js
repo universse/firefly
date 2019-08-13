@@ -8,6 +8,7 @@ import { OutboundLink } from 'components/common'
 import { MediaContext } from 'contexts/Media'
 import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
+import error from 'assets/images/error.png'
 import fallback from 'assets/images/fallback.png'
 import { logClickLearningResource } from 'utils/analytics'
 
@@ -86,12 +87,9 @@ function LearningItem ({
         alt=''
         onError={e => {
           e.target.onerror = null
-          e.target.src = `${fallback}`
+          e.target.src = `${error}`
         }}
-        src={
-          image ||
-          'https://res.cloudinary.com/aplu/image/upload/c_scale,q_40,w_500/v1557091665/Curated/uxvrlogo.jpg'
-        }
+        src={image || fallback}
       />
       <div className='Meta'>
         <div>
