@@ -16,12 +16,11 @@
     "firebase-tools": "^7.2.2"
   },
   "scripts": {
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
-    "start": "yarn shell",
-    "deploy": "firebase deploy",
+    "deploy": "firebase use production && firebase deploy",
     "logs": "firebase functions:log",
-    "setup": "firebase functions:config:get > .runtimeconfig.json"
+    "setup": "firebase functions:config:get > .runtimeconfig.json",
+    "start": "firebase use development && firebase serve --only functions",
+    "use": "firebase use"
   },
   "workspaces": {
     "nohoist": [

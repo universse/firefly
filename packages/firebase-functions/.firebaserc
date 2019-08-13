@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "firefly-users-db-dev"
+    "development": "firefly-users-db-dev",
+    "production": "firefly-users-db"
   }
 }
