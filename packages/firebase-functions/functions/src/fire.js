@@ -5,42 +5,37 @@ const admin = require('firebase-admin')
 // })
 
 const { origin } = require('./constants')
-// require('./config')
 
 async function fire (req, res) {
   res.set('Access-Control-Allow-Origin', origin)
 
+  const { events } = req.body
+
   let pages = 0
-  const startedAt = req.events[0].timestamp
+  const startedAt = events[0].timestamp
   const sessionId = generateSessionId(startedAt)
-  const duration = req.events[req.events.length - 1].timestamp - startedAt
+  const duration = events[events.length - 1].timestamp - startedAt
 
-  const events = req.events
-    // .sort(
-    //   ({ timestamp: timestamp1 }, { timestamp: timestamp2 }) =>
-    //     timestamp1 - timestamp2
-    // )
-    .map(event => {
-      if (event.type === 'view page' || event.type === 'view collection') {
-        pages = pages + 1
-      }
-
-      return {
-        sessionId,
-        ...event
-      }
-    })
+  events.forEach(event => {
+    if (event.type === 'view page' || event.type === 'view collection') {
+      pages = pages + 1
+    }
+  })
+  // .sort(
+  //   ({ timestamp: timestamp1 }, { timestamp: timestamp2 }) =>
+  //     timestamp1 - timestamp2
+  // )
 
   const session = {
-    ...req.body.session,
     sessionId,
+    ...req.session,
     startedAt,
     pages,
     duration
   }
 
   try {
-    await saveToFirebase(events, session, sessionId)
+    await saveToFirebase({ [sessionId]: events }, session, sessionId)
     res.status(200).json({ success: true })
   } catch (e) {
     console.log(e)
@@ -49,25 +44,16 @@ async function fire (req, res) {
 }
 
 async function saveToFirebase (events, session, sessionId) {
-  const fireRef = admin
-    .storage()
-    .ref()
-    .child('fire')
+  const bucket = admin.storage().bucket()
 
   await Promise.all([
-    fireRef
-      .child('events')
-      .child(sessionId + '.json')
-      .putString(JSON.stringify(events)),
-    fireRef
-      .child('sessions')
-      .child(sessionId + '.json')
-      .putString(JSON.stringify(session))
+    bucket.file(`fire/events/${sessionId}.json`).save(JSON.stringify(events)),
+    bucket.file(`fire/sessions/${sessionId}.json`).save(JSON.stringify(session))
   ])
 }
 
 // const db = pgp({
-//   connectionString: process.env.POSTGRES_URL,
+//   connectionString: functions.config().postgres.url,
 //   ssl: true
 // })
 

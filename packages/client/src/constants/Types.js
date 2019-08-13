@@ -11,11 +11,11 @@ export const CollectionIdsType = PropTypes.arrayOf(
 
 export const UrlType = {
   id: PropTypes.string,
-  description: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  publisher: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   cutOff: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  publisher: PropTypes.string,
+  title: PropTypes.string.isRequired,
   type: PropTypes.number,
   url: PropTypes.string.isRequired
 }

@@ -144,7 +144,7 @@ module.exports = {
         icon: 'src/assets/images/icon.png'
       }
     },
-    // ...(process.env.NETLIFY ? ['gatsby-plugin-offline'] : []),
+    // ...(process.env.ORIGIN ? ['gatsby-plugin-offline'] : []),
     // 'gatsby-plugin-sitemap',
     'gatsby-plugin-no-sourcemaps',
     'gatsby-plugin-netlify-cache',
