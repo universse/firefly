@@ -32,7 +32,7 @@ $modal-transition-duration: 0.28s;
   }
 }
 
-.SignUpModal {
+.Dialog {
   @extend %modal;
   @extend %full-screen;
   @include modal-transition(opacity, 0, 1);

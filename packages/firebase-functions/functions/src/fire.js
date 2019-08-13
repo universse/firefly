@@ -8,6 +8,8 @@ const { origin } = require('./constants')
 // require('./config')
 
 async function fire (req, res) {
+  res.set('Access-Control-Allow-Origin', origin)
+
   let pages = 0
   const startedAt = req.events[0].timestamp
   const sessionId = generateSessionId(startedAt)
@@ -39,7 +41,6 @@ async function fire (req, res) {
 
   try {
     await saveToFirebase(events, session, sessionId)
-    res.set('Access-Control-Allow-Origin', origin)
     res.status(200).json({ success: true })
   } catch (e) {
     console.log(e)

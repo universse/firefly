@@ -66,7 +66,7 @@ export default function SignUpForm () {
   }
 
   return (
-    <ReactModal className='SignUpModal' {...modalProps}>
+    <ReactModal className='Dialog' {...modalProps}>
       {isSubmitted ? (
         <div
           css={css`

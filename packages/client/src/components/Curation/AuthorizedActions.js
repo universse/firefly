@@ -69,14 +69,14 @@ export default function AuthorizedActions ({
         >
           <ShareDropdown name={name} top />
         </div>
-        <button
+        {/* <button
           aria-label='Invite Collaborators'
           className='IconButton'
           onClick={() => setActiveModalType(ModalTypes.INVITE)}
           type='button'
         >
           <Icon icon='user-plus' />
-        </button>
+        </button> */}
       </div>
       <button
         aria-label='Discard Draft'
@@ -104,11 +104,11 @@ export default function AuthorizedActions ({
       >
         <Icon icon='remove' />
       </button>
-      <InviteModal
+      {/* <InviteModal
         authorizedEmails={authorizedEmails}
         id={collection.id}
         invitee={invitee}
-      />
+      /> */}
     </>
   )
 }

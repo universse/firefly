@@ -43,14 +43,14 @@ export default function InviteModal ({ id, authorizedEmails, invitee }) {
 
     setIsloading(true)
 
-    invite(['shjneeulrjch@gmail.com'], getPath(), id)
+    invite([email], getPath(), id)
       .then(() => setIsSubmitted(true))
       .catch(() => setHasError(true))
       .finally(() => setIsloading(false))
   }
 
   return (
-    <ReactModal className='SignUpModal' {...modalProps}>
+    <ReactModal className='Dialog' {...modalProps}>
       {isSubmitted ? (
         <div
           css={css`

@@ -1,6 +1,9 @@
 const admin = require('firebase-admin')
+const sgMail = require('@sendgrid/mail')
 
-const { origin, transporter } = require('./constants')
+const { key, origin } = require('./constants')
+
+sgMail.setApiKey(key)
 
 const auth = admin.auth()
 const database = admin.database()
@@ -17,7 +20,6 @@ async function authorizeUser (draftId, email) {
   try {
     userRecord = await auth.getUserByEmail(email)
   } catch (e) {
-    console.log(e)
     userRecord = await auth.createUser({ email })
   }
 
@@ -27,28 +29,38 @@ async function authorizeUser (draftId, email) {
 }
 
 async function invite (req, res) {
+  res.set('Access-Control-Allow-Origin', origin)
+
   const { draftId, emails, redirect, url } = req.body
 
-  await Promise.all(
-    emails.map(async email => {
-      draftId && (await authorizeUser(draftId, email))
+  const mails = []
 
-      const link = await auth.generateSignInWithEmailLink(email, {
-        url: `${url}?redirect_to=${encodeURIComponent(redirect)}`,
-        handleCodeInApp: true
+  try {
+    await Promise.all(
+      emails.map(async email => {
+        draftId && (await authorizeUser(draftId, email))
+
+        const link = await auth.generateSignInWithEmailLink(email, {
+          url: `${url}?redirect_to=${encodeURIComponent(redirect)}`,
+          handleCodeInApp: true
+        })
+
+        mails.push({
+          from: 'Phuoc <s.phuoc.317049@gmail.com>',
+          to: email,
+          subject: 'Sign Up',
+          html: getHTMLTemplate(draftId, link)
+        })
       })
+    )
 
-      await transporter.sendMail({
-        from: 'Firefly',
-        to: email,
-        subject: 'Sign Up',
-        html: getHTMLTemplate(draftId, link)
-      })
-    })
-  )
+    await sgMail.send(mails)
 
-  res.set('Access-Control-Allow-Origin', origin)
-  res.status(200).json({ success: true })
+    res.status(200).json({ success: true })
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({ message: e.message })
+  }
 }
 
 module.exports = invite

@@ -35,6 +35,32 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
             className='GhostButton accent'
             onClick={() =>
               user
+                ? generateId('collections').then(id => {
+                    navigate(`/curate/${id}`, {
+                      state: { draft: { ...collection, id } }
+                    })
+                    openSnackbar({
+                      message: 'Saved a new copy.',
+                      shouldPersistOnNavigate: true
+                    })
+                  })
+                : signUpSnackbar()
+            }
+            type='button'
+          >
+            Save a Copy
+          </button>
+        </div>
+        {/* <div
+          css={css`
+            margin-right: 1.25rem;
+          `}
+        >
+          <button
+            aria-label='Request Access'
+            className='GhostButton accent'
+            onClick={() =>
+              user
                 ? requestAccess(authorizedEmails, window.location.href)
                 : signUpSnackbar()
             }
@@ -42,7 +68,7 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
           >
             Request Access
           </button>
-        </div>
+        </div> */}
         <div
           css={css`
             margin-right: 0.5rem;
@@ -50,7 +76,7 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
         >
           <ShareDropdown name={collection.name} top />
         </div>
-        <button
+        {/* <button
           aria-label='Save a Copy'
           className='IconButton'
           onClick={() =>
@@ -69,7 +95,7 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
           type='button'
         >
           <Icon icon='copy' />
-        </button>
+        </button> */}
       </div>
     </>
   )

@@ -34,16 +34,16 @@ export default function Avatar () {
         >
           Profile
         </Link> */}
-        <Link
+        {/* <Link
           {...highlightedIndex === 0 && { className: 'highlighted' }}
           to='/curate'
           {...getItemProps(0)}
         >
           Curate
-        </Link>
+        </Link> */}
         <button
           aria-label='Sign Out'
-          {...highlightedIndex === 1 && { className: 'highlighted' }}
+          {...highlightedIndex === 0 && { className: 'highlighted' }}
           onClick={() => {
             firebaseWorker.signOut().then(() => {
               window.___log('sign out')
@@ -53,7 +53,7 @@ export default function Avatar () {
             })
           }}
           type='button'
-          {...getItemProps(1)}
+          {...getItemProps(0)}
         >
           Sign Out
         </button>

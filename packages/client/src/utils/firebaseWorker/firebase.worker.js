@@ -51,24 +51,33 @@ export function isSignInWithEmailLink (href) {
 }
 
 export async function invite (emails, redirect, draftId = '') {
-  try {
-    const response = await fetch('/api/invite', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        draftId,
-        emails,
-        redirect,
-        url: `${global.location.origin}/welcome`
-      })
-    })
-    return await response.json()
-  } catch {
-    throw new Error()
-  }
+  return auth.sendSignInLinkToEmail(emails[0], {
+    url: `${global.location.origin}/welcome?redirect_to=${encodeURIComponent(
+      redirect
+    )}`,
+    handleCodeInApp: true
+  })
 }
+
+// export async function invite (emails, redirect, draftId = '') {
+//   try {
+//     const response = await fetch('/api/invite', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         draftId,
+//         emails,
+//         redirect,
+//         url: `${global.location.origin}/welcome`
+//       })
+//     })
+//     return await response.json()
+//   } catch {
+//     throw new Error()
+//   }
+// }
 
 // export function signInWithEmailAndPassword (email, password) {
 //   return auth.signInWithEmailAndPassword(email, password)
@@ -373,24 +382,24 @@ export async function discardDraft (id) {
   }
 }
 
-export async function requestAccess (authorizedEmails, href) {
-  try {
-    const response = await fetch('/api/requestAccess', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        authorizedEmails,
-        email: auth.currentUser.email,
-        href
-      })
-    })
-    return await response.json()
-  } catch {
-    throw new Error()
-  }
-}
+// export async function requestAccess (authorizedEmails, href) {
+//   try {
+//     const response = await fetch('/api/requestAccess', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         authorizedEmails,
+//         email: auth.currentUser.email,
+//         href
+//       })
+//     })
+//     return await response.json()
+//   } catch {
+//     throw new Error()
+//   }
+// }
 
 // const date = `${new Date().getDate()}-${new Date().getMonth() + 1}`
 // const id = firestore.collection(COLLECTIONS).doc().id

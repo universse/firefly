@@ -1,21 +1,26 @@
-const { origin, transporter } = require('./constants')
+const sgMail = require('@sendgrid/mail')
+
+const { key, origin } = require('./constants')
+
+sgMail.setApiKey(key)
 
 async function requestAccess (req, res) {
-  const { authorizedEmails, email: invitee, href } = req.body
-
-  await Promise.all(
-    authorizedEmails.map(async email => {
-      await transporter.sendMail({
-        from: 'Firefly',
-        to: email,
-        subject: 'Something',
-        html: `<p>${invitee} requested access. Click <a href='${href}?invitee=${invitee}'}'>here</a> to accept.</p>`
-      })
-    })
-  )
-
   res.set('Access-Control-Allow-Origin', origin)
-  res.status(200).json({ success: true })
+
+  const { authorizedEmails, email: invitee, href } = req.body
+  try {
+    await sgMail.sendMultiple({
+      from: invitee,
+      to: authorizedEmails,
+      subject: 'Request Access',
+      html: `<p>${invitee} requested access. Click <a href='${href}?invitee=${invitee}'}'>here</a> to accept.</p>`
+    })
+
+    res.status(200).json({ success: true })
+  } catch (e) {
+    console.log(e)
+    res.status(500).json({ message: e.message })
+  }
 }
 
 module.exports = requestAccess
