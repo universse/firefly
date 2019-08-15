@@ -1,6 +1,3 @@
-const express = require('express')
-const serverless = require('serverless-http')
-const compression = require('compression')
 const metascraper = require('metascraper')([
   // require('metascraper-author')(),
   require('metascraper-description')(),
@@ -9,21 +6,14 @@ const metascraper = require('metascraper')([
   require('metascraper-title')()
 ])
 const got = require('got')
-const {
-  NetlifyFunction,
-  getTruncatedString,
-  truncate,
-  toTitleCase
-} = require('common')
+const { getTruncatedString, truncate, toTitleCase } = require('@firefly/core')
 
-const basePath = process.env.ORIGIN ? `${NetlifyFunction}api` : '/api'
+module.exports = async (req, res) => {
+  // if (event.httpMethod !== 'POST') {
+  //   return { statusCode: 405, body: 'Method Not Allowed' }
+  // }
 
-const app = express()
-const router = express.Router()
-router.use(compression())
-
-router.post('/', async (req, res) => {
-  const { href } = JSON.parse(req.body)
+  const { href } = req.body
 
   try {
     const { body: html, url } = await got(href)
@@ -36,11 +26,7 @@ router.post('/', async (req, res) => {
     metadata.cutOff = truncate(metadata.description, 60)
 
     res.status(200).json(metadata)
-  } catch {
+  } catch (e) {
     res.status(400).json({ error: true })
   }
-})
-
-app.use(basePath, router)
-
-export const handler = serverless(app)
+}

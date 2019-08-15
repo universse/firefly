@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Categories, toTitleCase } from 'common'
+import { Categories, toTitleCase } from '@firefly/core'
 
 import CategoryFilter from 'components/CategoryFilter'
 import Footer from 'components/Footer'

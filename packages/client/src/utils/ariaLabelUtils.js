@@ -1,4 +1,4 @@
-import { toTitleCase } from 'common'
+import { toTitleCase } from '@firefly/core'
 
 export const createActionLabel = (action, name) => {
   switch (action) {

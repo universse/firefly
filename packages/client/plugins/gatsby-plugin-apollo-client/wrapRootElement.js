@@ -1,11 +1,10 @@
 import React from 'react'
 import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
-import ky from 'ky-universal'
+import 'isomorphic-unfetch'
 
 const client = new ApolloClient({
-  // uri: '',
-  fetch: ky
+  // uri: ''
 })
 
 // eslint-disable-next-line

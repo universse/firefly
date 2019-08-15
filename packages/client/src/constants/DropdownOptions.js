@@ -1,4 +1,4 @@
-import { Categories, DifficultyLevels, toTitleCase } from 'common'
+import { Categories, DifficultyLevels, toTitleCase } from '@firefly/core'
 
 export default {
   CATEGORY_OPTIONS: Categories.map((category, i) => ({

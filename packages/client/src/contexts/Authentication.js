@@ -18,7 +18,7 @@ export default function Authentication ({ children }) {
 
           if (payload) {
             window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-            window.___logUser(payload)
+            window.___logUser(payload.uid)
           } else {
             window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
           }

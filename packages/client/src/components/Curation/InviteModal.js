@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
+import { invite } from './utils'
 import Icon from 'assets/icons'
 import useModal from 'hooks/useModal'
 import useSiteMetadata from 'hooks/useSiteMetadata'
@@ -11,8 +12,6 @@ import ModalTypes from 'constants/ModalTypes'
 import { logClickSignUp } from 'utils/analytics'
 import firebaseWorker from 'utils/firebaseWorker'
 import { getPath } from 'utils/pathnameUtils'
-
-const { invite } = firebaseWorker
 
 // multi emails input
 export default function InviteModal ({ id, authorizedEmails, invitee }) {

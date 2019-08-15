@@ -9,7 +9,7 @@ const metascraper = require('metascraper')([
 const got = require('got')
 const { writeFileSync } = require('fs')
 const { resolve } = require('path')
-const { toTitleCase, getTruncatedString } = require('common')
+const { toTitleCase, getTruncatedString } = require('@firefly/core')
 
 const workbook = XLSX.readFile(resolve(__dirname, '../data/raw.xlsx'))
 const worksheet = workbook.Sheets['Sheet1']

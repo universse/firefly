@@ -1,6 +1,6 @@
 const fs = require('fs')
 const { resolve } = require('path')
-const { Categories } = require('common')
+const { Categories } = require('@firefly/core')
 
 const { createCategoryPath, createCollectionPath } = require('./utils')
 
@@ -16,7 +16,7 @@ module.exports = async ({
   })
 
   createRedirect({
-    fromPath: '/api/*',
+    fromPath: '/fire/*',
     toPath: `${process.env.FIREBASE_FUNCTIONS}/:splat`,
     statusCode: 200
   })

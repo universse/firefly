@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch'
+
 import { isIndexPage, scrollToHero } from './gatsby/utils'
 import 'styles/index.scss'
 

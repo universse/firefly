@@ -1,4 +1,4 @@
-const { Categories, ItemTypes } = require('common')
+const { Categories, ItemTypes } = require('@firefly/core')
 
 function parseCollection ({ category, ...props }) {
   return {

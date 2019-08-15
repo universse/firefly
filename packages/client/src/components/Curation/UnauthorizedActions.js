@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
 
+import { requestAccess } from './utils'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
 import { AuthenticationContext } from 'contexts/Authentication'
@@ -10,7 +11,7 @@ import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import useSignUpSnackbar from 'hooks/useSignUpSnackbar'
 import firebaseWorker from 'utils/firebaseWorker'
 
-const { generateId, requestAccess } = firebaseWorker
+const { generateId } = firebaseWorker
 
 export default function UnauthorizedActions ({ authorizedEmails, collection }) {
   const user = useContext(AuthenticationContext)
@@ -61,7 +62,11 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
             className='GhostButton accent'
             onClick={() =>
               user
-                ? requestAccess(authorizedEmails, window.location.href)
+                ? requestAccess(
+                    authorizedEmails,
+                    user.email,
+                    window.location.href
+                  )
                 : signUpSnackbar()
             }
             type='button'

@@ -21,8 +21,7 @@ const server = new ApolloServer({
     functionName: context.functionName,
     event,
     context
-  }),
-  tracing: true
+  })
 })
 
 export const graphql = server.createHandler({

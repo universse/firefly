@@ -1,6 +1,10 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const { NetlifyFunction, truncate, getTruncatedString } = require('common')
+const {
+  NetlifyFunction,
+  truncate,
+  getTruncatedString
+} = require('@firefly/core')
 
 require('dotenv').config({
   path: resolve(__dirname, '../../.env')
@@ -30,7 +34,7 @@ const developMiddleware = app => {
   )
 
   app.use(
-    '/api',
+    '/fire',
     proxy({
       target: 'http://localhost:5000/firefly-users-db-dev/us-central1',
       pathRewrite: {

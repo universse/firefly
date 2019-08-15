@@ -1,4 +1,4 @@
-const { Categories, animate } = require('common')
+const { Categories, animate } = require('@firefly/core')
 
 function slugify (str) {
   return str

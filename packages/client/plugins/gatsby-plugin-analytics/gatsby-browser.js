@@ -64,7 +64,7 @@ window.addEventListener('visibilitychange', () => {
 
 // end session
 let sent = false
-const endpoint = '/api/fire'
+const endpoint = '/fire/int'
 
 function endSession () {
   if (sent) return

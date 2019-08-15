@@ -1,7 +1,7 @@
 import React, { memo, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-// import { ItemTypes } from 'common'
+// import { ItemTypes } from '@firefly/core'
 
 import Icon from 'assets/icons'
 import { OutboundLink } from 'components/common'

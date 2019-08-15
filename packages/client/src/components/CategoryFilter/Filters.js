@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Categories, animate } from 'common'
+import { Categories, animate } from '@firefly/core'
 
 import { Category, scrollButtonWidthInRem } from './styled'
 import { MediaContext } from 'contexts/Media'

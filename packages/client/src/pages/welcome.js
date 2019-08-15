@@ -7,6 +7,7 @@ import { AuthenticationContext } from 'contexts/Authentication'
 import LocalStorage from 'constants/LocalStorage'
 import firebaseWorker from 'utils/firebaseWorker'
 import offlineStorageWorker from 'utils/offlineStorageWorker'
+import postRequest from 'utils/postRequest'
 
 export default function WelcomePage ({ location: { search } }) {
   const user = useContext(AuthenticationContext)
@@ -33,7 +34,12 @@ export default function WelcomePage ({ location: { search } }) {
           .then(email =>
             firebaseWorker.signInWithEmailLink(email, window.location.href)
           )
-          .then(isNewUser => {
+          .then(({ email, isNewUser }) => {
+            postRequest('/api/subscribe', {
+              api_key: process.env.GATSBY_OCTOPUS_KEY,
+              email_address: email
+            })
+
             window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
             window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
             window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)

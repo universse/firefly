@@ -49,7 +49,7 @@
     "prebuild": "echo transfer data",
     "build": "run-p build:**",
     "build:client": "yarn workspace client build",
-    "build:netlify-functions": "yarn workspace netlify-functions build",
+    "build:functions": "yarn workspace functions build",
     "postbuild": "echo clean data before timestamp",
     "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf .pnp && rm -rf .pnp.js",
     "commit": "shjs ./scripts/commit.js",
@@ -64,6 +64,6 @@
     "lint:styled": "stylelint packages/client/src/**/*.js",
     "start": "run-p start:**",
     "start:client": "yarn workspace client start",
-    "start:netlify-functions": "yarn workspace netlify-functions start"
+    "start:functions": "yarn workspace functions start"
   }
 }

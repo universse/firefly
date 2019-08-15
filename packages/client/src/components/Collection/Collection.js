@@ -1,7 +1,7 @@
 import React, { memo, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Categories, DifficultyLevels } from 'common'
+import { Categories, DifficultyLevels } from '@firefly/core'
 import { Link } from 'gatsby'
 
 import Tags from './Tags'

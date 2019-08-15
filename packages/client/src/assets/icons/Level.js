@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { DifficultyLevels } from 'common'
+import { DifficultyLevels } from '@firefly/core'
 
 export function Level ({ level }) {
   return (

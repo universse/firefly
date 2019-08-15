@@ -6,10 +6,10 @@ import LearningItem from 'components/CollectionTemplate/LearningItem'
 import Icon from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import useDebouncedValue from 'hooks/useDebouncedValue'
-import Netlify from 'constants/Netlify'
 import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
 import firebaseWorker from 'utils/firebaseWorker'
+import postRequest from 'utils/postRequest'
 
 function reducer (state, payload) {
   return { ...state, ...payload }
@@ -51,14 +51,7 @@ function LearningItemInput ({
       const { href } = new URL(debouncedUrlInput)
       setState({ isLoading: true, hasError: false })
 
-      fetch(Netlify.API, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ href })
-      })
-        .then(response => response.json())
+      postRequest('/.netlify/functions/meta', { href })
         .then(response => {
           if (response.error) throw new Error()
 
