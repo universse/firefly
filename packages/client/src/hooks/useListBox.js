@@ -22,6 +22,8 @@ export default function useListBox ({ onSelect }) {
     }
   }
 
+  const unhighlight = () => setHighlightedIndex(-1)
+
   const detailsProps = {
     ref: detailsRef
   }
@@ -49,6 +51,8 @@ export default function useListBox ({ onSelect }) {
           setHighlightedIndex(highlightedIndex =>
             highlightedIndex === 0
               ? items.current.length - 1
+              : highlightedIndex === -1
+              ? -1
               : highlightedIndex - 1
           )
           break
@@ -62,7 +66,7 @@ export default function useListBox ({ onSelect }) {
 
         case 'Escape':
           e.preventDefault()
-          setHighlightedIndex(-1)
+          unhighlight()
           detailsRef.current.removeAttribute('open')
           break
       }
@@ -90,7 +94,7 @@ export default function useListBox ({ onSelect }) {
       id: item.id,
       onClick: select,
       onMouseEnter: highlight,
-      onMouseLeave: () => setHighlightedIndex(-1),
+      onMouseLeave: unhighlight,
       onTouchStart: highlight,
       role: 'option',
       tabIndex: -1

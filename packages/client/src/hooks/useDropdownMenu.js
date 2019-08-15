@@ -32,6 +32,8 @@ export default function useDropdownMenu ({
       : menuRef.current.children[highlightedIndex].click()
   }
 
+  const unhighlight = () => setHighlightedIndex(-1)
+
   const detailsProps = {
     ref: detailsRef
   }
@@ -60,18 +62,22 @@ export default function useDropdownMenu ({
           e.preventDefault()
 
           setHighlightedIndex(highlightedIndex =>
-            highlightedIndex === 0 ? menuItemCount - 1 : highlightedIndex - 1
+            highlightedIndex === 0
+              ? menuItemCount - 1
+              : highlightedIndex === -1
+              ? -1
+              : highlightedIndex - 1
           )
           break
 
         case 'Enter':
           select()
-          setHighlightedIndex(-1)
+          unhighlight()
           break
 
         case 'Escape':
           e.preventDefault()
-          setHighlightedIndex(-1)
+          unhighlight()
           detailsRef.current.removeAttribute('open')
           break
 
@@ -83,7 +89,7 @@ export default function useDropdownMenu ({
   }
 
   const menuProps = {
-    onMouseLeave: () => setHighlightedIndex(-1),
+    onMouseLeave: unhighlight,
     ref: menuRef,
     role: 'menu',
     style

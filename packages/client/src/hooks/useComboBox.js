@@ -22,14 +22,17 @@ export default function useComboBox ({ onSelect }) {
 
   const openMenu = e => e.target.value && setIsOpen(true)
 
+  const unhighlight = () => setHighlightedIndex(-1)
+
   const closeMenu = () => {
-    setHighlightedIndex(-1)
+    unhighlight()
     setIsOpen(false)
   }
 
   // TODO may need pass in index as argument
   const select = () => {
     if (highlightedIndex < 0) return
+
     onSelect(items.current[highlightedIndex])
     closeMenu()
   }
@@ -59,13 +62,13 @@ export default function useComboBox ({ onSelect }) {
       },
       onChange: e => {
         setIsOpen(!!e.target.value)
-        setHighlightedIndex(-1)
+        unhighlight()
         onChange && onChange(e)
       },
       onClick: openMenu,
       onFocus: openMenu,
       onKeyDown: e => {
-        if (!isOpen) return
+        if (!e.target.value) return
         shouldScroll.current = true
 
         switch (e.key) {
@@ -84,6 +87,8 @@ export default function useComboBox ({ onSelect }) {
             setHighlightedIndex(highlightedIndex =>
               highlightedIndex === 0
                 ? items.current.length - 1
+                : highlightedIndex === -1
+                ? -1
                 : highlightedIndex - 1
             )
             break
@@ -104,7 +109,7 @@ export default function useComboBox ({ onSelect }) {
   const menuProps = {
     'aria-labelledby': labelId,
     id: menuId,
-    onMouseLeave: () => setHighlightedIndex(-1),
+    onMouseLeave: unhighlight,
     ref: menuRef,
     role: 'listbox'
   }
