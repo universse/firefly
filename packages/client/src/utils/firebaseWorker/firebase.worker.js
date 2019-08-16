@@ -13,14 +13,13 @@ const stopAuthListener = auth.onAuthStateChanged(user => {
 
 export async function getUser () {
   if (isReady) {
-    return (
-      auth.currentUser && {
-        uid: auth.currentUser.uid,
-        email: auth.currentUser.email
-      }
-    )
+    return auth.currentUser && auth.currentUser.uid
   }
   throw new Error()
+}
+
+export async function getEmail () {
+  return auth.currentUser && auth.currentUser.email
 }
 
 // eslint-disable-next-line

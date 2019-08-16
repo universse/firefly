@@ -9,14 +9,9 @@
 //   require('metascraper-title')()
 // ])
 // const got = require('got')
-// const {
-//   NetlifyFunction,
-//   getTruncatedString,
-//   truncate,
-//   toTitleCase
-// } = require('@firefly/core')
+// const { getTruncatedString, truncate, toTitleCase } = require('@firefly/core')
 
-// const basePath = process.env.ORIGIN ? `${NetlifyFunction}api` : '/api'
+// const basePath = process.env.ORIGIN ? `${process.env.API}/api` : '/api'
 
 // const app = express()
 // const router = express.Router()

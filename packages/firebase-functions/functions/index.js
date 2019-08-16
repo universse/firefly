@@ -3,10 +3,10 @@ const admin = require('firebase-admin')
 
 admin.initializeApp()
 
-const fire = require('./src/fire')
+const int = require('./src/int')
 const invite = require('./src/invite')
 const requestAccess = require('./src/requestAccess')
 
-exports.fire = functions.https.onRequest(fire)
+exports.int = functions.https.onRequest(int)
 exports.invite = functions.https.onRequest(invite)
 exports.requestAccess = functions.https.onRequest(requestAccess)

@@ -2,8 +2,10 @@
   "name": "firebase-functions",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "10"
+  },
   "dependencies": {
-    "@firefly/core": "*",
     "@sendgrid/mail": "^6.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",

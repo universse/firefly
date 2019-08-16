@@ -64,7 +64,6 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
               user
                 ? requestAccess(
                     authorizedEmails,
-                    user.email,
                     window.location.href
                   )
                 : signUpSnackbar()

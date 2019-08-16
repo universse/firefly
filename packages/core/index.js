@@ -16,12 +16,12 @@ module.exports = {
   DifficultyLevels: ['introductory', 'fundamental', 'intermediate', 'advanced'],
   // [endpoint, redirect]
   EndPoints: {
-    API: ['/api'],
-    FIRE: ['/fire'],
-    GRAPHQL: ['/graphql']
+    API: '/api',
+    FIRE: '/fire',
+    GRAPHQL: '/graphql'
   },
   ItemTypes: ['article', 'book', 'code', 'course', 'podcast', 'url', 'video'],
-  NetlifyFunction: '/.netlify/functions',
+  Origin: '',
   animate,
   toTitleCase,
   truncate,

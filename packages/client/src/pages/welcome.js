@@ -9,6 +9,8 @@ import firebaseWorker from 'utils/firebaseWorker'
 import offlineStorageWorker from 'utils/offlineStorageWorker'
 import postRequest from 'utils/postRequest'
 
+const { isSignInWithEmailLink, signInWithEmailLink } = firebaseWorker
+
 export default function WelcomePage ({ location: { search } }) {
   const user = useContext(AuthenticationContext)
 
@@ -24,27 +26,25 @@ export default function WelcomePage ({ location: { search } }) {
 
     user
       ? redirect()
-      : firebaseWorker
-          .isSignInWithEmailLink(window.location.href)
+      : isSignInWithEmailLink(window.location.href)
           .then(
             () =>
               window.localStorage.getItem(LocalStorage.EMAIL_SIGN_IN) ||
               window.prompt('Please enter your email for confirmation.')
           )
-          .then(email =>
-            firebaseWorker.signInWithEmailLink(email, window.location.href)
-          )
+          .then(email => signInWithEmailLink(email, window.location.href))
           .then(({ email, isNewUser }) => {
-            postRequest('/api/subscribe', {
-              api_key: process.env.GATSBY_OCTOPUS_KEY,
-              email_address: email
-            })
-
             window.localStorage.removeItem(LocalStorage.EMAIL_SIGN_IN)
             window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
             window.localStorage.setItem(LocalStorage.IS_NEW_USER, isNewUser)
 
-            return offlineStorageWorker.addToQueue()
+            return Promise.all([
+              offlineStorageWorker.addToQueue(),
+              postRequest('/api/subscribe', {
+                api_key: process.env.GATSBY_OCTOPUS_KEY,
+                email_address: email
+              })
+            ])
           })
           .then(redirect)
           .catch(e => {

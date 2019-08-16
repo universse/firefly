@@ -4,9 +4,9 @@
     "env": {
       "FIREBASE_COLLECTIONS": "@firebase_collections",
       "FIREBASE_FUNCTIONS": "@firebase_functions",
+      "GATSBY_API": "@gatsby_api",
       "GATSBY_FIREBASE_USERS": "@gatsby_firebase_users",
-      "GATSBY_OCTOPUS_KEY": "@gatsby_octopus_key",
-      "ORIGIN": "@origin"
+      "GATSBY_OCTOPUS_KEY": "@gatsby_octopus_key"
     }
   },
   "builds": [

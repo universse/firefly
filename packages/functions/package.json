@@ -2,9 +2,12 @@
   "name": "functions",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "10"
+  },
   "dependencies": {
-    "apollo-server-micro": "^2.8.1",
     "@firefly/core": "*",
+    "apollo-server-micro": "^2.8.1",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "got": "^9.6.0",
@@ -20,7 +23,7 @@
   },
   "devDependencies": {
     "babel-loader": "^8.0.6",
-    "netlify-lambda": "^1.5.1"
+    "netlify-lambda": "^1.6.0"
   },
   "scripts": {
     "build": "netlify-lambda build netlify",

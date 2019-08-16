@@ -1,3 +1,4 @@
+import firebaseWorker from 'utils/firebaseWorker'
 import postRequest from 'utils/postRequest'
 
 export function invite (emails, redirect, draftId = '') {
@@ -9,10 +10,12 @@ export function invite (emails, redirect, draftId = '') {
   })
 }
 
-export function requestAccess (authorizedEmails, email, href) {
-  return postRequest('/fire/requestAccess', {
-    authorizedEmails,
-    email,
-    href
-  })
+export function requestAccess (authorizedEmails, href) {
+  return firebaseWorker.getEmail().then(email =>
+    postRequest('/fire/requestAccess', {
+      authorizedEmails,
+      email,
+      href
+    })
+  )
 }

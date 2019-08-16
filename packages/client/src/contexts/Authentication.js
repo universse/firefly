@@ -13,12 +13,12 @@ export default function Authentication ({ children }) {
     ;(function authenticate (timeout = 200) {
       return firebaseWorker
         .getUser()
-        .then(payload => {
-          setUser(payload)
+        .then(uid => {
+          setUser(uid)
 
-          if (payload) {
+          if (uid) {
             window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-            window.___logUser(payload.uid)
+            window.___logUser(uid)
           } else {
             window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
           }

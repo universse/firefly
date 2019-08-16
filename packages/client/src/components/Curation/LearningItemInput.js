@@ -51,7 +51,7 @@ function LearningItemInput ({
       const { href } = new URL(debouncedUrlInput)
       setState({ isLoading: true, hasError: false })
 
-      postRequest('/.netlify/functions/meta', { href })
+      postRequest(`${process.env.GATSBY_API}/meta`, { href })
         .then(response => {
           if (response.error) throw new Error()
 

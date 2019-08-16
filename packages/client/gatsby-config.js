@@ -1,10 +1,6 @@
 const proxy = require('http-proxy-middleware')
 const { resolve } = require('path')
-const {
-  NetlifyFunction,
-  truncate,
-  getTruncatedString
-} = require('@firefly/core')
+const { truncate, getTruncatedString } = require('@firefly/core')
 
 require('dotenv').config({
   path: resolve(__dirname, '../../.env')
@@ -12,11 +8,11 @@ require('dotenv').config({
 
 const developMiddleware = app => {
   app.use(
-    NetlifyFunction,
+    process.env.GATSBY_API,
     proxy({
       target: 'http://localhost:9000',
       pathRewrite: {
-        [NetlifyFunction]: ''
+        [process.env.GATSBY_API]: ''
       }
     })
   )
@@ -148,7 +144,7 @@ module.exports = {
         icon: 'src/assets/images/icon.png'
       }
     },
-    // ...(process.env.ORIGIN ? ['gatsby-plugin-offline'] : []),
+    // ...(process.env.URL ? ['gatsby-plugin-offline'] : []),
     // 'gatsby-plugin-sitemap',
     'gatsby-plugin-no-sourcemaps',
     'gatsby-plugin-netlify-cache',
