@@ -21,7 +21,6 @@ async function int (req, res) {
       pageCount = pageCount + 1
     }
     event.timestamp = event.timestamp / 1000
-    event.sessionId = sessionId
   })
 
   session.id = sessionId

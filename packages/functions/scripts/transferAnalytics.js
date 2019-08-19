@@ -53,22 +53,30 @@ async function transfer () {
   const Events = []
 
   const metadataDoc = firestore.collection(SESSIONS_TABLE).doc('metadata')
-  const metadata = await metadataDoc.get()
 
-  const sessionsSnapshot = await firestore
-    .collection(SESSIONS_TABLE)
-    .where(_TIMESTAMP, '>', metadata.data().lastTransferredSessionTimestamp)
-    .orderBy(_TIMESTAMP, 'asc')
-    .get()
+  let sessionsSnapshot
+  try {
+    const metadata = await metadataDoc.get()
 
+    sessionsSnapshot = await firestore
+      .collection(SESSIONS_TABLE)
+      .where(_TIMESTAMP, '>', metadata.data().lastTransferredSessionTimestamp)
+      .orderBy(_TIMESTAMP, 'asc')
+      .get()
+  } catch {
+    sessionsSnapshot = await firestore
+      .collection(SESSIONS_TABLE)
+      .orderBy(_TIMESTAMP, 'asc')
+      .get()
+  }
   if (!sessionsSnapshot.size) return
 
   let lastTransferredSessionTimestamp
 
-  let count = 0
-  let batchNo = 0
-  const batches = []
-  const BATCH_SIZE = 497
+  // let count = 0
+  // let batchNo = 0
+  // const batches = []
+  // const BATCH_SIZE = 497
 
   sessionsSnapshot.forEach(async doc => {
     const { _timestamp, events, ...session } = doc.data()
@@ -76,19 +84,23 @@ async function transfer () {
     lastTransferredSessionTimestamp = _timestamp
 
     events.forEach(event => {
-      Events.push({ ...event, properties: event.properties || null })
+      Events.push({
+        ...event,
+        sessionId: session.id,
+        properties: event.properties || null
+      })
     })
 
-    if (count === BATCH_SIZE) {
-      count = 0
-      batchNo++
-    }
-    count++
+    // if (count === BATCH_SIZE) {
+    //   count = 0
+    //   batchNo++
+    // }
+    // count++
 
-    if (!batches[batchNo]) {
-      batches[batchNo] = firestore.batch()
-    }
-    batches[batchNo].delete(doc.ref)
+    // if (!batches[batchNo]) {
+    //   batches[batchNo] = firestore.batch()
+    // }
+    // batches[batchNo].delete(doc.ref)
   })
 
   await db.task('inserting-session', t => {
@@ -101,11 +113,15 @@ async function transfer () {
     return t.none(insert)
   })
 
-  batches[batchNo].set(metadataDoc, {
+  // batches[batchNo].set(metadataDoc, {
+  //   lastTransferredSessionTimestamp
+  // })
+
+  // writeBatchesToDB(batches)
+
+  await metadataDoc.set({
     lastTransferredSessionTimestamp
   })
-
-  writeBatchesToDB(batches)
 }
 
 ;(async () => {

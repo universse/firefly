@@ -34,7 +34,7 @@ export default function SignUpForm () {
     }, closeTimeoutMS)
   }, [closeTimeoutMS, isOpen])
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault()
     if (!email) return
 

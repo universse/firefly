@@ -36,7 +36,7 @@ export default function InviteModal ({ id, authorizedEmails, invitee }) {
   //   }, closeTimeoutMS)
   // }, [closeTimeoutMS, isOpen])
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault()
     // if (!emails.length) return
 

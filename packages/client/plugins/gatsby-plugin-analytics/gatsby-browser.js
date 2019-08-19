@@ -65,6 +65,14 @@ window.addEventListener('visibilitychange', () => {
 // end session
 let sent = false
 const endpoint = '/fire/int'
+const key = 'int'
+
+function send (data) {
+  const request = new XMLHttpRequest()
+  request.open('POST', endpoint)
+  request.setRequestHeader('Content-Type', 'application/json')
+  request.send(data)
+}
 
 function endSession () {
   if (sent) return
@@ -80,28 +88,27 @@ function endSession () {
 
   const data = JSON.stringify({ session, events })
 
-  if (window.navigator.sendBeacon) {
+  try {
     const beacon = window.navigator.sendBeacon(
       endpoint,
       new Blob([data], { type: 'application/json' })
     )
-    if (beacon) return
+    if (!beacon) throw new Error()
+  } catch {
+    const iOS =
+      !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
+    const google = window.navigator.vendor.includes('Google')
+
+    if (iOS || google) {
+      return window.localStorage.setItem(key, data)
+    }
+
+    send(data)
+
+    const latency = session.latency || 0
+    const t = Date.now() + Math.max(300, latency + 200)
+    while (Date.now() < t) {}
   }
-
-  const iOS =
-    !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
-
-  const async = !iOS
-  const request = new XMLHttpRequest()
-  request.open('POST', endpoint, async)
-  request.setRequestHeader('Content-Type', 'application/json')
-  request.send(data)
-
-  if (!async || window.navigator.vendor.includes('Google')) return
-
-  const latency = session.latency || 0
-  const t = Date.now() + Math.max(300, latency + 200)
-  while (Date.now() < t) {}
 }
 
 const once = { once: true }
@@ -124,6 +131,12 @@ function logViewPage ({ location, prevLocation }) {
 }
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
+  if (!prevLocation) {
+    const data = window.localStorage.getItem(key)
+    data && send(data)
+    window.localStorage.removeItem(key)
+  }
+
   document.visibilityState === 'visible' &&
     logViewPage({ location, prevLocation })
 }
