@@ -52,15 +52,6 @@ module.exports = async ({
     `
   )
 
-  // createPage({
-  //   path: '/collection',
-  //   component: resolve('./src/templates/collection.js'),
-  //   matchPath: '/collection/*',
-  //   context: {
-  //     id: 'fallback'
-  //   }
-  // })
-
   const normalizedCollections = {}
 
   db.data.allCollections.nodes.forEach(({ id, ...node }) => {
@@ -71,7 +62,6 @@ module.exports = async ({
     createPage({
       path: createCollectionPath({ id, name }),
       component: resolve('./src/templates/collection.js'),
-      // matchPath: undefined,
       context: {
         id
       }

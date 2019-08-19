@@ -32,9 +32,10 @@ const developMiddleware = app => {
   app.use(
     '/fire',
     proxy({
-      target: 'http://localhost:5000/firefly-users-db-dev/us-central1',
+      target: process.env.FIREBASE_FUNCTIONS,
+      changeOrigin: true,
       pathRewrite: {
-        '/api': ''
+        '/fire': ''
       }
     })
   )

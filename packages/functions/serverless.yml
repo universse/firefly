@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs10.x
   stage: dev
   region: us-east-1
   # To load environment variables externally
@@ -19,7 +19,7 @@ provider:
 
 custom:
   webpack:
-    webpackConfig: ./webpack.config.js
+    webpackConfig: ./webpack.lambdas.js
     includeModules: true
     packager: yarn
 
@@ -44,18 +44,18 @@ package:
 
 functions:
   hello:
-    handler: handlers.hello
+    handler: ./lambdas/handlers.hello
     events:
       - http:
           path: hello
           method: get
   graphql:
-    handler: handlers.graphql
+    handler: ./lambdas/handlers.graphql
     events:
       - http:
           path: graphql
           method: post
-          cors: true
+          # cors: true
       - http:
           path: graphql
           method: get

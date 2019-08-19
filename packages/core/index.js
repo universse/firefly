@@ -14,12 +14,6 @@ module.exports = {
     'web development'
   ],
   DifficultyLevels: ['introductory', 'fundamental', 'intermediate', 'advanced'],
-  // [endpoint, redirect]
-  EndPoints: {
-    API: '/api',
-    FIRE: '/fire',
-    GRAPHQL: '/graphql'
-  },
   ItemTypes: ['article', 'book', 'code', 'course', 'podcast', 'url', 'video'],
   Origin: '',
   animate,

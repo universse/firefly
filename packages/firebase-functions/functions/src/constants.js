@@ -1,3 +1,4 @@
+const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
 const transporter = nodemailer.createTransport({
@@ -10,7 +11,7 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports = {
-  key: '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',
   origin: '*',
+  sgKey: functions.config().sendgrid.key,
   transporter
 }

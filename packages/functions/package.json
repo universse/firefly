@@ -7,11 +7,15 @@
   },
   "dependencies": {
     "@firefly/core": "*",
+    "apollo-server-lambda": "^2.8.1",
     "apollo-server-micro": "^2.8.1",
     "compression": "^1.7.4",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
+    "firebase-admin": "^8.3.0",
     "got": "^9.6.0",
     "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
     "metascraper": "^5.6.5",
     "metascraper-author": "^5.6.5",
     "metascraper-description": "^5.6.5",
@@ -19,19 +23,34 @@
     "metascraper-publisher": "^5.6.5",
     "metascraper-title": "^5.6.5",
     "micro": "^9.3.4",
-    "serverless-http": "^2.1.0"
+    "pg-promise": "^9.0.3",
+    "serverless-http": "^2.2.0",
+    "xlsx": "^0.15.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "aws-sdk": "^2.512.0",
     "babel-loader": "^8.0.6",
-    "netlify-lambda": "^1.6.0"
+    "babel-plugin-macros": "^2.6.1",
+    "dotenv-webpack": "^1.7.0",
+    "jest": "^24.8.0",
+    "netlify-lambda": "^1.6.2",
+    "preval.macro": "^3.0.0",
+    "serverless-dynamodb-local": "^0.2.38",
+    "serverless-offline": "^5.9.0",
+    "serverless-webpack": "^5.3.1",
+    "webpack": "^4.39.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "build": "netlify-lambda build netlify",
+    "build": "netlify-lambda build netlify --config ./webpack.netlify.js",
     "clean": "rm -rf lambda",
     "start": "yarn start:netlify",
     "start:api": "",
     "start:graphql": "micro graphql",
-    "start:netlify": "netlify-lambda serve netlify",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:lambdas": "serverless offline start",
+    "start:netlify": "netlify-lambda serve netlify --config ./webpack.netlify.js",
+    "test": "jest"
   }
 }

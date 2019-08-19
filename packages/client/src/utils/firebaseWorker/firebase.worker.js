@@ -141,15 +141,14 @@ export async function fetchCollection (id) {
     const collection = collectionDoc.data()
 
     const urlsObj = {}
-    await firestore
+    const snapshot = await firestore
       .collection(URLS)
       .where('collectionId', '==', id)
       .get()
-      .then(snapshot =>
-        snapshot.forEach((doc, i) => {
-          urlsObj[doc.id] = doc.data()
-        })
-      )
+
+    snapshot.forEach((doc, i) => {
+      urlsObj[doc.id] = doc.data()
+    })
 
     collection.urls = []
     collection.urlIds.forEach((id, i) => {

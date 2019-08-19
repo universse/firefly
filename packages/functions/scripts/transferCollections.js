@@ -21,7 +21,7 @@ const users = admin.initializeApp(
   'users'
 )
 
-const schema = { collections: {}, urls: {} }
+const schema = ['collections', 'urls']
 
 const collectionsDB = collections.firestore()
 const usersDB = users.firestore()
@@ -29,32 +29,26 @@ const usersDB = users.firestore()
 let count = 0
 let batchNo = 0
 const batches = []
+const BATCH_SIZE = 498
 
 ;(async () => {
   await Promise.all(
-    Object.keys(schema).map(async collection => {
-      await usersDB
-        .collection(collection)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            if (count === 498) {
-              count = 0
-              batchNo = batchNo + 1
-            }
+    schema.map(async collection => {
+      const snapshot = await usersDB.collection(collection).get()
 
-            if (!batches[batchNo]) {
-              batches[batchNo] = collectionsDB.batch()
-            }
+      snapshot.forEach(doc => {
+        if (count === BATCH_SIZE) {
+          count = 0
+          batchNo++
+        }
+        count++
 
-            const batch = batches[batchNo]
-
-            const docRef = collectionsDB.collection(collection).doc(doc.id)
-
-            batch.set(docRef, doc.data())
-            count++
-          })
-        })
+        if (!batches[batchNo]) {
+          batches[batchNo] = collectionsDB.batch()
+        }
+        const docRef = collectionsDB.collection(collection).doc(doc.id)
+        batches[batchNo].set(docRef, doc.data())
+      })
     })
   )
 

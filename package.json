@@ -5,6 +5,7 @@
     "packages/*",
     "packages/firebase-functions/functions"
   ],
+  "heroku-run-build-script": false,
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

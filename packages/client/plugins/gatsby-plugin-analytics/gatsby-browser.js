@@ -1,5 +1,5 @@
 const session = {
-  createdAt: new Date().toString(),
+  createdAt: Date.now(),
   ref: document.referrer,
   userAgent: navigator.userAgent,
   language: navigator.language,
@@ -12,7 +12,7 @@ window.___log = (type, properties) => {
   events.push({
     timestamp: Date.now(),
     type,
-    ...(properties && { properties })
+    properties
   })
 
   process.env.NODE_ENV === 'development' && console.log({ type, properties })

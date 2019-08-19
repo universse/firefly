@@ -1,8 +1,8 @@
 const sgMail = require('@sendgrid/mail')
 
-const { key, origin } = require('./constants')
+const { sgKey, origin } = require('./constants')
 
-sgMail.setApiKey(key)
+sgMail.setApiKey(sgKey)
 
 async function requestAccess (req, res) {
   res.set('Access-Control-Allow-Origin', origin)

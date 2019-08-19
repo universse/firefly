@@ -1,6 +1,6 @@
 {
   "projects": {
-    "development": "firefly-users-db-dev",
+    "development": "firefly-users-db-dev-bc544",
     "production": "firefly-users-db"
   }
 }

@@ -1,9 +1,9 @@
 const admin = require('firebase-admin')
 const sgMail = require('@sendgrid/mail')
 
-const { key, origin } = require('./constants')
+const { sgKey, origin } = require('./constants')
 
-sgMail.setApiKey(key)
+sgMail.setApiKey(sgKey)
 
 const auth = admin.auth()
 const database = admin.database()
