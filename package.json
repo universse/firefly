@@ -5,7 +5,9 @@
     "packages/*",
     "packages/firebase-functions/functions"
   ],
-  "heroku-run-build-script": false,
+  "engines": {
+    "node": "10"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -47,11 +49,10 @@
     "stylelint-processor-styled-components": "^1.8.0"
   },
   "scripts": {
-    "prebuild": "echo transfer data",
     "build": "run-p build:**",
     "build:client": "yarn workspace client build",
     "build:functions": "yarn workspace functions build",
-    "postbuild": "echo clean data before timestamp",
+    "heroku-postbuild": "echo Skip builds on Heroku.",
     "clean": "shjs ./scripts/clean.js && rm -rf node_modules && rm -rf .pnp && rm -rf .pnp.js",
     "commit": "shjs ./scripts/commit.js",
     "flow": "flow",

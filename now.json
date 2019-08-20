@@ -2,8 +2,6 @@
   "alias": ["cherry.now.sh"],
   "build": {
     "env": {
-      "FIREBASE_COLLECTIONS": "@firebase_collections",
-      "FIREBASE_FUNCTIONS": "@firebase_functions",
       "GATSBY_API": "@gatsby_api",
       "GATSBY_FIREBASE_USERS": "@gatsby_firebase_users",
       "GATSBY_OCTOPUS_KEY": "@gatsby_octopus_key"
@@ -25,7 +23,7 @@
     },
     {
       "src": "/fire/(.*)",
-      "dest": "https://us-central1-firefly-users-db-dev.cloudfunctions.net/$1"
+      "dest": " https://us-central1-firefly-users-db.cloudfunctions.net/$1"
     },
     { "src": "/graphql", "dest": "/packages/functions/graphql" },
     {
