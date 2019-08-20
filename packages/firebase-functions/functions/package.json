@@ -15,11 +15,12 @@
   },
   "devDependencies": {},
   "scripts": {
-    "deploy": "shjs ./scripts/run.js deploy",
+    "deploy:dev": "firebase use development && firebase deploy",
+    "deploy:prod": "firebase use production && firebase deploy",
+    "deploy": "run-s deploy:**",
     "logs": "firebase functions:log",
     "setup": "firebase functions:config:get > .runtimeconfig.json",
-    "start": "shjs ./scripts/run.js start",
-    "use": "firebase use"
+    "start": "firebase use development && firebase serve --only functions"
   },
   "workspaces": {
     "nohoist": [

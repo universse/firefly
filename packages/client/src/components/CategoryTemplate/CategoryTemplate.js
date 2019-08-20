@@ -10,8 +10,8 @@ import { URLParamsContext } from 'contexts/URLParams'
 import { MediaContext } from 'contexts/Media'
 // import useDebouncedValue from 'hooks/useDebouncedValue'
 import { CollectionIdsType } from 'constants/Types'
-// import URLParamKeys from 'constants/URLParamKeys'
 import searchWorker from 'utils/searchWorker'
+import { logInputSearch } from 'utils/analytics'
 
 export default function CategoryTemplate ({
   data: {
@@ -23,11 +23,6 @@ export default function CategoryTemplate ({
   const {
     query: { searchInput, sort, tags }
   } = useContext(URLParamsContext)
-
-  // const handleChange = useCallback(e => {
-  //   queryDispatch({ searchInput: e.target.value })
-  //   logInputSearch(e.target.value, true)
-  // }, [queryDispatch])
 
   const [{ aggregatedTags, collectionIds }, setState] = useState({
     aggregatedTags: [],
@@ -55,7 +50,10 @@ export default function CategoryTemplate ({
         JSON.stringify(tags),
         nodes.length ? JSON.stringify(nodes) : null
       )
-      .then(state => isPending && setState(state))
+      .then(state => {
+        logInputSearch(searchInput, state.collectionIds.length, true)
+        isPending && setState(state)
+      })
 
     return () => (isPending = false)
   }, [nodes, searchInput, sort, tags])

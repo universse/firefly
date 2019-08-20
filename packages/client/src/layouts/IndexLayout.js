@@ -22,7 +22,6 @@ import {
   headerHeightInRem,
   screens
 } from 'constants/Styles'
-import { logInputSearch } from 'utils/analytics'
 
 function TopBarWrapper (props) {
   const { isPastBaseline, isScrollingDown, ref } = useIsScrollingDown()
@@ -96,10 +95,7 @@ export default function IndexLayout ({ category, children, pathname }) {
   const searchBarProps = {
     handleClearClick: () => queryDispatch({ searchInput: '' }),
     large: true,
-    onChange: e => {
-      queryDispatch({ searchInput: e.target.value })
-      logInputSearch(e.target.value, true)
-    },
+    onChange: e => queryDispatch({ searchInput: e.target.value }),
     value: searchInput
   }
 

@@ -33,8 +33,8 @@ export const logClickTagFilter = ({ tag, updatedTags }) =>
 export const logError = ({ error, componentStack }) =>
   window.___log(EventTypes.ERROR, { error, componentStack })
 
-export const logInputSearch = (input, isIndexPage = false) =>
-  window.___log(EventTypes.INPUT_SEARCH, { input, isIndexPage })
+export const logInputSearch = (input, resultCount, isIndexPage = false) =>
+  window.___log(EventTypes.INPUT_SEARCH, { input, isIndexPage, resultCount })
 
 export const logSignUpIntent = () => window.___log(EventTypes.SIGN_UP_INTENT)
 

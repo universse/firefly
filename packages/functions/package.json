@@ -30,7 +30,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "aws-sdk": "^2.512.0",
+    "aws-sdk": "^2.513.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-macros": "^2.6.1",
     "dotenv-webpack": "^1.7.0",

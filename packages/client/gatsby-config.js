@@ -29,11 +29,21 @@ const developMiddleware = app => {
     })
   )
 
+  // app.use(
+  //   '/fire',
+  //   proxy({
+  //     target: process.env.FIREBASE_FUNCTIONS,
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '/fire': ''
+  //     }
+  //   })
+  // )
+
   app.use(
     '/fire',
     proxy({
-      target: process.env.FIREBASE_FUNCTIONS,
-      changeOrigin: true,
+      target: 'http://localhost:5000/firefly-users-db-dev-bc544/us-central1/',
       pathRewrite: {
         '/fire': ''
       }
@@ -56,9 +66,9 @@ module.exports = {
         implementation: require('sass')
       }
     },
-    'gatsby-plugin-layout',
+    'gatsby-plugin-apollo-client',
     // 'gatsby-plugin-redux',
-    // 'gatsby-plugin-apollo-client',
+    'gatsby-plugin-layout',
     'gatsby-plugin-remove-trailing-slashes',
     {
       resolve: 'gatsby-source-filesystem',

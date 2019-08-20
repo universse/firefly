@@ -21,7 +21,6 @@ export default function useSearch () {
   const handleSearchInput = e => {
     setIsTyping(true)
     setSearchInput(e.target.value)
-    logInputSearch(e.target.value)
   }
 
   useEffect(() => {
@@ -32,7 +31,10 @@ export default function useSearch () {
 
       searchWorker
         .search(searchInput)
-        .then(({ collectionIds }) => isPending && setResults(collectionIds))
+        .then(({ collectionIds }) => {
+          logInputSearch(searchInput, collectionIds.length)
+          isPending && setResults(collectionIds)
+        })
         .finally(() => setIsLoading(false))
 
       return () => (isPending = false)
