@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { css } from '@emotion/core'
@@ -6,7 +6,6 @@ import { Link, navigate } from 'gatsby'
 
 import Inputs from './Inputs'
 import Footer from 'components/Footer'
-import { AuthenticationContext } from 'contexts/Authentication'
 import {
   bottomBarHeightInRem,
   headerHeightInRem,
@@ -21,24 +20,20 @@ const { fetchDraft, generateId } = firebaseWorker
 // TODO Suspense
 // check if authorized by keying in email
 export default function Curation ({ currentId, currentDraft, invitee }) {
-  const user = useContext(AuthenticationContext)
-
   const { recentDrafts, errorMessage, isLoading } = useSelector(
     state => state.meta
   )
   const dispatch = useDispatch()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    // currentDraft is only available when make copy or undo remove
     if (currentDraft) {
       dispatch({
         type: 'set',
-        // TODO authorized reset to [] if a copy made, not when undo remove
+        // TODO authorized reset to [] when make copy, not undo remove
         payload: { isAuthorized: true, authorizedEmails: [] }
       })
-      dispatch({
-        type: 'set-draft',
-        payload: currentDraft
-      })
+      dispatch({ type: 'set-draft', payload: currentDraft })
     }
   }, [currentDraft, dispatch])
 
@@ -53,10 +48,14 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
     }
   }, [dispatch])
 
+  useEffect(() => {
+    dispatch({ type: 'set', payload: { invitee } })
+  }, [dispatch, invitee])
+
   const canEdit = !isLoading && !errorMessage
 
   useEffect(() => {
-    if (canEdit || !user) return
+    if (canEdit) return
 
     if (!currentId) {
       dispatch({
@@ -85,39 +84,28 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
             }
           })
 
-          draft &&
-            dispatch({
-              type: 'set-draft',
-              payload: draft
-            })
+          dispatch({
+            type: 'set-draft',
+            payload: draft
+          })
         }
       })
       .catch(
-        e =>
-          console.log(e) ||
-          (isPending &&
-            dispatch({
-              type: 'set',
-              payload: {
-                isLoading: false,
-                errorMessage: 'something went wrong'
-              }
-            }))
+        () =>
+          isPending &&
+          dispatch({
+            type: 'set',
+            payload: {
+              isLoading: false,
+              errorMessage: 'something went wrong'
+            }
+          })
       )
 
     return () => {
       isPending = false
     }
-  }, [canEdit, currentId, dispatch, user])
-
-  useEffect(() => {
-    dispatch({
-      type: 'set',
-      payload: {
-        invitee
-      }
-    })
-  }, [dispatch, invitee])
+  }, [canEdit, currentId, dispatch])
 
   return (
     <>
@@ -154,7 +142,7 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
                     type: 'set',
                     payload: { errorMessage: false, isAuthorized: true }
                   })
-                  dispatch({ type: 'reset-draft', payload: { id } })
+                  dispatch({ type: 'new-draft', payload: { id } })
                 })
               }
               type='button'

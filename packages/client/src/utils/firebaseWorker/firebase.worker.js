@@ -5,19 +5,14 @@ import 'firebase/auth'
 firebase.initializeApp(JSON.parse(process.env.GATSBY_FIREBASE_USERS))
 const auth = firebase.auth()
 
-let isReady = false
-const stopAuthListener = auth.onAuthStateChanged(user => {
-  stopAuthListener()
-  isReady = true
-})
-
-export async function getUser () {
-  if (isReady) {
-    return auth.currentUser && auth.currentUser.uid
-  }
-  throw new Error()
+export function getUser () {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      unsubscribe()
+      resolve(user && user.uid)
+    }, reject)
+  })
 }
-
 export async function getEmail () {
   return auth.currentUser && auth.currentUser.email
 }
@@ -49,11 +44,13 @@ import 'firebase/firestore'
 //   }
 // }
 
-export function isSignInWithEmailLink (href) {
+export async function isSignInWithEmailLink (href) {
+  const user = await getUser()
+  if (user) throw new Error('authenticated')
   if (auth.isSignInWithEmailLink(href)) {
     return true
   }
-  throw new Error(isReady ? '' : 'Skip')
+  throw new Error()
 }
 
 export async function invite (emails, redirect, draftId = '') {
@@ -319,7 +316,7 @@ function sortRecentDrafts (recentDraftsObj) {
 }
 
 export async function fetchDraft (id) {
-  await initializeRealtimeDatabase()
+  await Promise.all([await initializeRealtimeDatabase(), await getUser()])
 
   try {
     if (id) {

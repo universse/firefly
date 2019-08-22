@@ -10,23 +10,16 @@ export default function Authentication ({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    ;(function authenticate (timeout = 200) {
-      return firebaseWorker
-        .getUser()
-        .then(uid => {
-          setUser(uid)
+    firebaseWorker.getUser().then(uid => {
+      setUser(uid)
 
-          if (uid) {
-            window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
-            window.___logUser(uid)
-          } else {
-            window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
-          }
-        })
-        .catch(() => {
-          setTimeout(authenticate, timeout)
-        })
-    })()
+      if (uid) {
+        window.localStorage.setItem(LocalStorage.HAS_SIGNED_IN, 'true')
+        window.___logUser(uid)
+      } else {
+        window.localStorage.removeItem(LocalStorage.HAS_SIGNED_IN)
+      }
+    })
   }, [])
 
   return (

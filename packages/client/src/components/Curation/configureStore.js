@@ -32,12 +32,11 @@ const initialDraft = {
 function draft (state = initialDraft, { type, payload }) {
   return produce(state, draft => {
     switch (type) {
-      case 'reset-draft':
+      case 'new-draft':
         return { ...initialDraft, id: payload.id }
 
       case 'set-draft':
-        Object.entries(payload).forEach(([key, value]) => (draft[key] = value))
-        break
+        return { ...state, ...payload }
 
       case 'add-tag':
         draft.tags.push(payload.tag)
