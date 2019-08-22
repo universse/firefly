@@ -1,6 +1,8 @@
 {
   "projects": {
-    "development": "firefly-users-db-dev-bc544",
-    "production": "firefly-users-db"
+    "development": "cherry-dev-72965",
+    "production": "cherry-c183f",
+    "analytics": "cherry-analytics-66c9f",
+    "analytics-dev": "cherry-analytics-dev"
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import 'isomorphic-unfetch'
 
 import IndexLayout from './IndexLayout'
 import Header from 'components/Header'

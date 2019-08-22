@@ -57,7 +57,7 @@ processed.collections.forEach(
     const collectionId = collectionDoc.id
 
     const lovesDoc = usersDB.collection('loves').doc(collectionId)
-    userBatch.set(lovesDoc, { count: 10 })
+    userBatch.set(lovesDoc, { count: loveCount })
 
     const urlIds = []
     urls.forEach((url, i) => {

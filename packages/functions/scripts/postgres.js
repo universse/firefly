@@ -18,7 +18,6 @@ const db = pgp({
 //     'category',
 //     'level',
 //     { name: 'tags', mod: ':json' },
-//     { name: 'related', mod: ':json' },
 //     { name: 'suggestions', mod: ':json' }
 //   ],
 //   { table: 'collections' }

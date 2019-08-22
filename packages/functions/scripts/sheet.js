@@ -64,6 +64,7 @@ const processed = { collections: [] }
 
         processed.collections.push({
           _EXCEL_KEY: row.no,
+          loveCount: Math.ceil(Math.random() * 50 + 150),
           category: row.category,
           level: row.level,
           name: toTitleCase(row.name),

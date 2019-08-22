@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { ModalContext } from 'contexts/Modal'
 import { SetModalContext } from 'contexts/SetModal'
 
-export default function useModal (type, label) {
+export default function useModal (type, contentLabel, onAfterClose) {
   const activeModalType = useContext(ModalContext)
   const setActiveModalType = useContext(SetModalContext)
 
@@ -11,8 +11,9 @@ export default function useModal (type, label) {
 
   return {
     closeTimeoutMS: 280,
-    contentLabel: label,
+    contentLabel,
     isOpen,
+    onAfterClose,
     onRequestClose () {
       setActiveModalType(null)
     },

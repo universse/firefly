@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports = {
-  origin: '*',
+  origin: functions.config().site.origin,
   sgKey: functions.config().sendgrid.key,
   transporter
 }

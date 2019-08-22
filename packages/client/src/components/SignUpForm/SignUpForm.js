@@ -15,7 +15,6 @@ ReactModal.setAppElement('#___gatsby')
 
 export default function SignUpForm () {
   const { title } = useSiteMetadata()
-  const modalProps = useModal(ModalTypes.SIGN_UP_FORM, 'Sign Up')
 
   const [email, setEmail] = useState('')
   // const [isSubscribing, setIsSubscribing] = useState(true)
@@ -23,16 +22,12 @@ export default function SignUpForm () {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const { closeTimeoutMS, isOpen, onRequestClose } = modalProps
-
-  useEffect(() => {
-    setTimeout(() => {
-      setEmail('')
-      setIsSubmitted(false)
-      setIsloading(false)
-      setHasError(false)
-    }, closeTimeoutMS)
-  }, [closeTimeoutMS, isOpen])
+  const modalProps = useModal(ModalTypes.SIGN_UP_FORM, 'Sign Up', () => {
+    setEmail('')
+    setIsSubmitted(false)
+    setIsloading(false)
+    setHasError(false)
+  })
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -70,7 +65,7 @@ export default function SignUpForm () {
         <>
           <div
             css={css`
-              margin-bottom: 2rem;
+              margin-bottom: 1.25rem;
             `}
           >
             <h3>Welcome to {title}</h3>
@@ -188,7 +183,7 @@ export default function SignUpForm () {
         <button
           aria-label='Close Modal'
           className='IconButton'
-          onClick={onRequestClose}
+          onClick={modalProps.onRequestClose}
           type='button'
         >
           <Icon icon='cross' />

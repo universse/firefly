@@ -44,14 +44,12 @@ export default function ShareWidget ({ id, isLoved, isSaved, name }) {
           type='button'
           value={id}
         >
-          {!isNaN(loveCount) && (
-            <Icon
-              filled={isLoved}
-              icon='heart'
-              label={isLoved ? 'unlove' : 'love'}
-              size='large'
-            />
-          )}
+          <Icon
+            filled={isLoved}
+            icon='heart'
+            label={isLoved ? 'unlove' : 'love'}
+            size='large'
+          />
         </button>
         <span
           css={css`

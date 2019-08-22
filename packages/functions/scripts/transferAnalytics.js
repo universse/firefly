@@ -7,6 +7,7 @@ const pgp = require('pg-promise')({
 const { writeBatchesToDB } = require('./utils')
 require('./config')
 
+// FIREBASE_ANALYTICS
 const firebaseKey = JSON.parse(process.env.FIREBASE_USERS)
 
 admin.initializeApp({

@@ -43,7 +43,7 @@ const developMiddleware = app => {
   app.use(
     '/fire',
     proxy({
-      target: 'http://localhost:5000/firefly-users-db-dev-bc544/us-central1/',
+      target: 'http://localhost:5000/cherry-dev-72965/us-central1/',
       pathRewrite: {
         '/fire': ''
       }
@@ -53,7 +53,7 @@ const developMiddleware = app => {
 
 module.exports = {
   siteMetadata: {
-    title: 'Firefly',
+    title: 'Cherry',
     description:
       'Discover the best learning resources, curated by the community.'
   },
@@ -66,9 +66,9 @@ module.exports = {
         implementation: require('sass')
       }
     },
-    'gatsby-plugin-apollo-client',
-    // 'gatsby-plugin-redux',
     'gatsby-plugin-layout',
+    // 'gatsby-plugin-apollo-client',
+    // 'gatsby-plugin-redux',
     'gatsby-plugin-remove-trailing-slashes',
     {
       resolve: 'gatsby-source-filesystem',
@@ -146,8 +146,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'Firefly',
-        short_name: 'Firefly',
+        name: 'Cherry',
+        short_name: 'Cherry',
         start_url: '/',
         background_color: '#ffffff',
         theme_color: '#e4234f',
