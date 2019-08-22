@@ -1,40 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
+import { useSelector } from 'react-redux'
 
 import { invite } from './utils'
 import Icon from 'assets/icons'
 import useModal from 'hooks/useModal'
-import useSiteMetadata from 'hooks/useSiteMetadata'
-import LocalStorage from 'constants/LocalStorage'
 import ModalTypes from 'constants/ModalTypes'
-import { logClickSignUp } from 'utils/analytics'
-import firebaseWorker from 'utils/firebaseWorker'
 import { getPath } from 'utils/pathnameUtils'
 
 // multi emails input
-export default function InviteModal ({ id, authorizedEmails, invitee }) {
-  const modalProps = useModal(ModalTypes.INVITE, 'Invite Collaborators')
+export default function InviteModal ({ id }) {
+  const authorizedEmails = useSelector(state => state.draft.authorizedEmails)
+  const invitee = useSelector(state => state.meta.invitee)
 
   const [emails, setEmails] = useState(authorizedEmails)
   const [email, setEmail] = useState(invitee || '')
   const [name, setName] = useState('')
-  // const [isSubscribing, setIsSubscribing] = useState(true)
   const [isLoading, setIsloading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const { closeTimeoutMS, isOpen, onRequestClose } = modalProps
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setEmail('')
-  //     setIsSubmitted(false)
-  //     setIsloading(false)
-  //     setHasError(false)
-  //   }, closeTimeoutMS)
-  // }, [closeTimeoutMS, isOpen])
+  const modalProps = useModal(ModalTypes.INVITE, 'Invite Collaborators', () => {
+    // reset state
+  })
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -141,7 +131,7 @@ export default function InviteModal ({ id, authorizedEmails, invitee }) {
         <button
           aria-label='Close Modal'
           className='IconButton'
-          onClick={onRequestClose}
+          onClick={modalProps.onRequestClose}
           type='button'
         >
           <Icon icon='cross' />
@@ -152,7 +142,5 @@ export default function InviteModal ({ id, authorizedEmails, invitee }) {
 }
 
 InviteModal.propTypes = {
-  authorizedEmails: PropTypes.arrayOf(PropTypes.string).isRequired,
-  id: PropTypes.string.isRequired,
-  invitee: PropTypes.string
+  id: PropTypes.string.isRequired
 }

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
+import { useSelector } from 'react-redux'
 
 import { requestAccess } from './utils'
 import ShareDropdown from 'components/ShareDropdown'
@@ -13,10 +13,13 @@ import firebaseWorker from 'utils/firebaseWorker'
 
 const { generateId } = firebaseWorker
 
-export default function UnauthorizedActions ({ authorizedEmails, collection }) {
+export default function UnauthorizedActions () {
   const user = useContext(AuthenticationContext)
   const signUpSnackbar = useSignUpSnackbar()
   const openSnackbar = useContext(SetSnackbarContext)
+
+  const authorizedEmails = useSelector(state => state.draft.authorizedEmails)
+  const { removed, ...draft } = useSelector(state => state.draft)
 
   return (
     <>
@@ -32,13 +35,13 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
           `}
         >
           <button
-            aria-label='Request Access'
+            aria-label='Save a Copy'
             className='GhostButton accent'
             onClick={() =>
               user
                 ? generateId('collections').then(id => {
                     navigate(`/curate/${id}`, {
-                      state: { draft: { ...collection, id } }
+                      state: { draft: { ...draft, id } }
                     })
                     openSnackbar({
                       message: 'Saved a new copy.',
@@ -62,10 +65,7 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
             className='GhostButton accent'
             onClick={() =>
               user
-                ? requestAccess(
-                    authorizedEmails,
-                    window.location.href
-                  )
+                ? requestAccess(authorizedEmails, window.location.href)
                 : signUpSnackbar()
             }
             type='button'
@@ -78,7 +78,7 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
             margin-right: 0.5rem;
           `}
         >
-          <ShareDropdown name={collection.name} top />
+          <ShareDropdown name={draft.name} top />
         </div>
         {/* <button
           aria-label='Save a Copy'
@@ -87,7 +87,7 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
             user
               ? generateId('collections').then(id => {
                   navigate(`/curate/${id}`, {
-                    state: { draft: { ...collection, id } }
+                    state: { draft: { ...draft, id } }
                   })
                   openSnackbar({
                     message: 'Saved a new copy.',
@@ -103,8 +103,4 @@ export default function UnauthorizedActions ({ authorizedEmails, collection }) {
       </div>
     </>
   )
-}
-
-UnauthorizedActions.propTypes = {
-  collection: PropTypes.object.isRequired
 }

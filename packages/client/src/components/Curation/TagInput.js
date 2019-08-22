@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { useDispatch } from 'react-redux'
 
 import Icon from 'assets/icons'
 import useComboBox from 'hooks/useComboBox'
 import searchWorker from 'utils/searchWorker'
 
-export default function TagInput ({ dispatch, tags }) {
+export default function TagInput ({ tags }) {
+  const dispatch = useDispatch()
+
   const [unique, setUnique] = useState([])
   const [input, setInput] = useState('')
 
@@ -95,6 +98,5 @@ export default function TagInput ({ dispatch, tags }) {
 }
 
 TagInput.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired
 }

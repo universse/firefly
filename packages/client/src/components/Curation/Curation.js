@@ -1,268 +1,193 @@
-import React, { useState, useReducer, useContext, useEffect } from 'react'
+import React, { useLayoutEffect, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
 import { css } from '@emotion/core'
-import produce from 'immer'
-import { DndProvider } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
+import { Link, navigate } from 'gatsby'
 
-import AuthorizedActions from './AuthorizedActions'
-import UnauthorizedActions from './UnauthorizedActions'
-import DetailsInput from './DetailsInput'
-import DraggableItem from './DraggableItem'
-import DragLayer from './DragLayer'
-import LearningItemInput from './LearningItemInput'
-import { MediaContext } from 'contexts/Media'
-import { headerHeightInRem, screens } from 'constants/Styles'
+import Inputs from './Inputs'
+import Footer from 'components/Footer'
+import { AuthenticationContext } from 'contexts/Authentication'
+import {
+  bottomBarHeightInRem,
+  headerHeightInRem,
+  mobileBarsHeightInRem,
+  mobileProgressBarHeightInRem,
+  screens
+} from 'constants/Styles'
 import firebaseWorker from 'utils/firebaseWorker'
-import { navigate } from '@reach/router'
 
-const { generateId, saveDraft } = firebaseWorker
+const { fetchDraft, generateId } = firebaseWorker
 
-function reducer (state, { type, payload }) {
-  return produce(state, draft => {
-    switch (type) {
-      case 'load':
-        return payload
+// TODO Suspense
+// check if authorized by keying in email
+export default function Curation ({ currentId, currentDraft, invitee }) {
+  const user = useContext(AuthenticationContext)
 
-      case 'set':
-        const [key, value] = Object.entries(payload)[0]
-        draft[key] = value
-        break
-
-      case 'add-tag':
-        draft.tags.push(payload.tag)
-        break
-
-      case 'remove-tag':
-        draft.removed = draft.tags.splice(payload.index, 1)[0]
-        break
-
-      case 'undo-remove-tag':
-        draft.tags.splice(payload.index, 0, draft.removed)
-        break
-
-      case 'set-url':
-        const { index, ...url } = payload
-        const urls = draft.urls
-
-        if (index) {
-          urls.push(url)
-        } else {
-          const index = urls.findIndex(({ id }) => id === payload.id)
-          urls[index] = url
-        }
-        break
-
-      case 'drop-url':
-        const { dragIndex, dropIndex } = payload
-        if (dragIndex === dropIndex) break
-
-        const dragUrl = draft.urls.splice(dragIndex, 1)[0]
-        draft.urls.splice(dropIndex, 0, dragUrl)
-        break
-
-      case 'remove-url':
-        draft.removed = draft.urls.splice(payload.index, 1)[0]
-        break
-
-      case 'undo-remove':
-        draft.urls.splice(payload.index, 0, draft.removed)
-        delete draft.removed
-        break
-
-      default:
-        throw new Error('Unknown action type.')
-    }
-  })
-}
-
-export default function Curation ({
-  id,
-  draft,
-  isAuthorized,
-  initialAuthorizedEmails,
-  invitee
-}) {
-  const { isDesktop } = useContext(MediaContext)
-
-  const [authorizedEmails, setAuthorizedEmails] = useState(
-    initialAuthorizedEmails
+  const { recentDrafts, errorMessage, isLoading } = useSelector(
+    state => state.meta
   )
+  const dispatch = useDispatch()
 
-  const [{ removed, ...collection }, dispatch] = useReducer(reducer, {
-    id,
-    name: '',
-    category: 0,
-    level: 0,
-    urls: [],
-    tags: [],
-    ...draft
-  })
-  const { name, category, level, urls, tags } = collection
-
-  useEffect(() => {
-    id
-      ? dispatch({ type: 'set', payload: { id } })
-      : generateId('collections').then(id => {
-          dispatch({ type: 'set', payload: { id } })
-          navigate(`/curate/${id}`)
-        })
-  }, [id])
-
-  const canSave = isAuthorized && (name || urls.length || tags.length)
+  useLayoutEffect(() => {
+    if (currentDraft) {
+      dispatch({
+        type: 'set',
+        // TODO authorized reset to [] if a copy made, not when undo remove
+        payload: { isAuthorized: true, authorizedEmails: [] }
+      })
+      dispatch({
+        type: 'set-draft',
+        payload: currentDraft
+      })
+    }
+  }, [currentDraft, dispatch])
 
   useEffect(() => {
-    canSave && saveDraft(collection)
-  }, [canSave, collection])
+    const setLoading = () =>
+      dispatch({ type: 'set', payload: { isLoading: true } })
+
+    window.addEventListener('popstate', setLoading)
+
+    return () => {
+      window.removeEventListener('popstate', setLoading)
+    }
+  }, [dispatch])
+
+  const canEdit = !isLoading && !errorMessage
+
+  useEffect(() => {
+    if (canEdit || !user) return
+
+    if (!currentId) {
+      dispatch({
+        type: 'set',
+        payload: { errorMessage: 'New' }
+      })
+    }
+
+    dispatch({ type: 'set', payload: { isLoading: true } })
+
+    let isPending = true
+
+    fetchDraft(currentId)
+      // meta: { isAuthorized, authorizedEmails, recentDrafts }
+      .then(({ draft, ...meta }) => {
+        if (isPending) {
+          dispatch({
+            type: 'set',
+            payload: {
+              isLoading: false,
+              ...(currentId && {
+                errorMessage:
+                  !draft && 'The draft you have requested does not exist.'
+              }),
+              ...meta
+            }
+          })
+
+          draft &&
+            dispatch({
+              type: 'set-draft',
+              payload: draft
+            })
+        }
+      })
+      .catch(
+        e =>
+          console.log(e) ||
+          (isPending &&
+            dispatch({
+              type: 'set',
+              payload: {
+                isLoading: false,
+                errorMessage: 'something went wrong'
+              }
+            }))
+      )
+
+    return () => {
+      isPending = false
+    }
+  }, [canEdit, currentId, dispatch, user])
+
+  useEffect(() => {
+    dispatch({
+      type: 'set',
+      payload: {
+        invitee
+      }
+    })
+  }, [dispatch, invitee])
 
   return (
     <>
       <div
+        className='base'
         css={css`
-          display: grid;
-          grid-gap: 1.5rem;
-          grid-template-areas:
-            'title'
-            'list';
-          margin: 1.5rem 0;
+          min-height: calc(100vh - ${mobileBarsHeightInRem}rem);
+
+          ${screens.mobile} {
+            padding: 0 0
+              ${bottomBarHeightInRem + mobileProgressBarHeightInRem}rem;
+          }
+
+          ${screens.tablet} {
+            padding-bottom: ${bottomBarHeightInRem +
+              mobileProgressBarHeightInRem}rem;
+          }
 
           ${screens.desktop} {
-            grid-gap: 3rem 1.5rem;
-            grid-template-areas:
-              '. title title'
-              'widget list sidebar';
-            grid-template-columns: 2.5rem 1fr 19rem;
-            margin: 2.5rem 0 0 0;
+            max-width: 64rem;
+            min-height: calc(100vh - ${headerHeightInRem}rem);
           }
         `}
       >
-        <div
-          css={css`
-            grid-area: title;
-
-            ${screens.mobile} {
-              margin: 0 1rem;
-            }
-          `}
-        >
-          <input
-            aria-label='Collection Title'
-            autoComplete='off'
-            css={css`
-              color: var(--black900);
-              font-size: 1.5rem;
-              font-weight: 700;
-              line-height: 2rem;
-              width: 100%;
-
-              ${screens.desktop} {
-                font-size: 2rem;
-                line-height: 2.5rem;
+        {errorMessage && (
+          <div>
+            <p>{errorMessage}</p>
+            <button
+              aria-label='Curate a New Collection'
+              onClick={() =>
+                generateId('collections').then(id => {
+                  navigate(`/curate/${id}`)
+                  dispatch({
+                    type: 'set',
+                    payload: { errorMessage: false, isAuthorized: true }
+                  })
+                  dispatch({ type: 'reset-draft', payload: { id } })
+                })
               }
-            `}
-            name='title'
-            onChange={e =>
-              dispatch({
-                type: 'set',
-                payload: { name: e.target.value }
-              })
-            }
-            placeholder='Collection title...'
-            type='text'
-            value={name}
-          />
-        </div>
-        <div
-          css={css`
-            align-self: start;
-            grid-area: sidebar;
-            position: sticky;
-            top: ${headerHeightInRem + 1}rem;
-
-            .Details {
-              border: 2px dashed var(--black300);
-            }
-          `}
-        >
-          <DetailsInput
-            category={category}
-            dispatch={dispatch}
-            level={level}
-            tags={tags}
-          />
-        </div>
-        <div
-          css={css`
-            grid-area: list;
-          `}
-        >
-          <DndProvider backend={HTML5Backend}>
-            <ul className='LearningList'>
-              {urls.map((url, i) => (
-                <DraggableItem
-                  key={url.id}
-                  dispatch={dispatch}
-                  index={i}
-                  {...url}
-                />
-              ))}
-            </ul>
-            <DragLayer />
-          </DndProvider>
-          <div
-            css={css`
-              position: relative;
-            `}
-          >
-            <div
-              css={css`
-                border: 2px dashed var(--black300);
-                border-radius: 4px;
-                margin: ${urls.length ? 1.5 : 0}rem 0 6rem;
-                padding: 1.25rem 1rem;
-              `}
+              type='button'
             >
-              <LearningItemInput dispatch={dispatch} index={-1} />
-            </div>
+              Create
+            </button>
           </div>
-        </div>
+        )}
+        {errorMessage && !!recentDrafts.length && (
+          <ul>
+            {recentDrafts.map(([id, { name }]) => (
+              <li key={id}>
+                <Link to={`/curate/${id}`}>
+                  {name || 'Untitled collection'}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+        {canEdit && <Inputs />}
       </div>
-      {isDesktop ? (
-        <div className='bottom'>
-          <div
-            className='base'
-            css={css`
-              align-items: center;
-              display: flex;
-              height: 4rem;
-              justify-content: space-between;
-              padding-left: 5rem;
-            `}
-          >
-            {isAuthorized ? (
-              <AuthorizedActions
-                authorizedEmails={authorizedEmails}
-                canPublish={!!(name && urls.length && tags.length)}
-                collection={collection}
-                invitee={invitee}
-              />
-            ) : (
-              <UnauthorizedActions
-                authorizedEmails={authorizedEmails}
-                collection={collection}
-              />
-            )}
-          </div>
+      {isLoading && (
+        <div className='fullscreen'>
+          <div className='Spinner' />
         </div>
-      ) : (
-        <></>
       )}
+      {!canEdit && <Footer />}
     </>
   )
 }
 
 Curation.propTypes = {
-  draft: PropTypes.object.isRequired,
-  isAuthorized: PropTypes.bool.isRequired,
-  id: PropTypes.string
+  currentDraft: PropTypes.object,
+  currentId: PropTypes.string,
+  invitee: PropTypes.string
 }

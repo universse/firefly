@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
+import { useSelector } from 'react-redux'
 
 import InviteModal from './InviteModal'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
+import { AuthenticationContext } from 'contexts/Authentication'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import ModalTypes from 'constants/ModalTypes'
 import firebaseWorker from 'utils/firebaseWorker'
 
-const { createCollection, discardDraft } = firebaseWorker
+const { createCollection, discardDraft, saveDraft } = firebaseWorker
 
 function publish (collection) {
   const { id } = collection
@@ -25,15 +26,21 @@ function publish (collection) {
     )
 }
 
-export default function AuthorizedActions ({
-  authorizedEmails,
-  canPublish,
-  collection,
-  invitee
-}) {
+export default function AuthorizedActions () {
+  const user = useContext(AuthenticationContext)
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
-  const { id, name } = collection
+
+  const invitee = useSelector(state => state.meta.invitee)
+  const { removed, ...draft } = useSelector(state => state.draft)
+  const { id, name, urls, tags } = draft
+  const canPublish = !!(name && urls.length && tags.length)
+
+  const canSave = user && (name || urls.length || tags.length)
+
+  useEffect(() => {
+    canSave && saveDraft(draft)
+  }, [canSave, draft, user])
 
   useEffect(() => {
     invitee && setActiveModalType(ModalTypes.INVITE)
@@ -56,7 +63,7 @@ export default function AuthorizedActions ({
             aria-label='Publish'
             className='PrimaryButton accent'
             disabled={!canPublish}
-            onClick={() => publish(collection)}
+            onClick={() => publish(draft)}
             type='button'
           >
             Publish
@@ -89,7 +96,7 @@ export default function AuthorizedActions ({
                 children: 'Undo',
                 onClick: () => {
                   navigate(`/curate/${id}`, {
-                    state: { draft: collection }
+                    state: { draft }
                   })
                 }
               },
@@ -104,18 +111,7 @@ export default function AuthorizedActions ({
       >
         <Icon icon='remove' />
       </button>
-      {/* <InviteModal
-        authorizedEmails={authorizedEmails}
-        id={collection.id}
-        invitee={invitee}
-      /> */}
+      {id && <InviteModal id={id} />}
     </>
   )
-}
-
-AuthorizedActions.propTypes = {
-  authorizedEmails: PropTypes.arrayOf(PropTypes.string).isRequired,
-  canPublish: PropTypes.bool.isRequired,
-  collection: PropTypes.object.isRequired,
-  invitee: PropTypes.string
 }

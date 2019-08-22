@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Icon from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 
-export default function DetailDropdown ({ dispatch, items, detail, value }) {
+export default function DetailDropdown ({ items, detail }) {
+  const value = useSelector(state => state.draft[detail])
+  const dispatch = useDispatch()
+
   const onSelect = ({ value }) => {
-    dispatch({ type: 'set', payload: { [detail]: value } })
+    dispatch({ type: 'set-draft', payload: { [detail]: value } })
   }
 
   const {
@@ -61,12 +65,10 @@ export default function DetailDropdown ({ dispatch, items, detail, value }) {
 
 DetailDropdown.propTypes = {
   detail: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.exact({
       label: PropTypes.string.isRequired,
       value: PropTypes.number.isRequired
     })
-  ).isRequired,
-  value: PropTypes.number.isRequired
+  ).isRequired
 }

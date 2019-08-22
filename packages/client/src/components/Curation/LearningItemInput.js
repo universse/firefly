@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect, useContext, useRef, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { useDispatch } from 'react-redux'
 
 import LearningItem from 'components/CollectionTemplate/LearningItem'
 import Icon from 'assets/icons'
@@ -17,13 +18,14 @@ function reducer (state, payload) {
 
 function LearningItemInput ({
   index,
-  dispatch,
   isEditing = true,
   setIsEditing,
   ...item
 }) {
   const isNew = index === -1
   const isLocal = useRef(!isNew)
+  const dispatch = useDispatch()
+
   const [{ hasError, isLoading, urlInput, preview }, setState] = useReducer(
     reducer,
     {
@@ -191,7 +193,6 @@ export default memo(LearningItemInput)
 
 LearningItemInput.propTypes = {
   // ...UrlType,
-  dispatch: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isEditing: PropTypes.bool,
   setIsEditing: PropTypes.func

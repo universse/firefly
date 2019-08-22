@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
+import { useDispatch } from 'react-redux'
 
 import LearningItemInput from './LearningItemInput'
 
 export default function DraggableItem (props) {
-  const { dispatch, index, title } = props
-
+  const { index, title } = props
+  const dispatch = useDispatch()
   const [edge, setEdge] = useState(null)
   const [isEditing, setIsEditing] = useState(index === -1)
 

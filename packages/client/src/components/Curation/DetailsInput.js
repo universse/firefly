@@ -1,16 +1,17 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
+import { useSelector, useDispatch } from 'react-redux'
 
 import DetailDropdown from './DetailDropdown'
 import TagInput from './TagInput'
 import Icon, { Level } from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import DropdownOptions from 'constants/DropdownOptions'
-import { TagsType } from 'constants/Types'
 
-export default function DetailsInput ({ category, level, tags, dispatch }) {
+export default function DetailsInput () {
   const openSnackbar = useContext(SetSnackbarContext)
+  const tags = useSelector(state => state.draft.tags)
+  const dispatch = useDispatch()
 
   return (
     <div className='Details'>
@@ -25,9 +26,7 @@ export default function DetailsInput ({ category, level, tags, dispatch }) {
         </div>
         <DetailDropdown
           detail='category'
-          dispatch={dispatch}
           items={DropdownOptions.CATEGORY_OPTIONS}
-          value={category}
         />
       </div>
       <div
@@ -43,7 +42,7 @@ export default function DetailsInput ({ category, level, tags, dispatch }) {
           <h4>Tags</h4>
         </div>
         <div>
-          <TagInput dispatch={dispatch} tags={tags} />
+          <TagInput tags={tags} />
         </div>
         {!!tags.length && (
           <ul
@@ -103,18 +102,9 @@ export default function DetailsInput ({ category, level, tags, dispatch }) {
         </div>
         <DetailDropdown
           detail='level'
-          dispatch={dispatch}
           items={DropdownOptions.DIFFICULTY_LEVEL_OPTIONS}
-          value={level}
         />
       </div>
     </div>
   )
-}
-
-DetailsInput.propTypes = {
-  category: PropTypes.number.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  level: PropTypes.number.isRequired,
-  tags: TagsType
 }

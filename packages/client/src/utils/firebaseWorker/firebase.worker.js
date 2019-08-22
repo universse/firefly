@@ -276,6 +276,7 @@ export async function action ({ id, action }) {
   }
 }
 
+// curation
 let database
 
 export async function initializeRealtimeDatabase () {
@@ -286,12 +287,12 @@ export async function initializeRealtimeDatabase () {
   }
 }
 
-function getRecentDrafts (uid) {
+function getRecentDraftsKey (uid) {
   return `users/${uid}/recentDrafts`
 }
 
 export async function saveDraft (collection) {
-  // await initializeRealtimeDatabase()
+  await initializeRealtimeDatabase()
   try {
     const { id, name } = collection
 
@@ -299,56 +300,64 @@ export async function saveDraft (collection) {
       [`drafts/${id}/authorized/${auth.currentUser.uid}`]: auth.currentUser
         .email,
       [`drafts/${id}/collection`]: collection,
-      [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: {
+      [`${getRecentDraftsKey(auth.currentUser.uid)}/${id}`]: {
         name,
         modified: Date.now()
       }
     })
-  } catch {
+  } catch (e) {
+    console.log(e)
     throw new Error()
   }
+}
+
+function sortRecentDrafts (recentDraftsObj) {
+  return Object.entries(recentDraftsObj).sort(
+    ([id1, { modified: modified1 }], [id2, { modified: modified2 }]) =>
+      modified2 - modified1
+  )
 }
 
 export async function fetchDraft (id) {
   await initializeRealtimeDatabase()
 
   try {
-    const draftSnapshot = await database.ref(`drafts/${id}`).once('value')
-    const draft = draftSnapshot.val()
+    if (id) {
+      const draftSnapshot = await database.ref(`drafts/${id}`).once('value')
+      const draft = draftSnapshot.val()
 
-    if (draft) {
-      const authorized = draft.authorized
+      if (draft) {
+        const { authorized, collection } = draft
 
-      return {
-        draft: draft.collection,
-        isAuthorized: auth.currentUser
-          ? !!draft.authorized[auth.currentUser.uid]
-          : false,
-        authorizedEmails: Object.values(authorized)
+        return {
+          draft: collection,
+          isAuthorized: auth.currentUser
+            ? !!authorized[auth.currentUser.uid]
+            : false,
+          authorizedEmails: Object.values(authorized)
+        }
       }
     }
 
     const recentDraftsSnapshot = await database
-      .ref(`${getRecentDrafts(auth.currentUser.uid)}`)
+      .ref(`${getRecentDraftsKey(auth.currentUser.uid)}`)
       .once('value')
+    const recentDrafts = recentDraftsSnapshot.val()
 
     return {
-      recentDrafts: Object.entries(recentDraftsSnapshot.val()).sort(
-        ([id1, { modified: modified1 }], [id2, { modified: modified2 }]) =>
-          modified2 - modified1
-      )
+      recentDrafts: recentDrafts ? sortRecentDrafts(recentDrafts) : []
     }
-  } catch {
+  } catch (e) {
+    console.log(e)
     throw new Error()
   }
 }
 
 export async function discardDraft (id) {
-  // await initializeRealtimeDatabase()
   try {
     await database.ref().update({
       [`drafts/${id}`]: null,
-      [`${getRecentDrafts(auth.currentUser.uid)}/${id}`]: null
+      [`${getRecentDraftsKey(auth.currentUser.uid)}/${id}`]: null
     })
   } catch {
     throw new Error()
