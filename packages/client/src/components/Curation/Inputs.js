@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
-import { useSelector, useDispatch } from 'react-redux'
 import { DndProvider } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
@@ -10,16 +9,19 @@ import DetailsInput from './DetailsInput'
 import DraggableItem from './DraggableItem'
 import DragLayer from './DragLayer'
 import LearningItemInput from './LearningItemInput'
-import { MediaContext } from 'contexts/Media'
+import useDraftStore, { useDraftActions } from './useDraftStore'
+import useStateStore from './useStateStore'
+import { useMedia } from 'hooks/useGlobalStore'
 import { headerHeightInRem, screens } from 'constants/Styles'
 
 export default function Inputs () {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
-  const isAuthorized = useSelector(state => state.meta.isAuthorized)
-  const name = useSelector(state => state.draft.name)
-  const urls = useSelector(state => state.draft.urls)
-  const dispatch = useDispatch()
+  const isAuthorized = useStateStore(state => state.isAuthorized)
+
+  const name = useDraftStore(state => state.name)
+  const urls = useDraftStore(state => state.urls)
+  const { setDraft } = useDraftActions()
 
   return (
     <>
@@ -67,12 +69,7 @@ export default function Inputs () {
               }
             `}
             name='title'
-            onChange={e =>
-              dispatch({
-                type: 'set-draft',
-                payload: { name: e.target.value }
-              })
-            }
+            onChange={e => setDraft({ name: e.target.value })}
             placeholder='Collection title...'
             type='text'
             value={name}

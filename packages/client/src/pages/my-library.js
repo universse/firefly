@@ -5,13 +5,15 @@ import Collection from 'components/Collection'
 import Footer from 'components/Footer'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
-import { AuthenticationContext } from 'contexts/Authentication'
-import { MediaContext } from 'contexts/Media'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import { UserDataContext } from 'contexts/UserData'
 import { EmptyLibrary } from 'assets/illustrations'
+import {
+  useMedia,
+  useNormalizedCollections,
+  useUser
+} from 'hooks/useGlobalStore'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
 import {
@@ -26,11 +28,11 @@ import { hasSignedIn } from 'utils/localStorageUtils'
 // TODO Suspense
 export default function MyLibraryPage () {
   const userData = useContext(UserDataContext)
-  const user = useContext(AuthenticationContext)
-  const { isDesktop, isMobile } = useContext(MediaContext)
+  const user = useUser()
+  const { isDesktop, isMobile } = useMedia()
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
+  const normalizedCollections = useNormalizedCollections()
 
   const [hasSaved, setHasSaved] = useState()
 

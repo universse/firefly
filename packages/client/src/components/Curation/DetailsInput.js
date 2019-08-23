@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import { css } from '@emotion/core'
-import { useSelector, useDispatch } from 'react-redux'
 
 import DetailDropdown from './DetailDropdown'
 import TagInput from './TagInput'
+import useDraftStore, { useDraftActions } from './useDraftStore'
 import Icon, { Level } from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import DropdownOptions from 'constants/DropdownOptions'
 
 export default function DetailsInput () {
   const openSnackbar = useContext(SetSnackbarContext)
-  const tags = useSelector(state => state.draft.tags)
-  const dispatch = useDispatch()
+  const tags = useDraftStore(state => state.tags)
+  const { removeTag, undoRemoveTag } = useDraftActions()
 
   return (
     <div className='Details'>
@@ -62,17 +62,14 @@ export default function DetailsInput () {
                   <button
                     aria-label={`Remove Tag "${tag}"`}
                     onClick={() => {
-                      dispatch({ type: 'remove-tag', payload: { index } })
+                      removeTag(index)
                       openSnackbar({
                         buttonProps: {
                           'aria-label': 'Undo Removing Tag',
                           children: 'Undo',
                           onClick: () => {
                             // logClickAction({ id, action: 'undo unsave' })
-                            dispatch({
-                              type: 'undo-remove-tag',
-                              payload: { index }
-                            })
+                            undoRemoveTag(index)
                           }
                         },
                         message: `Removed tag "${tag}".`

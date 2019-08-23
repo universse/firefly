@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import SearchBar from 'components/SearchBar'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import useComboBox from 'hooks/useComboBox'
+import { useNormalizedCollections } from 'hooks/useGlobalStore'
 import useSearch from 'hooks/useSearch'
 import URLParamKeys from 'constants/URLParamKeys'
 import { createCollectionPath } from '../../gatsby/utils'
@@ -13,7 +13,7 @@ export default function SearchComboBox ({
   large = false,
   maxResultCount = Infinity
 }) {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
+  const normalizedCollections = useNormalizedCollections()
 
   const {
     handleSelect,

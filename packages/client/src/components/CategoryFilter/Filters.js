@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, memo } from 'react'
+import React, { useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Categories, animate } from '@firefly/core'
 
 import { Category, scrollButtonWidthInRem } from './styled'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import { RefType } from 'constants/Types'
 import { baseFontSize, screens } from 'constants/Styles'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
@@ -14,7 +14,7 @@ const scrollButtonWidthInPx = baseFontSize * scrollButtonWidthInRem
 const CategoryPaths = ['/', ...Categories.map((_, i) => createCategoryPath(i))]
 
 function Filters ({ handleScroll, pathname, slider }) {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   useEffect(() => {
     if (isDesktop) return

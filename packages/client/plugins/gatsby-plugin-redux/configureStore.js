@@ -23,8 +23,8 @@ export default (preloadedState = {}) => {
     preloadedState,
     compose(
       // applyMiddleware(thunk),
-      typeof window === 'object' && window.devToolsExtension
-        ? window.devToolsExtension()
+      typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION__
+        ? window..__REDUX_DEVTOOLS_EXTENSION__()
         : f => f
     )
   )

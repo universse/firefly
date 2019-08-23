@@ -13,14 +13,14 @@ module.exports = ({ actions: { replaceWebpackConfig }, getConfig, stage }) => {
 
   config.resolve.modules = [resolve('./src'), 'node_modules']
 
-  // if (stage === 'develop' || stage === 'build-javascript') {
-  //   config.plugins.push(
-  //     new BundleAnalyzerPlugin({
-  //       analyzerMode: 'server',
-  //       analyzerPort: '3001'
-  //     })
-  //   )
-  // }
+  if (stage === 'develop' || stage === 'build-javascript') {
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'server',
+        analyzerPort: '3001'
+      })
+    )
+  }
 
   replaceWebpackConfig(config)
 }

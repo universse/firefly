@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
 import { css } from '@emotion/core'
 import { Link, navigate } from 'gatsby'
 
 import Inputs from './Inputs'
+import useDraftStore, { useDraftActions } from './useDraftStore'
+import useStateStore from './useStateStore'
 import Footer from 'components/Footer'
 import {
   bottomBarHeightInRem,
@@ -20,37 +21,31 @@ const { fetchDraft, generateId } = firebaseWorker
 // TODO Suspense
 // check if authorized by keying in email
 export default function Curation ({ currentId, currentDraft, invitee }) {
-  const { recentDrafts, errorMessage, isLoading } = useSelector(
-    state => state.meta
-  )
-  const dispatch = useDispatch()
+  const { recentDrafts, errorMessage, isLoading, setState } = useStateStore()
+  const { setDraft, createNewDraft } = useDraftActions()
 
   useEffect(() => {
     // currentDraft is only available when make copy or undo remove
     if (currentDraft) {
-      dispatch({
-        type: 'set',
-        // TODO authorized reset to [] when make copy, not undo remove
-        payload: { isAuthorized: true, authorizedEmails: [] }
-      })
-      dispatch({ type: 'set-draft', payload: currentDraft })
+      // TODO authorized reset to [] when make copy, not undo remove
+      setState({ isAuthorized: true, authorizedEmails: [] })
+      setDraft(currentDraft)
     }
-  }, [currentDraft, dispatch])
+  }, [currentDraft, setDraft, setState])
 
   useEffect(() => {
-    const setLoading = () =>
-      dispatch({ type: 'set', payload: { isLoading: true } })
+    const setLoading = () => setState({ isLoading: true })
 
     window.addEventListener('popstate', setLoading)
 
     return () => {
       window.removeEventListener('popstate', setLoading)
     }
-  }, [dispatch])
+  }, [setState])
 
   useEffect(() => {
-    dispatch({ type: 'set', payload: { invitee } })
-  }, [dispatch, invitee])
+    setState({ invitee })
+  }, [invitee, setState])
 
   const canEdit = !isLoading && !errorMessage
 
@@ -58,13 +53,10 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
     if (canEdit) return
 
     if (!currentId) {
-      dispatch({
-        type: 'set',
-        payload: { errorMessage: 'New' }
-      })
+      setState({ errorMessage: 'New' })
     }
 
-    dispatch({ type: 'set', payload: { isLoading: true } })
+    setState({ isLoading: true })
 
     let isPending = true
 
@@ -72,40 +64,29 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
       // meta: { isAuthorized, authorizedEmails, recentDrafts }
       .then(({ draft, ...meta }) => {
         if (isPending) {
-          dispatch({
-            type: 'set',
-            payload: {
-              isLoading: false,
-              ...(currentId && {
-                errorMessage:
-                  !draft && 'The draft you have requested does not exist.'
-              }),
-              ...meta
-            }
+          setState({
+            isLoading: false,
+            ...(currentId && {
+              errorMessage:
+                !draft && 'The draft you have requested does not exist.'
+            }),
+            ...meta
           })
 
-          dispatch({
-            type: 'set-draft',
-            payload: draft
-          })
+          setDraft(draft)
         }
       })
       .catch(
         () =>
           isPending &&
-          dispatch({
-            type: 'set',
-            payload: {
-              isLoading: false,
-              errorMessage: 'something went wrong'
-            }
+          setState({
+            isLoading: false,
+            errorMessage: 'something went wrong'
           })
       )
 
-    return () => {
-      isPending = false
-    }
-  }, [canEdit, currentId, dispatch])
+    return () => (isPending = false)
+  }, [canEdit, currentId, setDraft, setState])
 
   return (
     <>
@@ -138,11 +119,11 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
               onClick={() =>
                 generateId('collections').then(id => {
                   navigate(`/curate/${id}`)
-                  dispatch({
-                    type: 'set',
-                    payload: { errorMessage: false, isAuthorized: true }
+                  setState({
+                    errorMessage: false,
+                    isAuthorized: true
                   })
-                  dispatch({ type: 'new-draft', payload: { id } })
+                  createNewDraft(id)
                 })
               }
               type='button'

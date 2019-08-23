@@ -7,14 +7,14 @@ import { Link } from 'gatsby'
 import Tags from './Tags'
 import Icon, { Level } from 'assets/icons'
 import { ActionBar, Category, Difficulty } from 'components/common'
-import { NormalizedCollectionsContext } from 'contexts/NormalizedCollections'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
+import { useNormalizedCollections } from 'hooks/useGlobalStore'
 import { screens } from 'constants/Styles'
 import { createActionLabel } from 'utils/ariaLabelUtils'
 import { createCategoryPath, createCollectionPath } from '../../../gatsby/utils'
 
 function Collection ({ id, isSaved }) {
-  const normalizedCollections = useContext(NormalizedCollectionsContext)
+  const normalizedCollections = useNormalizedCollections()
   const onActionClick = useContext(UserDataDispatchContext)
   const { category, itemCount, level, name, tags } = normalizedCollections
     ? normalizedCollections[id]

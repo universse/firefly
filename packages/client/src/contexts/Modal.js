@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { SetModalContext } from './SetModal'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import ModalTypes from 'constants/ModalTypes'
 
 export const ModalContext = createContext()
@@ -10,7 +10,7 @@ export const ModalContext = createContext()
 export default function Modal ({ children, pathname }) {
   const [activeModalType, setActiveModalType] = useState()
 
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   useEffect(() => {
     if (!isDesktop || !activeModalType) return

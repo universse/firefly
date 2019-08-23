@@ -14,8 +14,6 @@ window.___log = (type, properties) => {
     type,
     properties
   })
-
-  process.env.NODE_ENV === 'development' && console.log({ type, properties })
 }
 
 window.___logUser = uid => {

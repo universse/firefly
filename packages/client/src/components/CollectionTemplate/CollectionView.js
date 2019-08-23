@@ -9,8 +9,8 @@ import { CollectionTitle } from './styled'
 import { ProgressBar } from 'components/common'
 import { Check } from 'assets/icons'
 import { LatestActivityContext } from 'contexts/LatestActivity'
-import { MediaContext } from 'contexts/Media'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
+import { useMedia } from 'hooks/useGlobalStore'
 import {
   bottomBarHeightInRem,
   headerHeightInRem,
@@ -26,7 +26,7 @@ export default function CollectionView ({
   collection: { id, category, level, name, tags, urls },
   isSaved
 }) {
-  const { isDesktop, isMobile } = useContext(MediaContext)
+  const { isDesktop, isMobile } = useMedia()
   const onActionClick = useContext(UserDataDispatchContext)
 
   const itemCount = urls.length

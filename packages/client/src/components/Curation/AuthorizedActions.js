@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react'
 import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
-import { useSelector } from 'react-redux'
 
 import InviteModal from './InviteModal'
+import useDraftStore, { useDraft } from './useDraftStore'
+import useStateStore from './useStateStore'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
-import { AuthenticationContext } from 'contexts/Authentication'
+// import { useUser } from 'hooks/useGlobalStore'
 import { SetModalContext } from 'contexts/SetModal'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import ModalTypes from 'constants/ModalTypes'
@@ -27,20 +28,21 @@ function publish (collection) {
 }
 
 export default function AuthorizedActions () {
-  const user = useContext(AuthenticationContext)
+  // const user = useUser()
   const openSnackbar = useContext(SetSnackbarContext)
   const setActiveModalType = useContext(SetModalContext)
 
-  const invitee = useSelector(state => state.meta.invitee)
-  const { removed, ...draft } = useSelector(state => state.draft)
+  const invitee = useStateStore(state => state.invitee)
+  const draft = useDraft()
   const { id, name, urls, tags } = draft
   const canPublish = !!(name && urls.length && tags.length)
 
-  const canSave = user && (name || urls.length || tags.length)
+  // const canSave = user && (name || urls.length || tags.length)
+  const canSave = name || urls.length || tags.length
 
   useEffect(() => {
     canSave && saveDraft(draft)
-  }, [canSave, draft, user])
+  }, [canSave, draft])
 
   useEffect(() => {
     invitee && setActiveModalType(ModalTypes.INVITE)

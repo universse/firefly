@@ -7,7 +7,7 @@ import MobileFilters from 'components/MobileFilters'
 import { MobileSortByDifficulty } from 'components/SortByDifficulty'
 import TagFilter from 'components/TagFilter'
 import { URLParamsContext } from 'contexts/URLParams'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 // import useDebouncedValue from 'hooks/useDebouncedValue'
 import { CollectionIdsType } from 'constants/Types'
 import searchWorker from 'utils/searchWorker'
@@ -18,7 +18,7 @@ export default function CategoryTemplate ({
     allCollectionIds: { nodes }
   }
 }) {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   const {
     query: { searchInput, sort, tags }

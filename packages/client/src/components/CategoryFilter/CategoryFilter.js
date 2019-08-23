@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import Filters from './Filters'
 import { ScrollButton } from './styled'
 import useSlider from './useSlider'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import { screens } from 'constants/Styles'
 
 export default function CategoryFilter ({ pathname }) {
@@ -18,7 +18,7 @@ export default function CategoryFilter ({ pathname }) {
     slider
   } = useSlider()
 
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   return (
     <>

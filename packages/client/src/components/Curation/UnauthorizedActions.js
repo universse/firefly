@@ -1,25 +1,26 @@
 import React, { useContext } from 'react'
 import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
-import { useSelector } from 'react-redux'
 
+import { useDraft } from './useDraftStore'
+import useStateStore from './useStateStore'
 import { requestAccess } from './utils'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
-import { AuthenticationContext } from 'contexts/Authentication'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
+import { useUser } from 'hooks/useGlobalStore'
 import useSignUpSnackbar from 'hooks/useSignUpSnackbar'
 import firebaseWorker from 'utils/firebaseWorker'
 
 const { generateId } = firebaseWorker
 
 export default function UnauthorizedActions () {
-  const user = useContext(AuthenticationContext)
+  const user = useUser()
   const signUpSnackbar = useSignUpSnackbar()
   const openSnackbar = useContext(SetSnackbarContext)
 
-  const authorizedEmails = useSelector(state => state.draft.authorizedEmails)
-  const { removed, ...draft } = useSelector(state => state.draft)
+  const authorizedEmails = useStateStore(state => state.authorizedEmails)
+  const draft = useDraft()
 
   return (
     <>

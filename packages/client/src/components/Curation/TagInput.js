@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { useDispatch } from 'react-redux'
 
+import useDraftStore, { useDraftActions } from './useDraftStore'
 import Icon from 'assets/icons'
 import useComboBox from 'hooks/useComboBox'
 import searchWorker from 'utils/searchWorker'
 
 export default function TagInput ({ tags }) {
-  const dispatch = useDispatch()
+  const { addTag } = useDraftActions()
 
   const [unique, setUnique] = useState([])
   const [input, setInput] = useState('')
@@ -23,7 +23,7 @@ export default function TagInput ({ tags }) {
     getItemProps
   } = useComboBox({
     onSelect: ({ tag }) => {
-      dispatch({ type: 'add-tag', payload: { tag } })
+      addTag(tag)
       setInput('')
     }
   })

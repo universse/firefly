@@ -1,11 +1,11 @@
-import React, { memo, useContext } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 // import { ItemTypes } from '@firefly/core'
 
 import Icon from 'assets/icons'
 import { OutboundLink } from 'components/common'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import { screens } from 'constants/Styles'
 import { UrlType } from 'constants/Types'
 import error from 'assets/images/error.png'
@@ -46,7 +46,7 @@ function LearningItem ({
   type,
   url
 }) {
-  const { isDesktop, isMobile } = useContext(MediaContext)
+  const { isDesktop, isMobile } = useMedia()
   // const icon = <Icon icon={ItemTypes[type]} size='small' />
 
   const isVideo = videoHosts.reduce(

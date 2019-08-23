@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
 import SEO from 'components/SEO'
 import SearchComboBox from 'components/SearchComboBox'
 import { BackButton } from 'components/common'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import {
   headerHeightInRem,
   bottomBarHeightInRem,
@@ -13,7 +13,7 @@ import {
 
 // TODO: loading state
 export default function SearchPage () {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   return (
     <>

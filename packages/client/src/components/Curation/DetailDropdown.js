@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { useSelector, useDispatch } from 'react-redux'
 
+import useDraftStore, { useDraftActions } from './useDraftStore'
 import Icon from 'assets/icons'
 import useDropdownMenu from 'hooks/useDropdownMenu'
 
 export default function DetailDropdown ({ items, detail }) {
-  const value = useSelector(state => state.draft[detail])
-  const dispatch = useDispatch()
+  const value = useDraftStore(state => state[detail])
+  const { setDraft } = useDraftActions()
 
   const onSelect = ({ value }) => {
-    dispatch({ type: 'set-draft', payload: { [detail]: value } })
+    setDraft({ [detail]: value })
   }
 
   const {

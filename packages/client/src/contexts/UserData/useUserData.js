@@ -1,12 +1,12 @@
-import { useReducer, useContext } from 'react'
+import { useReducer } from 'react'
 import produce from 'immer'
 
-import { AuthenticationContext } from '../Authentication'
 import useActionClickHandler from './useActionClickHandler'
 import useFetchUserData from './useFetchUserData'
 import useSaveUserData from './useSaveUserData'
 import useSyncOfflineData from './useSyncOfflineData'
 import useTrackToggleStateChange from './useTrackToggleStateChange'
+import { useUser } from 'hooks/useGlobalStore'
 import useOfflinePersistence from 'hooks/useOfflinePersistence'
 
 function reducer (_, { type, payload }) {
@@ -60,7 +60,7 @@ function reducer (_, { type, payload }) {
 
 export default function useUserData (canUndo) {
   const [userData, dispatch] = useReducer(reducer, null)
-  const user = useContext(AuthenticationContext)
+  const user = useUser()
 
   useFetchUserData(dispatch, user)
 

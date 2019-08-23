@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ReactModal from 'react-modal'
 import { css } from '@emotion/core'
 
 import { Swippable } from 'components/common'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import useModal from 'hooks/useModal'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
@@ -16,7 +16,7 @@ export default function MobileFilters ({ children, collectionCount }) {
     AriaLabels.SORT_AND_FILTER_COLLECTIONS
   )
 
-  const { isMobile } = useContext(MediaContext)
+  const { isMobile } = useMedia()
 
   return (
     <ReactModal

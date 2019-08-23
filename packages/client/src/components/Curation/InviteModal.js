@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
-import { useSelector } from 'react-redux'
 
 import { invite } from './utils'
+import useStateStore from './useStateStore'
 import Icon from 'assets/icons'
 import useModal from 'hooks/useModal'
 import ModalTypes from 'constants/ModalTypes'
@@ -12,8 +12,8 @@ import { getPath } from 'utils/pathnameUtils'
 
 // multi emails input
 export default function InviteModal ({ id }) {
-  const authorizedEmails = useSelector(state => state.draft.authorizedEmails)
-  const invitee = useSelector(state => state.meta.invitee)
+  const authorizedEmails = useStateStore(state => state.authorizedEmails)
+  const invitee = useStateStore(state => state.invitee)
 
   const [emails, setEmails] = useState(authorizedEmails)
   const [email, setEmail] = useState(invitee || '')

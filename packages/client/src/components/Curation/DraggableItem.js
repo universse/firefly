@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
-import { useDispatch } from 'react-redux'
 
 import LearningItemInput from './LearningItemInput'
+import useDraftStore, { useDraftActions } from './useDraftStore'
 
 export default function DraggableItem (props) {
   const { index, title } = props
-  const dispatch = useDispatch()
+  const { dropUrl } = useDraftActions()
+
   const [edge, setEdge] = useState(null)
   const [isEditing, setIsEditing] = useState(index === -1)
 
@@ -36,7 +37,7 @@ export default function DraggableItem (props) {
         dropIndex = index + 1
       }
 
-      dispatch({ type: 'drop-url', payload: { dragIndex, dropIndex } })
+      dropUrl({ dragIndex, dropIndex })
       setEdge(null)
     },
     hover (_, monitor) {

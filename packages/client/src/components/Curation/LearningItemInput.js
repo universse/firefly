@@ -1,8 +1,8 @@
 import React, { useReducer, useEffect, useContext, useRef, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { useDispatch } from 'react-redux'
 
+import useDraftStore, { useDraftActions } from './useDraftStore'
 import LearningItem from 'components/CollectionTemplate/LearningItem'
 import Icon from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
@@ -24,7 +24,7 @@ function LearningItemInput ({
 }) {
   const isNew = index === -1
   const isLocal = useRef(!isNew)
-  const dispatch = useDispatch()
+  const { setUrl, removeUrl, undoRemoveUrl } = useDraftActions()
 
   const [{ hasError, isLoading, urlInput, preview }, setState] = useReducer(
     reducer,
@@ -63,13 +63,10 @@ function LearningItemInput ({
             })
 
           !isNew &&
-            dispatch({
-              type: 'set-url',
-              payload: {
-                id: item.id,
-                url: debouncedUrlInput,
-                ...response
-              }
+            setUrl({
+              id: item.id,
+              url: debouncedUrlInput,
+              ...response
             })
         })
         .catch(() => isPending && setState({ hasError: true }))
@@ -79,7 +76,7 @@ function LearningItemInput ({
     }
 
     return () => (isPending = false)
-  }, [debouncedUrlInput, dispatch, isNew, item.id])
+  }, [debouncedUrlInput, isNew, item.id, setUrl])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -87,7 +84,7 @@ function LearningItemInput ({
 
     isNew
       ? firebaseWorker.generateId('urls').then(id => {
-          dispatch({ type: 'set-url', payload: { index, id, ...preview } })
+          setUrl({ index, id, ...preview })
           setState({ urlInput: '', preview: null })
         })
       : setIsEditing(false)
@@ -155,17 +152,14 @@ function LearningItemInput ({
             aria-label='Remove URL'
             className='IconButton'
             onClick={() => {
-              dispatch({ type: 'remove-url', payload: { index } })
+              removeUrl(index)
               openSnackbar({
                 buttonProps: {
                   'aria-label': 'Undo Removing URL',
                   children: 'Undo',
                   onClick: () => {
                     // logClickAction({ id, action: 'undo unsave' })
-                    dispatch({
-                      type: 'undo-remove',
-                      payload: { index }
-                    })
+                    undoRemoveUrl(index)
                   }
                 },
                 message: 'Removed learning item.'

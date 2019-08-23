@@ -10,7 +10,7 @@ import SEO from 'components/SEO'
 import ShareDropdown from 'components/ShareDropdown'
 // import { FABDesktop } from 'components/common'
 import Icon from 'assets/icons'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import { SetModalContext } from 'contexts/SetModal'
 import { UserDataContext } from 'contexts/UserData'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
@@ -37,7 +37,7 @@ export default function CollectionTemplate ({
 
   const { id, name } = collections
 
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   const { check, love, save } = userData || {}
   const isSaved = save && !!save[id]

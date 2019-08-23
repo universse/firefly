@@ -11,9 +11,9 @@ import SEO from 'components/SEO'
 import SortByDifficulty from 'components/SortByDifficulty'
 // import { FABDesktop } from 'components/common'
 // import Icon from 'assets/icons'
-import { MediaContext } from 'contexts/Media'
 import { SetModalContext } from 'contexts/SetModal'
 import { URLParamsContext } from 'contexts/URLParams'
+import { useMedia } from 'hooks/useGlobalStore'
 import useIsScrollingDown from 'hooks/useIsScrollingDown'
 import AriaLabels from 'constants/AriaLabels'
 import ModalTypes from 'constants/ModalTypes'
@@ -85,7 +85,7 @@ TopBar.propTypes = {
 }
 
 export default function IndexLayout ({ category, children, pathname }) {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   const {
     query: { searchInput },

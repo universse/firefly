@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { css } from '@emotion/core'
 
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
 import SignUpReminder from 'components/SignUpReminder'
-import { MediaContext } from 'contexts/Media'
+import { useMedia } from 'hooks/useGlobalStore'
 import {
   headerHeightInRem,
   mobileBarsHeightInRem,
@@ -13,7 +13,7 @@ import {
 import { hasSignedIn } from 'utils/localStorageUtils'
 
 export default function MePage (props) {
-  const { isDesktop } = useContext(MediaContext)
+  const { isDesktop } = useMedia()
 
   // created collections
   return (
