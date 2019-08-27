@@ -13,6 +13,7 @@ export function getUser () {
     }, reject)
   })
 }
+
 export async function getEmail () {
   return auth.currentUser && auth.currentUser.email
 }

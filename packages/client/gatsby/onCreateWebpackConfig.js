@@ -8,19 +8,17 @@ module.exports = ({ actions: { replaceWebpackConfig }, getConfig, stage }) => {
     test: /\.worker\.js$/,
     use: { loader: 'workerize-loader' }
   })
-
   config.output.globalObject = 'this'
 
   config.resolve.modules = [resolve('./src'), 'node_modules']
 
-  if (stage === 'develop' || stage === 'build-javascript') {
+  stage === 'build-javascript' &&
     config.plugins.push(
       new BundleAnalyzerPlugin({
         analyzerMode: 'server',
         analyzerPort: '3001'
       })
     )
-  }
 
   replaceWebpackConfig(config)
 }

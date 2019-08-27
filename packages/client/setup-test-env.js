@@ -1,6 +1,6 @@
-import { createSerializer } from 'jest-emotion'
-import * as emotion from 'emotion'
-import 'jest-dom/extend-expect'
-import '@testing-library/react/cleanup-after-each'
+import { createSerializer } from "jest-emotion";
+import * as emotion from "emotion";
+import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/react/cleanup-after-each";
 
-expect.addSnapshotSerializer(createSerializer(emotion))
+expect.addSnapshotSerializer(createSerializer(emotion));

@@ -5,8 +5,11 @@ import { media } from 'constants/Styles'
 import firebaseWorker from 'utils/firebaseWorker'
 import searchWorker from 'utils/searchWorker'
 
+const desktopKey = 'isDesktop'
+const mobileKey = 'isMobile'
+
 const [useGlobalStore, { setState }] = create(set => ({
-  media: { isDesktop: null, isMobile: null },
+  media: { [desktopKey]: null, [mobileKey]: null },
   normalizedCollections: null,
   user: null
 }))
@@ -16,14 +19,14 @@ if (typeof window === 'object') {
     const mql = window.matchMedia(query)
 
     const setMatches = () =>
-      setState(state => ({ media: { ...state.media, [key]: mql.matches } }))
+      setState(({ media }) => ({ media: { ...media, [key]: mql.matches } }))
 
     setMatches()
     mql.addListener(setMatches)
   }
 
-  setMediaListener('isDesktop', media.desktop)
-  setMediaListener('isMobile', media.mobile)
+  setMediaListener(desktopKey, media.desktop)
+  setMediaListener(mobileKey, media.mobile)
 
   searchWorker
     .init()

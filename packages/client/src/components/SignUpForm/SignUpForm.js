@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import ReactModal from 'react-modal'
 
@@ -136,12 +136,13 @@ export default function SignUpForm () {
                 `}
               >
                 <button
-                  aria-label='Sign In with Email Link'
+                  aria-label='Continue'
                   className='PrimaryButton'
+                  disabled={!email}
                   style={{ padding: 0, width: '100%' }}
                   type='submit'
                 >
-                  Sign In with Email Link
+                  Continue
                 </button>
               </div>
               {/* <div>

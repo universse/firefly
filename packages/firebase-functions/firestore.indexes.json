@@ -1,3 +1,6 @@
 {
-  "indexes": []
+  "indexes": [],
+  "fieldOverrides": [
+    { "collectionGroup": "urls", "fieldPath": "description", "indexes": [] }
+  ]
 }

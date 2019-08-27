@@ -2,7 +2,9 @@
   "projects": {
     "development": "cherry-dev-72965",
     "production": "cherry-c183f",
+    "analytics-dev": "cherry-analytics-dev",
     "analytics": "cherry-analytics-66c9f",
-    "analytics-dev": "cherry-analytics-dev"
+    "collections-dev": "",
+    "collections": ""
   }
 }

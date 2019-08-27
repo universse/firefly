@@ -14,7 +14,7 @@ function Onboard ({ message }) {
             color: var(--black800);
             font-family: Spectral, serif;
             font-size: 2rem;
-            font-weight: 900;
+            font-weight: 800;
             line-height: 2.5rem;
           `}
         >

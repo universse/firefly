@@ -4,7 +4,7 @@ import { css } from '@emotion/core'
 import { Link, navigate } from 'gatsby'
 
 import Inputs from './Inputs'
-import useDraftStore, { useDraftActions } from './useDraftStore'
+import { useDraftActions } from './useDraftStore'
 import useStateStore from './useStateStore'
 import Footer from 'components/Footer'
 import {

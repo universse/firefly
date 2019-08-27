@@ -8,16 +8,16 @@ Promise.all([
 ]).then(([changes, syncing]) =>
   syncing
     ? localforage
-        .setItem(LocalStorage.OFFLINE_QUEUE, {
-          check: { ...syncing.check, ...changes.check },
-          save: { ...syncing.save, ...changes.save }
-        })
-        .then(() => localforage.removeItem(LocalStorage.SYNCING))
-    : !changes &&
-      localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
-        check: {},
-        save: {}
+      .setItem(LocalStorage.OFFLINE_QUEUE, {
+        check: { ...syncing.check, ...changes.check },
+        save: { ...syncing.save, ...changes.save }
       })
+      .then(() => localforage.removeItem(LocalStorage.SYNCING))
+    : !changes &&
+    localforage.setItem(LocalStorage.OFFLINE_QUEUE, {
+      check: {},
+      save: {}
+    })
 )
 
 export async function getItem (key) {
@@ -87,5 +87,7 @@ export async function loadUserData () {
 }
 
 export async function persist (values) {
-  Object.entries(values).map(([key, value]) => localforage.setItem(key, value))
+  Object.entries(values).forEach(([key, value]) =>
+    localforage.setItem(key, value)
+  )
 }

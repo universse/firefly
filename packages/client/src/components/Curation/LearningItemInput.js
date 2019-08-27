@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, useContext, useRef, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import useDraftStore, { useDraftActions } from './useDraftStore'
+import { useDraftActions } from './useDraftStore'
 import LearningItem from 'components/CollectionTemplate/LearningItem'
 import Icon from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
@@ -84,9 +84,9 @@ function LearningItemInput ({
 
     isNew
       ? firebaseWorker.generateId('urls').then(id => {
-          setUrl({ index, id, ...preview })
-          setState({ urlInput: '', preview: null })
-        })
+        setUrl({ index, id, ...preview })
+        setState({ urlInput: '', preview: null })
+      })
       : setIsEditing(false)
   }
 

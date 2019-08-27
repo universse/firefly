@@ -10,6 +10,7 @@
     "plugin:jsx-a11y/recommended",
     "plugin:flowtype/recommended"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2016,
     "sourceType": "module",
@@ -41,5 +42,14 @@
     ],
     "react-hooks/exhaustive-deps": 2,
     "react-hooks/rules-of-hooks": 2
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "linkComponents": [
+      "OutboundLink",
+      { "name": "Link", "linkAttribute": "to" }
+    ]
   }
 }

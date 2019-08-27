@@ -107,6 +107,7 @@ export default function IndexLayout ({ category, children, pathname }) {
       </section>
       <div
         css={css`
+          min-height: 40rem;
           padding: 0 0 ${bottomBarHeightInRem}rem;
 
           ${screens.desktop} {

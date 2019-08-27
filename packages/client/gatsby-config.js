@@ -49,7 +49,23 @@ const developMiddleware = app => {
       }
     })
   )
-}
+};
+
+const devPlugins = [
+  'gatsby-plugin-react-axe',
+  {
+    resolve: 'gatsby-plugin-accessibilityjs',
+    options: {
+      injectStyles: `
+        .accessibility-error {
+          border: 3px solid #f00;
+        }
+      `,
+      errorClassName: 'accessibility-error',
+      onError: error => console.log(error)
+    }
+  }
+]
 
 module.exports = {
   siteMetadata: {
@@ -59,6 +75,7 @@ module.exports = {
   },
   developMiddleware,
   plugins: [
+    ...(process.env.NODE_ENV === 'development' ? devPlugins : []),
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-sass',
@@ -94,7 +111,6 @@ module.exports = {
               type,
               url
             }) => ({
-              // description
               description: getTruncatedString(description),
               // image,
               // publisher,
@@ -127,21 +143,12 @@ module.exports = {
         labelFormat: '[filename]--[local]'
       }
     },
-    ...(process.env.NODE_ENV === 'development'
-      ? ['gatsby-plugin-react-axe']
-      : []),
-    {
-      resolve: 'gatsby-plugin-accessibilityjs',
-      options: {
-        injectStyles: `
-          .accessibility-error {
-            border: 3px solid #f00;
-          }
-        `,
-        errorClassName: 'accessibility-error',
-        onError: error => console.log(error)
-      }
-    },
+    // {
+    //   resolve: 'gatsby-plugin-preload-fonts',
+    //   options: {
+    //     crossOrigin: false
+    //   }
+    // },
     'gatsby-plugin-analytics',
     {
       resolve: 'gatsby-plugin-manifest',
