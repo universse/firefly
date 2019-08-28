@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { navigate } from 'gatsby'
+import { createCollectionPath } from '@firefly/core'
 
 import { ProgressBar } from 'components/common'
 import { screens } from 'constants/Styles'
-import { createCollectionPath } from '../../../gatsby/utils'
 
 export default function LatestActivity ({
   latestActivity: { id, name, percentage }
@@ -16,8 +16,8 @@ export default function LatestActivity ({
   const message = isCompleted
     ? 'Great job completing '
     : justStarted
-    ? 'Continue with '
-    : 'Great progress on '
+      ? 'Continue with '
+      : 'Great progress on '
 
   const ariaLabel = isCompleted ? `Review ${name}` : `Continue with ${name}`
 

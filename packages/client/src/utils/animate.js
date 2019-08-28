@@ -1,4 +1,4 @@
-function animate ({
+export default function animate ({
   element,
   prop,
   func,
@@ -44,5 +44,3 @@ function animate ({
 
   return cancel
 }
-
-module.exports = animate

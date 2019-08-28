@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { css } from '@emotion/core'
 
 import Landing from './Landing'
 import LatestActivity from './LatestActivity'
 import Loading from './Loading'
 import Onboard from './Onboard'
-import { LatestActivityContext } from 'contexts/LatestActivity'
+import { useLatestActivity } from 'hooks/useGlobalStore'
 import useSiteMetadata from 'hooks/useSiteMetadata'
 import LocalStorage from 'constants/LocalStorage'
 import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
@@ -14,7 +14,7 @@ import { hasSignedIn, isNewUser } from 'utils/localStorageUtils'
 export default function Hero () {
   const { title } = useSiteMetadata()
 
-  const { isLoading, latestActivity } = useContext(LatestActivityContext)
+  const { isLoading, data } = useLatestActivity()
 
   useEffect(() => {
     if (isNewUser()) {
@@ -47,8 +47,8 @@ export default function Hero () {
         <Onboard message={`Welcome to $${title}!`} />
       ) : isLoading ? (
         <Loading />
-      ) : latestActivity ? (
-        <LatestActivity latestActivity={latestActivity} />
+      ) : data ? (
+        <LatestActivity latestActivity={data} />
       ) : (
         <Onboard message='Welcome back!' />
       )}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
 import AriaLabels from 'constants/AriaLabels'
-import { scrollToHero } from '../../../gatsby/utils'
+import scrollToHero from 'utils/scrollToHero'
 
 function Onboard ({ message }) {
   return (

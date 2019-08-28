@@ -2,13 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
-import { Categories, DifficultyLevels } from '@firefly/core'
+import { Categories, DifficultyLevels, createCategoryPath } from '@firefly/core'
 
 import Tags from 'components/Collection/Tags'
 import { ProgressBar } from 'components/common'
 import { Level } from 'assets/icons'
 import { TagsType } from 'constants/Types'
-import { createCategoryPath } from '../../../gatsby/utils'
 
 export default function Details ({ category, level, name, percentage, tags }) {
   return (

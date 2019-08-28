@@ -1,7 +1,12 @@
 import React, { memo, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Categories, DifficultyLevels } from '@firefly/core'
+import {
+  Categories,
+  DifficultyLevels,
+  createCategoryPath,
+  createCollectionPath
+} from '@firefly/core'
 import { Link } from 'gatsby'
 
 import Tags from './Tags'
@@ -11,7 +16,6 @@ import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
 import { useNormalizedCollections } from 'hooks/useGlobalStore'
 import { screens } from 'constants/Styles'
 import { createActionLabel } from 'utils/ariaLabelUtils'
-import { createCategoryPath, createCollectionPath } from '../../../gatsby/utils'
 
 function Collection ({ id, isSaved }) {
   const normalizedCollections = useNormalizedCollections()

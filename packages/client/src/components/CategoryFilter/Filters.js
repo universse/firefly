@@ -1,14 +1,14 @@
 import React, { useEffect, memo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
-import { Categories, animate } from '@firefly/core'
+import { Categories, createCategoryPath } from '@firefly/core'
 
 import { Category, scrollButtonWidthInRem } from './styled'
 import { useMedia } from 'hooks/useGlobalStore'
 import { RefType } from 'constants/Types'
 import { baseFontSize, screens } from 'constants/Styles'
+import animate from 'utils/animate'
 import { getNormalizedPathname } from 'utils/pathnameUtils'
-import { createCategoryPath } from '../../../gatsby/utils'
 
 const scrollButtonWidthInPx = baseFontSize * scrollButtonWidthInRem
 const CategoryPaths = ['/', ...Categories.map((_, i) => createCategoryPath(i))]

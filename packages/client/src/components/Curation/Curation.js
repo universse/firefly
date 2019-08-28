@@ -52,9 +52,7 @@ export default function Curation ({ currentId, currentDraft, invitee }) {
   useEffect(() => {
     if (canEdit) return
 
-    if (!currentId) {
-      setState({ errorMessage: 'New' })
-    }
+    if (!currentId) setState({ errorMessage: 'New' })
 
     setState({ isLoading: true })
 

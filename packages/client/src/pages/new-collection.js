@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { navigate } from 'gatsby'
+import { createCollectionPath } from '@firefly/core'
 
 import CollectionTemplate from 'components/CollectionTemplate'
 import { useNormalizedCollections } from 'hooks/useGlobalStore'
 import firebaseWorker from 'utils/firebaseWorker'
 import { getParamFromPathname } from 'utils/pathnameUtils'
-import { createCollectionPath } from '../../gatsby/utils'
 
 export default function NewCollectionPage ({
   location,

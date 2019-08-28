@@ -1,8 +1,10 @@
 const fs = require('fs')
 const { resolve } = require('path')
-const { Categories } = require('@firefly/core')
-
-const { createCategoryPath, createCollectionPath } = require('./utils')
+const {
+  Categories,
+  createCategoryPath,
+  createCollectionPath
+} = require('@firefly/core')
 
 module.exports = async ({
   graphql,
@@ -76,4 +78,4 @@ module.exports = async ({
     'src/utils/searchWorker/search.worker.js',
     searchWorker.replace('%searchData%', JSON.stringify(normalizedCollections))
   )
-}
+};

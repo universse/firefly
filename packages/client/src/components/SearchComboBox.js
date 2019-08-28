@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
+import { createCollectionPath } from '@firefly/core'
 
 import SearchBar from 'components/SearchBar'
 import useComboBox from 'hooks/useComboBox'
 import { useNormalizedCollections } from 'hooks/useGlobalStore'
 import useSearch from 'hooks/useSearch'
 import URLParamKeys from 'constants/URLParamKeys'
-import { createCollectionPath } from '../../gatsby/utils'
 
 export default function SearchComboBox ({
   large = false,
@@ -53,7 +53,9 @@ export default function SearchComboBox ({
             {results.slice(0, maxResultCount).map((result, index) => (
               <Link
                 key={result.id}
-                {...highlightedIndex === index && { className: 'highlighted' }}
+                {...highlightedIndex === index && {
+                  className: 'highlighted'
+                }}
                 {...getItemProps({
                   index,
                   item: {

@@ -5,7 +5,7 @@ import { HeroImage } from 'assets/illustrations'
 import AriaLabels from 'constants/AriaLabels'
 import { screens } from 'constants/Styles'
 import { logClickCTA } from 'utils/analytics'
-import { scrollToHero } from '../../../gatsby/utils'
+import scrollToHero from 'utils/scrollToHero'
 
 function Landing () {
   return (

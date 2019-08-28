@@ -8,9 +8,8 @@ import LearningItem from './LearningItem'
 import { CollectionTitle } from './styled'
 import { ProgressBar } from 'components/common'
 import { Check } from 'assets/icons'
-import { LatestActivityContext } from 'contexts/LatestActivity'
 import { UserDataDispatchContext } from 'contexts/UserDataDispatch'
-import { useMedia } from 'hooks/useGlobalStore'
+import { useGlobalActions, useMedia } from 'hooks/useGlobalStore'
 import {
   bottomBarHeightInRem,
   headerHeightInRem,
@@ -37,7 +36,7 @@ export default function CollectionView ({
 
   const percentage = (completedCount / itemCount) * 100
 
-  const { setLatestActivity } = useContext(LatestActivityContext)
+  const { setLatestActivity } = useGlobalActions()
 
   useEffect(() => {
     isSaved &&

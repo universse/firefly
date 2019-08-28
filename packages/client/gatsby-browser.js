@@ -1,5 +1,5 @@
-import { isIndexPage, scrollToHero } from './gatsby/utils'
-import 'styles/index.scss'
+import scrollToHero from 'utils/scrollToHero';
+import 'styles/index.scss';
 
 export const onClientEntry = () => {
   process.env.NODE_ENV === 'development' && console.clear()
@@ -11,10 +11,14 @@ export const onClientEntry = () => {
   window.addEventListener('mousedown', () =>
     document.body.classList.remove('using-keyboard')
   )
-}
+};
 
 export const onRouteUpdate = ({ prevLocation }) => {
   window.___hasVisited = !!prevLocation
+};
+
+function isIndexPage (pathname) {
+  return pathname.startsWith('/category') || pathname === '/';
 }
 
 export const shouldUpdateScroll = ({
@@ -38,4 +42,4 @@ export const shouldUpdateScroll = ({
   }
 
   return true
-}
+};

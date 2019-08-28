@@ -21,7 +21,7 @@ function reducer (_, { type, payload }) {
           }
         )
 
-      case 'load-database':
+      case 'load-database': {
         const { check, love, save } = payload
 
         draft.check = { ...check, ...draft.check }
@@ -32,8 +32,9 @@ function reducer (_, { type, payload }) {
           draft.save[id] = save[id]
         })
         break
+      }
 
-      case 'click':
+      case 'click': {
         const { action, id } = payload
         const key = action.replace('un', '')
 
@@ -44,6 +45,7 @@ function reducer (_, { type, payload }) {
           draft[key][id] = true
         }
         break
+      }
 
       case 'undo-unsave':
         draft.save = draft.prevSave

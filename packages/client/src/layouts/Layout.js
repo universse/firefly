@@ -6,7 +6,6 @@ import IndexLayout from './IndexLayout'
 import Header from 'components/Header'
 import { MobileNavigation } from 'components/Navigation'
 import SignUpForm from 'components/SignUpForm'
-import LatestActivity from 'contexts/LatestActivity'
 import Modal from 'contexts/Modal'
 import SetSnackbar from 'contexts/SetSnackbar'
 import URLParams from 'contexts/URLParams'
@@ -32,21 +31,19 @@ export default function Layout ({
         {normalizedPathname !== '/search' && (
           <Header noSearch={!!isIndexPage || !!noSearch} />
         )}
-        <LatestActivity>
-          <SetSnackbar pathname={pathname}>
-            <UserData canUndo={normalizedPathname === '/my-library'}>
-              {isIndexPage ? (
-                <URLParams location={location}>
-                  <IndexLayout category={category} pathname={pathname}>
-                    {children}
-                  </IndexLayout>
-                </URLParams>
-              ) : (
-                children
-              )}
-            </UserData>
-          </SetSnackbar>
-        </LatestActivity>
+        <SetSnackbar pathname={pathname}>
+          <UserData canUndo={normalizedPathname === '/my-library'}>
+            {isIndexPage ? (
+              <URLParams location={location}>
+                <IndexLayout category={category} pathname={pathname}>
+                  {children}
+                </IndexLayout>
+              </URLParams>
+            ) : (
+              children
+            )}
+          </UserData>
+        </SetSnackbar>
         <SignUpForm />
       </Modal>
       <MobileNavigation isIndexPage={isIndexPage || false} />
