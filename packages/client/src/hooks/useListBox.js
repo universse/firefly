@@ -52,8 +52,8 @@ export default function useListBox ({ onSelect }) {
             highlightedIndex === 0
               ? items.current.length - 1
               : highlightedIndex === -1
-              ? -1
-              : highlightedIndex - 1
+                ? -1
+                : highlightedIndex - 1
           )
           break
 

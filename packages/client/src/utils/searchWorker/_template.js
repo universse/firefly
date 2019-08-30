@@ -68,10 +68,10 @@ const filter = memoize((matched, tagCounts, tags) => {
 const order = memoize((filtered, sort) =>
   sort
     ? [...filtered].sort(({ id: id1 }, { id: id2 }) =>
-        sort === 'asc'
-          ? searchData[id1].level - searchData[id2].level
-          : searchData[id2].level - searchData[id1].level
-      )
+      sort === 'asc'
+        ? searchData[id1].level - searchData[id2].level
+        : searchData[id2].level - searchData[id1].level
+    )
     : filtered
 )
 

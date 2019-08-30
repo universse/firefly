@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 
-import useDraftStore, { useDraftActions } from './useDraftStore'
+import { useDraftActions } from './useDraftStore'
 import Icon from 'assets/icons'
 import useComboBox from 'hooks/useComboBox'
 import searchWorker from 'utils/searchWorker'
@@ -85,7 +85,9 @@ export default function TagInput ({ tags }) {
             matched.map((tag, index) => (
               <button
                 key={tag}
-                {...highlightedIndex === index && { className: 'highlighted' }}
+                {...highlightedIndex === index && {
+                  className: 'highlighted'
+                }}
                 {...getItemProps({ index, item: { tag } })}
               >
                 {tag}

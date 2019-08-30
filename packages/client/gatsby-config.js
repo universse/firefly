@@ -49,7 +49,7 @@ const developMiddleware = app => {
       }
     })
   )
-};
+}
 
 const devPlugins = [
   'gatsby-plugin-react-axe',

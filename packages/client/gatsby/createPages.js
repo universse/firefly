@@ -78,4 +78,4 @@ module.exports = async ({
     'src/utils/searchWorker/search.worker.js',
     searchWorker.replace('%searchData%', JSON.stringify(normalizedCollections))
   )
-};
+}

@@ -21,8 +21,8 @@ const [useDraftStore] = create((set, get) => ({
         urls: index
           ? urls.concat(url)
           : urls.filter(currentUrl =>
-              url.id === currentUrl.id ? url : currentUrl
-            )
+            url.id === currentUrl.id ? url : currentUrl
+          )
       })),
 
     dropUrl: ({ dragIndex, dropIndex }) => {

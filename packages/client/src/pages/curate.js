@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import Curation from 'components/Curation'
 import { MobileHeader } from 'components/Header'
 import SEO from 'components/SEO'
+import SignUpReminder from 'components/SignUpReminder'
 import { BackButton } from 'components/common'
+import { hasSignedIn } from 'utils/localStorageUtils'
 import { getParamFromPathname } from 'utils/pathnameUtils'
 
 export default function CuratePage ({
@@ -15,11 +17,15 @@ export default function CuratePage ({
     <>
       <SEO title='Curate a Learning Collection' />
       <MobileHeader navIcon={<BackButton />} shadow title='Curate' />
-      <Curation
-        currentDraft={state && state.draft}
-        currentId={getParamFromPathname(pathname, matchPath)}
-        invitee={new URLSearchParams(search).get('invitee')}
-      />
+      {hasSignedIn() ? (
+        <Curation
+          currentDraft={state && state.draft}
+          currentId={getParamFromPathname(pathname, matchPath)}
+          invitee={new URLSearchParams(search).get('invitee')}
+        />
+      ) : (
+        <SignUpReminder />
+      )}
     </>
   )
 }

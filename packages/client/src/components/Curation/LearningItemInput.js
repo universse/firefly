@@ -8,7 +8,6 @@ import Icon from 'assets/icons'
 import { SetSnackbarContext } from 'contexts/SetSnackbar'
 import useDebouncedValue from 'hooks/useDebouncedValue'
 import { screens } from 'constants/Styles'
-import { UrlType } from 'constants/Types'
 import firebaseWorker from 'utils/firebaseWorker'
 import postRequest from 'utils/postRequest'
 
@@ -186,7 +185,6 @@ function LearningItemInput ({
 export default memo(LearningItemInput)
 
 LearningItemInput.propTypes = {
-  // ...UrlType,
   index: PropTypes.number.isRequired,
   isEditing: PropTypes.bool,
   setIsEditing: PropTypes.func

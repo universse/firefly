@@ -3,7 +3,7 @@ import { navigate } from 'gatsby'
 import { css } from '@emotion/core'
 
 import InviteModal from './InviteModal'
-import useDraftStore, { useDraft } from './useDraftStore'
+import { useDraft } from './useDraftStore'
 import useStateStore from './useStateStore'
 import ShareDropdown from 'components/ShareDropdown'
 import Icon from 'assets/icons'
@@ -103,7 +103,7 @@ export default function AuthorizedActions () {
                 }
               },
               shouldPersistOnNavigate: true,
-              message: `Discarded draft.`
+              message: 'Discarded draft.'
             })
 
             navigate('/me')

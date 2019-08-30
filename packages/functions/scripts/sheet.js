@@ -12,7 +12,7 @@ const { resolve } = require('path')
 const { toTitleCase, getTruncatedString } = require('@firefly/core')
 
 const workbook = XLSX.readFile(resolve(__dirname, '../data/raw.xlsx'))
-const worksheet = workbook.Sheets['Sheet1']
+const worksheet = workbook.Sheets.Sheet1
 
 const NUMBER_OF_URLS = 20
 const processed = { collections: [] }

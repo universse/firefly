@@ -65,8 +65,8 @@ export default function useDropdownMenu ({
             highlightedIndex === 0
               ? menuItemCount - 1
               : highlightedIndex === -1
-              ? -1
-              : highlightedIndex - 1
+                ? -1
+                : highlightedIndex - 1
           )
           break
 

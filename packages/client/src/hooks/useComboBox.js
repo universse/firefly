@@ -88,8 +88,8 @@ export default function useComboBox ({ onSelect }) {
               highlightedIndex === 0
                 ? items.current.length - 1
                 : highlightedIndex === -1
-                ? -1
-                : highlightedIndex - 1
+                  ? -1
+                  : highlightedIndex - 1
             )
             break
 

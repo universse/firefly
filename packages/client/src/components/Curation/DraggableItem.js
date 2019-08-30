@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useDrag, useDrop } from 'react-dnd'
 import { getEmptyImage } from 'react-dnd-html5-backend'
 
 import LearningItemInput from './LearningItemInput'
-import useDraftStore, { useDraftActions } from './useDraftStore'
+import { useDraftActions } from './useDraftStore'
 
 export default function DraggableItem (props) {
   const { index, title } = props
@@ -97,5 +98,6 @@ export default function DraggableItem (props) {
 }
 
 DraggableItem.propTypes = {
-  // ...LearningItemInput.propTypes
+  index: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired
 }

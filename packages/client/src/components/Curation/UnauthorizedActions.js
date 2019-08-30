@@ -41,14 +41,14 @@ export default function UnauthorizedActions () {
             onClick={() =>
               user
                 ? generateId('collections').then(id => {
-                    navigate(`/curate/${id}`, {
-                      state: { draft: { ...draft, id } }
-                    })
-                    openSnackbar({
-                      message: 'Saved a new copy.',
-                      shouldPersistOnNavigate: true
-                    })
+                  navigate(`/curate/${id}`, {
+                    state: { draft: { ...draft, id } }
                   })
+                  openSnackbar({
+                    message: 'Saved a new copy.',
+                    shouldPersistOnNavigate: true
+                  })
+                })
                 : signUpSnackbar()
             }
             type='button'

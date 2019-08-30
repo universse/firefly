@@ -19,12 +19,12 @@ function SEO ({ description, lang = 'en', meta = [], title }) {
   const metaDescription = description || siteMetadata.description
   const metaTitle = title
     ? {
-        titleTemplate: `%s | ${siteMetadata.title}`,
-        title
-      }
+      titleTemplate: `%s | ${siteMetadata.title}`,
+      title
+    }
     : {
-        title: `${siteMetadata.title} | Follow your curiosity`
-      }
+      title: `${siteMetadata.title} | Follow your curiosity`
+    }
 
   return (
     <Helmet
